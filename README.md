@@ -1,6 +1,6 @@
 # [Mashshare](https://www.mashshare.net) 
 
-### Welcome to the Mashshare GitHub Repository. 
+### Welcome to the Mashshare GitHub Repository
 
 Social sharing optimization is essential for every website that aims to be succesfull regarding traffic and social interaction.
 Mashshare aspires to give you all the necessary tools for best possible sharing interaction out of your content from one source. It´s not only a set of big prominent fast loading share buttons, it optimizes your content in the background with open graph tags and optimizes all your contest in the best way to get the maximum amount of shares.
