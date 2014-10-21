@@ -9,7 +9,7 @@ More information can be found at [mashshare.net](https://www.mashshare.net/).
 
 ## Installation ##
 
-For detailed setup instructions, visit the official [Documentation](http://www.mashshare.com/documentation/) page.
+For detailed setup instructions, visit the official [Documentation](http://www.mashshare.net/documentation/) page.
 
 1. You can clone the GitHub repository: `https://github.com/mashshare/Mashshare.git`
 2. Or download it directly as a ZIP file: `https://github.com/mashshare/Mashshare/archive/master.zip`
