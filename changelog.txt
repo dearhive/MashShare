@@ -1,6 +1,6 @@
 CHANGELOG MASHSHARE
 
-= 2.1.3 =
+= 2.1.3 = 
 New: Use dynamic jQuery tabs in backend for header_callbacks
 New: Spanish translation by Nestor Pool
 Fix: Missing JS in mashsb-admin.js
