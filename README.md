@@ -7,6 +7,11 @@ Mashshare aspires to give you all the necessary tools for best possible sharing 
 
 More information can be found at [mashshare.net](https://www.mashshare.net/).
 
+## Note ##
+
+This is the latest developer version of Mashshare. 
+if you just want to use Mashshare install the productive version which you get at [wordpress.org](wordpress.org/plugins/mashsharer/)
+
 ## Installation ##
 
 For detailed setup instructions, visit the official [Documentation](http://www.mashshare.net/documentation/) page.
