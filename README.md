@@ -10,7 +10,7 @@ More information can be found at [mashshare.net](https://www.mashshare.net/).
 ## Note ##
 
 This is the latest developer version of Mashshare. 
-if you just want to use Mashshare install the productive version which you get at [wordpress.org](wordpress.org/plugins/mashsharer/)
+if you just want to use Mashshare install the productive version which you get at [wordpress.org](http://wordpress.org/plugins/mashsharer/)
 
 ## Installation ##
 
