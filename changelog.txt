@@ -1,7 +1,9 @@
 CHANGELOG MASHSHARE
 
 = 2.1.3 = 
-New: Use dynamic jQuery tabs in backend for header_callbacks
+New: Use Mashshare for categories and non singular blogposts 
+New: Use dynamic jQuery tabs in settings backend
+New: Use https://github.com/jjenzz/jQuery.nearest to separate opening of different subscribe toggle windows
 New: Spanish translation by Nestor Pool
 Fix: Missing JS in mashsb-admin.js
 Fix: Fix height of Whatsapp button
@@ -9,7 +11,9 @@ Fix: Rewrite Purge DB Cache function to delete post_meta objects
 Fix: Delete post_meta on complete uninstall
 Fix: Undefined property ($post-ID) in template-functions
 Fix: Whatsapp icon as icon font
-Fix; Wrong size of large Whatsapp button
+Fix: Wrong size of large Whatsapp button
+Fix: Priority number ignored
+
 
 = 2.1.2 =
 Fix: Padding issue Whatsapp icon
