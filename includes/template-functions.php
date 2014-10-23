@@ -12,32 +12,31 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-
 /* Load Hooks
  * @since 2.0
  * return void
  */
 
 add_shortcode('mashshare', 'mashshareShortcodeShow');
-add_filter('the_content', 'mashshare_filter_content', getExecutionOrder());
+add_filter('the_content', 'mashshare_filter_content', getExecutionOrder(), 1);
 add_filter('widget_text', 'do_shortcode');
 add_action('mashshare', 'mashshare');
 
+// uncomment for debugging
+//global $wp_filter; 
+//print_r($wp_filter['the_content']);
+
 /* Get Execution order of injected Share Buttons in $content 
- * Set global var $enablescripts to determine if js and css must be loaded in frontend
+ * 
  * 
  * @since 2.0.4
  * @return int
  */
 
 function getExecutionOrder(){
-    global $mashsb_options, $enablescripts;
-    $priority = mashsb_get_option('execution_order');
-    if (is_int($priority)){
-        return $priority;
-    }
-    /* return priority*/
-    return 1000;
+    global $mashsb_options;
+    is_numeric($mashsb_options['execution_order']) ? $priority = trim($mashsb_options['execution_order']) : $priority = 1000;
+    return $priority;
 }
     
     /* Creates some shares for older posts which has been already 
@@ -828,3 +827,5 @@ function mashsb_styles_method() {
         wp_add_inline_style( 'mashsb-styles', $mashsb_custom_css );
 }
 add_action( 'wp_enqueue_scripts', 'mashsb_styles_method' );
+
+
