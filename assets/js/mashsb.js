@@ -16,38 +16,54 @@ jQuery(document).ready( function($) {
     /* Network sharer scripts */
     /* deactivate FB sharer when likeaftershare is enabled */
     if (typeof lashare_fb == "undefined" && typeof mashsb !== 'undefined') {
-    $('.mashicon-facebook').click( function() {
+    $('.mashicon-facebook').click( function(e) {
+        e.preventDefault();
         winWidth = 520;
         winHeight = 350;
         var winTop = (screen.height / 2) - (winHeight / 2);
 	var winLeft = (screen.width / 2) - (winWidth / 2);
-	window.open('http://www.facebook.com/sharer.php?s=100&u=' + mashsb.share_url + '&p[title]=' + mashsb.title + '&p[summary]=' + mashsb.desc + '&p[images][0]=' + mashsb.image, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
+        var fburl = $(this).attr('href');
+          //alert(fburl + ' singular: ' + mashsb.singular)      
+            if (mashsb.singular === '1') {
+                window.open('http://www.facebook.com/sharer.php?s=100&u=' + mashsb.share_url + '&p[title]=' + mashsb.title + '&p[summary]=' + mashsb.desc + '&p[images][0]=' + mashsb.image, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
+            } else {
+                window.open(fburl, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
+            }
     });
     }
     if (typeof mashsb !== 'undefined') {
-        console.log('tester' + mashsb.title);
-    $('.mashicon-twitter').click( function() {
+        shareurl = mashsb.share_url;
+        if(typeof mashsu !== 'undefined'){
+        mashsu.shorturl != 0 ? shareurl = mashsu.shorturl : shareurl = mashsb.share_url;
+        }
+    $('.mashicon-twitter').click( function(e) {
+        e.preventDefault();
         winWidth = 520;
         winHeight = 350;
         var winTop = (screen.height / 2) - (winHeight / 2);
 	var winLeft = (screen.width / 2) - (winWidth / 2);
-	window.open('https://twitter.com/intent/tweet?text=' + mashsb.title + ' ' + mashsb.hashtag + '&url=' + mashsb.share_url, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
-    });
+        var twurl = $(this).attr('href');
+        if (mashsb.singular === '1') {
+            window.open('https://twitter.com/intent/tweet?text=' + mashsb.title + ' ' + mashsb.hashtag + '&url=' + shareurl, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
+        }else{
+            window.open(twurl, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
+        }
+        });
     }
 
     if (typeof mashsb !== 'undefined' && mashsb.subscribe === 'content'){
         /* Toogle container display:none */
-        jQuery('.mashicon-subscribe').not('.trigger_active').next('.mashsb-toggle-container').hide();
+        jQuery('.mashicon-subscribe').not('.trigger_active').nearest('.mashsb-toggle-container').hide();
         jQuery('.mashicon-subscribe').click( function() {
             var trig = jQuery(this);
             if ( trig.hasClass('trigger_active') ) {
-                jQuery('.mashsb-toggle-container').slideToggle('fast');
+                jQuery(trig).nearest('.mashsb-toggle-container').slideToggle('fast');
                 trig.removeClass('trigger_active');
                 //jQuery(".mashicon-subscribe").css({"padding-bottom":"10px"});
             } else {
-                jQuery('.trigger_active').next('.mashsb-toggle-container').slideToggle('slow');
+                jQuery('.trigger_active').nearest('.mashsb-toggle-container').slideToggle('slow');
                 jQuery('.trigger_active').removeClass('trigger_active');
-                jQuery('.mashsb-toggle-container').slideToggle('fast');
+                jQuery(trig).nearest('.mashsb-toggle-container').slideToggle('fast');
                 trig.addClass('trigger_active');
                 //jQuery(".mashicon-subscribe").css({"padding-bottom":"13px"});
             };
@@ -276,3 +292,51 @@ function roundShares(){
 
 
 });
+
+/*!------------------------------------------------------
+ * jQuery nearest v1.0.3
+ * http://github.com/jjenzz/jQuery.nearest
+ * ------------------------------------------------------
+ * Copyright (c) 2012 J. Smith (@jjenzz)
+ * Dual licensed under the MIT and GPL licenses:
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.gnu.org/licenses/gpl.html
+ */
+(function($, d) {
+  $.fn.nearest = function(selector) {
+    var self, nearest, el, s, p,
+        hasQsa = d.querySelectorAll;
+
+    function update(el) {
+      nearest = nearest ? nearest.add(el) : $(el);
+    }
+
+    this.each(function() {
+      self = this;
+
+      $.each(selector.split(','), function() {
+        s = $.trim(this);
+
+        if (!s.indexOf('#')) {
+          // selector starts with an ID
+          update((hasQsa ? d.querySelectorAll(s) : $(s)));
+        } else {
+          // is a class or tag selector
+          // so need to traverse
+          p = self.parentNode;
+          while (p) {
+            el = hasQsa ? p.querySelectorAll(s) : $(p).find(s);
+            if (el.length) {
+              update(el);
+              break;
+            }
+            p = p.parentNode;
+          }
+        }
+      });
+
+    });
+
+    return nearest || $();
+  };
+}(jQuery, document));
