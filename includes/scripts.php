@@ -60,7 +60,7 @@ function mashsb_load_scripts($hook) {
 			'shares'        => $shareresult,
                         'round_shares'  => isset($mashsb_options['mashsharer_round']),
                         /* Do not animate shares on blog posts. The share count would be wrong there and performance bad */
-                        'animate_shares' => isset($mashsb_options['animate_shares']) && is_single() ? 1 : 0,
+                        'animate_shares' => isset($mashsb_options['animate_shares']) && is_singular() ? 1 : 0,
                         'share_url' => $url,
                         'title' => $titleclean,
                         'image' => $image,
@@ -68,7 +68,8 @@ function mashsb_load_scripts($hook) {
                         'hashtag' => $hashtag,
                         'subscribe' => $mashsb_options['subscribe_behavior'] === 'content' ? 'content' : 'link',
                         'subscribe_url' => isset($mashsb_options['subscribe_link']) ? $mashsb_options['subscribe_link'] : '',
-                        'activestatus' => mashsbGetActiveStatus()
+                        'activestatus' => mashsbGetActiveStatus(),
+                        'singular' => is_singular() ? 1 : 0
                     ));
                         
 }
