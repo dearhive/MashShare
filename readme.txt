@@ -5,7 +5,7 @@ Contributors: ReneHermi
 Donate link: https://www.mashshare.net/buy-me-a-coffee/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Tags: Mashable, Social Sharing, Social sharing optimization, Share button, share buttons, Facebook Share button, Twitter Share Button, Social Share, Social buttons, social share buttons, Share, Share this, Google+, Twitter, Facebook, Digg, Stumble Upon, Linkedin, +1, add to any, AddThis, add this, addtoany, admin, aim, analytics, bookmark, bookmarking, bookmarks, bookmark button, bookmark menu, buddypress, chrome extension, comments, del.icio.us, Diigo, buffer, button, del.icio.us, e-mail, email, email button, Facebook, facebook like, facebook recommend, facebook share, facebook share button, fark, firefox extension, flickr, floating buttons, follow, foursquare, gmail, goo.gl, google, google analytics, google plus, google plus one, google widget, hackernews, Hubspot, hyves, instagram, instapaper, NewsVine, odnoklassniki, pocket, popular, outbrain, PrintFriendly, popular posts, print, Whatsapp, rss, related posts, related content, share links, share bar, sharebar, social analytics, velocity graph, social networking, share and enjoy, sidebar, Vkontakte, technorati, socialize, url shortener, sonico, statistics tumblr, vimeo, yarrp, youtube, recommendations, posterous, orkut, icon, icons, image, images, Like, links, lockerz, page, pages, pin, pin it, pinit, pinterest, plugin, plus 1, plus one, Post, posts, Reddit, save, seo, Share, Shareaholic, sharedaddy, sharethis, sharing, shortcode, sidebar, sociable, social, social bookmarking, social bookmarks, statistics, stats, stumbleupon, svg, technorati, tumblr, tweet, twitter, vector, widget, ,WPSSO, wpmu
+Tags: Mashable, Social Sharing, Social sharing optimization, Share button, share buttons, Facebook Share button, Twitter Share Button, Social Share, Social buttons, social share buttons, Share, Share this, simple social buttons, simple share buttons adder,  Google+, Twitter, Facebook, Digg, Stumble Upon, Linkedin, +1, add to any, AddThis, add this, addtoany, admin, aim, analytics, bookmark, bookmarking, bookmarks, bookmark button, bookmark menu, buddypress, chrome extension, comments, del.icio.us, Diigo, buffer, button, del.icio.us, e-mail, email, email button, Facebook, facebook like, facebook recommend, facebook share, facebook share button, fark, firefox extension, flickr, floating buttons, follow, foursquare, gmail, goo.gl, google, google analytics, google plus, google plus one, google widget, hackernews, Hubspot, hyves, instagram, instapaper, ManageWP, NewsVine, odnoklassniki, pocket, popular, outbrain, PrintFriendly, popular posts, print, Whatsapp, rss, related posts, related content, share links, share bar, sharebar, social analytics, velocity graph, social networking, share and enjoy, sidebar, Vkontakte, technorati, socialize, url shortener, sonico, statistics tumblr, vimeo, yarrp, youtube, recommendations, posterous, orkut, icon, icons, image, images, Like, links, lockerz, page, pages, pin, pin it, pinit, pinterest, plugin, plus 1, plus one, Post, posts, Reddit, save, seo, Share, Shareaholic, sharedaddy, sharethis, sharing, shortcode, sidebar, sociable, social, social bookmarking, social bookmarks, statistics, stats, stumbleupon, svg, technorati, tumblr, tweet, twitter, vector, widget, ,WPSSO, wpmu
 Requires at least: 3.1+
 Tested up to: 4.0
 Stable tag: 2.1.3
@@ -82,6 +82,9 @@ This plugin is in active development and will be updated on a regular basis - Pl
 * Xing
 * Tumblr
 * Mail
+* ManageWP
+* Meneame
+* Odnoklassniki
 
 = High Performance =
 
@@ -235,81 +238,39 @@ After installation, check with the [Facebook Open graph debugger](https://develo
 
 == Changelog ==
 
-Update notices 2.1.3:
+= 2.1.3 = 
+New: Use Mashshare on categories and non singular blogposts 
+New: Use dynamic jQuery tabs in settings backend
+New: Differentiate between multiple subscribe buttons and opens only one toggle window - Not all any longer!New: Spanish translation by Nestor Pool
+Fix: Missing function in mashsb-admin.js
+Fix: Fix height of Whatsapp button
+Fix: Rewrite Purge DB Cache function to delete post_meta objects
+Fix: Delete post_meta on complete uninstall
+Fix: Undefined property ($post-ID) in template-functions
+Fix: Whatsapp icon as icon font
+Fix: Wrong size of large Whatsapp button
+Fix: Priority number ignored
 
-This update is essential if you like to use the new Mashshare Stick Sharebar ADD-ON
+
+= 2.1.2 =
+Fix: Padding issue Whatsapp icon
+Fix: Delete some deprecated code
+Fix: More values for border radius to create circle like buttons
+Fix: Gradiant style compatible in Firefox
+New: New callback function colorpicker for settings
+New: Performance benchmarks compaired with other plugins published in readme.txt
+
+= 2.1.1 =
+Fix: Some issues where js and css is not loaded on specific post_types and frontpage on third party plugins like event calender
+New: WPMU WordPress Multisite compatible
+New: Some js modifications for compatibility with Twitter Short-URLs Add-On
+New: Gradiant share button style
+New: CDN Compatibility - Embed icon fonts as base64 octled to prevent cross origin issues when website is loaded from CDN
 
 See release notes and complete changelog at:
-https://www.mashshare.net/changelogs/mashshare/changelog.txt
-
-
-Old changelog (only for history purposes):
-
-= 1.2.4 =
-* New: Option to round the shares e.g. 1.5k instead 1500
-
-= 1.2.3 =
-* Fix: linkedIn Sharebutton
-
-= 1.2.2 =
-* Share button Compatibility for WordPress 3.9.1
-* Change Share button api.sharedcount.com to free.sharedcount.com (more reliable)
-
-= 1.2.1 =
-* Fix: Header already send due to wp_redirect 
-
-= 1.2.0 =
-* Change: FAQ
-* Fix: Share button Facebook URL not shared on mobile devices.
-
-= 1.1.9 =
-* Fix: Change share button rating link in admin
-* Fix: Change share button check for addon
-* Fix: Sanitation for ampersand and hash / urlencode
-
-= 1.1.8 =
-* Fix: Change font-size to 13px
-* New: Install Addons
-
-= 1.1.7 =
-* Fix: changed mashsharer() to mashsharer('');
-
-= 1.1.6 =
-* New: graphical icons
-
-= 1.1.5 =
-* Fix: Broken Layout when no page option, (frontpage, posts, pages) is activated
-
-= 1.1.4 =
-* New: Support for more social networks (background work)
-* New: Allow shortcode in text widgets
-* New: Option to allow or prevent share buttons on frontpage
-
-* Fix: No bgcolor for count
-* Fix: Use onlick instead javascript in href. Prevents issues with YOAST analytics plugin
-
-= 1.1.3 =
-* Fix: Sanitation fix for international languages. E.g. french
-
-= 1.1.2 =
-Fix: Disable share buttons on frontpage
-Fix: Prevent share buttons double shown on pages.
-Fix: Disable Share Button in feeds
-
-= 1.1.1 =
-
-Fix: Error in sharing title in EDD easy digital download and other third party plugins
-
-= 1.1.0 = 
-* Fix: Disable sharer in excerpts
-* New: Add support contact data
-* New: Change public name to mashshare (shorter is better sometimes)
-* New: Add Shortcode [mashshare]
-
-= 1.0 = 
-* First release
+https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
 = 2.1.3 =
-2.1.3 New: This update allows you to use Mashshare on categories and multiple blog pages
+2.1.3 New: This update allows you to use Mashshare on categories and multiple blog pages. <strong>Important:</strong> Update first your network Add-On to at least version 2.0.8

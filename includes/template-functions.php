@@ -35,7 +35,7 @@ add_action('mashshare', 'mashshare');
 
 function getExecutionOrder(){
     global $mashsb_options;
-    is_numeric($mashsb_options['execution_order']) ? $priority = trim($mashsb_options['execution_order']) : $priority = 1000;
+    isset($mashsb_options['execution_order']) && is_numeric($mashsb_options['execution_order']) ? $priority = trim($mashsb_options['execution_order']) : $priority = 1000;
     return $priority;
 }
     
@@ -130,7 +130,7 @@ function mashsbGetShareMethod($mashsbSharesObj) {
 
 function getSharedcount($url) {
     global $wpdb, $mashsb_options, $post;
-    $cacheexpire = $mashsb_options['mashsharer_cache'];
+    isset($mashsb_options['mashsharer_cache']) ? $cacheexpire = $mashsb_options['mashsharer_cache'] : $cacheexpire = 300;
     /* make sure 300sec is default value */
     $cacheexpire < 300 ? $cacheexpire = 300 : $cacheexpire;
 
@@ -313,7 +313,7 @@ function getSharedcount($url) {
         global $mashsb_options, $post;
         $singular = isset( $mashsb_options['singular'] ) ? $singular = true : $singular = false;
         $url = get_permalink($post->ID);
-        
+            
         if (function_exists('mashsuGetShortURL')){
             mashsuGetShortURL() !== '' ? $urltw = mashsuGetShortURL() : $urltw = $url;
         }else{
@@ -326,6 +326,7 @@ function getSharedcount($url) {
         $image = mashsb_get_image($post->ID);
         $desc = urlencode(mashsb_get_excerpt_by_id($post->ID));
         !empty($mashsb_options['mashsharer_hashtag']) ? $hashtag = $mashsb_options['mashsharer_hashtag'] : $hashtag = '';
+       
         
         $networks = apply_filters('mashsb_array_networks', array(
             'facebook' => 'http://www.facebook.com/sharer.php?s=100&u=' . $url . '&p[title]=' . $titleclean . '&p[summary]=' . $desc . '&p[images][0]=' . $image,
@@ -340,7 +341,7 @@ function getSharedcount($url) {
         }        
         }
         
-        //print_r ("<pre>" . arrNetworks()['facebook'] . "</pre>");
+
 
 /* Returns all available networks
      * @since 2.0
@@ -373,20 +374,17 @@ function getSharedcount($url) {
     if (!empty($enablednetworks)) {
         foreach ($enablednetworks as $key => $network):
             if($mashsb_options['visible_services'] !== 'all' && $maxcounter != count($enablednetworks) && $mashsb_options['visible_services'] < count($enablednetworks)){
-                //if ($startcounter > $maxcounter){$hiddenclass = 'mashsb-hide';} else {$hiddenclass = '';}
                 if ($startcounter === $maxcounter ){ 
                     $onoffswitch = onOffSwitch();
-                    //$onoffswitch2 = onOffSwitch2();
                     $startsecondaryshares   = '<div class="secondary-shares" style="display:none;">';} else {$onoffswitch = ''; $onoffswitch2 = ''; $startsecondaryshares   = '';}
                 if ($startcounter === (count($enablednetworks))){ 
-                    //$onoffswitch2 = onOffSwitch2();
                     $endsecondaryshares     = '</div>'; } else { ;$endsecondaryshares = '';}
                     
                 //echo " Debug: Startcounter " . $startcounter . " Hello: " . $maxcounter+1 .
                  //" Debug: Enabled services: " . count($enablednetworks) . "<br>"; 
             }
             if ($enablednetworks[$key]['name'] !='') {
-                /* replace all spaces with $nbsp; prevents css content: error on text-intend */
+                /* replace all spaces with $nbsp; This prevents error in css style content: text-intend */
                 $name = preg_replace('/\040{1,}/','&nbsp;',$enablednetworks[$key]['name']);
             } else {
                 $name = ucfirst($enablednetworks[$key]['id']);
@@ -414,7 +412,8 @@ function getSharedcount($url) {
     function mashshareShow($atts, $place) {
         mashdebug()->timer('timer');
         global $wpdb, $mashsb_options, $post, $title, $url;
-       
+        !empty($mashsb_options['mashsharer_apikey']) ? $apikey = $mashsb_options['mashsharer_apikey'] : $apikey = '';
+
             /* Load hashshag*/       
             if ($mashsb_options['mashsharer_hashtag'] != '') {
                 $hashtag = '&via=' . $mashsb_options['mashsharer_hashtag'];

@@ -196,6 +196,12 @@ function mashsb_get_registered_settings() {
 					'desc' => __( 'Check this box if you would like Mashshare to completely remove all of its data when the plugin is deleted.', 'mashsb' ),
 					'type' => 'checkbox'
 				),
+                                'debug_header' => array(
+					'id' => 'debug_header',
+					'name' => '<strong>' . __( 'Debug', 'mashsb' ) . '</strong>',
+					'desc' => __( ' ', 'mashsb' ),
+					'type' => 'header'
+				),
                                 array(
 					'id' => 'disable_cache',
 					'name' => __( 'Disable Transient Cache', 'mashsb' ),
@@ -239,9 +245,16 @@ function mashsb_get_registered_settings() {
 					'desc' => __( 'Select on which post_types the share buttons appear. This values will be ignored when position is specified "manual".', 'mashsb' ),
 					'type' => 'posttypes'
 				),
+                                'singular' => array(
+					'id' => 'singular',
+					'name' => __( 'Blog Posts', 'mashsb' ),
+					'desc' => __('Enable this checkbox to enable Mashshare on multiple blogposts and categories. <strong>Note:</strong> This could delay to little performance drawbacks.','mashsb'),
+					'type' => 'checkbox',
+                                        'std' => '0'
+				),
 				'frontpage' => array(
 					'id' => 'frontpage',
-					'name' => '<strong>' . __( 'Frontpage', 'mashsb' ) . '</strong>',
+					'name' => __( 'Frontpage', 'mashsb' ),
 					'desc' => __('Enable share buttons on frontpage','mashsb'),
 					'type' => 'checkbox'
 				),

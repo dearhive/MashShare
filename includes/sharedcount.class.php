@@ -59,7 +59,7 @@ function getAllCounts(){
 function get_sharedcount()  {
     mashdebug()->error("URL: " . $this->url);
     global $mashsb_options;
-    $apikey = $mashsb_options['mashsharer_apikey'];
+    !empty($mashsb_options['mashsharer_apikey']) ? $apikey = $mashsb_options['mashsharer_apikey'] : $apikey = '';
 
 	try {
 		$curl = curl_init();

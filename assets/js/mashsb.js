@@ -22,12 +22,12 @@ jQuery(document).ready( function($) {
         winHeight = 350;
         var winTop = (screen.height / 2) - (winHeight / 2);
 	var winLeft = (screen.width / 2) - (winWidth / 2);
-        var fburl = $(this).attr('href');
+        var url = $(this).attr('href');
           //alert(fburl + ' singular: ' + mashsb.singular)      
             if (mashsb.singular === '1') {
                 window.open('http://www.facebook.com/sharer.php?s=100&u=' + mashsb.share_url + '&p[title]=' + mashsb.title + '&p[summary]=' + mashsb.desc + '&p[images][0]=' + mashsb.image, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
             } else {
-                window.open(fburl, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
+                window.open(url, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
             }
     });
     }
@@ -42,11 +42,11 @@ jQuery(document).ready( function($) {
         winHeight = 350;
         var winTop = (screen.height / 2) - (winHeight / 2);
 	var winLeft = (screen.width / 2) - (winWidth / 2);
-        var twurl = $(this).attr('href');
+        var url = $(this).attr('href');
         if (mashsb.singular === '1') {
             window.open('https://twitter.com/intent/tweet?text=' + mashsb.title + ' ' + mashsb.hashtag + '&url=' + shareurl, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
         }else{
-            window.open(twurl, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
+            window.open(url, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
         }
         });
     }
@@ -83,9 +83,6 @@ jQuery(document).ready( function($) {
 /* Animate the shares
  * 
  */
-
-/*
-*/
 
 // target = id of html element or var of previously selected html element where counting occurs
 // startVal = the value you want to begin at
