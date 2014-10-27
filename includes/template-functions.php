@@ -302,8 +302,47 @@ function getSharedcount($url) {
     function isStatus($var){
         return (!empty($var["status"]));
         }
-    
-    /* Returns all available networks
+        
+   /* Array of all available network share urls
+    * 
+    * @since 2.1.3
+    * @return string
+    */   
+        
+    function arrNetworks($name) {
+        global $mashsb_options, $post;
+        $singular = isset( $mashsb_options['singular'] ) ? $singular = true : $singular = false;
+        $url = get_permalink($post->ID);
+        
+        if (function_exists('mashsuGetShortURL')){
+            mashsuGetShortURL() !== '' ? $urltw = mashsuGetShortURL() : $urltw = $url;
+        }else{
+            $urltw = $url;
+        }
+        
+        $title = urlencode(html_entity_decode(the_title_attribute('echo=0'), ENT_COMPAT, 'UTF-8'));
+        $title = str_replace('#' , '%23', $title); 
+        $titleclean = esc_html($title);
+        $image = mashsb_get_image($post->ID);
+        $desc = urlencode(mashsb_get_excerpt_by_id($post->ID));
+        !empty($mashsb_options['mashsharer_hashtag']) ? $hashtag = $mashsb_options['mashsharer_hashtag'] : $hashtag = '';
+        
+        $networks = apply_filters('mashsb_array_networks', array(
+            'facebook' => 'http://www.facebook.com/sharer.php?s=100&u=' . $url . '&p[title]=' . $titleclean . '&p[summary]=' . $desc . '&p[images][0]=' . $image,
+            'twitter' =>  'https://twitter.com/intent/tweet?text=' . $titleclean . ' via ' . $hashtag . '&url=' . $urltw,
+            'subscribe' => '#',
+        ));
+        
+        if ($singular === true){
+            return $networks[$name];
+        } else  {
+            return 'javascript:void(0)';
+        }        
+        }
+        
+        //print_r ("<pre>" . arrNetworks()['facebook'] . "</pre>");
+
+/* Returns all available networks
      * @since 2.0
      * @returns string
      */
@@ -353,7 +392,8 @@ function getSharedcount($url) {
                 $name = ucfirst($enablednetworks[$key]['id']);
             }
             
-            $output .= '<a class="mashicon-' . $enablednetworks[$key]['id'] . '" href="javascript:void(0);"><span class="icon"></span><span class="text">' . $name . '</span></a>';
+            //$output .= '<a class="mashicon-' . $enablednetworks[$key]['id'] . '" href="javascript:void(0);"><span class="icon"></span><span class="text">' . $name . '</span></a>';
+            $output .= '<a class="mashicon-' . $enablednetworks[$key]['id'] . '" href="' . arrNetworks($enablednetworks[$key]['id']) . '" target="_blank"><span class="icon"></span><span class="text">' . $name . '</span></a>';
             $output .= $onoffswitch;
             $output .= $startsecondaryshares;
             
@@ -463,15 +503,14 @@ function getSharedcount($url) {
                         . $sharecount .
                     '<div class="mashsb-buttons">' 
                         . getNetworks() . 
-                        //'<a class="mashicon-facebook" href="javascript:void(0);"><span class="icon"></span><span class="text">' . __('Share&nbsp;on&nbsp;Facebook', 'mashsb') . '</span></a><a class="mashicon-twitter" href="javascript:void(0)"><span class="icon"></span><span class="text">' . __('Tweet&nbsp;on&nbsp;Twitter', 'mashsb') . '</span></a><a class="mashicon-google" href="javascript:void(0)"><span class="icon"></span><span class="text">' . __('Google+', 'mashsb') . '</span></a>' . mashsb_subscribe_button() .                     
                     '</div></div>
                     <div style="clear:both;"></div>'
                     . mashsb_subscribe_content() .
                     '</aside>
                         <!-- Share buttons made by mashshare.net - Version: ' . MASHSB_VERSION . '-->';
-          if (is_singular() == 1){
+          
             return apply_filters( 'mashsb_output_buttons', $return );  
-          }
+          
     }
     
     /* Returns active status of Mashshare.
@@ -488,9 +527,10 @@ function getSharedcount($url) {
        $current_post_type = get_post_type();
        $enabled_post_types = isset( $mashsb_options['post_types'] ) ? $mashsb_options['post_types'] : null;
        $excluded = isset( $mashsb_options['excluded_from'] ) ? $mashsb_options['excluded_from'] : null;
+       $singular = isset( $mashsb_options['singular'] ) ? $singular = true : $singular = false;
 
        // No scripts on non singular page
-       if (!is_singular() == 1) {
+       if (!is_singular() == 1 && $singular !== true) {
         return false;
        }
 
@@ -570,6 +610,7 @@ function getSharedcount($url) {
         $current_post_type = get_post_type();
         $frontpage = isset( $mashsb_options['frontpage'] ) ? $mashsb_options['frontpage'] : null;
         $excluded = isset( $mashsb_options['excluded_from'] ) ? $mashsb_options['excluded_from'] : null;
+        $singular = isset( $mashsb_options['singular'] ) ? $singular = true : $singular = false;
         
         if (strpos($excluded, ',') !== false) {
              $excluded = explode(',', $excluded);
@@ -582,10 +623,7 @@ function getSharedcount($url) {
                 return $content;
         }  
 
-        if (!is_singular() == 1) {
-            /* disabled to show mashshare on non singualar pages to do: allow mashshare on this pages
-               @TODO: Hardcode the share links into php source href instead using only js 
-            */
+        if (!is_singular() == 1 && $singular !== true) {
             return $content;
         }
 
