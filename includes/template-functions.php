@@ -270,12 +270,12 @@ function getSharedcount($url) {
      * @return string
      */
     function onOffSwitch(){
-        $output = '<div class="onoffswitch">
-                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked="">
-                        <label class="onoffswitch-label" for="myonoffswitch">
-                        <div class="onoffswitch-inner"></div>
-                        </label>
-                        </div>';
+        $output = '<div class="onoffswitch">' .
+                        '<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked="">' .
+                        '<label class="onoffswitch-label" for="myonoffswitch">' .
+                        '<div class="onoffswitch-inner"></div>' .
+                        '</label>' .
+                        '</div>';
         return apply_filters('mashsh_onoffswitch', $output);
     }
     
@@ -286,12 +286,12 @@ function getSharedcount($url) {
      * @return string
      */
     function onOffSwitch2(){
-        $output = '<div class="onoffswitch2" style="display:none;">
-                        <input type="checkbox" name="onoffswitch2" class="onoffswitch2-checkbox" id="myonoffswitch2" checked="">
-                        <label class="onoffswitch2-label" for="myonoffswitch2">
-                        <div class="onoffswitch2-inner"></div>
-                        </label>
-                        </div>';
+        $output = '<div class="onoffswitch2" style="display:none;">' .
+                        '<input type="checkbox" name="onoffswitch2" class="onoffswitch2-checkbox" id="myonoffswitch2" checked="">' .
+                        '<label class="onoffswitch2-label" for="myonoffswitch2">' .
+                        '<div class="onoffswitch2-inner"></div>' .
+                        '</label>' .
+                        '</div>';
         return apply_filters('mashsh_onoffswitch2', $output);
     }
 

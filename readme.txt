@@ -8,7 +8,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Mashable, Social Sharing, Social sharing optimization, Share button, share buttons, Facebook Share button, Twitter Share Button, Social Share, Social buttons, social share buttons, Share, Share this, simple social buttons, simple share buttons adder,  Google+, Twitter, Facebook, Digg, Stumble Upon, Linkedin, +1, add to any, AddThis, add this, addtoany, admin, aim, analytics, bookmark, bookmarking, bookmarks, bookmark button, bookmark menu, buddypress, chrome extension, comments, del.icio.us, Diigo, buffer, button, del.icio.us, e-mail, email, email button, Facebook, facebook like, facebook recommend, facebook share, facebook share button, fark, firefox extension, flickr, floating buttons, follow, foursquare, gmail, goo.gl, google, google analytics, google plus, google plus one, google widget, hackernews, Hubspot, hyves, instagram, instapaper, ManageWP, NewsVine, odnoklassniki, pocket, popular, outbrain, PrintFriendly, popular posts, print, Whatsapp, rss, related posts, related content, share links, share bar, sharebar, social analytics, velocity graph, social networking, share and enjoy, sidebar, Vkontakte, technorati, socialize, url shortener, sonico, statistics tumblr, vimeo, yarrp, youtube, recommendations, posterous, orkut, icon, icons, image, images, Like, links, lockerz, page, pages, pin, pin it, pinit, pinterest, plugin, plus 1, plus one, Post, posts, Reddit, save, seo, Share, Shareaholic, sharedaddy, sharethis, sharing, shortcode, sidebar, sociable, social, social bookmarking, social bookmarks, statistics, stats, stumbleupon, svg, technorati, tumblr, tweet, twitter, vector, widget, WPSSO, wpmu
 Requires at least: 3.1+
 Tested up to: 4.0
-Stable tag: 2.1.3
+Stable tag: 2.1.4
 
 Mashshare social sharing buttons, a high-performance social sharing optimization ecosystem for Facebook Twitter Subscribe and 17 more networks 
 
@@ -238,6 +238,10 @@ After installation, check with the [Facebook Open graph debugger](https://develo
 
 == Changelog ==
 
+= 2.1.4 =
+Fix: remove empty characters in html | prevent Wordpress to inject <br> and <p> codes into buttons code
+Fix: Prevent jQuery error. Put jQuery nearest() library into document.ready
+
 = 2.1.3 = 
 New: Use Mashshare on categories and non singular blogposts 
 New: Use dynamic jQuery tabs in settings backend
@@ -273,4 +277,4 @@ https://www.mashshare.net/changelog/
 == Upgrade Notice ==
 
 = 2.1.3 =
-2.1.3 New: This update allows you to use Mashshare on categories and multiple blog pages. <strong>Important:</strong> Update first your network Add-On to at least version 2.0.8
+2.1.3 New: This update allows you to use Mashshare on categories and multiple blog pages. <strong>Important:</strong> Update your Network Add-On to version 2.0.8 after updating Mashshare
