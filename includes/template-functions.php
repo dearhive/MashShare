@@ -212,7 +212,6 @@ function getSharedcount($url) {
         }
          return apply_filters('mashsb_filter_subscribe_button', $subscribebutton );
     }
-    //add_filter('mashsb_output_networks', 'mashsb_subscribe_button');
     
     /* Put the Subscribe container under the share buttons
      * @since 2.0.0.
@@ -228,7 +227,6 @@ function getSharedcount($url) {
         }
          return apply_filters('mashsb_toggle_container', $container);
     }
-    //add_filter('mashsb_output_buttons', 'mashsb_subscribe_content');
     
     
    /* Check if [mashshare] shortcode is used in subscribe field and deletes it
@@ -343,23 +341,22 @@ function getSharedcount($url) {
         
 
 
-/* Returns all available networks
+    /* Returns all available networks
      * @since 2.0
      * @returns string
      */
     function getNetworks() {
-        
         //mashdebug()->timer('getNetworks');
         global $mashsb_options;
         $output = '';
         $startsecondaryshares = '';
         $endsecondaryshares = '';
-        /* var for more services button */
+        /* content of 'more services' button */
         $onoffswitch = '';
         /* counter for 'Visible Services' */
         $startcounter = 1;
         $maxcounter = $mashsb_options['visible_services']+1; // plus 1 because our array values start counting from zero
-        /* our list of available services, includes disabled ones! 
+        /* our list of available services, includes the disabled ones! 
          * We have to clean this array first!
          */
         $getnetworks = $mashsb_options['networks'];
@@ -389,9 +386,9 @@ function getSharedcount($url) {
             } else {
                 $name = ucfirst($enablednetworks[$key]['id']);
             }
-            
+            $enablednetworks[$key]['id'] == 'whatsapp' ? $display = 'display:none;' : $display = ''; // Whatsapp button is made visible via js when opened on mobile devices
             //$output .= '<a class="mashicon-' . $enablednetworks[$key]['id'] . '" href="javascript:void(0);"><span class="icon"></span><span class="text">' . $name . '</span></a>';
-            $output .= '<a class="mashicon-' . $enablednetworks[$key]['id'] . '" href="' . arrNetworks($enablednetworks[$key]['id']) . '" target="_blank"><span class="icon"></span><span class="text">' . $name . '</span></a>';
+            $output .= '<a style="' . $display . '" class="mashicon-' . $enablednetworks[$key]['id'] . '" href="' . arrNetworks($enablednetworks[$key]['id']) . '" target="_blank"><span class="icon"></span><span class="text">' . $name . '</span></a>';
             $output .= $onoffswitch;
             $output .= $startsecondaryshares;
             
@@ -801,6 +798,7 @@ function mashsb_hide_shares(){
 
 function mashsb_styles_method() {
     global $mashsb_options;
+    isset($mashsb_options['small_buttons']) ? $smallbuttons = true : $smallbuttons = false;
     /*trailingslashit( plugins_url(). '/mashshare-likeaftershare/templates/'    ) . $file;
     wp_enqueue_style(
 		'custom-style',
@@ -857,6 +855,45 @@ function mashsb_styles_method() {
         .mashsb-box .mashsb-count {
             display: none;
         }';   
+    }
+    
+    if ($smallbuttons === true){
+    $mashsb_custom_css .= '[class^="mashicon-"] .text, [class*=" mashicon-"] .text{
+        text-indent: -9999px !important;
+        line-height: 0px;
+        display: block;
+        } 
+    [class^="mashicon-"] .text:after, [class*=" mashicon-"] .text:after {
+        content: "" !important;
+        text-indent: 0;
+        font-size:13px;
+        display: block !important;
+    }
+    [class^="mashicon-"], [class*=" mashicon-"] {
+        width:25%;
+        text-align: center !important;
+    }
+    [class^="mashicon-"] .icon:before, [class*=" mashicon-"] .icon:before {
+        float:none;
+        margin-right: 0;
+    }
+    .mashsb-buttons a{
+       margin-right: 3px;
+       margin-bottom:3px;
+       min-width: 0;
+       width: 41px;
+    }
+
+    .onoffswitch, 
+    .onoffswitch-inner:before, 
+    .onoffswitch-inner:after 
+    .onoffswitch2,
+    .onoffswitch2-inner:before, 
+    .onoffswitch2-inner:after  {
+        margin-right: 0px;
+        width: 41px;
+        line-height: 41px;
+    }';   
     }
     
     $mashsb_custom_css .= $custom_css;

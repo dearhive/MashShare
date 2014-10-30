@@ -154,7 +154,7 @@ function mashsb_get_registered_settings() {
                                 'hide_sharecount' => array(
 					'id' => 'hide_sharecount',
 					'name' => __( 'Hide Sharecount', 'mashsb' ),
-					'desc' => __( 'Optional: If you fill in any number here, the shares for a specific post are not shown until the share count of this number is reached.', 'mashsb' ),
+					'desc' => __( '<strong>Optional:</strong> If you fill in any number here, the shares for a specific post are not shown until the share count of this number is reached.', 'mashsb' ),
 					'type' => 'text',
                                         'size' => 'small'
 				),
@@ -226,6 +226,12 @@ function mashsb_get_registered_settings() {
 		),
                 'visual' => apply_filters('mashsb_settings_visual',
 			array(
+                            'location_header' => array(
+					'id' => 'location_header',
+					'name' => '<strong>' . __( 'Location & Position', 'mashsb' ) . '</strong>',
+					'desc' => __( ' ', 'mashsb' ),
+					'type' => 'header'
+                            ),
                             'mashsharer_position' => array(
 					'id' => 'mashsharer_position',
 					'name' => __( 'Position', 'mashsb' ),
@@ -247,8 +253,8 @@ function mashsb_get_registered_settings() {
 				),
                                 'singular' => array(
 					'id' => 'singular',
-					'name' => __( 'Blog Posts', 'mashsb' ),
-					'desc' => __('Enable this checkbox to enable Mashshare on multiple blogposts and categories. <strong>Note:</strong> This could delay to little performance drawbacks.','mashsb'),
+					'name' => __( 'Categories', 'mashsb' ),
+					'desc' => __('Enable this checkbox to enable Mashshare on multiple blogposts and categories.','mashsb'),
 					'type' => 'checkbox',
                                         'std' => '0'
 				),
@@ -258,6 +264,12 @@ function mashsb_get_registered_settings() {
 					'desc' => __('Enable share buttons on frontpage','mashsb'),
 					'type' => 'checkbox'
 				),
+                                'style_header' => array(
+					'id' => 'style_header',
+					'name' => '<strong>' . __( 'Visual appearance / Style', 'mashsb' ) . '</strong>',
+					'desc' => __( ' ', 'mashsb' ),
+					'type' => 'header'
+                                ),
 				'mashsharer_round' => array(
 					'id' => 'mashsharer_round',
 					'name' => __( 'Round Shares', 'mashsb' ),
@@ -273,13 +285,13 @@ function mashsb_get_registered_settings() {
 				'mashsharer_hashtag' => array(
 					'id' => 'mashsharer_hashtag',
 					'name' => __( 'Twitter Handle', 'mashsb' ),
-					'desc' => __( 'Optional: Using your twitter username, e.g. \'Mashshare\' results in via @Mashshare', 'mashsb' ),
+					'desc' => __( '<strong>Optional:</strong> Using your twitter username, e.g. \'Mashshare\' results in via @Mashshare', 'mashsb' ),
 					'type' => 'text',
 					'size' => 'medium'
 				),
                                 'share_color' => array(
 					'id' => 'share_color',
-					'name' => __( 'Share color', 'mashsb' ),
+					'name' => __( 'Share count color', 'mashsb' ),
 					'desc' => __( 'Choose color of the share number in hex format, e.g. #7FC04C: ', 'mashsb' ),
 					'type' => 'text',
 					'size' => 'medium',
@@ -319,8 +331,8 @@ function mashsb_get_registered_settings() {
 				),
                                 'mash_style' => array(
 					'id' => 'mash_style',
-					'name' => __( 'Style', 'mashsb' ),
-					'desc' => __( 'Load another style to change visual appearance of the share buttons. <br>if you created a custom style and you want to make it available for the community here, <a href="https://www.mashshare.net/contact-support/" target="_blank"> get in contact with me.</a>', 'mashsb' ),
+					'name' => __( 'Share button style', 'mashsb' ),
+					'desc' => __( 'Change visual appearance of the share buttons.', 'mashsb' ),
 					'type' => 'select',
                                         'options' => array(
 						'shadow' => '"Shadow" Created by Rene Hermenau',
@@ -329,6 +341,12 @@ function mashsb_get_registered_settings() {
 					),
                                         'std' => 'default'
 					
+				),
+                                'small_buttons' => array(
+					'id' => 'small_buttons',
+					'name' => __( 'Use small buttons', 'mashsb' ),
+					'desc' => __( 'All buttons will be shown as pure small icons without any text on desktop and mobile devices all the time.<br><strong>Note:</strong> Disable this when you use the <a href="https://www.mashshare.net/downloads/mashshare-responsive/" target="_blank">responsive Add-On</a>', 'mashsb' ),
+					'type' => 'checkbox'
 				),
                                 'subscribe_behavior' => array(
 					'id' => 'subscribe_behavior',
@@ -345,7 +363,7 @@ function mashsb_get_registered_settings() {
                                 'subscribe_link' => array(
 					'id' => 'subscribe_link',
 					'name' => __( 'Subscribe Link', 'mashsb' ),
-					'desc' => __( 'The link to any place on your site, e.g. http://yoursite.com/subscribe', 'mashsb' ),
+					'desc' => __( 'Put a link behind the subscribe button and use no opening toggle window, e.g. http://yoursite.com/subscribe', 'mashsb' ),
 					'type' => 'text',
 					'size' => 'regular',
                                         'std' => ''
@@ -353,7 +371,7 @@ function mashsb_get_registered_settings() {
                                 'subscribe_content' => array(
 					'id' => 'subscribe_content',
 					'name' => __( 'Subscribe content', 'mashsb' ),
-					'desc' => __( 'Define your subscribe content here. Forms, like button, links or any other text. Shortcodes are also supported, e.g.: [contact-form-7]', 'mashsb' ),
+					'desc' => __( 'Define the content of the opening toggle subscribe window here. Use formulars, like button, links or any other text. Shortcodes are supported, e.g.: [contact-form-7]', 'mashsb' ),
 					'type' => 'rich_editor',
 					'textarea_rows' => '6',
                                         'std' => ''
