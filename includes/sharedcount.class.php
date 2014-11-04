@@ -26,7 +26,7 @@ function getFBTWCounts(){
             $sharecounts = $this->get_sharedcount();
         
             $counts = array('shares'=>array(),'total'=>0);
-        if ($fb_mode = 'total'){
+        if ($fb_mode === 'total'){
             $counts['shares']['fb'] = $sharecounts['Facebook']['total_count'];
         } else {
             $counts['shares']['fb'] = $sharecounts['Facebook']['share_count'];    
@@ -40,11 +40,15 @@ function getFBTWCounts(){
 }
 /* Only used when mashshare-networks is enabled */
 function getAllCounts(){
-
+        isset($mashsb_options['facebook_count_mode']) ? $fb_mode = $mashsb_options['facebook_count_mode'] : $fb_mode = '';
         $sharecounts = $this->get_sharedcount();
         
 	$counts = array('shares'=>array(),'total'=>0);
-	$counts['shares']['fb'] = $sharecounts['Facebook']['total_count'];
+	if ($fb_mode === 'total'){
+        $counts['shares']['fb'] = $sharecounts['Facebook']['total_count'];
+        } else {
+        $counts['shares']['fb'] = $sharecounts['Facebook']['share_count'];    
+        }
 	$counts['shares']['tw'] = $sharecounts['Twitter'];
 	$counts['shares']['gp'] = $sharecounts['GooglePlusOne'];
 	$counts['shares']['li'] = $sharecounts['LinkedIn'];
