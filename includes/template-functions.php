@@ -221,7 +221,7 @@ function getSharedcount($url) {
     function mashsb_subscribe_content(){
         global $mashsb_options;
         if ($mashsb_options['networks'][2] && $mashsb_options['subscribe_behavior'] === 'content'){ //Subscribe content enabled
-            $container = '<div class="mashsb-toggle-container" id="mashsb-toggle">' . mashsb_cleanShortcode('mashshare', $mashsb_options['subscribe_content']). '</div>';
+            $container = '<div class="mashsb-toggle-container">' . mashsb_cleanShortcode('mashshare', $mashsb_options['subscribe_content']). '</div>';
         } else {
             $container = '';    
         }
@@ -267,13 +267,15 @@ function getSharedcount($url) {
      * @since 2.0
      * @return string
      */
-    function onOffSwitch(){
+    /*function onOffSwitch(){
         $output = '<div class="onoffswitch">' .
                         '<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked="">' .
                         '<label class="onoffswitch-label" for="myonoffswitch">' .
                         '<div class="onoffswitch-inner"></div>' .
                         '</label>' .
-                        '</div>';
+                        '</div>';*/
+    function onOffSwitch(){
+        $output = '<div class="onoffswitch"></div>';
         return apply_filters('mashsh_onoffswitch', $output);
     }
     
@@ -284,11 +286,13 @@ function getSharedcount($url) {
      * @return string
      */
     function onOffSwitch2(){
-        $output = '<div class="onoffswitch2" style="display:none;">' .
+        /*$output = '<div class="onoffswitch2" style="display:none;">' .
                         '<input type="checkbox" name="onoffswitch2" class="onoffswitch2-checkbox" id="myonoffswitch2" checked="">' .
                         '<label class="onoffswitch2-label" for="myonoffswitch2">' .
                         '<div class="onoffswitch2-inner"></div>' .
                         '</label>' .
+                        '</div>';*/
+        $output = '<div class="onoffswitch2" style="display:none;">' .
                         '</div>';
         return apply_filters('mashsh_onoffswitch2', $output);
     }
@@ -308,9 +312,10 @@ function getSharedcount($url) {
     */   
         
     function arrNetworks($name) {
-        global $mashsb_options, $post;
+        global $mashsb_options, $post, $wp;
         $singular = isset( $mashsb_options['singular'] ) ? $singular = true : $singular = false;
-        $url = get_permalink($post->ID);
+        isset($mashsb_options['current_url']) ? $url = add_query_arg( $wp->query_string, '', home_url( $wp->request ) ) : $url = get_permalink($post->ID);
+        //$url = get_permalink($post->ID);
             
         if (function_exists('mashsuGetShortURL')){
             mashsuGetShortURL() !== '' ? $urltw = mashsuGetShortURL() : $urltw = $url;
@@ -327,8 +332,8 @@ function getSharedcount($url) {
        
         
         $networks = apply_filters('mashsb_array_networks', array(
-            'facebook' => 'http://www.facebook.com/sharer.php?s=100&u=' . $url . '&p[title]=' . $titleclean . '&p[summary]=' . $desc . '&p[images][0]=' . $image,
-            'twitter' =>  'https://twitter.com/intent/tweet?text=' . $titleclean . ' via ' . $hashtag . '&url=' . $urltw,
+            'facebook' => 'http://www.facebook.com/sharer.php?s=100&amp;u=' . $url . '&amp;p[title]=' . $titleclean . '&amp;p[summary]=' . $desc . '&amp;p[images][0]=' . $image,
+            'twitter' =>  'https://twitter.com/intent/tweet?text=' . $titleclean . '%20via%20' . $hashtag . '&amp;url=' . $urltw,
             'subscribe' => '#',
         ));
         
@@ -425,7 +430,7 @@ function getSharedcount($url) {
                     if (isset($mashsb_options['mashsharer_round'])) {
                         $totalshares = roundshares($totalshares);
                     }  
-                 $sharecount = '<div class="mashsb-count"><div class="counts" id="mashsbcount">' . $totalshares . '</div><span class="mashsb-sharetext">' . __('SHARES', 'mashsb') . '</span></div>';    
+                 $sharecount = '<div class="mashsb-count"><div class="counts mashsbcount">' . $totalshares . '</div><span class="mashsb-sharetext">' . __('SHARES', 'mashsb') . '</span></div>';    
              } else {
                  $sharecount = '';
              }
@@ -452,8 +457,9 @@ function getSharedcount($url) {
      * @returns string
      */
     function mashshareShortcodeShow($atts, $place) {
-        global $wpdb ,$mashsb_options, $post;
-        $url = get_permalink($post->ID);
+        global $wpdb ,$mashsb_options, $post, $wp;
+        isset($mashsb_options['current_url']) ? $url = add_query_arg( $wp->query_string, '', home_url( $wp->request ) ) : $url = get_permalink($post->ID);
+
         $title = addslashes(the_title_attribute('echo=0'));
         $sharecount = '';
 
@@ -595,11 +601,12 @@ function getSharedcount($url) {
      */
     function mashshare_filter_content($content){
          
-        global $atts, $mashsb_options, $url, $title, $post;
+        global $atts, $mashsb_options, $url, $title, $post, $wp;
         global $wp_current_filter;
         
         /* define some vars here to reduce multiple execution of some basic functions */
-        $url = get_permalink($post->ID);
+        //$url = get_permalink($post->ID);
+        isset($mashsb_options['current_url']) ? $url = add_query_arg( $wp->query_string, '', home_url( $wp->request ) ) : $url = get_permalink($post->ID);
         $title = addslashes(the_title_attribute('echo=0'));
         $position = $mashsb_options['mashsharer_position'];
         $enabled_post_types = isset( $mashsb_options['post_types'] ) ? $mashsb_options['post_types'] : null;
@@ -670,8 +677,8 @@ function mashsharer(){
     global $atts;
     global $url;
     global $title;
-    global $post;
-    $url = get_permalink($post->ID);
+    global $post, $wp;
+    isset($mashsb_options['current_url']) ? $url = add_query_arg( $wp->query_string, '', home_url( $wp->request ) ) : $url = get_permalink($post->ID);
     $title = addslashes(the_title_attribute('echo=0'));
     echo mashshareShow($atts, '', $url, $title);
 }
@@ -685,8 +692,8 @@ function mashshare(){
     global $atts;
     global $url;
     global $title;
-    global $post;
-    $url = get_permalink($post->ID);
+    global $post, $wp;
+    isset($mashsb_options['current_url']) ? $url = add_query_arg( $wp->query_string, '', home_url( $wp->request ) ) : $url = get_permalink($post->ID);
     $title = addslashes(the_title_attribute('echo=0'));
     echo mashshareShow($atts, '', $url, $title);
 }
@@ -755,7 +762,7 @@ function mashsb_get_fake_factor() {
  */
 
 function getFakecount() {
-    global $mashsb_options;
+    global $mashsb_options, $wp;
     $fakecountoption = 0;
     if (isset($mashsb_options['fake_count'])) {
         $fakecountoption = $mashsb_options['fake_count'];
@@ -772,9 +779,9 @@ function getFakecount() {
  */
 
 function mashsb_hide_shares(){
-    global $mashsb_options, $post;
-    $url = get_permalink(isset($post->ID));
-    
+    global $mashsb_options, $post, $wp;
+    //$url = get_permalink(isset($post->ID));
+    isset($mashsb_options['current_url']) ? $url = add_query_arg( $wp->query_string, '', home_url( $wp->request ) ) : $url = get_permalink(isset($post->ID));
     $sharelimit = isset($mashsb_options['hide_sharecount']) ? $mashsb_options['hide_sharecount'] : 0;
    
     if ($sharelimit > 0){
@@ -893,7 +900,8 @@ function mashsb_styles_method() {
         margin-right: 0px;
         width: 41px;
         line-height: 41px;
-    }';   
+    }
+';   
     }
     
     $mashsb_custom_css .= $custom_css;

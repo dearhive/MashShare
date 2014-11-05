@@ -775,7 +775,9 @@ font-weight: bold;
 
 .mashsb-tabs .active {
     border-left: solid 2px #0074a2;
-    padding: 5px;
-    /*background-color: white;*/
+    background-color: white;
     line-height: 23px;
+}
+.mashsb-tabs a {
+    padding:5px;
 }

@@ -24,6 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * @param string $hook Page hook
  */
 function mashsb_load_scripts($hook) {
+    global $wp;
         if ( ! apply_filters( 'mashsb_load_scripts', mashsbGetActiveStatus(), $hook ) ) {
             mashdebug()->info("mashsb_load_script not active");
             return;
@@ -31,7 +32,8 @@ function mashsb_load_scripts($hook) {
     
 	global $mashsb_options, $post;
         //$url = urlencode(get_permalink($post->ID));
-        $url = get_permalink($post->ID);
+        //$url = get_permalink($post->ID);
+        isset($mashsb_options['current_url']) ? $url = add_query_arg( $wp->query_string, '', home_url( $wp->request ) ) : $url = get_permalink($post->ID);
         //$title = addslashes(the_title_attribute('echo=0'));
         //$title = urlencode(html_entity_decode(get_the_title(), ENT_COMPAT, 'UTF-8'));
         //$title = urlencode(the_title_attribute('echo=0'));

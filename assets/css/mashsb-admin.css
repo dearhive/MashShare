@@ -772,3 +772,12 @@ font-weight: bold;
         float:none;
     }
 }
+
+.mashsb-tabs .active {
+    border-left: solid 2px #0074a2;
+    background-color: white;
+    line-height: 23px;
+}
+.mashsb-tabs a {
+    padding:5px;
+}

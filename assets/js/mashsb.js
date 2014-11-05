@@ -1,5 +1,3 @@
-
-
 jQuery(document).ready( function($) {
     
     
@@ -55,13 +53,13 @@ jQuery(document).ready( function($) {
     
     /* Opens a new minus buttonwhen plus sign is clicked */
     /* Toogle function for more services */
-    $( "#myonoffswitch" ).click(function() {
+    $( ".onoffswitch" ).click(function() {
         $('.onoffswitch').hide();
         $('.secondary-shares').show();
         $('.onoffswitch2').show();
         /*$( ".mashsb-buttons a" ).toggleClass( 'float-left');*/
     }); 
-    $( "#myonoffswitch2" ).click(function() {
+    $( ".onoffswitch2" ).click(function() {
         $('.onoffswitch').show();
         $('.secondary-shares').hide();         
     }); 
@@ -72,7 +70,7 @@ jQuery(document).ready( function($) {
     $('.mashicon-facebook').click( function(e) {
         e.preventDefault();
         winWidth = 520;
-        winHeight = 350;
+        winHeight = 550;
         var winTop = (screen.height / 2) - (winHeight / 2);
 	var winLeft = (screen.width / 2) - (winWidth / 2);
         var url = $(this).attr('href');
@@ -130,214 +128,128 @@ jQuery(document).ready( function($) {
         $(this).attr("href", href);
         });
     };
-    
-
-
-/* Animate the shares
+   
+ 
+/* Round the shares callback function
  * 
- */
-
-// target = id of html element or var of previously selected html element where counting occurs
-// startVal = the value you want to begin at
-// endVal = the value you want to arrive at
-// decimals = number of decimal places, default 0
-// duration = duration of animation in seconds, default 2
-// options = optional object of options (see below)
-
-/* Start when mashsb defined. Todo: JS builder to avoid this code */
-if (typeof mashsb !== 'undefined' && mashsb.animate_shares == 1 && $('#mashsbcount').length) {
-
-function countUp(target, startVal, endVal, decimals, duration, options) {
-
-    // make sure requestAnimationFrame and cancelAnimationFrame are defined
-    // polyfill for browsers without native support
-    // by Opera engineer Erik Möller
-    var lastTime = 0;
-    var vendors = ['webkit', 'moz', 'ms'];
-    for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
-        window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
-        window.cancelAnimationFrame =
-          window[vendors[x]+'CancelAnimationFrame'] || window[vendors[x]+'CancelRequestAnimationFrame'];
-    }
-    if (!window.requestAnimationFrame) {
-        window.requestAnimationFrame = function(callback, element) {
-            var currTime = new Date().getTime();
-            var timeToCall = Math.max(0, 16 - (currTime - lastTime));
-            var id = window.setTimeout(function() { callback(currTime + timeToCall); },
-              timeToCall);
-            lastTime = currTime + timeToCall;
-            return id;
-        }
-    }
-    if (!window.cancelAnimationFrame) {
-        window.cancelAnimationFrame = function(id) {
-            clearTimeout(id);
-        }
-    }
-
-     // default options
-    this.options = options || {
-        useEasing : true, // toggle easing
-        useGrouping : true, // 1,000,000 vs 1000000
-        separator : ',', // character to use as a separator
-        decimal : '.', // character to use as a decimal
-    }
-    if (this.options.separator == '') this.options.useGrouping = false;
-    if (this.options.prefix == null) this.options.prefix = '';
-    if (this.options.suffix == null) this.options.suffix = '';
-
-    var self = this;
-
-    this.d = (typeof target === 'string') ? document.getElementById(target) : target;
-    //this.d = (typeof target === 'string') ? document.getElementsByClassName(target) : target; 
-    this.startVal = Number(startVal);
-    this.endVal = Number(endVal);
-    this.countDown = (this.startVal > this.endVal) ? true : false;
-    this.startTime = null;
-    this.timestamp = null;
-    this.remaining = null;
-    this.frameVal = this.startVal;
-    this.rAF = null;
-    this.decimals = Math.max(0, decimals || 0);
-    this.dec = Math.pow(10, this.decimals);
-    this.duration = duration * 1000 || 2000;
-
-    this.version = function () { return '1.2.0' }
-
-    // Robert Penner's easeOutExpo
-    this.easeOutExpo = function(t, b, c, d) {
-        return c * (-Math.pow(2, -10 * t / d) + 1) * 1024 / 1023 + b;
-    }
-    this.count = function(timestamp) {
-
-        if (self.startTime === null) self.startTime = timestamp;
-
-        self.timestamp = timestamp;
-
-        var progress = timestamp - self.startTime;
-        self.remaining = self.duration - progress;
-
-        // to ease or not to ease
-        if (self.options.useEasing) {
-            if (self.countDown) {
-                var i = self.easeOutExpo(progress, 0, self.startVal - self.endVal, self.duration);
-                self.frameVal = self.startVal - i;
-            } else {
-                self.frameVal = self.easeOutExpo(progress, self.startVal, self.endVal - self.startVal, self.duration);
-            }
-        } else {
-            if (self.countDown) {
-                var i = (self.startVal - self.endVal) * (progress / self.duration);
-                self.frameVal = self.startVal - i;
-            } else {
-                self.frameVal = self.startVal + (self.endVal - self.startVal) * (progress / self.duration);
-            }
-        }
-
-        // decimal
-        self.frameVal = Math.round(self.frameVal*self.dec)/self.dec;
-
-        // don't go past endVal since progress can exceed duration in the last frame
-        if (self.countDown) {
-            self.frameVal = (self.frameVal < self.endVal) ? self.endVal : self.frameVal;
-        } else {
-            self.frameVal = (self.frameVal > self.endVal) ? self.endVal : self.frameVal;
-        }
-
-        // format and print value
-        self.d.innerHTML = self.formatNumber(self.frameVal.toFixed(self.decimals));
-
-        // whether to continue
-        if (progress < self.duration) {
-            self.rAF = requestAnimationFrame(self.count);
-        } else {
-            if (self.callback != null) self.callback();
-        }
-    }
-    this.start = function(callback) {
-        self.callback = callback;
-        // make sure values are valid
-        if (!isNaN(self.endVal) && !isNaN(self.startVal)) {
-            self.rAF = requestAnimationFrame(self.count);
-        } else {
-            console.log('countUp error: startVal or endVal is not a number');
-            self.d.innerHTML = '--';
-        }
-        return false;
-    }
-    this.stop = function() {
-        cancelAnimationFrame(self.rAF);
-    }
-    this.reset = function() {
-        self.startTime = null;
-        self.startVal = startVal;
-        cancelAnimationFrame(self.rAF);
-        self.d.innerHTML = self.formatNumber(self.startVal.toFixed(self.decimals));
-    }
-    this.resume = function() {
-        self.startTime = null;
-        self.duration = self.remaining;
-        self.startVal = self.frameVal;
-        requestAnimationFrame(self.count);
-    }
-    this.formatNumber = function(nStr) {
-        nStr += '';
-        var x, x1, x2, rgx;
-        x = nStr.split('.');
-        x1 = x[0];
-        x2 = x.length > 1 ? self.options.decimal + x[1] : '';
-        rgx = /(\d+)(\d{3})/;
-        if (self.options.useGrouping) {
-            while (rgx.test(x1)) {
-                x1 = x1.replace(rgx, '$1' + self.options.separator + '$2');
-            }
-        }
-        return self.options.prefix + x1 + x2 + self.options.suffix;
-    }
-
-    // format startVal on initialization
-    self.d.innerHTML = self.formatNumber(self.startVal.toFixed(self.decimals));
-}
-
-// Example:
-// var numAnim = new countUp("SomeElementYouWantToAnimate", 0, 99.99, 2, 2.5);
-// numAnim.start();
-// with optional callback:
-// numAnim.start(someMethodToCallOnComplete);
-
-var options = {
-  useEasing : true, 
-  useGrouping : false, 
-  separator : ',', 
-  decimal : '.', 
-  prefix : '', 
-  suffix : '' 
-};
-
-
-var mashsbcounter = new countUp("mashsbcount", 0, mashsb.shares, 0, 2, options);
-mashsbcounter.start(roundShares);
-};
-
-
-function roundShares(){
+ * @param {type} value
+ * @returns {String|@exp;value@call;toFixed}
+ */    
+function roundShares(value){
      if (typeof mashsb !== "undefined" && mashsb.round_shares == 1) {
-             if (mashsb.shares > 1000000) {
+             if (value > 1000000) {
                     //console.log("100000");
-                    shares = Math.round((mashsb.shares / 1000000)*10)/10 + 'M';
-                    return jQuery('.counts').text(shares);
+                    shares = Math.round((value / 1000000)*10)/10 + 'M';
+                    return shares;
                     
                 }
-                if (mashsb.shares > 1000) {
+                if (value > 1000) {
                     //console.log("1000");
-                    shares = Math.round((mashsb.shares / 1000)*10)/10 + 'k';
+                    shares = Math.round((value / 1000)*10)/10 + 'k';
                     //mashsb.shares = mashsb.shares / 1000 + 'k';
                     //console.log("k: " + shares);
-                    return jQuery('.counts').text(shares);
+                    return shares;
                     
                  }  
      }
-     jQuery('.counts').text(mashsb.shares);
+     /* zero decimals */
+     return value.toFixed(0);
+}
+
+/* Count up script jquery-countTo
+ * by mhuggins
+ * 
+ * Source: https://github.com/mhuggins/jquery-countTo
+ */
+(function ($) {
+	$.fn.countTo = function (options) {
+		options = options || {};
+
+		return $(this).each(function () {
+			// set options for current element
+			var settings = $.extend({}, $.fn.countTo.defaults, {
+				from:            $(this).data('from'),
+				to:              $(this).data('to'),
+				speed:           $(this).data('speed'),
+				refreshInterval: $(this).data('refresh-interval'),
+				decimals:        $(this).data('decimals')
+			}, options);
+
+			// how many times to update the value, and how much to increment the value on each update
+			var loops = Math.ceil(settings.speed / settings.refreshInterval),
+				increment = (settings.to - settings.from) / loops;
+
+			// references & variables that will change with each update
+			var self = this,
+				$self = $(this),
+				loopCount = 0,
+				value = settings.from,
+				data = $self.data('countTo') || {};
+
+			$self.data('countTo', data);
+
+			// if an existing interval can be found, clear it first
+			if (data.interval) {
+				clearInterval(data.interval);
+			}
+			data.interval = setInterval(updateTimer, settings.refreshInterval);
+
+			// initialize the element with the starting value
+			render(value);
+
+			function updateTimer() {
+				value += increment;
+				loopCount++;
+
+				render(value);
+
+				if (typeof(settings.onUpdate) == 'function') {
+					settings.onUpdate.call(self, value);
+				}
+
+				if (loopCount >= loops) {
+					// remove the interval
+					$self.removeData('countTo');
+					clearInterval(data.interval);
+					value = settings.to;
+
+					if (typeof(settings.onComplete) == 'function') {
+						settings.onComplete.call(self, value);
+					}
+				}
+			}
+
+			function render(value) {
+				var formattedValue = settings.formatter.call(self, value, settings);
+				$self.text(formattedValue);
+			}
+		});
+	};
+
+	$.fn.countTo.defaults = {
+		from: 0,               // the number the element should start at
+		to: 0,                 // the number the element should end at
+		speed: 1000,           // how long it should take to count between the target numbers
+		refreshInterval: 100,  // how often the element should be updated
+		decimals: 0,           // the number of decimal places to show
+		//formatter: formatter,  // handler for formatting the value before rendering
+                formatter: roundShares,
+		onUpdate: null,        // callback method for every time the element is updated
+		onComplete: null       // callback method for when the element finishes updating
+	};
+
+	function formatter(value, settings) {
+		return value.toFixed(settings.decimals);
+	}
+        
+
+}(jQuery));
+
+/* Start the counter
+ * 
+ */
+if (typeof mashsb !== 'undefined' && mashsb.animate_shares == 1 && $('.mashsbcount').length) {
+    $('.mashsbcount').countTo({from: 0, to: mashsb.shares, speed: 1000, refreshInterval: 100});
 }
 
 
