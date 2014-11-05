@@ -254,7 +254,7 @@ function mashsb_get_registered_settings() {
                                 'singular' => array(
 					'id' => 'singular',
 					'name' => __( 'Categories', 'mashsb' ),
-					'desc' => __('Enable this checkbox to enable Mashshare on multiple blogposts and categories.','mashsb'),
+					'desc' => __('Enable this checkbox to enable Mashshare on categories with multiple blogposts.','mashsb'),
 					'type' => 'checkbox',
                                         'std' => '0'
 				),
@@ -262,6 +262,12 @@ function mashsb_get_registered_settings() {
 					'id' => 'frontpage',
 					'name' => __( 'Frontpage', 'mashsb' ),
 					'desc' => __('Enable share buttons on frontpage','mashsb'),
+					'type' => 'checkbox'
+				),
+                                'current_url' => array(
+					'id' => 'current_url',
+					'name' => __( 'Current Page URL', 'mashsb' ),
+					'desc' => __('Force sharing the current page on non singular pages like categories with multiple blogposts','mashsb'),
 					'type' => 'checkbox'
 				),
                                 'style_header' => array(
