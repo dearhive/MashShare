@@ -264,9 +264,8 @@ After installation, check with the [Facebook Open graph debugger](https://develo
 == Changelog ==
 
 = 2.1.6 =
-* New: Fast count up animation script which animates even rounded shares like 5.4k
+* New: New count up animation script which animates even rounded shares like 5.4k
 * New: New option to force the use of current page url instead permalink of postid
-* New: Show the active 
 * Fix: Share button in FB popup not visible, popup window was too small on some screen resolutions
 * Fix: Some changes for better HTML5 compliance
 * Fix: Get FB share count instead total count / selectable
@@ -321,4 +320,4 @@ https://www.mashshare.net/changelog/
 == Upgrade Notice ==
 
 = 2.1.6 =
-2.1.6 This updates changes the style of the the plus button for better HTML5 compatibility. If you modified the plus button on your page its possible that you have to convert your changes. <strong>Note:</strong> Update your Sharebar Add-On to latest version.
+2.1.6 This updates changes the style of the the plus button for better HTML5 compatibility. If you modified the plus button on your page its possible that you have to convert some of your custom css changes. <strong>Note:</strong> Update your Sharebar and network Add-On to latest version for this update.
