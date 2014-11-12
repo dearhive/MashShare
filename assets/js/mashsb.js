@@ -67,19 +67,22 @@ jQuery(document).ready( function($) {
     /* Network sharer scripts */
     /* deactivate FB sharer when likeaftershare is enabled */
     if (typeof lashare_fb == "undefined" && typeof mashsb !== 'undefined') {
-    $('.mashicon-facebook').click( function(e) {
-        e.preventDefault();
+    $('.mashicon-facebook').click( function(mashfb) {
+        mashfb.preventDefault();
         winWidth = 520;
         winHeight = 550;
         var winTop = (screen.height / 2) - (winHeight / 2);
 	var winLeft = (screen.width / 2) - (winWidth / 2);
         var url = $(this).attr('href');
+        $('.mashicon-facebook').removeAttr('href');
           //alert(fburl + ' singular: ' + mashsb.singular)      
-            if (mashsb.singular === '1') {
-                window.open('http://www.facebook.com/sharer.php?s=100&u=' + mashsb.share_url + '&p[title]=' + mashsb.title + '&p[summary]=' + mashsb.desc + '&p[images][0]=' + mashsb.image, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
-            } else {
+            //if (mashsb.singular === '1') {
+                //window.open('http://www.facebook.com/sharer.php?s=100&u=' + mashsb.share_url + '&p[title]=' + mashsb.title + '&p[summary]=' + mashsb.desc + '&p[images][0]=' + mashsb.image, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
+            /*} else {
+                console.log("not singular");
                 window.open(url, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
-            }
+            }*/
+        window.open(url, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
     });
     }
     if (typeof mashsb !== 'undefined') {
@@ -87,18 +90,24 @@ jQuery(document).ready( function($) {
         if(typeof mashsu !== 'undefined'){
         mashsu.shorturl != 0 ? shareurl = mashsu.shorturl : shareurl = mashsb.share_url;
         }
-    $('.mashicon-twitter').click( function(e) {
-        e.preventDefault();
+    $('.mashicon-twitter').click( function(mashfw) {
+        mashfw.preventDefault();
         winWidth = 520;
         winHeight = 350;
         var winTop = (screen.height / 2) - (winHeight / 2);
 	var winLeft = (screen.width / 2) - (winWidth / 2);
         var url = $(this).attr('href');
-        if (mashsb.singular === '1') {
-            window.open('https://twitter.com/intent/tweet?text=' + mashsb.title + ' ' + mashsb.hashtag + '&url=' + shareurl, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
-        }else{
+        $('.mashicon-twitter').removeAttr('href');
+        // deprecated and removed because TW popup opens twice
+        //if (mashsb.singular === '1') {
+            //console.log('mashsb.singular1: ' + mashsb.singular);
+            //window.open('https://twitter.com/intent/tweet?text=' + mashsb.title + '&via=' + mashsb.hashtag + '&url=' + shareurl, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
+        /*}else{
+            console.log('mashsb.singular2: ' + mashsb.singular);
             window.open(url, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
-        }
+        }*/
+        //window.open(url, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
+
         });
     }
 

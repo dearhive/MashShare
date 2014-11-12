@@ -33,7 +33,7 @@ function mashsb_load_scripts($hook) {
 	global $mashsb_options, $post;
         //$url = urlencode(get_permalink($post->ID));
         //$url = get_permalink($post->ID);
-        isset($mashsb_options['current_url']) ? $url = add_query_arg( $wp->query_string, '', home_url( $wp->request ) ) : $url = get_permalink($post->ID);
+        $url = get_permalink($post->ID);
         //$title = addslashes(the_title_attribute('echo=0'));
         //$title = urlencode(html_entity_decode(get_the_title(), ENT_COMPAT, 'UTF-8'));
         //$title = urlencode(the_title_attribute('echo=0'));
@@ -48,7 +48,7 @@ function mashsb_load_scripts($hook) {
         $desc = mashsb_get_excerpt_by_id($post->ID);
         /* Load hashshag*/       
             if ($mashsb_options['mashsharer_hashtag'] != '') {
-                $hashtag = '&via=' . $mashsb_options['mashsharer_hashtag'];
+                $hashtag = $mashsb_options['mashsharer_hashtag'];
             } else {
                 $hashtag = '';
             }
@@ -71,7 +71,8 @@ function mashsb_load_scripts($hook) {
                         'subscribe' => $mashsb_options['subscribe_behavior'] === 'content' ? 'content' : 'link',
                         'subscribe_url' => isset($mashsb_options['subscribe_link']) ? $mashsb_options['subscribe_link'] : '',
                         'activestatus' => mashsbGetActiveStatus(),
-                        'singular' => is_singular() ? 1 : 0
+                        'singular' => is_singular() ? 1 : 0,
+                        'twitter_popup' => isset($mashsb_options['twitter_popup']) ? 0 : 1,
                     ));
                         
 }

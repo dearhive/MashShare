@@ -264,11 +264,19 @@ function mashsb_get_registered_settings() {
 					'desc' => __('Enable share buttons on frontpage','mashsb'),
 					'type' => 'checkbox'
 				),
-                                'current_url' => array(
+                                /*'current_url' => array(
 					'id' => 'current_url',
 					'name' => __( 'Current Page URL', 'mashsb' ),
 					'desc' => __('Force sharing the current page on non singular pages like categories with multiple blogposts','mashsb'),
 					'type' => 'checkbox'
+				),*/
+                                'twitter_popup' => array(
+					'id' => 'twitter_popup',
+					'name' => __( 'Twitter Popup disable', 'mashsb' ),
+					'desc' => __('Check this box if your twitter popup is openening twice. This happens when you are using any third party twitter instance on your website.','mashsb'),
+					'type' => 'checkbox',
+                                        'std' => '0'
+                                    
 				),
                                 'style_header' => array(
 					'id' => 'style_header',

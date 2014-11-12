@@ -12,7 +12,7 @@ flickr, floating buttons, follow, foursquare, gmail, goo.gl, google, google anal
 popular, outbrain, PrintFriendly, popular posts, print, Whatsapp, rss, related posts, related content, share links, share bar, sharebar, social analytics, velocity graph, social networking, share and enjoy, sidebar, Vkontakte, 
 technorati, socialize, url shortener, sonico, statistics tumblr, vimeo, yarrp, youtube, recommendations, posterous, orkut, icon, icons, image, images, Like, links, lockerz, page, pages, pin, pin it, pinit, pinterest, plugin, 
 plus 1, plus one, Post, posts, Reddit, save, seo, Share, Shareaholic, sharedaddy, sharethis, sharing, shortcode, sidebar, sociable, social, social bookmarking, social bookmarks, statistics, stats, stumbleupon, svg, technorati, 
-tumblr, tweet, twitter, vector, widget, WPSSO, wpmu
+tumblr, tweet, twitter, vector, widget, WPSSO, wpmu, bruteprotect
 Requires at least: 3.1+
 Tested up to: 4.0
 Stable tag: 2.1.6
@@ -264,13 +264,14 @@ After installation, check with the [Facebook Open graph debugger](https://develo
 == Changelog ==
 
 = 2.1.6 =
-* New: New count up animation script which animates even rounded shares like 5.4k
+* New: New count up animation script which animates even shares in the format like 5.4k
 * New: New option to force the use of current page url instead permalink of postid
 * Fix: Share button in FB popup not visible, popup window was too small on some screen resolutions
 * Fix: Some changes for better HTML5 compliance
 * Fix: Get FB share count instead total count / selectable
 * Fix: Delete label attribute from plus sign. Fix HTML5 W3C error.
 * Fix: Delete id mashsb-toogle to prevent duplicate use of duplicate id
+* Fix: Twitter popup opened twice when any other third party instance of Twitter tweet button is running
 * Tweak: Change css for the plus button. Cleaner and easier to adjust. 
 * Tweak: remove id mashsbcount to prevent duplicate use of duplicate id
 
@@ -289,6 +290,7 @@ After installation, check with the [Facebook Open graph debugger](https://develo
 * New: Use dynamic jQuery tabs in settings backend
 * New: Differentiate between multiple subscribe buttons and opens only one toggle window
 * New: Spanish translation by Nestor Pool
+* New: Tested with bruteprotect plugin
 * Fix: Missing function in mashsb-admin.js
 * Fix: height of Whatsapp button
 * Fix: Rewrite Purge DB Cache function to delete post_meta objects
