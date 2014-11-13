@@ -280,7 +280,7 @@ function mashsb_get_registered_settings() {
 				),
                                 'style_header' => array(
 					'id' => 'style_header',
-					'name' => '<strong>' . __( 'Visual appearance / Style', 'mashsb' ) . '</strong>',
+					'name' => '<strong>' . __( 'Visual Style & Template', 'mashsb' ) . '</strong>',
 					'desc' => __( ' ', 'mashsb' ),
 					'type' => 'header'
                                 ),
@@ -343,6 +343,14 @@ function mashsb_get_registered_settings() {
                                         'std' => 'default'
 					
 				),
+                                array(
+                                        'id' => 'button_width',
+                                        'name' => __( 'Button width', 'mashpv' ),
+                                        'desc' => __( 'Minimum with of the large share buttons in pixels', 'mashpv' ),
+                                        'type' => 'number',
+                                        'size' => 'normal',
+                                        'std' => '177'
+                                ), 
                                 'mash_style' => array(
 					'id' => 'mash_style',
 					'name' => __( 'Share button style', 'mashsb' ),

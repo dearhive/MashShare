@@ -33,7 +33,6 @@ Free and premium Add-Ons available for Google Analytics, more Social Networks, r
 
 This plugin is in active development and will be updated on a regular basis - Please do not rate negative before i tried my best to solve your issue.
 
-
 = Main Features =
 
 * High Performance - easy to use - Share Buttons for the most common networks
@@ -160,6 +159,9 @@ Configure the Share buttons sharing function in the settings page of the plugin.
 **Full SEO third party plugin support**
 Mashshare integrates with [All in One SEO Pack](http://wordpress.org/plugins/all-in-one-seo-pack/) and [WordPress SEO by Yoast](http://wordpress.org/plugins/wordpress-seo/).
 
+** GitHub **
+Follow the development and improve Mashshare.
+You find us on GitHub at: https://github.com/mashshare/Mashshare 
 
 ** Languages **
 
@@ -264,6 +266,7 @@ After installation, check with the [Facebook Open graph debugger](https://develo
 == Changelog ==
 
 = 2.1.6 =
+* New: Change width of large buttons in settings
 * New: New count up animation script which animates even shares in the format like 5.4k
 * New: New option to force the use of current page url instead permalink of postid
 * Fix: Share button in FB popup not visible, popup window was too small on some screen resolutions
@@ -274,6 +277,7 @@ After installation, check with the [Facebook Open graph debugger](https://develo
 * Fix: Twitter popup opened twice when any other third party instance of Twitter tweet button is running
 * Tweak: Change css for the plus button. Cleaner and easier to adjust. 
 * Tweak: remove id mashsbcount to prevent duplicate use of duplicate id
+* Tweak: Simplified the facebook sharer url
 
 = 2.1.5 =
 * Tweak: Cleaner and more attractive Whatsapp svg icon 
@@ -322,4 +326,4 @@ https://www.mashshare.net/changelog/
 == Upgrade Notice ==
 
 = 2.1.6 =
-2.1.6 This updates changes the style of the the plus button for better HTML5 compatibility. If you modified the plus button on your page its possible that you have to convert some of your custom css changes. <strong>Note:</strong> Update your Sharebar and network Add-On to latest version for this update.
+2.1.6 This updates changes the style of the the plus button for better HTML5 compatibility. If you modified the plus button on your page its possible that you have to convert some of your custom css styles. <strong>Note:</strong> Update your Sharebar and network Add-On to latest version for this update.

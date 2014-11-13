@@ -328,11 +328,12 @@ function getSharedcount($url) {
         
         $image = mashsb_get_image($post->ID);
         $desc = urlencode(mashsb_get_excerpt_by_id($post->ID));
+        
         !empty($mashsb_options['mashsharer_hashtag']) ? $hashtag = $mashsb_options['mashsharer_hashtag'] : $hashtag = '';
        
         
         $networks = apply_filters('mashsb_array_networks', array(
-            'facebook' => 'http://www.facebook.com/sharer.php?s=100&amp;u=' . $url . '&amp;p[title]=' . $title . '&amp;p[summary]=' . $desc . '&amp;p[images][0]=' . $image,
+            'facebook' => 'http://www.facebook.com/sharer.php?u=' . $url,
             'twitter' =>  'https://twitter.com/intent/tweet?text=' . $title . '&amp;via=' . $hashtag . '&amp;url=' . $urltw,
             'subscribe' => '#',
             'url' => $url,
@@ -462,7 +463,11 @@ function getSharedcount($url) {
         global $wpdb ,$mashsb_options, $post;
         $url = get_permalink($post->ID);
 
-        $title = addslashes(the_title_attribute('echo=0'));
+        $title = html_entity_decode(the_title_attribute('echo=0'), ENT_QUOTES, 'UTF-8');
+        $title = urlencode($title);
+        $title = str_replace('#' , '%23', $title);
+        $title = esc_html($title);
+        
         $sharecount = '';
 
         extract(shortcode_atts(array(
@@ -474,7 +479,7 @@ function getSharedcount($url) {
 
             /* Load hashshag*/       
             if ($mashsb_options['mashsharer_hashtag'] != '') {
-                $hashtag = '&via=' . $mashsb_options['mashsharer_hashtag'];
+                $hashtag = '&amp;via=' . $mashsb_options['mashsharer_hashtag'];
             } else {
                 $hashtag = '';
             }
@@ -607,12 +612,13 @@ function getSharedcount($url) {
         global $wp_current_filter;
         
         /* define some vars here to reduce multiple execution of some basic functions */
-        $url = get_permalink($post->ID);
-        
-        $title = addslashes(the_title_attribute('echo=0'));
-        $title = addslashes(the_title_attribute('echo=0'));
+        $url = urlencode(get_permalink($post->ID));
+
+        //$title = addslashes(the_title_attribute('echo=0'));
+        //$title = html_entity_decode(the_title_attribute('echo=0'), ENT_COMPAT, 'UTF-8');
+        $title = html_entity_decode(the_title_attribute('echo=0'), ENT_QUOTES, 'UTF-8');
         $title = urlencode($title);
-        $title = str_replace('#' , '%23', $title); 
+        $title = str_replace('#' , '%23', $title);
         $title = esc_html($title);
         
         $position = $mashsb_options['mashsharer_position'];
@@ -683,12 +689,12 @@ function mashsharer(){
     global $content;
     global $atts;
     //global $url;
-    global $title;
+    //global $title;
     global $post;
     $url = get_permalink($post->ID);
-    $title = addslashes(the_title_attribute('echo=0'));
+    $title = html_entity_decode(the_title_attribute('echo=0'), ENT_QUOTES, 'UTF-8');
     $title = urlencode($title);
-    $title = str_replace('#' , '%23', $title); 
+    $title = str_replace('#' , '%23', $title);
     $title = esc_html($title);
     echo mashshareShow($atts, '', $url, $title);
 }
@@ -701,12 +707,12 @@ function mashshare(){
     global $content;
     global $atts;
     //global $url;
-    global $title;
+    //global $title;
     global $post;
     $url = get_permalink($post->ID);
-    $title = addslashes(the_title_attribute('echo=0'));
+    $title = html_entity_decode(the_title_attribute('echo=0'), ENT_QUOTES, 'UTF-8');
     $title = urlencode($title);
-    $title = str_replace('#' , '%23', $title); 
+    $title = str_replace('#' , '%23', $title);
     $title = esc_html($title);
     echo mashshareShow($atts, '', $url, $title);
 }
@@ -827,12 +833,12 @@ function mashsb_styles_method() {
     /* VARS */
     $share_color = $mashsb_options['share_color'];
     $custom_css = $mashsb_options['custom_css'];
+    $button_width = $mashsb_options['button_width'];
     
     /* STYLES */
     $mashsb_custom_css = "
         .mashsb-count {
         color: {$share_color};
-       
         }"; 
     if ($mashsb_options['border_radius']  != 'default'){
     $mashsb_custom_css .= '
@@ -912,9 +918,11 @@ function mashsb_styles_method() {
         margin-right: 0px;
         width: 41px;
         line-height: 41px;
+    }';   
     }
-';   
-    }
+    $mashsb_custom_css .= '
+    .mashsb-buttons a {
+    min-width: ' . $button_width . 'px;}';
     
     $mashsb_custom_css .= $custom_css;
         // ----------- Hook into existed 'mashsb-style' at /templates/mashsb.min.css -----------

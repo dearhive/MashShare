@@ -341,17 +341,22 @@ color:#8A8C8E;
     margin-bottom:3px;
     margin-left: 0px;
     cursor: pointer;
-    font-size:30px;
     background-color: #C5C5C5; color: #FFFFFF;
     width: 42px;
     height: 42px; 
+    line-height: 42px;
+    text-align: center;
 }
 
 .onoffswitch:before {
     content: "+";
-    padding-left: 11px;
-    padding-top: 5px;
+    /*padding-left: 12px;
+    padding-top: 1px;*/
     display: inline-block;
+    font-weight: bold;
+    font-size: 30px;
+    font-family: arial;
+    vertical-align: middle;
 }
 
 .onoffswitch2 {
@@ -363,17 +368,22 @@ color:#8A8C8E;
     margin-bottom:3px;
     margin-left: 0px;
     cursor: pointer;
-    font-size:30px;
     background-color: #C5C5C5; color: #FFFFFF;
     width: 42px;
-    height: 42px; 
+    height: 42px;
+    line-height: 42px;
+    text-align: center;
 }
 
 .onoffswitch2:before {
     content: "-";
-    padding-left: 15px;
-    padding-top: 5px;
+    /*padding-left: 15px;
+    padding-top: 5px;*/
     display: inline-block;
+    font-weight: bold;
+    font-size: 30px;
+    font-family: arial;
+    vertical-align: super;
 }
 
 /* On off switch for more services */
