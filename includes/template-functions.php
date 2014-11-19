@@ -587,7 +587,7 @@ function getSharedcount($url) {
        //if(has_action('mashshare') && mashsb_is_excluded() !== true) {
        if(has_action('mashshare')) {
            mashdebug()->info("action1");
-           //return true;    
+           return true;    
        }
        
        // Load scripts when do_action('mashsharer') is used
@@ -831,9 +831,9 @@ function mashsb_styles_method() {
 	);*/
     
     /* VARS */
-    $share_color = $mashsb_options['share_color'];
-    $custom_css = $mashsb_options['custom_css'];
-    $button_width = $mashsb_options['button_width'];
+    isset($mashsb_options['share_color']) ? $share_color = $mashsb_options['share_color'] : $share_color = '';
+    isset($mashsb_options['custom_css']) ? $custom_css = $mashsb_options['custom_css'] : $custom_css = '';
+    isset($mashsb_options['button_width']) ? $button_width = $mashsb_options['button_width'] : $button_width = '';
     
     /* STYLES */
     $mashsb_custom_css = "
@@ -919,10 +919,11 @@ function mashsb_styles_method() {
         width: 41px;
         line-height: 41px;
     }';   
-    }
+    } else {
     $mashsb_custom_css .= '
     .mashsb-buttons a {
     min-width: ' . $button_width . 'px;}';
+    }
     
     $mashsb_custom_css .= $custom_css;
         // ----------- Hook into existed 'mashsb-style' at /templates/mashsb.min.css -----------

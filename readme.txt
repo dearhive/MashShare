@@ -266,15 +266,18 @@ After installation, check with the [Facebook Open graph debugger](https://develo
 == Changelog ==
 
 = 2.1.6 =
+
+** if you install this version make sure to also update your Add-Ons which are improved by us as well **
+
 * New: Change width of large buttons in settings
 * New: New count up animation script which animates even shares in the format like 5.4k
-* New: New option to force the use of current page url instead permalink of postid
 * Fix: Share button in FB popup not visible, popup window was too small on some screen resolutions
 * Fix: Some changes for better HTML5 compliance
 * Fix: Get FB share count instead total count / selectable
 * Fix: Delete label attribute from plus sign. Fix HTML5 W3C error.
 * Fix: Delete id mashsb-toogle to prevent duplicate use of duplicate id
 * Fix: Twitter popup opened twice when any other third party instance of Twitter tweet button is running
+* Fix: Reddit, Stumbleupon and Linkedin was not shown because of a blank character in the network array.
 * Tweak: Change css for the plus button. Cleaner and easier to adjust. 
 * Tweak: remove id mashsbcount to prevent duplicate use of duplicate id
 * Tweak: Simplified the facebook sharer url
@@ -326,4 +329,4 @@ https://www.mashshare.net/changelog/
 == Upgrade Notice ==
 
 = 2.1.6 =
-2.1.6 This updates changes the style of the the plus button for better HTML5 compatibility. If you modified the plus button on your page its possible that you have to convert some of your custom css styles. <strong>Note:</strong> Update your Sharebar and network Add-On to latest version for this update.
+2.1.6 This updates changes the style of the the plus button for HTML5 compatibility. If you modified the plus button on your page its possible that you have to convert some of your custom css styles. <strong>Note:</strong> Update your Sharebar and network Add-On to latest version for this update.
