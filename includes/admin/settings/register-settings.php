@@ -1072,7 +1072,7 @@ if ( ! function_exists( 'mashsb_license_key_callback' ) ) {
 }
 
 /**
- * Networks Callback / Facebook and Twitter default
+ * Networks Callback / Facebook, Twitter and Subscribe default
  *
  * Renders network order table. Uses separate option field 'mashsb_networks 
  *
@@ -1084,7 +1084,7 @@ if ( ! function_exists( 'mashsb_license_key_callback' ) ) {
 
 function mashsb_networks_callback( $args ) {
 	global $mashsb_options;
-       /* Our array in $mashsb_option['networks']
+       /* Array in $mashsb_option['networks']
         * 
         *                                   array(
                                                 0 => array (

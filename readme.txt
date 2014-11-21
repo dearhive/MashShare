@@ -14,8 +14,8 @@ technorati, socialize, url shortener, sonico, statistics tumblr, vimeo, yarrp, y
 plus 1, plus one, Post, posts, Reddit, save, seo, Share, Shareaholic, sharedaddy, sharethis, sharing, shortcode, sidebar, sociable, social, social bookmarking, social bookmarks, statistics, stats, stumbleupon, svg, technorati, 
 tumblr, tweet, twitter, vector, widget, WPSSO, wpmu, bruteprotect
 Requires at least: 3.1+
-Tested up to: 4.0
-Stable tag: 2.1.6
+Tested up to: 4.0.1
+Stable tag: 2.1.7
 
 Mashshare social share buttons, a high-performance social sharing and social seo ecosystem for Facebook Twitter Subscribe and more networks 
 
@@ -172,10 +172,10 @@ Mashshare has been translated into the following languages:
 3. Spanish
 4. Turkish
 5. Italy
+6. Portuguese (Brazil)
 
-Would you like to help translate the plugin into more languages? 
+Would you like to help translate the share button plugin into more languages? 
 Join our [Transifex Translation Team](www.transifex.com/projects/p/mashshare).
-
 
 = How does it work? =
 
@@ -265,11 +265,17 @@ After installation, check with the [Facebook Open graph debugger](https://develo
 
 == Changelog ==
 
+= 2.1.7 =
+* New: Tested for WordPress 4.0.1
+* New: Import / Export function for Mashshare settings
+* Fix: Brace duplicate in css file
+* Fix: Spelling issue
+
 = 2.1.6 =
 
 ** if you install this version make sure to also update your Add-Ons which are improved by us as well **
 
-* New: Change width of large buttons in settings
+* New: Change width of large share buttons in settings
 * New: New count up animation script which animates even shares in the format like 5.4k
 * Fix: Share button in FB popup not visible, popup window was too small on some screen resolutions
 * Fix: Some changes for better HTML5 compliance
@@ -328,5 +334,5 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 2.1.6 =
-2.1.6 This updates changes the style of the the plus button for HTML5 compatibility. If you modified the plus button on your page its possible that you have to convert some of your custom css styles. <strong>Note:</strong> Update your Sharebar and network Add-On to latest version for this update.
+= 2.1.7 =
+2.1.7 This updates changes the style of the the plus button for HTML5 compatibility. If you modified the plus button on your page its possible that you have to convert some of your custom css styles. <strong>Note:</strong> Update your Sharebar and network Add-On to latest version for this update.

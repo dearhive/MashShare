@@ -27,9 +27,9 @@ function mashsb_settings_contextual_help() {
 */
 	$screen->set_help_sidebar(
 		'<p><strong>' . $screen->id . sprintf( __( 'For more information:', 'mashsb' ) . '</strong></p>' .
-		'<p>' . sprintf( __( 'Visit the <a href="%s">documentation</a> on the Mashare website.', 'mashsb' ), esc_url( 'https://www.mashare.net/' ) ) ) . '</p>' .
+		'<p>' . sprintf( __( 'Visit the <a href="%s">documentation</a> on the Mashshare website.', 'mashsb' ), esc_url( 'https://www.mashshare.net/' ) ) ) . '</p>' .
 		'<p>' . sprintf(
-					__( '<a href="%s">Post an issue</a> on <a href="%s">Mashare</a>. View <a href="%s">extensions</a>.', 'mashsb' ),
+					__( '<a href="%s">Post an issue</a> on <a href="%s">Mashshare</a>. View <a href="%s">extensions</a>.', 'mashsb' ),
 					esc_url( 'https://www.mashshare.net/contact-support/' ),
 					esc_url( 'https://www.mashshare.net' ),
 					esc_url( 'https://www.mashshare.net/downloads' )

@@ -5,7 +5,7 @@
  * Description: Mashshare is a Share functionality inspired by the the great website Mashable for Facebook and Twitter. More networks available.
  * Author: René Hermenau
  * Author URI: http://www.mashshare.net
- * Version: 2.1.6
+ * Version: 2.1.7
  * Text Domain: mashsb
  * Domain Path: languages
  * Credits: A thousand thanks go to Pippin Williamson! I borrowed a lot of code from his popular plugin Easy Digital Downloads. I never reinvent the wheel and as
@@ -122,7 +122,7 @@ final class Mashshare {
 		global $wpdb;
 		// Plugin version
 		if ( ! defined( 'MASHSB_VERSION' ) ) {
-			define( 'MASHSB_VERSION', '2.1.6' );
+			define( 'MASHSB_VERSION', '2.1.7' );
 		}
 
 		// Plugin Folder Path
@@ -177,6 +177,7 @@ final class Mashshare {
 			require_once MASHSB_PLUGIN_DIR . 'includes/admin/settings/display-settings.php';
                         require_once MASHSB_PLUGIN_DIR . 'includes/admin/settings/contextual-help.php';
                         require_once MASHSB_PLUGIN_DIR . 'includes/install.php';	
+                        require_once MASHSB_PLUGIN_DIR . 'includes/admin/tools.php';
 		}                                              
                         		
             /* Instantiate class MASHSB_licence

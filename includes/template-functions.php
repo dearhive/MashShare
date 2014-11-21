@@ -594,8 +594,9 @@ function getSharedcount($url) {
        //if(has_action('mashsharer') && mashsb_is_excluded() !== true) {
        if(has_action('mashsharer')) {
            mashdebug()->info("action2");
-           //return true;    
+           return true;    
        } 
+
     }
     
 
