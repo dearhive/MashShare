@@ -15,7 +15,7 @@ plus 1, plus one, Post, posts, Reddit, save, seo, Share, Shareaholic, sharedaddy
 tumblr, tweet, twitter, vector, widget, WPSSO, wpmu, bruteprotect
 Requires at least: 3.1+
 Tested up to: 4.0.1
-Stable tag: 2.1.7
+Stable tag: 2.1.8
 
 Mashshare social share buttons, a high-performance social sharing and social seo ecosystem for Facebook Twitter Subscribe and more networks 
 
@@ -265,8 +265,12 @@ After installation, check with the [Facebook Open graph debugger](https://develo
 
 == Changelog ==
 
+= 2.1.8 =
+* Fix: Shares on the share buttons are not counted on specific configurations
+* Fix: undefined vars in sharedcount.class.php
+
 = 2.1.7 =
-* New: Tested for WordPress 4.0.1
+* New: Tested up to WordPress 4.0.1
 * New: Import / Export function for Mashshare settings
 * Fix: Brace duplicate in css file
 * Fix: Spelling issue
@@ -334,5 +338,5 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 2.1.7 =
-2.1.7 This updates changes the style of the the plus button for HTML5 compatibility. If you modified the plus button on your page its possible that you have to convert some of your custom css styles. <strong>Note:</strong> Update your Sharebar and network Add-On to latest version for this update.
+= 2.1.8 =
+2.1.8 <strong>Note:</strong> Update your Sharebar and Network Add-On to latest version for this update.

@@ -40,28 +40,30 @@ function getFBTWCounts(){
 }
 /* Only used when mashshare-networks is enabled */
 function getAllCounts(){
+        global $mashsb_options;
+        
         isset($mashsb_options['facebook_count_mode']) ? $fb_mode = $mashsb_options['facebook_count_mode'] : $fb_mode = '';
         $sharecounts = $this->get_sharedcount();
         
 	$counts = array('shares'=>array(),'total'=>0);
 	if ($fb_mode === 'total'){
-        $counts['shares']['fb'] = $sharecounts['Facebook']['total_count'];
+            isset($sharecounts['Facebook']['total_count']) ? $counts['shares']['fb'] = $sharecounts['Facebook']['total_count'] : $sharecounts['Facebook']['total_count'] = 0;
         } else {
-        $counts['shares']['fb'] = $sharecounts['Facebook']['share_count'];    
+            isset($sharecounts['Facebook']['share_count']) ? $counts['shares']['fb'] = $sharecounts['Facebook']['share_count'] : $counts['shares']['fb'] = 0;  
         }
-	$counts['shares']['tw'] = $sharecounts['Twitter'];
-	$counts['shares']['gp'] = $sharecounts['GooglePlusOne'];
-	$counts['shares']['li'] = $sharecounts['LinkedIn'];
-	$counts['shares']['st'] = $sharecounts['StumbleUpon'];
-	$counts['shares']['pin'] = $sharecounts['Pinterest'];
+            isset($sharecounts['Twitter']) ? $counts['shares']['tw'] = $sharecounts['Twitter'] : $sharecounts['Twitter'] = 0;
+            isset($sharecounts['GooglePlusOne']) ? $counts['shares']['gp'] = $sharecounts['GooglePlusOne'] : $counts['shares']['gp'] = 0 ;
+            isset($sharecounts['LinkedIn']) ? $counts['shares']['li'] = $sharecounts['LinkedIn'] : $counts['shares']['li'] = 0;
+            isset($sharecounts['StumbleUpon']) ? $counts['shares']['st'] = $sharecounts['StumbleUpon'] : $counts['shares']['st'] = 0 ;
+            isset($sharecounts['Pinterest']) ? $counts['shares']['pin'] = $sharecounts['Pinterest'] : $counts['shares']['pin'] = 0;
 
 	foreach ($counts['shares'] as $sbserv => $sbsharecount) $counts['total'] += (int)$sbsharecount;
-        mashdebug()->error("sharedcount.com getAllCounts: " . $counts['total']);
+        mashdebug()->info("sharedcount.com getAllCounts: " . $counts['total']);
 	return $counts;
 }
 
 function get_sharedcount()  {
-    mashdebug()->error("URL: " . $this->url);
+    mashdebug()->info("Share URL: " . $this->url);
     global $mashsb_options;
     !empty($mashsb_options['mashsharer_apikey']) ? $apikey = $mashsb_options['mashsharer_apikey'] : $apikey = '';
 
@@ -76,7 +78,7 @@ function get_sharedcount()  {
 		curl_close ($curl);
                 $counts = json_decode($curl_results, true);
                 
-                mashdebug()->error("results: " . $counts['Twitter']);
+                mashdebug()->info("Twitter count: " . isset($counts['Twitter']));
                 return $counts;
 	} catch (Exception $e){
                 mashdebug()->error("error: " . $counts);
