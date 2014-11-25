@@ -15,9 +15,9 @@ plus 1, plus one, Post, posts, Reddit, save, seo, Share, Shareaholic, sharedaddy
 tumblr, tweet, twitter, vector, widget, WPSSO, wpmu, bruteprotect
 Requires at least: 3.1+
 Tested up to: 4.0.1
-Stable tag: 2.1.8
+Stable tag: 2.1.9
 
-Mashshare social share buttons, a high-performance social sharing and social seo ecosystem for Facebook Twitter Subscribe and more networks 
+Mashshare social share buttons, a high-performance social sharing and social SEO ecosystem for Facebook, Twitter, Subscribe and more networks 
 
 == Description == 
 
@@ -250,7 +250,7 @@ After installation, check with the [Facebook Open graph debugger](https://develo
 
 == Screenshots ==
 
-1. Default share buttons (included)
+1. Subscribe form with Facebook button and mail subscribe
 2. Default share buttons with separate available responsive Add-On
 3. Add-On Marketplace with free and premium Add-Ons
 4. Default Sharebuttons with separate available responsive Add-On
@@ -260,10 +260,15 @@ After installation, check with the [Facebook Open graph debugger](https://develo
 8. Sticky Sharebar Add-On on desktop device
 9. Round circle style (included)
 10. Drag and drop setting menue
+11. Default share buttons (included)
+
 
 
 
 == Changelog ==
+
+= 2.1.9 =
+* Fix: If Twitter username is empty the plugin still appends "via @" at end of tweet
 
 = 2.1.8 =
 * Fix: Shares on the share buttons are not counted on specific configurations

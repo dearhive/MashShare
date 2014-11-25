@@ -329,12 +329,12 @@ function getSharedcount($url) {
         $image = mashsb_get_image($post->ID);
         $desc = urlencode(mashsb_get_excerpt_by_id($post->ID));
         
-        !empty($mashsb_options['mashsharer_hashtag']) ? $hashtag = $mashsb_options['mashsharer_hashtag'] : $hashtag = '';
+        !empty($mashsb_options['mashsharer_hashtag']) ? $hashtag = '&amp;via=' . $mashsb_options['mashsharer_hashtag'] : $hashtag = '';
        
         
         $networks = apply_filters('mashsb_array_networks', array(
             'facebook' => 'http://www.facebook.com/sharer.php?u=' . $url,
-            'twitter' =>  'https://twitter.com/intent/tweet?text=' . $title . '&amp;via=' . $hashtag . '&amp;url=' . $urltw,
+            'twitter' =>  'https://twitter.com/intent/tweet?text=' . $title . $hashtag . '&amp;url=' . $urltw,
             'subscribe' => '#',
             'url' => $url,
             'title' => $title   
