@@ -161,7 +161,7 @@ function mashsb_get_registered_settings() {
                                 'excluded_from' => array(
 					'id' => 'excluded_from',
 					'name' => __( 'Exclude from', 'mashsb' ),
-					'desc' => __( 'Exclude share buttons from a list of specific posts and pages. Put in the page id seperated by a comma, e.g. 23, 63, 114 ', 'mashsb' ),
+					'desc' => __( 'Exclude share buttons from a list of specific posts and pages. Put in the page id separated by a comma, e.g. 23, 63, 114 ', 'mashsb' ),
 					'type' => 'text',
                                         'size' => 'medium'
 				),
@@ -254,7 +254,7 @@ function mashsb_get_registered_settings() {
                                 'singular' => array(
 					'id' => 'singular',
 					'name' => __( 'Categories', 'mashsb' ),
-					'desc' => __('Enable this checkbox to enable Mashshare on categories with multiple blogposts.','mashsb'),
+					'desc' => __('Enable this checkbox to enable Mashshare on categories with multiple blogposts. <strong>Note: </strong> Post_types: "Post" must be enabled.','mashsb'),
 					'type' => 'checkbox',
                                         'std' => '0'
 				),

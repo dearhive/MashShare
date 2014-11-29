@@ -269,6 +269,7 @@ After installation, check with the [Facebook Open graph debugger](https://develo
 
 = 2.1.9 =
 * Fix: If Twitter username is empty the plugin still appends "via @" at end of tweet
+* Fix: Exclude posts not working on every constellations.
 
 = 2.1.8 =
 * Fix: Shares on the share buttons are not counted on specific configurations

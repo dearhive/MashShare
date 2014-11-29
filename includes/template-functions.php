@@ -452,6 +452,7 @@ function getSharedcount($url) {
                         <!-- Share buttons made by mashshare.net - Version: ' . MASHSB_VERSION . '-->';
             mashdebug()->timer('timer', true);
             return apply_filters( 'mashsb_output_buttons', $return );
+            
     }
     
     /* Shortcode function
@@ -517,9 +518,7 @@ function getSharedcount($url) {
                     . mashsb_subscribe_content() .
                     '</aside>
                         <!-- Share buttons made by mashshare.net - Version: ' . MASHSB_VERSION . '-->';
-          
-            return apply_filters( 'mashsb_output_buttons', $return );  
-          
+            return apply_filters( 'mashsb_output_buttons', $return );    
     }
     
     /* Returns active status of Mashshare.
@@ -534,7 +533,7 @@ function getSharedcount($url) {
 
        $frontpage = isset( $mashsb_options['frontpage'] ) ? $frontpage = 1 : $frontpage = 0;
        $current_post_type = get_post_type();
-       $enabled_post_types = isset( $mashsb_options['post_types'] ) ? $mashsb_options['post_types'] : null;
+       $enabled_post_types = isset( $mashsb_options['post_types'] ) ? $mashsb_options['post_types'] : array();
        $excluded = isset( $mashsb_options['excluded_from'] ) ? $mashsb_options['excluded_from'] : null;
        $singular = isset( $mashsb_options['singular'] ) ? $singular = true : $singular = false;
 
@@ -542,40 +541,7 @@ function getSharedcount($url) {
        if (!is_singular() == 1 && $singular !== true) {
         return false;
        }
-
-        // Load scripts when page is not excluded
-        if (strpos($excluded, ',') !== false) {
-            //mashdebug()->error("hoo");
-            $excluded = explode(',', $excluded);
-            if (!in_array($post->ID, $excluded)) {
-                return true;
-            }
-        }
-        if ($post->ID == $excluded) {
-            return false;
-        }
        
-       // Load scripts when post_type is defined (for automatic embeding)
-       //if ($enabled_post_types && in_array($currentposttype, $enabled_post_types) && mashsb_is_excluded() !== true ) {
-       if ($enabled_post_types == null or in_array($current_post_type, $enabled_post_types)) {
-           mashdebug()->info("100");
-           return true;
-       }  
-       
-       /* Check if post types are allowed */
-       //mashdebug()->info("var frontpage enabled: " . $frontpage . " is_front_page(): " . is_front_page());
-       //if ($enabled_post_types && in_array($currentposttype, $enabled_post_types) && mashsb_is_excluded() !== true) {
-       /*if ($enabled_post_types && in_array($current_post_type, $enabled_post_types)) {
-           mashdebug()->info("200");
-           return true;
-       }*/
-       
-       // No scripts on frontpage when disabled
-       //if ($frontpage == 1 && is_front_page() == 1 && mashsb_is_excluded() !== true) {
-       if ($frontpage == 1 && is_front_page() == 1) {
-           mashdebug()->info("300");
-            return true;
-       }
        // Load scripts when shortcode is used
        /* Check if shortcode is used */ 
        if( has_shortcode( $post->post_content, 'mashshare' ) ) {
@@ -596,6 +562,41 @@ function getSharedcount($url) {
            mashdebug()->info("action2");
            return true;    
        } 
+
+        // Load scripts when page is not excluded
+        if (strpos($excluded, ',') !== false) {
+            //mashdebug()->error("hoo");
+            $excluded = explode(',', $excluded);
+            if (!in_array($post->ID, $excluded)) {
+                return true;
+            }
+        }
+        if ($post->ID == $excluded) {
+            return false;
+        }
+       
+       // Load scripts when post_type is defined (for automatic embeding)
+       //if ($enabled_post_types && in_array($currentposttype, $enabled_post_types) && mashsb_is_excluded() !== true ) {
+       //if ($enabled_post_types == null or in_array($current_post_type, $enabled_post_types)) {
+       if (in_array($current_post_type, $enabled_post_types)) {
+           mashdebug()->info("100");
+           return true;
+       }  
+       
+       /* Check if post types are allowed */
+       //mashdebug()->info("var frontpage enabled: " . $frontpage . " is_front_page(): " . is_front_page());
+       //if ($enabled_post_types && in_array($currentposttype, $enabled_post_types) && mashsb_is_excluded() !== true) {
+       /*if ($enabled_post_types && in_array($current_post_type, $enabled_post_types)) {
+           mashdebug()->info("200");
+           return true;
+       }*/
+       
+       // No scripts on frontpage when disabled
+       //if ($frontpage == 1 && is_front_page() == 1 && mashsb_is_excluded() !== true) {
+       if ($frontpage == 1 && is_front_page() == 1) {
+           mashdebug()->info("300");
+            return true;
+       }
 
     }
     
