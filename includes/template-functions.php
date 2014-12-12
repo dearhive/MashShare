@@ -326,25 +326,26 @@ function getSharedcount($url) {
         //$title = str_replace('#' , '%23', $title); 
         //$titleclean = esc_html($title);
         
-        $image = mashsb_get_image($post->ID);
-        $desc = urlencode(mashsb_get_excerpt_by_id($post->ID));
+        function_exists('MASHOG') ? $image = MASHOG()->MASHOG_OG_Output->_add_image() : $image = mashsb_get_image($post->ID);
+        function_exists('MASHOG') ? $desc = MASHOG()->MASHOG_OG_Output->_get_description() : $desc = urlencode(mashsb_get_excerpt_by_id($post->ID));
+        function_exists('MASHOG') ? $hashtag = '&amp;hashtags=' . MASHOG()->MASHOG_OG_Output->_get_hashtag() : $hashtag = '';
+        $hashtag = str_replace(' ', '', $hashtag);
+        $hashtag = str_replace('#', '', $hashtag);
+        //$image = mashsb_get_image($post->ID);
+        //$desc = urlencode(mashsb_get_excerpt_by_id($post->ID));
         
-        !empty($mashsb_options['mashsharer_hashtag']) ? $hashtag = '&amp;via=' . $mashsb_options['mashsharer_hashtag'] : $hashtag = '';
+        !empty($mashsb_options['mashsharer_hashtag']) ? $via = '&amp;via=' . $mashsb_options['mashsharer_hashtag'] : $via = '';
        
         
         $networks = apply_filters('mashsb_array_networks', array(
             'facebook' => 'http://www.facebook.com/sharer.php?u=' . $url,
-            'twitter' =>  'https://twitter.com/intent/tweet?text=' . $title . $hashtag . '&amp;url=' . $urltw,
+            'twitter' =>  'https://twitter.com/intent/tweet?text=' . $title . $hashtag . $via . '&amp;url=' . $urltw,
             'subscribe' => '#',
             'url' => $url,
             'title' => $title   
         ));
         
-        //if ($singular === true){
-            return $networks[$name];
-        /*} else  {
-            return 'javascript:void(0)';
-        } */       
+            return $networks[$name];    
         }
         
 
@@ -464,7 +465,13 @@ function getSharedcount($url) {
         global $wpdb ,$mashsb_options, $post;
         $url = get_permalink($post->ID);
 
-        $title = html_entity_decode(the_title_attribute('echo=0'), ENT_QUOTES, 'UTF-8');
+        /*$title = html_entity_decode(the_title_attribute('echo=0'), ENT_QUOTES, 'UTF-8');
+        $title = urlencode($title);
+        $title = str_replace('#' , '%23', $title);
+        $title = esc_html($title);*/
+        
+        function_exists('MASHOG') ? $title = MASHOG()->MASHOG_OG_Output->_get_title() : $title = $array['title'];  
+        $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
         $title = urlencode($title);
         $title = str_replace('#' , '%23', $title);
         $title = esc_html($title);
@@ -480,9 +487,9 @@ function getSharedcount($url) {
 
             /* Load hashshag*/       
             if ($mashsb_options['mashsharer_hashtag'] != '') {
-                $hashtag = '&amp;via=' . $mashsb_options['mashsharer_hashtag'];
+                $via = '&amp;via=' . $mashsb_options['mashsharer_hashtag'];
             } else {
-                $hashtag = '';
+                $via = '';
             }
 
             
@@ -618,7 +625,13 @@ function getSharedcount($url) {
 
         //$title = addslashes(the_title_attribute('echo=0'));
         //$title = html_entity_decode(the_title_attribute('echo=0'), ENT_COMPAT, 'UTF-8');
-        $title = html_entity_decode(the_title_attribute('echo=0'), ENT_QUOTES, 'UTF-8');
+        /*$title = html_entity_decode(the_title_attribute('echo=0'), ENT_QUOTES, 'UTF-8');
+        $title = urlencode($title);
+        $title = str_replace('#' , '%23', $title);
+        $title = esc_html($title);*/
+        
+        function_exists('MASHOG') ? $title = MASHOG()->MASHOG_OG_Output->_get_title() : $title = $array['title'];  
+        $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
         $title = urlencode($title);
         $title = str_replace('#' , '%23', $title);
         $title = esc_html($title);
@@ -693,8 +706,10 @@ function mashsharer(){
     //global $url;
     //global $title;
     global $post;
-    $url = get_permalink($post->ID);
-    $title = html_entity_decode(the_title_attribute('echo=0'), ENT_QUOTES, 'UTF-8');
+    $url = urlencode(get_permalink($post->ID));
+    function_exists('MASHOG') ? $title = MASHOG()->MASHOG_OG_Output->_get_title() : $title = $array['title'];  
+    //$title = html_entity_decode(the_title_attribute('echo=0'), ENT_QUOTES, 'UTF-8');
+    $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
     $title = urlencode($title);
     $title = str_replace('#' , '%23', $title);
     $title = esc_html($title);
@@ -711,8 +726,10 @@ function mashshare(){
     //global $url;
     //global $title;
     global $post;
-    $url = get_permalink($post->ID);
-    $title = html_entity_decode(the_title_attribute('echo=0'), ENT_QUOTES, 'UTF-8');
+    $url = urlencode(get_permalink($post->ID));
+    function_exists('MASHOG') ? $title = MASHOG()->MASHOG_OG_Output->_get_title() : $title = $array['title'];  
+    //$title = html_entity_decode(the_title_attribute('echo=0'), ENT_QUOTES, 'UTF-8');
+    $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
     $title = urlencode($title);
     $title = str_replace('#' , '%23', $title);
     $title = esc_html($title);
