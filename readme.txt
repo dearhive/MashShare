@@ -11,7 +11,7 @@ simple share buttons adder,  Google+, Twitter, Facebook, Digg, Stumble Upon, Lin
 buddypress, chrome extension, comments, del.icio.us, Diigo, buffer, button, del.icio.us, e-mail, email, email button, Facebook, facebook like, facebook recommend, facebook share, facebook share button, fark, firefox extension, 
 flickr, floating buttons, follow, foursquare, gmail, goo.gl
 Requires at least: 3.1+
-Tested up to: 4.0.1
+Tested up to: 4.1.0
 Stable tag: 2.2.0
 
 Social Media Icons & Share Buttons, a highly customizable social sharing and & Media SEO ecosystem Facebook, Twitter and more ...
@@ -19,8 +19,8 @@ Social Media Icons & Share Buttons, a highly customizable social sharing and & M
 == Description == 
 
 > <strong>IMPORTANT:</strong> This free Social Media Icons Plugin is a professional and highly customizable ecosystem for social media sharing and optimizing of your valuable content. It gives you per default a large total share counter beside three large prominent Share Buttons for your Twitter tweets, Facebook shares and the option to place a prominent subscribe button for your news feed or mailing list. 
-This services are free per default including great support. We think this is satisfying for most websites. If you are running a website which needs services like Whatsapp, Pinterest, Mail, Print, Linkedin, Odnoklassniki etc. you have the option to afford them on the Add-On Marketplace.
-<strong>DO NOT INSTALL</strong> this plugin when you need more Social Networks from the scratch, you do not care about personal and dedicated support and you think its not worth to pay for additional social networks. There are dozens of other good working social share plugins on the WordPress repository and we recommend to use one of these than, or use them in combination with Mashshare.
+This services are free per default including great support. We also offer some free Add-Ons to pre define your wanted hashtags and sharing desciption for every single post or to use short links. We think this is satisfying for most websites. If you are running a website which needs services like Whatsapp, Pinterest, Mail, Print, Linkedin, Odnoklassniki etc. you have the option to afford them on the Add-On Marketplace.
+<strong>DO NOT INSTALL</strong> this plugin when you need more Social Networks from the scratch, you do not care about personal and dedicated support and you think its not worth to pay this. There are dozens of other good working social share plugins on the WordPress repository and we recommend to use one of these than, or use them in combination with Mashshare.
 Otherwise we really appreciate your interest in Mashshare. [Please rate Mashshare](https://wordpress.org/support/view/plugin-reviews/mashsharer?filter=5 "Please rate us") if you like this plugin.
 If you have any support question or a new feature request feel free to get in contact with us on [Mashshare.net](https://www.mashshare.net "Share buttons").
 
@@ -271,6 +271,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 * New: Use custom share texts and images for all buttons including Tweeter when free Mashshare Add-On "OpenGraph" is installed. 
 * Use custom predefined hashtags for all posts with free Mashshare Add-On "OpenGraph"
 * Fix: Missing URLencode for shortcode function, prevents "not found" for tumblr button
+* Tweak: Use Current page for sharing and not permalink url when current page not_singular(). (Compatibility for )
 
 = 2.1.9 =
 * Fix: If Twitter username is empty the plugin still appends "via @" at end of tweet
@@ -349,5 +350,5 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 2.1.9 =
-2.1.9 <strong>Note:</strong> Update your Sharebar and Network Add-On to latest version for this update.
+= 2.2.0 =
+2.2.0 <strong>Note:</strong> Update your Network Add-On and Open Graph Add-On to latest version.

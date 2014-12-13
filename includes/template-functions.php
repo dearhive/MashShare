@@ -328,9 +328,23 @@ function getSharedcount($url) {
         
         function_exists('MASHOG') ? $image = MASHOG()->MASHOG_OG_Output->_add_image() : $image = mashsb_get_image($post->ID);
         function_exists('MASHOG') ? $desc = MASHOG()->MASHOG_OG_Output->_get_description() : $desc = urlencode(mashsb_get_excerpt_by_id($post->ID));
-        function_exists('MASHOG') ? $hashtag = '&amp;hashtags=' . MASHOG()->MASHOG_OG_Output->_get_hashtag() : $hashtag = '';
+        if (function_exists('MASHOG')){
+            $twittertitle = MASHOG()->MASHOG_OG_Output->_get_tw_title();
+            $twittertitle = html_entity_decode($twittertitle, ENT_QUOTES, 'UTF-8');
+            $twittertitle = urlencode($twittertitle);
+            $twittertitle = str_replace('#' , '%23', $twittertitle);
+            $twittertitle = esc_html($twittertitle);
+            empty($twittertitle) ? $twittertitle = $title : $twittertitle; 
+        } else {
+            $twittertitle = $title;
+        }
+     
+        
+        /*function_exists('MASHOG') ? $hashtag = '&amp;hashtags=' . MASHOG()->MASHOG_OG_Output->_get_hashtag() : $hashtag = '';
         $hashtag = str_replace(' ', '', $hashtag);
         $hashtag = str_replace('#', '', $hashtag);
+         * */
+        
         //$image = mashsb_get_image($post->ID);
         //$desc = urlencode(mashsb_get_excerpt_by_id($post->ID));
         
@@ -339,7 +353,7 @@ function getSharedcount($url) {
         
         $networks = apply_filters('mashsb_array_networks', array(
             'facebook' => 'http://www.facebook.com/sharer.php?u=' . $url,
-            'twitter' =>  'https://twitter.com/intent/tweet?text=' . $title . $hashtag . $via . '&amp;url=' . $urltw,
+            'twitter' =>  'https://twitter.com/intent/tweet?text=' . $twittertitle . $via . '&amp;url=' . $urltw,
             'subscribe' => '#',
             'url' => $url,
             'title' => $title   
@@ -463,7 +477,8 @@ function getSharedcount($url) {
      */
     function mashshareShortcodeShow($atts, $place) {
         global $wpdb ,$mashsb_options, $post;
-        $url = get_permalink($post->ID);
+        /* Use permalink when its not singular page, so on category pages the permalink is used. */
+        is_singular() ? $url = urlencode(home_url( $wp->request )) : $url = urlencode(get_permalink($post->ID));
 
         /*$title = html_entity_decode(the_title_attribute('echo=0'), ENT_QUOTES, 'UTF-8');
         $title = urlencode($title);
@@ -616,20 +631,11 @@ function getSharedcount($url) {
      * @return string
      */
     function mashshare_filter_content($content){
-         
-        global $atts, $mashsb_options, $post;
-        global $wp_current_filter;
+        global $atts, $mashsb_options, $post, $wp_current_filter, $wp;
         
-        /* define some vars here to reduce multiple execution of some basic functions */
-        $url = urlencode(get_permalink($post->ID));
-
-        //$title = addslashes(the_title_attribute('echo=0'));
-        //$title = html_entity_decode(the_title_attribute('echo=0'), ENT_COMPAT, 'UTF-8');
-        /*$title = html_entity_decode(the_title_attribute('echo=0'), ENT_QUOTES, 'UTF-8');
-        $title = urlencode($title);
-        $title = str_replace('#' , '%23', $title);
-        $title = esc_html($title);*/
-        
+        /* define some vars here to reduce multiple execution of basic functions */
+        /* Use permalink when its not singular page, so on category pages the permalink is used. */
+        is_singular() ? $url = urlencode(home_url( $wp->request )) : $url = urlencode(get_permalink($post->ID));
         function_exists('MASHOG') ? $title = MASHOG()->MASHOG_OG_Output->_get_title() : $title = $array['title'];  
         $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
         $title = urlencode($title);
@@ -695,6 +701,24 @@ function getSharedcount($url) {
 
         }
 
+/* Template function mashshare() 
+ * @since 2.0.0
+ * @return string
+*/ 
+function mashshare(){
+    global $content;
+    global $atts;
+    global $post;
+    //$url = urlencode(get_permalink($post->ID));
+    /* Use permalink when its not singular page, so on category pages the permalink is used. */
+    is_singular() ? $url = urlencode(home_url( $wp->request )) : $url = urlencode(get_permalink($post->ID));
+    function_exists('MASHOG') ? $title = MASHOG()->MASHOG_OG_Output->_get_title() : $title = $array['title'];  
+    $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
+    $title = urlencode($title);
+    $title = str_replace('#' , '%23', $title);
+    $title = esc_html($title);
+    echo mashshareShow($atts, '', $url, $title);
+}
 
 /* Deprecated: Template function mashsharer()
  * @since 1.0
@@ -706,7 +730,7 @@ function mashsharer(){
     //global $url;
     //global $title;
     global $post;
-    $url = urlencode(get_permalink($post->ID));
+    is_singular() ? $url = urlencode(home_url( $wp->request )) : $url = urlencode(get_permalink($post->ID));
     function_exists('MASHOG') ? $title = MASHOG()->MASHOG_OG_Output->_get_title() : $title = $array['title'];  
     //$title = html_entity_decode(the_title_attribute('echo=0'), ENT_QUOTES, 'UTF-8');
     $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
@@ -716,25 +740,7 @@ function mashsharer(){
     echo mashshareShow($atts, '', $url, $title);
 }
 
-/* Template function mashshare() 
- * @since 2.0.0
- * @return string
-*/ 
-function mashshare(){
-    global $content;
-    global $atts;
-    //global $url;
-    //global $title;
-    global $post;
-    $url = urlencode(get_permalink($post->ID));
-    function_exists('MASHOG') ? $title = MASHOG()->MASHOG_OG_Output->_get_title() : $title = $array['title'];  
-    //$title = html_entity_decode(the_title_attribute('echo=0'), ENT_QUOTES, 'UTF-8');
-    $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
-    $title = urlencode($title);
-    $title = str_replace('#' , '%23', $title);
-    $title = esc_html($title);
-    echo mashshareShow($atts, '', $url, $title);
-}
+
 
 
 /**

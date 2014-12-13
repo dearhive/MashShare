@@ -56,7 +56,7 @@ function mashsb_load_scripts($hook) {
 	$js_dir = MASHSB_PLUGIN_URL . 'assets/js/';
 	// Use minified libraries if SCRIPT_DEBUG is turned off
 	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
-	wp_enqueue_script( 'mashsb', $js_dir . 'mashsb' . $suffix . '.js', array( 'jquery' ), MASHSB_VERSION );
+	wp_enqueue_script( 'mashsb', $js_dir . 'mashsb' . $suffix . '.js', array( 'jquery' ), MASHSB_VERSION, true );
         !isset($mashsb_options['disable_sharecount']) ? $shareresult = getSharedcount($url) : $shareresult = 0;
                 wp_localize_script( 'mashsb', 'mashsb', array(
 			'shares'        => $shareresult,
