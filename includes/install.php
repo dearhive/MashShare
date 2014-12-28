@@ -67,6 +67,9 @@ function mashsb_install() {
 
         // Add the current version
         update_option( 'mashsb_version', MASHSB_VERSION );
+        // Add plugin installation date and variable for rating div
+        add_option('mashsb_installDate',date('Y-m-d h:i:s'));
+        add_option('mashsb_RatingDiv','no');
 	
                 
     /* Setup some default options

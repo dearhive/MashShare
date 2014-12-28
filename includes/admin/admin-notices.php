@@ -15,26 +15,75 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * Admin Messages
  *
- * @since 1.0
+ * @since 2.2.3
  * @global $mashsb_options Array of all the MASHSB Options
  * @return void
  */
 function mashsb_admin_messages() {
 	global $mashsb_options;
+        
+        $install_date = get_option('mashsb_installDate');
+        $display_date = date('Y-m-d h:i:s');
+	$datetime1 = new DateTime($install_date);
+	$datetime2 = new DateTime($display_date);
+	$diff_intrval = round(($datetime2->format('U') - $datetime1->format('U')) / (60*60*24));
+    //if($diff_intrval >= 7 && get_option('mashsb_RatingDiv')=="no")
+        if(get_option('mashsb_RatingDiv')=="no")
+    {
+	 echo '
+<div class="mashsb_fivestar">
+    	<p>I noticed you\'ve been using <strong>Mashshare</strong> for more than 1 week. Could you please do me a BIG favor and give it a 5-star rating on Wordpress? 
+        <br>~ René Hermenau
+        <h2></h2></p>
+        <ul>
+        	<li><a href="https://wordpress.org/support/view/plugin-reviews/mashsharer" class="thankyou" target="_new" title="Ok, you deserved it">Ok, you deserved it</a></li>
+            <li><a href="javascript:void(0);" class="mashsbHideRating" title="I already did">I already did</a></li>
+            <li><a href="javascript:void(0);" class="mashsbHideRating" title="No, not good enough">No, not good enough</a></li>
+        </ul>
+    </div>
+    <script>
+    jQuery( document ).ready(function( $ ) {
 
-	
-
-	/*if ( ( empty( $mashsb_options['purchase_page'] ) || 'trash' == get_post_status( $mashsb_options['purchase_page'] ) ) && current_user_can( 'edit_pages' ) && ! get_user_meta( get_current_user_id(), '_mashsb_set_checkout_dismissed' ) ) {
-		echo '<div class="error">';
-			echo '<p>' . sprintf( __( 'No checkout page has been configured. Visit <a href="%s">Settings</a> to set one.', 'mashsb' ), admin_url( 'edit.php?post_type=download&page=mashsb-settings' ) ) . '</p>';
-			echo '<p><a href="' . add_query_arg( array( 'mashsb_action' => 'dismiss_notices', 'mashsb_notice' => 'set_checkout' ) ) . '">' . __( 'Dismiss Notice', 'mashsb' ) . '</a></p>';
-		echo '</div>';
-	}*/
- 
-
-	//settings_errors( 'mashsb-notices' );
+    jQuery(\'.mashsbHideRating\').click(function(){
+        var data={\'action\':\'hideRating\'}
+             jQuery.ajax({
+        
+        url: "'.admin_url( 'admin-ajax.php' ).'",
+        type: "post",
+        data: data,
+        dataType: "json",
+        async: !0,
+        success: function(e) {
+            if (e=="success") {
+               jQuery(\'.mashsb_fivestar\').slideUp(\'slow\');
+            }
+        }
+         });
+        })
+    
+    });
+    </script>
+    ';
+    }
 }
 add_action( 'admin_notices', 'mashsb_admin_messages' );
+
+/* Hide the rating div
+ * 
+ * @subpackage  Admin/Notices
+ * @copyright   Copyright (c) 2014, René Hermenau
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since       2.2.3
+ * 
+ * @return json string
+ * 
+ */
+
+function mashsb_HideRatingDiv(){
+    update_option('mashsb_RatingDiv','yes');
+    echo json_encode(array("success")); exit;
+}
+add_action('wp_ajax_hideRating','mashsb_HideRatingDiv');
 
 /**
  * Admin Add-ons Notices

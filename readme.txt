@@ -12,7 +12,7 @@ buddypress, chrome extension, comments, del.icio.us, Diigo, buffer, button, del.
 flickr, floating buttons, follow, foursquare, gmail, goo.gl
 Requires at least: 3.1+
 Tested up to: 4.1.0
-Stable tag: 2.2.2
+Stable tag: 2.2.3
 
 Social Media Icons & Share Buttons, a highly customizable social sharing and & Media SEO ecosystem Facebook, Twitter and more ...
 
@@ -259,7 +259,6 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 7. Sticky Sharebar Add-On on mobile device
 8. Sticky Sharebar Add-On on desktop device
 9. Round circle style (included)
-10. Drag and drop setting menue
 11. Default share buttons (included)
 12. Custom Sharing descriptions with free Mashshare Open Graph Add-On
 
@@ -267,6 +266,11 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 
 == Changelog ==
+
+= 2.2.3 =
+Tweak: Prevent duplicate popups for some constellations
+Tweak: Remove a screenshot which indicates that more networks included
+New: Ask for review notice after 7 days
 
 = 2.2.2 =
 * Fix: A bug where twitter does not open 
@@ -358,5 +362,5 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 2.2.0 =
-2.2.0 <strong>Note:</strong> Update your Network Add-On and Open Graph Add-On to latest version.
+= 2.2.3 =
+2.2.3 <strong>Note:</strong> Update your Network Add-On and Open Graph Add-On to latest version.
