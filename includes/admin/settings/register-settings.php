@@ -141,9 +141,17 @@ function mashsb_get_registered_settings() {
 				'mashsharer_apikey' => array(
 					'id' => 'mashsharer_apikey',
 					'name' => __( 'API Key - Important', 'mashsb' ),
-					'desc' => __( 'Get it FREE at <a href="https://admin.sharedcount.com/admin/signup.php" target="_blank">SharedCount.com</a> for 10.000 free daily requests. It´s essential for accurate function of this plugin. Make sure Curl is working on your server.', 'mashsb' ),
+					'desc' => __( 'Get it FREE at <a href="https://admin.sharedcount.com/admin/signup.php?utm_campaign=settings&utm_medium=plugin&utm_source=mashshare" target="_blank">SharedCount.com</a> for 10.000 free daily requests. It´s essential for accurate function of this plugin. Make sure Curl is working on your server.', 'mashsb' ),
 					'type' => 'text',
 					'size' => 'medium'
+				),
+				'mashsharer_sharecount_domain' => array(
+					'id' => 'mashsharer_sharecount_domain',
+					'name' => __( 'SharedCount Domain', 'mashsb' ),
+					'desc' => __( 'The SharedCount Domain your API key is configured to query. For example, free.sharedcount.com. This may update automatically if configured incorrectly.', 'mashsb' ),
+					'type' => 'text',
+					'size' => 'medium',
+					'std'  => 'free.sharedcount.com'
 				),
                                 'disable_sharecount' => array(
 					'id' => 'disable_sharecount',
