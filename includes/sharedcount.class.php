@@ -23,7 +23,11 @@ function getFBTWCounts(){
         
         isset($mashsb_options['facebook_count_mode']) ? $fb_mode = $mashsb_options['facebook_count_mode'] : $fb_mode = '';
         
-            $sharecounts = $this->get_sharedcount();
+        $sharecounts = $this->get_sharedcount();
+
+        if(!$sharecounts){
+	    return; 
+        }
         
             $counts = array('shares'=>array(),'total'=>0);
         if ($fb_mode === 'total'){
@@ -44,6 +48,9 @@ function getAllCounts(){
         
         isset($mashsb_options['facebook_count_mode']) ? $fb_mode = $mashsb_options['facebook_count_mode'] : $fb_mode = '';
         $sharecounts = $this->get_sharedcount();
+        if(!$sharecounts){
+	       return; 
+        }
         
 	$counts = array('shares'=>array(),'total'=>0);
 	if ($fb_mode === 'total'){
@@ -62,24 +69,58 @@ function getAllCounts(){
 	return $counts;
 }
 
+function update_sharedcount_domain($apikey, $domain = false){ 
+    global $mashsb_options;
+	if(!$domain){
+		try{
+			$domain_obj =  $this->_curl('http://'. $mashsb_options["mashsharer_sharecount_domain"] . "/account?apikey=" . $apikey);
+			$domain = $domain_obj["domain"];
+		}
+		catch (Exception $e){
+	        mashdebug()->error("error: " . $domain_obj);
+			return 0;
+		}
+	}
+	$mashsb_options["mashsharer_sharecount_domain"] = $domain;
+	update_option( 'mashsb_settings', $mashsb_options);
+	return 1;
+}
+
+private function _curl($url){
+	$curl = curl_init();
+	curl_setopt($curl, CURLOPT_URL, $url);
+	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+	$curl_results = curl_exec ($curl);
+	curl_close ($curl);
+	return json_decode($curl_results, true);
+}
+
 function get_sharedcount()  {
     mashdebug()->info("Share URL: " . $this->url);
     global $mashsb_options;
-    !empty($mashsb_options['mashsharer_apikey']) ? $apikey = $mashsb_options['mashsharer_apikey'] : $apikey = '';
+    if(empty($mashsb_options['mashsharer_apikey'])){
+        return 0; //quit early if there's no API key.
+    }
+    $apikey = trim($mashsb_options['mashsharer_apikey']);
+    $domain = trim($mashsb_options['mashsharer_sharecount_domain']);
+	
+	if(!isset($domain) || empty($domain)){
+		$domain = "free.sharedcount.com";
+		$this->update_sharedcount_domain($apikey, $domain);
+	}
 
 	try {
-		$curl = curl_init();
-		curl_setopt($curl, CURLOPT_URL, "http://free.sharedcount.com/?url=" . $this->url . "&apikey=" . $apikey);
-		//curl_setopt($curl, CURLOPT_POST, true);
-		//curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-		//curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
-		$curl_results = curl_exec ($curl);
-		curl_close ($curl);
-                $counts = json_decode($curl_results, true);
-                
-                mashdebug()->info("Twitter count: " . isset($counts['Twitter']));
-                return $counts;
+        $counts = $this->_curl('http://'.$domain . "/?url=" . $this->url . "&apikey=" . $apikey);
+        if(isset($counts["Error"]) && isset($counts['Domain']) && $counts["Type"] === "domain_apikey_mismatch"){
+	         $this->update_sharedcount_domain($apikey, $counts['Domain']);
+             return 0;
+        }
+        else if(isset($counts["Error"]) && isset($counts['Type']) && $counts['Type'] === 'invalid_api_key'  ){
+             $this->update_sharedcount_domain($apikey);
+             return 0;
+        }
+        mashdebug()->info("Twitter count: " . isset($counts['Twitter']));
+        return $counts;
 	} catch (Exception $e){
                 mashdebug()->error("error: " . $counts);
 		return 0;
