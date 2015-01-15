@@ -12,7 +12,7 @@ buddypress, chrome extension, comments, del.icio.us, Diigo, buffer, button, del.
 flickr, floating buttons, follow, foursquare, gmail, goo.gl
 Requires at least: 3.1+
 Tested up to: 4.1.0
-Stable tag: 2.2.3
+Stable tag: 2.2.4
 
 Social Media Icons & Share Buttons, a highly customizable social sharing and & Media SEO ecosystem Facebook, Twitter and more ...
 
@@ -266,6 +266,10 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 
 == Changelog ==
+
+= 2.2.4 =
+* New: New input field to select the sharedcount api endpoint. e.g. free.sharedcount.com or plus.sharedcount.com
+* Tweak: No more requests to sharedcount api when rate limit exceeds. 
 
 = 2.2.3 =
 Tweak: Prevent duplicate popups for some constellations
