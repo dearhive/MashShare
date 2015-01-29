@@ -243,7 +243,7 @@ function mashsb_get_registered_settings() {
                             'mashsharer_position' => array(
 					'id' => 'mashsharer_position',
 					'name' => __( 'Position', 'mashsb' ),
-					'desc' => __( 'Choose where you would like the social icons to appear, before or after the main content. If set to Manual, you can use this code to place your Social links anywhere you like in your templates files: <strong>&lt;?php do_action("mashshare"); ?&gt;</strong> or use the shortcode: [mashshare] in your posts. Optional: <strong>[mashshare shares="off"]</strong> if you like to disable the share number.', 'mashsb' ),
+					'desc' => __( 'Choose where you would like the social icons to appear, before or after the main content. If set to Manual, you can use this code to place your Social links anywhere you like in your templates files: <strong>&lt;?php do_action("mashshare"); ?&gt;</strong> or use the shortcode: [mashshare] in your posts. Optional: <strong>[mashshare shares="false"]</strong> if you like to disable the share number.', 'mashsb' ),
 					'type' => 'select',
                                         'options' => array(
 						'before' => __( 'Top', 'mashsb' ),
