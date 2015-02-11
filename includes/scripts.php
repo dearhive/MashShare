@@ -31,22 +31,15 @@ function mashsb_load_scripts($hook) {
 	}
     
 	global $mashsb_options, $post;
-        //$url = urlencode(get_permalink($post->ID));
-        //$url = get_permalink($post->ID);
+
         $url = get_permalink($post->ID);
-        //$title = addslashes(the_title_attribute('echo=0'));
-        //$title = urlencode(html_entity_decode(get_the_title(), ENT_COMPAT, 'UTF-8'));
-        //$title = urlencode(the_title_attribute('echo=0'));
         $title = urlencode(html_entity_decode(the_title_attribute('echo=0'), ENT_COMPAT, 'UTF-8'));
-        //$title = html_entity_decode(the_title_attribute('echo=0'), ENT_COMPAT, 'UTF-8');
-        //$titleclean = str_replace('#' , '', html_entity_decode($title));
         $title = str_replace('#' , '%23', $title); 
-        //$titleclean = str_replace("'" , "", $title); 
-        //$titleclean = $title;
         $titleclean = esc_html($title);
         $image = mashsb_get_image($post->ID);
         $desc = mashsb_get_excerpt_by_id($post->ID);
-        /* Load hashshag*/       
+        
+        /* Load hashshags */       
             if ($mashsb_options['mashsharer_hashtag'] != '') {
                 $hashtag = $mashsb_options['mashsharer_hashtag'];
             } else {
@@ -56,7 +49,9 @@ function mashsb_load_scripts($hook) {
 	$js_dir = MASHSB_PLUGIN_URL . 'assets/js/';
 	// Use minified libraries if SCRIPT_DEBUG is turned off
 	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
-	wp_enqueue_script( 'mashsb', $js_dir . 'mashsb' . $suffix . '.js', array( 'jquery' ), MASHSB_VERSION, true );
+        
+        isset($mashsb_options['load_scripts_footer']) ? $in_footer = true : $in_footer = false;       
+	wp_enqueue_script( 'mashsb', $js_dir . 'mashsb' . $suffix . '.js', array( 'jquery' ), MASHSB_VERSION, $in_footer );
         !isset($mashsb_options['disable_sharecount']) ? $shareresult = getSharedcount($url) : $shareresult = 0;
                 wp_localize_script( 'mashsb', 'mashsb', array(
 			'shares'        => $shareresult,

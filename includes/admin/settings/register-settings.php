@@ -184,14 +184,20 @@ function mashsb_get_registered_settings() {
                                 'fake_count' => array(
 					'id' => 'fake_count',
 					'name' => __( 'Fake Share counts', 'mashsb' ),
-					'desc' => __( 'This number will be aggregated to all your share counts multiplied with a post specific factor based on title word count divided 10.', 'mashsb' ),
+					'desc' => __( 'This number will be aggregated to all your share counts and is multiplied with a post specific factor based on anmount of words in a post title divided with the number 10.', 'mashsb' ),
 					'type' => 'text',
                                         'size' => 'medium'
 				),
+                                'load_scripts_footer' => array(
+					'id' => 'load_scripts_footer',
+					'name' => __( 'JS Load Order', 'mashsb' ),
+					'desc' => __( 'Enable this to load all *.js files into footer. Make sure your theme uses the wp_footer() template tag in the appropriate place. Default: Disabled', 'mashsb' ),
+					'type' => 'checkbox'
+				),
                                 'facebook_count' => array(
 					'id' => 'facebook_count_mode',
-					'name' => __( 'Facebook Total Counter', 'mashsb' ),
-					'desc' => __( 'Specify if you like to get the FB total counts including likes and shares or if you only like to get the total share counts', 'mashsb' ),
+					'name' => __( 'Facebook Shares', 'mashsb' ),
+					'desc' => __( 'Get the Facebook total counts including \"likes\" and \"shares\" or get only the pure shares', 'mashsb' ),
 					'type' => 'select',
                                         'options' => array(
                                             'total' => 'Total counts',

@@ -12,7 +12,7 @@ buddypress, chrome extension, comments, del.icio.us, Diigo, buffer, button, del.
 flickr, floating buttons, follow, foursquare, gmail, goo.gl
 Requires at least: 3.6+
 Tested up to: 4.1.0
-Stable tag: 2.2.4
+Stable tag: 2.2.5
 
 Social Media Icons & Share Buttons, a highly customizable social sharing and & Media SEO ecosystem Facebook, Twitter and more ...
 
@@ -268,6 +268,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 == Changelog ==
 
 = 2.2.5 =
+* New: Optional loading of scripts and styles into footer. See new option in Mashshare->Settings->General settings
 * Info: No longer compatible to older versions than WordPress 3.6
 
 = 2.2.4 =
