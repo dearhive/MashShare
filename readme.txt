@@ -10,7 +10,7 @@ Tags: Mashable, Social Media Pop-Up, Social Media Widget, Social Media Sharing, 
 simple share buttons adder,  Google+, Twitter, Facebook, Digg, Stumble Upon, Linkedin, +1, add to any, AddThis, add this, addtoany, admin, aim, analytics, bookmark, bookmarking, bookmarks, bookmark button, bookmark menu, 
 buddypress, chrome extension, comments, del.icio.us, Diigo, buffer, button, del.icio.us, e-mail, email, email button, Facebook, facebook like, facebook recommend, facebook share, facebook share button, fark, firefox extension, 
 flickr, floating buttons, follow, foursquare, gmail, goo.gl
-Requires at least: 3.1+
+Requires at least: 3.6+
 Tested up to: 4.1.0
 Stable tag: 2.2.4
 
@@ -266,6 +266,9 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 
 == Changelog ==
+
+= 2.2.5 =
+* Info: No longer compatible to older versions than WordPress 3.6
 
 = 2.2.4 =
 * New: New input field to select the sharedcount api endpoint. e.g. free.sharedcount.com or plus.sharedcount.com
