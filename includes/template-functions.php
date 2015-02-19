@@ -149,7 +149,6 @@ function getSharedcount($url) {
         $mashsbSharesObj = mashsbGetShareObj($url);
         // Get the share counts
         $mashsbShareCounts = mashsbGetShareMethod($mashsbSharesObj);
-        
         //$mashsbShareCounts['total'] = 11; // USE THIS FOR DEBUGGING
         
         if (isset($mashsbCheckUpdate)) {

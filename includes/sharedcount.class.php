@@ -39,6 +39,8 @@ function getFBTWCounts(){
 
 	foreach ($counts['shares'] as $mashsbcounts => $sharecount) $counts['total'] += (int)$sharecount;
         mashdebug()->error("sharedcount.com getFBTWCounts: " . $counts['total']);
+        // Log the counts if debug is enabled
+        //MASHSB()->logger->info("sharedcount.com FB total_count: " . $sharecounts['Facebook']['total_count'] . " FB share_count:" . $sharecounts['Facebook']['share_count'] . " TW: " . $sharecounts['Twitter']);
 	return $counts;
 
 }
@@ -66,6 +68,7 @@ function getAllCounts(){
 
 	foreach ($counts['shares'] as $sbserv => $sbsharecount) $counts['total'] += (int)$sbsharecount;
         mashdebug()->info("sharedcount.com getAllCounts: " . $counts['total']);
+        //MASHSB()->logger->info("sharedcount.com FB total_count: " . $sharecounts['Facebook']['total_count'] . " FB share_count:" . $sharecounts['Facebook']['share_count'] . " TW: " . $sharecounts['Twitter'] . " G+:" . $counts['shares']['gb'] . " Linkedin:" . $counts['shares']['li'] . " Stumble: " . $counts['shares']['st'] . " Pinterest: " . $counts['shares']['pin']);
 	return $counts;
 }
 
@@ -120,12 +123,16 @@ function get_sharedcount()  {
              return 0;
         }
         mashdebug()->info("Twitter count: " . isset($counts['Twitter']));
+        MASHSB()->logger->info("URL: " . $this->url . " API Key:" . $apikey . " sharedcount.com FB total_count: " . $counts['Facebook']['total_count'] . " FB share_count:" . $counts['Facebook']['share_count'] . " TW: " . $counts['Twitter'] . " G+:" . $counts['GooglePlusOne'] . " Linkedin:" . $counts['LinkedIn'] . " Stumble: " . $counts['StumbleUpon'] . " Pinterest: " . $counts['Pinterest']);
+        
         return $counts;
 	} catch (Exception $e){
                 mashdebug()->error("error: " . $counts);
+                MASHSB()->logger->info('ERROR: Curl()' . $counts);
 		return 0;
 	}
         mashdebug()->error("error2: " . $counts);
+        MASHSB()->logger->info('ERROR 2: Curl()' . $counts);
 	return 0;
 }
 

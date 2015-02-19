@@ -6,7 +6,7 @@
  * Description: Mashshare is a Share functionality inspired by the the great website Mashable for Facebook and Twitter. More networks available.
  * Author: René Hermenau
  * Author URI: http://www.mashshare.net
- * Version: 2.2.5
+ * Version: 2.2.6
  * Text Domain: mashsb
  * Domain Path: languages
  * Credits: A thousand thanks go to Pippin Williamson! I borrowed a lot of code from his popular plugin Easy Digital Downloads. I never reinvent the wheel and as
@@ -57,6 +57,11 @@ if (!class_exists('mashshare')) :
          * @since 2.0.0
          */
         public $html;
+        
+        /* MASHSB LOGGER Class
+         * 
+         */
+        public $logger;
 
         /**
          * Main mashshare Instance
@@ -80,6 +85,7 @@ if (!class_exists('mashshare')) :
                 self::$instance->includes();
                 self::$instance->load_textdomain();
                 self::$instance->html = new MASHSB_HTML_Elements();
+                self::$instance->logger = new Logger("mashlog_" . date("Y-m-d") . ".log", Logger::INFO);
             }
             return self::$instance;
         }
@@ -165,6 +171,7 @@ if (!class_exists('mashshare')) :
             require_once MASHSB_PLUGIN_DIR . 'includes/class-mashsb-html-elements.php';
             require_once MASHSB_PLUGIN_DIR . 'includes/debug/classes/MashDebug.interface.php';
             require_once MASHSB_PLUGIN_DIR . 'includes/debug/classes/MashDebug.class.php';
+            require_once MASHSB_PLUGIN_DIR . 'includes/logger.php';
 
             if (is_admin() || ( defined('WP_CLI') && WP_CLI )) {
                 require_once MASHSB_PLUGIN_DIR . 'includes/admin/add-ons.php';
