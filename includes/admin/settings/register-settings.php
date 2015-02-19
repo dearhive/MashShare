@@ -232,7 +232,7 @@ function mashsb_get_registered_settings() {
                                 'debug_mode' => array(
 					'id' => 'debug_mode',
 					'name' => __( 'Debug mode', 'mashsb' ),
-					'desc' => __( '<strong>Note: </strong> Check this box this before you get in contact with our support team. This allows us to check publically hidden debug messages on your website. Do not forget to disable it thereafter!' . mashsb_log_permissions(), 'mashsb' ),
+					'desc' => __( '<strong>Note: </strong> Check this box before you get in contact with our support team. This allows us to check publically hidden debug messages on your website. Do not forget to disable it thereafter! Enable this also to write daily sorted log files of requested share counts to folder /wp-content/mashsharer/logs. Please send us this files when you notice a wrong share count.' . mashsb_log_permissions(), 'mashsb' ),
 					'type' => 'checkbox'
 				)
                                 

@@ -24,7 +24,7 @@ function mashsb_admin_rate_us( $footer_text ) {
 	global $typenow;
 
 	if ( mashsb_is_admin_page() ) {
-		$rate_text = sprintf( __( 'Thank you for using <a href="%1$s" target="_blank">Mashshare</a>! Please <a href="%2$s" target="_blank">rate us</a> on <a href="%2$s" target="_blank">WordPress.org</a> and help to support this project.', 'mashsb' ),
+		$rate_text = sprintf( __( 'Thank you for using <a href="%1$s" target="_blank">Mashshare</a>! Please <a href="%2$s" target="_blank">rate us</a> on <a href="%2$s" target="_blank">WordPress.org</a> and help to support this project.<br>Something not working as expected or need help for customizing Mashshare? Read our <a href="https://www.mashshare.net/faq/" target="blank">FAQ</a> and visit the Mashshare <a href="https://mashshare.net/support" target="blank">Support Forum</a>', 'mashsb' ),
 			'https://www.mashshare.net',
 			'http://wordpress.org/support/view/plugin-reviews/mashsharer?filter=5#postform'
 		);

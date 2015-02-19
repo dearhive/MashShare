@@ -21,6 +21,7 @@ class Logger {
 		$this->file = $file;
 		$this->level = $level;
 		$this->path = MASHSB_PLUGIN_DIR . "logs/$this->file";
+                $this->folder = MASHSB_PLUGIN_DIR . "logs";
 		$this->start();
 	}
 	
@@ -99,7 +100,7 @@ class Logger {
          */
         
         function checkDir(){
-            $writable = is_writable($this->path);
+            $writable = is_writable($this->folder);
             if ($writable)
                 return true;
             

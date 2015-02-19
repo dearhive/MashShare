@@ -268,6 +268,9 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 == Changelog ==
 
+= 2.2.6 =
+* New: New logging function for debug mode which stores all requested shares in /mashsharer/logs/
+
 = 2.2.5 =
 * New: Optional loading of share button scripts and styles into footer. See new option in Mashshare->Settings->General settings
 * Info: Share buttons no longer compatible to older versions than WordPress 3.6
