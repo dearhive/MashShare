@@ -232,7 +232,7 @@ function mashsb_get_registered_settings() {
                                 'debug_mode' => array(
 					'id' => 'debug_mode',
 					'name' => __( 'Debug mode', 'mashsb' ),
-					'desc' => __( '<strong>Note: </strong> Check this box this before you get in contact with our support team. This allows us to check publically hidden debug messages on your website. Do not forget to disable it thereafter!', 'mashsb' ),
+					'desc' => __( '<strong>Note: </strong> Check this box this before you get in contact with our support team. This allows us to check publically hidden debug messages on your website. Do not forget to disable it thereafter!' . mashsb_log_permissions(), 'mashsb' ),
 					'type' => 'checkbox'
 				)
                                 
@@ -1272,7 +1272,7 @@ function mashsb_delete_cache_objects(){
         //$wpdb->query($sql);
         delete_post_meta_by_key( 'mashsb_timestamp' );
         delete_post_meta_by_key( 'mashsb_shares' );
-        return ' <strong style="color:red;">' . __('DB cache deleted! Do not forget to uncheck this box for performance increase after doing the job.') . '</strong> ';
+        return ' <strong style="color:red;">' . __('DB cache deleted! Do not forget to uncheck this box for performance increase after doing the job.', 'mashsb') . '</strong> ';
     }
 }
 
@@ -1285,6 +1285,19 @@ function mashsb_delete_cache_objects(){
 function mashsb_cache_status(){
     global $mashsb_options;
     if (isset($mashsb_options['disable_cache'])){
-        return ' <strong style="color:red;">' . __('Transient Cache disabled! Enable it for performance increase.') . '</strong> ';
+        return ' <strong style="color:red;">' . __('Transient Cache disabled! Enable it for performance increase.' , 'mashsb') . '</strong> ';
+    }
+}
+
+/* Permission check if logfile is writable
+ *
+ * @since 2.0.6
+ * @return string
+ */
+
+function mashsb_log_permissions(){
+    global $mashsb_options;
+    if (!MASHSB()->logger->checkDir() ){
+        return '<br><strong style="color:red;">' . __('Log file directory not writable! Set FTP permission to 755 or 777 for /wp-content/mashsharer/logs/', 'mashsb') . '</strong> Read here more about <a href="http://codex.wordpress.org/Changing_File_Permissions" target="_blank">file permissions</a> ';
     }
 }
