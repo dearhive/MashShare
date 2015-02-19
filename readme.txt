@@ -269,7 +269,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 == Changelog ==
 
 = 2.2.6 =
-* New: New logging function for debug mode which stores all requested shares in /mashsharer/logs/
+* New: New sharebutton logging function for debug mode which stores all requested share counts in wp-content/plugins/mashsharer/logs/
 
 = 2.2.5 =
 * New: Optional loading of share button scripts and styles into footer. See new option in Mashshare->Settings->General settings
@@ -375,4 +375,4 @@ https://www.mashshare.net/changelog/
 == Upgrade Notice ==
 
 = 2.2.6 =
-2.2.6 <strong></strong> Its recommend to update to latest version due to stability
+2.2.6 <strong></strong> Its recommend to update to latest version due to stability aspects. If possible test this first on a staging platform. If something goes wrong with the update remove the folder /wp-content/mashsharer completely via FTP and install Mashshare again. None of your settings will be lost.
