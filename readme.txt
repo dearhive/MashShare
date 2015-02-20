@@ -11,7 +11,7 @@ simple share buttons adder,  Google+, Twitter, Facebook, Digg, Stumble Upon, Lin
 buddypress, chrome extension, comments, del.icio.us, Diigo, buffer, button, del.icio.us, e-mail, email, email button, Facebook, facebook like, facebook recommend, facebook share, facebook share button, fark, firefox extension, 
 flickr, floating buttons, follow, foursquare, gmail, goo.gl
 Requires at least: 3.6+
-Tested up to: 4.1.0
+Tested up to: 4.2.0
 Stable tag: 2.2.6
 
 Social Media Icons & Share Buttons, a highly customizable social sharing and & Media SEO ecosystem Facebook, Twitter and more ...
@@ -144,15 +144,15 @@ So real execution time of every single Plugin is faster (probaby with a similar 
 
 **Shortcodes**
 
-* Use `[mashshare]` anywhere in pages or post's text to show the buttons and total count where you like to at a custom position.
-Buttons are shown exactly on the place where you use the shortcode in your content.
+* Use `[mashshare]` anywhere in pages or post's text to show the buttons and total share count wherever you like.
+Share Buttons will be shown exactly on the place where you copy the shortcode in your content.
 
 There are more parameters available:
 
  `[mashshare shares="false" buttons="true" align="left"]` for buttons without shares, alignment left
  `[mashshare shares="true" buttons="false" align="right"]` for sharecount without buttons, alignment right
 
-* For manual insertion of the Share Buttons in your template files use the following php code where you want to show your Mash share buttons:`do_action('mashshare');`
+* For manual insertion of the Share Buttons in your template files use the following php code on place you like to see the share buttons:`echo do_shortcode('[mashshare]');`
 Configure the Share buttons sharing function in the settings page of the plugin.
 * Change the color of Mashshare count with setting option.
 
@@ -375,4 +375,4 @@ https://www.mashshare.net/changelog/
 == Upgrade Notice ==
 
 = 2.2.6 =
-2.2.6 <strong></strong> Its recommend to update to latest version due to stability aspects. If possible test this first on a staging platform. If something goes wrong with the update remove the folder /wp-content/mashsharer completely via FTP and install Mashshare again. None of your settings will be lost.
+2.2.6 <strong></strong> Its recommend to update to latest version due to stability aspects. If possible test this first on a staging platform. If something goes wrong with the update remove the folder <strong>/wp-content/plugins/mashsharer</strong> completely via FTP and install Mashshare again. None of your settings will be lost.

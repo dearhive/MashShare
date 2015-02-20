@@ -128,7 +128,7 @@ if (!class_exists('mashshare')) :
             global $wpdb;
             // Plugin version
             if (!defined('MASHSB_VERSION')) {
-                define('MASHSB_VERSION', '2.2.5');
+                define('MASHSB_VERSION', '2.2.6');
             }
 
             // Plugin Folder Path
