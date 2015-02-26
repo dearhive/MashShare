@@ -110,7 +110,7 @@ color:#ffffff;
   /* For IE 8 Important */
   float:left;
 }
-/* Icon definations */
+/* Icon definitions */
 .mashicon-facebook .icon:before { content: '\e800'; } /* '' */
 .mashicon-google .icon:before { content: '\e801'; } /* '' */
 .mashicon-pinterest .icon:before { content: '\e802'; } /* '' */

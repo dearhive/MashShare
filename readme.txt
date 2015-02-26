@@ -38,8 +38,8 @@ Social Media Icons & Share Buttons, a highly customizable social sharing and & M
 > Free and paid Add-Ons available:
 > 
 > - Google Analytics<br /> 
-> - more Social Networks<br /> 
-> - Responsiveness<br /> 
+> - More Social Share Buttons<br /> 
+> - Share Button Responsive<br /> 
 > - Sticky Share bar<br /> 
 > - Social Sharing Optimization<br /> 
 > - and more...<br /> 
@@ -48,12 +48,12 @@ Social Media Icons & Share Buttons, a highly customizable social sharing and & M
 
 <h3> Mashshare Share Buttons Social Media Icons </h3>
 
-This Social Media plugin is in active development and will be updated on a regular basis - Please do not rate negative before we tried to solve your issue.
+This Social Media share button plugin is in active development and will be updated on a regular basis - Please do not rate negative before we tried to solve your issue.
 
 = Main Features =
 
 * High Performance Social Media Icons - easy to use - Share Buttons for the most common networks
-* High Resolution lossless vector font share icons
+* High Resolution lossless vector font share button icons
 * Show the Total Social Media Share count at a glance
 * Object and transient caches to provide incredibly fast execution speed of Social Media Icons
 * Shortcodes
@@ -129,6 +129,11 @@ Thanks to [JS Morisset](https://profiles.wordpress.org/jsmoriss/ "Social Sharing
 	<li><strong>0.0174</strong> secs - Facebook v1.5.5</li>
 	<li><strong>0.0176</strong> secs - WPSSO Social Sharing Buttons (SSB) v1.0.10 + WPSSO</li>
 	<li><strong>0.0181</strong> secs - MailPoet Newsletters (aka Wysija Newsletters) v2.6.11</li>
+        <li><strong>0.0125</strong> secs - ShareThis v7.0.17</li>
+        <li><strong>0.0140</strong> secs - AddThis Social Bookmarking Widget v3.5.10</li>
+        <li><strong>0.0150</strong> secs - WPSSO Social Sharing Buttons (SSB) v1.0.9</li>
+        <li><strong>0.0170</strong> secs - Digg Digg v5.3.6</li>
+        <li><strong>0.0181</strong> secs - Facebook v1.5.5 (Provides Only Facebook Buttons)</li>
 	<li><strong>0.0258</strong> secs - All in One SEO Pack v2.2.3.1</li>
 	<li><strong>0.0293</strong> secs - JetPack by WordPress.com v2.9.2 ()</li>
 	<li><strong>0.0342</strong> secs - WP e-Commerce v3.8.13.3 (No Products)</li>
@@ -144,6 +149,9 @@ Thanks to [JS Morisset](https://profiles.wordpress.org/jsmoriss/ "Social Sharing
 	<li><strong>0.1092</strong> secs - <strong>WordPress Core v4.0.0</strong></li>
 	<li><strong>0.1404</strong> secs - BuddyPress v2.1.1 (No Activities)</li>
 	<li><strong>0.1404</strong> secs - NextGEN Gallery by Photocrati v2.0.66.29 (No Galleries or Images)</li>
+
+        <li><strong>0.0096</strong> secs - Share Buttons by AddToAny v1.3.4</li>
+        <li><strong>0.0232</strong> secs - Shareaholic | share buttons, analytics, related content v7.5.0.2</li>
 </ul>
 
 <p><small><em>This Benchmarks were executed on Intel i5 2.3Ghz, 8GB DDR3, using an APC opcode/object cache without any DB or file Cache Plugin like W3Total, WordPress v4.0, and P3 v1.5.2 ( Attempt to disable opcode optimizers - 
