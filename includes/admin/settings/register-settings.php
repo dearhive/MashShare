@@ -407,15 +407,15 @@ function mashsb_get_registered_settings() {
                                 'subscribe_content' => array(
 					'id' => 'subscribe_content',
 					'name' => __( 'Subscribe content', 'mashsb' ),
-					'desc' => __( 'Define the content of the opening toggle subscribe window here. Use formulars, like button, links or any other text. Shortcodes are supported, e.g.: [contact-form-7]', 'mashsb' ),
-					'type' => 'rich_editor',
-					'textarea_rows' => '6',
-                                        'std' => ''
+					'desc' => __( '<br>Define the content of the opening toggle subscribe window here. Use formulars, like button, links or any other text. Shortcodes are supported, e.g.: [contact-form-7]', 'mashsb' ),
+					'type' => 'textarea',
+					'textarea_rows' => '3',
+                                        'size' => 15
 				),                                
                                 'custom_css' => array(
 					'id' => 'custom_css',
 					'name' => __( 'Custom CSS', 'mashsb' ),
-					'desc' => __( 'Put in some custom styles here', 'mashsb' ),
+					'desc' => __( '<br>Put in some custom styles here', 'mashsb' ),
 					'type' => 'textarea',
 					'size' => 15
                                         
