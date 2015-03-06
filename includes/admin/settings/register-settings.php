@@ -310,6 +310,14 @@ function mashsb_get_registered_settings() {
 					'desc' => __( 'Count up the shares on page loading with a nice looking animation effect. This only works on singular pages and not with shortcodes generated buttons.', 'mashsb' ),
 					'type' => 'checkbox'
 				),
+                                'sharecount_title' => array(
+					'id' => 'sharecount_title',
+					'name' => __( 'Share count title', 'mashsb' ),
+					'desc' => __( 'Change the text of the Share count title. <strong>Default:</strong> SHARES', 'mashsb' ),
+					'type' => 'text',
+					'size' => 'medium',
+                                        'std' => 'SHARES'
+				),
 				'mashsharer_hashtag' => array(
 					'id' => 'mashsharer_hashtag',
 					'name' => __( 'Twitter handle', 'mashsb' ),
