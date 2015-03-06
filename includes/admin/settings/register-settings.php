@@ -294,25 +294,25 @@ function mashsb_get_registered_settings() {
 				),
                                 'style_header' => array(
 					'id' => 'style_header',
-					'name' => '<strong>' . __( 'Visual Style & Template', 'mashsb' ) . '</strong>',
+					'name' => '<strong>' . __( 'Customize', 'mashsb' ) . '</strong>',
 					'desc' => __( ' ', 'mashsb' ),
 					'type' => 'header'
                                 ),
 				'mashsharer_round' => array(
 					'id' => 'mashsharer_round',
 					'name' => __( 'Round Shares', 'mashsb' ),
-					'desc' => __( 'Share counts more than 1000 are shown as 1k. More than 1 Million as 1M', 'mashsb' ),
+					'desc' => __( 'Share counts greater than 1.000 will be shown as 1k. Greater than 1 Million as 1M', 'mashsb' ),
 					'type' => 'checkbox'
 				),
                                 'animate_shares' => array(
 					'id' => 'animate_shares',
 					'name' => __( 'Animate Shares', 'mashsb' ),
-					'desc' => __( 'Count up the shares on page loading with a nice looking and fast jQuery animation. This only works on singular pages and not with shortcodes generated buttons.', 'mashsb' ),
+					'desc' => __( 'Count up the shares on page loading with a nice looking animation effect. This only works on singular pages and not with shortcodes generated buttons.', 'mashsb' ),
 					'type' => 'checkbox'
 				),
 				'mashsharer_hashtag' => array(
 					'id' => 'mashsharer_hashtag',
-					'name' => __( 'Twitter Handle', 'mashsb' ),
+					'name' => __( 'Twitter handle', 'mashsb' ),
 					'desc' => __( '<strong>Optional:</strong> Using your twitter username, e.g. \'Mashshare\' results in via @Mashshare', 'mashsb' ),
 					'type' => 'text',
 					'size' => 'medium'
@@ -371,9 +371,9 @@ function mashsb_get_registered_settings() {
 					'desc' => __( 'Change visual appearance of the share buttons.', 'mashsb' ),
 					'type' => 'select',
                                         'options' => array(
-						'shadow' => '"Shadow" Created by Rene Hermenau',
-                                                'gradiant' => '"Gradiant" Created by Rene Hermenau',
-                                                'default' => 'Default'
+						'shadow' => 'Shadowed buttons',
+                                                'gradiant' => 'Gradient colored buttons',
+                                                'default' => 'Clean buttons - no effects'
 					),
                                         'std' => 'default'
 					
@@ -386,20 +386,20 @@ function mashsb_get_registered_settings() {
 				),
                                 'subscribe_behavior' => array(
 					'id' => 'subscribe_behavior',
-					'name' => __( 'Subscribe behavior', 'mashsb' ),
-					'desc' => __( 'Specify behavior of the subscribe button and decide if you like to link the button directly to any content or to have a toggled content slider below the button.', 'mashsb' ),
+					'name' => __( 'Subscribe button', 'mashsb' ),
+					'desc' => __( 'Specify if the subscribe button is opening a content box below the button or if the button is linked to the "subscribe url" below.', 'mashsb' ),
 					'type' => 'select',
                                         'options' => array(
-						'content' => 'Content',
-                                                'link' => 'Link'
+						'content' => 'Open content box',
+                                                'link' => 'Open Subscribe Link'
 					),
                                         'std' => 'content'
 					
 				),
                                 'subscribe_link' => array(
 					'id' => 'subscribe_link',
-					'name' => __( 'Subscribe Link', 'mashsb' ),
-					'desc' => __( 'Put a link behind the subscribe button and use no opening toggle window, e.g. http://yoursite.com/subscribe', 'mashsb' ),
+					'name' => __( 'Subscribe URL', 'mashsb' ),
+					'desc' => __( 'Link the Subscribe button to this URL. This can be the url to your subscribe page, facebook fanpage, RSS feed etc. e.g. http://yoursite.com/subscribe', 'mashsb' ),
 					'type' => 'text',
 					'size' => 'regular',
                                         'std' => ''
