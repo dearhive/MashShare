@@ -12,7 +12,7 @@ buddypress, chrome extension, comments, del.icio.us, Diigo, buffer, button, del.
 flickr, floating buttons, follow, foursquare, gmail, goo.gl
 Requires at least: 3.6+
 Tested up to: 4.2.0
-Stable tag: 2.2.6
+Stable tag: 2.2.7
 
 Social Media Icons & Share Buttons, a highly customizable social sharing and & Media SEO ecosystem Facebook, Twitter and more ...
 
@@ -293,6 +293,10 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 
 == Changelog ==
+
+= 2.2.7 =
+* New: Translate the word "SHARES" via settings
+* Fix: Better english grammar in settings
 
 = 2.2.6 =
 * New: New sharebutton logging function for debug mode which stores all requested share counts in wp-content/plugins/mashsharer/logs/

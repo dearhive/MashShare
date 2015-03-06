@@ -430,8 +430,11 @@ function getSharedcount($url) {
      */
     function mashshareShow($atts, $place, $url, $title) {
         mashdebug()->timer('timer');
+        
         global $wpdb, $mashsb_options, $post;
         !empty($mashsb_options['mashsharer_apikey']) ? $apikey = $mashsb_options['mashsharer_apikey'] : $apikey = '';
+        !empty($mashsb_options['sharecount_title']) ? $sharecount_title = $mashsb_options['sharecount_title'] : $sharecount_title = __('SHARES', 'mashsb');
+        
 
             /* Load hashshag*/       
             /*if ($mashsb_options['mashsharer_hashtag'] != '') {
@@ -447,7 +450,7 @@ function getSharedcount($url) {
                     if (isset($mashsb_options['mashsharer_round'])) {
                         $totalshares = roundshares($totalshares);
                     }  
-                 $sharecount = '<div class="mashsb-count"><div class="counts mashsbcount">' . $totalshares . '</div><span class="mashsb-sharetext">' . __('SHARES', 'mashsb') . '</span></div>';    
+                 $sharecount = '<div class="mashsb-count"><div class="counts mashsbcount">' . $totalshares . '</div><span class="mashsb-sharetext">' . $sharecount_title . '</span></div>';    
              } else {
                  $sharecount = '';
              }
@@ -478,6 +481,7 @@ function getSharedcount($url) {
         global $wpdb ,$mashsb_options, $post, $wp;
         /* Use permalink when its not singular page, so on category pages the permalink is used. */
         is_singular() ? $url = urlencode(home_url( $wp->request )) : $url = urlencode(get_permalink($post->ID));
+        !empty($mashsb_options['sharecount_title']) ? $sharecount_title = $mashsb_options['sharecount_title'] : $sharecount_title = __('SHARES', 'mashsb');
 
         /*$title = html_entity_decode(the_title_attribute('echo=0'), ENT_QUOTES, 'UTF-8');
         $title = urlencode($title);
@@ -515,7 +519,7 @@ function getSharedcount($url) {
                         if ($roundenabled) {
                             $totalshares = roundshares($totalshares);
                         }
-                    $sharecount = '<div class="mashsb-count" style="float:' . $align . ';"><div class="counts">' . $totalshares . '</div><span class="mashsb-sharetext">' . __('SHARES', 'mashsb') . '</span></div>';    
+                    $sharecount = '<div class="mashsb-count" style="float:' . $align . ';"><div class="counts">' . $totalshares . '</div><span class="mashsb-sharetext">' . $sharecount_title . '</span></div>';    
                     /*If shortcode [mashshare shares="true" onlyshares="true"]
                      * return shares and exit;
                      */
