@@ -196,8 +196,8 @@ function mashsb_get_registered_settings() {
 				),
                                 'facebook_count' => array(
 					'id' => 'facebook_count_mode',
-					'name' => __( 'Facebook Shares', 'mashsb' ),
-					'desc' => __( 'Get the Facebook total counts including \"likes\" and \"shares\" or get only the pure shares', 'mashsb' ),
+					'name' => __( 'Facebook Count', 'mashsb' ),
+					'desc' => __( 'Get the Facebook total count including "likes" and "shares" or get only the pure share count', 'mashsb' ),
 					'type' => 'select',
                                         'options' => array(
                                             'total' => 'Total counts',
