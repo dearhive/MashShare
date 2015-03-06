@@ -38,7 +38,7 @@ Social Media Icons & Share Buttons, a highly customizable social sharing and & M
 > Free and paid Add-Ons available:
 > 
 > - More Social Share Buttons<br /> 
-> - YouTube Video Share Popup
+> - YouTube Video Share Popup<br />
 > - Share Button Responsive<br /> 
 > - Sticky Share bar<br /> 
 > - Social Sharing Optimization<br /> 
