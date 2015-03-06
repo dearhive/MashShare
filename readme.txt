@@ -37,11 +37,12 @@ Social Media Icons & Share Buttons, a highly customizable social sharing and & M
 >
 > Free and paid Add-Ons available:
 > 
-> - Google Analytics<br /> 
 > - More Social Share Buttons<br /> 
+> - YouTube Video Share Popup
 > - Share Button Responsive<br /> 
 > - Sticky Share bar<br /> 
 > - Social Sharing Optimization<br /> 
+> - Google Analytics<br /> 
 > - and more...<br /> 
 >
 > [Demo](https://www.mashshare.net?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-info-link) | [Get Add-Ons >>](https://www.mashshare.net/downloads?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=get-addons)
@@ -296,7 +297,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 = 2.2.7 =
 * New: Translate the word "SHARES" via settings
-* Fix: Better english grammar in settings
+* Fix: Better english grammar in share buttons settings
 
 = 2.2.6 =
 * New: New sharebutton logging function for debug mode which stores all requested share counts in wp-content/plugins/mashsharer/logs/
