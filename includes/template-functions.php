@@ -313,7 +313,6 @@ function getSharedcount($url) {
     function arrNetworks($name, $url, $title) {
         global $mashsb_options, $post;
         $singular = isset( $mashsb_options['singular'] ) ? $singular = true : $singular = false;
-        //$url = get_permalink($post->ID);
             
         if (function_exists('mashsuGetShortURL')){
             mashsuGetShortURL() !== 0 ? $urltw = mashsuGetShortURL() : $urltw = $url;
@@ -480,7 +479,8 @@ function getSharedcount($url) {
     function mashshareShortcodeShow($atts, $place) {
         global $wpdb ,$mashsb_options, $post, $wp;
         /* Use permalink when its not singular page, so on category pages the permalink is used. */
-        is_singular() ? $url = urlencode(home_url( $wp->request )) : $url = urlencode(get_permalink($post->ID));
+        //is_singular() ? $url = urlencode(home_url( $wp->request )) : $url = urlencode(get_permalink($post->ID));
+        $url = mashsb_get_url();
         !empty($mashsb_options['sharecount_title']) ? $sharecount_title = $mashsb_options['sharecount_title'] : $sharecount_title = __('SHARES', 'mashsb');
 
         /*$title = html_entity_decode(the_title_attribute('echo=0'), ENT_QUOTES, 'UTF-8');
@@ -638,7 +638,7 @@ function getSharedcount($url) {
         
         /* define some vars here to reduce multiple execution of basic functions */
         /* Use permalink when its not singular page, so on category pages the permalink is used. */
-        is_singular() ? $url = urlencode(home_url( $wp->request )) : $url = urlencode(get_permalink($post->ID));
+        $url = mashsb_get_url();
         function_exists('MASHOG') ? $title = MASHOG()->MASHOG_OG_Output->_get_title() : $title = the_title_attribute('echo=0');
         $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
         $title = urlencode($title);
@@ -713,9 +713,10 @@ function mashshare(){
     global $atts;
     global $post;
     global $wp;
-    //$url = urlencode(get_permalink($post->ID));
+
     /* Use permalink when its not singular page, so on category pages the permalink is used. */
-    is_singular() ? $url = urlencode(home_url( $wp->request )) : $url = urlencode(get_permalink($post->ID));
+    //is_singular() ? $url = urlencode(home_url( $wp->request )) : $url = urlencode(get_permalink($post->ID));
+    $url = mashsb_get_url();
     function_exists('MASHOG') ? $title = MASHOG()->MASHOG_OG_Output->_get_title() : $title = the_title_attribute('echo=0');
     $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
     $title = urlencode($title);
@@ -735,7 +736,8 @@ function mashsharer(){
     //global $title;
     global $post;
     global $wp;
-    is_singular() ? $url = urlencode(home_url( $wp->request )) : $url = urlencode(get_permalink($post->ID));
+    //is_singular() ? $url = urlencode(home_url( $wp->request )) : $url = urlencode(get_permalink($post->ID));
+    $url = mashsb_get_url();
     function_exists('MASHOG') ? $title = MASHOG()->MASHOG_OG_Output->_get_title() : $title = the_title_attribute('echo=0');
     //$title = html_entity_decode(the_title_attribute('echo=0'), ENT_QUOTES, 'UTF-8');
     $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
@@ -960,5 +962,24 @@ function mashsb_styles_method() {
         wp_add_inline_style( 'mashsb-styles', $mashsb_custom_css );
 }
 add_action( 'wp_enqueue_scripts', 'mashsb_styles_method' );
+
+
+    
+/* Get URL to share
+ * 
+ * @return url  $string
+ * @scince 2.2.8
+ */
+function mashsb_get_url(){
+    global $wp, $posts, $numpages;
+    if($numpages > 1){ // check if '<!-- nextpage -->' is used
+        $url = urlencode(get_permalink($post->ID));
+    } elseif (is_singular()){
+        $url = urlencode(home_url( $wp->request )); // Stays here for compatibility. Not sure if this breaks when we switch to get_permalink($post->ID)
+    }else{
+        $url = urlencode(get_permalink($post->ID));
+    }
+    return apply_filters('mashsb_get_url', $url);
+}
 
 
