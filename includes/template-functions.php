@@ -908,7 +908,7 @@ function mashsb_styles_method() {
         }';   
     }
     if (mashsb_hide_shares() === true){
-    $mashsb_custom_css .= '
+    $mashsb_custom_css .= ' 
         .mashsb-box .mashsb-count {
             display: none;
         }';   
