@@ -94,10 +94,12 @@ function mashsbSmoothVelocity ($mashsbShareCounts) {
  */
 
 function mashsbGetShareObj($url) {
-    if (class_exists('mashserver')) {
-        //require_once(MASHSB_PLUGIN_DIR . 'includes/mashserver.php');
-        $mashsbSharesObj = new shareCount($url);
-        $mashsbSharesObj = new mashsbSharedcount($url);
+    global $mashsb_options;
+    $mashengine = isset($mashsb_options['mashsb_sharemethod']) ? true : false;
+    
+    if ($mashengine) {
+        require_once(MASHSB_PLUGIN_DIR . 'includes/mashengine.php');
+        $mashsbSharesObj = new mashengine($url);
         return $mashsbSharesObj;
     } 
         require_once(MASHSB_PLUGIN_DIR . 'includes/sharedcount.class.php');
@@ -121,7 +123,11 @@ function mashsbGetShareObj($url) {
 
 function mashsbGetShareMethod($mashsbSharesObj) {
     if (class_exists('MashshareNetworks')) {
-        $mashsbShareCounts = $mashsbSharesObj->getAllCounts();
+        //$mashsbShareCounts = $mashsbSharesObj->getAllCounts();
+        //$mashsbShareCounts = $mashsbSharesObj->getShares();
+        $mashsbShareCounts = $mashsbSharesObj->get();
+        //var_dump($mashsbShareCounts);
+        //echo '<h1>' . $mashsbShareCounts['total'] . '</h1>';
         return $mashsbShareCounts;
     } 
         $mashsbShareCounts = $mashsbSharesObj->getFBTWCounts();
@@ -976,12 +982,12 @@ function mashsb_get_url(){
         $url = urlencode(get_permalink($post->ID));
     } elseif (is_singular()){
         // Stays here for compatibility. Not sure if this breaks when we switch to get_permalink($post->ID)
-        !empty($wp->query_string) ? $url = add_query_arg($wp->query_string, '', urlencode(home_url( $wp->request ))) : $url = urlencode(home_url( $wp->request )); 
-        /*if (!empty($wp->query_string)){
+        //!empty($wp->query_string) ? $url = add_query_arg($wp->query_string, '', urlencode(home_url( $wp->request ))) : $url = urlencode(home_url( $wp->request )); 
+        if (!empty($wp->query_string)){
             $url = add_query_arg($wp->query_string, '', urlencode(home_url( $wp->request ))); 
         }else{
             $url = urlencode(home_url( $wp->request )); // Stays here for compatibility. Not sure if this breaks when we switch to get_permalink($post->ID)
-        }*/
+        }
     }else{
         $url = urlencode(get_permalink($post->ID));
     }
