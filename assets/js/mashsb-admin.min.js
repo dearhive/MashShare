@@ -1,4 +1,16 @@
 jQuery(document).ready(function ($) {
+    
+/* Fade in sharedcount settings if needed */
+$('#mashsb_settings\\[mashsb_sharemethod\\]').change(function(){
+    if($('#mashsb_settings\\[mashsb_sharemethod\\]').val() === "sharedcount")
+    {
+        $('#mashsb_settingsgeneral_header .row:nth-child(3), #mashsb_settingsgeneral_header .row:nth-child(4)').fadeIn(500);
+    }
+    else 
+    {
+        $('#mashsb_settingsgeneral_header .row:nth-child(3), #mashsb_settingsgeneral_header .row:nth-child(4)').fadeOut(500);
+    }
+});
       
 // Start easytabs()
 if ( $( ".mashsb-tabs" ).length ) {
