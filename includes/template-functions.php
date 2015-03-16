@@ -971,11 +971,17 @@ add_action( 'wp_enqueue_scripts', 'mashsb_styles_method' );
  * @scince 2.2.8
  */
 function mashsb_get_url(){
-    global $wp, $posts, $numpages;
+    global $wp, $post, $numpages;
     if($numpages > 1){ // check if '<!-- nextpage -->' is used
         $url = urlencode(get_permalink($post->ID));
     } elseif (is_singular()){
-        $url = urlencode(home_url( $wp->request )); // Stays here for compatibility. Not sure if this breaks when we switch to get_permalink($post->ID)
+        // Stays here for compatibility. Not sure if this breaks when we switch to get_permalink($post->ID)
+        !empty($wp->query_string) ? $url = add_query_arg($wp->query_string, '', urlencode(home_url( $wp->request ))) : $url = urlencode(home_url( $wp->request )); 
+        /*if (!empty($wp->query_string)){
+            $url = add_query_arg($wp->query_string, '', urlencode(home_url( $wp->request ))); 
+        }else{
+            $url = urlencode(home_url( $wp->request )); // Stays here for compatibility. Not sure if this breaks when we switch to get_permalink($post->ID)
+        }*/
     }else{
         $url = urlencode(get_permalink($post->ID));
     }
