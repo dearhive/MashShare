@@ -11,22 +11,24 @@ class mashengine {
         }
 	
 	/* Collect share count from all available networks */
-	public function getAllCounts() {
+	public function getALLCounts() {
 		$this->data                = new stdClass;
 		//$this->data->url           = $this->url;
-		$this->data->shares        = new stdClass;
-		$this->data->shares->total = 0;
-                $data['total'] = $this->getSharesALL();
+		//$this->data->shares        = new stdClass;
+		//$this->data->shares->total = 0;
+                $this->data->total = 0;
+                $data = $this->getSharesALL();
 		return $data;
 	}
         
         /* Collect share count from facebook and twitter */
 	public function getFBTWCounts() {
 		$this->data                = new stdClass;
-		$this->data->url           = $this->url;
-		$this->data->shares        = new stdClass;
-		$this->data->shares->total = 0;
-                $data['total'] = $this->getSharesFBTW();
+		//$this->data->url           = $this->url;
+		//$this->data->shares        = new stdClass;
+		//$this->data->shares->total = 0;
+                $this->data->total = 0;
+                $data = $this->getSharesFBTW();
 		return $data;
 	}
 	   
@@ -55,8 +57,8 @@ class mashengine {
                 $data = $this->data;
                 
                 // return the total count
-		return $data->shares->total;
-		//return $data;
+		//return $data->shares->total;
+		return $data;
 	} 
         
       /* Build the multi_curl() crawler for all networks
@@ -81,14 +83,14 @@ class mashengine {
                 $RollingCurlX->addRequest("http://www.stumbleupon.com/services/1.01/badge.getinfo?url=" . $this->url, $post_data, array($this, 'getCount'), array('stumbleupon'), $headers);
                 $RollingCurlX->addRequest("https://plusone.google.com/_/+1/fastbutton?url=" . $this->url, $post_data, array($this, 'getCount'),  array('google'), $headers);
                 $RollingCurlX->addRequest("http://api.pinterest.com/v1/urls/count.json?url=" . $this->url, $post_data, array($this, 'getCount'), array('pinterest'), $headers);
-                $RollingCurlX->addRequest("http://feeds.delicious.com/v2/json/urlinfo/data?url=" . $this->url, $post_data, array($this, 'getCount'),  array('delicious'), $headers);
-                $RollingCurlX->addRequest("http://www.reddit.com/api/info.json?&url=" . $this->url, $post_data, array($this, 'getCount'), array('reddit'), $headers);
+                //$RollingCurlX->addRequest("http://feeds.delicious.com/v2/json/urlinfo/data?url=" . $this->url, $post_data, array($this, 'getCount'),  array('delicious'), $headers);
+                //$RollingCurlX->addRequest("http://www.reddit.com/api/info.json?&url=" . $this->url, $post_data, array($this, 'getCount'), array('reddit'), $headers);
                 $RollingCurlX->addRequest("https://api.bufferapp.com/1/links/shares.json?url=" . $this->url, $post_data, array($this, 'getCount'), array('buffer'), $headers);
-                $RollingCurlX->addRequest("https://vk.com/share.php?act=count&index=1&url=" . $this->url, $post_data, array($this, 'getCount'), array('buffer'), $headers);
+                $RollingCurlX->addRequest("https://vk.com/share.php?act=count&index=1&url=" . $this->url, $post_data, array($this, 'getCount'), array('vk'), $headers);
                 $RollingCurlX->execute();
                 
-		$data = json_encode($this->data); // This return an json string instead
-                //$data = $this->data;
+		//$data = json_encode($this->data); // This return an json string instead
+                $data = $this->data;
                 
                 // return the total count
 		//return $data->shares->total;
@@ -117,7 +119,7 @@ class mashengine {
 			case "linkedin":
 			case "twitter":
 				$data = json_decode($data);
-				$count = $data->count;
+				$count = isset($data->count) ? $data->count : 0;
 				break;
 			case "stumbleupon":
 				$data = json_decode($data);
@@ -147,12 +149,15 @@ class mashengine {
                                 $count = $matches[1];
                                 break;
                                 default:
-                                    //
+                                    // nothing here
 			}
                        
 			$count = (int) $count;
-			$this->data->shares->total += $count;
+			/*$this->data->shares->total += $count;
                         $this->data->shares->$service[0] = $count;
+                         * */
+                        $this->data->total += $count;
+                        $this->data->$service[0] = $count;
                         MASHSB()->logger->info('URL: ' . $url . ' ' . $service[0] . ': ' . $count);
 		} 
 		return;
