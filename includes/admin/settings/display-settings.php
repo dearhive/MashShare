@@ -93,7 +93,7 @@ function mashsb_do_settings_fields($page, $section) {
            echo '<table class="form-table"><tbody>';
            
        }  
-        echo '<tr><th class="row th">';
+        echo '<tr class="row"><th class="row th">';
         //echo "<pre>";
         //var_dump($field);
         if (!empty($field['args']['label_for']))
