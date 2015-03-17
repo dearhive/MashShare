@@ -266,14 +266,6 @@ a.mashsb-delete:hover { color: #f00; }
 .mashsb-graph .y1Axis { color: rgb( 237, 194, 64 )!important; }
 .mashsb-graph .y2Axis { color: rgb( 175, 216, 248 )!important; }
 
-.form-table th {
-vertical-align: top;
-text-align: left;
-padding: 20px 10px 20px 0;
-width: 200px;
-line-height: 1.3;
-font-weight: 400;
-}
 
 input.large-text, textarea.large-text {
 max-width: 600px;
@@ -720,8 +712,7 @@ margin: 0;
 padding: 0;
 background: #f1f1f1;
 float: left;
-max-width:200px;
-padding-top: 20px;
+padding-top: 0px;
 /*list-style-type: square;*/
 }
 
@@ -734,31 +725,13 @@ font-weight: bold;
 text-decoration: none;
 }
 
-#tab_container ul li a {
-text-decoration: none;
-}
 
-#tab_container ul li {
-margin-bottom:2px;
-line-height: 33px;
-}
-
-#tab_container .panel-container {
-background: #FFF;
-padding:20px;
-overflow:auto;
-}
 
 #tab_container .row{ 
     padding-top:10px; 
     padding-bottom:12px;
 }
 
-#tab_container .col-title{
-    float:left;
-    min-width:180px;
-    max-width:180px;
-}
 
 #tab_container .col-title strong{
     white-space: pre;
@@ -768,27 +741,104 @@ overflow:auto;
 font-weight: bold;
 }
 
-@media only screen and (max-width:680px) {
-    #tab_container ul {
-        float:none;
-    }
-}
-
-/*.mashsb-tabs .active {
-    border-left: solid 2px #0074a2;
-    background-color: white;
-    line-height: 23px;
-}*/
 .mashsb-tabs a {
     padding:5px;
 }
 
 #tab_container > ul > li.mashsb-tabs.active {
-    border-left: solid 2px #0074a2;
     background-color:white;
 }
 
-#tab_container > ul > li.mashsb-tabs:hover {
-    border-left: solid 2px #0074a2;
-    background-color:#f9f9f9;
+
+
+#mashsb_settingsgeneral_header .row:nth-child(3), #mashsb_settingsgeneral_header .row:nth-child(4){
+    display:none;
 }
+
+/* Layout of admin table and rows
+*/
+
+#tab_container .panel-container {
+background: #FFF;
+padding:20px;
+padding-top:0px;
+overflow:auto;
+}
+
+#tab_container .form-table th {
+vertical-align: top;
+text-align: left;
+padding: 20px 10px 20px 0;
+width: 200px;
+line-height: 1.3;
+font-weight: bold;
+font-size: 14px;
+color:#484848;
+width: 30%;
+}
+
+#tab_container .form-table tr {
+  border-bottom: 1px solid #E7E7E7;
+}
+
+#tab_container span.description{
+    display: block;
+    font-weight: 400;
+    font-style: normal; 
+    font-size: 13px;
+    margin-top: 7px;
+    color:#484848;
+}
+
+#tab_container .col-title{
+    color:#484848;
+}
+
+@media only screen and (max-width:680px) {
+    #tab_container ul {
+        float:none;
+    }
+    #tab_container .form-table tr > th {
+        width:100%;
+    } 
+    #tab_container span.description{
+    font-size: 14px;
+    }
+    #tab_container .form-table tr > th, #tab_container .form-table tr > td {
+        padding:10px;
+    }
+}
+
+#tab_container ul li {
+margin-bottom:0px;
+}
+
+#tab_container ul li a {
+display: block;
+padding:10px 4px 10px 14px;
+border-width: 1px 0;
+border-style: solid;
+border-top-color:white;
+border-bottom-color:#e7e7e7;
+text-decoration: none;
+color: #0097DF;
+font-weight: bold;
+}
+#tab_container ul li a:hover {
+background-color: #e5e5e5;
+color:#777777;
+}
+
+.mashsb_admin .mashsharelogo{
+    color:#0097DF;
+}
+.mashsb_admin .nav-tab {
+    color: #0097DF;
+}
+
+
+#tab_container table tbody tr:nth-child(1) > th > div {
+    font-size: 20px;
+}
+/* End layout of admin table and rows
+*/
