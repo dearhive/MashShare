@@ -65,11 +65,19 @@ function getAllCounts(){
             isset($sharecounts['LinkedIn']) ? $counts['shares']['li'] = $sharecounts['LinkedIn'] : $counts['shares']['li'] = 0;
             isset($sharecounts['StumbleUpon']) ? $counts['shares']['st'] = $sharecounts['StumbleUpon'] : $counts['shares']['st'] = 0 ;
             isset($sharecounts['Pinterest']) ? $counts['shares']['pin'] = $sharecounts['Pinterest'] : $counts['shares']['pin'] = 0;
+        
+        $total = 0;
+	foreach ($counts['shares'] as $totalcount) $total += (int)$totalcount;
+        $totalArr = array ('total' => $total);
+        $objMerged = (object)array_merge((array)$sharecounts, (array)$totalArr);
 
-	foreach ($counts['shares'] as $sbserv => $sbsharecount) $counts['total'] += (int)$sbsharecount;
-        mashdebug()->info("sharedcount.com getAllCounts: " . $counts['total']);
         //MASHSB()->logger->info("sharedcount.com FB total_count: " . $sharecounts['Facebook']['total_count'] . " FB share_count:" . $sharecounts['Facebook']['share_count'] . " TW: " . $sharecounts['Twitter'] . " G+:" . $counts['shares']['gb'] . " Linkedin:" . $counts['shares']['li'] . " Stumble: " . $counts['shares']['st'] . " Pinterest: " . $counts['shares']['pin']);
-	return $counts;
+        //return $sharecounts;
+        //$data = json_encode($objMerged);
+        mashdebug()->info("sharedcount.com getAllCounts: " . $counts['total']);
+        return $objMerged;
+        //echo "<pre>";
+        //var_dump($sharecounts);
 }
 
 function update_sharedcount_domain($apikey, $domain = false){ 
@@ -124,6 +132,7 @@ function get_sharedcount()  {
         }
         mashdebug()->info("Twitter count: " . isset($counts['Twitter']));
         MASHSB()->logger->info("URL: " . urldecode($this->url) . " API Key:" . $apikey . " sharedcount.com FB total_count: " . $counts['Facebook']['total_count'] . " FB share_count:" . $counts['Facebook']['share_count'] . " TW: " . $counts['Twitter'] . " G+:" . $counts['GooglePlusOne'] . " Linkedin:" . $counts['LinkedIn'] . " Stumble: " . $counts['StumbleUpon'] . " Pinterest: " . $counts['Pinterest']);
+        
         
         return $counts;
 	} catch (Exception $e){
