@@ -230,8 +230,8 @@ function mashsb_get_registered_settings() {
 				),
                                 array(
 					'id' => 'disable_cache',
-					'name' => __( 'Disable Transient Cache', 'mashsb' ),
-					'desc' => __( '<strong>Note: </strong>Use this only for testing to see if share counts are working! Your page loading performance will drop. Works only when sharecount is enabled.<br>' . mashsb_cache_status(), 'mashsb' ),
+					'name' => __( 'Disable Cache', 'mashsb' ),
+					'desc' => __( '<strong>Note: </strong>Use this only for testing to see if shares are counted! Your page loading performance will drop. Works only when sharecount is enabled.<br>' . mashsb_cache_status(), 'mashsb' ),
 					'type' => 'checkbox'
 				),
                                 'delete_cache_objects' => array(
