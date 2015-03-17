@@ -96,8 +96,7 @@ function mashsbSmoothVelocity ($mashsbShareCounts) {
 
 function mashsbGetShareObj($url) {
     global $mashsb_options;
-    $mashengine = isset($mashsb_options['mashsb_sharemethod']) ? true : false;
-    
+    $mashengine = isset($mashsb_options['mashsb_sharemethod']) && $mashsb_options['mashsb_sharemethod'] === 'mashengine' ? true : false;
     if ($mashengine) {
         require_once(MASHSB_PLUGIN_DIR . 'includes/mashengine.php');
         $mashsbSharesObj = new mashengine($url);
@@ -125,7 +124,6 @@ function mashsbGetShareObj($url) {
 function mashsbGetShareMethod($mashsbSharesObj) {
     if (class_exists('MashshareNetworks')) {
         $mashsbShareCounts = $mashsbSharesObj->getAllCounts();
-        echo '<h1>' . $mashsbShareCounts['total'] . '</h1>';
         return $mashsbShareCounts;
     } 
         $mashsbShareCounts = $mashsbSharesObj->getFBTWCounts();
@@ -143,6 +141,7 @@ function getSharedcount($url) {
     }
     $mashsbNextUpdate = (int) $cacheexpire;
     $mashsbLastUpdated = get_post_meta($post->ID, 'mashsb_timestamp', true);
+
     if (empty($mashsbLastUpdated)) {
         $mashsbCheckUpdate = true;
         $mashsbLastUpdated = 0;
@@ -150,56 +149,38 @@ function getSharedcount($url) {
     if ($mashsbLastUpdated < (time() - $mashsbNextUpdate)) {
         mashdebug()->info( " Update frequency " . $mashsbNextUpdate . " last updated: " . $mashsbLastUpdated . "time: " . time());
         // Get the share Object
-        $url = "https://www.mashshare.net/";
+        // only for debugging here
+        //$url = "https://www.mashshare.net";
         $mashsbSharesObj = mashsbGetShareObj($url);
         // Get the share counts
         $mashsbShareCounts = mashsbGetShareMethod($mashsbSharesObj);
         //$mashsbShareCounts['total'] = 11; // USE THIS FOR DEBUGGING
         
-        if (isset($mashsbCheckUpdate)) {
+        //if (isset($mashsbCheckUpdate)) {
             mashdebug()->info("First Update");
-            //Some fake shares to create smooth step values for older posts which 
-            //did not use Mashshare before (important for velocity graph Add-On) 
-            $mashsbShareCountArr = mashsbSmoothVelocity($mashsbShareCounts['total']);
-            
-             if (empty($mashsbShareCountArr)){
-             $mashsbShareCountArr = array(0);}
-             $mashsbStoredDBMeta = 0;
-        } else {
             $mashsbStoredDBMeta = get_post_meta($post->ID, 'mashsb_shares', true);
-            $mashsbStoredDBMetaArr = explode(",", $mashsbStoredDBMeta);
-            if (count($mashsbStoredDBMetaArr) >= 40) {
-                array_shift($mashsbStoredDBMetaArr);
-                array_push($mashsbStoredDBMetaArr, $mashsbShareCounts['total']);
-            } else {
-                array_push($mashsbStoredDBMetaArr, $mashsbShareCounts['total']);
-            }
-            $mashsbShareCountArr = $mashsbStoredDBMetaArr;
-        }
+        //}
         
-        /* Update post_meta only when API requested and
+        /* Update post_meta only when API is requested and
          * API share count is not smaller than current sharecount 
-         * This would mean there was an error in the API (Failure or hammering any limits like X-Rate-Limit)
+         * This would mean there was an error in the API (Failure or hammering any limits, e.g. X-Rate-Limit)
          */
-        
-        $lastDBStoredShareArray = explode(",", $mashsbStoredDBMeta);
-
-        if ($mashsbShareCounts['total'] >= end((array_values($lastDBStoredShareArray)))) {
-            
-            mashdebug()->info("update database with sharedcount: " . $mashsbShareCounts['total']);
-            
-            $mashsbShareCountArr = implode(",", $mashsbShareCountArr);
-            update_post_meta($post->ID, 'mashsb_shares', $mashsbShareCountArr);
+        //echo '<h1>fresh request:'.$mashsbShareCounts->total.'</h1>';
+        if ($mashsbShareCounts->total >= $mashsbShareCounts->total) {
+            update_post_meta($post->ID, 'mashsb_shares', $mashsbShareCounts->total);
             update_post_meta($post->ID, 'mashsb_timestamp', time());
-            /* return counts from getAllCounts() when they are updated in DB */
-            return apply_filters('filter_get_sharedcount', $mashsbShareCounts['total'] + getFakecount());
+            update_post_meta($post->ID, 'mashsb_jsonshares', json_encode($mashsbShareCounts));
+            mashdebug()->info("updated database with share count: " . $mashsbShareCounts->total);
+            /* return counts from getAllCounts() after DB update */
+            return apply_filters('filter_get_sharedcount', $mashsbShareCounts->total + getFakecount());
         }
         /* return previous counts from DB Cache | this happens when API has a hiccup and does not return any results as expected*/
-        return apply_filters('filter_get_sharedcount', end((array_values($lastDBStoredShareArray))) + getFakecount());
+        return apply_filters('filter_get_sharedcount', $mashsbStoredDBMeta + getFakecount());
     } else {
-        /* return counts from post_meta cache | This is regular cached result */
-        $cachedCountsArr = explode(",", get_post_meta($post->ID, 'mashsb_shares', true));
-        $cachedCounts = end((array_values($cachedCountsArr))) + getFakecount();
+        /* return counts from post_meta plus fake count | This is regular cached result */
+        $cachedCountsMeta = get_post_meta($post->ID, 'mashsb_shares', true);
+        $cachedCounts = $cachedCountsMeta + getFakecount();
+        //echo '<h1>return from cache:'.$cachedCounts.'</h1>';
         return apply_filters('filter_get_sharedcount', $cachedCounts);
     }
 }
