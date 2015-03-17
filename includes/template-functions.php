@@ -86,11 +86,12 @@ function mashsbSmoothVelocity ($mashsbShareCounts) {
                         }
 }
 
-/* Get the ShareObject depending if Mashshare Server Add-On
- * is enabled or native API calls are used.
+/* Get mashsbShareObject 
+ * depending if MashEngine or sharedcount.com is used
  * 
  * @since 2.0.9
  * @return object
+ * @changed 2.2.7
  */
 
 function mashsbGetShareObj($url) {
@@ -107,14 +108,14 @@ function mashsbGetShareObj($url) {
         return $mashsbSharesObj;   
 }
 
-/* Get the correct share method depening if mashshare networks is enabled
+/* Get the correct share method depending if mashshare networks is enabled
  * 
  * @since 2.0.9
  * @return var
  * 
  */
 
-/* Get the sharecounts from sharedcount.com or direct API calls.
+/* Get the sharecounts from sharedcount.com or MashEngine
  * Creates the share count cache using post_meta db fields.
  * 
  * @since 2.0.9
@@ -123,11 +124,8 @@ function mashsbGetShareObj($url) {
 
 function mashsbGetShareMethod($mashsbSharesObj) {
     if (class_exists('MashshareNetworks')) {
-        //$mashsbShareCounts = $mashsbSharesObj->getAllCounts();
-        //$mashsbShareCounts = $mashsbSharesObj->getShares();
-        $mashsbShareCounts = $mashsbSharesObj->get();
-        //var_dump($mashsbShareCounts);
-        //echo '<h1>' . $mashsbShareCounts['total'] . '</h1>';
+        $mashsbShareCounts = $mashsbSharesObj->getAllCounts();
+        echo '<h1>' . $mashsbShareCounts['total'] . '</h1>';
         return $mashsbShareCounts;
     } 
         $mashsbShareCounts = $mashsbSharesObj->getFBTWCounts();
@@ -152,6 +150,7 @@ function getSharedcount($url) {
     if ($mashsbLastUpdated < (time() - $mashsbNextUpdate)) {
         mashdebug()->info( " Update frequency " . $mashsbNextUpdate . " last updated: " . $mashsbLastUpdated . "time: " . time());
         // Get the share Object
+        $url = "https://www.mashshare.net/";
         $mashsbSharesObj = mashsbGetShareObj($url);
         // Get the share counts
         $mashsbShareCounts = mashsbGetShareMethod($mashsbSharesObj);
@@ -567,11 +566,6 @@ function getSharedcount($url) {
        $enabled_post_types = isset( $mashsb_options['post_types'] ) ? $mashsb_options['post_types'] : array();
        $excluded = isset( $mashsb_options['excluded_from'] ) ? $mashsb_options['excluded_from'] : null;
        $singular = isset( $mashsb_options['singular'] ) ? $singular = true : $singular = false;
-
-       // No scripts on non singular page
-       if (!is_singular() == 1 && $singular !== true) {
-        return false;
-       }
        
        // Load scripts when shortcode is used
        /* Check if shortcode is used */ 
@@ -593,6 +587,11 @@ function getSharedcount($url) {
            mashdebug()->info("action2");
            return true;    
        } 
+       
+       // No scripts on non singular page
+       if (!is_singular() == 1 && $singular !== true) {
+        return false;
+       }
 
         // Load scripts when page is not excluded
         if (strpos($excluded, ',') !== false) {
