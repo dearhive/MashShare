@@ -733,10 +733,6 @@ text-decoration: none;
 }
 
 
-#tab_container .col-title strong{
-    white-space: pre;
-}
-
 #tab_container .row label strong, #tab_container .row strong {
 font-weight: bold;
 }
@@ -840,5 +836,10 @@ color:#777777;
 #tab_container table tbody tr:nth-child(1) > th > div {
     font-size: 20px;
 }
+
+.mashsb_hidden{
+    display: none;
+}
+
 /* End layout of admin table and rows
 */
