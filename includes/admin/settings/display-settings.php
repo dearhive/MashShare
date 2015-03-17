@@ -59,7 +59,6 @@ function getTabHeader($page, $section){
  * 
 *  We dont use tables here any longer. Are we stuck in the nineties?
  * @todo Use sprintf to sanitize  $field['id'] instead using str_replace() Should be faster?
- * @todo Push this code into EasyDigitalDownload EDD@github
  * @todo some media queries for better responisbility
  */
 function mashsb_do_settings_fields($page, $section) {
@@ -73,6 +72,7 @@ function mashsb_do_settings_fields($page, $section) {
     // Check first if any callback header registered
     foreach ((array) $wp_settings_fields[$page][$section] as $field) {
        strpos($field['callback'],'header') !== false ? $header = true : $header = false; 
+       
        if ($header === true)
                break;
     }
@@ -85,22 +85,29 @@ function mashsb_do_settings_fields($page, $section) {
        // Check if header has been created previously
        if (strpos($field['callback'],'header') !== false && $firstHeader === false) { 
            echo '<div id="' . $sanitizedID . '">'; 
+           echo '<table class="form-table"><tbody>';
            $firstHeader = true;
        } elseif (strpos($field['callback'],'header') !== false && $firstHeader === true) { 
        // Header has been created previously so we have to close the first opened div
-           echo '</div><div id="' . $sanitizedID . '">'; 
-       } 
-        echo '<div class="row">';
+           echo '</table></div><div id="' . $sanitizedID . '">'; 
+           echo '<table class="form-table"><tbody>';
+           
+       }  
+        echo '<tr><th class="row th">';
+        //echo "<pre>";
+        //var_dump($field);
         if (!empty($field['args']['label_for']))
             echo '<label for="' . esc_attr($field['args']['label_for']) . '">' . $field['title'] . '</label>';
         else
-            echo '<div class="col-title">' . $field['title'] . '</div>';
-        echo '<div style="overflow:auto;">';
+            echo '<div class="col-title">' . $field['title'] . '<span class="description">' . $field['args']['desc'] . '</span></div>';
+        echo '</th>';
+        echo '<td>';
         call_user_func($field['callback'], $field['args']);
-        echo '</div>';
-        echo '</div>';
+        echo '</td></tr>';
+        
         
     }
+    echo '</tbody></table>';
     if ($header === true){
     echo '</div>';
     }
@@ -122,8 +129,8 @@ function mashsb_options_page() {
 
 	ob_start();
 	?>
-	<div class="wrap">
-             <h1> <?php echo __('Welcome to Mashshare ', 'mashsb') . MASHSB_VERSION; ?></h1>
+	<div class="wrap mashsb_admin">
+             <h1 class="mashsharelogo"> <?php echo __('Welcome to Mashshare ', 'mashsb') . MASHSB_VERSION; ?></h1>
             <div class="about-text" style="font-weight: 400;line-height: 1.6em;font-size: 19px;">
                 <?php echo __('Thank you for updating to the latest version!', 'mashsb');?>
                 <br>
@@ -158,7 +165,12 @@ function mashsb_options_page() {
 				mashsb_do_settings_fields( 'mashsb_settings_' . $active_tab, 'mashsb_settings_' . $active_tab );
 				?>
 				<!--</table>-->
-				<?php submit_button(); ?>
+                                
+				<?php 
+                                // do not show save button on add-on page
+                                if ($active_tab !== 'addons')
+                                    submit_button(); 
+                                ?>
 			</form>
                     </div> <!-- new //-->
 		</div><!-- #tab_container-->

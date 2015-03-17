@@ -131,32 +131,44 @@ function mashsb_get_registered_settings() {
 					'desc' => __( ' ', 'mashsb' ),
 					'type' => 'header'
 				),
-				'mashsharer_cache' => array(
-					'id' => 'mashsharer_cache',
-					'name' =>  __( 'Cache expire', 'mashsb' ),
-					'desc' => __('The amount of shares are updated after time of "cache expire". Notice that Sharedcount.com uses his own cache (30 - 60min) so it does not update immediately when expire time is very low, e.g. 5 minutes.', 'mashsb'),
+                                'mashsb_sharemethod' => array(
+					'id' => 'mashsb_sharemethod',
+					'name' =>  __( 'Share count engine', 'mashsb' ),
+					'desc' => __('<strong>Choose your prefered engine to retrive share count numbers:</strong><br> <i>MashEngine</i> is using no external API and is recommended for use. <i>Sharedcount.com</i> needs an API key and is limited to 10.000 free requests daily. </strong>Default:</strong> MashEngine', 'mashsb'),
 					'type' => 'select',
-					'options' => mashsb_get_expiretimes()
+					'options' => array(
+                                            'mashengine' => 'MashEngine',
+                                            'sharedcount' => 'Sharedcount.com'
+                                        )
+     
 				),
+				
 				'mashsharer_apikey' => array(
 					'id' => 'mashsharer_apikey',
-					'name' => __( 'API Key - Important', 'mashsb' ),
-					'desc' => __( 'Get it FREE at <a href="https://admin.sharedcount.com/admin/signup.php?utm_campaign=settings&utm_medium=plugin&utm_source=mashshare" target="_blank">SharedCount.com</a> for 10.000 free daily requests. It´s essential for accurate function of this plugin. Make sure Curl is working on your server.', 'mashsb' ),
+					'name' => __( 'Sharedcount.com API Key', 'mashsb' ),
+					'desc' => __( 'Get it at <a href="https://sharedcount.com" target="_blank">SharedCount.com</a> for 10.000 free daily requests.', 'mashsb' ),
 					'type' => 'text',
 					'size' => 'medium'
 				),
 				'mashsharer_sharecount_domain' => array(
 					'id' => 'mashsharer_sharecount_domain',
-					'name' => __( 'SharedCount Domain', 'mashsb' ),
+					'name' => __( 'Sharedcount.com endpint', 'mashsb' ),
 					'desc' => __( 'The SharedCount Domain your API key is configured to query. For example, free.sharedcount.com. This may update automatically if configured incorrectly.', 'mashsb' ),
 					'type' => 'text',
 					'size' => 'medium',
 					'std'  => 'free.sharedcount.com'
 				),
+                                'mashsharer_cache' => array(
+					'id' => 'mashsharer_cache',
+					'name' =>  __( 'Cache expiration', 'mashsb' ),
+					'desc' => __('Shares are counted after time of expiration. Notice that Sharedcount.com uses his own cache (30 - 60min) so it does not update immediately when expire time is very low.', 'mashsb'),
+					'type' => 'select',
+					'options' => mashsb_get_expiretimes()
+				),
                                 'disable_sharecount' => array(
 					'id' => 'disable_sharecount',
 					'name' => __( 'Disable Sharecount', 'mashsb' ),
-					'desc' => __( 'Use this when you can not enable curl_exec and share counts stays zero on your site. In this mode the plugin do not calls the database and no SQL queries are done. (Gives just a very little performance boost because all database requests are cached in any case.)', 'mashsb' ),
+					'desc' => __( 'Use this when curl() is not supported on your server or share counts should not counted. This mode does not call the database and no SQL queries are generated. (Only less performance advantage. All db requests are cached) Default: false', 'mashsb' ),
 					'type' => 'checkbox'
 				),
                                 'hide_sharecount' => array(
@@ -249,7 +261,7 @@ function mashsb_get_registered_settings() {
                             'mashsharer_position' => array(
 					'id' => 'mashsharer_position',
 					'name' => __( 'Position', 'mashsb' ),
-					'desc' => __( 'Choose where you would like the social icons to appear, before or after the main content. If set to Manual, you can use this code to place your Social links anywhere you like in your templates files: <strong>&lt;?php echo do_shortcode("[mashshare]"); ?&gt;</strong> or use the shortcode: [mashshare] in your posts. Optional: <strong>[mashshare shares="false"]</strong> if you like to disable the share number. See all <a href="https://www.mashshare.net/faq/#Is_there_a_shortcode_for_pages_and_posts" target="_blank">possible shortcodes</a> here.', 'mashsb' ),
+					'desc' => __( 'Location of Share Buttons. Set to <i>manual</i> if you do not want to use the automatic embeding. Use the shortcode function to place Mashshare directly into your theme template files: <strong>&lt;?php echo do_shortcode("[mashshare]"); ?&gt;</strong> or the content shortcode: [mashshare] for posts and pages. See all <a href="https://www.mashshare.net/faq/#Is_there_a_shortcode_for_pages_and_posts" target="_blank">available shortcodes</a> here.', 'mashsb' ),
 					'type' => 'select',
                                         'options' => array(
 						'before' => __( 'Top', 'mashsb' ),
@@ -290,6 +302,14 @@ function mashsb_get_registered_settings() {
 					'desc' => __('Check this box if your twitter popup is openening twice. This happens when you are using any third party twitter instance on your website.','mashsb'),
 					'type' => 'checkbox',
                                         'std' => '0'
+                                    
+				),
+                                'mashsb_shortcode_info' => array(
+					'id' => 'mashsb_shortcode_info',
+					'name' => __( 'Note:', 'mashsb' ),
+					'desc' => __('Using the shortcode <strong>[mashshare]</strong> is forcing the load of dependacy scripts and styles on that specific pages. It is overwriting any other location setting.','mashsb'),
+					'type' => 'note',
+                                        'label_for' => 'test'
                                     
 				),
                                 'style_header' => array(
@@ -432,6 +452,12 @@ function mashsb_get_registered_settings() {
 		),
                  'networks' => apply_filters( 'mashsb_settings_networks',
                          array(
+                                'services_header' => array(
+					'id' => 'services_header',
+					'name' => __( 'Select available networks', 'mashsb' ),
+					'desc' => '',
+					'type' => 'header'
+				),
                                 'visible_services' => array(
 					'id' => 'visible_services',
 					'name' => __( 'Large Buttons', 'mashsb' ),
@@ -449,7 +475,12 @@ function mashsb_get_registered_settings() {
                          )
                 ),
 		'licenses' => apply_filters('mashsb_settings_licenses',
-			array()
+			array('licenses_header' => array(
+					'id' => 'licenses_header',
+					'name' => __( 'Activate your Add-Ons', 'mashsb' ),
+					'desc' => '',
+					'type' => 'header'
+				),)
 		),
                 'extensions' => apply_filters('mashsb_settings_extension',
 			array()
@@ -458,10 +489,11 @@ function mashsb_get_registered_settings() {
 			array(
                                 'addons' => array(
 					'id' => 'addons',
-					'name' => __( 'Add-Ons', 'mashsb' ),
-					'desc' => __( 'All Mashshare Add-Ons at a glance', 'mashsb' ),
+					'name' => __( '', 'mashsb' ),
+					'desc' => __( '', 'mashsb' ),
 					'type' => 'addons'
 				)
+                            //mashsb_addons_callback()
                         )
 		)
 	);
@@ -1222,6 +1254,23 @@ function mashsb_posttypes_callback ($args){
 		endforeach;
 		echo '<p class="description">' . $args['desc'] . '</p>';
 	}
+}
+
+/* 
+ * Note Callback
+ * 
+ * Show a note
+ * 
+ * @since 2.2.8
+ * @param array $args Arguments passed by the setting
+ * @return void
+ * 
+ */
+
+function mashsb_note_callback ($args){
+  global $mashsb_options;
+  $html = !empty($args['desc']) ? $args['desc'] : '';
+  echo $html;
 }
         
 /**
