@@ -23,6 +23,7 @@ if( mashsb_get_option( 'uninstall_on_delete' ) ) {
         delete_option( 'mashsb_networks');
         delete_post_meta_by_key( 'mashsb_timestamp' );
         delete_post_meta_by_key( 'mashsb_shares' );
+        delete_post_meta_by_key( 'mashsb_jsonshares' );
         /* Delete the database */
         //$sql = "DROP TABLE " . MASHSB_TABLE;
         //require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
