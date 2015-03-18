@@ -85,7 +85,7 @@ if (!class_exists('mashshare')) :
                 self::$instance->includes();
                 self::$instance->load_textdomain();
                 self::$instance->html = new MASHSB_HTML_Elements();
-                self::$instance->logger = new Logger("mashlog_" . date("Y-m-d") . ".log", Logger::INFO);
+                self::$instance->logger = new mashsbLogger("mashlog_" . date("Y-m-d") . ".log", mashsbLogger::INFO);
             }
             return self::$instance;
         }
@@ -172,6 +172,7 @@ if (!class_exists('mashshare')) :
             require_once MASHSB_PLUGIN_DIR . 'includes/debug/classes/MashDebug.interface.php';
             require_once MASHSB_PLUGIN_DIR . 'includes/debug/classes/MashDebug.class.php';
             require_once MASHSB_PLUGIN_DIR . 'includes/logger.php';
+            require_once MASHSB_PLUGIN_DIR . 'includes/libraries/RolingCurlX.php';
 
             if (is_admin() || ( defined('WP_CLI') && WP_CLI )) {
                 require_once MASHSB_PLUGIN_DIR . 'includes/admin/add-ons.php';
