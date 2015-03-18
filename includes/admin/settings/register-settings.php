@@ -161,7 +161,7 @@ function mashsb_get_registered_settings() {
                                 'mashsharer_cache' => array(
 					'id' => 'mashsharer_cache',
 					'name' =>  __( 'Cache expiration', 'mashsb' ),
-					'desc' => __('Shares are counted after time of expiration. Notice that Sharedcount.com uses his own cache (30 - 60min) so it does not update immediately when expire time is very low.', 'mashsb'),
+					'desc' => __('Shares are counted after this time. Notice that Sharedcount.com uses his own cache (30 - 60min) so it does not update immediately when expire time is very low.', 'mashsb'),
 					'type' => 'select',
 					'options' => mashsb_get_expiretimes()
 				),
@@ -196,7 +196,7 @@ function mashsb_get_registered_settings() {
                                 'fake_count' => array(
 					'id' => 'fake_count',
 					'name' => __( 'Fake Share counts', 'mashsb' ),
-					'desc' => __( 'This number will be aggregated to all your share counts and is multiplied with a post specific factor based on anmount of words in a post title divided with the number 10.', 'mashsb' ),
+					'desc' => __( 'This number will be aggregated to all your share counts and is multiplied with a post specific factor. (Number of post title words divided with 10).', 'mashsb' ),
 					'type' => 'text',
                                         'size' => 'medium'
 				),
