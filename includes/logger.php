@@ -8,7 +8,7 @@
 * Author url: https://raw.githubusercontent.com/joshnesbitt/logger/master/lib/logger.php
 *
 **/
-class Logger {
+class mashsbLogger {
   var $file, $path, $level, $stream;
   const INFO  = 4;
   const DEBUG = 3;
