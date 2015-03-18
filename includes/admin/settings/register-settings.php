@@ -206,7 +206,7 @@ function mashsb_get_registered_settings() {
 					'desc' => __( 'Enable this to load all *.js files into footer. Make sure your theme uses the wp_footer() template tag in the appropriate place. Default: Disabled', 'mashsb' ),
 					'type' => 'checkbox'
 				),
-                                'facebook_count' => array(
+                                /*'facebook_count' => array(
 					'id' => 'facebook_count_mode',
 					'name' => __( 'Facebook Count', 'mashsb' ),
 					'desc' => __( 'Get the Facebook total count including "likes" and "shares" or get only the pure share count', 'mashsb' ),
@@ -215,7 +215,7 @@ function mashsb_get_registered_settings() {
                                             'total' => 'Total counts',
                                             'shares' => 'Only share counts'
                                         )
-				),
+				),*/
                                 'uninstall_on_delete' => array(
 					'id' => 'uninstall_on_delete',
 					'name' => __( 'Remove Data on Uninstall?', 'mashsb' ),
