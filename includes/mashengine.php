@@ -158,7 +158,7 @@ class mashengine {
                          * */
                         $this->data->total += $count;
                         $this->data->$service[0] = $count;
-                        MASHSB()->logger->info('URL: ' . $url . ' ' . $service[0] . ': ' . $count);
+                        MASHSB()->logger->info('MashEngine - URL: ' . $url . ' ' . $service[0] . ': ' . $count);
 		} 
 		return;
         }
