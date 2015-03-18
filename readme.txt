@@ -1,4 +1,4 @@
-=== Mashshare - Social Media Icons SEO Share Buttons for Facebook, Twitter, Subscribe ===
+=== Mashshare - Social Media Icons SEO Share Buttons for Facebook, Twitter, Subscribe === 
 
 Author URL: https://www.mashshare.net
 Plugin URL: https://www.mashshare.net
@@ -296,7 +296,12 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 == Changelog ==
 
 = 2.2.8 =
+* New: Integration of a new share count engine. sharedcount.com and api key is not longer needed.
 * New: Check if '<!-- nextpage -->' is used and share primary url without page parameter
+* New: Complete rewrite of the admin layout. New design and better responsibility on mobile devices. Main option description below header. New sub description below option field.
+* Fix: Change class name Logger to mashsbLogger. This fix "redeclare error" on some system
+* Tweak: Add header to the social network tab
+* Tweak: Store all different shares as json string in post meta. We can access this.
 
 = 2.2.7 =
 * New: Translate the word "SHARES" via settings
