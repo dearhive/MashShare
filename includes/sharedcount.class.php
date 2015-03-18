@@ -21,7 +21,7 @@ class mashsbSharedcount {
 function getFBTWCounts(){
         global $mashsb_options;
         
-        isset($mashsb_options['facebook_count_mode']) ? $fb_mode = $mashsb_options['facebook_count_mode'] : $fb_mode = '';
+        //isset($mashsb_options['facebook_count_mode']) ? $fb_mode = $mashsb_options['facebook_count_mode'] : $fb_mode = '';
         
         $sharecounts = $this->get_sharedcount();
 
@@ -30,11 +30,7 @@ function getFBTWCounts(){
         }
         
             $counts = array('shares'=>array(),'total'=>0);
-        if ($fb_mode === 'total'){
-            $counts['shares']['fb'] = $sharecounts['Facebook']['total_count'];
-        } else {
-            $counts['shares']['fb'] = $sharecounts['Facebook']['share_count'];    
-        }
+            $counts['shares']['fb'] = $sharecounts['Facebook']['share_count'];  
             $counts['shares']['tw'] = $sharecounts['Twitter'];
 
 	foreach ($counts['shares'] as $mashsbcounts => $sharecount) $counts['total'] += (int)$sharecount;
@@ -47,19 +43,13 @@ function getFBTWCounts(){
 /* Only used when mashshare-networks is enabled */
 function getAllCounts(){
         global $mashsb_options;
-        
-        isset($mashsb_options['facebook_count_mode']) ? $fb_mode = $mashsb_options['facebook_count_mode'] : $fb_mode = '';
         $sharecounts = $this->get_sharedcount();
         if(!$sharecounts){
 	       return; 
         }
         
 	$counts = array('shares'=>array(),'total'=>0);
-	if ($fb_mode === 'total'){
-            isset($sharecounts['Facebook']['total_count']) ? $counts['shares']['fb'] = $sharecounts['Facebook']['total_count'] : $sharecounts['Facebook']['total_count'] = 0;
-        } else {
             isset($sharecounts['Facebook']['share_count']) ? $counts['shares']['fb'] = $sharecounts['Facebook']['share_count'] : $counts['shares']['fb'] = 0;  
-        }
             isset($sharecounts['Twitter']) ? $counts['shares']['tw'] = $sharecounts['Twitter'] : $sharecounts['Twitter'] = 0;
             isset($sharecounts['GooglePlusOne']) ? $counts['shares']['gp'] = $sharecounts['GooglePlusOne'] : $counts['shares']['gp'] = 0 ;
             isset($sharecounts['LinkedIn']) ? $counts['shares']['li'] = $sharecounts['LinkedIn'] : $counts['shares']['li'] = 0;
