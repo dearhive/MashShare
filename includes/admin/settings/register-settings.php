@@ -236,7 +236,7 @@ function mashsb_get_registered_settings() {
 				),
                                 'delete_cache_objects' => array(
 					'id' => 'delete_cache_objects',
-					'name' => __( 'Delete DB Cache', 'mashsb' ),
+					'name' => __( 'Purge DB Cache', 'mashsb' ),
 					'desc' => __( '<strong>Note: </strong>Use this with caution when you think your share counts are wrong. Checking this and using the save button will delete all stored mashshare post_meta objects.<br>' . mashsb_delete_cache_objects(), 'mashsb' ),
 					'type' => 'checkbox'
 				),
@@ -1328,7 +1328,8 @@ function mashsb_delete_cache_objects(){
         //require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
         //$wpdb->query($sql);
         delete_post_meta_by_key( 'mashsb_timestamp' );
-        delete_post_meta_by_key( 'mashsb_shares' );
+        delete_post_meta_by_key( 'mashsb_shares' ); 
+        delete_post_meta_by_key( 'mashsb_jsonshares' );
         return ' <strong style="color:red;">' . __('DB cache deleted! Do not forget to uncheck this box for performance increase after doing the job.', 'mashsb') . '</strong> ';
     }
 }
