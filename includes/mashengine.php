@@ -1,5 +1,6 @@
 <?php
-
+if(!class_exists('RollingCurlX'))  
+        require_once MASHSB_PLUGIN_DIR . 'includes/libraries/RolingCurlX.php';
 class mashengine {
 	private $data;
 	private $url;
@@ -13,9 +14,6 @@ class mashengine {
 	/* Collect share count from all available networks */
 	public function getALLCounts() {
 		$this->data                = new stdClass;
-		//$this->data->url           = $this->url;
-		//$this->data->shares        = new stdClass;
-		//$this->data->shares->total = 0;
                 $this->data->total = 0;
                 $data = $this->getSharesALL();
 		return $data;
@@ -24,9 +22,6 @@ class mashengine {
         /* Collect share count from facebook and twitter */
 	public function getFBTWCounts() {
 		$this->data                = new stdClass;
-		//$this->data->url           = $this->url;
-		//$this->data->shares        = new stdClass;
-		//$this->data->shares->total = 0;
                 $this->data->total = 0;
                 $data = $this->getSharesFBTW();
 		return $data;
@@ -42,22 +37,21 @@ class mashengine {
                 //$user_data = null;
                 $headers = null;
                 
-                /*$options = array(
+                $options = array(
                 CURLOPT_SSL_VERIFYPEER => FALSE,
-                CURLOPT_SSL_VERIFYHOST => FALSE,
-                CURLOPT_USERAGENT, 'Mashengine v.1.1',
-                );*/
-                //$options = array(); 
-                $RollingCurlX = new RollingCurlX(7);    // max 10 simultaneous downloads
+                CURLOPT_SSL_VERIFYHOST => FALSE
+                //CURLOPT_USERAGENT, 'MashEngine v.1.1',
+                );
+                
+                $RollingCurlX = new RollingCurlX(2);    // max 10 simultaneous downloads
+		$RollingCurlX->setOptions($options);
 		$RollingCurlX->addRequest("https://api.facebook.com/method/links.getStats?format=json&urls=" . $this->url, $post_data, array($this, 'getCount'), array('facebook'), $headers);
                 $RollingCurlX->addRequest("http://urls.api.twitter.com/1/urls/count.json?url=" . $this->url, $post_data, array($this, 'getCount'),  array('twitter'), $headers);
                 $RollingCurlX->execute();
                 
 		//$data = json_encode($this->data); // This return and json string instead
                 $data = $this->data;
-                
-                // return the total count
-		//return $data->shares->total;
+
 		return $data;
 	} 
         
@@ -70,13 +64,14 @@ class mashengine {
                 //$user_data = null;
                 $headers = null;
                 
-                /*$options = array(
+                $options = array(
                 CURLOPT_SSL_VERIFYPEER => FALSE,
                 CURLOPT_SSL_VERIFYHOST => FALSE,
-                CURLOPT_USERAGENT, 'Mashengine v.1.1',
-                );*/
-                //$options = array(); 
-                $RollingCurlX = new RollingCurlX(7);    // max 10 simultaneous downloads
+                //CURLOPT_USERAGENT, 'MashEngine v.1.1'
+                );
+				
+                $RollingCurlX = new RollingCurlX(10);    // max 10 simultaneous downloads
+		$RollingCurlX->setOptions($options);
 		$RollingCurlX->addRequest("https://api.facebook.com/method/links.getStats?format=json&urls=" . $this->url, $post_data, array($this, 'getCount'), array('facebook'), $headers);
                 $RollingCurlX->addRequest("http://urls.api.twitter.com/1/urls/count.json?url=" . $this->url, $post_data, array($this, 'getCount'),  array('twitter'), $headers);
                 $RollingCurlX->addRequest("https://www.linkedin.com/countserv/count/share?format=json&url=" . $this->url, $post_data, array($this, 'getCount'), array('linkedin'), $headers);
@@ -87,9 +82,9 @@ class mashengine {
                 //$RollingCurlX->addRequest("http://www.reddit.com/api/info.json?&url=" . $this->url, $post_data, array($this, 'getCount'), array('reddit'), $headers);
                 $RollingCurlX->addRequest("https://api.bufferapp.com/1/links/shares.json?url=" . $this->url, $post_data, array($this, 'getCount'), array('buffer'), $headers);
                 $RollingCurlX->addRequest("https://vk.com/share.php?act=count&index=1&url=" . $this->url, $post_data, array($this, 'getCount'), array('vk'), $headers);
-                $RollingCurlX->execute();
+		$RollingCurlX->execute();
                 
-		//$data = json_encode($this->data); // This return an json string instead
+				//$data = json_encode($this->data); // This return an json string instead
                 $data = $this->data;
                 
                 // return the total count
