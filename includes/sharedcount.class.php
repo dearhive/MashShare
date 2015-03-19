@@ -26,18 +26,23 @@ function getFBTWCounts(){
         $sharecounts = $this->get_sharedcount();
 
         if(!$sharecounts){
-	    return; 
+            $this->sharecount  = new stdClass;
+            $this->sharecount->total = 0;
+			return $this->sharecount; 
         }
-        
             $counts = array('shares'=>array(),'total'=>0);
             $counts['shares']['fb'] = $sharecounts['Facebook']['share_count'];  
             $counts['shares']['tw'] = $sharecounts['Twitter'];
 
 	foreach ($counts['shares'] as $mashsbcounts => $sharecount) $counts['total'] += (int)$sharecount;
         mashdebug()->error("sharedcount.com getFBTWCounts: " . $counts['total']);
+		//echo "<pre>";
+		var_dump($sharecounts);
+        $totalArr = array ('total' => $counts['total']);
+        $objMerged = (object)array_merge((array)$sharecounts, (array)$totalArr);
         // Log the counts if debug is enabled
         //MASHSB()->logger->info("sharedcount.com FB total_count: " . $sharecounts['Facebook']['total_count'] . " FB share_count:" . $sharecounts['Facebook']['share_count'] . " TW: " . $sharecounts['Twitter']);
-	return $counts;
+	return $objMerged;
 
 }
 /* Only used when mashshare-networks is enabled */
@@ -45,10 +50,12 @@ function getAllCounts(){
         global $mashsb_options;
         $sharecounts = $this->get_sharedcount();
         if(!$sharecounts){
-	       return; 
+	        $this->sharecount  = new stdClass;
+            $this->sharecount->total = 0;
+			return $this->sharecount; 
         }
         
-	$counts = array('shares'=>array(),'total'=>0);
+        $counts = array('shares'=>array(),'total'=>0);
             isset($sharecounts['Facebook']['share_count']) ? $counts['shares']['fb'] = $sharecounts['Facebook']['share_count'] : $counts['shares']['fb'] = 0;  
             isset($sharecounts['Twitter']) ? $counts['shares']['tw'] = $sharecounts['Twitter'] : $sharecounts['Twitter'] = 0;
             isset($sharecounts['GooglePlusOne']) ? $counts['shares']['gp'] = $sharecounts['GooglePlusOne'] : $counts['shares']['gp'] = 0 ;
