@@ -65,7 +65,7 @@ function mashsb_install() {
 		update_option( 'mashsb_version_upgraded_from', $current_version );
 	}
 
-        // Add the current version
+        // Update the current version
         update_option( 'mashsb_version', MASHSB_VERSION );
         // Add plugin installation date and variable for rating div
         add_option('mashsb_installDate',date('Y-m-d h:i:s'));
@@ -82,7 +82,6 @@ function mashsb_install() {
         'Subscribe'
     );
     
-    //if (false === get_option('mashsb_networks') or count(get_option('mashsb_networks') === 0)) {
     if (is_plugin_inactive('mashshare-networks/mashshare-networks.php')) {
         update_option('mashsb_networks', $networks);
     }
