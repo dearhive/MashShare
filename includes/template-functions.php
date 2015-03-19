@@ -45,6 +45,7 @@ function getExecutionOrder(){
      * 
      * @since 2.0.9
      * @return int
+     * @deprecated deprecated since version 2.2.8
      */
 function mashsbSmoothVelocity ($mashsbShareCounts) {
         switch ($mashsbShareCounts) {
@@ -98,7 +99,10 @@ function mashsbGetShareObj($url) {
     global $mashsb_options;
     $mashengine = isset($mashsb_options['mashsb_sharemethod']) && $mashsb_options['mashsb_sharemethod'] === 'mashengine' ? true : false;
     if ($mashengine) {
-        require_once(MASHSB_PLUGIN_DIR . 'includes/mashengine.php');
+        if(!class_exists('RollingCurlX'))  
+        require_once MASHSB_PLUGIN_DIR . 'includes/libraries/RolingCurlX.php';
+        if(!class_exists('mashengine'))         
+            require_once(MASHSB_PLUGIN_DIR . 'includes/mashengine.php');
         $mashsbSharesObj = new mashengine($url);
         return $mashsbSharesObj;
     } 
@@ -149,23 +153,20 @@ function getSharedcount($url) {
     if ($mashsbLastUpdated < (time() - $mashsbNextUpdate)) {
         mashdebug()->info( " Update frequency " . $mashsbNextUpdate . " last updated: " . $mashsbLastUpdated . "time: " . time());
         // Get the share Object
-        // only for debugging here
-        //$url = "https://www.mashshare.net";
         $mashsbSharesObj = mashsbGetShareObj($url);
         // Get the share counts
         $mashsbShareCounts = mashsbGetShareMethod($mashsbSharesObj);
         //$mashsbShareCounts['total'] = 11; // USE THIS FOR DEBUGGING
-        
-        //if (isset($mashsbCheckUpdate)) {
+
             mashdebug()->info("First Update");
             $mashsbStoredDBMeta = get_post_meta($post->ID, 'mashsb_shares', true);
-        //}
+
         
         /* Update post_meta only when API is requested and
          * API share count is not smaller than current sharecount 
          * This would mean there was an error in the API (Failure or hammering any limits, e.g. X-Rate-Limit)
          */
-        //echo '<h1>fresh request:'.$mashsbShareCounts->total.'</h1>';
+
         if ($mashsbShareCounts->total >= $mashsbShareCounts->total) {
             update_post_meta($post->ID, 'mashsb_shares', $mashsbShareCounts->total);
             update_post_meta($post->ID, 'mashsb_timestamp', time());
@@ -180,7 +181,6 @@ function getSharedcount($url) {
         /* return counts from post_meta plus fake count | This is regular cached result */
         $cachedCountsMeta = get_post_meta($post->ID, 'mashsb_shares', true);
         $cachedCounts = $cachedCountsMeta + getFakecount();
-        //echo '<h1>return from cache:'.$cachedCounts.'</h1>';
         return apply_filters('filter_get_sharedcount', $cachedCounts);
     }
 }
@@ -305,10 +305,7 @@ function getSharedcount($url) {
         }else{
             $urltw = $url;
         }
-        
-        //$title = urlencode(html_entity_decode(the_title_attribute('echo=0'), ENT_COMPAT, 'UTF-8'));
-        //$title = str_replace('#' , '%23', $title); 
-        //$titleclean = esc_html($title);
+       
         
         function_exists('MASHOG') ? $image = MASHOG()->MASHOG_OG_Output->_add_image() : $image = mashsb_get_image($post->ID);
         function_exists('MASHOG') ? $desc = MASHOG()->MASHOG_OG_Output->_get_description() : $desc = urlencode(mashsb_get_excerpt_by_id($post->ID));
@@ -373,8 +370,7 @@ function getSharedcount($url) {
         }else{
         $enablednetworks = $getnetworks; 
         }
-        //var_dump($enablednetworks);
-        //echo "max: " . $maxcounter;
+
     if (!empty($enablednetworks)) {
         foreach ($enablednetworks as $key => $network):
             if($mashsb_options['visible_services'] !== 'all' && $maxcounter != count($enablednetworks) && $mashsb_options['visible_services'] < count($enablednetworks)){
@@ -469,10 +465,6 @@ function getSharedcount($url) {
         $url = mashsb_get_url();
         !empty($mashsb_options['sharecount_title']) ? $sharecount_title = $mashsb_options['sharecount_title'] : $sharecount_title = __('SHARES', 'mashsb');
 
-        /*$title = html_entity_decode(the_title_attribute('echo=0'), ENT_QUOTES, 'UTF-8');
-        $title = urlencode($title);
-        $title = str_replace('#' , '%23', $title);
-        $title = esc_html($title);*/
         
         function_exists('MASHOG') ? $title = MASHOG()->MASHOG_OG_Output->_get_title() : $title = the_title_attribute('echo=0');
         $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
@@ -956,6 +948,7 @@ add_action( 'wp_enqueue_scripts', 'mashsb_styles_method' );
  * @return url  $string
  * @scince 2.2.8
  */
+
 function mashsb_get_url(){
     global $wp, $post, $numpages;
     if($numpages > 1){ // check if '<!-- nextpage -->' is used
@@ -963,11 +956,12 @@ function mashsb_get_url(){
     } elseif (is_singular()){
         // Stays here for compatibility. Not sure if this breaks when we switch to get_permalink($post->ID)
         //!empty($wp->query_string) ? $url = add_query_arg($wp->query_string, '', urlencode(home_url( $wp->request ))) : $url = urlencode(home_url( $wp->request )); 
-        if (!empty($wp->query_string)){
+        /*if (!empty($wp->query_string)){
             $url = add_query_arg($wp->query_string, '', urlencode(home_url( $wp->request ))); 
         }else{
             $url = urlencode(home_url( $wp->request )); // Stays here for compatibility. Not sure if this breaks when we switch to get_permalink($post->ID)
-        }
+        }*/
+        $url = urlencode(get_permalink($post->ID));
     }else{
         $url = urlencode(get_permalink($post->ID));
     }
