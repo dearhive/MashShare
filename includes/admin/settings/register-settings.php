@@ -133,8 +133,8 @@ function mashsb_get_registered_settings() {
 				),
                                 'mashsb_sharemethod' => array(
 					'id' => 'mashsb_sharemethod',
-					'name' =>  __( 'Share count engine', 'mashsb' ),
-					'desc' => __('<strong>Choose your prefered engine to retrive share count numbers:</strong><br> <i>MashEngine</i> is using no external API and is recommended for use. <i>Sharedcount.com</i> needs an API key and is limited to 10.000 free requests daily. </strong>Default:</strong> MashEngine', 'mashsb'),
+					'name' =>  __( 'Share counts', 'mashsb' ),
+					'desc' => __('<i>MashEngine</i> collects shares by calling directly social networks from your server. All shares are cached and stored in your database. <p> If you notice performance issues choose the classical <i>Sharedcount.com</i>. This needs an API key and is limited to 10.000 free requests daily but it is a little bit faster on requesting. After caching there is no performance advantage to MashEngine! <p> <strong>MashEngine collects: </strong> Facebook, Twitter, LinkedIn, Google+, Pinterest, Stumbleupon, Buffer, VK. <strong>Default:</strong> MashEngine', 'mashsb'),
 					'type' => 'select',
 					'options' => array(
                                             'mashengine' => 'MashEngine',
@@ -161,7 +161,7 @@ function mashsb_get_registered_settings() {
                                 'mashsharer_cache' => array(
 					'id' => 'mashsharer_cache',
 					'name' =>  __( 'Cache expiration', 'mashsb' ),
-					'desc' => __('Shares are counted after this time. Notice that Sharedcount.com uses his own cache (30 - 60min) so it does not update immediately when expire time is very low.', 'mashsb'),
+					'desc' => __('Shares are counted for every post after this time. Notice that Sharedcount.com uses his own cache (30 - 60min) so share count does not update immediately. If you have a very large website with 100k and more daily pageviews make sure to increase this value, scpecially when you use MashEngine! Otherwise it could happen that some networks block your requests due to hammering their rate limits.', 'mashsb'),
 					'type' => 'select',
 					'options' => mashsb_get_expiretimes()
 				),
