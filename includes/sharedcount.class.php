@@ -36,12 +36,9 @@ function getFBTWCounts(){
 
 	foreach ($counts['shares'] as $mashsbcounts => $sharecount) $counts['total'] += (int)$sharecount;
         mashdebug()->error("sharedcount.com getFBTWCounts: " . $counts['total']);
-		//echo "<pre>";
-		var_dump($sharecounts);
+
         $totalArr = array ('total' => $counts['total']);
         $objMerged = (object)array_merge((array)$sharecounts, (array)$totalArr);
-        // Log the counts if debug is enabled
-        //MASHSB()->logger->info("sharedcount.com FB total_count: " . $sharecounts['Facebook']['total_count'] . " FB share_count:" . $sharecounts['Facebook']['share_count'] . " TW: " . $sharecounts['Twitter']);
 	return $objMerged;
 
 }
@@ -50,9 +47,9 @@ function getAllCounts(){
         global $mashsb_options;
         $sharecounts = $this->get_sharedcount();
         if(!$sharecounts){
-	        $this->sharecount  = new stdClass;
+	    $this->sharecount  = new stdClass;
             $this->sharecount->total = 0;
-			return $this->sharecount; 
+	    return $this->sharecount; 
         }
         
         $counts = array('shares'=>array(),'total'=>0);
@@ -67,14 +64,8 @@ function getAllCounts(){
 	foreach ($counts['shares'] as $totalcount) $total += (int)$totalcount;
         $totalArr = array ('total' => $total);
         $objMerged = (object)array_merge((array)$sharecounts, (array)$totalArr);
-
-        //MASHSB()->logger->info("sharedcount.com FB total_count: " . $sharecounts['Facebook']['total_count'] . " FB share_count:" . $sharecounts['Facebook']['share_count'] . " TW: " . $sharecounts['Twitter'] . " G+:" . $counts['shares']['gb'] . " Linkedin:" . $counts['shares']['li'] . " Stumble: " . $counts['shares']['st'] . " Pinterest: " . $counts['shares']['pin']);
-        //return $sharecounts;
-        //$data = json_encode($objMerged);
         mashdebug()->info("sharedcount.com getAllCounts: " . $counts['total']);
         return $objMerged;
-        //echo "<pre>";
-        //var_dump($sharecounts);
 }
 
 function update_sharedcount_domain($apikey, $domain = false){ 
@@ -98,6 +89,8 @@ private function _curl($url){
 	$curl = curl_init();
 	curl_setopt($curl, CURLOPT_URL, $url);
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT ,5); 
+        curl_setopt($curl, CURLOPT_TIMEOUT, 5); //timeout in seconds
 	$curl_results = curl_exec ($curl);
 	curl_close ($curl);
 	return json_decode($curl_results, true);
