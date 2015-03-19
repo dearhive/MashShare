@@ -319,15 +319,7 @@ function getSharedcount($url) {
         } else {
             $twittertitle = $title;
         }
-     
-        
-        /*function_exists('MASHOG') ? $hashtag = '&amp;hashtags=' . MASHOG()->MASHOG_OG_Output->_get_hashtag() : $hashtag = '';
-        $hashtag = str_replace(' ', '', $hashtag);
-        $hashtag = str_replace('#', '', $hashtag);
-         * */
-        
-        //$image = mashsb_get_image($post->ID);
-        //$desc = urlencode(mashsb_get_excerpt_by_id($post->ID));
+    
         
         !empty($mashsb_options['mashsharer_hashtag']) ? $via = '&amp;via=' . $mashsb_options['mashsharer_hashtag'] : $via = '';
        
@@ -340,7 +332,8 @@ function getSharedcount($url) {
             'title' => $title   
         ));
         
-            return $networks[$name];    
+            return isset($networks[$name]) ? $networks[$name] : $networks[$name] = '';    
+            //return $networks[$name];
         }
         
 
