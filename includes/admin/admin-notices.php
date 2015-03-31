@@ -27,18 +27,15 @@ function mashsb_admin_messages() {
 	$datetime1 = new DateTime($install_date);
 	$datetime2 = new DateTime($display_date);
 	$diff_intrval = round(($datetime2->format('U') - $datetime1->format('U')) / (60*60*24));
-    //if($diff_intrval >= 7 && get_option('mashsb_RatingDiv')=="no")
-        if(get_option('mashsb_RatingDiv')=="no")
+        if($diff_intrval >= 7 && get_option('mashsb_RatingDiv')=="no")
     {
-	 echo '
-<div class="mashsb_fivestar">
-    	<p>I noticed you\'ve been using <strong>Mashshare</strong> for more than 1 week. Could you please do me a BIG favor and give it a 5-star rating on Wordpress? 
-        <br>~ René Hermenau
-        <h2></h2></p>
+	 echo '<div class="mashsb_fivestar" style="box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);">
+    	<p>Awesome, you\'ve been using <strong>Mashshare Social Sharing</strong> for more than 1 week. May we ask you to give it a <strong>5-star</strong> rating on Wordpress? 
+        <br><strong>Your Mashshare Team</strong>
         <ul>
-        	<li><a href="https://wordpress.org/support/view/plugin-reviews/mashsharer" class="thankyou" target="_new" title="Ok, you deserved it">Ok, you deserved it</a></li>
-            <li><a href="javascript:void(0);" class="mashsbHideRating" title="I already did">I already did</a></li>
-            <li><a href="javascript:void(0);" class="mashsbHideRating" title="No, not good enough">No, not good enough</a></li>
+        	<li><a href="https://wordpress.org/support/view/plugin-reviews/mashsharer" class="thankyou" target="_new" title="Ok, you deserved it" style="font-weight:bold;">Ok, you deserved it</a></li>
+            <li><a href="javascript:void(0);" class="mashsbHideRating" title="I already did" style="font-weight:bold;">I already did</a></li>
+            <li><a href="javascript:void(0);" class="mashsbHideRating" title="No, not good enough" style="font-weight:bold;">No, not good enough</a></li>
         </ul>
     </div>
     <script>
@@ -56,6 +53,7 @@ function mashsb_admin_messages() {
         success: function(e) {
             if (e=="success") {
                jQuery(\'.mashsb_fivestar\').slideUp(\'slow\');
+			   
             }
         }
          });
