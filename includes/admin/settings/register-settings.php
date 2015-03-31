@@ -146,7 +146,7 @@ function mashsb_get_registered_settings() {
 				'mashsharer_apikey' => array(
 					'id' => 'mashsharer_apikey',
 					'name' => __( 'Sharedcount.com API Key', 'mashsb' ),
-					'desc' => __( 'Get it at <a href="https://sharedcount.com" target="_blank">SharedCount.com</a> for 10.000 free daily requests.', 'mashsb' ),
+					'desc' => __( 'Get it at <a href="https://www.sharedcount.com" target="_blank">SharedCount.com</a> for 10.000 free daily requests.', 'mashsb' ),
 					'type' => 'text',
 					'size' => 'medium'
 				),
