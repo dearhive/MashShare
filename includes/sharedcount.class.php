@@ -21,7 +21,7 @@ class mashsbSharedcount {
 function getFBTWCounts(){
         global $mashsb_options;
         
-        //isset($mashsb_options['facebook_count_mode']) ? $fb_mode = $mashsb_options['facebook_count_mode'] : $fb_mode = '';
+        isset($mashsb_options['facebook_count_mode']) ? $fb_mode = $mashsb_options['facebook_count_mode'] : $fb_mode = '';
         
         $sharecounts = $this->get_sharedcount();
 
@@ -31,7 +31,13 @@ function getFBTWCounts(){
 			return $this->sharecount; 
         }
             $counts = array('shares'=>array(),'total'=>0);
-            $counts['shares']['fb'] = $sharecounts['Facebook']['share_count'];  
+        if ($fb_mode === 'likes'){
+            $counts['shares']['fb'] = $sharecounts['Facebook']['like_count'];
+        } elseif ($fb_mode === 'shares'){
+            $counts['shares']['fb'] = $sharecounts['Facebook']['share_count']; 
+        } else{
+            $counts['shares']['fb'] = $sharecounts['Facebook']['total_count']; 
+        }
             $counts['shares']['tw'] = $sharecounts['Twitter'];
 
 	foreach ($counts['shares'] as $mashsbcounts => $sharecount) $counts['total'] += (int)$sharecount;
