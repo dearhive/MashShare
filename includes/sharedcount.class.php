@@ -31,13 +31,16 @@ function getFBTWCounts(){
 			return $this->sharecount; 
         }
             $counts = array('shares'=>array(),'total'=>0);
-        if ($fb_mode === 'likes'){
-            $counts['shares']['fb'] = $sharecounts['Facebook']['like_count'];
-        } elseif ($fb_mode === 'shares'){
-            $counts['shares']['fb'] = $sharecounts['Facebook']['share_count']; 
-        } else{
-            $counts['shares']['fb'] = $sharecounts['Facebook']['total_count']; 
-        }
+            switch ($fb_mode){
+                case $fb_mode === 'likes':
+                $counts['shares']['fb'] = $sharecounts['Facebook']['like_count'];
+                break;
+            case $fb_mode === 'total':
+                $counts['shares']['fb'] = $sharecounts['Facebook']['total_count']; 
+                break;
+            default:
+                $counts['shares']['fb'] = $sharecounts['Facebook']['share_count']; 
+            }
             $counts['shares']['tw'] = $sharecounts['Twitter'];
 
 	foreach ($counts['shares'] as $mashsbcounts => $sharecount) $counts['total'] += (int)$sharecount;
@@ -51,6 +54,9 @@ function getFBTWCounts(){
 /* Only used when mashshare-networks is enabled */
 function getAllCounts(){
         global $mashsb_options;
+        
+        isset($mashsb_options['facebook_count_mode']) ? $fb_mode = $mashsb_options['facebook_count_mode'] : $fb_mode = '';
+        
         $sharecounts = $this->get_sharedcount();
         if(!$sharecounts){
 	    $this->sharecount  = new stdClass;
@@ -59,7 +65,17 @@ function getAllCounts(){
         }
         
         $counts = array('shares'=>array(),'total'=>0);
-            isset($sharecounts['Facebook']['share_count']) ? $counts['shares']['fb'] = $sharecounts['Facebook']['share_count'] : $counts['shares']['fb'] = 0;  
+            $counts = array('shares'=>array(),'total'=>0);
+            switch ($fb_mode){
+                case $fb_mode === 'likes':
+                $counts['shares']['fb'] = $sharecounts['Facebook']['like_count'];
+                break;
+            case $fb_mode === 'total':
+                $counts['shares']['fb'] = $sharecounts['Facebook']['total_count']; 
+                break;
+            default:
+                $counts['shares']['fb'] = $sharecounts['Facebook']['share_count']; 
+            }
             isset($sharecounts['Twitter']) ? $counts['shares']['tw'] = $sharecounts['Twitter'] : $sharecounts['Twitter'] = 0;
             isset($sharecounts['GooglePlusOne']) ? $counts['shares']['gp'] = $sharecounts['GooglePlusOne'] : $counts['shares']['gp'] = 0 ;
             isset($sharecounts['LinkedIn']) ? $counts['shares']['li'] = $sharecounts['LinkedIn'] : $counts['shares']['li'] = 0;
