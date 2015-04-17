@@ -235,8 +235,14 @@ add_action( 'mashsb_import_settings', 'mashsb_tools_import_export_process_import
  *
  * @since       2.1.6
  * @return      void
+ * @change      2.3.1
  */
 function mashsb_tools_sysinfo_display() {
+    
+    if( ! current_user_can( 'edit_posts' ) ) {
+		return;
+	}
+        
 ?>
 	<form action="<?php echo esc_url( admin_url( 'admin.php?page=mashsb-tools&tab=system_info' ) ); ?>" method="post" dir="ltr">
 		<textarea readonly="readonly" onclick="this.focus(); this.select()" id="system-info-textarea" name="mashsb-sysinfo" title="To copy the system info, click below then press Ctrl + C (PC) or Cmd + C (Mac)."><?php echo mashsb_tools_sysinfo_get(); ?></textarea>
