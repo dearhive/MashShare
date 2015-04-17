@@ -1258,6 +1258,35 @@ function mashsb_posttypes_callback ($args){
 	}
 }
 
+
+/* 
+ * Taxonomies Callback
+ * 
+ * Adds a multiple choice drop box
+ * for selecting (custom) taxonomies
+ * 
+ * @since 2.3.1
+ * @param array $args Arguments passed by the setting
+ * @return void
+ * 
+ * @deprecated
+ * 
+ */
+
+/*function mashsb_taxonomies_callback ($args){
+  global $mashsb_options;
+  $taxonomies = get_taxonomies();
+
+  if ( ! empty( $taxonomies ) ) {
+                foreach( $taxonomies as $key => $option ):
+			if( isset( $mashsb_options[$args['id']][$key] ) ) { $enabled = $option; } else { $enabled = NULL; }
+			echo '<input name="mashsb_settings[' . $args['id'] . '][' . $key . ']" id="mashsb_settings[' . $args['id'] . '][' . $key . ']" type="checkbox" value="' . $option . '" ' . checked($option, $enabled, false) . '/>&nbsp;';
+			echo '<label for="mashsb_settings[' . $args['id'] . '][' . $key . ']">' . $option . '</label><br/>';
+		endforeach;
+		echo '<p class="description mashsb_hidden">' . $args['desc'] . '</p>';
+	}
+}*/
+
 /* 
  * Note Callback
  * 

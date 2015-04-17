@@ -9,7 +9,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Mashable, Social Media Pop-Up, Social Media Widget, Social Media Sharing, Social Media Networks, Social Sharing, Social sharing optimization, Share button, share buttons, Facebook Share button, Twitter Share Button, Social Share, Social buttons, social share buttons, Share, Share this, simple social buttons, simple share buttons adder,  Google+, Twitter, Facebook, Digg, Stumble Upon, Linkedin, +1, add to any, AddThis, add this, addtoany, admin, aim, analytics, bookmark, bookmarking, bookmarks, bookmark button, bookmark menu, buddypress, chrome extension, comments, del.icio.us, Diigo, buffer, button, del.icio.us, e-mail, email, email button, Facebook, facebook like, facebook recommend, facebook share, facebook share button, fark, firefox extension, flickr, floating buttons, follow, foursquare, gmail, goo.gl
 Requires at least: 3.6+
 Tested up to: 4.2.0
-Stable tag: 2.3.0  
+Stable tag: 2.3.1  
 
 Social Media Icons & Share Buttons, a highly customizable social sharing and & Media SEO ecosystem Facebook, Twitter and more ...
 
@@ -293,9 +293,13 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 == Changelog ==
 
+= 2.3.1. =
+* Security Update: Update is highly recommended! It contains two security fixes! Thanks to g0blin research
+
 = 2.3.0 =
 * New: New options: Specify to get facebook shares, likes or the total sum of facebook shares + facebook likes. (This is improved compared to a similar function which existed in versions earlier than 2.2.8)
 * Fix: Broken url to sharedcount.com in admin dashboard of mashshare share buttons
+* Fix: 'MashEngine' was only showing the likes per default in previous version
 
 = 2.2.9 =
 * New: Two more share counts available, Buffer and VK.
@@ -429,5 +433,5 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 2.3.0 =
-2.3.0 <strong>FEATURE UPDATE:</strong> New option lets you specify to get facebook likes, shares or the total sum of it. Just in case: If something goes wrong, and the update is running into any issues just remove the folder <strong>/wp-content/plugins/mashsharer</strong> completely via FTP and install Mashshare again. Your settings will not lost. However, Its recommend to test every new plugin update on a staging platform first!
+= 2.3.1 =
+2.3.1 <strong>SECURITY UPDATE:</strong> Update is highly recommended! It contains two security fixes!

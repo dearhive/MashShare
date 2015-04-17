@@ -80,6 +80,11 @@ function mashsb_get_tools_tabs() {
  * @return      void
  */
 function mashsb_tools_import_export_display() {
+    
+        if( ! current_user_can( 'update_plugins' ) ) {
+		return;
+	}
+    
 	do_action( 'mashsb_tools_import_export_before' );
 ?>
 	<div class="postbox">
@@ -239,7 +244,7 @@ add_action( 'mashsb_import_settings', 'mashsb_tools_import_export_process_import
  */
 function mashsb_tools_sysinfo_display() {
     
-    if( ! current_user_can( 'edit_posts' ) ) {
+    if( ! current_user_can( 'update_plugins' ) ) {
 		return;
 	}
         
@@ -441,6 +446,10 @@ function mashsb_tools_sysinfo_get() {
  * @return      void
  */
 function mashsb_tools_sysinfo_download() {
+    
+        if( ! current_user_can( 'update_plugins' ) )
+		return;
+    
 	nocache_headers();
 
 	header( 'Content-Type: text/plain' );
