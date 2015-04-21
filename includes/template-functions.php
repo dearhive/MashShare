@@ -332,8 +332,8 @@ function getSharedcount($url) {
             'title' => $title   
         ));
         
-            //return isset($networks[$name]) ? $networks[$name] : $networks[$name] = '';    
-            return $networks[$name];
+            return isset($networks[$name]) ? $networks[$name] : '';    
+            //return $networks[$name];
         }
         
 
