@@ -143,10 +143,10 @@ function mashsb_options_page() {
 			<?php
 			foreach( mashsb_get_settings_tabs() as $tab_id => $tab_name ) {
 
-				$tab_url = add_query_arg( array(
+				$tab_url = esc_url(add_query_arg( array(
 					'settings-updated' => false,
 					'tab' => $tab_id
-				) );
+				) ));
 
 				$active = $active_tab == $tab_id ? ' nav-tab-active' : '';
 
