@@ -185,11 +185,11 @@ class MASHSB_License {
                 
 		// Call the API
 		$response = wp_remote_get(
-			add_query_arg( $api_params, $this->api_url ),
+			esc_url(add_query_arg( $api_params, $this->api_url ),
 			array(
 				'timeout'   => 15,
 				'sslverify' => false
-			)
+			))
 		);
 
 		// Make sure there are no errors
@@ -237,11 +237,11 @@ class MASHSB_License {
 
 			// Call the API
 			$response = wp_remote_get(
-				add_query_arg( $api_params, $this->api_url ),
+				esc_url(add_query_arg( $api_params, $this->api_url ),
 				array(
 					'timeout'   => 15,
 					'sslverify' => false
-				)
+				))
 			);
 
 			// Make sure there are no errors
