@@ -156,18 +156,19 @@ function getSharedcount($url) {
         $mashsbSharesObj = mashsbGetShareObj($url);
         // Get the share counts
         $mashsbShareCounts = mashsbGetShareMethod($mashsbSharesObj);
-        //$mashsbShareCounts['total'] = 11; // USE THIS FOR DEBUGGING
+        //$mashsbShareCounts = new stdClass(); // USE THIS FOR DEBUGGING
+        //$mashsbShareCounts->total = 13; // USE THIS FOR DEBUGGING
 
             mashdebug()->info("First Update");
             $mashsbStoredDBMeta = get_post_meta($post->ID, 'mashsb_shares', true);
 
         
         /* Update post_meta only when API is requested and
-         * API share count is not smaller than current sharecount 
-         * This would mean there was an error in the API (Failure or hammering any limits, e.g. X-Rate-Limit)
+         * API share count is greater than real fresh requested share count ->
+         * ### This would mean there is an error in the API (Failure or hammering any limits, e.g. X-Rate-Limit) ###
          */
 
-        if ($mashsbShareCounts->total >= $mashsbShareCounts->total) {
+        if ($mashsbShareCounts->total >= $mashsbStoredDBMeta) {
             update_post_meta($post->ID, 'mashsb_shares', $mashsbShareCounts->total);
             update_post_meta($post->ID, 'mashsb_timestamp', time());
             update_post_meta($post->ID, 'mashsb_jsonshares', json_encode($mashsbShareCounts));
@@ -947,13 +948,6 @@ function mashsb_get_url(){
     if($numpages > 1){ // check if '<!-- nextpage -->' is used
         $url = urlencode(get_permalink($post->ID));
     } elseif (is_singular()){
-        // Stays here for compatibility. Not sure if this breaks when we switch to get_permalink($post->ID)
-        //!empty($wp->query_string) ? $url = add_query_arg($wp->query_string, '', urlencode(home_url( $wp->request ))) : $url = urlencode(home_url( $wp->request )); 
-        /*if (!empty($wp->query_string)){
-            $url = add_query_arg($wp->query_string, '', urlencode(home_url( $wp->request ))); 
-        }else{
-            $url = urlencode(home_url( $wp->request )); // Stays here for compatibility. Not sure if this breaks when we switch to get_permalink($post->ID)
-        }*/
         $url = urlencode(get_permalink($post->ID));
     }else{
         $url = urlencode(get_permalink($post->ID));

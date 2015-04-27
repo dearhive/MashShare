@@ -843,3 +843,28 @@ color:#777777;
 
 /* End layout of admin table and rows
 */
+#mashtabcontainer > .mashtabs {
+    background-color: #ffffff;       
+}
+
+#mashtabcontainer ul .active {
+      background-color: #00adef;
+      color: white;
+      border-bottom-color: #0098D2;
+}
+
+#mashtabcontainer ul .active:hover {
+      background-color: #00A4E2;
+      color: white;
+      border-bottom-color: #0098D2;
+}
+
+#mashtabcontainer ul li a {
+      padding: 10px 14px 10px 14px;
+      background-color: #f3f3f3
+          
+}
+
+#mashtabcontainer .mashtab-container {
+      border: 0px solid #ececec;
+}

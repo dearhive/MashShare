@@ -25,6 +25,12 @@ $('#tab_container').easytabs({
 });
 }
 
+if ( $( ".mashtab" ).length ) {
+$('#mashtabcontainer').easytabs({
+    animate:true
+});
+}
+
 // Drag n drop social networks
 	$('#mashsb_network_list').sortable({
                 items: '.mashsb_list_item',
