@@ -161,7 +161,7 @@ function mashsb_get_registered_settings() {
                                 'mashsharer_cache' => array(
 					'id' => 'mashsharer_cache',
 					'name' =>  __( 'Cache expiration', 'mashsb' ),
-					'desc' => __('Shares are counted for every post after this time. Notice that Sharedcount.com uses his own cache (30 - 60min) so share count does not update immediately. If you have a very large website with 100k and more daily pageviews make sure to increase this value, scpecially when you use MashEngine! Otherwise it could happen that some networks block your requests due to hammering their rate limits.', 'mashsb'),
+					'desc' => __('Shares are counted for every post after this time. Notice that Sharedcount.com uses his own cache (30 - 60min) so share count does not update immediately. Make sure to increase this value especially when you use MashEngine! Otherwise it could happen that some networks block your requests due to hammering their rate limits. <p><strong>Default: </strong>5 min. <strong>Recommended: </strong>30min and more', 'mashsb'),
 					'type' => 'select',
 					'options' => mashsb_get_expiretimes()
 				),
@@ -254,67 +254,7 @@ function mashsb_get_registered_settings() {
 		),
                 'visual' => apply_filters('mashsb_settings_visual',
 			array(
-                            'location_header' => array(
-					'id' => 'location_header',
-					'name' => '<strong>' . __( 'Location & Position', 'mashsb' ) . '</strong>',
-					'desc' => __( ' ', 'mashsb' ),
-					'type' => 'header'
-                            ),
-                            'mashsharer_position' => array(
-					'id' => 'mashsharer_position',
-					'name' => __( 'Position', 'mashsb' ),
-					'desc' => __( 'Location of Share Buttons. Set to <i>manual</i> if you do not want to use the automatic embeding. Use the shortcode function to place Mashshare directly into your theme template files: <strong>&lt;?php echo do_shortcode("[mashshare]"); ?&gt;</strong> or the content shortcode: [mashshare] for posts and pages. See all <a href="https://www.mashshare.net/faq/#Is_there_a_shortcode_for_pages_and_posts" target="_blank">available shortcodes</a> here.', 'mashsb' ),
-					'type' => 'select',
-                                        'options' => array(
-						'before' => __( 'Top', 'mashsb' ),
-						'after' => __( 'Bottom', 'mashsb' ),
-                                                'both' => __( 'Top and Bottom', 'mashsb' ),
-						'manual' => __( 'Manual', 'mashsb' )
-					)
-					
-				),
-                                'post_types' => array(
-					'id' => 'post_types',
-					'name' => __( 'Post Types', 'mashsb' ),
-					'desc' => __( 'Select on which post_types the share buttons appear. This values will be ignored when position is specified "manual".', 'mashsb' ),
-					'type' => 'posttypes'
-				),
-                                'singular' => array(
-					'id' => 'singular',
-					'name' => __( 'Categories', 'mashsb' ),
-					'desc' => __('Enable this checkbox to enable Mashshare on categories with multiple blogposts. <strong>Note: </strong> Post_types: "Post" must be enabled.','mashsb'),
-					'type' => 'checkbox',
-                                        'std' => '0'
-				),
-				'frontpage' => array(
-					'id' => 'frontpage',
-					'name' => __( 'Frontpage', 'mashsb' ),
-					'desc' => __('Enable share buttons on frontpage','mashsb'),
-					'type' => 'checkbox'
-				),
-                                /*'current_url' => array(
-					'id' => 'current_url',
-					'name' => __( 'Current Page URL', 'mashsb' ),
-					'desc' => __('Force sharing the current page on non singular pages like categories with multiple blogposts','mashsb'),
-					'type' => 'checkbox'
-				),*/
-                                'twitter_popup' => array(
-					'id' => 'twitter_popup',
-					'name' => __( 'Twitter Popup disable', 'mashsb' ),
-					'desc' => __('Check this box if your twitter popup is openening twice. This happens when you are using any third party twitter instance on your website.','mashsb'),
-					'type' => 'checkbox',
-                                        'std' => '0'
-                                    
-				),
-                                'mashsb_shortcode_info' => array(
-					'id' => 'mashsb_shortcode_info',
-					'name' => __( 'Note:', 'mashsb' ),
-					'desc' => __('Using the shortcode <strong>[mashshare]</strong> is forcing the load of dependacy scripts and styles on that specific pages. It is overwriting any other location setting.','mashsb'),
-					'type' => 'note',
-                                        'label_for' => 'test'
-                                    
-				),
-                                'style_header' => array(
+                            'style_header' => array(
 					'id' => 'style_header',
 					'name' => '<strong>' . __( 'Customize', 'mashsb' ) . '</strong>',
 					'desc' => __( ' ', 'mashsb' ),
@@ -347,6 +287,14 @@ function mashsb_get_registered_settings() {
 					'type' => 'text',
 					'size' => 'medium'
 				),
+                                /*'share_color' => array(
+					'id' => 'share_color',
+					'name' => __( 'Share count color', 'mashsb' ),
+					'desc' => __( 'Choose color of the share number in hex format, e.g. #7FC04C: ', 'mashsb' ),
+					'type' => 'text',
+					'size' => 'medium',
+                                        'std' => '#cccccc'
+				),*/
                                 'share_color' => array(
 					'id' => 'share_color',
 					'name' => __( 'Share count color', 'mashsb' ),
@@ -434,22 +382,115 @@ function mashsb_get_registered_settings() {
 					'size' => 'regular',
                                         'std' => ''
 				),
-                                'subscribe_content' => array(
+                                /*'subscribe_content' => array(
 					'id' => 'subscribe_content',
 					'name' => __( 'Subscribe content', 'mashsb' ),
 					'desc' => __( '<br>Define the content of the opening toggle subscribe window here. Use formulars, like button, links or any other text. Shortcodes are supported, e.g.: [contact-form-7]', 'mashsb' ),
 					'type' => 'textarea',
 					'textarea_rows' => '3',
                                         'size' => 15
-				),                                
+				),*/
+                                'additional_content' => array(
+					'id' => 'additional_content',
+					'name' => __( 'Additional Content', 'mashsb' ),
+					'desc' => __( '', 'mashsb' ),
+					'type' => 'add_content',
+                                        'options' => array(
+                                            'box1' => array(
+                                                'id' => 'content_below',
+                                                'name' => __( 'Content Above', 'mashsb' ),
+                                                'desc' => __( 'Content appearing above share buttons. Use HTML, formulars, like button, links or any other text. Shortcodes are supported, e.g.: [contact-form-7]', 'mashsb' ),
+                                                'type' => 'textarea',
+                                                'textarea_rows' => '3',
+                                                'size' => 15
+                                                ),
+                                            'box2' => array(
+                                                'id' => 'content_above',
+                                                'name' => __( 'Content Below', 'mashsb' ),
+                                                'desc' => __( 'Content appearing below share buttons.  Use HTML, formulars, like button, links or any other text. Shortcodes are supported, e.g.: [contact-form-7]', 'mashsb' ),
+                                                'type' => 'textarea',
+                                                'textarea_rows' => '3',
+                                                'size' => 15
+                                                ),
+                                            'box3' => array(
+                                                'id' => 'subscribe_content',
+                                                'name' => __( 'Subscribe content', 'mashsb' ),
+                                                'desc' => __( 'Define the content of the opening toggle subscribe window here. Use formulars, like button, links or any other text. Shortcodes are supported, e.g.: [contact-form-7]', 'mashsb' ),
+                                                'type' => 'textarea',
+                                                'textarea_rows' => '3',
+                                                'size' => 15
+                                                )
+                                        )
+				),                   
                                 'custom_css' => array(
 					'id' => 'custom_css',
 					'name' => __( 'Custom CSS', 'mashsb' ),
-					'desc' => __( '<br>Put in some custom styles here', 'mashsb' ),
+					'desc' => __( '<br>Use Mashshare custom styles here', 'mashsb' ),
 					'type' => 'textarea',
 					'size' => 15
                                         
-				)
+				),
+                                'location_header' => array(
+					'id' => 'location_header',
+					'name' => '<strong>' . __( 'Location & Position', 'mashsb' ) . '</strong>',
+					'desc' => __( ' ', 'mashsb' ),
+					'type' => 'header'
+                                ),
+                                'mashsharer_position' => array(
+					'id' => 'mashsharer_position',
+					'name' => __( 'Position', 'mashsb' ),
+					'desc' => __( 'Location of Share Buttons. Set to <i>manual</i> if you do not want to use the automatic embeding. Use the shortcode function to place Mashshare directly into your theme template files: <strong>&lt;?php echo do_shortcode("[mashshare]"); ?&gt;</strong> or the content shortcode: [mashshare] for posts and pages. See all <a href="https://www.mashshare.net/faq/#Is_there_a_shortcode_for_pages_and_posts" target="_blank">available shortcodes</a> here.', 'mashsb' ),
+					'type' => 'select',
+                                        'options' => array(
+						'before' => __( 'Top', 'mashsb' ),
+						'after' => __( 'Bottom', 'mashsb' ),
+                                                'both' => __( 'Top and Bottom', 'mashsb' ),
+						'manual' => __( 'Manual', 'mashsb' )
+					)
+					
+				),
+                                'post_types' => array(
+					'id' => 'post_types',
+					'name' => __( 'Post Types', 'mashsb' ),
+					'desc' => __( 'Select on which post_types the share buttons appear. This values will be ignored when position is specified "manual".', 'mashsb' ),
+					'type' => 'posttypes'
+				),
+                                'singular' => array(
+					'id' => 'singular',
+					'name' => __( 'Categories', 'mashsb' ),
+					'desc' => __('Enable this checkbox to enable Mashshare on categories with multiple blogposts. <strong>Note: </strong> Post_types: "Post" must be enabled.','mashsb'),
+					'type' => 'checkbox',
+                                        'std' => '0'
+				),
+				'frontpage' => array(
+					'id' => 'frontpage',
+					'name' => __( 'Frontpage', 'mashsb' ),
+					'desc' => __('Enable share buttons on frontpage','mashsb'),
+					'type' => 'checkbox'
+				),
+                                /*'current_url' => array(
+					'id' => 'current_url',
+					'name' => __( 'Current Page URL', 'mashsb' ),
+					'desc' => __('Force sharing the current page on non singular pages like categories with multiple blogposts','mashsb'),
+					'type' => 'checkbox'
+				),*/
+                                'twitter_popup' => array(
+					'id' => 'twitter_popup',
+					'name' => __( 'Twitter Popup disable', 'mashsb' ),
+					'desc' => __('Check this box if your twitter popup is openening twice. This happens when you are using any third party twitter instance on your website.','mashsb'),
+					'type' => 'checkbox',
+                                        'std' => '0'
+                                    
+				),
+                                /*'mashsb_shortcode_info' => array(
+					'id' => 'mashsb_shortcode_info',
+					'name' => __( 'Note:', 'mashsb' ),
+					'desc' => __('Using the shortcode <strong>[mashshare]</strong> forces loading of dependacy scripts and styles on specific pages. It is overwriting any other location setting.','mashsb'),
+					'type' => 'note',
+                                        'label_for' => 'test'
+                                    
+				),*/
+                                
                         )
 		),
                  'networks' => apply_filters( 'mashsb_settings_networks',
@@ -1258,35 +1299,6 @@ function mashsb_posttypes_callback ($args){
 	}
 }
 
-
-/* 
- * Taxonomies Callback
- * 
- * Adds a multiple choice drop box
- * for selecting (custom) taxonomies
- * 
- * @since 2.3.1
- * @param array $args Arguments passed by the setting
- * @return void
- * 
- * @deprecated
- * 
- */
-
-/*function mashsb_taxonomies_callback ($args){
-  global $mashsb_options;
-  $taxonomies = get_taxonomies();
-
-  if ( ! empty( $taxonomies ) ) {
-                foreach( $taxonomies as $key => $option ):
-			if( isset( $mashsb_options[$args['id']][$key] ) ) { $enabled = $option; } else { $enabled = NULL; }
-			echo '<input name="mashsb_settings[' . $args['id'] . '][' . $key . ']" id="mashsb_settings[' . $args['id'] . '][' . $key . ']" type="checkbox" value="' . $option . '" ' . checked($option, $enabled, false) . '/>&nbsp;';
-			echo '<label for="mashsb_settings[' . $args['id'] . '][' . $key . ']">' . $option . '</label><br/>';
-		endforeach;
-		echo '<p class="description mashsb_hidden">' . $args['desc'] . '</p>';
-	}
-}*/
-
 /* 
  * Note Callback
  * 
@@ -1300,9 +1312,39 @@ function mashsb_posttypes_callback ($args){
 
 function mashsb_note_callback ($args){
   global $mashsb_options;
-  $html = !empty($args['desc']) ? $args['desc'] : '';
+  //$html = !empty($args['desc']) ? $args['desc'] : '';
+  $html = '';
   echo $html;
 }
+
+/**
+ * Additional content Callback 
+ * Adds several content text boxes selectable via jQuery easytabs() 
+ *
+ * @param array $args
+ * @return string $html
+ * @scince 2.3.2
+ */
+
+function mashsb_add_content_callback($args){
+    	global $mashsb_options;
+
+        $html = '<div id="mashtabcontainer" class="tabcontent_container"><ul class="mashtabs" style="width:99%;max-width:500px;">';
+            foreach ( $args['options'] as $option => $name ) :
+                    $html .= '<li class="mashtab" style="float:left;margin-right:4px;"><a href="#'.$name['id'].'">'.$name['name'].'</a></li>';
+            endforeach;
+        $html .= '</ul>';
+        $html .= '<div class="mashtab-container">';
+            foreach ( $args['options'] as $option => $name ) :
+                    $value = isset($mashsb_options[$name['id']]) ? $mashsb_options[ $name['id']] : 'kein wert';
+                    $textarea = '<textarea class="large-text mashsb-textarea" cols="50" rows="15" id="mashsb_settings['. $name['id'] .']" name="mashsb_settings['.$name['id'].']">' . esc_textarea( stripslashes( $value ) ) . '</textarea>';
+                    $html .= '<div id="'.$name['id'].'" style="max-width:500px;"><span style="padding-top:60px;display:block;">' . $name['desc'] . ':</span><br>' . $textarea . '</div>';
+            endforeach;
+        $html .= '</div>';
+        $html .= '</div>';
+	echo $html;
+}
+
         
 /**
  * Hook Callback
