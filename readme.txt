@@ -289,9 +289,16 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 12. Custom Sharing descriptions with free Mashshare Open Graph Add-On
 
 
-
-
 == Changelog ==
+
+= 2.3.2 =
+* New: Internal cache and share count return function only fires if requested share count value is higher than previous stored value. This prevents bouncing share count because some networks are deliver inconstant share values from time to time.
+* New: Two more fields for putting content above and below share buttons grouped together with subscribe option field in tabs
+* Fix: PHP notice: "Undefined var" when network add-on is installed but disabled
+* Fix: esc_url for add_query_arg and remove_query_arg
+* Tweak: New recommended minimum cache time is 30min. 
+* Tweak: Move up the Customize tab for faster editing periodical editing cusomization tasks
+
 
 = 2.3.1. =
 * Security Update: Update is highly recommended! It contains two security fixes! Thanks to g0blin research
