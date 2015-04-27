@@ -108,7 +108,7 @@ function mashsb_dismiss_notices() {
 
 	update_user_meta( get_current_user_id(), '_mashsb_' . $notice . '_dismissed', 1 );
       
-	wp_redirect( remove_query_arg( array( 'mashsb_action', 'mashsb_notice' ) ) ); exit;
+	wp_redirect( esc_url(remove_query_arg( array( 'mashsb_action', 'mashsb_notice' ) ) ) ); exit;
 
 }
 add_action( 'mashsb_dismiss_notices', 'mashsb_dismiss_notices' );
