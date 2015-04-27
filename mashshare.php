@@ -6,11 +6,12 @@
  * Description: Mashshare is a Share functionality inspired by the the great website Mashable for Facebook and Twitter. More networks available.
  * Author: René Hermenau
  * Author URI: http://www.mashshare.net
- * Version: 2.3.1
+ * Version: 2.3.2
  * Text Domain: mashsb
  * Domain Path: languages
- * Credits: A thousand thanks go to Pippin Williamson! I borrowed a lot of code from his popular plugin Easy Digital Downloads. I never reinvent the wheel and as
- * Pippin is famous for creating of very reliable and robust code, i decided to use the EDD code base and essential parts of his EDD framework. Find more from Pippin at https://pippinsplugins.com/
+ * Credits: A thousand thanks go to Pippin Williamson and the edd team. When we started with Mashshare we decided to use the EDD code base and 
+ * essential parts of the EDD framework because its very reliable and robust. Check out more by pippin on https://pippinsplugins.com/
+
  *
  * Mashshare Share Buttons is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -128,7 +129,7 @@ if (!class_exists('mashshare')) :
             global $wpdb;
             // Plugin version
             if (!defined('MASHSB_VERSION')) {
-                define('MASHSB_VERSION', '2.3.1');
+                define('MASHSB_VERSION', '2.3.2');
             }
 
             // Plugin Folder Path

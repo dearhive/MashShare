@@ -410,13 +410,6 @@ function getSharedcount($url) {
         !empty($mashsb_options['mashsharer_apikey']) ? $apikey = $mashsb_options['mashsharer_apikey'] : $apikey = '';
         !empty($mashsb_options['sharecount_title']) ? $sharecount_title = $mashsb_options['sharecount_title'] : $sharecount_title = __('SHARES', 'mashsb');
         
-
-            /* Load hashshag*/       
-            /*if ($mashsb_options['mashsharer_hashtag'] != '') {
-                $hashtag = '&via=' . $mashsb_options['mashsharer_hashtag'];
-            } else {
-                $hashtag = '';
-            }*/
             
             if (!isset($mashsb_options['disable_sharecount'])) {
                     /* Get totalshares of the current page */
@@ -429,22 +422,46 @@ function getSharedcount($url) {
              } else {
                  $sharecount = '';
              }
+             
                      
-                $return = '
-                    <aside class="mashsb-container">
-                    <div class="mashsb-box">'
+                $return = '<aside class="mashsb-container">'
+                        . mashsb_content_above().
+                    '<div class="mashsb-box">'
                         . apply_filters('mashsb_sharecount_filter', $sharecount) .
                     '<div class="mashsb-buttons">' 
                         . getNetworks($url, $title) . 
                         //'<a class="mashicon-facebook" href="javascript:void(0);"><span class="icon"></span><span class="text">' . __('Share&nbsp;on&nbsp;Facebook', 'mashsb') . '</span></a><a class="mashicon-twitter" href="javascript:void(0)"><span class="icon"></span><span class="text">' . __('Tweet&nbsp;on&nbsp;Twitter', 'mashsb') . '</span></a><a class="mashicon-google" href="javascript:void(0)"><span class="icon"></span><span class="text">' . __('Google+', 'mashsb') . '</span></a>' . mashsb_subscribe_button() .                     
                     '</div></div>
                     <div style="clear:both;"></div>'
-                    . mashsb_subscribe_content() .
+                    . mashsb_subscribe_content()
+                    . mashsb_content_below() .
                     '</aside>
-                        <!-- Share buttons made by mashshare.net - Version: ' . MASHSB_VERSION . '-->';
+                        <!-- Share buttons by mashshare.net - Version: ' . MASHSB_VERSION . '-->';
             mashdebug()->timer('timer', true);
             return apply_filters( 'mashsb_output_buttons', $return );
             
+    }
+    
+    /* Additional content above share buttons 
+     * 
+     * @return string $html
+     * @scince 2.3.2
+     */
+    function mashsb_content_above(){
+        global $mashsb_options;
+        $html = !empty ($mashsb_options['content_above']) ? '<div class="mashsb_above_buttons">' . $mashsb_options['content_above'] . '</div>' : '';
+        return apply_filters( 'mashsb_above_buttons', $html );
+    }
+    
+    /* Additional content above share buttons 
+     * 
+     * @return string $html
+     * @scince 2.3.2
+     */
+    function mashsb_content_below(){
+        global $mashsb_options;
+        $html = !empty ($mashsb_options['content_below']) ? '<div class="mashsb_below_buttons">' .$mashsb_options['content_below'] . '</div>' : '';
+        return apply_filters( 'mashsb_below_buttons', $html );
     }
     
     /* Shortcode function
@@ -454,8 +471,7 @@ function getSharedcount($url) {
      */
     function mashshareShortcodeShow($atts, $place) {
         global $wpdb ,$mashsb_options, $post, $wp;
-        /* Use permalink when its not singular page, so on category pages the permalink is used. */
-        //is_singular() ? $url = urlencode(home_url( $wp->request )) : $url = urlencode(get_permalink($post->ID));
+
         $url = mashsb_get_url();
         !empty($mashsb_options['sharecount_title']) ? $sharecount_title = $mashsb_options['sharecount_title'] : $sharecount_title = __('SHARES', 'mashsb');
 
@@ -504,15 +520,16 @@ function getSharedcount($url) {
              }
              
                         
-                $return = '
-                    <aside class="mashsb-container">
-                    <div class="mashsb-box">'
+                $return = '<aside class="mashsb-container">'
+                    . mashsb_content_above().
+                    '<div class="mashsb-box">'
                         . $sharecount .
                     '<div class="mashsb-buttons">' 
                         . getNetworks($url, $title) . 
                     '</div></div>
                     <div style="clear:both;"></div>'
-                    . mashsb_subscribe_content() .
+                    . mashsb_subscribe_content()
+                    . mashsb_content_below() .
                     '</aside>
                         <!-- Share buttons made by mashshare.net - Version: ' . MASHSB_VERSION . '-->';
             return apply_filters( 'mashsb_output_buttons', $return );    
