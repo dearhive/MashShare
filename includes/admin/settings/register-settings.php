@@ -397,7 +397,7 @@ function mashsb_get_registered_settings() {
 					'type' => 'add_content',
                                         'options' => array(
                                             'box1' => array(
-                                                'id' => 'content_below',
+                                                'id' => 'content_above',
                                                 'name' => __( 'Content Above', 'mashsb' ),
                                                 'desc' => __( 'Content appearing above share buttons. Use HTML, formulars, like button, links or any other text. Shortcodes are supported, e.g.: [contact-form-7]', 'mashsb' ),
                                                 'type' => 'textarea',
@@ -405,7 +405,7 @@ function mashsb_get_registered_settings() {
                                                 'size' => 15
                                                 ),
                                             'box2' => array(
-                                                'id' => 'content_above',
+                                                'id' => 'content_below',
                                                 'name' => __( 'Content Below', 'mashsb' ),
                                                 'desc' => __( 'Content appearing below share buttons.  Use HTML, formulars, like button, links or any other text. Shortcodes are supported, e.g.: [contact-form-7]', 'mashsb' ),
                                                 'type' => 'textarea',
@@ -1336,7 +1336,7 @@ function mashsb_add_content_callback($args){
         $html .= '</ul>';
         $html .= '<div class="mashtab-container">';
             foreach ( $args['options'] as $option => $name ) :
-                    $value = isset($mashsb_options[$name['id']]) ? $mashsb_options[ $name['id']] : 'kein wert';
+                    $value = isset($mashsb_options[$name['id']]) ? $mashsb_options[ $name['id']] : '';
                     $textarea = '<textarea class="large-text mashsb-textarea" cols="50" rows="15" id="mashsb_settings['. $name['id'] .']" name="mashsb_settings['.$name['id'].']">' . esc_textarea( stripslashes( $value ) ) . '</textarea>';
                     $html .= '<div id="'.$name['id'].'" style="max-width:500px;"><span style="padding-top:60px;display:block;">' . $name['desc'] . ':</span><br>' . $textarea . '</div>';
             endforeach;

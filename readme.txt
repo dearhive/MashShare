@@ -9,7 +9,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Mashable, Social Media Pop-Up, Social Media Widget, Social Media Sharing, Social Media Networks, Social Sharing, Social sharing optimization, Share button, share buttons, Facebook Share button, Twitter Share Button, Social Share, Social buttons, social share buttons, Share, Share this, simple social buttons, simple share buttons adder,  Google+, Twitter, Facebook, Digg, Stumble Upon, Linkedin, +1, add to any, AddThis, add this, addtoany, admin, aim, analytics, bookmark, bookmarking, bookmarks, bookmark button, bookmark menu, buddypress, chrome extension, comments, del.icio.us, Diigo, buffer, button, del.icio.us, e-mail, email, email button, Facebook, facebook like, facebook recommend, facebook share, facebook share button, fark, firefox extension, flickr, floating buttons, follow, foursquare, gmail, goo.gl
 Requires at least: 3.6+
 Tested up to: 4.2.0
-Stable tag: 2.3.2  
+Stable tag: 2.3.3  
 
 Social Media Icons & Share Buttons, a highly customizable social sharing and & Media SEO ecosystem Facebook, Twitter and more ...
 
@@ -291,6 +291,10 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 == Changelog ==
 
+= 2.3.3 =
+* Fix: New content boxes 'above' and below are reverted. 
+* Fix: Remove predefined var 'kein wert'
+
 = 2.3.2 =
 * New: Internal cache and share count return function only fires if requested share count value is higher than previous stored value. This prevents bouncing share count because some networks are deliver inconstant share values from time to time.
 * New: Two more fields for putting content above and below share buttons grouped together with subscribe option field in tabs
@@ -440,5 +444,5 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 2.3.1 =
-2.3.1 <strong>SECURITY UPDATE:</strong> Update is highly recommended! It contains two security fixes!
+= 2.3.3 =
+2.3.3 <strong>SECURITY UPDATE:</strong> Update is highly recommended! It contains one important security fix.!

@@ -334,7 +334,6 @@ function getSharedcount($url) {
         ));
         
             return isset($networks[$name]) ? $networks[$name] : '';    
-            //return $networks[$name];
         }
         
 
@@ -430,7 +429,6 @@ function getSharedcount($url) {
                         . apply_filters('mashsb_sharecount_filter', $sharecount) .
                     '<div class="mashsb-buttons">' 
                         . getNetworks($url, $title) . 
-                        //'<a class="mashicon-facebook" href="javascript:void(0);"><span class="icon"></span><span class="text">' . __('Share&nbsp;on&nbsp;Facebook', 'mashsb') . '</span></a><a class="mashicon-twitter" href="javascript:void(0)"><span class="icon"></span><span class="text">' . __('Tweet&nbsp;on&nbsp;Twitter', 'mashsb') . '</span></a><a class="mashicon-google" href="javascript:void(0)"><span class="icon"></span><span class="text">' . __('Google+', 'mashsb') . '</span></a>' . mashsb_subscribe_button() .                     
                     '</div></div>
                     <div style="clear:both;"></div>'
                     . mashsb_subscribe_content()
@@ -442,27 +440,6 @@ function getSharedcount($url) {
             
     }
     
-    /* Additional content above share buttons 
-     * 
-     * @return string $html
-     * @scince 2.3.2
-     */
-    function mashsb_content_above(){
-        global $mashsb_options;
-        $html = !empty ($mashsb_options['content_above']) ? '<div class="mashsb_above_buttons">' . $mashsb_options['content_above'] . '</div>' : '';
-        return apply_filters( 'mashsb_above_buttons', $html );
-    }
-    
-    /* Additional content above share buttons 
-     * 
-     * @return string $html
-     * @scince 2.3.2
-     */
-    function mashsb_content_below(){
-        global $mashsb_options;
-        $html = !empty ($mashsb_options['content_below']) ? '<div class="mashsb_below_buttons">' .$mashsb_options['content_below'] . '</div>' : '';
-        return apply_filters( 'mashsb_below_buttons', $html );
-    }
     
     /* Shortcode function
      * Select Share count from database and returns share buttons and share counts
@@ -971,5 +948,27 @@ function mashsb_get_url(){
     }
     return apply_filters('mashsb_get_url', $url);
 }
+
+    /* Additional content above share buttons 
+     * 
+     * @return string $html
+     * @scince 2.3.2
+     */
+    function mashsb_content_above(){
+        global $mashsb_options;
+        $html = !empty ($mashsb_options['content_above']) ? '<div class="mashsb_above_buttons">' . $mashsb_options['content_above'] . '</div>' : '';
+        return apply_filters( 'mashsb_above_buttons', $html );
+    }
+    
+    /* Additional content above share buttons 
+     * 
+     * @return string $html
+     * @scince 2.3.2
+     */
+    function mashsb_content_below(){
+        global $mashsb_options;
+        $html = !empty ($mashsb_options['content_below']) ? '<div class="mashsb_below_buttons">' .$mashsb_options['content_below'] . '</div>' : '';
+        return apply_filters( 'mashsb_below_buttons', $html );
+    }
 
 
