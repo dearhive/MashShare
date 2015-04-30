@@ -1161,12 +1161,18 @@ if ( ! function_exists( 'mashsb_license_key_callback' ) ) {
 
 		if ( 'valid' == get_option( $args['options']['is_valid_license_option'] ) ) {
 			$html .= '<input type="submit" class="button-secondary" name="' . $args['id'] . '_deactivate" value="' . __( 'Deactivate License',  'mashsb' ) . '"/>';
-		}
+                        $html .= '<span style="font-weight:bold;color:green;"> License key activated! </span> <p style="color:green;font-size:13px;"> You´ll get updates for this Add-On automatically!</p>';
+                } else {
+                    $html .= '<span style="color:red;"> License key not activated!</span style=""><p style="font-size:13px;font-weight:bold;">You´ll get no important security and feature updates for this Add-On!</p>';
+                }
 		$html .= '<label for="mashsb_settings[' . $args['id'] . ']"> '  . $args['desc'] . '</label>';
 
+                wp_nonce_field( $args['id'] . '-nonce', $args['id'] . '-nonce' );
+                
 		echo $html;
 	}
 }
+
 
 /**
  * Networks Callback / Facebook, Twitter and Subscribe default
