@@ -18,7 +18,6 @@ class MASHSB_SL_Plugin_Updater {
     private $name       = '';
     private $slug       = '';
     private $version    = '';
-    private $item_shortname = '';
 
     /**
      * Class constructor.
@@ -92,7 +91,6 @@ class MASHSB_SL_Plugin_Updater {
             echo " slug: " . $this->slug;
             echo " version info: " . $version_info->slug;
             echo " new version :" . $version_info->new_version;
-            echo " shortname: " . $this->item_shortname;
             echo " item_name: " . $this->item_name;
             exit;*/
 
@@ -199,54 +197,12 @@ class MASHSB_SL_Plugin_Updater {
         }
     }
 
-
-    /**
-     * Updates information on the "View version x.x details" page with custom data.
-     *
-     * @uses api_request()
-     *
-     * @param mixed   $_data
-     * @param string  $_action
-     * @param object  $_args
-     * @return object $_data
-     */
-    /*function plugins_api_filter( $_data, $_action = '', $_args = null ) {
-
-
-        if ( $_action != 'plugin_information' ) {
-
-            return $_data;
-
-        }
-
-        if ( ! isset( $_args->slug ) || ( $_args->slug != $this->slug ) ) {
-
-            return $_data;
-
-        }
-
-        $to_send = array(
-            'slug'   => $this->slug,
-            'is_ssl' => is_ssl(),
-            'fields' => array(
-                'banners' => false, // These will be supported soon hopefully
-                'reviews' => false
-            )
-        );
-
-        $api_response = $this->api_request( 'plugin_information', $to_send );
-
-        if ( false !== $api_response ) {
-            $_data = $api_response;
-        }
-
-        return $_data;
-    }*/
     
     /**
      * Updates information on the "View version x.x details" page with custom data.
      *
      * @uses get_transient()
+     * @uses api_request()
      *
      * @param mixed   $_data
      * @param string  $_action
@@ -277,7 +233,7 @@ class MASHSB_SL_Plugin_Updater {
                 'reviews' => false
             )
         );
-        // rhe get plugin information from transient first
+        // rhe get plugin information from transient storage cache
         $api_response = $this->get_plugin_transient($this->slug);
         if (empty($api_response)){     
             $api_response = $this->api_request( 'plugin_information', $to_send );
@@ -328,8 +284,6 @@ class MASHSB_SL_Plugin_Updater {
         if ( $data['slug'] != $this->slug )
             return;
         
-        //if ( empty($this->item_shortname) )
-          //  return;
 
         //if ( empty( $data['license'] ) )
             //return;

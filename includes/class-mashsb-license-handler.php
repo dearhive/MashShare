@@ -22,7 +22,7 @@ class MASHSB_License {
 	private $item_shortname;
 	private $version;
 	private $author;
-	private $api_url = 'http://dev.mashshare.net/edd-sl-api/';
+	private $api_url = 'https://www.mashshare.net/edd-sl-api/';
 
 	/**
 	 * Class constructor
