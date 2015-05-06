@@ -1,6 +1,6 @@
 <?php
-if(!class_exists('RollingCurlX'))  
-        require_once MASHSB_PLUGIN_DIR . 'includes/libraries/RolingCurlX.php';
+//if(!class_exists('RollingCurlX'))  
+        //require_once MASHSB_PLUGIN_DIR . 'includes/libraries/RolingCurlX.php';
 class mashengine {
 	private $data;
 	private $url;

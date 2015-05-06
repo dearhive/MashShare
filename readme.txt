@@ -292,9 +292,11 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 == Changelog ==
 
 = 2.3.4 =
-* Fix: Add-On Licensing and automatic updating not working since 2.3.2 because of security updates.
+* New: Several performance improvements for faster php execution. Removal of duplicate foreach loops and array_filter callback function
 * New: Update notices for add-on even when a license key is not acticated.
-* New: Better visualization in dashboard when license key could be triggered active
+* New: Better error notification when license key can not be triggered as active
+* Fix: Add-On Licensing and automatic updating not working since 2.3.2 because of security updates.
+* Fix: Corrected path to log file in settings description
 
 = 2.3.3 =
 * Fix: New content boxes 'above' and below are reverted. 
@@ -450,5 +452,5 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 2.3.3 =
-2.3.3 <strong>SECURITY UPDATE:</strong> Update is highly recommended! It contains one important security fix.!
+= 2.3.4 =
+2.3.4 <strong>PERFORMANCE UPDATE:</strong> Update is recommended! It contains several performance updates.!

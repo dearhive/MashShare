@@ -150,19 +150,19 @@ function getSharedcount($url) {
         $mashsbCheckUpdate = true;
         $mashsbLastUpdated = 0;
     }
-    if ($mashsbLastUpdated < (time() - $mashsbNextUpdate)) {
-        mashdebug()->info( " Update frequency " . $mashsbNextUpdate . " last updated: " . $mashsbLastUpdated . "time: " . time());
+    //if ($mashsbLastUpdated < (time() - $mashsbNextUpdate)) {
+    if ($mashsbLastUpdated + $mashsbNextUpdate <= time()) {
+        mashdebug()->info("First Update - Frequency: " . $mashsbNextUpdate . " Next update: " . date('Y-m-d H:i:s', $mashsbLastUpdated + $mashsbNextUpdate) . " last updated: " . date('Y-m-d H:i:s', $mashsbLastUpdated) . " Current time: " . date('Y-m-d H:i:s', time()));
         // Get the share Object
         $mashsbSharesObj = mashsbGetShareObj($url);
         // Get the share counts
         $mashsbShareCounts = mashsbGetShareMethod($mashsbSharesObj);
         //$mashsbShareCounts = new stdClass(); // USE THIS FOR DEBUGGING
         //$mashsbShareCounts->total = 13; // USE THIS FOR DEBUGGING
+        $mashsbStoredDBMeta = get_post_meta($post->ID, 'mashsb_shares', true);
+        // Write timestamp
+        update_post_meta($post->ID, 'mashsb_timestamp', time());
 
-            mashdebug()->info("First Update");
-            $mashsbStoredDBMeta = get_post_meta($post->ID, 'mashsb_shares', true);
-
-        
         /* Update post_meta only when API is requested and
          * API share count is greater than real fresh requested share count ->
          * ### This would mean there is an error in the API (Failure or hammering any limits, e.g. X-Rate-Limit) ###
@@ -170,29 +170,26 @@ function getSharedcount($url) {
 
         if ($mashsbShareCounts->total >= $mashsbStoredDBMeta) {
             update_post_meta($post->ID, 'mashsb_shares', $mashsbShareCounts->total);
-            update_post_meta($post->ID, 'mashsb_timestamp', time());
             update_post_meta($post->ID, 'mashsb_jsonshares', json_encode($mashsbShareCounts));
             mashdebug()->info("updated database with share count: " . $mashsbShareCounts->total);
             /* return counts from getAllCounts() after DB update */
             return apply_filters('filter_get_sharedcount', $mashsbShareCounts->total + getFakecount());
         }
-        /* return previous counts from DB Cache | this happens when API has a hiccup and does not return any results as expected*/
+        /* return previous counts from DB Cache | this happens when API has a hiccup and does not return any results as expected */
         return apply_filters('filter_get_sharedcount', $mashsbStoredDBMeta + getFakecount());
     } else {
         /* return counts from post_meta plus fake count | This is regular cached result */
         $cachedCountsMeta = get_post_meta($post->ID, 'mashsb_shares', true);
         $cachedCounts = $cachedCountsMeta + getFakecount();
+        mashdebug()->info("Cached result - Frequency: " . $mashsbNextUpdate . " Next update: " . date('Y-m-d H:i:s', $mashsbLastUpdated + $mashsbNextUpdate) . " last updated: " . date('Y-m-d H:i:s', $mashsbLastUpdated) . " Current time: " . date('Y-m-d H:i:s', time()));
         return apply_filters('filter_get_sharedcount', $cachedCounts);
     }
 }
-    
 
-    
-    function mashsb_subscribe_button(){
+function mashsb_subscribe_button(){
         global $mashsb_options;
         if ($mashsb_options['networks'][2]){
-            // DEPRECATED todo: remove in later version $subscribebutton = '<a href="javascript:void(0)" class="mashicon-subscribe" id="mash-subscribe-control"><span class="icon"></span><span class="text">' . __('Subscribe', 'mashsb') . '</span></a>' . $addons;
-        $subscribebutton = '<a href="javascript:void(0)" class="mashicon-subscribe" id="mash-subscribe-control"><span class="icon"></span><span class="text">' . __('Subscribe', 'mashsb') . '</span></a>';
+            $subscribebutton = '<a href="javascript:void(0)" class="mashicon-subscribe" id="mash-subscribe-control"><span class="icon"></span><span class="text">' . __('Subscribe', 'mashsb') . '</span></a>';
         } else {
             $subscribebutton = '';    
         }
@@ -344,8 +341,8 @@ function getSharedcount($url) {
      */
     function getNetworks($url, $title) {
         //mashdebug()->timer('getNetworks');
-        global $mashsb_options;
-        $output = '';
+        global $mashsb_options, $enablednetworks, $output;
+
         $startsecondaryshares = '';
         $endsecondaryshares = '';
         /* content of 'more services' button */
@@ -357,14 +354,23 @@ function getSharedcount($url) {
          * We have to clean this array first!
          */
         $getnetworks = $mashsb_options['networks'];
-        /* Delete disabled services from array. Use callback function here */
+        // Delete disabled services from array. Use callback function here. Only once: array_filter is slow. 
+        // Use the newly created array and bypass the callback function than
         if (is_array($getnetworks)){
-        $enablednetworks = array_filter($getnetworks, 'isStatus');
+            if (!is_array($enablednetworks)){
+                //echo "is not array";
+                //var_dump($enablednetworks);
+            $enablednetworks = array_filter($getnetworks, 'isStatus');
+            }else {
+                //echo "is array";
+                //var_dump($enablednetworks);
+            $enablednetworks = $enablednetworks;    
+            }
         }else{
         $enablednetworks = $getnetworks; 
         }
 
-    if (!empty($enablednetworks)) {
+    if (!empty($enablednetworks) && !isset($output)) {
         foreach ($enablednetworks as $key => $network):
             if($mashsb_options['visible_services'] !== 'all' && $maxcounter != count($enablednetworks) && $mashsb_options['visible_services'] < count($enablednetworks)){
                 if ($startcounter === $maxcounter ){ 
@@ -383,7 +389,7 @@ function getSharedcount($url) {
                 $name = ucfirst($enablednetworks[$key]['id']);
             }
             $enablednetworks[$key]['id'] == 'whatsapp' ? $display = 'display:none;' : $display = ''; // Whatsapp button is made visible via js when opened on mobile devices
-            //$output .= '<a class="mashicon-' . $enablednetworks[$key]['id'] . '" href="javascript:void(0);"><span class="icon"></span><span class="text">' . $name . '</span></a>';
+
             $output .= '<a style="' . $display . '" class="mashicon-' . $enablednetworks[$key]['id'] . '" href="' . arrNetworks($enablednetworks[$key]['id'], $url, $title) . '" target="_blank"><span class="icon"></span><span class="text">' . $name . '</span></a>';
             $output .= $onoffswitch;
             $output .= $startsecondaryshares;
@@ -495,8 +501,7 @@ function getSharedcount($url) {
                        $sharecount = '';
                 }  
              }
-             
-                        
+     
                 $return = '<aside class="mashsb-container">'
                     . mashsb_content_above().
                     '<div class="mashsb-box">'
