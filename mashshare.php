@@ -2,11 +2,11 @@
 
 /**
  * Plugin Name: Mashshare Share Buttons
- * Plugin URI: http://www.mashshare.net
+ * Plugin URI: https://www.mashshare.net
  * Description: Mashshare is a Share functionality inspired by the the great website Mashable for Facebook and Twitter. More networks available.
  * Author: René Hermenau
- * Author URI: http://www.mashshare.net
- * Version: 2.3.4
+ * Author URI: https://www.mashshare.net
+ * Version: 2.3.5
  * Text Domain: mashsb
  * Domain Path: languages
  * Credits: A thousand thanks go to Pippin Williamson and the edd team. When we started with Mashshare we decided to use the EDD code base and 
@@ -29,7 +29,7 @@
  * @package MASHSB
  * @category Core
  * @author René Hermenau
- * @version 1.0.2
+ * @version 2.3.5
  */
 // Exit if accessed directly
 if (!defined('ABSPATH'))
@@ -46,7 +46,7 @@ if (!class_exists('mashshare')) :
         /** Singleton ************************************************************ */
 
         /**
-         * @var Mshshare The one and only Mashshare
+         * @var Mashshare The one and only Mashshare
          * @since 1.0
          */
         private static $instance;
@@ -129,7 +129,7 @@ if (!class_exists('mashshare')) :
             global $wpdb;
             // Plugin version
             if (!defined('MASHSB_VERSION')) {
-                define('MASHSB_VERSION', '2.3.4');
+                define('MASHSB_VERSION', '2.3.5');
             }
 
             // Plugin Folder Path
@@ -187,17 +187,6 @@ if (!class_exists('mashshare')) :
                 require_once MASHSB_PLUGIN_DIR . 'includes/install.php';
                 require_once MASHSB_PLUGIN_DIR . 'includes/admin/tools.php';
             }
-
-            /* Instantiate class MASHSB_licence
-             * Not needed here. 
-             * Its the core free downloadable at wordpress.org
-             *  
-             * @since 1.0
-             * @return apply_filter mashsb_settings_licenses and create licence key input field in core
-             */
-            /* if (class_exists('MASHSB_License')) {
-              $mashsb_sl_license = new MASHSB_License(__FILE__, 'Mashshare', MASHSB_VERSION, 'Rene Hermenau', 'edd_sl_license_key');
-              } */
         }
 
         /**

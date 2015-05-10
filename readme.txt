@@ -8,8 +8,8 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Mashable, Social Media Pop-Up, Social Media Widget, Social Media Sharing, Social Media Networks, Social Sharing, Social sharing optimization, Share button, share buttons, Facebook Share button, Twitter Share Button, Social Share, Social buttons, social share buttons, Share, Share this, simple social buttons, simple share buttons adder,  Google+, Twitter, Facebook, Digg, Stumble Upon, Linkedin, +1, add to any, AddThis, add this, addtoany, admin, aim, analytics, bookmark, bookmarking, bookmarks, bookmark button, bookmark menu, buddypress, chrome extension, comments, del.icio.us, Diigo, buffer, button, del.icio.us, e-mail, email, email button, Facebook, facebook like, facebook recommend, facebook share, facebook share button, fark, firefox extension, flickr, floating buttons, follow, foursquare, gmail, goo.gl
 Requires at least: 3.6+
-Tested up to: 4.2.0
-Stable tag: 2.3.4 
+Tested up to: 4.2.2
+Stable tag: 2.3.5 
 
 Social Media Icons & Share Buttons, a highly customizable social sharing and & Media SEO ecosystem Facebook, Twitter and more ...
 
@@ -291,6 +291,10 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 == Changelog ==
 
+= 2.3.5 =
+* Fix: Wrong sharing title when mashshare is used on category / archive pages with multiple blog posts
+* New: Tested up to WP 4.2.2
+
 = 2.3.4 =
 * New: Several performance improvements for faster php execution. Removal of duplicate foreach loops and array_filter callback function
 * New: Update notices for add-on even when a license key is not acticated.
@@ -452,5 +456,5 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 2.3.4 =
-2.3.4 <strong>PERFORMANCE UPDATE:</strong> Update is recommended! It contains several performance updates.!
+= 2.3.5 =
+2.3.5 <strong> UPDATE:</strong> Update is recommended when you use Mashshare on category pages. It contains one fix.!

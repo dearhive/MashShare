@@ -341,8 +341,9 @@ function mashsb_subscribe_button(){
      */
     function getNetworks($url, $title) {
         //mashdebug()->timer('getNetworks');
-        global $mashsb_options, $enablednetworks, $output;
+        global $mashsb_options, $enablednetworks;
 
+        $output = '';
         $startsecondaryshares = '';
         $endsecondaryshares = '';
         /* content of 'more services' button */
@@ -370,7 +371,7 @@ function mashsb_subscribe_button(){
         $enablednetworks = $getnetworks; 
         }
 
-    if (!empty($enablednetworks) && !isset($output)) {
+    if (!empty($enablednetworks)) {
         foreach ($enablednetworks as $key => $network):
             if($mashsb_options['visible_services'] !== 'all' && $maxcounter != count($enablednetworks) && $mashsb_options['visible_services'] < count($enablednetworks)){
                 if ($startcounter === $maxcounter ){ 
@@ -379,8 +380,8 @@ function mashsb_subscribe_button(){
                 if ($startcounter === (count($enablednetworks))){ 
                     $endsecondaryshares     = '</div>'; } else { ;$endsecondaryshares = '';}
                     
-                //echo " Debug: Startcounter " . $startcounter . " Hello: " . $maxcounter+1 .
-                 //" Debug: Enabled services: " . count($enablednetworks) . "<br>"; 
+                //echo "<h1>Debug: Startcounter " . $startcounter . " Hello: " . $maxcounter+1 .
+                //" Debug: Enabled services: " . count($enablednetworks) . "</h1>"; 
             }
             if ($enablednetworks[$key]['name'] !='') {
                 /* replace all spaces with $nbsp; This prevents error in css style content: text-intend */
@@ -610,6 +611,7 @@ function mashsb_subscribe_button(){
         /* define some vars here to reduce multiple execution of basic functions */
         /* Use permalink when its not singular page, so on category pages the permalink is used. */
         $url = mashsb_get_url();
+
         function_exists('MASHOG') ? $title = MASHOG()->MASHOG_OG_Output->_get_title() : $title = the_title_attribute('echo=0');
         $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
         $title = urlencode($title);
