@@ -22,7 +22,8 @@ class MASHSB_License {
 	private $item_shortname;
 	private $version;
 	private $author;
-	private $api_url = 'https://www.mashshare.net/edd-sl-api/';
+	private $api_url = 'https://www.mashshare.net/edd-sl-api/'; // production
+        //private $api_url = 'http://dev.mashshare.net/edd-sl-api/'; // development
 
 	/**
 	 * Class constructor
@@ -216,7 +217,7 @@ class MASHSB_License {
 				'body'      => $api_params
 			)
 		);
-
+                
 		// Make sure there are no errors
 		if ( is_wp_error( $response ) ) {
 			return;
