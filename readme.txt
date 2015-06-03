@@ -293,6 +293,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 = 2.3.7 =
 * Fix: Mashshare->Tools->System Info does not open
+* Fix: Check if has_shortcode() exists. Compatibility check for wordpress < 3.6
 
 = 2.3.6 =
 * New: Support for mail.ru and line (only with network add-on)
