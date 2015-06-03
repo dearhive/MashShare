@@ -94,17 +94,7 @@ function mashsb_install() {
         // Add the transient to redirect / not for multisites
 	set_transient( '_mashsb_activation_redirect', true, 30 );
         
-                /* create database table 
-                 * @DEPRECATED since 2.0.9
-                 */
-        	/*$sql = "CREATE TABLE ".MASHSB_TABLE." (
-                ID int(11) NOT NULL AUTO_INCREMENT,
-                URL varchar(250) NULL,
-                TOTAL_SHARES int(20) NOT NULL,
-                CHECK_TIMESTAMP TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                PRIMARY KEY  (ID))";
-                require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-                dbDelta( $sql );*/
+
 
 }
 
