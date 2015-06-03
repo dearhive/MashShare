@@ -536,7 +536,7 @@ function mashsb_subscribe_button(){
        
        // Load scripts when shortcode is used
        /* Check if shortcode is used */ 
-       if( has_shortcode( $post->post_content, 'mashshare' ) ) {
+       if( function_exists(has_shortcode) && has_shortcode( $post->post_content, 'mashshare' ) ) {
            mashdebug()->info("400");
             return true;
        } 
