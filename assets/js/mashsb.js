@@ -74,12 +74,7 @@ jQuery(document).ready( function($) {
         var winTop = (screen.height / 2) - (winHeight / 2);
 	var winLeft = (screen.width / 2) - (winWidth / 2);
         var url = $(this).attr('href');  
-            //if (mashsb.singular === '1') {
-                //window.open('http://www.facebook.com/sharer.php?s=100&u=' + mashsb.share_url + '&p[title]=' + mashsb.title + '&p[summary]=' + mashsb.desc + '&p[images][0]=' + mashsb.image, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
-            /*} else {
-                console.log("not singular");
-                window.open(url, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
-            }*/
+
         window.open(url, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
         mashfb.preventDefault(mashfb);
         return false;
@@ -100,12 +95,6 @@ jQuery(document).ready( function($) {
         
         // deprecated and removed because TW popup opens twice
        if (mashsb.twitter_popup === '1') {
-            //console.log('mashsb.singular1: ' + mashsb.singular);
-            //window.open('https://twitter.com/intent/tweet?text=' + mashsb.title + '&via=' + mashsb.hashtag + '&url=' + shareurl, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
-        /*}else{
-            console.log('mashsb.singular2: ' + mashsb.singular);
-            window.open(url, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
-        }*/
         window.open(url, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
        } 
        mashfw.preventDefault(mashfw);
