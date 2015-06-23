@@ -2,8 +2,8 @@
 class WPChromePHP implements iMashDebug {
 
 	public function __construct() {
-		include 'api/chromephp/ChromePhp.php';
-		$this->api = ChromePhp::getInstance();
+		include 'api/chromephp/mashsbChromePhp.php';
+		$this->api = mashsbChromePhp::getInstance();
 	}
 
 

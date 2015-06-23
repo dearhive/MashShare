@@ -292,8 +292,11 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 == Changelog ==
 
 = 2.3.7 =
+* New: Support for yummly.com (network add-on needed)
 * Fix: Mashshare->Tools->System Info does not open
 * Fix: Check if has_shortcode() exists. Compatibility check for wordpress < 3.6
+* Fix: Rename debugging class mashsbChromePhp()
+* Fix: Some 'undefined variables' notices when mashshare is installed first time and settings are not saved
 
 = 2.3.6 =
 * New: Support for mail.ru and line (only with network add-on)

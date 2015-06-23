@@ -39,12 +39,8 @@ function mashsb_load_scripts($hook) {
         $image = mashsb_get_image($post->ID);
         $desc = mashsb_get_excerpt_by_id($post->ID);
         
-        /* Load hashshags */       
-            if ($mashsb_options['mashsharer_hashtag'] != '') {
-                $hashtag = $mashsb_options['mashsharer_hashtag'];
-            } else {
-                $hashtag = '';
-            }
+        /* Load hashshags */   
+        $hashtag = !empty($mashsb_options['mashsharer_hashtag']) ? $mashsb_options['mashsharer_hashtag'] : '';
             
 	$js_dir = MASHSB_PLUGIN_URL . 'assets/js/';
 	// Use minified libraries if SCRIPT_DEBUG is turned off
@@ -63,7 +59,7 @@ function mashsb_load_scripts($hook) {
                         'image' => $image,
                         'desc' => $desc,
                         'hashtag' => $hashtag,
-                        'subscribe' => $mashsb_options['subscribe_behavior'] === 'content' ? 'content' : 'link',
+                        'subscribe' => !empty($mashsb_options['subscribe_behavior']) && $mashsb_options['subscribe_behavior'] === 'content' ? 'content' : 'link',
                         'subscribe_url' => isset($mashsb_options['subscribe_link']) ? $mashsb_options['subscribe_link'] : '',
                         'activestatus' => mashsbGetActiveStatus(),
                         'singular' => is_singular() ? 1 : 0,

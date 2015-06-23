@@ -536,7 +536,7 @@ function mashsb_subscribe_button(){
        
        // Load scripts when shortcode is used
        /* Check if shortcode is used */ 
-       if( function_exists(has_shortcode) && has_shortcode( $post->post_content, 'mashshare' ) ) {
+       if( function_exists('has_shortcode') && has_shortcode( $post->post_content, 'mashshare' ) ) {
            mashdebug()->info("400");
             return true;
        } 
@@ -618,7 +618,7 @@ function mashsb_subscribe_button(){
         $title = str_replace('#' , '%23', $title);
         $title = esc_html($title);
         
-        $position = $mashsb_options['mashsharer_position'];
+        $position = !empty($mashsb_options['mashsharer_position']) ? $mashsb_options['mashsharer_position'] : '';
         $enabled_post_types = isset( $mashsb_options['post_types'] ) ? $mashsb_options['post_types'] : null;
         $current_post_type = get_post_type();
         $frontpage = isset( $mashsb_options['frontpage'] ) ? $mashsb_options['frontpage'] : null;
@@ -845,13 +845,13 @@ function mashsb_styles_method() {
         .mashsb-count {
         color: {$share_color};
         }"; 
-    if ($mashsb_options['border_radius']  != 'default'){
+    if ( !empty($mashsb_options['border_radius']) && $mashsb_options['border_radius'] != 'default' ){
     $mashsb_custom_css .= '
         [class^="mashicon-"], .onoffswitch-label, .onoffswitch2-label {
             border-radius: ' . $mashsb_options['border_radius'] . 'px;
         }';   
     }
-    if ($mashsb_options['mash_style']  == 'shadow'){
+    if ( !empty($mashsb_options['mash_style']) && $mashsb_options['mash_style']  == 'shadow' ){
     $mashsb_custom_css .= '
         .mashsb-buttons a, .onoffswitch, .onoffswitch2, .onoffswitch-inner:before, .onoffswitch2-inner:before  {
             -webkit-transition: all 0.07s ease-in;
@@ -871,7 +871,7 @@ function mashsb_styles_method() {
             transition: all linear .25s;
         }';   
     }
-    if ($mashsb_options['mash_style']  == 'gradiant'){
+    if ( !empty($mashsb_options['mash_style']) && $mashsb_options['mash_style']  == 'gradiant' ){
     $mashsb_custom_css .= '
         .mashsb-buttons a  {
             background-image: -webkit-linear-gradient(bottom,rgba(0, 0, 0, 0.17) 0%,rgba(255, 255, 255, 0.17) 100%);

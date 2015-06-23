@@ -21,7 +21,7 @@
  * @package ChromePhp
  * @author Craig Campbell <iamcraigcampbell@gmail.com>
  */
-class ChromePhp
+class mashsbChromePhp 
 {
     /**
      * @var string
@@ -139,7 +139,7 @@ class ChromePhp
     public static function getInstance()
     {
         if (self::$_instance === null) {
-            self::$_instance = new ChromePhp();
+            self::$_instance = new mashsbChromePhp();
         }
         return self::$_instance;
     }
