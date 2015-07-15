@@ -9,7 +9,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Mashable, Social Media Pop-Up, Social Media Widget, Social Media Sharing, Social Media Networks, Social Sharing, Social sharing optimization, Share button, share buttons, Facebook Share button, Twitter Share Button, Social Share, Social buttons, social share buttons, Share, Share this, simple social buttons, simple share buttons adder,  Google+, Twitter, Facebook, Digg, Stumble Upon, Linkedin, +1, add to any, AddThis, add this, addtoany, admin, aim, analytics, bookmark, bookmarking, bookmarks, bookmark button, bookmark menu, buddypress, chrome extension, comments, del.icio.us, Diigo, buffer, button, del.icio.us, e-mail, email, email button, Facebook, facebook like, facebook recommend, facebook share, facebook share button, fark, firefox extension, flickr, floating buttons, follow, foursquare, gmail, goo.gl
 Requires at least: 3.6+
 Tested up to: 4.2.2
-Stable tag: 2.3.8
+Stable tag: 2.3.9
 
 Social Media Icons & Share Buttons, a highly customizable social sharing and & Media SEO ecosystem Facebook, Twitter and more ...
 
@@ -289,7 +289,12 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 12. Custom Sharing descriptions with free Mashshare Open Graph Add-On
 
 
-== Changelog ==
+== Changelog == 
+
+= 2.3.9 =
+Tweak: Better detection if Mashshare is running and load only js and css files when they are needed.
+New: Important new option "Load JS and CSS all over" in Mashshare->settings->Visual->Location & Position if JS and CSS are not loaded because do_shortcode['mashshare'] is used
+Fix: Wrong constant name WC_VERSION. Changed to MASHSB_VERSION
 
 = 2.3.8 =
 Fix: wrong font icons for whatsapp and memeame

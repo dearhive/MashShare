@@ -131,14 +131,14 @@ function in_plugin_update_message( $args ) {
 
         // Output Upgrade Notice
         $matches        = null;
-        $regexp         = '~==\s*Upgrade Notice\s*==\s*=\s*(.*)\s*=(.*)(=\s*' . preg_quote( WC_VERSION ) . '\s*=|$)~Uis';
+        $regexp         = '~==\s*Upgrade Notice\s*==\s*=\s*(.*)\s*=(.*)(=\s*' . preg_quote( MASHSB_VERSION ) . '\s*=|$)~Uis';
         $upgrade_notice = '';
 
         if ( preg_match( $regexp, $response['body'], $matches ) ) {
           $version        = trim( $matches[1] );
           $notices        = (array) preg_split('~[\r\n]+~', trim( $matches[2] ) );
           
-          if ( version_compare( WC_VERSION, $version, '<' ) ) {
+          if ( version_compare( MASHSB_VERSION, $version, '<' ) ) {
 
             $upgrade_notice .= '<div class="mashsb_plugin_upgrade_notice" style="padding:10px;background-color: #479CCF;color: #FFF;">';
 

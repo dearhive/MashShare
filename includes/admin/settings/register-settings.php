@@ -439,7 +439,7 @@ function mashsb_get_registered_settings() {
                                 'mashsharer_position' => array(
 					'id' => 'mashsharer_position',
 					'name' => __( 'Position', 'mashsb' ),
-					'desc' => __( 'Location of Share Buttons. Set to <i>manual</i> if you do not want to use the automatic embeding. Use the shortcode function to place Mashshare directly into your theme template files: <strong>&lt;?php echo do_shortcode("[mashshare]"); ?&gt;</strong> or the content shortcode: [mashshare] for posts and pages. See all <a href="https://www.mashshare.net/faq/#Is_there_a_shortcode_for_pages_and_posts" target="_blank">available shortcodes</a> here.', 'mashsb' ),
+					'desc' => __( 'Position of Share Buttons. If this is set to <i>manual</i> use the shortcode function [mashshare] or use php code <br><strong>&lt;?php echo do_shortcode("[mashshare]"); ?&gt;</strong> in template files. Be aware that you have to enable the above mentioned option "Load JS and CSS all over" if you experience issues with do_shortcode and the buttons are not shown, because we are not able to automatically detect the use of do_shortcode. See all <a href="https://www.mashshare.net/faq/#Is_there_a_shortcode_for_pages_and_posts" target="_blank">available shortcodes</a> here.', 'mashsb' ),
 					'type' => 'select',
                                         'options' => array(
 						'before' => __( 'Top', 'mashsb' ),
@@ -455,10 +455,17 @@ function mashsb_get_registered_settings() {
 					'desc' => __( 'Select on which post_types the share buttons appear. This values will be ignored when position is specified "manual".', 'mashsb' ),
 					'type' => 'posttypes'
 				),
+                                'loadall' => array(
+					'id' => 'loadall',
+					'name' => __( 'Load JS and CSS all over', 'mashsb' ),
+					'desc' => __( 'This loads JS and CSS files on all site content pages. Select this only if you are using  <strong>&lt;?php echo do_shortcode("[mashshare]"); ?&gt;</strong> and buttons are not shown in the expected content. <br>If you disable this option all styles and scripts are loaded conditionally only where they are used.', 'mashsb' ),
+					'type' => 'checkbox',
+                                        'std' => 'false'
+				),
                                 'singular' => array(
 					'id' => 'singular',
 					'name' => __( 'Categories', 'mashsb' ),
-					'desc' => __('Enable this checkbox to enable Mashshare on categories with multiple blogposts. <strong>Note: </strong> Post_types: "Post" must be enabled.','mashsb'),
+					'desc' => __('Enable this checkbox to enable Mashshare on categories with multiple blogposts. <br><strong>Note: </strong> Post_types: "Post" must be enabled.','mashsb'),
 					'type' => 'checkbox',
                                         'std' => '0'
 				),
@@ -477,7 +484,7 @@ function mashsb_get_registered_settings() {
                                 'twitter_popup' => array(
 					'id' => 'twitter_popup',
 					'name' => __( 'Twitter Popup disable', 'mashsb' ),
-					'desc' => __('Check this box if your twitter popup is openening twice. This happens when you are using any third party twitter instance on your website.','mashsb'),
+					'desc' => __('Check this box if your twitter popup is openening twice. This happens sometimes when you are using any third party twitter plugin or the twitter SDK on your website.','mashsb'),
 					'type' => 'checkbox',
                                         'std' => '0'
                                     

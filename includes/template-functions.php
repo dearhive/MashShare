@@ -533,31 +533,38 @@ function mashsb_subscribe_button(){
        $enabled_post_types = isset( $mashsb_options['post_types'] ) ? $mashsb_options['post_types'] : array();
        $excluded = isset( $mashsb_options['excluded_from'] ) ? $mashsb_options['excluded_from'] : null;
        $singular = isset( $mashsb_options['singular'] ) ? $singular = true : $singular = false;
+       $loadall = isset( $mashsb_options['loadall'] ) ? $loadall = true : $loadall = false;
+       
+       if ($loadall){
+           mashdebug()->info("load all mashsb scripts");
+           return true;
+       }
        
        // Load scripts when shortcode is used
        /* Check if shortcode is used */ 
        if( function_exists('has_shortcode') && has_shortcode( $post->post_content, 'mashshare' ) ) {
-           mashdebug()->info("400");
+           mashdebug()->info("has_shortcode");
             return true;
        } 
        
+       
        // Load scripts when do_action('mashshare') is used
        //if(has_action('mashshare') && mashsb_is_excluded() !== true) {
-       if(has_action('mashshare')) {
+       /*if(has_action('mashshare')) {
            mashdebug()->info("action1");
            return true;    
-       }
+       }*/
        
        // Load scripts when do_action('mashsharer') is used
        //if(has_action('mashsharer') && mashsb_is_excluded() !== true) {
-       if(has_action('mashsharer')) {
+       /*if(has_action('mashsharer')) {
            mashdebug()->info("action2");
            return true;    
-       } 
+       }*/ 
        
        // No scripts on non singular page
        if (!is_singular() == 1 && $singular !== true) {
-        return false;
+           return false;
        }
 
         // Load scripts when page is not excluded

@@ -1,7 +1,7 @@
 <?php
 
 // uncomment this line for testing
-//set_site_transient( 'update_plugins', null );
+set_site_transient( 'update_plugins', null );
 
 /**
  * Allows plugins to use their own update API.
@@ -266,15 +266,15 @@ class MASHSB_SL_Plugin_Updater {
 	 */
 	private function api_request( $_action, $_data ) {
 
-		global $wp_version;
+		global $wp_version, $edd_options;
 
 		$data = array_merge( $this->api_data, $_data );
 
 		if ( $data['slug'] != $this->slug )
 			return;
 
-		if ( empty( $data['license'] ) )
-			return;
+		if ( empty( $data['license']) && !isset( $edd_options['edd_sl_allow_update_notices'] ) )
+                        return;
 
 		if( $this->api_url == home_url() ) {
 			return false; // Don't allow a plugin to ping itself
