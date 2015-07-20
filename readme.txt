@@ -292,7 +292,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 == Changelog == 
 
 = 2.3.9 =
-Tweak: Better detection if Mashshare is running and load only js and css files when they are needed.
+Tweak: Performance improvement - Better detection if Mashshare is running and load only js and css files when they are needed.
 New: Important new option "Load JS and CSS all over" in Mashshare->settings->Visual->Location & Position if JS and CSS are not loaded because do_shortcode['mashshare'] is used
 Fix: Wrong constant name WC_VERSION. Changed to MASHSB_VERSION
 
@@ -474,5 +474,5 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 2.3.6 =
-2.3.6 <strong> UPDATE:</strong> Update is recommended when you use the social network add-on.
+= 2.3.9 =
+2.3.9 <strong> UPDATE:</strong> Update contains a performance improvement
