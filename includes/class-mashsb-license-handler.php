@@ -112,12 +112,12 @@ class MASHSB_License {
 			//return;
             //rhe
  
-            $test = array(
+            /*$test = array(
 				'version'   => $this->version,
 				'license'   => $this->license,
 				'item_name' => $this->item_name,
 				'author'    => $this->author
-			);
+			);*/
 
 
 		// Setup the updater
