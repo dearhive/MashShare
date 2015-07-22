@@ -63,6 +63,35 @@ function mashsb_admin_messages() {
     </script>
     ';
     }
+    if ( get_option('mashsb_update_notice') =='no' ) {
+    // admin notice after updating Mashshare
+    echo '<div class="mashsb_update_notice update-nag">' . __('Thank you for updating to latest version of Mashshare. Be aware of the very important change: If you are using the php shortcode function <strong>do_shortcode[\'mashshare\'] </strong>and the mashshare styles are not loaded you have to enable the new option <strong><a href="'.admin_url( 'options-general.php?page=mashsb-settings&tab=visual#mashsb_settingslocation_header' ).'">Load JS and CSS all over</a></strong> in Mashshare->settings->Visual->Location & Position', 'mashsb') . 
+            '<p><a href="javascript:void(0);" class="mashsb_hide_update" title="I understand" style="text-decoration:none;">I understand! <br>Do not show again this notice</a>'
+            . '</div>'
+            . '<script>
+    jQuery( document ).ready(function( $ ) {
+
+    jQuery(\'.mashsb_hide_update\').click(function(){
+        var data={\'action\':\'hide_update\'}
+             jQuery.ajax({
+        
+        url: "'.admin_url( 'admin-ajax.php' ).'",
+        type: "post",
+        data: data,
+        dataType: "json",
+        async: !0,
+        success: function(e) {
+            if (e=="success") {
+               jQuery(\'.mashsb_update_notice\').slideUp(\'slow\');
+			   
+            }
+        }
+         });
+        })
+    
+    });
+    </script>';
+}
 }
 add_action( 'admin_notices', 'mashsb_admin_messages' );
 
@@ -82,6 +111,22 @@ function mashsb_HideRatingDiv(){
     echo json_encode(array("success")); exit;
 }
 add_action('wp_ajax_hideRating','mashsb_HideRatingDiv');
+
+/* Hide the update notice div
+ * 
+ * @subpackage  Admin/Notices
+ * @copyright   Copyright (c) 2015, René Hermenau
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since       2.4.0
+ * 
+ * @return json string
+ * 
+ */
+function mashsb_hide_update_div(){
+    update_option('mashsb_update_notice','yes');
+    echo json_encode(array("success")); exit;
+}
+add_action('wp_ajax_hide_update','mashsb_hide_update_div');
 
 /**
  * Admin Add-ons Notices
