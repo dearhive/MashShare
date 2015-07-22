@@ -458,7 +458,7 @@ function mashsb_get_registered_settings() {
                                 'loadall' => array(
 					'id' => 'loadall',
 					'name' => __( 'Load JS and CSS all over', 'mashsb' ),
-					'desc' => __( 'This loads JS and CSS files on all site content pages. Select this only if you are using  <strong>&lt;?php echo do_shortcode("[mashshare]"); ?&gt;</strong> and buttons are not shown in the expected content. <br>If you disable this option all styles and scripts are loaded conditionally only where they are used.', 'mashsb' ),
+					'desc' => __( 'This loads JS and CSS files on all site content pages. Select this only if you are using  <strong>&lt;?php echo do_shortcode("[mashshare]"); ?&gt;</strong> and buttons are not shown in the expected content. <br>If you disable this option all styles and scripts are loaded conditionally only where they are needed.', 'mashsb' ),
 					'type' => 'checkbox',
                                         'std' => 'false'
 				),
