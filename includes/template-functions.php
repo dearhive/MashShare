@@ -456,7 +456,7 @@ function mashsb_subscribe_button(){
     function mashshareShortcodeShow($atts, $place) {
         global $wpdb ,$mashsb_options, $post, $wp;
 
-        $url = mashsb_get_url();
+        $mainurl = mashsb_get_url();
         !empty($mashsb_options['sharecount_title']) ? $sharecount_title = $mashsb_options['sharecount_title'] : $sharecount_title = __('SHARES', 'mashsb');
 
         
@@ -472,7 +472,8 @@ function mashsb_subscribe_button(){
             'cache' => '3600',
             'shares' => 'true',
             'buttons' => 'true',
-            'align' => 'left'
+            'align' => 'left',
+            'url' => ''
                         ), $atts));
 
             /* Load hashshag*/       
@@ -482,10 +483,12 @@ function mashsb_subscribe_button(){
                 $via = '';
             }
 
+            // Define url to share
+            $url = !empty($url) ? $url : $mainurl;
             
              if ($shares != 'false') {
-                    /* gettotalshares of the current page with sharedcount.com */
-                    $totalshares = getSharedcount($url);
+                    /* get totalshares of the current page with sharedcount.com */
+                    $totalshares = getSharedcount($mainurl);
                     /* Round total shares when enabled */
                     $roundenabled = isset($mashsb_options['mashsharer_round']) ? $mashsb_options['mashsharer_round'] : null;
                         if ($roundenabled) {
