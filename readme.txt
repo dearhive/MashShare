@@ -181,6 +181,7 @@ There are more parameters available:
 
  `[mashshare shares="false" buttons="true" align="left"]` for buttons without shares, alignment left
  `[mashshare shares="true" buttons="false" align="right"]` for sharecount without buttons, alignment right
+ `[mashshare url="http://yourwebsite.com/yourpage"]` for share buttons with custom url
 
 * For manual insertion of the Share Buttons in your template files use the following php code on place you like to see the share buttons:`echo do_shortcode('[mashshare]');`
 Configure the Share buttons sharing function in the settings page of the plugin.
@@ -490,4 +491,4 @@ https://www.mashshare.net/changelog/
 == Upgrade Notice ==
 
 = 2.4.2 =
-2.4.2 <strong> UPDATE:</strong> Update contains a new shortcode argument [mashshare url="yourwebsite.com"]
+2.4.2 <strong> UPDATE:</strong> New shortcode argument [mashshare url="yourwebsite.com"]. Its recommended to test this update first on a staging website before installing it on a live site. Use the free plugin <a href="https://wordpress.org/plugins/wp-staging/" target="_blank">WP Staging</a> for creating a test staging site with two clicks.
