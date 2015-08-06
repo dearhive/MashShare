@@ -27,6 +27,7 @@ if( mashsb_get_option( 'uninstall_on_delete' ) ) {
         delete_option( 'mashsb_version_upgraded_from');
         
         
+        
         /* Delete all post meta options */
         delete_post_meta_by_key( 'mashsb_timestamp' );
         delete_post_meta_by_key( 'mashsb_shares' );

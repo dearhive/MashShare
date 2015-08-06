@@ -738,7 +738,7 @@ function mashsharer(){
  *
  * @since 1.0
  * @param int $postID
- * @return void
+ * @return string
  */
 function mashsb_get_image($postID){
     mashdebug()->timer('mashsb_get_image');
@@ -756,7 +756,7 @@ add_action( 'mashsb_get_image', 'mashsb_get_image' );
  *
  * @since 1.0
  * @param int $postID
- * @return void
+ * @return string
  */
 function mashsb_get_excerpt_by_id($post_id){
     mashdebug()->timer('mashsb_get_exerpt');

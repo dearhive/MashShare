@@ -272,8 +272,8 @@ class MASHSB_SL_Plugin_Updater {
 
 		if ( $data['slug'] != $this->slug )
 			return;
-
-		if ( empty( $data['license']) && !isset( $edd_options['edd_sl_allow_update_notices'] ) )
+                //if ( empty( $data['license']) && !isset( $edd_options['edd_sl_allow_update_notices'] ) )
+		if ( empty( $data['license']) )
                         return;
 
 		if( $this->api_url == home_url() ) {
