@@ -618,6 +618,9 @@ function mashsb_subscribe_button(){
     function mashshare_filter_content($content){
         global $atts, $mashsb_options, $post, $wp_current_filter, $wp;
         
+        // Do not execute filter for excerpts
+        if(in_array('get_the_excerpt', $GLOBALS['wp_current_filter'])) return $content;
+        
         /* define some vars here to reduce multiple execution of basic functions */
         /* Use permalink when its not singular page, so on category pages the permalink is used. */
         $url = mashsb_get_url();
