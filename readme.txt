@@ -8,8 +8,8 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Mashable, Social Media Pop-Up, Social Media Widget, Social Media Sharing, Social Media Networks, Social Sharing, Social sharing optimization, Share button, share buttons, Facebook Share button, Twitter Share Button, Social Share, Social buttons, social share buttons, Share, Share this, simple social buttons, simple share buttons adder,  Google+, Twitter, Facebook, Digg, Stumble Upon, Linkedin, +1, add to any, AddThis, add this, addtoany, admin, aim, analytics, bookmark, bookmarking, bookmarks, bookmark button, bookmark menu, buddypress, chrome extension, comments, del.icio.us, Diigo, buffer, button, del.icio.us, e-mail, email, email button, Facebook, facebook like, facebook recommend, facebook share, facebook share button, fark, firefox extension, flickr, floating buttons, follow, foursquare, gmail, goo.gl
 Requires at least: 3.6+
-Tested up to: 4.2.4
-Stable tag: 2.4.2
+Tested up to: 4.3
+Stable tag: 2.4.3
 
 Social Media Icons & Share Buttons, a highly customizable social sharing and & Media SEO ecosystem Facebook, Twitter and more ...
 
@@ -301,6 +301,10 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 == Changelog == 
 
+= 2.4.3 =
+* Fix: Disable Mashshare on 404 pages to prevent "Trying to get property of non-object"
+* New: Tested up to WordPress 4.3
+
 = 2.4.2 =
 * New: New shortcode argument allows you to define custom url´s, e.g. [mashshare url="yourwebsite.com/yourpage"]
 * New: Tested up to Wordpress 4.2.4
@@ -495,5 +499,5 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 2.4.2 =
-2.4.2 <strong> UPDATE:</strong> New shortcode argument [mashshare url="yourwebsite.com"]. Its recommended to test this update first on a staging website before installing it on a live site. Use the free plugin <a href="https://wordpress.org/plugins/wp-staging/" target="_blank">WP Staging</a> for creating a test staging site with two clicks.
+= 2.4.3 =
+2.4.3 <strong>Update: </strong>See the complete <a href="https://wordpress.org/plugins/mashsharer/changelog/">changelog</a>. Test this update first on a staging website before installing it on a live site. Use the free plugin <a href="https://wordpress.org/plugins/wp-staging/" target="_blank">WP Staging</a> for creating a test staging site with two clicks.

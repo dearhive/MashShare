@@ -290,18 +290,25 @@ function mashsb_subscribe_button(){
         
    /* Array of all available network share urls
     * 
+    * @param string $name id of the network
+    * @param string $url to share
+    * @param string $title to share
+    * @param mixed $customurl boolean | string false default
+    * 
     * @since 2.1.3
     * @return string
     */   
         
-    function arrNetworks($name, $url, $title) {
+    function arrNetworks($name, $url, $title, $customurl = false) {
         global $mashsb_options, $post;
         $singular = isset( $mashsb_options['singular'] ) ? $singular = true : $singular = false;
-            
-        if (function_exists('mashsuGetShortURL')){
-            mashsuGetShortURL() !== 0 ? $urltw = mashsuGetShortURL() : $urltw = $url;
-        }else{
-            $urltw = $url;
+          
+        $urltw = $url;
+        if ( function_exists('mashsuGetShortURL') && $customurl === false){
+            mashsuGetShortURL() !== 0 ? $urltw = mashsuGetShortURL( $url ) : $urltw = $url;
+        }
+        if ( function_exists('mashsuGetShortURL') && $customurl === true){
+            mashsuGetShortURL() !== 0 ? $urltw = mashsuGetShortURL( $customurl ) : $urltw = $customurl;
         }
        
         
@@ -336,10 +343,14 @@ function mashsb_subscribe_button(){
 
 
     /* Returns all available networks
+     * 
      * @since 2.0
+     * @param string $url to share
+     * @param string $title to share
+     * @param mixed $customurl boolean | string false default
      * @returns string
      */
-    function getNetworks($url, $title) {
+    function getNetworks($url, $title, $customurl) {
         //mashdebug()->timer('getNetworks');
         global $mashsb_options, $enablednetworks;
 
@@ -391,7 +402,7 @@ function mashsb_subscribe_button(){
             }
             $enablednetworks[$key]['id'] == 'whatsapp' ? $display = 'display:none;' : $display = ''; // Whatsapp button is made visible via js when opened on mobile devices
 
-            $output .= '<a style="' . $display . '" class="mashicon-' . $enablednetworks[$key]['id'] . '" href="' . arrNetworks($enablednetworks[$key]['id'], $url, $title) . '" target="_blank"><span class="icon"></span><span class="text">' . $name . '</span></a>';
+            $output .= '<a style="' . $display . '" class="mashicon-' . $enablednetworks[$key]['id'] . '" href="' . arrNetworks($enablednetworks[$key]['id'], $url, $title, $customurl) . '" target="_blank"><span class="icon"></span><span class="text">' . $name . '</span></a>';
             $output .= $onoffswitch;
             $output .= $startsecondaryshares;
             
@@ -435,7 +446,7 @@ function mashsb_subscribe_button(){
                     '<div class="mashsb-box">'
                         . apply_filters('mashsb_sharecount_filter', $sharecount) .
                     '<div class="mashsb-buttons">' 
-                        . getNetworks($url, $title) . 
+                        . getNetworks($url, $title, false) . 
                     '</div></div>
                     <div style="clear:both;"></div>'
                     . mashsb_subscribe_content()
@@ -456,8 +467,6 @@ function mashsb_subscribe_button(){
     function mashshareShortcodeShow($atts, $place) {
         global $wpdb ,$mashsb_options, $post, $wp;
         
-
-
         $mainurl = mashsb_get_url();
         !empty($mashsb_options['sharecount_title']) ? $sharecount_title = $mashsb_options['sharecount_title'] : $sharecount_title = __('SHARES', 'mashsb');
 
@@ -485,8 +494,8 @@ function mashsb_subscribe_button(){
                 $via = '';
             }
 
-            // Define url to share
-            $url = !empty($url) ? $url : $mainurl;
+            // Define custom url to share
+            $customurl = empty($url) ? false : $url;
             
              if ($shares != 'false') {
                     /* get totalshares of the current page with sharedcount.com */
@@ -513,7 +522,7 @@ function mashsb_subscribe_button(){
                     '<div class="mashsb-box">'
                         . $sharecount .
                     '<div class="mashsb-buttons">' 
-                        . getNetworks($url, $title) . 
+                        . getNetworks($mainurl, $title, $customurl) . 
                     '</div></div>
                     <div style="clear:both;"></div>'
                     . mashsb_subscribe_content()
