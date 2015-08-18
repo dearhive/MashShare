@@ -455,6 +455,8 @@ function mashsb_subscribe_button(){
      */
     function mashshareShortcodeShow($atts, $place) {
         global $wpdb ,$mashsb_options, $post, $wp;
+        
+
 
         $mainurl = mashsb_get_url();
         !empty($mashsb_options['sharecount_title']) ? $sharecount_title = $mashsb_options['sharecount_title'] : $sharecount_title = __('SHARES', 'mashsb');
@@ -518,7 +520,11 @@ function mashsb_subscribe_button(){
                     . mashsb_content_below() .
                     '</aside>
                         <!-- Share buttons made by mashshare.net - Version: ' . MASHSB_VERSION . '-->';
-            return apply_filters( 'mashsb_output_buttons', $return );    
+        
+        // Do not execute filter for excerpts
+        //if(in_array('get_the_excerpt', $GLOBALS['wp_current_filter'])) apply_filters( 'mashsb_output_buttons', '' );
+            
+        return apply_filters( 'mashsb_output_buttons', $return );    
     }
     
     /* Returns active status of Mashshare.
@@ -538,6 +544,9 @@ function mashsb_subscribe_button(){
        $singular = isset( $mashsb_options['singular'] ) ? $singular = true : $singular = false;
        $loadall = isset( $mashsb_options['loadall'] ) ? $loadall = true : $loadall = false;
        
+       if ( is_404() )
+           return false;
+           
        if ($loadall){
            mashdebug()->info("load all mashsb scripts");
            return true;
@@ -619,7 +628,7 @@ function mashsb_subscribe_button(){
         global $atts, $mashsb_options, $post, $wp_current_filter, $wp;
         
         // Do not execute filter for excerpts
-        if(in_array('get_the_excerpt', $GLOBALS['wp_current_filter'])) return $content;
+        //if(in_array('get_the_excerpt', $GLOBALS['wp_current_filter'])) return $content;
         
         /* define some vars here to reduce multiple execution of basic functions */
         /* Use permalink when its not singular page, so on category pages the permalink is used. */

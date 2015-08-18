@@ -185,7 +185,7 @@ function in_plugin_update_message( $args ) {
           
           if ( version_compare( MASHSB_VERSION, $version, '<' ) ) {
 
-            $upgrade_notice .= '<div class="mashsb_plugin_upgrade_notice" style="padding:10px;background-color: #479CCF;color: #FFF;">';
+            $upgrade_notice .= '<div class="mashsb_plugin_upgrade_notice" style="padding:10px;background-color:#58C1FF;color: #FFF;">';
 
             foreach ( $notices as $index => $line ) {
               $upgrade_notice .= wp_kses_post( preg_replace( '~\[([^\]]*)\]\(([^\)]*)\)~', '<a href="${2}" style="text-decoration:underline;color:#ffffff;">${1}</a>', $line ) );

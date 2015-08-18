@@ -2,7 +2,7 @@
 
 Author URL: https://www.mashshare.net
 Plugin URL: https://www.mashshare.net
-Contributors: ReneHermi
+Contributors: ReneHermi, WP-Staging
 Donate link: 
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -19,13 +19,16 @@ Social Media Icons & Share Buttons, a highly customizable social sharing and & M
 > This free Social Media Icons Plugin is a professional and highly customizable<br />
 > ecosystem for social media sharing and optimizing of your valuable content.<br /> 
 >
-> No external script dependencies are needed and and all code resides on your site. <br /> 
+
+<strong>See the demonstration video by Katrinah.com</strong>
+[youtube https://www.youtube.com/watch?v=vRSE-pQJTBQ]
+
+> No external script dependencies are needed and and all code resides on your site. 
 > So the default share buttons ensure yours and your visitors privacy! <br /> 
 >
 > It gives you per default a large total share counter beside three large 
 > prominent Share Buttons for your Twitter tweets, Facebook shares and the option<br /> 
 > to place a prominent subscribe button for your news feed and mailing list. 
->
 > This services are free per default including great support. 
 > There is no need to have an account like other share services demands from you <br /> 
 >
@@ -35,6 +38,7 @@ Social Media Icons & Share Buttons, a highly customizable social sharing and & M
 > Print, Linkedin, Odnoklassniki etc., you get them on the Add-On Marketplace.<br />
 > 
 > Mashshare can also be used in conjunction with other third-party share buttons vendor!
+>
 >
 > Free and paid Add-Ons available:
 > 
