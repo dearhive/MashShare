@@ -12,6 +12,8 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+
+
 /* Load Hooks
  * @since 2.0
  * return void
@@ -21,14 +23,15 @@ add_shortcode('mashshare', 'mashshareShortcodeShow');
 add_filter('the_content', 'mashshare_filter_content', getExecutionOrder(), 1);
 add_filter('widget_text', 'do_shortcode');
 add_action('mashshare', 'mashshare');
+add_filter('mash_share_title', 'mashsb_get_title', 10, 2);
+
 
 // uncomment for debugging
 //global $wp_filter; 
 //print_r($wp_filter['the_content']);
 
 /* Get Execution order of injected Share Buttons in $content 
- * 
- * 
+ *
  * @since 2.0.4
  * @return int
  */
@@ -39,52 +42,53 @@ function getExecutionOrder(){
     return $priority;
 }
     
-    /* Creates some shares for older posts which has been already 
-     * shared dozens of times
-     * This smooths the Velocity Graph Add-On if available
-     * 
-     * @since 2.0.9
-     * @return int
-     * @deprecated deprecated since version 2.2.8
-     */
-function mashsbSmoothVelocity ($mashsbShareCounts) {
-        switch ($mashsbShareCounts) {
-                    case $mashsbShareCounts >= 1000:
-                        $mashsbShareCountArr = array(100,170,276,329,486,583,635,736,875, $mashsbShareCounts);
-                        return $mashsbShareCountArr;
-                        break;
-                    case $mashsbShareCounts >= 600:
-                        $mashsbShareCountArr = array(75,99,165,274,384,485,573, $mashsbShareCounts);
-                        return $mashsbShareCountArr;
-                        break;
-                    case $mashsbShareCounts >= 400:
-                        $mashsbShareCountArr = array(25,73,157,274,384,399, $mashsbShareCounts);
-                        return $mashsbShareCountArr;
-                        break;
-                    case $mashsbShareCounts >= 200:
-                        $mashsbShareCountArr = array(52,88,130,176,199, $mashsbShareCounts);
-                        return $mashsbShareCountArr;
-                        break;
-                    case $mashsbShareCounts >= 100:
-                        $mashsbShareCountArr = array(23,54,76,87,99, $mashsbShareCounts);
-                        return $mashsbShareCountArr;
-                        break;
-                    case $mashsbShareCounts >= 60:
-                        $mashsbShareCountArr = array(2,10,14,18,27,33,45,57, $mashsbShareCounts);
-                        return $mashsbShareCountArr;
-                        break;
-                    case $mashsbShareCounts >= 20:
-                        $mashsbShareCountArr = array(2,5,7,9,9, 10,11, 13, 15, 20, $mashsbShareCounts);
-                        return $mashsbShareCountArr;
-                        break;
-                    case $mashsbShareCounts == 0:
-                        $mashsbShareCountArr = array(0);
-                        return $mashsbShareCountArr;
-                        break;
-                    default:
-                        $mashsbShareCountArr = array(0);
-                        return $mashsbShareCountArr;
-                        }
+/* Creates some shares for older posts which has been already 
+ * shared dozens of times
+ * This smooths the Velocity Graph Add-On if available
+ * 
+ * @since 2.0.9
+ * @return int
+ * @deprecated deprecated since version 2.2.8
+ */
+
+function mashsbSmoothVelocity($mashsbShareCounts) {
+    switch ($mashsbShareCounts) {
+        case $mashsbShareCounts >= 1000:
+            $mashsbShareCountArr = array(100, 170, 276, 329, 486, 583, 635, 736, 875, $mashsbShareCounts);
+            return $mashsbShareCountArr;
+            break;
+        case $mashsbShareCounts >= 600:
+            $mashsbShareCountArr = array(75, 99, 165, 274, 384, 485, 573, $mashsbShareCounts);
+            return $mashsbShareCountArr;
+            break;
+        case $mashsbShareCounts >= 400:
+            $mashsbShareCountArr = array(25, 73, 157, 274, 384, 399, $mashsbShareCounts);
+            return $mashsbShareCountArr;
+            break;
+        case $mashsbShareCounts >= 200:
+            $mashsbShareCountArr = array(52, 88, 130, 176, 199, $mashsbShareCounts);
+            return $mashsbShareCountArr;
+            break;
+        case $mashsbShareCounts >= 100:
+            $mashsbShareCountArr = array(23, 54, 76, 87, 99, $mashsbShareCounts);
+            return $mashsbShareCountArr;
+            break;
+        case $mashsbShareCounts >= 60:
+            $mashsbShareCountArr = array(2, 10, 14, 18, 27, 33, 45, 57, $mashsbShareCounts);
+            return $mashsbShareCountArr;
+            break;
+        case $mashsbShareCounts >= 20:
+            $mashsbShareCountArr = array(2, 5, 7, 9, 9, 10, 11, 13, 15, 20, $mashsbShareCounts);
+            return $mashsbShareCountArr;
+            break;
+        case $mashsbShareCounts == 0:
+            $mashsbShareCountArr = array(0);
+            return $mashsbShareCountArr;
+            break;
+        default:
+            $mashsbShareCountArr = array(0);
+            return $mashsbShareCountArr;
+    }
 }
 
 /* Get mashsbShareObject 
@@ -233,6 +237,7 @@ function mashsb_subscribe_button(){
     
     
     /* Round the totalshares
+     * 
      * @since 1.0
      * @return string
      */
@@ -250,13 +255,6 @@ function mashsb_subscribe_button(){
      * @since 2.0
      * @return string
      */
-    /*function onOffSwitch(){
-        $output = '<div class="onoffswitch">' .
-                        '<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked="">' .
-                        '<label class="onoffswitch-label" for="myonoffswitch">' .
-                        '<div class="onoffswitch-inner"></div>' .
-                        '</label>' .
-                        '</div>';*/
     function onOffSwitch(){
         $output = '<div class="onoffswitch"></div>';
         return apply_filters('mashsh_onoffswitch', $output);
@@ -264,19 +262,13 @@ function mashsb_subscribe_button(){
     
     /* Return the second more networks button after 
      * last hidden additional service. initial status: hidden
-     * Gets visible with click on 'plus'
+     * Become visible with click on plus icon
+     * 
      * @since 2.0
      * @return string
      */
     function onOffSwitch2(){
-        /*$output = '<div class="onoffswitch2" style="display:none;">' .
-                        '<input type="checkbox" name="onoffswitch2" class="onoffswitch2-checkbox" id="myonoffswitch2" checked="">' .
-                        '<label class="onoffswitch2-label" for="myonoffswitch2">' .
-                        '<div class="onoffswitch2-inner"></div>' .
-                        '</label>' .
-                        '</div>';*/
-        $output = '<div class="onoffswitch2" style="display:none;">' .
-                        '</div>';
+        $output = '<div class="onoffswitch2" style="display:none;"></div>';
         return apply_filters('mashsh_onoffswitch2', $output);
     }
 
@@ -287,8 +279,11 @@ function mashsb_subscribe_button(){
     function isStatus($var){
         return (!empty($var["status"]));
         }
-        
-   /* Array of all available network share urls
+       
+
+
+
+/* Array of all available network share urls
     * 
     * @param string $name id of the network
     * @param string $url to share
@@ -299,42 +294,23 @@ function mashsb_subscribe_button(){
     * @return string
     */   
         
-    function arrNetworks($name, $url, $title, $customurl = false) {
-        global $mashsb_options, $post;
-        $singular = isset( $mashsb_options['singular'] ) ? $singular = true : $singular = false;
-          
-        $urltw = $url;
-        if ( function_exists('mashsuGetShortURL') && $customurl === false){
-            mashsuGetShortURL() !== 0 ? $urltw = mashsuGetShortURL( $url ) : $urltw = $url;
-        }
-        if ( function_exists('mashsuGetShortURL') && $customurl === true){
-            mashsuGetShortURL() !== 0 ? $urltw = mashsuGetShortURL( $customurl ) : $urltw = $customurl;
-        }
-       
-        
-        function_exists('MASHOG') ? $image = MASHOG()->MASHOG_OG_Output->_add_image() : $image = mashsb_get_image($post->ID);
-        function_exists('MASHOG') ? $desc = MASHOG()->MASHOG_OG_Output->_get_description() : $desc = urlencode(mashsb_get_excerpt_by_id($post->ID));
-        if (function_exists('MASHOG')){
-            $twittertitle = MASHOG()->MASHOG_OG_Output->_get_tw_title();
-            $twittertitle = html_entity_decode($twittertitle, ENT_QUOTES, 'UTF-8');
-            $twittertitle = urlencode($twittertitle);
-            $twittertitle = str_replace('#' , '%23', $twittertitle);
-            $twittertitle = esc_html($twittertitle);
-            empty($twittertitle) ? $twittertitle = $title : $twittertitle; 
-        } else {
-            $twittertitle = $title;
-        }
-    
-        
+    function arrNetworks($name) {
+        global $mashsb_options, $post, $mashsb_custom_url, $mashsb_custom_text;
+        $singular = isset( $mashsb_options['singular'] ) ? $singular = true : $singular = false;     
+
+        $url = $mashsb_custom_url ? $mashsb_custom_url : mashsb_get_url() ;
+        $twitter_url = $mashsb_custom_url ? $mashsb_custom_url : mashsb_get_twitter_url();
+        $title = $mashsb_custom_text ? $mashsb_custom_text : mashsb_get_title();
+        $twitter_title = $mashsb_custom_text ? $mashsb_custom_text : mashsb_get_twitter_title();
+
         !empty($mashsb_options['mashsharer_hashtag']) ? $via = '&amp;via=' . $mashsb_options['mashsharer_hashtag'] : $via = '';
        
-        
         $networks = apply_filters('mashsb_array_networks', array(
             'facebook' => 'http://www.facebook.com/sharer.php?u=' . $url,
-            'twitter' =>  'https://twitter.com/intent/tweet?text=' . $twittertitle . $via . '&amp;url=' . $urltw,
+            'twitter' =>  'https://twitter.com/intent/tweet?text=' . $twitter_title . $via . '&amp;url=' . $twitter_url,
             'subscribe' => '#',
             'url' => $url,
-            'title' => $title   
+            'title' => mashsb_get_title()   
         ));
         
             return isset($networks[$name]) ? $networks[$name] : '';    
@@ -348,9 +324,10 @@ function mashsb_subscribe_button(){
      * @param string $url to share
      * @param string $title to share
      * @param mixed $customurl boolean | string false default
+     * @param string $custom_title a custom title for sharing 
      * @returns string
      */
-    function getNetworks($url, $title, $customurl) {
+    function getNetworks() {
         //mashdebug()->timer('getNetworks');
         global $mashsb_options, $enablednetworks;
 
@@ -402,7 +379,7 @@ function mashsb_subscribe_button(){
             }
             $enablednetworks[$key]['id'] == 'whatsapp' ? $display = 'display:none;' : $display = ''; // Whatsapp button is made visible via js when opened on mobile devices
 
-            $output .= '<a style="' . $display . '" class="mashicon-' . $enablednetworks[$key]['id'] . '" href="' . arrNetworks($enablednetworks[$key]['id'], $url, $title, $customurl) . '" target="_blank"><span class="icon"></span><span class="text">' . $name . '</span></a>';
+            $output .= '<a style="' . $display . '" class="mashicon-' . $enablednetworks[$key]['id'] . '" href="' . arrNetworks($enablednetworks[$key]['id']) . '" target="_blank"><span class="icon"></span><span class="text">' . $name . '</span></a>';
             $output .= $onoffswitch;
             $output .= $startsecondaryshares;
             
@@ -420,8 +397,10 @@ function mashsb_subscribe_button(){
      * @since 1.0
      * @returns string
      */
-    function mashshareShow($atts, $place, $url, $title) {
+    function mashshareShow($atts, $place) {
         mashdebug()->timer('timer');
+        $url = mashsb_get_url();
+        //$title = mashsb_get_title();
         
         global $wpdb, $mashsb_options, $post;
         !empty($mashsb_options['mashsharer_apikey']) ? $apikey = $mashsb_options['mashsharer_apikey'] : $apikey = '';
@@ -446,7 +425,7 @@ function mashsb_subscribe_button(){
                     '<div class="mashsb-box">'
                         . apply_filters('mashsb_sharecount_filter', $sharecount) .
                     '<div class="mashsb-buttons">' 
-                        . getNetworks($url, $title, false) . 
+                        . getNetworks() . 
                     '</div></div>
                     <div style="clear:both;"></div>'
                     . mashsb_subscribe_content()
@@ -465,17 +444,11 @@ function mashsb_subscribe_button(){
      * @returns string
      */
     function mashshareShortcodeShow($atts, $place) {
-        global $wpdb ,$mashsb_options, $post, $wp;
+        global $wpdb ,$mashsb_options, $post, $wp, $mashsb_custom_url, $mashsb_custom_text;
         
         $mainurl = mashsb_get_url();
+        //$title = mashsb_get_title();
         !empty($mashsb_options['sharecount_title']) ? $sharecount_title = $mashsb_options['sharecount_title'] : $sharecount_title = __('SHARES', 'mashsb');
-
-        
-        function_exists('MASHOG') ? $title = MASHOG()->MASHOG_OG_Output->_get_title() : $title = the_title_attribute('echo=0');
-        $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
-        $title = urlencode($title);
-        $title = str_replace('#' , '%23', $title);
-        $title = esc_html($title);
         
         $sharecount = '';
 
@@ -484,6 +457,7 @@ function mashsb_subscribe_button(){
             'shares' => 'true',
             'buttons' => 'true',
             'align' => 'left',
+            'text' => '',
             'url' => ''
                         ), $atts));
 
@@ -494,12 +468,19 @@ function mashsb_subscribe_button(){
                 $via = '';
             }
 
-            // Define custom url to share
-            $customurl = empty($url) ? false : $url;
+            // Define custom url var to share
+            $mashsb_custom_url = empty($url) ? false : $url;
+            
+            // Define custom text to share
+            $mashsb_custom_text = empty($text) ? false : $text;
+            
+            $sharecount_url = empty($url) ? mashsb_get_url() : $url;
             
              if ($shares != 'false') {
                     /* get totalshares of the current page with sharedcount.com */
-                    $totalshares = getSharedcount($mainurl);
+                    $totalshares = getSharedcount($mashsb_custom_url);
+                    //$totalshares = getSharedcount($mainurl);
+                    //$totalshares = $mashsb_custom_url;
                     /* Round total shares when enabled */
                     $roundenabled = isset($mashsb_options['mashsharer_round']) ? $mashsb_options['mashsharer_round'] : null;
                         if ($roundenabled) {
@@ -522,7 +503,7 @@ function mashsb_subscribe_button(){
                     '<div class="mashsb-box">'
                         . $sharecount .
                     '<div class="mashsb-buttons">' 
-                        . getNetworks($mainurl, $title, $customurl) . 
+                        . getNetworks() . 
                     '</div></div>
                     <div style="clear:both;"></div>'
                     . mashsb_subscribe_content()
@@ -553,8 +534,8 @@ function mashsb_subscribe_button(){
        $singular = isset( $mashsb_options['singular'] ) ? $singular = true : $singular = false;
        $loadall = isset( $mashsb_options['loadall'] ) ? $loadall = true : $loadall = false;
        
-       if ( is_404() )
-           return false;
+       /*if ( is_404() )
+           return false;*/
            
        if ($loadall){
            mashdebug()->info("load all mashsb scripts");
@@ -563,7 +544,7 @@ function mashsb_subscribe_button(){
        
        // Load scripts when shortcode is used
        /* Check if shortcode is used */ 
-       if( function_exists('has_shortcode') && has_shortcode( $post->post_content, 'mashshare' ) ) {
+       if( function_exists('has_shortcode') && is_object($post) && has_shortcode( $post->post_content, 'mashshare' ) ) {
            mashdebug()->info("has_shortcode");
             return true;
        } 
@@ -642,12 +623,12 @@ function mashsb_subscribe_button(){
         /* define some vars here to reduce multiple execution of basic functions */
         /* Use permalink when its not singular page, so on category pages the permalink is used. */
         $url = mashsb_get_url();
-
-        function_exists('MASHOG') ? $title = MASHOG()->MASHOG_OG_Output->_get_title() : $title = the_title_attribute('echo=0');
+        $title = mashsb_get_title();
+        /*function_exists('MASHOG') ? $title = MASHOG()->MASHOG_OG_Output->_get_title() : $title = the_title_attribute('echo=0');
         $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
         $title = urlencode($title);
         $title = str_replace('#' , '%23', $title);
-        $title = esc_html($title);
+        $title = esc_html($title);*/
         
         $position = !empty($mashsb_options['mashsharer_position']) ? $mashsb_options['mashsharer_position'] : '';
         $enabled_post_types = isset( $mashsb_options['post_types'] ) ? $mashsb_options['post_types'] : null;
@@ -692,16 +673,16 @@ function mashsb_subscribe_button(){
                 break;
 
                 case 'both':
-                    $content = mashshareShow($atts, '', $url, $title) . $content . mashshareShow($atts, "bottom", $url, $title);
+                    $content = mashshareShow($atts, '') . $content . mashshareShow($atts, "bottom");
                 break;
 
                 case 'before':
-                    $content = mashshareShow($atts, '', $url, $title) . $content;
+                    $content = mashshareShow($atts, '') . $content;
                     
                 break;
 
                 case 'after':
-                    $content .= mashshareShow($atts, '', $url, $title);
+                    $content .= mashshareShow($atts, '');
                 break;
             }
             return $content;
@@ -713,20 +694,21 @@ function mashsb_subscribe_button(){
  * @return string
 */ 
 function mashshare(){
-    global $content;
     global $atts;
+    /*global $content;
     global $post;
-    global $wp;
+    global $wp;*/
 
     /* Use permalink when its not singular page, so on category pages the permalink is used. */
     //is_singular() ? $url = urlencode(home_url( $wp->request )) : $url = urlencode(get_permalink($post->ID));
-    $url = mashsb_get_url();
-    function_exists('MASHOG') ? $title = MASHOG()->MASHOG_OG_Output->_get_title() : $title = the_title_attribute('echo=0');
+    //$url = mashsb_get_url();
+    //$title = mashsb_get_title(); 
+    /*function_exists('MASHOG') ? $title = MASHOG()->MASHOG_OG_Output->_get_title() : $title = the_title_attribute('echo=0');
     $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
     $title = urlencode($title);
     $title = str_replace('#' , '%23', $title);
-    $title = esc_html($title);
-    echo mashshareShow($atts, '', $url, $title);
+    $title = esc_html($title);*/
+    echo mashshareShow($atts, '');
 }
 
 /* Deprecated: Template function mashsharer()
@@ -734,21 +716,19 @@ function mashshare(){
  * @return string
 */ 
 function mashsharer(){
-    global $content;
     global $atts;
-    //global $url;
-    //global $title;
+    /*global $content;
     global $post;
-    global $wp;
+    global $wp;*/
     //is_singular() ? $url = urlencode(home_url( $wp->request )) : $url = urlencode(get_permalink($post->ID));
-    $url = mashsb_get_url();
-    function_exists('MASHOG') ? $title = MASHOG()->MASHOG_OG_Output->_get_title() : $title = the_title_attribute('echo=0');
-    //$title = html_entity_decode(the_title_attribute('echo=0'), ENT_QUOTES, 'UTF-8');
+    //$url = mashsb_get_url();
+    //$title = mashsb_get_title();       
+    /*function_exists('MASHOG') ? $title = MASHOG()->MASHOG_OG_Output->_get_title() : $title = the_title_attribute('echo=0');
     $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
     $title = urlencode($title);
     $title = str_replace('#' , '%23', $title);
-    $title = esc_html($title);
-    echo mashshareShow($atts, '', $url, $title);
+    $title = esc_html($title);*/
+    echo mashshareShow($atts, '');
 }
 
 
@@ -860,11 +840,6 @@ function mashsb_hide_shares(){
 function mashsb_styles_method() {
     global $mashsb_options;
     isset($mashsb_options['small_buttons']) ? $smallbuttons = true : $smallbuttons = false;
-    /*trailingslashit( plugins_url(). '/mashshare-likeaftershare/templates/'    ) . $file;
-    wp_enqueue_style(
-		'custom-style',
-		plugins_url() . '/mashshare-likeaftershare/templates/'
-	);*/
     
     /* VARS */
     isset($mashsb_options['share_color']) ? $share_color = $mashsb_options['share_color'] : $share_color = '';
@@ -968,24 +943,6 @@ function mashsb_styles_method() {
 add_action( 'wp_enqueue_scripts', 'mashsb_styles_method' );
 
 
-    
-/* Get URL to share
- * 
- * @return url  $string
- * @scince 2.2.8
- */
-
-function mashsb_get_url(){
-    global $wp, $post, $numpages;
-    if($numpages > 1){ // check if '<!-- nextpage -->' is used
-        $url = urlencode(get_permalink($post->ID));
-    } elseif (is_singular()){
-        $url = urlencode(get_permalink($post->ID));
-    }else{
-        $url = urlencode(get_permalink($post->ID));
-    }
-    return apply_filters('mashsb_get_url', $url);
-}
 
     /* Additional content above share buttons 
      * 
@@ -1009,4 +966,70 @@ function mashsb_get_url(){
         return apply_filters( 'mashsb_below_buttons', $html );
     }
 
+/**
+ * Return general post title
+ * 
+ * @param string $title default post title
+ * @return string the default post title, shortcode title or custom twitter title
+ */
+function mashsb_get_title() {
+    function_exists('MASHOG') ? $title = MASHOG()->MASHOG_OG_Output->_get_title() : $title = the_title_attribute('echo=0');
+    $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
+    $title = urlencode($title);
+    $title = str_replace('#' , '%23', $title);
+    $title = esc_html($title);
+    
+    return $title;
+}
 
+/**
+ * Return twitter custom title
+ * 
+ * @return string the custom twitter title
+ */
+function mashsb_get_twitter_title() {
+    if (function_exists('MASHOG')) {
+        $title = MASHOG()->MASHOG_OG_Output->_get_tw_title();
+        $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
+        $title = urlencode($title);
+        $title = str_replace('#', '%23', $title);
+        $title = esc_html($title);
+    } else {
+        $title = mashsb_get_title();
+    }
+    return $title;
+}
+
+    
+/* Get URL to share
+ * 
+ * @return url  $string
+ * @scince 2.2.8
+ */
+
+function mashsb_get_url(){
+    global $wp, $post, $numpages;
+    if($numpages > 1){ // check if '<!-- nextpage -->' is used
+        $url = urlencode(get_permalink($post->ID));
+    } elseif (is_singular()){
+        $url = urlencode(get_permalink($post->ID));
+    }else{
+        $url = urlencode(get_permalink($post->ID));
+    }
+    return apply_filters('mashsb_get_url', $url);
+}
+
+/* Get twitter URL to share
+ * 
+ * @return url  $string
+ * @scince 2.2.8
+ */
+
+function mashsb_get_twitter_url(){
+    global $wp, $post, $numpages; 
+       if ( function_exists('mashsuGetShortURL')){
+            $url = mashsb_get_url();
+            mashsuGetShortURL($url) !== 0 ? $url = mashsuGetShortURL( $url ) : $url = mashsb_get_url();
+        }
+    return apply_filters('mashsb_get_twitter_url', $url);
+}

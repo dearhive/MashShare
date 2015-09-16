@@ -129,7 +129,7 @@ if (!class_exists('mashshare')) :
             global $wpdb;
             // Plugin version
             if (!defined('MASHSB_VERSION')) {
-                define('MASHSB_VERSION', '2.4.2');
+                define('MASHSB_VERSION', '2.4.3');
             }
 
             // Plugin Folder Path
@@ -232,7 +232,7 @@ if (!class_exists('mashshare')) :
  * Use this function like you would a global variable, except without needing
  * to declare the global.
  *
- * Example: <?php $MASHSB = MASHSB(); ?>
+ * Example: $MASHSB = MASHSB();
  *
  * @since 2.0.0
  * @return object The one true Mashshare Instance

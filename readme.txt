@@ -302,8 +302,13 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 == Changelog == 
 
 = 2.4.3 =
-* Fix: Disable Mashshare on 404 pages to prevent "Trying to get property of non-object"
+* Fix: Check if $post is object on some places to prevent "Trying to get property of non-object"
 * New: Tested up to WordPress 4.3
+* New: Performance improvements
+* New: Complete rewrite of a large code base. Prevent the use of globals all over
+* New: Shortcode attribute "text" to specifiy the share text. E.g. [mashshare text="This is a custom share text. Awesome, isn't it?"]
+* Tweak: Remove deprecated code
+
 
 = 2.4.2 =
 * New: New shortcode argument allows you to define custom url´s, e.g. [mashshare url="yourwebsite.com/yourpage"]
@@ -500,4 +505,4 @@ https://www.mashshare.net/changelog/
 == Upgrade Notice ==
 
 = 2.4.3 =
-2.4.3 <strong>Update: </strong>See the complete <a href="https://wordpress.org/plugins/mashsharer/changelog/">changelog</a>. Test this update first on a staging website before installing it on a live site. Use the free plugin <a href="https://wordpress.org/plugins/wp-staging/" target="_blank">WP Staging</a> for creating a test staging site with two clicks.
+2.4.3 <strong>Update: </strong>See the <a href="https://wordpress.org/plugins/mashsharer/changelog/">changelog</a>. Test this update first on a staging website before installing it on a live site. Use the free plugin <a href="https://wordpress.org/plugins/wp-staging/" target="_blank">WP Staging</a> for creating a test staging site.

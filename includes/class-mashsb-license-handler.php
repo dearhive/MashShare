@@ -216,7 +216,7 @@ class MASHSB_License {
 				'body'      => $api_params
 			)
 		);
-                
+
 		// Make sure there are no errors
 		if ( is_wp_error( $response ) ) {
 			return;
