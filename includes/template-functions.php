@@ -1030,6 +1030,8 @@ function mashsb_get_twitter_url(){
        if ( function_exists('mashsuGetShortURL')){
             $url = mashsb_get_url();
             mashsuGetShortURL($url) !== 0 ? $url = mashsuGetShortURL( $url ) : $url = mashsb_get_url();
+        } else {
+            $url = mashsb_get_url();
         }
     return apply_filters('mashsb_get_twitter_url', $url);
 }

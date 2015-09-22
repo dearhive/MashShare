@@ -8,8 +8,8 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Mashable, Social Media Pop-Up, Social Media Widget, Social Media Sharing, Social Media Networks, Social Sharing, Social sharing optimization, Share button, share buttons, Facebook Share button, Twitter Share Button, Social Share, Social buttons, social share buttons, Share, Share this, simple social buttons, simple share buttons adder,  Google+, Twitter, Facebook, Digg, Stumble Upon, Linkedin, +1, add to any, AddThis, add this, addtoany, admin, aim, analytics, bookmark, bookmarking, bookmarks, bookmark button, bookmark menu, buddypress, chrome extension, comments, del.icio.us, Diigo, buffer, button, del.icio.us, e-mail, email, email button, Facebook, facebook like, facebook recommend, facebook share, facebook share button, fark, firefox extension, flickr, floating buttons, follow, foursquare, gmail, goo.gl
 Requires at least: 3.6+
-Tested up to: 4.3
-Stable tag: 2.4.3
+Tested up to: 4.3.1
+Stable tag: 2.4.4
 
 Social Media Icons & Share Buttons, a highly customizable social sharing and & Media SEO ecosystem Facebook, Twitter and more ...
 
@@ -183,9 +183,13 @@ Share Buttons will be shown exactly on the place where you copy the shortcode in
 
 There are more parameters available:
 
- `[mashshare shares="false" buttons="true" align="left"]` for buttons without shares, alignment left
- `[mashshare shares="true" buttons="false" align="right"]` for sharecount without buttons, alignment right
- `[mashshare url="http://yourwebsite.com/yourpage"]` for share buttons with custom url
+Embed Share Buttons in pages or posts:  `[mashshare] `
+Buttons without sharecount: `[mashshare shares="false"]`
+Sharecount only: `[mashshare buttons="false"]`
+Share buttons alignment: `[mashshare shares="false" buttons="true" align="left|right"]`
+Shortcode in template files via php: `echo do_shortcode('[mashshare]');`
+Custom url:  `[mashshare url="http://www.google.de"]`
+Custom share text: `[mashshare text="This is my custom share text"]`
 
 * For manual insertion of the Share Buttons in your template files use the following php code on place you like to see the share buttons:`echo do_shortcode('[mashshare]');`
 Configure the Share buttons sharing function in the settings page of the plugin.
@@ -301,12 +305,16 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 == Changelog == 
 
+= 2.4.4 =
+* Fix: Twitter share url not shown when shorturl add-on is not installed
+
 = 2.4.3 =
-* Fix: Check if $post is object on some places to prevent "Trying to get property of non-object"
+* Fix: Notice "Trying to get property of non-object" on some custom post_types
 * New: Tested up to WordPress 4.3
 * New: Performance improvements
-* New: Complete rewrite of a large code base. Prevent the use of globals all over
+* New: Rewrite of a large code base. Prevent the use of globals all over
 * New: Shortcode attribute "text" to specifiy the share text. E.g. [mashshare text="This is a custom share text. Awesome, isn't it?"]
+* New: Tested up with wp 4.3.1
 * Tweak: Remove deprecated code
 
 
@@ -504,5 +512,5 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 2.4.3 =
-2.4.3 <strong>Update: </strong>See the <a href="https://wordpress.org/plugins/mashsharer/changelog/">changelog</a>. Test this update first on a staging website before installing it on a live site. Use the free plugin <a href="https://wordpress.org/plugins/wp-staging/" target="_blank">WP Staging</a> for creating a test staging site.
+= 2.4.4 =
+2.4.4 <strong>Update: </strong>Read the <a href="https://wordpress.org/plugins/mashsharer/changelog/" style="color:white;text-decoration: underline;">changelog</a>. It's recommended to test all plugin updates on a staging website first before installing them on a live site. (You can use <a href="https://wordpress.org/plugins/wp-staging/" target="_blank" style="color:white;text-decoration: underline;">WP Staging</a> for creating a test site or your prefered tool for this)
