@@ -379,7 +379,7 @@ function mashsb_subscribe_button(){
             }
             $enablednetworks[$key]['id'] == 'whatsapp' ? $display = 'display:none;' : $display = ''; // Whatsapp button is made visible via js when opened on mobile devices
 
-            $output .= '<a style="' . $display . '" class="mashicon-' . $enablednetworks[$key]['id'] . '" href="' . arrNetworks($enablednetworks[$key]['id']) . '" target="_blank"><span class="icon"></span><span class="text">' . $name . '</span></a>';
+            $output .= '<a style="' . $display . '" class="mashicon-' . $enablednetworks[$key]['id'] . '" href="' . arrNetworks($enablednetworks[$key]['id']) . '" target="_blank" rel="nofollow"><span class="icon"></span><span class="text">' . $name . '</span></a>';
             $output .= $onoffswitch;
             $output .= $startsecondaryshares;
             

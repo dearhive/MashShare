@@ -9,7 +9,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Mashable, Social Media Pop-Up, Social Media Widget, Social Media Sharing, Social Media Networks, Social Sharing, Social sharing optimization, Share button, share buttons, Facebook Share button, Twitter Share Button, Social Share, Social buttons, social share buttons, Share, Share this, simple social buttons, simple share buttons adder,  Google+, Twitter, Facebook, Digg, Stumble Upon, Linkedin, +1, add to any, AddThis, add this, addtoany, admin, aim, analytics, bookmark, bookmarking, bookmarks, bookmark button, bookmark menu, buddypress, chrome extension, comments, del.icio.us, Diigo, buffer, button, del.icio.us, e-mail, email, email button, Facebook, facebook like, facebook recommend, facebook share, facebook share button, fark, firefox extension, flickr, floating buttons, follow, foursquare, gmail, goo.gl
 Requires at least: 3.6+
 Tested up to: 4.3.1
-Stable tag: 2.4.4
+Stable tag: 2.4.5
 
 Social Media Icons & Share Buttons, a highly customizable social sharing and & Media SEO ecosystem Facebook, Twitter and more ...
 
@@ -305,6 +305,9 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 == Changelog == 
 
+= 2.4.5 =
+* Tweak: Change share links to rel="nofollow"
+
 = 2.4.4 =
 * Fix: Twitter share url not shown when shorturl add-on is not installed
 
@@ -512,5 +515,5 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 2.4.4 =
-2.4.4 <strong>Update: </strong>Read the <a href="https://wordpress.org/plugins/mashsharer/changelog/" style="color:white;text-decoration: underline;">changelog</a>. It's recommended to test all plugin updates on a staging website first before installing them on a live site. (You can use <a href="https://wordpress.org/plugins/wp-staging/" target="_blank" style="color:white;text-decoration: underline;">WP Staging</a> for creating a test site or your prefered tool for this)
+= 2.4.5 =
+2.4.5  <a href="https://wordpress.org/plugins/mashsharer/changelog/" style="color:white;text-decoration: underline;">See the changelog!</a> It's recommended to test all plugin updates on a staging website first before installing them on a live site. (Use <a href="https://wordpress.org/plugins/wp-staging/" target="_blank" style="color:white;text-decoration: underline;">WP Staging</a> for creating a test site or any other prefered tool)
