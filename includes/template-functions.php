@@ -994,8 +994,10 @@ function mashsb_get_twitter_title() {
         $title = urlencode($title);
         $title = str_replace('#', '%23', $title);
         $title = esc_html($title);
+        $title = str_replace('+', '%20', $title);
     } else {
         $title = mashsb_get_title();
+        $title = str_replace('+', '%20', $title);
     }
     return $title;
 }
