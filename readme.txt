@@ -117,6 +117,7 @@ This Social Media share button plugin is in active development and will be updat
 * ManageWP
 * Meneame
 * Odnoklassniki
+* Frype / Draugiem
 
 = High Performance =
 
@@ -306,6 +307,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 == Changelog == 
 
 = 2.4.6 =
+* New: Add Frype / Draugiem to the list of supported social networks
 * Fix: Convert space characters + to %20 in twitter share text
 
 = 2.4.5 =
