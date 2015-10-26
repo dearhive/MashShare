@@ -140,6 +140,11 @@ function mashsbGetShareMethod($mashsbSharesObj) {
 
 function getSharedcount($url) {
     global $wpdb, $mashsb_options, $post;
+    
+    if (is_null($post)) {
+    	return apply_filters('filter_get_sharedcount', 0);
+    }
+    
     isset($mashsb_options['mashsharer_cache']) ? $cacheexpire = $mashsb_options['mashsharer_cache'] : $cacheexpire = 300;
     /* make sure 300sec is default value */
     $cacheexpire < 300 ? $cacheexpire = 300 : $cacheexpire;
