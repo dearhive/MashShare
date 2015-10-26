@@ -174,8 +174,7 @@ function mashsbGetShareMethod($mashsbSharesObj) {
  */
 function getSharedcount($url) {
     global $wpdb, $mashsb_options, $post;
-
-    // Bypass next lines and return share count for pages with empty $post object
+    
     if (is_null($post)) {
     	return apply_filters('filter_get_sharedcount', 0);
     }
