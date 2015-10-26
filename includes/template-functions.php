@@ -138,8 +138,48 @@ function mashsbGetShareMethod($mashsbSharesObj) {
         return $mashsbShareCounts;
 }
 
+/**
+ * Get share count for all pages where $post is empty. E.g. category or blog list pages
+ * Uses transient 
+ * 
+ * @param string $url
+ * @param in $cacheexpire
+ * @returns integer $shares
+ */
+/*function mashsbGetNonPostShares($url, $cacheexpire) {
+    // Get any existing copy of our transient data
+    if (false === ( $non_post_shares = get_transient('non_post_shares') )) {
+        // It wasn't there, so regenerate the data and save the transient
+        // Get the share Object
+        $mashsbSharesObj = mashsbGetShareObj($url);
+        // Get the share counts
+        $mashsbShareCounts = mashsbGetShareMethod($mashsbSharesObj);
+        $transient_name = md5($url);
+        // Set the transient
+        set_transient('$transient_name', $mashsbShareCounts, $cacheexpire);
+    } else {
+        $shares = get_transient('non_post_shares');
+    }
+    if (is_numeric($shares)){    
+        return $shares;
+        mashdebug()->info('Share count where $post is_null(): ' . $shares);
+    }
+}*/
+
+/*
+ * Return the share count
+ * 
+ * @param string url of the page the share count is collected for
+ * @returns int
+ */
 function getSharedcount($url) {
     global $wpdb, $mashsb_options, $post;
+
+    // Bypass next lines and return share count for pages with empty $post object
+    if (is_null($post)) {
+    	return apply_filters('filter_get_sharedcount', 0);
+    }
+    
     isset($mashsb_options['mashsharer_cache']) ? $cacheexpire = $mashsb_options['mashsharer_cache'] : $cacheexpire = 300;
     /* make sure 300sec is default value */
     $cacheexpire < 300 ? $cacheexpire = 300 : $cacheexpire;
@@ -147,6 +187,16 @@ function getSharedcount($url) {
     if (isset($mashsb_options['disable_cache'])) {
         $cacheexpire = 5;
     }
+    
+    /* Bypass next lines and return share count for pages with empty $post object
+       share count for pages where $post is empty. E.g. category or blog list pages
+       Otherwise share counts are requested with every page load 
+     *      */
+    /*if (is_null($post)) {
+    	return apply_filters('filter_get_sharedcount', mashsbGetNonPostShares($url, $cacheexpire));
+    }*/
+    
+    
     $mashsbNextUpdate = (int) $cacheexpire;
     $mashsbLastUpdated = get_post_meta($post->ID, 'mashsb_timestamp', true);
 
@@ -154,7 +204,7 @@ function getSharedcount($url) {
         $mashsbCheckUpdate = true;
         $mashsbLastUpdated = 0;
     }
-    //if ($mashsbLastUpdated < (time() - $mashsbNextUpdate)) {
+
     if ($mashsbLastUpdated + $mashsbNextUpdate <= time()) {
         mashdebug()->info("First Update - Frequency: " . $mashsbNextUpdate . " Next update: " . date('Y-m-d H:i:s', $mashsbLastUpdated + $mashsbNextUpdate) . " last updated: " . date('Y-m-d H:i:s', $mashsbLastUpdated) . " Current time: " . date('Y-m-d H:i:s', time()));
         // Get the share Object
@@ -169,7 +219,7 @@ function getSharedcount($url) {
 
         /* Update post_meta only when API is requested and
          * API share count is greater than real fresh requested share count ->
-         * ### This would mean there is an error in the API (Failure or hammering any limits, e.g. X-Rate-Limit) ###
+         * ### This meas there is an error in the API (Failure or hammering any limits, e.g. X-Rate-Limit) ###
          */
 
         if ($mashsbShareCounts->total >= $mashsbStoredDBMeta) {
@@ -446,8 +496,8 @@ function mashsb_subscribe_button(){
     function mashshareShortcodeShow($atts, $place) {
         global $wpdb ,$mashsb_options, $post, $wp, $mashsb_custom_url, $mashsb_custom_text;
         
-        $mainurl = mashsb_get_url();
-        //$title = mashsb_get_title();
+        //$mainurl = mashsb_get_url();
+
         !empty($mashsb_options['sharecount_title']) ? $sharecount_title = $mashsb_options['sharecount_title'] : $sharecount_title = __('SHARES', 'mashsb');
         
         $sharecount = '';
@@ -474,7 +524,7 @@ function mashsb_subscribe_button(){
             // Define custom text to share
             $mashsb_custom_text = empty($text) ? false : $text;
             
-            $sharecount_url = empty($url) ? mashsb_get_url() : $url;
+            //$sharecount_url = empty($url) ? mashsb_get_url() : $url;
             
              if ($shares != 'false') {
                     /* get totalshares of the current page with sharedcount.com */
