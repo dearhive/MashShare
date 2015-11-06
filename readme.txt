@@ -306,6 +306,9 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 == Changelog == 
 
+= 2.4.7 =
+* Fix: Prevent excessive getSharedcount work when global $post is null
+
 = 2.4.6 =
 * New: Add Frype / Draugiem to the list of supported social networks
 * Fix: Convert space characters + to %20 in twitter share text

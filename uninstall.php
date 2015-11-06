@@ -1,6 +1,6 @@
 <?php
 /**
- * Uninstall Mashshare LikeAfterShare
+ * Uninstall Mashshare
  *
  * @package     MASHSB
  * @subpackage  Uninstall
