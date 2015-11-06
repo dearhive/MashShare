@@ -6,7 +6,7 @@ Contributors: ReneHermi, WP-Staging
 Donate link: 
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Tags: Mashable, Social Media Pop-Up, Social Media Widget, Social Media Sharing, Social Media Networks, Social Sharing, Social sharing optimization, Share button, share buttons, Facebook Share button, Twitter Share Button, Social Share, Social buttons, social share buttons, Share, Share this, simple social buttons, simple share buttons adder,  Google+, Twitter, Facebook, Digg, Stumble Upon, Linkedin, +1, add to any, AddThis, add this, addtoany, admin, aim, analytics, bookmark, bookmarking, bookmarks, bookmark button, bookmark menu, buddypress, chrome extension, comments, del.icio.us, Diigo, buffer, button, del.icio.us, e-mail, email, email button, Facebook, facebook like, facebook recommend, facebook share, facebook share button, fark, firefox extension, flickr, floating buttons, follow, foursquare, gmail, goo.gl
+Tags: Mashable, Social Media Pop-Up, Social Media Widget, Social Media Sharing, Social Media Networks, Social Sharing, Social sharing optimization, Share button, share buttons, Facebook Share button, Twitter Share Button, Social Share, Social buttons, social share buttons, Skype. Frype, Share, Share this, simple social buttons, simple share buttons adder,  Google+, Twitter, Facebook, Digg, Stumble Upon, Linkedin, +1, add to any, AddThis, add this, addtoany, admin, aim, analytics, bookmark, bookmarking, bookmarks, bookmark button, bookmark menu, buddypress, chrome extension, comments, del.icio.us, Diigo, buffer, button, del.icio.us, e-mail, email, email button, Facebook, facebook like, facebook recommend, facebook share, facebook share button, fark, firefox extension, flickr, floating buttons, follow, foursquare, gmail, goo.gl
 Requires at least: 3.6+
 Tested up to: 4.3.1
 Stable tag: 2.4.6
@@ -118,6 +118,7 @@ This Social Media share button plugin is in active development and will be updat
 * Meneame
 * Odnoklassniki
 * Frype / Draugiem
+* Skype
 
 = High Performance =
 
@@ -158,7 +159,6 @@ Thanks to [JS Morisset](https://profiles.wordpress.org/jsmoriss/ "Social Sharing
 	<li><strong>0.1092</strong> secs - <strong>WordPress Core v4.0.0</strong></li>
 	<li><strong>0.1404</strong> secs - BuddyPress v2.1.1 (No Activities)</li>
 	<li><strong>0.1404</strong> secs - NextGEN Gallery by Photocrati v2.0.66.29 (No Galleries or Images)</li>
-
         <li><strong>0.0096</strong> secs - Share Buttons by AddToAny v1.3.4</li>
         <li><strong>0.0232</strong> secs - Shareaholic | share buttons, analytics, related content v7.5.0.2</li>
 </ul>
@@ -306,12 +306,12 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 == Changelog == 
 
-= 2.4.7 =
-* Fix: Prevent excessive getSharedcount work when global $post is null
 
 = 2.4.6 =
+* New: Support for Skype Share button (only with social network add-on)
 * New: Add Frype / Draugiem to the list of supported social networks
 * Fix: Convert space characters + to %20 in twitter share text
+* Fix: Prevent excessive getSharedcount work when global $post is null
 
 = 2.4.5 =
 * Tweak: Change share links to rel="nofollow"
