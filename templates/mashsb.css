@@ -139,6 +139,7 @@ color:#ffffff;
 .mashicon-line .icon:before { content: '\E81A'; } /* '' */
 .mashicon-yummly .icon:before { content: '\E81B'; } /* '' */
 .mashicon-frype .icon:before { content: '\e81c'; } /* '' */
+.mashicon-skype .icon:before { content: '\e81d'; } /* '' */
 
 
 /* Upper and lower distance share button to next elements  */
@@ -271,6 +272,10 @@ background: #e16120;
 }
 .mashicon-frype{
 background: #ff6600;
+}
+
+.mashicon-skype{
+background: #00afef;
 }
 
 .mashicon-buffer .text, mashicon-buffer .icon{

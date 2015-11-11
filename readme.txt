@@ -306,6 +306,10 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 == Changelog == 
 
+= 2.4.7 UNRELEASED YET =
+* Tweak: Remove border bottom on admin settings rows
+* Tweak: Move renderhr callback function into mashshare core
+
 
 = 2.4.6 =
 * New: Support for Skype Share button (only with social network add-on)

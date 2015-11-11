@@ -1373,6 +1373,22 @@ function mashsb_hook_callback( $args ) {
 }
 
 /**
+ * Custom Callback for rendering a <hr> line in the settings
+ *
+ * @since 2.4.7
+ * @param array $args Arguments passed by the setting
+ * @global $mashsb_options Array of all the Mashshare Options
+ * @return void
+
+ */
+if ( !function_exists('mashsb_renderhr_callback') ) {
+    function mashsb_renderhr_callback( $args ) { 
+            $html = '';
+            echo $html;
+    }
+}
+
+/**
  * Set manage_options as the cap required to save MASHSB settings pages
  *
  * @since 1.9

@@ -784,7 +784,7 @@ function mashsharer(){
 
 
 /**
- * Get Thumbnail image if existed
+ * Get Thumbnail featured image if existed
  *
  * @since 1.0
  * @param int $postID
