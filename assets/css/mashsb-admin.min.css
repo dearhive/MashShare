@@ -146,6 +146,7 @@ color:#ffffff;
 .mashicon-yummly .icon:before { content: '\E81B'; } /* '' */
 .mashicon-whatsapp .icon:before { content: '\e814'; }
 .mashicon-frype .icon:before { content: '\e81c'; } /* '' */
+.mashicon-skype .icon:before { content: '\e81d'; } /* '' */
 
 
 
@@ -234,7 +235,9 @@ background: #e16120;
 .mashicon-frype{
 background: #ff6600;
 }
-
+.mashicon-skype{
+background: #00afef;
+}
 
 .mashsb-hidden { display: none; }
 .mashsb-clearfix:after { display: block; visibility: hidden; content: "."; text-indent: -9999px; height: 0; }
@@ -782,9 +785,9 @@ color:#484848;
 width: 30%;
 }
 
-#tab_container .form-table tr {
+/*#tab_container .form-table tr {
   border-bottom: 1px solid #E7E7E7;
-}
+}*/
 
 #tab_container span.description{
     display: block;
