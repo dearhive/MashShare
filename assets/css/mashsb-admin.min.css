@@ -12,7 +12,7 @@
     cursor:move;
 }
 
-#mashsb_network_list td {
+#mashsb_network_list td { 
     padding: 5px 10px;
     /*line-height: 1px;*/
 }
@@ -787,7 +787,7 @@ width: 30%;
 
 /*#tab_container .form-table tr {
   border-bottom: 1px solid #E7E7E7;
-}*/
+}*/ 
 
 #tab_container span.description{
     display: block;
@@ -879,4 +879,9 @@ color:#777777;
 
 #mashtabcontainer .mashtab-container {
       border: 0px solid #ececec;
+}
+
+.mashsb-admin-settings-header{
+    font-size:20px;
+    font-weight:bold;
 }
