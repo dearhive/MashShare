@@ -511,7 +511,7 @@ function mashsb_subscribe_button(){
                         ), $atts));
 
             /* Load hashshag*/       
-            if ($mashsb_options['mashsharer_hashtag'] != '') {
+            if ( !empty( $mashsb_options['mashsharer_hashtag'] ) ) {
                 $via = '&amp;via=' . $mashsb_options['mashsharer_hashtag'];
             } else {
                 $via = '';

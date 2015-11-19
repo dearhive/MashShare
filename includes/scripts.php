@@ -44,7 +44,8 @@ function mashsb_load_scripts($hook) {
             
 	$js_dir = MASHSB_PLUGIN_URL . 'assets/js/';
 	// Use minified libraries if SCRIPT_DEBUG is turned off
-	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+	$suffix  = ( mashsbIsDebugMode() ) ? '' : '.min';
+        //$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
         
         isset($mashsb_options['load_scripts_footer']) ? $in_footer = true : $in_footer = false;       
 	wp_enqueue_script( 'mashsb', $js_dir . 'mashsb' . $suffix . '.js', array( 'jquery' ), MASHSB_VERSION, $in_footer );
@@ -89,7 +90,8 @@ function mashsb_register_styles($hook) {
 	}
 
 	// Use minified libraries if SCRIPT_DEBUG is turned off
-	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+	//$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+        $suffix  = ( mashsbIsDebugMode() ) ? '' : '.min';
 	$file          = 'mashsb' . $suffix . '.css';
 
 	//$url = trailingslashit( plugins_url(). '/mashsharer/templates/'    ) . $file;
@@ -119,7 +121,8 @@ function mashsb_load_admin_scripts( $hook ) {
 	$css_dir = MASHSB_PLUGIN_URL . 'assets/css/';
 
 	// Use minified libraries if SCRIPT_DEBUG is turned off
-	$suffix  = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+	$suffix  = ( mashsbIsDebugMode() ) ? '' : '.min';
+        //$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
         //echo $css_dir . 'mashsb-admin' . $suffix . '.css', MASHSB_VERSION;
 	// These have to be global
 	wp_enqueue_script( 'mashsb-admin-scripts', $js_dir . 'mashsb-admin' . $suffix . '.js', array( 'jquery' ), MASHSB_VERSION, false );
@@ -130,3 +133,16 @@ function mashsb_load_admin_scripts( $hook ) {
 	wp_enqueue_style( 'mashsb-admin', $css_dir . 'mashsb-admin' . $suffix . '.css', MASHSB_VERSION );
 }
 add_action( 'admin_enqueue_scripts', 'mashsb_load_admin_scripts', 100 );
+
+/*
+ * Check if debug mode is enabled
+ * 
+ * @since 2.2.7
+ * @return bool true if Mashshare debug mode is on
+ */
+function mashsbIsDebugMode(){
+    global $mashsb_options;
+    
+    $debug_mode = isset($mashsb_options['debug_mode']) ? true : false;
+    return $debug_mode;
+}
