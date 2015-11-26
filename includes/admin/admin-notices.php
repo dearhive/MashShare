@@ -22,7 +22,10 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 function mashsb_admin_messages() {
 	global $mashsb_options;
         
-        $install_date = get_option('mashsb_installDate');
+        if (!current_user_can('update_plugins'))
+        return;
+
+    $install_date = get_option('mashsb_installDate');
         $display_date = date('Y-m-d h:i:s');
 	$datetime1 = new DateTime($install_date);
 	$datetime2 = new DateTime($display_date);

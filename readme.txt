@@ -306,10 +306,11 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 == Changelog == 
 
-= 2.4.7 UNRELEASED YET =
+= 2.4.7 =
 * New: If mashshare debug mode is enabled run non-minified scripts
 * Tweak: Remove border bottom on admin settings rows
 * Tweak: Move renderhr callback function into mashshare core
+* Tweak: Show "rate our plugin" only to administrators
 * Fix: Undefined var $mashsb_options['mashsharer_hashtag'];
 * Fix: Undefined var $mashsb_options['debug_mode']
 
