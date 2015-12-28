@@ -6,10 +6,10 @@ Contributors: ReneHermi, WP-Staging
 Donate link: 
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Tags: Mashable, Social Media Pop-Up, Social Media Widget, Social Media Sharing, Social Media Networks, Social Sharing, Social sharing optimization, Share button, share buttons, Facebook Share button, Twitter Share Button, Social Share, Social buttons, social share buttons, Skype. Frype, Share, Share this, simple social buttons, simple share buttons adder,  Google+, Twitter, Facebook, Digg, Stumble Upon, Linkedin, +1, add to any, AddThis, add this, addtoany, admin, aim, analytics, bookmark, bookmarking, bookmarks, bookmark button, bookmark menu, buddypress, chrome extension, comments, del.icio.us, Diigo, buffer, button, del.icio.us, e-mail, email, email button, Facebook, facebook like, facebook recommend, facebook share, facebook share button, fark, firefox extension, flickr, floating buttons, follow, foursquare, gmail, goo.gl
+Tags: Mashable, Social Media Pop-Up, Social Media Widget, Social Media Sharing, SumoMe, Social Media Networks, Social Sharing, Social sharing optimization, Share button, share buttons, Facebook Share button, Twitter Share Button, Social Share, Social buttons, social share buttons, Skype. Frype, Share, Share this, simple social buttons, simple share buttons adder,  Google+, Twitter, Facebook, Digg, Stumble Upon, Linkedin, +1, add to any, AddThis, add this, addtoany, admin, aim, analytics, bookmark, bookmarking, bookmarks, bookmark button, bookmark menu, buddypress, chrome extension, comments, del.icio.us, Diigo, buffer, button, del.icio.us, e-mail, email, email button, Facebook, facebook recommend, facebook share, facebook share button, facebook like, fark, firefox extension, flickr, floating buttons, follow, foursquare, gmail, goo.gl
 Requires at least: 3.6+
-Tested up to: 4.3.1
-Stable tag: 2.4.7
+Tested up to: 4.4
+Stable tag: 2.4.8
 
 Social Media Icons & Share Buttons, a highly customizable social sharing and & Media SEO ecosystem Facebook, Twitter and more ...
 
@@ -18,19 +18,21 @@ Social Media Icons & Share Buttons, a highly customizable social sharing and & M
 > #### Mashshare - The Social Media Ecosystem
 > This free Social Media Icons Plugin is a professional and highly customizable<br />
 > ecosystem for social media sharing and optimizing of your valuable content.<br /> 
->
+> 
+> Do not slow down loading time of your website with other sharing buttons and prevent ranking loose.
+> Other social buttons are often using external scripts which are slowing down the loading time of your entire website.
 
-<strong>See the demonstration video by Katrinah.com</strong>
+> Mashshare is using NO external script dependencies. All code is loaded directly from your website and Mashshare ensures yours and your visitors privacy.  <br /> 
+
+<strong>See a demonstration video by Katrinah.com</strong>
 [youtube https://www.youtube.com/watch?v=vRSE-pQJTBQ]
 
-> No external script dependencies are needed and and all code resides on your site. 
-> So the default share buttons ensure yours and your visitors privacy! <br /> 
 >
 > It gives you per default a large total share counter beside three large 
-> prominent Share Buttons for your Twitter tweets, Facebook shares and the option<br /> 
+> prominent Share Buttons for your Twitter tweets, Facebook share and the option<br /> 
 > to place a prominent subscribe button for your news feed and mailing list. 
 > This services are free per default including great support. 
-> There is no need to have an account like other share services demands from you <br /> 
+> There is no need to create an account! <br /> 
 >
 > We also offer free Add-Ons for specifing social sharing image, title, description and twitter hashtags and think this is satisfying for most website owners who need a free and effective working social sharing solution.<br /> 
 >
@@ -160,6 +162,7 @@ Thanks to [JS Morisset](https://profiles.wordpress.org/jsmoriss/ "Social Sharing
 	<li><strong>0.1404</strong> secs - BuddyPress v2.1.1 (No Activities)</li>
 	<li><strong>0.1404</strong> secs - NextGEN Gallery by Photocrati v2.0.66.29 (No Galleries or Images)</li>
         <li><strong>0.0096</strong> secs - Share Buttons by AddToAny v1.3.4</li>
+        <li><strong>0.0096</strong> secs - SumoMe v1.1.0</li>
         <li><strong>0.0232</strong> secs - Shareaholic | share buttons, analytics, related content v7.5.0.2</li>
 </ul>
 
@@ -222,6 +225,9 @@ Join our [Transifex Translation Team](http://www.transifex.com/projects/p/mashsh
 Mashshare makes use of the webservice sharedcount.com and periodically checks for the total count 
 of all your Facebook and Twitter shares and cumulates them. It than shows the total number beside the Share buttons and Social Media Icons. 
 No need to embed dozens of external slow loading scripts into your website. 
+
+= What are advantages of Mashshare compared to SumoMe, ? =
+
  
 = How to install and setup? =
 Install it via the admin dashboard and to 'Plugins', click 'Add New' and search the plugins for 'Mashshare'. Install the plugin with 'Install Now'.
@@ -306,11 +312,16 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 == Changelog == 
 
+= 2.4.8 =
+* New: New setting for counting twitter shares via click on the twitter button
+* New: New setting for counting twitter shares via multiplication factor of facebook shares
+* New: Check if shortcode is used and embed assets automatically
+
 = 2.4.7 =
 * New: If mashshare debug mode is enabled run non-minified scripts
 * Tweak: Remove border bottom on admin settings rows
 * Tweak: Move renderhr callback function into mashshare core
-* Tweak: Show "rate our plugin" only to administrators
+* Tweak: Show "rate our plugin" only to administrators and make it more user friendly
 * Fix: Undefined var $mashsb_options['mashsharer_hashtag'];
 * Fix: Undefined var $mashsb_options['debug_mode']
 
@@ -395,7 +406,7 @@ Fix: wrong font icons for whatsapp and memeame
 * Security Update: Update is highly recommended! It contains two security fixes! Thanks to g0blin research
 
 = 2.3.0 =
-* New: New options: Specify to get facebook shares, likes or the total sum of facebook shares + facebook likes. (This is improved compared to a similar function which existed in versions earlier than 2.2.8)
+* New: New options: Specify to get facebook share count, likes or the total sum of facebook share count + facebook likes. (This is improved compared to a similar function which existed in versions earlier than 2.2.8)
 * Fix: Broken url to sharedcount.com in admin dashboard of mashshare share buttons
 * Fix: 'MashEngine' was only showing the likes per default in previous version
 
@@ -531,5 +542,5 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 2.4.5 =
-2.4.5  <a href="https://wordpress.org/plugins/mashsharer/changelog/" style="color:white;text-decoration: underline;">See the changelog!</a> It's recommended to test all plugin updates on a staging website first before installing them on a live site. (Use <a href="https://wordpress.org/plugins/wp-staging/" target="_blank" style="color:white;text-decoration: underline;">WP Staging</a> for creating a test site or any other prefered tool)
+= 2.4.7 =
+2.4.7  <strong>Important:</strong> If you are using the VideoPost Add-On, please update it first before updating Mashshare! <a href="https://wordpress.org/plugins/mashsharer/changelog/" style="color:white;text-decoration: underline;">See the changelog!</a> It's recommended to test all plugin updates on a staging website first before installing them on a live site. (Use <a href="https://wordpress.org/plugins/wp-staging/" target="_blank" style="color:white;text-decoration: underline;">WP Staging</a> for creating a test site or any other prefered tool)

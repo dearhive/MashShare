@@ -13,7 +13,6 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 
-
 /* Load Hooks
  * @since 2.0
  * return void
@@ -449,7 +448,6 @@ function mashsb_subscribe_button(){
     function mashshareShow($atts, $place) {
         mashdebug()->timer('timer');
         $url = mashsb_get_url();
-        //$title = mashsb_get_title();
         
         global $wpdb, $mashsb_options, $post;
         !empty($mashsb_options['mashsharer_apikey']) ? $apikey = $mashsb_options['mashsharer_apikey'] : $apikey = '';
@@ -494,8 +492,6 @@ function mashsb_subscribe_button(){
      */
     function mashshareShortcodeShow($atts, $place) {
         global $wpdb ,$mashsb_options, $post, $wp, $mashsb_custom_url, $mashsb_custom_text;
-        
-        //$mainurl = mashsb_get_url();
 
         !empty($mashsb_options['sharecount_title']) ? $sharecount_title = $mashsb_options['sharecount_title'] : $sharecount_title = __('SHARES', 'mashsb');
         
@@ -522,8 +518,6 @@ function mashsb_subscribe_button(){
             
             // Define custom text to share
             $mashsb_custom_text = empty($text) ? false : $text;
-            
-            //$sharecount_url = empty($url) ? mashsb_get_url() : $url;
             
              if ($shares != 'false') {
                     /* get totalshares of the current page with sharedcount.com */
@@ -579,13 +573,20 @@ function mashsb_subscribe_button(){
        $frontpage = isset( $mashsb_options['frontpage'] ) ? $frontpage = 1 : $frontpage = 0;
        $current_post_type = get_post_type();
        $enabled_post_types = isset( $mashsb_options['post_types'] ) ? $mashsb_options['post_types'] : array();
-       $excluded = isset( $mashsb_options['excluded_from'] ) ? $mashsb_options['excluded_from'] : null;
        $singular = isset( $mashsb_options['singular'] ) ? $singular = true : $singular = false;
        $loadall = isset( $mashsb_options['loadall'] ) ? $loadall = true : $loadall = false;
        
        /*if ( is_404() )
            return false;*/
-           
+
+       if ( function_exists('shortcode_exists') ) {    
+           if ( shortcode_exists('mashshare') ){
+               mashdebug()->info("shortcode exists");
+               return true;           
+           }
+       }
+       
+
        if ($loadall){
            mashdebug()->info("load all mashsb scripts");
            return true;
@@ -597,42 +598,20 @@ function mashsb_subscribe_button(){
            mashdebug()->info("has_shortcode");
             return true;
        } 
-       
-       
-       // Load scripts when do_action('mashshare') is used
-       //if(has_action('mashshare') && mashsb_is_excluded() !== true) {
-       /*if(has_action('mashshare')) {
-           mashdebug()->info("action1");
-           return true;    
-       }*/
-       
-       // Load scripts when do_action('mashsharer') is used
-       //if(has_action('mashsharer') && mashsb_is_excluded() !== true) {
-       /*if(has_action('mashsharer')) {
-           mashdebug()->info("action2");
-           return true;    
-       }*/ 
+
+       if ( mashsb_is_excluded() ) {
+           mashdebug()->info("is_excluded");
+           return false;
+       }
        
        // No scripts on non singular page
        if (!is_singular() == 1 && $singular !== true) {
+           mashdebug()->info("No scripts on non singular page");
            return false;
        }
 
-        // Load scripts when page is not excluded
-        if (strpos($excluded, ',') !== false) {
-            //mashdebug()->error("hoo");
-            $excluded = explode(',', $excluded);
-            if (!in_array($post->ID, $excluded)) {
-                return true;
-            }
-        }
-        if ($post->ID == $excluded) {
-            return false;
-        }
        
        // Load scripts when post_type is defined (for automatic embeding)
-       //if ($enabled_post_types && in_array($currentposttype, $enabled_post_types) && mashsb_is_excluded() !== true ) {
-       //if ($enabled_post_types == null or in_array($current_post_type, $enabled_post_types)) {
        if (in_array($current_post_type, $enabled_post_types)) {
            mashdebug()->info("100");
            return true;
@@ -1085,4 +1064,32 @@ function mashsb_get_twitter_url(){
             $url = mashsb_get_url();
         }
     return apply_filters('mashsb_get_twitter_url', $url);
+}
+
+/**
+ * Check if buttons are excluded from a specific post id
+ * 
+ * @return true if post is excluded
+ */
+function mashsb_is_excluded(){
+    global $post, $mashsb_options;
+    
+    $excluded = isset( $mashsb_options['excluded_from'] ) ? $mashsb_options['excluded_from'] : null;
+           
+            // Load scripts when page is not excluded
+        if (strpos($excluded, ',') !== false) {
+            //mashdebug()->error("hoo");
+            $excluded = explode(',', $excluded);
+            if (in_array($post->ID, $excluded)) {
+                mashdebug()->info("is excluded1");
+                return true;
+            }
+        }
+        if ($post->ID == $excluded) {
+            mashdebug()->info("is single excluded1");
+            return true;
+        }
+        
+        mashdebug()->info("is not excluded1");
+        return false;
 }

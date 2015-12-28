@@ -439,7 +439,7 @@ function mashsb_get_registered_settings() {
                                 'mashsharer_position' => array(
 					'id' => 'mashsharer_position',
 					'name' => __( 'Position', 'mashsb' ),
-					'desc' => __( 'Position of Share Buttons. If this is set to <i>manual</i> use the shortcode function [mashshare] or use php code <br><strong>&lt;?php echo do_shortcode("[mashshare]"); ?&gt;</strong> in template files. Be aware that you have to enable the above mentioned option "Load JS and CSS all over" if you experience issues with do_shortcode and the buttons are not shown, because we are not able to automatically detect the use of do_shortcode. See all <a href="https://www.mashshare.net/faq/#Is_there_a_shortcode_for_pages_and_posts" target="_blank">available shortcodes</a> here.', 'mashsb' ),
+					'desc' => __( 'Position of Share Buttons. If this is set to <i>manual</i> use the shortcode function [mashshare] or use php code <br>&lt;?php echo do_shortcode("[mashshare]"); ?&gt; in template files. </p>You must activate the option "<strong>Load JS and CSS all over</strong>" if you experience issues with do_shortcode() and the buttons are not shown as expected. See all <a href="https://www.mashshare.net/faq/#Is_there_a_shortcode_for_pages_and_posts" target="_blank">available shortcodes</a> here.', 'mashsb' ),
 					'type' => 'select',
                                         'options' => array(
 						'before' => __( 'Top', 'mashsb' ),
@@ -457,8 +457,8 @@ function mashsb_get_registered_settings() {
 				),
                                 'loadall' => array(
 					'id' => 'loadall',
-					'name' => __( 'Load JS and CSS all over', 'mashsb' ),
-					'desc' => __( 'This loads JS and CSS files on all site content pages. Select this only if you are using  <strong>&lt;?php echo do_shortcode("[mashshare]"); ?&gt;</strong> and buttons are not shown in the expected content. <br>If you disable this option all styles and scripts are loaded conditionally only where they are needed.', 'mashsb' ),
+					'name' => __( '<strong>IMPORTANT:</strong> Load JS and CSS all over', 'mashsb' ),
+					'desc' => __( 'You must enable this option if you are using </br> <strong>&lt;?php echo do_shortcode("[mashshare]"); ?&gt;</strong>. and Mashshare buttons are not shown as expected.', 'mashsb' ),
 					'type' => 'checkbox',
                                         'std' => 'false'
 				),

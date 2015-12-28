@@ -33,12 +33,13 @@ function mashsb_admin_messages() {
         if($diff_intrval >= 7 && get_option('mashsb_RatingDiv')=="no")
     {
 	 echo '<div class="mashsb_fivestar" style="box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);">
-    	<p>Awesome, you\'ve been using <strong>Mashshare Social Sharing</strong> for more than 1 week. May we ask you to give it a <strong>5-star</strong> rating on Wordpress? 
-        <br><strong>Your Mashshare Team</strong>
+    	<p>Awesome, you\'ve been using <strong>Mashshare Social Sharing</strong> for more than 1 week. <br> May i ask you to give it a <strong>5-star rating</strong> on Wordpress? </br>
+        This will help to spread its popularity and to make this plugin a better one.
+        <br><br>Your help is much appreciated. Thank you very much,<br> ~René Hermenau
         <ul>
-        	<li><a href="https://wordpress.org/support/view/plugin-reviews/mashsharer" class="thankyou" target="_new" title="Ok, you deserved it" style="font-weight:bold;">Ok, you deserved it</a></li>
+            <li><a href="https://wordpress.org/support/view/plugin-reviews/mashsharer" class="thankyou" target="_new" title="Ok, you deserved it" style="font-weight:bold;">Ok, you deserved it</a></li>
             <li><a href="javascript:void(0);" class="mashsbHideRating" title="I already did" style="font-weight:bold;">I already did</a></li>
-            <li><a href="javascript:void(0);" class="mashsbHideRating" title="No, not good enough" style="font-weight:bold;">No, not good enough</a></li>
+            <li><a href="javascript:void(0);" class="mashsbHideRating" title="No, not good enough" style="font-weight:bold;">No, not good enough, i do not like to rate it!</a></li>
         </ul>
     </div>
     <script>
@@ -66,37 +67,44 @@ function mashsb_admin_messages() {
     </script>
     ';
     }
-    if ( get_option('mashsb_update_notice') =='no' ) {
+    // Disabled since 2.4.7
+    //mashsb_update_notices();
+}
+add_action( 'admin_notices', 'mashsb_admin_messages' );
+
+/**
+ * Return update notices
+ * @since 2.4.1
+ * @deprecated since 2.4.7
+ */
+function mashsb_update_notices(){
+    if ( get_option('mashsb_update_notice') !='no' ) {
     // admin notice after updating Mashshare
-    echo '<div class="mashsb_update_notice update-nag">' . __('Thank you for updating to latest version of Mashshare. Be aware of the very important change: If you are using the php shortcode function <strong>do_shortcode[\'mashshare\'] </strong>and the mashshare styles are not loaded you have to enable the new option <strong><a href="'.admin_url( 'options-general.php?page=mashsb-settings&tab=visual#mashsb_settingslocation_header' ).'">Load JS and CSS all over</a></strong> in Mashshare->settings->Visual->Location & Position', 'mashsb') . 
+    echo '<div class="mashsb_update_notice update-nag">' . __('Mashshare notice: If you are using the php shortcode function <strong>do_shortcode[\'mashshare\'] </strong>and Mashshare styles are not loaded, enable the option <strong><a href="'.admin_url( 'options-general.php?page=mashsb-settings&tab=visual#mashsb_settingslocation_header' ).'">Load JS and CSS all over</a></strong> in Mashshare->settings->Visual->Location & Position', 'mashsb') . 
             '<p><a href="javascript:void(0);" class="mashsb_hide_update" title="I understand" style="text-decoration:none;">I understand! <br>Do not show again this notice</a>'
             . '</div>'
             . '<script>
     jQuery( document ).ready(function( $ ) {
-
-    jQuery(\'.mashsb_hide_update\').click(function(){
-        var data={\'action\':\'hide_update\'}
-             jQuery.ajax({
-        
-        url: "'.admin_url( 'admin-ajax.php' ).'",
-        type: "post",
-        data: data,
-        dataType: "json",
-        async: !0,
-        success: function(e) {
-            if (e=="success") {
-               jQuery(\'.mashsb_update_notice\').slideUp(\'slow\');
-			   
-            }
-        }
-         });
+        jQuery(\'.mashsb_hide_update\').click(function(){
+            var data={\'action\':\'hide_update\'}
+            jQuery.ajax({
+                url: "'.admin_url( 'admin-ajax.php' ).'",
+                type: "post",
+                data: data,
+                dataType: "json",
+                async: !0,
+                success: function(e) {
+                    if (e=="success") {
+                       jQuery(\'.mashsb_update_notice\').slideUp(\'slow\');	   
+                    }
+                }
+            });
         })
     
     });
     </script>';
+    }
 }
-}
-add_action( 'admin_notices', 'mashsb_admin_messages' );
 
 /* Hide the rating div
  * 

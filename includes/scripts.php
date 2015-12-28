@@ -24,13 +24,11 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * @param string $hook Page hook
  */
 function mashsb_load_scripts($hook) {
-    global $wp;
+    global $wp, $mashsb_options, $post;
         if ( ! apply_filters( 'mashsb_load_scripts', mashsbGetActiveStatus(), $hook ) ) {
             mashdebug()->info("mashsb_load_script not active");
             return;
 	}
-    
-	global $mashsb_options, $post;
 
         $url = get_permalink($post->ID);
         $title = urlencode(html_entity_decode(the_title_attribute('echo=0'), ENT_COMPAT, 'UTF-8'));
@@ -68,7 +66,7 @@ function mashsb_load_scripts($hook) {
                     ));
                         
 }
-add_action( 'wp_enqueue_scripts', 'mashsb_load_scripts' );
+add_action( 'wp_enqueue_scripts', 'mashsb_load_scripts', 100);
 
 /**
  * Register Styles
