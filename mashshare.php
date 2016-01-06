@@ -168,8 +168,8 @@ if (!class_exists('mashshare')) :
 
             require_once MASHSB_PLUGIN_DIR . 'includes/admin/settings/register-settings.php';
             $mashsb_options = mashsb_get_settings();
-            require_once MASHSB_PLUGIN_DIR . 'includes/template-functions.php';
             require_once MASHSB_PLUGIN_DIR . 'includes/scripts.php';
+            require_once MASHSB_PLUGIN_DIR . 'includes/template-functions.php';
             require_once MASHSB_PLUGIN_DIR . 'includes/class-mashsb-license-handler.php';
             require_once MASHSB_PLUGIN_DIR . 'includes/class-mashsb-html-elements.php';
             require_once MASHSB_PLUGIN_DIR . 'includes/debug/classes/MashDebug.interface.php';
@@ -188,8 +188,6 @@ if (!class_exists('mashshare')) :
                 require_once MASHSB_PLUGIN_DIR . 'includes/admin/settings/contextual-help.php';
                 require_once MASHSB_PLUGIN_DIR . 'includes/install.php';
                 require_once MASHSB_PLUGIN_DIR . 'includes/admin/tools.php';
-            } else {
-                //require_once MASHSB_PLUGIN_DIR . 'includes/template-functions.php';
             }
         }
 

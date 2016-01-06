@@ -43,7 +43,6 @@ function mashsb_load_scripts($hook) {
 	$js_dir = MASHSB_PLUGIN_URL . 'assets/js/';
 	// Use minified libraries if SCRIPT_DEBUG is turned off
 	$suffix  = ( mashsbIsDebugMode() ) ? '' : '.min';
-        //$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
         
         isset($mashsb_options['load_scripts_footer']) ? $in_footer = true : $in_footer = false;       
 	wp_enqueue_script( 'mashsb', $js_dir . 'mashsb' . $suffix . '.js', array( 'jquery' ), MASHSB_VERSION, $in_footer );
@@ -66,7 +65,7 @@ function mashsb_load_scripts($hook) {
                     ));
                         
 }
-add_action( 'wp_enqueue_scripts', 'mashsb_load_scripts', 100);
+add_action( 'wp_enqueue_scripts', 'mashsb_load_scripts');
 
 /**
  * Register Styles

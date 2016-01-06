@@ -238,8 +238,8 @@ function mashsb_get_registered_settings() {
 				),
                                 'delete_cache_objects' => array(
 					'id' => 'delete_cache_objects',
-					'name' => __( 'Purge DB Cache', 'mashsb' ),
-					'desc' => __( '<strong>Note: </strong>Use this with caution when you think your share counts are wrong. Checking this and using the save button will delete all stored mashshare post_meta objects.<br>' . mashsb_delete_cache_objects(), 'mashsb' ),
+					'name' => __( 'Attention: Purge DB Cache', 'mashsb' ),
+					'desc' => __( '<strong>Note: </strong>Use this with caution only when you think your share counts are totally wrong. <strong>This will delete all your twitter counts. They can not be restored!</strong> Checking this and using the save button will delete all stored mashshare post_meta objects.<br>' . mashsb_delete_cache_objects(), 'mashsb' ),
 					'type' => 'checkbox'
 				),
                                 
