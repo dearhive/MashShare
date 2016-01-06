@@ -8,21 +8,21 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Mashable, Social Media Pop-Up, Social Media Widget, Social Media Sharing, SumoMe, Social Media Networks, Social Sharing, Social sharing optimization, Share button, share buttons, Facebook Share button, Twitter Share Button, Social Share, Social buttons, social share buttons, Skype. Frype, Share, Share this, simple social buttons, simple share buttons adder,  Google+, Twitter, Facebook, Digg, Stumble Upon, Linkedin, +1, add to any, AddThis, add this, addtoany, admin, aim, analytics, bookmark, bookmarking, bookmarks, bookmark button, bookmark menu, buddypress, chrome extension, comments, del.icio.us, Diigo, buffer, button, del.icio.us, e-mail, email, email button, Facebook, facebook recommend, facebook share, facebook share button, facebook like, fark, firefox extension, flickr, floating buttons, follow, foursquare, gmail, goo.gl
 Requires at least: 3.6+
-Tested up to: 4.4
+Tested up to: 4.4.1
 Stable tag: 2.4.8
 
 Social Media Icons & Share Buttons, a highly customizable social sharing and & Media SEO ecosystem Facebook, Twitter and more ...
 
 == Description == 
 
-> #### Mashshare - The Social Media Ecosystem
+> #### Mashshare - The Social Media Ecosystem (Twitter counts supported)
 > This free Social Media Icons Plugin is a professional and highly customizable<br />
 > ecosystem for social media sharing and optimizing of your valuable content.<br /> 
 > 
-> Do not slow down loading time of your website with other sharing buttons and prevent ranking loose.
-> Other social buttons are often using external scripts which are slowing down the loading time of your entire website.
+> <strong>Stop slow loading times of your website with other sharing buttons and prevent ranking loose.</strong>
+> Other social buttons are often using external scripts which are increasing loading time of your entire website.
 
-> Mashshare is using NO external script dependencies. All code is loaded directly from your website and Mashshare ensures yours and your visitors privacy.  <br /> 
+> Mashshare is using NO external script dependencies. All code is loaded directly from your website and <strong>Mashshare ensures yours and your visitors privacy!</strong>  <br /> 
 
 <strong>See a demonstration video by Katrinah.com</strong>
 [youtube https://www.youtube.com/watch?v=vRSE-pQJTBQ]
@@ -313,9 +313,9 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 == Changelog == 
 
 = 2.4.8 =
-* New: New setting for counting twitter shares via click on the twitter button
-* New: New setting for counting twitter shares via multiplication factor of facebook shares
-* New: Check if shortcode is used and embed assets automatically
+* New: Mashshare is supporting again twitter counts. Thanks to our friend Artur and his service newsharecounts.com
+* New: Check if shortcode is used and embed assets and scripts automatically. Option load js and css all over is not longer needed.
+* New: Additional class mashsb-main for mashsb-container class allows easier customization of the main share buttons independantely from add-on buttons
 
 = 2.4.7 =
 * New: If mashshare debug mode is enabled run non-minified scripts

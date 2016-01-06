@@ -467,7 +467,7 @@ function mashsb_subscribe_button(){
              }
              
                      
-                $return = '<aside class="mashsb-container">'
+                $return = '<aside class="mashsb-container mashsb-main">'
                         . mashsb_content_above().
                     '<div class="mashsb-box">'
                         . apply_filters('mashsb_sharecount_filter', $sharecount) .
@@ -541,7 +541,7 @@ function mashsb_subscribe_button(){
                 }  
              }
      
-                $return = '<aside class="mashsb-container">'
+                $return = '<aside class="mashsb-container mashsb-main">'
                     . mashsb_content_above().
                     '<div class="mashsb-box">'
                         . $sharecount .

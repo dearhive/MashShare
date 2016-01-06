@@ -134,11 +134,11 @@ function mashsb_get_registered_settings() {
                                 'mashsb_sharemethod' => array(
 					'id' => 'mashsb_sharemethod',
 					'name' =>  __( 'Share counts', 'mashsb' ),
-					'desc' => __('<i>MashEngine</i> collects shares by calling directly social networks from your server. All shares are cached and stored in your database. <p> If you notice performance issues choose the classical <i>Sharedcount.com</i>. This needs an API key and is limited to 10.000 free requests daily but it is a little bit faster on requesting. After caching there is no performance advantage to MashEngine! <p> <strong>MashEngine collects: </strong> Facebook, Twitter, LinkedIn, Google+, Pinterest, Stumbleupon, Buffer, VK. <strong>Default:</strong> MashEngine', 'mashsb'),
+					'desc' => __('<i>MashEngine</i> collects shares by calling social networks directly from your server. All shares are cached and stored in your database. <p> If you notice performance issues choose the classical <i>Sharedcount.com</i>. This needs an API key and is limited to 10.000 free requests daily but it is a little bit faster on requesting. After caching there is no performance benefit compared to MashEngine! Only mashEngine is able to collect twitter tweets.<p> <strong>MashEngine collects: </strong> Facebook, Twitter, LinkedIn, Google+, Pinterest, Stumbleupon, Buffer, VK. <strong>Default:</strong> MashEngine<p>Twitter count is powered by <a href="http://newsharecounts.com" target="_blank" rel="external nofollow">newsharecounts.com</a>', 'mashsb'),
 					'type' => 'select',
 					'options' => array(
-                                            'mashengine' => 'MashEngine',
-                                            'sharedcount' => 'Sharedcount.com'
+                                            'mashengine' => 'MashEngine (including twitter count)',
+                                            'sharedcount' => 'Sharedcount.com (no twitter count)'
                                         )
      
 				),
@@ -168,7 +168,7 @@ function mashsb_get_registered_settings() {
                                 'disable_sharecount' => array(
 					'id' => 'disable_sharecount',
 					'name' => __( 'Disable Sharecount', 'mashsb' ),
-					'desc' => __( 'Use this when curl() is not supported on your server or share counts should not counted. This mode does not call the database and no SQL queries are generated. (Only less performance advantage. All db requests are cached) Default: false', 'mashsb' ),
+					'desc' => __( 'Use this when curl() is not supported on your server or share counts should not counted. This mode does not call the database and no SQL queries are generated. (Only less performance benefit. All db requests are cached) Default: false', 'mashsb' ),
 					'type' => 'checkbox'
 				),
                                 'hide_sharecount' => array(

@@ -1,6 +1,5 @@
 <?php
-//if(!class_exists('RollingCurlX'))  
-        //require_once MASHSB_PLUGIN_DIR . 'includes/libraries/RolingCurlX.php';
+
 class mashengine {
 	private $data;
 	private $url;
@@ -13,7 +12,7 @@ class mashengine {
 	
 	/* Collect share count from all available networks */
 	public function getALLCounts() {
-		$this->data                = new stdClass;
+		$this->data = new stdClass;
                 $this->data->total = 0;
                 $data = $this->getSharesALL();
 		return $data;
@@ -21,7 +20,7 @@ class mashengine {
         
         /* Collect share count from facebook and twitter */
 	public function getFBTWCounts() {
-		$this->data                = new stdClass;
+		$this->data = new stdClass;
                 $this->data->total = 0;
                 $data = $this->getSharesFBTW();
 		return $data;
@@ -45,6 +44,8 @@ class mashengine {
                 //CURLOPT_USERAGENT, 'MashEngine v.1.1',
                 );
                 
+                //$RCX->addRequest($url, $post_data, 'callback_functn', $user_data, $options, $headers);
+                
                 $RollingCurlX = new RollingCurlX(2);    // max 10 simultaneous downloads
 		$RollingCurlX->setOptions($options);
                 switch ($fb_mode){
@@ -57,7 +58,8 @@ class mashengine {
                     default:
                         $RollingCurlX->addRequest("https://api.facebook.com/method/links.getStats?format=json&urls=" . $this->url, $post_data, array($this, 'getCount'), array('facebook_shares'), $headers);
                 }
-                $RollingCurlX->addRequest("http://urls.api.twitter.com/1/urls/count.json?url=" . $this->url, $post_data, array($this, 'getCount'),  array('twitter'), $headers);
+                //$RollingCurlX->addRequest("http://urls.api.twitter.com/1/urls/count.json?url=" . $this->url, $post_data, array($this, 'getCount'),  array('twitter'), $headers);
+                $RollingCurlX->addRequest("http://public.newsharecounts.com/count.json?url=" . $this->url, $post_data, array($this, 'getCount'),  array('twitter'), $headers);
                 $RollingCurlX->execute();
                 
 		//$data = json_encode($this->data); // This return and json string instead
@@ -96,7 +98,8 @@ class mashengine {
                     default:
                         $RollingCurlX->addRequest("https://api.facebook.com/method/links.getStats?format=json&urls=" . $this->url, $post_data, array($this, 'getCount'), array('facebook_shares'), $headers);
                 }
-                $RollingCurlX->addRequest("http://urls.api.twitter.com/1/urls/count.json?url=" . $this->url, $post_data, array($this, 'getCount'),  array('twitter'), $headers);
+                //$RollingCurlX->addRequest("http://urls.api.twitter.com/1/urls/count.json?url=" . $this->url, $post_data, array($this, 'getCount'),  array('twitter'), $headers);
+                $RollingCurlX->addRequest("http://public.newsharecounts.com/count.json?url=" . $this->url, $post_data, array($this, 'getCount'),  array('twitter'), $headers);
                 $RollingCurlX->addRequest("https://www.linkedin.com/countserv/count/share?format=json&url=" . $this->url, $post_data, array($this, 'getCount'), array('linkedin'), $headers);
                 $RollingCurlX->addRequest("http://www.stumbleupon.com/services/1.01/badge.getinfo?url=" . $this->url, $post_data, array($this, 'getCount'), array('stumbleupon'), $headers);
                 $RollingCurlX->addRequest("https://plusone.google.com/_/+1/fastbutton?url=" . $this->url, $post_data, array($this, 'getCount'),  array('google'), $headers);
