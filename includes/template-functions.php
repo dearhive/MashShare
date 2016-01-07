@@ -579,9 +579,9 @@ function mashsb_subscribe_button(){
        /*if ( is_404() )
            return false;*/
 
-       if ( function_exists('shortcode_exists') ) {    
-           if ( shortcode_exists('mashshare') ){
-               mashdebug()->info("shortcode exists");
+       if ( function_exists('has_shortcode') ) {    
+           if ( has_shortcode($post->content, 'mashshare') ){
+               mashdebug()->info("has_shortcode");
                return true;           
            }
        }
@@ -645,18 +645,11 @@ function mashsb_subscribe_button(){
     function mashshare_filter_content($content){
         global $atts, $mashsb_options, $post, $wp_current_filter, $wp;
         
-        // Do not execute filter for excerpts
-        //if(in_array('get_the_excerpt', $GLOBALS['wp_current_filter'])) return $content;
         
         /* define some vars here to reduce multiple execution of basic functions */
         /* Use permalink when its not singular page, so on category pages the permalink is used. */
         $url = mashsb_get_url();
         $title = mashsb_get_title();
-        /*function_exists('MASHOG') ? $title = MASHOG()->MASHOG_OG_Output->_get_title() : $title = the_title_attribute('echo=0');
-        $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
-        $title = urlencode($title);
-        $title = str_replace('#' , '%23', $title);
-        $title = esc_html($title);*/
         
         $position = !empty($mashsb_options['mashsharer_position']) ? $mashsb_options['mashsharer_position'] : '';
         $enabled_post_types = isset( $mashsb_options['post_types'] ) ? $mashsb_options['post_types'] : null;
@@ -723,19 +716,6 @@ function mashsb_subscribe_button(){
 */ 
 function mashshare(){
     global $atts;
-    /*global $content;
-    global $post;
-    global $wp;*/
-
-    /* Use permalink when its not singular page, so on category pages the permalink is used. */
-    //is_singular() ? $url = urlencode(home_url( $wp->request )) : $url = urlencode(get_permalink($post->ID));
-    //$url = mashsb_get_url();
-    //$title = mashsb_get_title(); 
-    /*function_exists('MASHOG') ? $title = MASHOG()->MASHOG_OG_Output->_get_title() : $title = the_title_attribute('echo=0');
-    $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
-    $title = urlencode($title);
-    $title = str_replace('#' , '%23', $title);
-    $title = esc_html($title);*/
     echo mashshareShow($atts, '');
 }
 
@@ -745,17 +725,6 @@ function mashshare(){
 */ 
 function mashsharer(){
     global $atts;
-    /*global $content;
-    global $post;
-    global $wp;*/
-    //is_singular() ? $url = urlencode(home_url( $wp->request )) : $url = urlencode(get_permalink($post->ID));
-    //$url = mashsb_get_url();
-    //$title = mashsb_get_title();       
-    /*function_exists('MASHOG') ? $title = MASHOG()->MASHOG_OG_Output->_get_title() : $title = the_title_attribute('echo=0');
-    $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
-    $title = urlencode($title);
-    $title = str_replace('#' , '%23', $title);
-    $title = esc_html($title);*/
     echo mashshareShow($atts, '');
 }
 

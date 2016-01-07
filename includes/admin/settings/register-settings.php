@@ -439,7 +439,7 @@ function mashsb_get_registered_settings() {
                                 'mashsharer_position' => array(
 					'id' => 'mashsharer_position',
 					'name' => __( 'Position', 'mashsb' ),
-					'desc' => __( 'Position of Share Buttons. If this is set to <i>manual</i> use the shortcode function [mashshare] or use php code <br>&lt;?php echo do_shortcode("[mashshare]"); ?&gt; in template files. </p>You must activate the option "<strong>Load JS and CSS all over</strong>" if you experience issues with do_shortcode() and the buttons are not shown as expected. See all <a href="https://www.mashshare.net/faq/#Is_there_a_shortcode_for_pages_and_posts" target="_blank">available shortcodes</a> here.', 'mashsb' ),
+					'desc' => __( 'Position of Share Buttons. If this is set to <i>manual</i> use the shortcode function [mashshare] or use php code <br>&lt;?php echo do_shortcode("[mashshare]"); ?&gt; in template files. </p>You must activate the option "<strong>Load JS and CSS all over</strong>" if you experience issues with do_shortcode() and the buttons are not shown as expected. List of <a href="https://www.mashshare.net/faq/#Shortcodes" target="_blank">available shortcodes</a>', 'mashsb' ),
 					'type' => 'select',
                                         'options' => array(
 						'before' => __( 'Top', 'mashsb' ),
