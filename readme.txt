@@ -313,7 +313,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 == Changelog == 
 
 = 2.4.8 =
-* New: Mashshare Share Buttons are supporting again twitter counts. Thanks to our friend Artur and his service newsharecounts.com
+* New: Mashshare Share Buttons are supporting again twitter counts. Thanks to our friend Artur and his service newsharecounts.com. (You have to free signup on newsharecount.com with your twitter account)
 * New: Additional class mashsb-main for mashsb-container class allows easier customization of the main share buttons independantely from add-on buttons
 
 = 2.4.7 =
