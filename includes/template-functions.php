@@ -578,6 +578,7 @@ function mashsb_subscribe_button(){
        
        /*if ( is_404() )
            return false;*/
+       
 
        if ( function_exists('has_shortcode') ) {    
            if ( has_shortcode($post->content, 'mashshare') ){
@@ -631,6 +632,9 @@ function mashsb_subscribe_button(){
            mashdebug()->info("300");
             return true;
        }
+       
+       
+       return apply_filters('mashsb_active', false);
 
     }
     
