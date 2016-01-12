@@ -9,7 +9,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Mashable, Social Media Pop-Up, Social Media Widget, Social Media Sharing, SumoMe, Social Media Networks, Social Sharing, Social sharing optimization, Share button, share buttons, Facebook Share button, Twitter Share Button, Social Share, Social buttons, social share buttons, Skype. Frype, Share, Share this, simple social buttons, simple share buttons adder,  Google+, Twitter, Facebook, Digg, Stumble Upon, Linkedin, +1, add to any, AddThis, add this, addtoany, admin, aim, analytics, bookmark, bookmarking, bookmarks, bookmark button, bookmark menu, buddypress, chrome extension, comments, del.icio.us, Diigo, buffer, button, del.icio.us, e-mail, email, email button, Facebook, facebook recommend, facebook share, facebook share button, facebook like, fark, firefox extension, flickr, floating buttons, follow, foursquare, gmail, goo.gl
 Requires at least: 3.6+
 Tested up to: 4.4.1
-Stable tag: 2.4.9
+Stable tag: 2.5.0
 
 Social Media Icons & Share Buttons, a highly customizable social sharing and & Media SEO ecosystem Facebook, Twitter and more ...
 
@@ -312,8 +312,8 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 == Changelog == 
 
-= 2.5.0 Not released yet = 
-* New: A new filter called mashsb_active allows you to enable mashshare js and css globally
+= 2.5.0 = 
+* New: A new filter called mashsb_active allows you to enable mashshare mashsb.js and mashsb.css conditionally via third party function
 
 = 2.4.9 =
 * New: Free signup on newsharecount.com with your twitter account is necessary to get the twitter count. Sign up instruction in Mashshare->settings->General settings

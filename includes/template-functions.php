@@ -583,58 +583,51 @@ function mashsb_subscribe_button(){
        if ( function_exists('has_shortcode') ) {    
            if ( has_shortcode($post->content, 'mashshare') ){
                mashdebug()->info("has_shortcode");
-               return true;           
+               return apply_filters('mashsb_active', true);        
            }
        }
        
 
        if ($loadall){
            mashdebug()->info("load all mashsb scripts");
-           return true;
+           return apply_filters('mashsb_active', true);    
        }
        
        // Load scripts when shortcode is used
        /* Check if shortcode is used */ 
        if( function_exists('has_shortcode') && is_object($post) && has_shortcode( $post->post_content, 'mashshare' ) ) {
            mashdebug()->info("has_shortcode");
-            return true;
+            return apply_filters('mashsb_active', true);    
        } 
 
        if ( mashsb_is_excluded() ) {
            mashdebug()->info("is_excluded");
-           return false;
+           return apply_filters('mashsb_active', false);
        }
        
        // No scripts on non singular page
        if (!is_singular() == 1 && $singular !== true) {
            mashdebug()->info("No scripts on non singular page");
-           return false;
+           return apply_filters('mashsb_active', false);
        }
 
        
        // Load scripts when post_type is defined (for automatic embeding)
        if (in_array($current_post_type, $enabled_post_types)) {
            mashdebug()->info("100");
-           return true;
+           return apply_filters('mashsb_active', true);    
        }  
        
-       /* Check if post types are allowed */
-       //mashdebug()->info("var frontpage enabled: " . $frontpage . " is_front_page(): " . is_front_page());
-       //if ($enabled_post_types && in_array($currentposttype, $enabled_post_types) && mashsb_is_excluded() !== true) {
-       /*if ($enabled_post_types && in_array($current_post_type, $enabled_post_types)) {
-           mashdebug()->info("200");
-           return true;
-       }*/
        
        // No scripts on frontpage when disabled
        //if ($frontpage == 1 && is_front_page() == 1 && mashsb_is_excluded() !== true) {
        if ($frontpage == 1 && is_front_page() == 1) {
            mashdebug()->info("300");
-            return true;
+            return apply_filters('mashsb_active', true);
        }
        
-       
        return apply_filters('mashsb_active', false);
+       
 
     }
     
