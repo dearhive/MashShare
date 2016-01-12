@@ -106,6 +106,7 @@ function mashsbGetShareObj($url) {
         require_once MASHSB_PLUGIN_DIR . 'includes/libraries/RolingCurlX.php';
         if(!class_exists('mashengine'))         
             require_once(MASHSB_PLUGIN_DIR . 'includes/mashengine.php');
+        mashdebug()->error('url: ' . $url);
         $mashsbSharesObj = new mashengine($url);
         return $mashsbSharesObj;
     } 
@@ -139,31 +140,34 @@ function mashsbGetShareMethod($mashsbSharesObj) {
 
 /**
  * Get share count for all pages where $post is empty. E.g. category or blog list pages
- * Uses transient 
+ * Uses transients 
  * 
  * @param string $url
- * @param in $cacheexpire
+ * @param int $cacheexpire
+ *  
  * @returns integer $shares
  */
-/*function mashsbGetNonPostShares($url, $cacheexpire) {
+function mashsbGetNonPostShares($url, $cacheexpire) {
     // Get any existing copy of our transient data
-    if (false === ( $non_post_shares = get_transient('non_post_shares') )) {
+    if ( false === get_transient( 'mashcount_' . md5($url) ) ) {
         // It wasn't there, so regenerate the data and save the transient
         // Get the share Object
         $mashsbSharesObj = mashsbGetShareObj($url);
-        // Get the share counts
+        // Get the share counts object
         $mashsbShareCounts = mashsbGetShareMethod($mashsbSharesObj);
         $transient_name = md5($url);
         // Set the transient
-        set_transient('$transient_name', $mashsbShareCounts, $cacheexpire);
+        set_transient('mashcount_' . md5($url), $mashsbShareCounts->total, $cacheexpire);
     } else {
-        $shares = get_transient('non_post_shares');
+        $shares = get_transient('mashcount_' . md5($url));
     }
-    if (is_numeric($shares)){    
-        return $shares;
+    if (isset($shares) && is_numeric($shares)){  
         mashdebug()->info('Share count where $post is_null(): ' . $shares);
+        return $shares;   
+    } else {
+        return '0'; // we need a result
     }
-}*/
+}
 
 /*
  * Return the share count
@@ -172,10 +176,10 @@ function mashsbGetShareMethod($mashsbSharesObj) {
  * @returns int
  */
 function getSharedcount($url) {
-    global $wpdb, $mashsb_options, $post;
+    global $mashsb_options, $post;
     
-    if (is_null($post)) {
-    	return apply_filters('filter_get_sharedcount', 0);
+    if (empty($url)) {
+    	//return apply_filters('filter_get_sharedcount', 0);
     }
     
     isset($mashsb_options['mashsharer_cache']) ? $cacheexpire = $mashsb_options['mashsharer_cache'] : $cacheexpire = 300;
@@ -183,17 +187,15 @@ function getSharedcount($url) {
     $cacheexpire < 300 ? $cacheexpire = 300 : $cacheexpire;
 
     if (isset($mashsb_options['disable_cache'])) {
-        $cacheexpire = 5;
+        $cacheexpire = 2;
     }
     
     /* Bypass next lines and return share count for pages with empty $post object
-       share count for pages where $post is empty. E.g. category or blog list pages
-       Otherwise share counts are requested with every page load 
-     *      */
-    /*if (is_null($post)) {
+       Category, blog list pages, non singular() pages. Store the shares in to transients with mashsbGetNonPostShares();
+     */
+    if ( is_null($post) ) {
     	return apply_filters('filter_get_sharedcount', mashsbGetNonPostShares($url, $cacheexpire));
-    }*/
-    
+    }
     
     $mashsbNextUpdate = (int) $cacheexpire;
     $mashsbLastUpdated = get_post_meta($post->ID, 'mashsb_timestamp', true);
@@ -205,6 +207,7 @@ function getSharedcount($url) {
 
     if ($mashsbLastUpdated + $mashsbNextUpdate <= time()) {
         mashdebug()->info("First Update - Frequency: " . $mashsbNextUpdate . " Next update: " . date('Y-m-d H:i:s', $mashsbLastUpdated + $mashsbNextUpdate) . " last updated: " . date('Y-m-d H:i:s', $mashsbLastUpdated) . " Current time: " . date('Y-m-d H:i:s', time()));
+        
         // Get the share Object
         $mashsbSharesObj = mashsbGetShareObj($url);
         // Get the share counts
@@ -217,7 +220,7 @@ function getSharedcount($url) {
 
         /* Update post_meta only when API is requested and
          * API share count is greater than real fresh requested share count ->
-         * ### This meas there is an error in the API (Failure or hammering any limits, e.g. X-Rate-Limit) ###
+         * ### This could result because of an error in the API (Failure or hammering any limits, e.g. X-Rate-Limit) ###
          */
 
         if ($mashsbShareCounts->total >= $mashsbStoredDBMeta) {
@@ -445,23 +448,24 @@ function mashsb_subscribe_button(){
      * @since 1.0
      * @returns string
      */
-    function mashshareShow($atts, $place) {
-        mashdebug()->timer('timer');
-        $url = mashsb_get_url();
-        
-        global $wpdb, $mashsb_options, $post;
-        !empty($mashsb_options['mashsharer_apikey']) ? $apikey = $mashsb_options['mashsharer_apikey'] : $apikey = '';
+    function mashshareShow($customurl, $place) {
+        global $mashsb_options;
+         //mashdebug()->timer('timer');
+
+        $url = isset($customurl) ? $customurl : mashsb_get_url();
+        //$url = isset($args['url']) ? $args['url'] : 'http://google.de';
+        //echo "url is: " . $url;
         !empty($mashsb_options['sharecount_title']) ? $sharecount_title = $mashsb_options['sharecount_title'] : $sharecount_title = __('SHARES', 'mashsb');
-        
             
             if (!isset($mashsb_options['disable_sharecount'])) {
                     /* Get totalshares of the current page */
                     $totalshares = getSharedcount($url);
                     /* Round total shares when enabled */
                     if (isset($mashsb_options['mashsharer_round'])) {
+
                         $totalshares = roundshares($totalshares);
                     }  
-                 $sharecount = '<div class="mashsb-count"><div class="counts mashsbcount">' . $totalshares . '</div><span class="mashsb-sharetext">' . $sharecount_title . '</span></div>';    
+                    $sharecount = '<div class="mashsb-count"><div class="counts mashsbcount">' . $totalshares . '</div><span class="mashsb-sharetext">' . $sharecount_title . '</span></div>';    
              } else {
                  $sharecount = '';
              }
@@ -479,7 +483,7 @@ function mashsb_subscribe_button(){
                     . mashsb_content_below() .
                     '</aside>
                         <!-- Share buttons by mashshare.net - Version: ' . MASHSB_VERSION . '-->';
-            mashdebug()->timer('timer', true);
+            //mashdebug()->timer('timer', true);
             return apply_filters( 'mashsb_output_buttons', $return );
             
     }
@@ -520,10 +524,8 @@ function mashsb_subscribe_button(){
             $mashsb_custom_text = empty($text) ? false : $text;
             
              if ($shares != 'false') {
-                    /* get totalshares of the current page with sharedcount.com */
-                    $totalshares = getSharedcount($mashsb_custom_url);
-                    //$totalshares = getSharedcount($mainurl);
-                    //$totalshares = $mashsb_custom_url;
+                    /* get totalshares of the current page */
+                    $totalshares = getSharedcount($mashsb_custom_url); //rhe
                     /* Round total shares when enabled */
                     $roundenabled = isset($mashsb_options['mashsharer_round']) ? $mashsb_options['mashsharer_round'] : null;
                         if ($roundenabled) {
@@ -578,7 +580,7 @@ function mashsb_subscribe_button(){
        
        /*if ( is_404() )
            return false;*/
-       
+
 
        if ( function_exists('has_shortcode') ) {    
            if ( has_shortcode($post->content, 'mashshare') ){
@@ -597,11 +599,11 @@ function mashsb_subscribe_button(){
        /* Check if shortcode is used */ 
        if( function_exists('has_shortcode') && is_object($post) && has_shortcode( $post->post_content, 'mashshare' ) ) {
            mashdebug()->info("has_shortcode");
-            return apply_filters('mashsb_active', true);    
+           return apply_filters('mashsb_active', true);    
        } 
 
        if ( mashsb_is_excluded() ) {
-           mashdebug()->info("is_excluded");
+           mashdebug()->info("mashsb_is_excluded()");
            return apply_filters('mashsb_active', false);
        }
        
@@ -614,7 +616,7 @@ function mashsb_subscribe_button(){
        
        // Load scripts when post_type is defined (for automatic embeding)
        if (in_array($current_post_type, $enabled_post_types)) {
-           mashdebug()->info("100");
+           mashdebug()->info("automatic post_type enabled");
            return apply_filters('mashsb_active', true);    
        }  
        
@@ -622,12 +624,12 @@ function mashsb_subscribe_button(){
        // No scripts on frontpage when disabled
        //if ($frontpage == 1 && is_front_page() == 1 && mashsb_is_excluded() !== true) {
        if ($frontpage == 1 && is_front_page() == 1) {
-           mashdebug()->info("300");
-            return apply_filters('mashsb_active', true);
+           mashdebug()->info("allow frontpage and is frontpage");
+           return apply_filters('mashsb_active', true);
        }
        
+       mashdebug()->info("mashsbGetActiveStatus false");
        return apply_filters('mashsb_active', false);
-       
 
     }
     
@@ -663,7 +665,7 @@ function mashsb_subscribe_button(){
         }
     
         if ($post->ID == $excluded) {
-                return $content;
+            return $content;
         }  
 
         if (!is_singular() == 1 && $singular !== true) {
@@ -802,24 +804,31 @@ function getFakecount() {
     return $fakecount;
 }
 
-/* Show sharecount only when there is number of x shares. otherwise its hidden via css
- * @return bool
+/* 
+ * Hide sharecount until number of shares excead
+ * 
  * @since 2.0.7
+ * @return bool true when shares are hidden
+ * 
+ * @todo change $url to function()
  */
 
 function mashsb_hide_shares(){
-    global $mashsb_options, $post, $wp;
+    global $mashsb_options, $post;
+
+    if ( empty($mashsb_options['hide_sharecount']) )
+        return false;
+    
     $url = get_permalink(isset($post->ID));
     $sharelimit = isset($mashsb_options['hide_sharecount']) ? $mashsb_options['hide_sharecount'] : 0;
    
-    if ($sharelimit > 0){
-        //mashdebug()->error( "getsharedcount: " . getSharedcount($url) . "sharelimit " . $sharelimit);
+        //mashdebug()->error( "hide_shares() getsharedcount: " . getSharedcount($url) . "sharelimit " . $sharelimit);
         if (getSharedcount($url) > $sharelimit){
             return false;
         }else {
             return true;
         }
-    }
+    
     return false;
 }
 
@@ -1047,15 +1056,32 @@ function mashsb_is_excluded(){
             //mashdebug()->error("hoo");
             $excluded = explode(',', $excluded);
             if (in_array($post->ID, $excluded)) {
-                mashdebug()->info("is excluded1");
+                mashdebug()->info("is excluded");
                 return true;
             }
         }
         if ($post->ID == $excluded) {
-            mashdebug()->info("is single excluded1");
+            mashdebug()->info("is single excluded");
             return true;
         }
         
-        mashdebug()->info("is not excluded1");
+        mashdebug()->info("is not excluded");
         return false;
+}
+
+/**
+ * Get mashsb cache expiration time
+ * 
+ * @return int
+ */
+function mashsb_get_cache_expiration() {
+    isset($mashsb_options['mashsharer_cache']) ? $cacheexpire = $mashsb_options['mashsharer_cache'] : $cacheexpire = 300;
+    /* make sure 300sec is default value */
+    $cacheexpire < 300 ? $cacheexpire = 300 : $cacheexpire;
+
+    if (isset($mashsb_options['disable_cache'])) {
+        $cacheexpire = 2;
+    }
+    
+    return $cacheexpire;
 }

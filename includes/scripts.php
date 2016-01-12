@@ -30,7 +30,8 @@ function mashsb_load_scripts($hook) {
             return;
 	}
 
-        $url = get_permalink($post->ID);
+        //$url = get_permalink($post->ID);
+        $url = mashsb_get_url();
         $title = urlencode(html_entity_decode(the_title_attribute('echo=0'), ENT_COMPAT, 'UTF-8'));
         $title = str_replace('#' , '%23', $title); 
         $titleclean = esc_html($title);
@@ -65,7 +66,7 @@ function mashsb_load_scripts($hook) {
                     ));
                         
 }
-add_action( 'wp_enqueue_scripts', 'mashsb_load_scripts');
+add_action( 'wp_enqueue_scripts', 'mashsb_load_scripts', 30);
 
 /**
  * Register Styles
