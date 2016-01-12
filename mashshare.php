@@ -35,7 +35,13 @@
 if (!defined('ABSPATH'))
     exit;
 
+// Plugin version
+if (!defined('MASHSB_VERSION')) {
+    define('MASHSB_VERSION', '2.5.0');
+}
+
 if (!class_exists('mashshare')) :
+    
 
     /**
      * Main mashsb Class
@@ -129,10 +135,6 @@ if (!class_exists('mashshare')) :
          */
         private function setup_constants() {
             global $wpdb;
-            // Plugin version
-            if (!defined('MASHSB_VERSION')) {
-                define('MASHSB_VERSION', '2.5.0');
-            }
 
             // Plugin Folder Path
             if (!defined('MASHSB_PLUGIN_DIR')) {
