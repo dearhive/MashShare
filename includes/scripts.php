@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  */
 function mashsb_load_scripts($hook) {
     global $wp, $mashsb_options, $post;
-        if ( ! apply_filters( 'mashsb_load_scripts', mashsbGetActiveStatus(), $hook ) ) {
+        if ( !apply_filters( 'mashsb_load_scripts', mashsbGetActiveStatus(), $hook ) ) {
             mashdebug()->info("mashsb_load_script not active");
             return;
 	}
@@ -66,7 +66,7 @@ function mashsb_load_scripts($hook) {
                     ));
                         
 }
-add_action( 'wp_enqueue_scripts', 'mashsb_load_scripts', 30);
+add_action( 'wp_enqueue_scripts', 'mashsb_load_scripts', 10);
 
 /**
  * Register Styles
@@ -96,7 +96,7 @@ function mashsb_register_styles($hook) {
         $url = MASHSB_PLUGIN_URL . 'templates/' .   $file;
 	wp_enqueue_style( 'mashsb-styles', $url, array(), MASHSB_VERSION );
 }
-add_action( 'wp_enqueue_scripts', 'mashsb_register_styles' );
+add_action( 'wp_enqueue_scripts', 'mashsb_register_styles', 10);
 
 /**
  * Load Admin Scripts
