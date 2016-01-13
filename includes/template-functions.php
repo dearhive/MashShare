@@ -580,14 +580,15 @@ function mashsb_subscribe_button(){
        
        /*if ( is_404() )
            return false;*/
+       
 
-
-       if ( function_exists('has_shortcode') ) {    
+       /*if ( function_exists('has_shortcode') ) {    
            if ( has_shortcode($post->content, 'mashshare') ){
                mashdebug()->info("has_shortcode");
-               return apply_filters('mashsb_active', true);        
+               $return = 'true';
+               return apply_filters('mashsb_active', $return);        
            }
-       }
+       }*/
        
 
        if ($loadall){
@@ -805,7 +806,7 @@ function getFakecount() {
 }
 
 /* 
- * Hide sharecount until number of shares excead
+ * Hide sharecount until number of shares exceed
  * 
  * @since 2.0.7
  * @return bool true when shares are hidden
