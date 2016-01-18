@@ -312,9 +312,11 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 == Changelog == 
 
-= 2.5.0 not released = 
+
+= 2.5.0 = 
 * New: A new filter called mashsb_active allows you to enable mashshare mashsb.js and mashsb.css conditionally via third party function
 * New: Store shares even on non post pages like category and archive pages
+* Fix: undefined var notice
 
 = 2.4.9 =
 * New: Free signup on newsharecount.com with your twitter account is necessary to get the twitter count. Sign up instruction in Mashshare->settings->General settings
