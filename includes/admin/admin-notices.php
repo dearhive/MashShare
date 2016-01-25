@@ -13,6 +13,27 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
+ * Check if at least one social network is enabled
+ * 
+ * @global array $mashsb_options
+ * @return boolean false when no network is enabled
+ */
+function mashsb_check_active_networks(){
+    global $mashsb_options;
+    
+    $networks = $mashsb_options['networks'];
+    
+    if ( isset($networks) )
+    foreach ($networks as $key => $value){
+        if ( isset ($networks[$key]['status']) )
+            return true;
+    }
+    
+    return false;;  
+}
+
+
+/**
  * Admin Messages
  *
  * @since 2.2.3
@@ -24,6 +45,12 @@ function mashsb_admin_messages() {
         
         if (!current_user_can('update_plugins'))
         return;
+        
+    if ( mashsb_is_admin_page() && !mashsb_check_active_networks() ) {
+        echo '<div class="error">';
+        echo '<p>'. sprintf( __('No Social Networks enabled. Go to <a href="%s"> Mashshare->Settings->Social Networks</a> and enable at least one Social Network.','mashsb') , 'http://127.0.0.1/dev/wp-admin/admin.php?page=mashsb-settings&tab=networks') .'</p>';
+        echo '</div>';
+    }
 
     $install_date = get_option('mashsb_installDate');
         $display_date = date('Y-m-d h:i:s');
