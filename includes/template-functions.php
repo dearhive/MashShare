@@ -40,6 +40,7 @@ function getExecutionOrder(){
     isset($mashsb_options['execution_order']) && is_numeric($mashsb_options['execution_order']) ? $priority = trim($mashsb_options['execution_order']) : $priority = 1000;
     return $priority;
 }
+
     
 /* Creates some shares for older posts which has been already 
  * shared dozens of times
@@ -199,9 +200,9 @@ function getSharedcount($url) {
     
     $mashsbNextUpdate = (int) $cacheexpire;
     $mashsbLastUpdated = get_post_meta($post->ID, 'mashsb_timestamp', true);
+    
 
     if (empty($mashsbLastUpdated)) {
-        $mashsbCheckUpdate = true;
         $mashsbLastUpdated = 0;
     }
 
@@ -258,7 +259,7 @@ function mashsb_subscribe_button(){
     
     function mashsb_subscribe_content(){
         global $mashsb_options;
-        if ($mashsb_options['networks'][2] && $mashsb_options['subscribe_behavior'] === 'content'){ //Subscribe content enabled
+        if (isset($mashsb_options['networks'][2]) && isset($mashsb_options['subscribe_behavior']) && $mashsb_options['subscribe_behavior'] === 'content'){ //Subscribe content enabled
             $container = '<div class="mashsb-toggle-container">' . mashsb_cleanShortcode('mashshare', $mashsb_options['subscribe_content']). '</div>';
         } else {
             $container = '';    
@@ -349,10 +350,10 @@ function mashsb_subscribe_button(){
         global $mashsb_options, $post, $mashsb_custom_url, $mashsb_custom_text;
         $singular = isset( $mashsb_options['singular'] ) ? $singular = true : $singular = false;     
 
-        $url = $mashsb_custom_url ? $mashsb_custom_url : mashsb_get_url() ;
-        $twitter_url = $mashsb_custom_url ? $mashsb_custom_url : mashsb_get_twitter_url();
-        $title = $mashsb_custom_text ? $mashsb_custom_text : mashsb_get_title();
-        $twitter_title = $mashsb_custom_text ? $mashsb_custom_text : mashsb_get_twitter_title();
+        $url = !empty($mashsb_custom_url) ? $mashsb_custom_url : mashsb_get_url() ;
+        $twitter_url = !empty($mashsb_custom_url) ? $mashsb_custom_url : mashsb_get_twitter_url();
+        $title = !empty($mashsb_custom_text) ? $mashsb_custom_text : mashsb_get_title();
+        $twitter_title = !empty($mashsb_custom_text) ? $mashsb_custom_text : mashsb_get_twitter_title();
 
         !empty($mashsb_options['mashsharer_hashtag']) ? $via = '&amp;via=' . $mashsb_options['mashsharer_hashtag'] : $via = '';
        
@@ -361,7 +362,7 @@ function mashsb_subscribe_button(){
             'twitter' =>  'https://twitter.com/intent/tweet?text=' . $twitter_title . $via . '&amp;url=' . $twitter_url,
             'subscribe' => '#',
             'url' => $url,
-            'title' => mashsb_get_title()   
+            'title' => $title   
         ));
         
             return isset($networks[$name]) ? $networks[$name] : '';    
@@ -389,11 +390,11 @@ function mashsb_subscribe_button(){
         $onoffswitch = '';
         /* counter for 'Visible Services' */
         $startcounter = 1;
-        $maxcounter = $mashsb_options['visible_services']+1; // plus 1 because our array values start counting from zero
+        $maxcounter = isset($mashsb_options['visible_services']) ? $mashsb_options['visible_services']+1 : 0; // plus 1 because our array values start counting from zero
         /* our list of available services, includes the disabled ones! 
          * We have to clean this array first!
          */
-        $getnetworks = $mashsb_options['networks'];
+        $getnetworks = isset($mashsb_options['networks']) ? $mashsb_options['networks'] : '';
         // Delete disabled services from array. Use callback function here. Only once: array_filter is slow. 
         // Use the newly created array and bypass the callback function than
         if (is_array($getnetworks)){
@@ -846,7 +847,7 @@ function mashsb_styles_method() {
     isset($mashsb_options['small_buttons']) ? $smallbuttons = true : $smallbuttons = false;
     
     /* VARS */
-    isset($mashsb_options['share_color']) ? $share_color = $mashsb_options['share_color'] : $share_color = '';
+    isset($mashsb_options['share_color']) ? $share_color = $mashsb_options['share_color'] : $share_color = '#ccc';
     isset($mashsb_options['custom_css']) ? $custom_css = $mashsb_options['custom_css'] : $custom_css = '';
     isset($mashsb_options['button_width']) ? $button_width = $mashsb_options['button_width'] : $button_width = '';
     
