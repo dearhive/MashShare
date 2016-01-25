@@ -39,7 +39,7 @@ function mashsb_save_order(){
         $current_list = get_option('mashsb_networks');
         $new_order = $_POST['mashsb_list'];
         $new_list = array();
-   
+        //wp_die(print_r($new_order));
         /* First write the sort order */
         foreach ($new_order as $n){
             if (isset($current_list[$n])){
@@ -47,6 +47,7 @@ function mashsb_save_order(){
                 
             }
         }
+        //wp_die(print_r($new_order));
         //print_r($_POST);
         /* Update sort order of networks */
         update_option('mashsb_networks', $new_list);
