@@ -64,9 +64,9 @@ class MASHSB_Welcome {
                 
                 //@since 2.0.3
 		if( ! $upgrade ) { // First time install
-			wp_safe_redirect( admin_url( 'options-general.php?page=mashsb-settings&tab=networks' ) ); exit;
+			wp_safe_redirect( admin_url( 'options-general.php?page=mashsb-settings&tab=visual#mashsb_settingslocation_header' ) ); exit;
 		} else { // Update
-			wp_safe_redirect( admin_url( 'options-general.php?page=mashsb-settings&tab=networks' ) ); exit;
+			wp_safe_redirect( admin_url( 'options-general.php?page=mashsb-settings&tab=visual#mashsb_settingslocation_header' ) ); exit;
 		}
 	}
 }
