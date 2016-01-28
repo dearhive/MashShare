@@ -224,6 +224,12 @@ function mashsb_get_registered_settings() {
 					'desc' => __( 'Check this box if you would like Mashshare to completely remove all of its data when the plugin is deleted.', 'mashsb' ),
 					'type' => 'checkbox'
 				),
+                                'allow_tracking' => array(
+					'id' => 'allow_tracking',
+					'name' => __( 'Allow Usage Tracking', 'mashsb' ),
+					'desc' => sprintf( __( 'Allow Mashshare to track plugin usage? Opt-in to tracking and our newsletter and immediately be emailed a 10%% discount to the Mashshare shop, valid towards the <a href="%s" target="_blank">purchase of Add-Ons</a>. No sensitive data is tracked.', 'mashsb' ), 'https://www.mashshare.net/add-ons/?utm_source=' . substr( md5( get_bloginfo( 'name' ) ), 0, 10 ) . '&utm_medium=admin&utm_term=setting&utm_campaign=MASHSBUsageTracking') ,
+					'type' => 'checkbox'
+				),
                                 'debug_header' => array(
 					'id' => 'debug_header',
 					'name' => '<strong>' . __( 'Debug', 'mashsb' ) . '</strong>',
@@ -458,7 +464,7 @@ function mashsb_get_registered_settings() {
                                 'loadall' => array(
 					'id' => 'loadall',
 					'name' => __( '<strong>IMPORTANT:</strong> Load JS and CSS all over', 'mashsb' ),
-					'desc' => __( 'You must enable this option if you are using </br> <strong>&lt;?php echo do_shortcode("[mashshare]"); ?&gt;</strong>. and Mashshare buttons are not shown as expected.', 'mashsb' ),
+					'desc' => __( 'Enable this option if you are using </br> <strong>&lt;?php echo do_shortcode("[mashshare]"); ?&gt;</strong>.', 'mashsb' ),
 					'type' => 'checkbox',
                                         'std' => 'false'
 				),

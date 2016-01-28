@@ -6,10 +6,10 @@ Contributors: ReneHermi, WP-Staging
 Donate link: 
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Tags: Mashable, Social Media Pop-Up, Social Media Widget, Social Media Sharing, SumoMe, Social Media Networks, Social Sharing, Social sharing optimization, Share button, share buttons, Facebook Share button, Twitter Share Button, Social Share, Social buttons, social share buttons, Skype. Frype, Share, Share this, simple social buttons, simple share buttons adder,  Google+, Twitter, Facebook, Digg, Stumble Upon, Linkedin, +1, add to any, AddThis, add this, addtoany, admin, aim, analytics, bookmark, bookmarking, bookmarks, bookmark button, bookmark menu, buddypress, chrome extension, comments, del.icio.us, Diigo, buffer, button, del.icio.us, e-mail, email, email button, Facebook, facebook recommend, facebook share, facebook share button, facebook like, fark, firefox extension, flickr, floating buttons, follow, foursquare, gmail, goo.gl
+Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email
 Requires at least: 3.6+
 Tested up to: 4.4.1
-Stable tag: 2.5.0
+Stable tag: 2.5.1
 
 Social Media Icons & Share Buttons, a highly customizable social sharing and & Media SEO ecosystem Facebook, Twitter and more ...
 
@@ -27,7 +27,6 @@ Social Media Icons & Share Buttons, a highly customizable social sharing and & M
 <strong>See a demonstration video by Katrinah.com</strong>
 [youtube https://www.youtube.com/watch?v=vRSE-pQJTBQ]
 
->
 > It gives you per default a large total share counter beside three large 
 > prominent Share Buttons for your Twitter tweets, Facebook share and the option<br /> 
 > to place a prominent subscribe button for your news feed and mailing list. 
@@ -312,6 +311,14 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 == Changelog == 
 
+= 2.5.1 not released yet =
+* New: Redirection after first time activation to visual tab
+* Tweak: Notice if there is no network enabled
+* Tweak: Performance improvement! Font icons not loaded any longer as external files. All font icons embeded purely as octet-stream;base64
+* Fix: undefined var subscribe_behavior
+* Fix: Check sharecount only when url is defined and $post not empty
+* Fix: Prevent double encoding of share url's that leads to unwanted results
+* New: Function for collecting non sensitive informations for improving Mashshare and keep track of how it is used. Muste be enabled by user explicitely before it is used.
 
 = 2.5.0 = 
 * New: A new filter called mashsb_active allows you to enable mashshare mashsb.js and mashsb.css conditionally via third party function

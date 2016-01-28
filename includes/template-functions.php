@@ -48,6 +48,7 @@ function getExecutionOrder(){
  * 
  * @since 2.0.9
  * @return int
+ * 
  * @deprecated deprecated since version 2.2.8
  */
 
@@ -150,7 +151,7 @@ function mashsbGetShareMethod($mashsbSharesObj) {
  */
 function mashsbGetNonPostShares($url, $cacheexpire) {
     // Get any existing copy of our transient data
-    if ( false === get_transient( 'mashcount_' . md5($url) ) ) {
+    if (false === get_transient('mashcount_' . md5($url))) {
         // It wasn't there, so regenerate the data and save the transient
         // Get the share Object
         $mashsbSharesObj = mashsbGetShareObj($url);
@@ -161,12 +162,12 @@ function mashsbGetNonPostShares($url, $cacheexpire) {
         set_transient('mashcount_' . md5($url), $mashsbShareCounts->total, $cacheexpire);
     } else {
         $shares = get_transient('mashcount_' . md5($url));
-    }
-    if (isset($shares) && is_numeric($shares)){  
-        mashdebug()->info('Share count where $post is_null(): ' . $shares);
-        return $shares;   
-    } else {
-        return '0'; // we need a result
+        if (isset($shares) && is_numeric($shares)) {
+            mashdebug()->info('Share count where $post is_null(): ' . $shares);
+            return $shares;
+        } else {
+            return '0'; // we need a result
+        }
     }
 }
 
@@ -179,10 +180,6 @@ function mashsbGetNonPostShares($url, $cacheexpire) {
 function getSharedcount($url) {
     global $mashsb_options, $post;
     
-    if (empty($url)) {
-    	//return apply_filters('filter_get_sharedcount', 0);
-    }
-    
     isset($mashsb_options['mashsharer_cache']) ? $cacheexpire = $mashsb_options['mashsharer_cache'] : $cacheexpire = 300;
     /* make sure 300sec is default value */
     $cacheexpire < 300 ? $cacheexpire = 300 : $cacheexpire;
@@ -192,12 +189,17 @@ function getSharedcount($url) {
     }
     
     /* Bypass next lines and return share count for pages with empty $post object
-       Category, blog list pages, non singular() pages. Store the shares in to transients with mashsbGetNonPostShares();
+       Category, blog list pages, non singular() pages. Store the shares in transients with mashsbGetNonPostShares();
      */
-    if ( is_null($post) ) {
+    if ( is_null($post) && !empty($url)) {
     	return apply_filters('filter_get_sharedcount', mashsbGetNonPostShares($url, $cacheexpire));
     }
-    
+    /*
+     * Important: This runs on non singular pages and prevents php crashes and loops without results
+     */
+    if (empty($url) && !is_null($post))
+        return get_post_meta($post->ID, 'mashsb_shares', true);
+ 
     $mashsbNextUpdate = (int) $cacheexpire;
     $mashsbLastUpdated = get_post_meta($post->ID, 'mashsb_timestamp', true);
     
@@ -460,6 +462,7 @@ function mashsb_subscribe_button(){
             
             if (!isset($mashsb_options['disable_sharecount'])) {
                     /* Get totalshares of the current page */
+                if (!empty($url))
                     $totalshares = getSharedcount($url);
                     /* Round total shares when enabled */
                     if (isset($mashsb_options['mashsharer_round'])) {
@@ -591,6 +594,7 @@ function mashsb_subscribe_button(){
            }
        }*/
        
+
 
        if ($loadall){
            mashdebug()->info("load all mashsb scripts");
@@ -821,11 +825,11 @@ function mashsb_hide_shares(){
     if ( empty($mashsb_options['hide_sharecount']) )
         return false;
     
-    $url = get_permalink(isset($post->ID));
+    $url = rawurlencode( get_permalink(isset($post->ID)) );
     $sharelimit = isset($mashsb_options['hide_sharecount']) ? $mashsb_options['hide_sharecount'] : 0;
    
         //mashdebug()->error( "hide_shares() getsharedcount: " . getSharedcount($url) . "sharelimit " . $sharelimit);
-        if (getSharedcount($url) > $sharelimit){
+        if (!empty($url) && getSharedcount($url) > $sharelimit){
             return false;
         }else {
             return true;
@@ -1017,11 +1021,11 @@ function mashsb_get_twitter_title() {
 function mashsb_get_url(){
     global $wp, $post, $numpages;
     if($numpages > 1){ // check if '<!-- nextpage -->' is used
-        $url = urlencode(get_permalink($post->ID));
+        $url = get_permalink($post->ID);
     } elseif (is_singular()){
-        $url = urlencode(get_permalink($post->ID));
+        $url = get_permalink($post->ID);
     }else{
-        $url = urlencode(get_permalink($post->ID));
+        $url = get_permalink($post->ID);
     }
     return apply_filters('mashsb_get_url', $url);
 }
