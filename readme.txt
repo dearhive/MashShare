@@ -311,7 +311,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 == Changelog == 
 
-= 2.5.1 not released yet =
+= 2.5.1 =
 * New: Redirection after first time activation to visual tab
 * Tweak: Notice if there is no network enabled
 * Tweak: Performance improvement! Font icons not loaded any longer as external files. All font icons embeded purely as octet-stream;base64
@@ -557,5 +557,5 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 2.4.7 =
-2.4.7  <strong>Important:</strong> If you are using the VideoPost Add-On, please update it first before updating Mashshare! <a href="https://wordpress.org/plugins/mashsharer/changelog/" style="color:white;text-decoration: underline;">See the changelog!</a> It's recommended to test all plugin updates on a staging website first before installing them on a live site. (Use <a href="https://wordpress.org/plugins/wp-staging/" target="_blank" style="color:white;text-decoration: underline;">WP Staging</a> for creating a test site or any other prefered tool)
+= 2.5.1 =
+2.5.1  <strong>Several tweaks, fixes and performance improvements!</strong> <a href="https://wordpress.org/plugins/mashsharer/changelog/" style="color:white;text-decoration: underline;">Complete Changelog!</a> It's recommended to test plugin updates on a testing website first before installing them on a live site. (Use <a href="https://wordpress.org/plugins/wp-staging/" target="_blank" style="color:white;text-decoration: underline;">WP Staging</a> for creating a test site or another plugin)
