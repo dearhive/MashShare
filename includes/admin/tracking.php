@@ -14,7 +14,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 // Debug mode
 if (!defined('MASHSB_TRACKING_DEBUG')) {
-    define('MASHSB_TRACKING_DEBUG', true);
+    define('MASHSB_TRACKING_DEBUG', false);
 }
 
 /**
