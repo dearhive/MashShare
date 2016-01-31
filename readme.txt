@@ -9,7 +9,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email
 Requires at least: 3.6+
 Tested up to: 4.4.1
-Stable tag: 2.5.1
+Stable tag: 2.5.2
 
 Social Media Icons & Share Buttons, a highly customizable social sharing and & Media SEO ecosystem Facebook, Twitter and more ...
 
@@ -311,6 +311,13 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 == Changelog == 
 
+= 2.5.2 =
+* Fix: Share count including fakecount for custom urls in shortcodes are not returned and stays zero
+* Fix: Custom URL and Custom Text are not returned in shortcodes
+* Fix: Sharecounts are hidden when setting "Hide sharecount is enabled". Number of shares are ignored
+* Fix: Disabled Mashshare cache results in non shown shares on non singular pages or custom urls in shortcodes
+* Fix: Fake count ignored on non singular pages or custom urls in shortcodes
+
 = 2.5.1 =
 * New: Redirection after first time activation to visual tab
 * Tweak: Notice if there is no network enabled
@@ -557,5 +564,5 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 2.5.1 =
-2.5.1  <strong>Several tweaks, fixes and performance improvements!</strong> <a href="https://wordpress.org/plugins/mashsharer/changelog/" style="color:white;text-decoration: underline;">Complete Changelog!</a> It's recommended to test plugin updates on a testing website first before installing them on a live site. (Use <a href="https://wordpress.org/plugins/wp-staging/" target="_blank" style="color:white;text-decoration: underline;">WP Staging</a> for creating a test site or another plugin)
+= 2.5.2 =
+2.5.2  <strong>Several tweaks, fixes and performance improvements!</strong> <a href="https://wordpress.org/plugins/mashsharer/changelog/" style="color:white;text-decoration: underline;">Complete Changelog!</a> It's recommended to test plugin updates on a testing website first before installing them on a live site. (Use <a href="https://wordpress.org/plugins/wp-staging/" target="_blank" style="color:white;text-decoration: underline;">WP Staging</a> for creating a test site or another plugin)
