@@ -317,6 +317,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 * Tweak: Clean up code and several performance improvements
 * Fix: Undefined var 'mash_networks' on first installation
 * Fix: Disabling cache not working for shortcode buttons with custom url
+* Fix: Shorturls are not working on share bar add-on
 * New: Move 'Exclude' option to settings->Visual->Location
 * New: Show usage tracking notice only for administrators
 
