@@ -375,9 +375,9 @@ function mashsb_subscribe_button(){
 
         $url = !empty($mashsb_custom_url) ? $mashsb_custom_url : mashsb_get_url() ;
         
-        // Run this only for twitter (mashsb_get_twitter_url is performance heavy)
+        // Run this only for twitter (mashsb_get_twitter_url() is performance heavy)
         if($name === 'twitter'){
-            $twitter_url = !empty($mashsb_custom_url) ? $mashsb_custom_url : mashsb_get_twitter_url();
+            $twitter_url = !empty($mashsb_custom_url) ? mashsb_get_shorturl($mashsb_custom_url) : mashsb_get_twitter_url();
         }
         $twitter_title = !empty($mashsb_custom_text) ? $mashsb_custom_text : mashsb_get_twitter_title();
         $twitter_url = isset($twitter_url) ? $twitter_url : '';
@@ -1054,6 +1054,20 @@ function mashsb_get_twitter_url(){;
             $url = mashsb_get_url();
         }
     return apply_filters('mashsb_get_twitter_url', $url);
+}
+
+
+/**
+ * Wrapper for mashsuGetShortURL() which exists in shorturl addon
+ * 
+ * @param string $url
+ * @return string
+ */
+function mashsb_get_shorturl($url) {
+    if ( function_exists('mashsuGetShortURL') )
+        return mashsuGetShortURL($url);
+
+    return $url;
 }
 
 /**
