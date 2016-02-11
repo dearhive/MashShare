@@ -47,7 +47,7 @@ module.exports = function(grunt) {
                     {expand: true, src: ['**', '!node_modules/**', '!Gruntfile.js', '!package.json', '!nbproject/**', '!grunt/**'],                
                      dest: '<%= paths.base %>'},
                  
-                    {expand: true, src: ['**', '!node_modules/**', '!Gruntfile.js', '!package.json', '!nbproject/**', '!grunt/**'],
+                    {expand: true, src: ['**', '!node_modules/**', '!Gruntfile.js', '!package.json', '!nbproject/**', '!grunt/**','!tests/**', '!bin/**', '.travis.yml', '!phpunit.xml.dist'],
                     dest: '<%= paths.basetrunk %>'},
                 ]                
             },

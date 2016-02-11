@@ -374,9 +374,15 @@ function mashsb_subscribe_button(){
         $singular = isset( $mashsb_options['singular'] ) ? $singular = true : $singular = false;     
 
         $url = !empty($mashsb_custom_url) ? $mashsb_custom_url : mashsb_get_url() ;
-        $twitter_url = !empty($mashsb_custom_url) ? $mashsb_custom_url : mashsb_get_twitter_url();
-        $title = !empty($mashsb_custom_text) ? $mashsb_custom_text : mashsb_get_title();
+        
+        // Run this only for twitter (mashsb_get_twitter_url is performance heavy)
+        if($name === 'twitter'){
+            $twitter_url = !empty($mashsb_custom_url) ? $mashsb_custom_url : mashsb_get_twitter_url();
+        }
         $twitter_title = !empty($mashsb_custom_text) ? $mashsb_custom_text : mashsb_get_twitter_title();
+        $twitter_url = isset($twitter_url) ? $twitter_url : '';
+        
+        $title = !empty($mashsb_custom_text) ? $mashsb_custom_text : mashsb_get_title();
 
         !empty($mashsb_options['mashsharer_hashtag']) ? $via = '&amp;via=' . $mashsb_options['mashsharer_hashtag'] : $via = '';
        
@@ -1039,11 +1045,10 @@ function mashsb_get_url(){
  * @scince 2.2.8
  */
 
-function mashsb_get_twitter_url(){
-    global $wp, $post, $numpages; 
+function mashsb_get_twitter_url(){; 
        if ( function_exists('mashsuGetShortURL')){
             $url = mashsb_get_url();
-            mashsuGetShortURL($url) !== 0 ? $url = mashsuGetShortURL( $url ) : $url = mashsb_get_url();
+            //mashsuGetShortURL($url) !== 0 ? $url = mashsuGetShortURL( $url ) : $url = mashsb_get_url();
             $url = mashsuGetShortURL( $url );
         } else {
             $url = mashsb_get_url();
