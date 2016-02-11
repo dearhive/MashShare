@@ -8,8 +8,8 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email
 Requires at least: 3.6+
-Tested up to: 4.4.1
-Stable tag: 2.5.2
+Tested up to: 4.4.2
+Stable tag: 2.5.3
 
 Social Media Icons & Share Buttons, a highly customizable social sharing and & Media SEO ecosystem Facebook, Twitter and more ...
 
@@ -311,6 +311,15 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 == Changelog == 
 
+= 2.5.3 not released =
+* Tweak: Tested up to WP 4.4.2
+* Tweak: Rewrite sharedcount class for using phpunit test class
+* Tweak: Clean up code and several performance improvements
+* Fix: Undefined var 'mash_networks' on first installation
+* Fix: Disabling cache not working for shortcode buttons with custom url
+* New: Move 'Exclude' option to settings->Visual->Location
+* New: Show usage tracking notice only for administrators
+
 = 2.5.2 =
 * Fix: Share count including fakecount for custom urls in shortcodes are not returned and stays zero
 * Fix: Custom URL and Custom Text are not returned in shortcodes
@@ -564,5 +573,5 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 2.5.2 =
-2.5.2  <strong>Several tweaks, fixes and performance improvements!</strong> <a href="https://wordpress.org/plugins/mashsharer/changelog/" style="color:white;text-decoration: underline;">Complete Changelog!</a> It's recommended to test plugin updates on a testing website first before installing them on a live site. (Use <a href="https://wordpress.org/plugins/wp-staging/" target="_blank" style="color:white;text-decoration: underline;">WP Staging</a> for creating a test site or another plugin)
+= 2.5.3 =
+2.5.3  <strong>Several tweaks, fixes and performance improvements!</strong> <a href="https://wordpress.org/plugins/mashsharer/changelog/" style="color:white;text-decoration: underline;">Complete Changelog!</a> It's recommended to test plugin updates on a testing website first before installing them on a live site. (Use <a href="https://wordpress.org/plugins/wp-staging/" target="_blank" style="color:white;text-decoration: underline;">WP Staging</a> for creating a test site or another plugin)

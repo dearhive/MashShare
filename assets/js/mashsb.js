@@ -81,10 +81,10 @@ jQuery(document).ready( function($) {
     });
     }
     if (typeof mashsb !== 'undefined') {
-        shareurl = mashsb.share_url;
+        /*shareurl = mashsb.share_url;
         if(typeof mashsu !== 'undefined'){
         mashsu.shorturl != 0 ? shareurl = mashsu.shorturl : shareurl = mashsb.share_url;
-        }
+        }*/
     $('.mashicon-twitter').click( function(mashfw) {
         
         winWidth = 520;

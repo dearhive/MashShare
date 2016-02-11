@@ -13,9 +13,11 @@
 class mashsbSharedcount {
     private $url,$timeout;
 
-    function __construct($url,$timeout=10) {
-        $this->url=rawurlencode($url);
-        $this->timeout=$timeout;
+    function __construct($url,$timeout=10, $apikey = '') {
+        global $mashsb_options;
+        $this->url = rawurlencode($url);
+        $this->timeout= $timeout;
+        $this->apikey = trim($apikey);
         }
 
 function getFBTWCounts(){
@@ -90,11 +92,11 @@ function getAllCounts(){
         return $objMerged;
 }
 
-function update_sharedcount_domain($apikey, $domain = false){ 
+function update_sharedcount_domain($domain = false){ 
     global $mashsb_options;
 	if(!$domain){
 		try{
-			$domain_obj =  $this->_curl('http://'. $mashsb_options["mashsharer_sharecount_domain"] . "/account?apikey=" . $apikey);
+			$domain_obj =  $this->_curl('http://'. $mashsb_options["mashsharer_sharecount_domain"] . "/account?apikey=" . $this->apikey);
 			$domain = $domain_obj["domain"];
 		}
 		catch (Exception $e){
@@ -121,31 +123,31 @@ private function _curl($url){
 function get_sharedcount()  {
     mashdebug()->info("Share URL: " . $this->url);
     global $mashsb_options;
-    if(empty($mashsb_options['mashsharer_apikey'])){
+    if( empty($this->apikey) ){
         return 0; //quit early if there's no API key.
     }
-    $apikey = trim($mashsb_options['mashsharer_apikey']);
-    $domain = trim($mashsb_options['mashsharer_sharecount_domain']);
-	
+    //$apikey = trim($mashsb_options['mashsharer_apikey']);
+    $domain = isset($mashsb_options['mashsharer_sharecount_domain']) ? trim($mashsb_options['mashsharer_sharecount_domain']) : '';	
 	if(!isset($domain) || empty($domain)){
 		$domain = "free.sharedcount.com";
-		$this->update_sharedcount_domain($apikey, $domain);
+		$this->update_sharedcount_domain($domain);
 	}
 
 	try {
-        $counts = $this->_curl('http://'.$domain . "/?url=" . $this->url . "&apikey=" . $apikey);
+        $counts = $this->_curl('http://'.$domain . "/?url=" . $this->url . "&apikey=" . $this->apikey);
+        //mashdebug()->error('check ' . $domain . $this->apikey . $this->url);
         if(isset($counts["Error"]) && isset($counts['Domain']) && $counts["Type"] === "domain_apikey_mismatch"){
-	         $this->update_sharedcount_domain($apikey, $counts['Domain']);
+	         $this->update_sharedcount_domain($counts['Domain']);
              return 0;
         }
         else if(isset($counts["Error"]) && isset($counts['Type']) && $counts['Type'] === 'invalid_api_key'  ){
-             $this->update_sharedcount_domain($apikey);
+             $this->update_sharedcount_domain();
              return 0;
         }
-        mashdebug()->info("Twitter count: " . isset($counts['Twitter']));
-        MASHSB()->logger->info("URL: " . urldecode($this->url) . " API Key:" . $apikey . " sharedcount.com FB total_count: " . $counts['Facebook']['total_count'] . " FB share_count:" . $counts['Facebook']['share_count'] . " TW: " . $counts['Twitter'] . " G+:" . $counts['GooglePlusOne'] . " Linkedin:" . $counts['LinkedIn'] . " Stumble: " . $counts['StumbleUpon'] . " Pinterest: " . $counts['Pinterest']);
-        
-        
+
+        mashdebug()->error("Facebook total count: " . $counts['Facebook']['total_count']);
+        MASHSB()->logger->info("URL: " . urldecode($this->url) . " API Key:" . $this->apikey . " sharedcount.com FB total_count: " . $counts['Facebook']['total_count'] . " FB share_count:" . $counts['Facebook']['share_count'] . " TW: " . $counts['Twitter'] . " G+:" . $counts['GooglePlusOne'] . " Linkedin:" . $counts['LinkedIn'] . " Stumble: " . $counts['StumbleUpon'] . " Pinterest: " . $counts['Pinterest']);
+
         return $counts;
 	} catch (Exception $e){
                 mashdebug()->error("error: " . $counts);

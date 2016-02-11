@@ -178,13 +178,6 @@ function mashsb_get_registered_settings() {
 					'type' => 'text',
                                         'size' => 'small'
 				),
-                                'excluded_from' => array(
-					'id' => 'excluded_from',
-					'name' => __( 'Exclude from', 'mashsb' ),
-					'desc' => __( 'Exclude share buttons from a list of specific posts and pages. Put in the page id separated by a comma, e.g. 23, 63, 114 ', 'mashsb' ),
-					'type' => 'text',
-                                        'size' => 'medium'
-				),
                                 'execution_order' => array(
 					'id' => 'execution_order',
 					'name' => __( 'Execution Order', 'mashsb' ),
@@ -467,6 +460,13 @@ function mashsb_get_registered_settings() {
 					'desc' => __( 'Enable this option if you are using </br> <strong>&lt;?php echo do_shortcode("[mashshare]"); ?&gt;</strong>.', 'mashsb' ),
 					'type' => 'checkbox',
                                         'std' => 'false'
+				),
+                                'excluded_from' => array(
+					'id' => 'excluded_from',
+					'name' => __( 'Exclude from', 'mashsb' ),
+					'desc' => __( 'Exclude share buttons from a list of post ids. Put in the post id separated by a comma, e.g. 23, 63, 114 ', 'mashsb' ),
+					'type' => 'text',
+                                        'size' => 'medium'
 				),
                                 'singular' => array(
 					'id' => 'singular',

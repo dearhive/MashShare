@@ -232,6 +232,9 @@ class MASHSB_Tracking {
 	 * @return void
 	 */
 	public function admin_notice() {
+            
+                if (!current_user_can('update_plugins'))
+                    return;
 
 		$hide_notice = get_option( 'mashsb_tracking_notice' );
 

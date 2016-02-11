@@ -21,9 +21,9 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 function mashsb_check_active_networks(){
     global $mashsb_options;
     
-    $networks = $mashsb_options['networks'];
+    $networks = isset($mashsb_options['networks']) ? $mashsb_options['networks'] : false;
     
-    if ( isset($networks) )
+    if ( isset($networks) && is_array($networks) )
     foreach ($networks as $key => $value){
         if ( isset ($networks[$key]['status']) )
             return true;
@@ -203,7 +203,7 @@ add_action( 'mashsb_dismiss_notices', 'mashsb_dismiss_notices' );
  * 
  */
 
-function in_plugin_update_message( $args ) {
+function mashsb_in_plugin_update_message( $args ) {
     $transient_name = 'mashsb_upgrade_notice_' . $args['Version'];
 
     if ( false === ( $upgrade_notice = get_transient( $transient_name ) ) ) {
@@ -239,4 +239,4 @@ function in_plugin_update_message( $args ) {
 
     echo wp_kses_post( $upgrade_notice );
   }
- add_action ( "in_plugin_update_message-mashsharer/mashshare.php", 'in_plugin_update_message'  );
+ add_action ( 'in_plugin_update_message-mashsharer/mashshare.php', 'mashsb_in_plugin_update_message'  );

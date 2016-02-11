@@ -105,7 +105,7 @@ function mashsbGetShareObj($url) {
     $mashengine = isset($mashsb_options['mashsb_sharemethod']) && $mashsb_options['mashsb_sharemethod'] === 'mashengine' ? true : false;
     if ($mashengine) {
         if(!class_exists('RollingCurlX'))  
-        require_once MASHSB_PLUGIN_DIR . 'includes/libraries/RolingCurlX.php';
+            require_once MASHSB_PLUGIN_DIR . 'includes/libraries/RolingCurlX.php';
         if(!class_exists('mashengine'))         
             require_once(MASHSB_PLUGIN_DIR . 'includes/mashengine.php');
         mashdebug()->error('mashsbGetShareObj() url: ' . $url);
@@ -113,7 +113,8 @@ function mashsbGetShareObj($url) {
         return $mashsbSharesObj;
     } 
         require_once(MASHSB_PLUGIN_DIR . 'includes/sharedcount.class.php');
-        $mashsbSharesObj = new mashsbSharedcount($url);
+        $apikey = isset($mashsb_options['mashsharer_apikey']) ? $mashsb_options['mashsharer_apikey'] : '';
+        $mashsbSharesObj = new mashsbSharedcount($url, 10, $apikey);
         return $mashsbSharesObj;   
 }
 
@@ -148,6 +149,8 @@ function mashsbGetShareMethod($mashsbSharesObj) {
  *  
  * @returns integer $shares
  */
+
+
 function mashsbGetNonPostShares($url) {
     
     isset($mashsb_options['mashsharer_cache']) ? $cacheexpire = $mashsb_options['mashsharer_cache'] : $cacheexpire = 300;
@@ -155,17 +158,20 @@ function mashsbGetNonPostShares($url) {
     $cacheexpire < 300 ? $cacheexpire = 300 : $cacheexpire;
 
     if (isset($mashsb_options['disable_cache'])) {
-        $cacheexpire = 2;
+        //$cacheexpire = 2;
+        delete_transient('mashcount_' . md5($url));
     }
 
     // Get any existing copy of our transient data
     if (false === get_transient('mashcount_' . md5($url))) {
+        
         // It wasn't there, so regenerate the data and save the transient
         // Get the share Object
         $mashsbSharesObj = mashsbGetShareObj($url);
+        
         // Get the share counts object
         $mashsbShareCounts = mashsbGetShareMethod($mashsbSharesObj);
-        $transient_name = md5($url);
+
         // Set the transient
         set_transient('mashcount_' . md5($url), $mashsbShareCounts->total, $cacheexpire);
         mashdebug('mashsbGetNonPostShares set_transient:' . $mashsbShareCounts->total);
@@ -198,11 +204,7 @@ function getSharedcount($url) {
         $cacheexpire = 2;
     }
     
-    // check share count for shortcode custom urls
-    if ( !empty($url) && $customurl = true) {
-        //mashdebug()->error('getSharedcount:'.$url);
-    	//return mashsbGetNonPostShares($url, $cacheexpire);
-    }
+
     
     /* Bypass next lines and return share count for pages with empty $post object
        Category, blog list pages, non singular() pages. Store the shares in transients with mashsbGetNonPostShares();
@@ -420,12 +422,8 @@ function mashsb_subscribe_button(){
         // Use the newly created array and bypass the callback function than
         if (is_array($getnetworks)){
             if (!is_array($enablednetworks)){
-                //echo "is not array";
-                //var_dump($enablednetworks);
             $enablednetworks = array_filter($getnetworks, 'isStatus');
             }else {
-                //echo "is array";
-                //var_dump($enablednetworks);
             $enablednetworks = $enablednetworks;    
             }
         }else{
@@ -543,7 +541,7 @@ function mashsb_subscribe_button(){
             // Define custom url var to share
             //$mashsb_custom_url = empty($url) ? false : $url;
             $mashsb_custom_url = empty($url) ? mashsb_get_url() : $url;
-
+            
             // Define custom text to share
             //$mashsb_custom_text = empty($text) ? false : $text;
             $mashsb_custom_text = empty($text) ? mashsb_get_title() : $text;
@@ -601,34 +599,38 @@ function mashsb_subscribe_button(){
     function mashsbGetActiveStatus(){
        global $mashsb_options, $post;
 
-       $frontpage = isset( $mashsb_options['frontpage'] ) ? $frontpage = 1 : $frontpage = 0;
+       $frontpage = isset( $mashsb_options['frontpage'] ) ? true : false;
        $current_post_type = get_post_type();
        $enabled_post_types = isset( $mashsb_options['post_types'] ) ? $mashsb_options['post_types'] : array();
-       $singular = isset( $mashsb_options['singular'] ) ? $singular = true : $singular = false;
+       $singular = isset( $mashsb_options['singular'] ) ? true : false;
        $loadall = isset( $mashsb_options['loadall'] ) ? $loadall = true : $loadall = false;
        
-       /*if ( is_404() )
-           return false;*/
+
+       if ( mashsb_is_excluded() ) {
+           mashdebug()->info("mashsb_is_excluded()");
+           return apply_filters('mashsb_active', false);
+       }
 
        if ($loadall){
            mashdebug()->info("load all mashsb scripts");
            return apply_filters('mashsb_active', true);    
        }
-       
+
+       // Load on frontpage
+       if ($frontpage === true && is_front_page()) {
+           mashdebug()->info("allow frontpage and is frontpage");
+           return apply_filters('mashsb_active', true);
+       }
+
        // Load scripts when shortcode is used
        /* Check if shortcode is used */ 
        if( function_exists('has_shortcode') && is_object($post) && has_shortcode( $post->post_content, 'mashshare' ) ) {
            mashdebug()->info("has_shortcode");
            return apply_filters('mashsb_active', true);    
        } 
-
-       if ( mashsb_is_excluded() ) {
-           mashdebug()->info("mashsb_is_excluded()");
-           return apply_filters('mashsb_active', false);
-       }
        
        // No scripts on non singular page
-       if (!is_singular() == 1 && $singular !== true) {
+       if (!is_singular() && !$singular) {
            mashdebug()->info("No scripts on non singular page");
            return apply_filters('mashsb_active', false);
        }
@@ -639,15 +641,7 @@ function mashsb_subscribe_button(){
            mashdebug()->info("automatic post_type enabled");
            return apply_filters('mashsb_active', true);    
        }  
-       
-       
-       // No scripts on frontpage when disabled
-       //if ($frontpage == 1 && is_front_page() == 1 && mashsb_is_excluded() !== true) {
-       if ($frontpage == 1 && is_front_page() == 1) {
-           mashdebug()->info("allow frontpage and is frontpage");
-           return apply_filters('mashsb_active', true);
-       }
-       
+
        mashdebug()->info("mashsbGetActiveStatus false");
        return apply_filters('mashsb_active', false);
 
@@ -661,73 +655,68 @@ function mashsb_subscribe_button(){
      * @since 1.0
      * @return string
      */
-    function mashshare_filter_content($content){
-        global $atts, $mashsb_options, $post, $wp_current_filter, $wp;
-        
-        
-        /* define some vars here to reduce multiple execution of basic functions */
-        /* Use permalink when its not singular page, so on category pages the permalink is used. */
-        $url = mashsb_get_url();
-        $title = mashsb_get_title();
-        
-        $position = !empty($mashsb_options['mashsharer_position']) ? $mashsb_options['mashsharer_position'] : '';
-        $enabled_post_types = isset( $mashsb_options['post_types'] ) ? $mashsb_options['post_types'] : null;
-        $current_post_type = get_post_type();
-        $frontpage = isset( $mashsb_options['frontpage'] ) ? $mashsb_options['frontpage'] : null;
-        $excluded = isset( $mashsb_options['excluded_from'] ) ? $mashsb_options['excluded_from'] : null;
-        $singular = isset( $mashsb_options['singular'] ) ? $singular = true : $singular = false;
-        
-        if (strpos($excluded, ',') !== false) {
-             $excluded = explode(',', $excluded);
-             if (in_array($post->ID, $excluded)) {
-                return $content;
-             }  
+    function mashshare_filter_content($content) {
+    global $atts, $mashsb_options, $post, $wp_current_filter, $wp;
+
+    //$url = mashsb_get_url();
+    //$title = mashsb_get_title();
+
+    $position = !empty($mashsb_options['mashsharer_position']) ? $mashsb_options['mashsharer_position'] : '';
+
+    $enabled_post_types = isset($mashsb_options['post_types']) ? $mashsb_options['post_types'] : null;
+    $current_post_type = get_post_type();
+    $frontpage = isset($mashsb_options['frontpage']) ? true : false;
+    $excluded = isset($mashsb_options['excluded_from']) ? $mashsb_options['excluded_from'] : null;
+    $singular = isset($mashsb_options['singular']) ? $singular = true : $singular = false;
+
+    /*if (strpos($excluded, ',') !== false) {
+        $excluded = explode(',', $excluded);
+        if (in_array($post->ID, $excluded)) {
+            return $content;
         }
+    }
+
+    if ($post->ID == $excluded) {
+        return $content;
+    }*/
     
-        if ($post->ID == $excluded) {
-            return $content;
-        }  
+    if ( mashsb_is_excluded() )
+        return $content;
 
-        if (!is_singular() == 1 && $singular !== true) {
-            return $content;
-        }
+    if ($frontpage == false && is_front_page()) {
+        return $content;
+    }
 
-        if ($frontpage == 0 && is_front_page() == 1) {
-            return $content;
-        }
-        
-        if ($enabled_post_types == null or !in_array($current_post_type, $enabled_post_types)) {
-            return $content;
-        }
+    if (!is_singular() == 1 && $singular !== true) {
+        return $content;
+    }
 
-        if (in_array('get_the_excerpt', $wp_current_filter)) {
-            return $content;
-        }
-        
-        if (is_feed()) {
-            return $content;
-        }
-		
-            switch($position){
-                case 'manual':
-                break;
+    if ($enabled_post_types == null or ! in_array($current_post_type, $enabled_post_types)) {
+        return $content;
+    }
+    
+    if (in_array('get_the_excerpt', $wp_current_filter)) {
+        return $content;
+    }
 
-                case 'both':
-                    $content = mashshareShow($atts, '') . $content . mashshareShow($atts, "bottom");
-                break;
+    switch ($position) {
+        case 'manual':
+            break;
 
-                case 'before':
-                    $content = mashshareShow($atts, '') . $content;
-                    
-                break;
+        case 'both':
+            $content = mashshareShow($atts, '') . $content . mashshareShow($atts, "bottom");
+            break;
 
-                case 'after':
-                    $content .= mashshareShow($atts, '');
-                break;
-            }
-            return $content;
+        case 'before':
+            $content = mashshareShow($atts, '') . $content;
+            break;
 
-        }
+        case 'after':
+            $content .= mashshareShow($atts, '');
+            break;
+    }
+    return $content;
+}
 
 /* Template function mashshare() 
  * @since 2.0.0
@@ -1055,6 +1044,7 @@ function mashsb_get_twitter_url(){
        if ( function_exists('mashsuGetShortURL')){
             $url = mashsb_get_url();
             mashsuGetShortURL($url) !== 0 ? $url = mashsuGetShortURL( $url ) : $url = mashsb_get_url();
+            $url = mashsuGetShortURL( $url );
         } else {
             $url = mashsb_get_url();
         }
