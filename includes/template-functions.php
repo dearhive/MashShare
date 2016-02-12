@@ -380,15 +380,15 @@ function mashsb_subscribe_button(){
             $twitter_url = !empty($mashsb_custom_url) ? mashsb_get_shorturl($mashsb_custom_url) : mashsb_get_twitter_url();
         }
         $twitter_title = !empty($mashsb_custom_text) ? $mashsb_custom_text : mashsb_get_twitter_title();
-        $twitter_url = isset($twitter_url) ? $twitter_url : '';
+        $twitter_url = isset($twitter_url) ? urlencode($twitter_url) : '';
         
         $title = !empty($mashsb_custom_text) ? $mashsb_custom_text : mashsb_get_title();
 
-        !empty($mashsb_options['mashsharer_hashtag']) ? $via = '&amp;via=' . $mashsb_options['mashsharer_hashtag'] : $via = '';
+        !empty($mashsb_options['mashsharer_hashtag']) ? $via = '&via=' . $mashsb_options['mashsharer_hashtag'] : $via = '';
        
         $networks = apply_filters('mashsb_array_networks', array(
             'facebook' => 'http://www.facebook.com/sharer.php?u=' . $url,
-            'twitter' =>  'https://twitter.com/intent/tweet?text=' . $twitter_title . $via . '&amp;url=' . $twitter_url,
+            'twitter' =>  'https://twitter.com/intent/tweet?text=' . $twitter_title . '&url=' . $twitter_url . $via,
             'subscribe' => '#',
             'url' => $url,
             'title' => $title   
@@ -539,7 +539,7 @@ function mashsb_subscribe_button(){
 
             /* Load hashshag*/       
             if ( !empty( $mashsb_options['mashsharer_hashtag'] ) ) {
-                $via = '&amp;via=' . $mashsb_options['mashsharer_hashtag'];
+                $via = '&via=' . $mashsb_options['mashsharer_hashtag'];
             } else {
                 $via = '';
             }
