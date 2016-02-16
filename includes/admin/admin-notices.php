@@ -29,7 +29,7 @@ function mashsb_check_active_networks(){
             return true;
     }
     
-    return false;;  
+    return false; 
 }
 
 
