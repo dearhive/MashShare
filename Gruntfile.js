@@ -1,5 +1,6 @@
 /* local path 
 cd "m:/github/Mashshare/mashshare-github-master/"
+cd "/srv/www/wordpress-develop/src/wp-content/plugins/mashsharer"
  * 
  */
 module.exports = function(grunt) {
@@ -52,6 +53,21 @@ module.exports = function(grunt) {
                 ]                
             },
         },
+        
+        'string-replace': {
+                build: {
+                    files: {
+                        '<%= paths.basetrunk %>/mashshare.php' : 'mashshare.php',
+                        '<%= paths.base %>/mashshare.php' : 'mashshare.php',
+                    },
+                    options: {
+                        replacements: [{
+                                pattern: /define\('MASHSB_DEBUG', true\);/g,
+                                replacement: 'define(\'MASHSB_DEBUG\', false);'
+                            }]
+                    }
+                }
+            },
 
         // Clean the build folder
         clean: {
@@ -101,5 +117,5 @@ module.exports = function(grunt) {
 
     // Build task
     //grunt.registerTask( 'build', [ 'compress:build' ]);
-    grunt.registerTask( 'build', [ 'clean:build', 'uglify:build', 'cssmin:build', 'copy:build', 'compress:build' ]);
+    grunt.registerTask( 'build', [ 'clean:build', 'uglify:build', 'cssmin:build', 'copy:build', 'string-replace:build', 'compress:build' ]);
 };

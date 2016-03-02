@@ -1,4 +1,4 @@
-=== Mashshare - Social Media Icons SEO Share Buttons for Facebook, Twitter, Subscribe === 
+=== Mashshare - Google AMP (Accelerated Mobile Pages) supported === 
 
 Author URL: https://www.mashshare.net
 Plugin URL: https://www.mashshare.net
@@ -8,8 +8,8 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email
 Requires at least: 3.6+
-Tested up to: 4.4.2
-Stable tag: 2.5.3
+Tested up to: 4.5
+Stable tag: 2.5.4
 
 Social Media Icons & Share Buttons, a highly customizable social sharing and & Media SEO ecosystem Facebook, Twitter and more ...
 
@@ -23,6 +23,8 @@ Social Media Icons & Share Buttons, a highly customizable social sharing and & M
 > Other social buttons are often using external scripts which are increasing loading time of your entire website.
 
 > Mashshare is using NO external script dependencies. All code is loaded directly from your website and <strong>Mashshare ensures yours and your visitors privacy!</strong>  <br /> 
+>
+> <strong>New: </strong> Support for Accelerated Mobile Pages (AMP) when using the [official WordPress AMP plugin](https://wordpress.org/plugins/amp/):
 
 <strong>See a demonstration video by Katrinah.com</strong>
 [youtube https://www.youtube.com/watch?v=vRSE-pQJTBQ]
@@ -311,13 +313,24 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 == Changelog == 
 
-= 2.5.3 not released =
+= 2.5.4 not released =
+* New: Share button support for Google AMP Accelerated Mobile Pages when using the WordPress official AMP plugin https://wordpress.org/plugins/amp/
+* New: Fakecount support RTL languages like arabic and hebraic
+* New: Allow the use of css style concatenating with BWP Minify (Better WordPress Minify) or Autoptimize plugin
+* Tweak: Add debug constant
+* Tweak: Clean up code
+* Fix: $post undefined message
+* Fix: remove !important css declarations in AMP inline style declaration
+
+= 2.5.3 =
 * Tweak: Tested up to WP 4.4.2
 * Tweak: Rewrite sharedcount class for using phpunit test class
 * Tweak: Clean up code and several performance improvements
 * Fix: Undefined var 'mash_networks' on first installation
 * Fix: Disabling cache not working for shortcode buttons with custom url
 * Fix: Shorturls are not working on share bar add-on
+* Fix: Twitter username handle not shown on iphone (missing urlencode())
+* Fix: Custom url and text in shortcodes are overwriting default button text and url when used on same page
 * New: Move 'Exclude' option to settings->Visual->Location
 * New: Show usage tracking notice only for administrators
 
@@ -575,4 +588,4 @@ https://www.mashshare.net/changelog/
 == Upgrade Notice ==
 
 = 2.5.3 =
-2.5.3  <strong>Several tweaks, fixes and performance improvements!</strong> <a href="https://wordpress.org/plugins/mashsharer/changelog/" style="color:white;text-decoration: underline;">Complete Changelog!</a> It's recommended to test plugin updates on a testing website first before installing them on a live site. (Use <a href="https://wordpress.org/plugins/wp-staging/" target="_blank" style="color:white;text-decoration: underline;">WP Staging</a> for creating a test site or another plugin)
+2.5.3  <strong>Several tweaks, fixes and performance improvements!</strong> <a href="https://wordpress.org/plugins/mashsharer/changelog/" style="color:white;text-decoration: underline;">Complete Changelog!</a> It's recommended to test plugin updates on a testing website first before installing them on a live site. (Use <a href="https://wordpress.org/plugins/wp-staging/" target="_blank" style="color:white;text-decoration: underline;">WP Staging</a> for creating a test site)

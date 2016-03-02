@@ -687,13 +687,13 @@ function mashsb_get_settings_tabs() {
 	}  
         
 	if( ! empty( $settings['extensions'] ) ) {
-		$tabs['extensions'] = __( 'Extensions', 'mashsb' );
+		$tabs['extensions'] = __( 'Add-On Settings', 'mashsb' );
 	}
 	
 	if( ! empty( $settings['licenses'] ) ) {
 		$tabs['licenses'] = __( 'Licenses', 'mashsb' );
 	}
-        $tabs['addons'] = __( 'Add-Ons', 'mashsb' );
+        $tabs['addons'] = __( 'Get More Add-Ons', 'mashsb' );
 
 	//$tabs['misc']      = __( 'Misc', 'mashsb' );
 

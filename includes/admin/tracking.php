@@ -12,10 +12,6 @@
 // Exit if accessed directly
 if ( !defined( 'ABSPATH' ) ) exit;
 
-// Debug mode
-if (!defined('MASHSB_TRACKING_DEBUG')) {
-    define('MASHSB_TRACKING_DEBUG', false);
-}
 
 /**
  * Usage tracking
@@ -120,7 +116,9 @@ class MASHSB_Tracking {
                 
                 
                 $url = 'https://www.mashshare.net/?mashsb_action=checkin';
-                //$url = 'http://127.0.0.1/dev/?mashsb_action=checkin'; // only for debugging
+                if (MASHSB_DEBUG){
+                    $url = 'http://src.wordpress-develop.dev/?mashsb_action=checkin'; // only for debugging
+                }
                 
                 $request = wp_remote_post( $url, array(
 			'method'      => 'POST',
@@ -134,12 +132,10 @@ class MASHSB_Tracking {
 
 
                 
-                if (!MASHSB_TRACKING_DEBUG)
+                if (!MASHSB_DEBUG)
 		update_option( 'mashsb_tracking_last_send', time() );
                 
                 $data = $this->data;
-                //do_action('mashsb_after_allowing_tracking', $data);
-
 	}
 
 	/**
@@ -173,12 +169,12 @@ class MASHSB_Tracking {
 
 		$mashsb_options['allow_tracking'] = '1';
 
-                if (!MASHSB_TRACKING_DEBUG)
+                if (!MASHSB_DEBUG)
 		update_option( 'mashsb_settings', $mashsb_options );
 
 		$this->send_checkin( true );
                 
-                if (!MASHSB_TRACKING_DEBUG)
+                if (!MASHSB_DEBUG)
 		update_option( 'mashsb_tracking_notice', '1' );
 
 	}
@@ -194,10 +190,10 @@ class MASHSB_Tracking {
 		global $mashsb_options;
 		if( isset( $mashsb_options['allow_tracking'] ) ) {
 			unset( $mashsb_options['allow_tracking'] );
-                         if (!MASHSB_TRACKING_DEBUG)
+                         if (!MASHSB_DEBUG)
 			update_option( 'mashsb_settings', $mashsb_options );
 		}
-                 if (!MASHSB_TRACKING_DEBUG)
+                 if (!MASHSB_DEBUG)
 		update_option( 'mashsb_tracking_notice', '1' );
 
 		wp_redirect( remove_query_arg( 'mashsb_action' ) ); exit;
@@ -255,8 +251,8 @@ class MASHSB_Tracking {
 			stristr( network_site_url( '/' ), 'localhost' ) !== false ||
 			stristr( network_site_url( '/' ), ':8888'     ) !== false // This is common with MAMP on OS X
 		) {
-                         if (!MASHSB_TRACKING_DEBUG)
-			update_option( 'mashsb_tracking_notice', '1' );
+                         if (!MASHSB_DEBUG)
+                            update_option( 'mashsb_tracking_notice', '1' );
 		} else {
 			$optin_url  = add_query_arg( 'mashsb_action', 'opt_into_tracking' );
 			$optout_url = add_query_arg( 'mashsb_action', 'opt_out_of_tracking' );

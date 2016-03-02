@@ -1,6 +1,6 @@
 {
   "name": "mashsharer",
-  "version": "2.5.3",
+  "version": "2.5.4",
   "devDependencies": {
     "grunt": "~0.4.5",
     "grunt-contrib-clean": "~0.6.0",
@@ -13,6 +13,7 @@
     "grunt-version": ">=0.3.1",
     "load-grunt-tasks": "~3.1.0",
     "time-grunt": "~1.1.0",
-    "load-grunt-config": "*"
+    "load-grunt-config": "*",
+    "grunt-string-replace": "~1.2.1"
   }
 }
