@@ -508,9 +508,15 @@ function mashsb_render_sharecounts($customurl = '', $align='left'){
     $sharetitle = isset($mashsb_options['sharecount_title']) ? $mashsb_options['sharecount_title'] :  __('SHARES', 'mashsb');
     // If $url is valid wordpress url store and return share count from getSharedcount() else with mashsbGetNonPostShares()
     if ( $url == mashsb_get_url() ) {
-        $sharecount = isset($mashsb_options['mashsharer_round']) ? roundshares(getSharedcount($url)) : getSharedcount($url);
+        $shares = getSharedcount($url);
+        $sharecount = isset($mashsb_options['mashsharer_round']) ? roundshares($shares) : getSharedcount($url);
     } else {
-        $sharecount = isset($mashsb_options['mashsharer_round']) ? roundshares(mashsbGetNonPostShares($url)) : mashsbGetNonPostShares($url);
+        $shares = mashsbGetNonPostShares($url);
+        $sharecount = isset($mashsb_options['mashsharer_round']) ? roundshares($shares) : mashsbGetNonPostShares($url);
+    }
+    // do not show shares after x shares
+    if( mashsb_hide_shares($shares) ){
+        return;
     }
 
     $html = '<div class="mashsb-count" style="float:' . $align . ';"><div class="counts mashsbcount">' . $sharecount . '</div><span class="mashsb-sharetext">' . $sharetitle . '</span></div>';
@@ -786,30 +792,28 @@ function getFakecount() {
  * Hide sharecount until number of shares exceed
  * 
  * @since 2.0.7
+ * 
+ * @param int number of shares
  * @return bool true when shares are hidden
  * 
- * @todo change $url to function()
  */
 
-function mashsb_hide_shares() {
+function mashsb_hide_shares( $sharecount ) {
     global $mashsb_options, $post;
 
-    if ( empty($mashsb_options['hide_sharecount']) ){
+    if( empty( $mashsb_options['hide_sharecount'] ) ) {
         return false;
     }
 
-    $url = get_permalink(isset($post->ID));
-    $sharelimit = isset($mashsb_options['hide_sharecount']) ? $mashsb_options['hide_sharecount'] : 0;
+    $url = get_permalink( isset( $post->ID ) );
+    $sharelimit = isset( $mashsb_options['hide_sharecount'] ) ? $mashsb_options['hide_sharecount'] : 0;
 
-    if ( getSharedcount($url) > $sharelimit ) {
+    if( $sharecount >= $sharelimit ) {
         return false;
-    } else {
-        return true;
     }
-    return false;
+    // Hide share count per default when it is not a valid number
+    return true;
 }
-
-
 
 /* Additional content above share buttons 
  * 

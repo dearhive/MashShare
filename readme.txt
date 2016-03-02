@@ -315,12 +315,16 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 = 2.5.4 not released =
 * New: Share button support for Google AMP Accelerated Mobile Pages when using the WordPress official AMP plugin https://wordpress.org/plugins/amp/
+* New: Performance improvement: Number of share count requests are reduced
 * New: Fakecount support RTL languages like arabic and hebraic
 * New: Allow the use of css style concatenating with BWP Minify (Better WordPress Minify) or Autoptimize plugin
-* Tweak: Add debug constant
-* Tweak: Clean up code
+* New: Rename tab "Extensions" to "Add-On Settings"
+* New: Rename "Add-Ons" to "Get More Add-Ons"
+* Tweak: Hiding shares when x shares are reached will be done via php and not longer css
+* Tweak: Adding debug constant MASHSB_DEBUG for developing purposes
+* Tweak: Cleaning code
 * Fix: $post undefined message
-* Fix: remove !important css declarations in AMP inline style declaration
+* Fix: Remove !important css declarations in AMP inline style declaration
 
 = 2.5.3 =
 * Tweak: Tested up to WP 4.4.2

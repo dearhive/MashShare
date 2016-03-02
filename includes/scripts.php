@@ -153,7 +153,7 @@ function mashsb_load_inline_styles() {
         }";
     if ( !empty($mashsb_options['border_radius']) && $mashsb_options['border_radius'] != 'default' ) {
         $mashsb_custom_css .= '
-        [class^="mashicon-"], .onoffswitch-label, .onoffswitch2-label {
+        [class^="mashicon-"], .onoffswitch-label, .onoffswitch2-label, .onoffswitch {
             border-radius: ' . $mashsb_options['border_radius'] . 'px;
         }';
     }
@@ -178,24 +178,17 @@ function mashsb_load_inline_styles() {
         }';
     }
     if ( !empty($mashsb_options['mash_style']) && $mashsb_options['mash_style'] == 'gradiant' ) {
-        $mashsb_custom_css .= '
-        .mashsb-buttons a {
-            background-image: -webkit-linear-gradient(bottom,rgba(0, 0, 0, 0.17) 0%,rgba(255, 255, 255, 0.17) 100%);
-            background-image: -moz-linear-gradient(bottom,rgba(0, 0, 0, 0.17) 0%,rgba(255, 255, 255, 0.17) 100%);
-            background-image: linear-gradient(bottom,rgba(0,0,0,.17) 0%,rgba(255,255,255,.17) 100%);}';
-    }
-    if ( mashsb_hide_shares() === true ) {
-        $mashsb_custom_css .= ' 
-        .mashsb-box .mashsb-count {
-            display: none;
-        }';
+    $mashsb_custom_css .= '.mashsb-buttons a {
+        background-image: -webkit-linear-gradient(bottom,rgba(0, 0, 0, 0.17) 0%,rgba(255, 255, 255, 0.17) 100%);
+        background-image: -moz-linear-gradient(bottom,rgba(0, 0, 0, 0.17) 0%,rgba(255, 255, 255, 0.17) 100%);
+        background-image: linear-gradient(bottom,rgba(0,0,0,.17) 0%,rgba(255,255,255,.17) 100%);}';
     }
     if ( $smallbuttons === true ) {
-        $mashsb_custom_css .= '[class^="mashicon-"] .text, [class*=" mashicon-"] .text{
-        text-indent: -9999px !important;
-        line-height: 0px;
-        display: block;
-        } 
+    $mashsb_custom_css .= '[class^="mashicon-"] .text, [class*=" mashicon-"] .text{
+    text-indent: -9999px !important;
+    line-height: 0px;
+    display: block;
+    } 
     [class^="mashicon-"] .text:after, [class*=" mashicon-"] .text:after {
         content: "" !important;
         text-indent: 0;
@@ -248,8 +241,48 @@ function mashsb_load_inline_styles() {
  */
 function mashsb_amp_load_css(){
     global $mashsb_options;
+    
+    $share_color = isset($mashsb_options['share_color']) ? $mashsb_options['share_color'] : '#ccc';
+    $custom_css = isset($mashsb_options['custom_css']) ? $mashsb_options['custom_css'] : '';
+    
     // Get default css
     $css = file_get_contents(MASHSB_PLUGIN_DIR . '/templates/mashsb.min.css');
+        /* STYLES */
+    $css .= '.mashsb-count {color:' . $share_color . '}';
+    
+    if ( !empty($mashsb_options['border_radius']) && $mashsb_options['border_radius'] != 'default' ) {
+        $css .= '
+        [class^="mashicon-"], .onoffswitch-label, .onoffswitch2-label {
+            border-radius: ' . $mashsb_options['border_radius'] . 'px;
+        }';
+    }
+    if ( !empty($mashsb_options['mash_style']) && $mashsb_options['mash_style'] == 'shadow' ) {
+        $css .= '
+        .mashsb-buttons a, .onoffswitch, .onoffswitch2, .onoffswitch-inner:before, .onoffswitch2-inner:before  {
+            -webkit-transition: all 0.07s ease-in;
+            -moz-transition: all 0.07s ease-in;
+            -ms-transition: all 0.07s ease-in;
+            -o-transition: all 0.07s ease-in;
+            transition: all 0.07s ease-in;
+            box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.2),inset 0 -1px 0 0 rgba(0, 0, 0, 0.3);
+            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+            border: none;
+            -moz-user-select: none;
+            -webkit-font-smoothing: subpixel-antialiased;
+            -webkit-transition: all linear .25s;
+            -moz-transition: all linear .25s;
+            -o-transition: all linear .25s;
+            -ms-transition: all linear .25s;
+            transition: all linear .25s;
+        }';
+    }
+    if ( !empty($mashsb_options['mash_style']) && $mashsb_options['mash_style'] == 'gradiant' ) {
+    $css .= '
+    .mashsb-buttons a {
+        background-image: -webkit-linear-gradient(bottom,rgba(0, 0, 0, 0.17) 0%,rgba(255, 255, 255, 0.17) 100%);
+        background-image: -moz-linear-gradient(bottom,rgba(0, 0, 0, 0.17) 0%,rgba(255, 255, 255, 0.17) 100%);
+        background-image: linear-gradient(bottom,rgba(0,0,0,.17) 0%,rgba(255,255,255,.17) 100%);}';
+    }
     // Get css for small buttons
     $css .= '[class^="mashicon-"] .text, [class*=" mashicon-"] .text{
         text-indent: -9999px;
@@ -299,6 +332,9 @@ function mashsb_amp_load_css(){
     
     // Float the second shares box
     $css .= '.secondary-shares{float:left;}';
+    
+    // add custom css
+    $css .= $custom_css;
         
     echo $css;
 };

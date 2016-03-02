@@ -1,5 +1,5 @@
 
-/* START Delete text for buttons behind Plus signe */
+/* START Delete text for buttons behind Plus sign */
  .mashsb-buttons .secondary-shares a .text{
         text-indent: -9999px;
         line-height: 0px;
@@ -127,16 +127,22 @@ color:#ffffff;
     padding-top: 10px;
     padding-bottom:10px;
 } 
-/* General size of all buttons */
+/* 
+ *  General size of all buttons 
+ *  low cardinality so we can override this with custom css easily 
+ */
 .mashsb-buttons a{
-    /* we need to reset some style 
-    to prevent theme incompatibility */
+    min-width: 177px;
+}
+
+/* General design of all buttons */
+.mashsb-box .mashsb-buttons a{
     padding:13px;
     margin-right: 3px;
     margin-bottom:3px;
     float:left;
     text-decoration: none;
-    min-width: 177px;
+    border:0px;
 }
 
 /* Click on plus sign adds this class to switch the float */

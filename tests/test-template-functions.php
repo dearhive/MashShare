@@ -144,8 +144,21 @@ class TemplateFunctions extends WP_UnitTestCase {
 
     }
 
-    public function test_mashsb_get_image() {
-        $id = $this->factory->post->create(array('post_type' => 'post'));
+    public function test_mashsb_hide_shares() {
+        global $mashsb_options;
+        $mashsb_options['hide_sharecount'] = 60;
+        
+        $shares = '';
+        $this->assertTrue( mashsb_hide_shares( $shares ) );
+        $shares = 0;
+        $this->assertTrue( mashsb_hide_shares( $shares ) );
+        $shares = 0.1;
+        $this->assertTrue( mashsb_hide_shares( $shares ) );
+        $shares = 60;
+        $this->assertFalse( mashsb_hide_shares( $shares ) ); // Must be false        
+        $shares = 65;
+        $this->assertFalse( mashsb_hide_shares( $shares ) ); // Must be false
+
     }
 
 }
