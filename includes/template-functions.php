@@ -153,6 +153,10 @@ function mashsbGetNonPostShares($url) {
     isset($mashsb_options['mashsharer_cache']) ? $cacheexpire = $mashsb_options['mashsharer_cache'] : $cacheexpire = 300;
     /* make sure 300sec is default value */
     $cacheexpire < 300 ? $cacheexpire = 300 : $cacheexpire;
+    
+    if ( MASH_DEBUG ){
+        $cacheexpire = 10;
+    }
 
     if ( isset($mashsb_options['disable_cache']) ) {
         //$cacheexpire = 2;
@@ -197,12 +201,14 @@ function getSharedcount($url) {
     isset($mashsb_options['mashsharer_cache']) ? $cacheexpire = $mashsb_options['mashsharer_cache'] : $cacheexpire = 300;
     /* make sure 300sec is default value */
     $cacheexpire < 300 ? $cacheexpire = 300 : $cacheexpire;
-
-    if ( isset($mashsb_options['disable_cache']) ) {
-        $cacheexpire = 2;
+    
+    if ( MASH_DEBUG ){
+        $cacheexpire = 10;
     }
 
-
+    if ( isset($mashsb_options['disable_cache']) ) {
+         delete_transient('mashcount_' . md5($url));
+    }
 
     /* Bypass next lines and return share count for pages with empty $post object
       Category, blog list pages, non singular() pages. Store the shares in transients with mashsbGetNonPostShares();
@@ -211,13 +217,13 @@ function getSharedcount($url) {
         return mashsbGetNonPostShares($url);
     }
 
-
     /*
      * Important: This runs on non singular pages and prevents php crashes and loops without results
      */
-    if ( empty($url) && !is_null($post) )
+    if ( empty($url) && !is_null($post) ){
         return get_post_meta($post->ID, 'mashsb_shares', true) + getFakecount();
-
+    }
+    
     $mashsbNextUpdate = ( int ) $cacheexpire;
     $mashsbLastUpdated = get_post_meta($post->ID, 'mashsb_timestamp', true);
 
@@ -764,6 +770,7 @@ add_action('mashsb_get_excerpt_by_id', 'mashsb_get_excerpt_by_id');
  * @return int
  */
 function mashsb_get_fake_factor() {
+    // str_word_count is not working for hebraic and arabic languages
     //$wordcount = str_word_count(the_title_attribute('echo=0')); //Gets title to be used as a basis for the count
     $wordcount = count(explode(' ', the_title_attribute('echo=0')));
     $factor = $wordcount / 10;
@@ -783,8 +790,6 @@ function getFakecount() {
         $fakecountoption = $mashsb_options['fake_count'];
     }
     $fakecount = round($fakecountoption * mashsb_get_fake_factor(), 0);
-    //mashdebug()->info("fakecount: " . $fakecount);
-    //return apply_filters('filter_get_fakecount', $fakecount);
     return $fakecount;
 }
 
