@@ -317,10 +317,12 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 * New: Share button support for Google AMP Accelerated Mobile Pages when using the WordPress official AMP plugin https://wordpress.org/plugins/amp/
 * New: Autoptimize support - Concatenating of css and js files
 * New: BWP Minify (Better WordPress Minify) support - Concatenating of css and js files
+* New: Use modern facebook icon
 * New: Performance improvement: Number of share count requests are reduced
 * New: Fakecount support RTL languages like arabic and hebraic
 * New: Rename tab "Extensions" to "Add-On Settings"
 * New: Rename "Add-Ons" to "Get More Add-Ons"
+* Fix: Prevent fatal error when curl is not installed and check first if it is installed
 
 * Tweak: Hiding shares when x shares are reached will be done via php and not longer css
 * Tweak: Adding debug constant MASHSB_DEBUG for developing purposes
