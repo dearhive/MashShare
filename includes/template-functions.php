@@ -154,7 +154,7 @@ function mashsbGetNonPostShares($url) {
     /* make sure 300sec is default value */
     $cacheexpire < 300 ? $cacheexpire = 300 : $cacheexpire;
     
-    if ( MASH_DEBUG ){
+    if ( MASHSB_DEBUG ){
         $cacheexpire = 10;
     }
 
@@ -202,18 +202,14 @@ function getSharedcount($url) {
     /* make sure 300sec is default value */
     $cacheexpire < 300 ? $cacheexpire = 300 : $cacheexpire;
     
-    if ( MASH_DEBUG ){
+    if ( MASHSB_DEBUG ){
         $cacheexpire = 10;
-    }
-
-    if ( isset($mashsb_options['disable_cache']) ) {
-         delete_transient('mashcount_' . md5($url));
     }
 
     /* Bypass next lines and return share count for pages with empty $post object
       Category, blog list pages, non singular() pages. Store the shares in transients with mashsbGetNonPostShares();
      */
-    if ( is_null($post) && !empty($url) ) {
+    if ( !empty($url) && is_null($post) ) {
         return mashsbGetNonPostShares($url);
     }
 
@@ -233,6 +229,10 @@ function getSharedcount($url) {
     }
 
     if ( $mashsbLastUpdated + $mashsbNextUpdate <= time() ) {
+        // Write timestamp (Use this on top of this conditional. If this is not on top following return statements will be skipped and ignored - possible bug?)
+        update_post_meta($post->ID, 'mashsb_timestamp', time());
+        
+        //update_post_meta($post->ID, 'mashsb_timestamp', time());
         mashdebug()->info("First Update - Frequency: " . $mashsbNextUpdate . " Next update: " . date('Y-m-d H:i:s', $mashsbLastUpdated + $mashsbNextUpdate) . " last updated: " . date('Y-m-d H:i:s', $mashsbLastUpdated) . " Current time: " . date('Y-m-d H:i:s', time()));
 
         // Get the share Object
@@ -242,8 +242,6 @@ function getSharedcount($url) {
         //$mashsbShareCounts = new stdClass(); // USE THIS FOR DEBUGGING
         //$mashsbShareCounts->total = 13; // USE THIS FOR DEBUGGING
         $mashsbStoredDBMeta = get_post_meta($post->ID, 'mashsb_shares', true);
-        // Write timestamp
-        update_post_meta($post->ID, 'mashsb_timestamp', time());
 
         /*
          * Update post_meta only when API is requested and
@@ -506,7 +504,7 @@ function mashshareShow() {
 function mashsb_render_sharecounts($customurl = '', $align='left'){
     global $mashsb_options;
     
-    if ( isset($mashsb_options['disable_sharecount']) ) {
+    if ( isset( $mashsb_options['disable_sharecount'] ) || !mashsb_curl_installed() ) {
         return;
     }
 
@@ -733,7 +731,6 @@ function mashsb_get_image($postID) {
         return $image[0];
     }
 }
-
 add_action('mashsb_get_image', 'mashsb_get_image');
 
 /**
