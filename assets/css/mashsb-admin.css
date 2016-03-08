@@ -838,7 +838,14 @@ color:#777777;
 }
 
 .mashsb_admin .mashsharelogo{
+    display:block;
+    float: left;
     color:#0097DF;
+    font-weight:600;
+    font-size: 36px;
+    padding-top: 10px;
+    padding-bottom:20px;
+    width:210px;
 }
 .mashsb_admin .nav-tab {
     color: #0097DF;
@@ -884,4 +891,21 @@ color:#777777;
 .mashsb-admin-settings-header{
     font-size:20px;
     font-weight:bold;
+}
+
+.mashsb-version{
+    display: block;
+    padding-left:14px;
+    padding-top:17px;
+    font-size:15px;
+}
+
+
+#mash-social-admin-head > li{
+    float:left;
+    margin-right:5px;
+}
+
+.mashsb.nav-tab-wrapper{
+    clear:both;
 }

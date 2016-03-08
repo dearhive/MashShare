@@ -420,15 +420,39 @@ function mashsb_get_registered_settings() {
                                                 'size' => 15
                                                 )
                                         )
-				),                   
-                                'custom_css' => array(
+				), 
+                                'additional_css' => array(
+					'id' => 'additional_css',
+					'name' => __( 'Custom Styles', 'mashsb' ),
+					'desc' => __( '', 'mashsb' ),
+					'type' => 'add_content',
+                                        'options' => array(
+                                            'box1' => array(
+                                                'id' => 'custom_css',
+                                                'name' => __( 'General CSS', 'mashsb' ),
+                                                'desc' => __( 'This css is loaded on all pages where the Mashshare buttons are enabled and it\'s loaded as an additonal inline css on your site', 'mashsb' ),
+                                                'type' => 'textarea',
+                                                'textarea_rows' => '3',
+                                                'size' => 15
+                                                ),
+                                            'box2' => array(
+                                                'id' => 'amp_css',
+                                                'name' => __( 'AMP CSS', 'mashsb' ),
+                                                'desc' => sprintf(__( 'This CSS is loaded only on AMP Project pages like yourwebsite.com/amp. <strong>Note: </strong> You need the WordPress <a href="%s" target="_blank">AMP Plugin</a> installed.', 'mashsb' ), 'https://wordpress.org/plugins/amp/'),
+                                                'type' => 'textarea',
+                                                'textarea_rows' => '3',
+                                                'size' => 15
+                                                ),
+                                        )
+				), 
+                                /*'custom_css' => array(
 					'id' => 'custom_css',
 					'name' => __( 'Custom CSS', 'mashsb' ),
 					'desc' => __( '<br>Use Mashshare custom styles here', 'mashsb' ),
 					'type' => 'textarea',
 					'size' => 15
                                         
-				),
+				),*/
                                 'location_header' => array(
 					'id' => 'location_header',
 					'name' => '<strong>' . __( 'Location & Position', 'mashsb' ) . '</strong>',
@@ -524,7 +548,7 @@ function mashsb_get_registered_settings() {
                                 'networks' => array(
 					'id' => 'networks',
 					'name' => '<strong>' . __( 'Services', 'mashsb' ) . '</strong>',
-					'desc' => __('Drag and drop the Share Buttons to sort them and specify which ones should be enabled. If you enable more services than the specified value "Large Buttons", the plus sign is automatically added to the last visible big share button.<br><strong>No Share Services visible after update?</strong> Disable and enable the Mashshare Plugin solves this. ','mashsb'),
+					'desc' => __('Drag and drop the Share Buttons to sort them and specify which ones should be enabled. If you enable more networks than "Large Buttons", the plus sign is automatically added to the last visible large share button.s','mashsb'),
 					'type' => 'networks',
                                         'options' => mashsb_get_networks_list()
                                  )
@@ -1357,7 +1381,7 @@ function mashsb_add_content_callback($args){
             foreach ( $args['options'] as $option => $name ) :
                     $value = isset($mashsb_options[$name['id']]) ? $mashsb_options[ $name['id']] : '';
                     $textarea = '<textarea class="large-text mashsb-textarea" cols="50" rows="15" id="mashsb_settings['. $name['id'] .']" name="mashsb_settings['.$name['id'].']">' . esc_textarea( stripslashes( $value ) ) . '</textarea>';
-                    $html .= '<div id="'.$name['id'].'" style="max-width:500px;"><span style="padding-top:60px;display:block;">' . $name['desc'] . ':</span><br>' . $textarea . '</div>';
+                    $html .= '<div id="'.$name['id'].'" style="max-width:500px;"><span style="padding-top:60px;display:block;">' . $name['desc'] . '</span><br>' . $textarea . '</div>';
             endforeach;
         $html .= '</div>';
         $html .= '</div>';

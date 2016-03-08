@@ -1,4 +1,4 @@
-=== Mashshare - Google AMP (Accelerated Mobile Pages) supported === 
+=== Mashshare - Google AMP (Accelerated Mobile Pages) compatible === 
 
 Author URL: https://www.mashshare.net
 Plugin URL: https://www.mashshare.net
@@ -313,8 +313,9 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 == Changelog == 
 
-= 2.5.4 not released =
+= 2.5.4 =
 * New: Share button support for Google AMP Accelerated Mobile Pages when using the WordPress official AMP plugin https://wordpress.org/plugins/amp/
+* New: New option for adding custom css only on AMP pages. 
 * New: Autoptimize support - Concatenating of css and js files
 * New: BWP Minify (Better WordPress Minify) support - Concatenating of css and js files
 * New: Use modern facebook icon

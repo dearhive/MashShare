@@ -244,10 +244,18 @@ function mashsb_amp_load_css(){
     
     $share_color = isset($mashsb_options['share_color']) ? $mashsb_options['share_color'] : '#ccc';
     $custom_css = isset($mashsb_options['custom_css']) ? $mashsb_options['custom_css'] : '';
+    $amp_css = isset($mashsb_options['amp_css']) ? $mashsb_options['amp_css'] : '';
     
     // Get default css
     $css = file_get_contents(MASHSB_PLUGIN_DIR . '/templates/mashsb.min.css');
-        /* STYLES */
+     
+    // add custom css
+    $css .= $custom_css;
+    
+    // add AMP custom css
+     $css .= $amp_css;
+    
+    // STYLES
     $css .= '.mashsb-count {color:' . $share_color . '}';
     
     if ( !empty($mashsb_options['border_radius']) && $mashsb_options['border_radius'] != 'default' ) {
@@ -306,7 +314,7 @@ function mashsb_amp_load_css(){
     .mashsb-buttons a{
        margin-right: 3px;
        margin-bottom:3px;
-       min-width: 0;
+       min-width: 0px;
        width: 41px;
     }
 
@@ -333,8 +341,8 @@ function mashsb_amp_load_css(){
     // Float the second shares box
     $css .= '.secondary-shares{float:left;}';
     
-    // add custom css
-    $css .= $custom_css;
+    // Hide the view count
+    $css .= '.mashpv{display:none;}';
         
     echo $css;
 };

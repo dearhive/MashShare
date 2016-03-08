@@ -24,3 +24,9 @@ function mashsb_curl_installed(){
     return false;
 }
 
+/*function mashsb_is_amp_endpoint(){
+    if (  function_exists( 'is_amp_endpoint' )){
+        return is_amp_endpoint();
+    }
+}*/
+
