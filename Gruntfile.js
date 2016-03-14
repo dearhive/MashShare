@@ -11,9 +11,12 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON( 'package.json' ),
         paths : {
             // Base destination dir
-            base : '../../../../plugin/svn/tags/<%= pkg.version %>',
-            basetrunk : '../../../../plugin/svn/trunk/',
-            basezip: '../../../../plugin/svn/' 
+            base: '../../../../plugin/svn/tags/<%= pkg.version %>',
+            basetrunk: '../../../../plugin/svn/trunk/',
+            basetags: '../../../../plugin/svn/tags/',
+            basezip: '../../../../plugin/svn/',
+            baseassets: '../../../../plugin/svn/assets',
+            tmp: '../../../../plugin/svn/tmp'
         },
 
         // Tasks here
@@ -45,7 +48,7 @@ module.exports = function(grunt) {
         copy: {
             build: {             
                 files: [
-                    {expand: true, src: ['**', '!node_modules/**', '!Gruntfile.js', '!package.json', '!nbproject/**', '!grunt/**'],                
+                    {expand: true, src: ['**', '!node_modules/**', '!Gruntfile.js', '!package.json', '!nbproject/**', '!grunt/**','!tests/**', '!bin/**', '.travis.yml', '!phpunit.xml.dist'],                
                      dest: '<%= paths.base %>'},
                  
                     {expand: true, src: ['**', '!node_modules/**', '!Gruntfile.js', '!package.json', '!nbproject/**', '!grunt/**','!tests/**', '!bin/**', '.travis.yml', '!phpunit.xml.dist'],
@@ -102,14 +105,24 @@ module.exports = function(grunt) {
                 //dest: '../../',
                 //expand: true
             }
-        }
-
+        },
+        wp_deploy: {
+            deploy: { 
+                options: {
+                    plugin_main_file: 'mashshare.php',
+                    plugin_slug: 'mashsharer',
+                    svn_user: 'renehermi',  
+                    build_dir: '<%= paths.basezip %>', //relative path to your build directory
+                    //assets_dir: '<%= paths.basezip %>', //relative path to your assets directory (optional).
+                    tmp_dir: '<%= paths.tmp %>', //relative path tmp assets directory (optional).
+                    version: '<%= pkg.version %>'
+                },
+            }
+        },
 
     });
 
     // Load all grunt plugins here
-    // [...]
-    //require('load-grunt-config')(grunt);
     require('load-grunt-tasks')(grunt);
     
     // Display task timing
@@ -118,4 +131,5 @@ module.exports = function(grunt) {
     // Build task
     //grunt.registerTask( 'build', [ 'compress:build' ]);
     grunt.registerTask( 'build', [ 'clean:build', 'uglify:build', 'cssmin:build', 'copy:build', 'string-replace:build', 'compress:build' ]);
+    grunt.registerTask( 'deploy', [ 'wp_deploy:deploy' ] )
 };

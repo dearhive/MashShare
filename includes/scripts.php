@@ -222,10 +222,10 @@ function mashsb_load_inline_styles() {
     } else { 
         // need this to make sure the min-width value is not overwriting the responisve add-on settings if available
         if ($button_width && !mashsb_is_active_responsive_addon() ){
-            $mashsb_custom_css .= '.mashsb-buttons a {min-width: ' . $button_width . 'px;}';
+            $mashsb_custom_css .= '.mashsb-buttons a {min-width: ' . $button_width . 'px}';
         }
         if ($button_width && mashsb_is_active_responsive_addon() ){
-            $mashsb_custom_css .= '@media only screen and (min-width:460px;){.mashsb-buttons a {min-width: ' . $button_width . 'px;}}';
+            $mashsb_custom_css .= '@media only screen and (min-width:460px){.mashsb-buttons a {min-width: ' . $button_width . 'px;}}';
         }
     }
 

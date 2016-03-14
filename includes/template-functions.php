@@ -25,9 +25,6 @@ add_filter('widget_text', 'do_shortcode');
 add_action('mashshare', 'mashshare');
 add_filter('mash_share_title', 'mashsb_get_title', 10, 2);
 
-// uncomment for debugging
-//global $wp_filter; 
-//print_r($wp_filter['the_content']);
 
 /* Get Execution order of injected Share Buttons in $content 
  *

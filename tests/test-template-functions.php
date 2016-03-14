@@ -31,7 +31,7 @@ class TemplateFunctions extends WP_UnitTestCase {
         $this->assertGreaterThan(0, $shares);
     }
 
-    public function test_mashengine() {
+    public function test_mashengine_FBTW() {
         $url = 'http://google.com';
         if ( !class_exists('RollingCurlX') )
             require_once MASHSB_PLUGIN_DIR . 'includes/libraries/RolingCurlX.php';
@@ -42,12 +42,24 @@ class TemplateFunctions extends WP_UnitTestCase {
         $this->assertGreaterThan(0, $shares);
     }
 
-    public function test_getsharedcount() {
+    public function test_mashengine_all_counts() {
         global $post;
         $url = 'http://google.com';
         $mash = new mashengine($url);
         $shares = $mash->getALLCounts()->total;
         $this->assertGreaterThan(0, $shares);
+    }
+    
+    public function test_getSharedcount(){
+        global $mashsb_options;
+        //$mashsb_options['mashsharer_cache'] = 2;
+        $mashsb_options['mashsb_sharemethod'] = 'mashengine';
+        $args = array('post_type' => 'post');
+        $id = $this->factory->post->create($args);
+        $post = get_post($id);
+        $url = 'http://google.com';
+        $shares = getSharedcount($url);      
+        $this->assertGreaterThan(20000, $shares);
     }
 
     public function test_is_active_on_page() {

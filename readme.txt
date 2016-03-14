@@ -9,7 +9,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email
 Requires at least: 3.6+
 Tested up to: 4.5
-Stable tag: 2.5.4
+Stable tag: 2.5.5
 
 Social Media Icons & Share Buttons, a highly customizable social sharing and & Media SEO ecosystem Facebook, Twitter and more ...
 
@@ -312,6 +312,9 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 
 == Changelog == 
+
+= 2.5.5 =
+* Fix: Button width ignored after last update
 
 = 2.5.4 =
 * New: Share button support for Google AMP Accelerated Mobile Pages when using the WordPress official AMP plugin https://wordpress.org/plugins/amp/
