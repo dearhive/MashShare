@@ -415,6 +415,8 @@ function getNetworks($is_shortcode = false) {
     /* counter for 'Visible Services' */
     $startcounter = 1;
     $maxcounter = isset($mashsb_options['visible_services']) ? $mashsb_options['visible_services'] + 1 : 0; // plus 1 because our array values start counting from zero
+    /* Filter counter of visible services  */
+    $maxcounter = apply_filters('mashsb_visible_services',$maxcounter);
     /* our list of available services, includes the disabled ones! 
      * We have to clean this array first!
      */
@@ -544,7 +546,12 @@ function mashshareShortcodeShow($args) {
     !empty($mashsb_options['sharecount_title']) ? $sharecount_title = $mashsb_options['sharecount_title'] : $sharecount_title = __('SHARES', 'mashsb');
 
     $sharecount = '';
-
+    
+    /*
+     * Filter shortcode args to add an option for custommers, to change (add) some args
+     */
+    apply_filters('mashsb_shortcode_args',$args);
+    
     extract(shortcode_atts(array(
         'cache' => '3600',
         'shares' => 'true',
