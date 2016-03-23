@@ -194,7 +194,14 @@ function mashsbGetNonPostShares($url) {
 
 function getSharedcount($url) {
     global $mashsb_options, $post;
-
+    
+    /* 
+     * If post ID isn't set
+     */
+    if( !isset($post->ID) ){
+        return 0;
+    }
+    
     isset($mashsb_options['mashsharer_cache']) ? $cacheexpire = $mashsb_options['mashsharer_cache'] : $cacheexpire = 300;
     /* make sure 300sec is default value */
     $cacheexpire < 300 ? $cacheexpire = 300 : $cacheexpire;
@@ -740,6 +747,12 @@ add_action('mashsb_get_image', 'mashsb_get_image');
 function mashsb_get_excerpt_by_id($post_id) {
     mashdebug()->timer('mashsb_get_exerpt');
     $the_post = get_post($post_id); //Gets post ID
+    /* 
+     * If post_content isn't set
+     */
+    if( !isset($the_post->post_content) ){
+        return "";
+    }
     $the_excerpt = $the_post->post_content; //Gets post_content to be used as a basis for the excerpt
     $excerpt_length = 35; //Sets excerpt length by word count
     $the_excerpt = strip_tags(strip_shortcodes($the_excerpt)); //Strips tags and images
@@ -886,8 +899,10 @@ function mashsb_get_url() {
         $url = get_permalink($post->ID);
     } elseif ( is_singular() ) {
         $url = get_permalink($post->ID);
-    } else {
+    } elseif ( isset ($post->ID) ) { /* if postID isn't set */
         $url = get_permalink($post->ID);
+    } else {
+        $url = "";
     }
     return apply_filters('mashsb_get_url', $url);
 }

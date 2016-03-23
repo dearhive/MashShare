@@ -36,6 +36,12 @@ function mashsb_load_scripts($hook) {
         mashdebug()->info("mashsb_load_script not active");
         return;
     }
+    /* 
+     * If post ID isn't set
+     */
+    if( !isset($post->ID) ){
+        return;
+    }
 
     $url = mashsb_get_url();
     $title = urlencode(html_entity_decode(the_title_attribute('echo=0'), ENT_COMPAT, 'UTF-8'));
