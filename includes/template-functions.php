@@ -194,7 +194,14 @@ function mashsbGetNonPostShares($url) {
 
 function getSharedcount($url) {
     global $mashsb_options, $post;
-
+    
+    /* 
+     * If post ID isn't set
+     */
+    if( !isset($post->ID) ){
+        return 0;
+    }
+    
     isset($mashsb_options['mashsharer_cache']) ? $cacheexpire = $mashsb_options['mashsharer_cache'] : $cacheexpire = 300;
     /* make sure 300sec is default value */
     $cacheexpire < 300 ? $cacheexpire = 300 : $cacheexpire;
@@ -408,6 +415,8 @@ function getNetworks($is_shortcode = false) {
     /* counter for 'Visible Services' */
     $startcounter = 1;
     $maxcounter = isset($mashsb_options['visible_services']) ? $mashsb_options['visible_services'] + 1 : 0; // plus 1 because our array values start counting from zero
+    /* Filter counter of visible services  */
+    $maxcounter = apply_filters('mashsb_visible_services',$maxcounter);
     /* our list of available services, includes the disabled ones! 
      * We have to clean this array first!
      */
@@ -537,7 +546,12 @@ function mashshareShortcodeShow($args) {
     !empty($mashsb_options['sharecount_title']) ? $sharecount_title = $mashsb_options['sharecount_title'] : $sharecount_title = __('SHARES', 'mashsb');
 
     $sharecount = '';
-
+    
+    /*
+     * Filter shortcode args to add an option for custommers, to change (add) some args
+     */
+    apply_filters('mashsb_shortcode_args',$args);
+    
     extract(shortcode_atts(array(
         'cache' => '3600',
         'shares' => 'true',
@@ -740,6 +754,12 @@ add_action('mashsb_get_image', 'mashsb_get_image');
 function mashsb_get_excerpt_by_id($post_id) {
     mashdebug()->timer('mashsb_get_exerpt');
     $the_post = get_post($post_id); //Gets post ID
+    /* 
+     * If post_content isn't set
+     */
+    if( !isset($the_post->post_content) ){
+        return "";
+    }
     $the_excerpt = $the_post->post_content; //Gets post_content to be used as a basis for the excerpt
     $excerpt_length = 35; //Sets excerpt length by word count
     $the_excerpt = strip_tags(strip_shortcodes($the_excerpt)); //Strips tags and images
@@ -886,8 +906,10 @@ function mashsb_get_url() {
         $url = get_permalink($post->ID);
     } elseif ( is_singular() ) {
         $url = get_permalink($post->ID);
-    } else {
+    } elseif ( isset ($post->ID) ) { /* if postID isn't set */
         $url = get_permalink($post->ID);
+    } else {
+        $url = "";
     }
     return apply_filters('mashsb_get_url', $url);
 }
