@@ -184,8 +184,13 @@ if (!class_exists('mashshare')) :
             require_once MASHSB_PLUGIN_DIR . 'includes/logger.php';
             require_once MASHSB_PLUGIN_DIR . 'includes/actions.php';
             require_once MASHSB_PLUGIN_DIR . 'includes/helper.php';
+            require_once MASHSB_PLUGIN_DIR . 'includes/widgets.php';
+                            require_once MASHSB_PLUGIN_DIR . 'includes/admin/settings/metabox-settings.php'; /*move into is_admin*/
+                                            require_once MASHSB_PLUGIN_DIR . 'includes/admin/meta-box/meta-box.php';
+            //require_once MASHSB_PLUGIN_DIR . 'includes/header-meta-tags.php';
 
             if (is_admin() || ( defined('WP_CLI') && WP_CLI )) {
+                require_once MASHSB_PLUGIN_DIR . 'includes/install.php';
                 require_once MASHSB_PLUGIN_DIR . 'includes/admin/add-ons.php';
                 require_once MASHSB_PLUGIN_DIR . 'includes/admin/admin-actions.php';
                 require_once MASHSB_PLUGIN_DIR . 'includes/admin/admin-notices.php';
@@ -195,9 +200,9 @@ if (!class_exists('mashshare')) :
                 require_once MASHSB_PLUGIN_DIR . 'includes/admin/welcome.php';
                 require_once MASHSB_PLUGIN_DIR . 'includes/admin/settings/display-settings.php';
                 require_once MASHSB_PLUGIN_DIR . 'includes/admin/settings/contextual-help.php';
-                require_once MASHSB_PLUGIN_DIR . 'includes/install.php';
                 require_once MASHSB_PLUGIN_DIR . 'includes/admin/tools.php';
                 require_once MASHSB_PLUGIN_DIR . 'includes/admin/tracking.php';
+
             }
         }
 
@@ -252,6 +257,6 @@ if (!class_exists('mashshare')) :
 function MASHSB() {
     return Mashshare::instance();
 }
-
 // Get MASHSB Running
-MASHSB();
+//MASHSB();
+add_action('plugins_loaded', 'MASHSB');

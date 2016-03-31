@@ -1,4 +1,4 @@
-=== Mashshare - Google AMP (Accelerated Mobile Pages) compatible === 
+=== Mashshare - Social Media Share Buttons for Facebook, Twitter, Subscribe & more === 
 
 Author URL: https://www.mashshare.net
 Plugin URL: https://www.mashshare.net
@@ -9,7 +9,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email
 Requires at least: 3.6+
 Tested up to: 4.5
-Stable tag: 2.5.5
+Stable tag: 2.5.6
 
 Social Media Icons & Share Buttons, a highly customizable social sharing and & Media SEO ecosystem Facebook, Twitter and more ...
 
@@ -312,6 +312,20 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 
 == Changelog == 
+
+= 2.5.6 not released =
+* New: Most Popular Post Widget for displaying posts sorted by shares
+* New: Enable networks independantely mobile / desktop device 
+* New: Make the basic buttons responsive
+* New: admin menue icon
+* New: Filter mashsb_visible_services for modifying the visible networks
+* New: Filter mashsb_shortcode_atts for modifying the shortcode arguments
+* Performance: Only cached shares are served when page is requested by bot or spider
+* Tweak: New UI elements for admin checkboxes
+* Tweak: Enable Twitter and Facebook share button per default on first time installation
+* Tweak: Change Mashshare to MashShare for better branding
+* Fix: New function for returning share title shows correct title even on archive, categories and non posts like bbpress and buddyPress pages
+
 
 = 2.5.5 =
 * Fix: Button width ignored after last update

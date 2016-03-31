@@ -1,0 +1,7 @@
+.mashsb-rwmb-label, .mashsb-rwmb-input{
+    float: right;
+}
+label.error{
+    padding-left: auto;
+    padding-right: 3px;
+}

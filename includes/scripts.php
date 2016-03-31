@@ -120,13 +120,14 @@ function mashsb_load_admin_scripts($hook) {
 
     // Use minified libraries if Mashshare debug mode is turned off
     $suffix = ( mashsbIsDebugMode() ) ? '' : '.min';
-
+    
     wp_enqueue_script('mashsb-admin-scripts', $js_dir . 'mashsb-admin' . $suffix . '.js', array('jquery'), MASHSB_VERSION, false);
     wp_enqueue_script('jquery-ui-sortable');
     wp_enqueue_script('media-upload'); //Provides all the functions needed to upload, validate and give format to files.
     wp_enqueue_script('thickbox'); //Responsible for managing the modal window.
     wp_enqueue_style('thickbox'); //Provides the styles needed for this window.
     wp_enqueue_style('mashsb-admin', $css_dir . 'mashsb-admin' . $suffix . '.css', MASHSB_VERSION);
+
 }
 
 
@@ -220,12 +221,12 @@ function mashsb_load_inline_styles() {
         line-height: 41px;
     }';
     } else { 
-        // need this to make sure the min-width value is not overwriting the responisve add-on settings if available
-        if ($button_width && !mashsb_is_active_responsive_addon() ){
-            $mashsb_custom_css .= '.mashsb-buttons a {min-width: ' . $button_width . 'px}';
-        }
-        if ($button_width && mashsb_is_active_responsive_addon() ){
-            $mashsb_custom_css .= '@media only screen and (min-width:460px){.mashsb-buttons a {min-width: ' . $button_width . 'px;}}';
+        // need this to make sure the min-width value is not overwriting the responsive add-on settings if available
+        //if ($button_width && !mashsb_is_active_responsive_addon() ){
+            //$mashsb_custom_css .= '.mashsb-buttons a {min-width: ' . $button_width . 'px}';
+        //}
+        if ( $button_width ){
+            $mashsb_custom_css .= '@media only screen and (min-width:568px){.mashsb-buttons a {min-width: ' . $button_width . 'px;}}';
         }
     }
 
