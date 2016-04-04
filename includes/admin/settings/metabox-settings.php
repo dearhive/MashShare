@@ -20,6 +20,7 @@ function mashsb_meta_boxes( $meta_boxes ) {
     endforeach;
     $post_type[] = 'post';
     $post_type[] = 'page';
+    $twitter_handle = !empty($mashsb_options['mashsharer_hashtag']) ? $mashsb_options['mashsharer_hashtag'] : '';
 
     // Setup our meta box using an array
     $meta_boxes[0] = array(
@@ -42,7 +43,7 @@ function mashsb_meta_boxes( $meta_boxes ) {
             // Setup the social media title
             array(
                 'name' => '<span class="mashicon mashicon-share"></span> Social Media Title',
-                'desc' => 'Add a title that will populate the open graph meta tag which will be used when users share your content onto Facebook, LinkedIn, and Google+. If nothing is provided here, we will use the post title as a backup.',
+                'desc' => 'This title will fill up the open graph meta tag og:title and will be used when users share your content on Facebook, LinkedIn, or Google+. Leave this blank to use the post title.',
                 'id' => $prefix . 'og_title',
                 'type' => 'textarea',
                 'clone' => false,
@@ -51,7 +52,7 @@ function mashsb_meta_boxes( $meta_boxes ) {
             // Setup the social media description
             array(
                 'name' => '<span class="mashicon mashicon-share"></span> Social Media Description',
-                'desc' => 'Add a description that will populate the open graph meta tag which will be used when users share your content onto Facebook, LinkedIn, and Google Plus.',
+                'desc' => 'This description will fill up the open graph meta tag og:description and will be used when users share your content on Facebook, LinkedIn, and Google Plus.',
                 'id' => $prefix . 'og_description',
                 'type' => 'textarea',
                 'clone' => false,
@@ -71,7 +72,7 @@ function mashsb_meta_boxes( $meta_boxes ) {
             // Setup the pinterest description
             array(
                 'name' => '<span class="mashicon mashicon-pinterest"></span> Pinterest Description',
-                'desc' => 'Place a customized message that will be used when this post is shared on Pinterest. Leave this blank to use the title of the post.',
+                'desc' => 'Place a customized message that will be used when this post is shared on Pinterest. Leave this blank to use the post title.',
                 'id' => $prefix . 'pinterest_description',
                 'type' => 'textarea',
                 'clone' => false,
@@ -80,7 +81,7 @@ function mashsb_meta_boxes( $meta_boxes ) {
             // Setup the Custom Tweet box
             array(
                 'name' => '<span class="mashicon mashicon-twitter"></span> Custom Tweet',
-                'desc' => 'If this is left blank your post title will be used. ' . ($mashsb_options['mashsharer_hashtag'] ? 'Based on your username (@' . $options['twitterID'] . '), <span class="tweetLinkSection">a link being added,</span> and the current content above' : '<span ="tweetLinkSection">Based on a link being added, and</span> the current content above') . ', your tweet has <span class="counterNumber">140</span> characters remaining.',
+                'desc' => 'If this is left blank the post title will be used. ' . ($twitter_handle ? 'Based on your username (via ' . $twitter_handle . '), <span class="tweetLinkSection">a link being added,</span> and the current content above' : '<span ="tweetLinkSection">Based on a link being added, and</span> the current content above') . ', your tweet has <span class="counterNumber">140</span> characters remaining.',
                 'id' => $prefix . 'custom_tweet',
                 'type' => 'textarea',
                 'clone' => false,

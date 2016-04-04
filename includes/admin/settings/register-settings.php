@@ -808,7 +808,8 @@ function mashsb_checkbox_callback( $args ) {
         $html = '<div class="mashsb-admin-onoffswitch">';
 	$html .= '<input type="checkbox" class="mashsb-admin-onoffswitch-checkbox" id="mashsb_settings[' . $args['id'] . ']" name="mashsb_settings[' . $args['id'] . ']" value="1" ' . $checked . '/>';
 	$html .= '<label class="mashsb_hidden mashsb-admin-onoffswitch-label" for="mashsb_settings[' . $args['id'] . ']"></label>';
-
+        $html .= '</div>';
+        
 	echo $html;
 }
 

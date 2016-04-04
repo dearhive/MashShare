@@ -112,6 +112,10 @@ select.error {
 /* Mashshare Custom Settings
 -------------------------------------------------------------- */
 
+#mashsb_meta .mashsb-rwmb-field.mashsb-rwmb-image_advanced-wrapper.mashsb-og-image .mashsb-rwmb-input ul{
+    min-height:10px;
+}
+
 .mashsb-rwmb-meta-box {
     margin-left:10px;
 }
@@ -190,8 +194,6 @@ select.error {
     border: none;
 }
 
-/*#mashsb_meta ul.mashsb-rwbm-images.mashsb-rwbm-uploaded.ui-sortable.hidden,*/
-/*#mashsb_meta .mashsb-rwmb-field.mashsb-rwmb-image_advanced-wrapper.mashsb-og-image .mashsb-rwmb-input ul*/
 #mashsb_meta .mashsb-rwmb-media-list.ui-sortable
 {
     display: block;

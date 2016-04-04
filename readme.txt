@@ -325,6 +325,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 * Tweak: Enable Twitter and Facebook share button per default on first time installation
 * Tweak: Change Mashshare to MashShare for better branding
 * Fix: New function for returning share title shows correct title even on archive, categories and non posts like bbpress and buddyPress pages
+* Fix: Missing </div> in checkbox callback function
 
 
 = 2.5.5 =
