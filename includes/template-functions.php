@@ -427,7 +427,7 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
     
     /* counter for 'Visible Services' */
     $startcounter = 1;
-    $maxcounter = isset( $mashsb_options['visible_services'] ) ? (int)$mashsb_options['visible_services'] + 1 : 0; // plus 1 because our array values start counting from zero
+    $maxcounter = isset( $mashsb_options['visible_services'] ) ? $mashsb_options['visible_services'] : 0;
     $maxcounter = apply_filters( 'mashsb_visible_services', $maxcounter );
     
     /* visible services from shortcode attribute */
@@ -453,7 +453,7 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
 
     if( !empty( $enablednetworks ) ) {
         foreach ( $enablednetworks as $key => $network ):
-            if ( $maxcounter !== 'all' && $maxcounter < count($enablednetworks) ) {
+            if ( $maxcounter !== 'all' && $maxcounter + 1 < count($enablednetworks) ) { // $maxcounter + 1 for correct comparision with count()
                 if( $startcounter == $maxcounter ) {
                     $onoffswitch = onOffSwitch();
                     $startsecondaryshares = '<div class="secondary-shares" style="display:none;">';
@@ -902,19 +902,31 @@ function mashsb_get_title() {
  * 
  * @return string the custom twitter title
  */
-function mashsb_get_twitter_title() {
-    if( function_exists( 'MASHOG' ) ) {
-        $title = MASHOG()->MASHOG_OG_Output->_get_tw_title();
-        $title = html_entity_decode( $title, ENT_QUOTES, 'UTF-8' );
-        $title = urlencode( $title );
-        $title = str_replace( '#', '%23', $title );
-        $title = esc_html( $title );
-        $title = str_replace( '+', '%20', $title );
-    } else {
-        $title = mashsb_get_title();
-        $title = str_replace( '+', '%20', $title );
-    }
-    return $title;
+//function mashsb_get_twitter_title() {
+//    if( function_exists( 'MASHOG' ) ) {
+//        $title = MASHOG()->MASHOG_OG_Output->_get_tw_title();
+//        $title = html_entity_decode( $title, ENT_QUOTES, 'UTF-8' );
+//        $title = urlencode( $title );
+//        $title = str_replace( '#', '%23', $title );
+//        $title = esc_html( $title );
+//        $title = str_replace( '+', '%20', $title );
+//    } else {
+//        $title = mashsb_get_title();
+//        $title = str_replace( '+', '%20', $title );
+//    }
+//    return $title;
+//}
+
+/**
+ * Return twitter custom title
+ * 
+ * @global object $mashsb_meta_tags
+ * @return string the custom twitter title
+ */
+function mashsb_get_twitter_title(){
+    global $mashsb_meta_tags;
+    
+    return $mashsb_meta_tags->get_twitter_title();
 }
 
 /* Get URL to share
