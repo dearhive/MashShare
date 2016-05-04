@@ -404,7 +404,7 @@ function arrNetworks($name, $is_shortcode) {
  * @param bool true when used from shortcode [mashshare]
  */
 
-function getNetworks($is_shortcode = false) {
+function getNetworks($is_shortcode = false, $services = 0 ) {
     global $mashsb_options, $enablednetworks;
 
     $output = '';
@@ -414,9 +414,10 @@ function getNetworks($is_shortcode = false) {
     $onoffswitch = '';
     /* counter for 'Visible Services' */
     $startcounter = 1;
-    $maxcounter = isset($mashsb_options['visible_services']) ? $mashsb_options['visible_services'] + 1 : 0; // plus 1 because our array values start counting from zero
-    /* Filter counter of visible services  */
-    $maxcounter = apply_filters('mashsb_visible_services',$maxcounter);
+    $maxcounter = isset($mashsb_options['visible_services']) ? (int)$mashsb_options['visible_services'] + 1 : 0; // plus 1 because our array values start counting from zero
+    
+    /* visible services from shortcode attribute */
+    $maxcounter = ($services === 0) ? $maxcounter : $services; 
     /* our list of available services, includes the disabled ones! 
      * We have to clean this array first!
      */
@@ -432,11 +433,10 @@ function getNetworks($is_shortcode = false) {
     } else {
         $enablednetworks = $getnetworks;
     }
-
     if ( !empty($enablednetworks) ) {
         foreach ( $enablednetworks as $key => $network ):
-            if ( $mashsb_options['visible_services'] !== 'all' && $maxcounter != count($enablednetworks) && $mashsb_options['visible_services'] < count($enablednetworks) ) {
-                if ( $startcounter === $maxcounter ) {
+            if ( $maxcounter !== 'all' && $maxcounter < count($enablednetworks) ) {
+                if ( $startcounter == $maxcounter ) {
                     $onoffswitch = onOffSwitch();
                     $startsecondaryshares = '<div class="secondary-shares" style="display:none;">';
                 } else {
@@ -544,6 +544,7 @@ function mashshareShortcodeShow($args) {
     global $wpdb, $mashsb_options, $post, $wp, $mashsb_custom_url, $mashsb_custom_text;
 
     !empty($mashsb_options['sharecount_title']) ? $sharecount_title = $mashsb_options['sharecount_title'] : $sharecount_title = __('SHARES', 'mashsb');
+    !empty($mashsb_options['visible_services']) ? $visible_services = $mashsb_options['visible_services'] : $visible_services = 1;
 
     $sharecount = '';
     
@@ -556,6 +557,7 @@ function mashshareShortcodeShow($args) {
         'cache' => '3600',
         'shares' => 'true',
         'buttons' => 'true',
+        'services' => $visible_services + 1, //default is by admin option // plus 1 because our array values start counting from zero
         'align' => 'left',
         'text' => '', // $text
         'url' => '' // $url
@@ -580,7 +582,7 @@ function mashshareShortcodeShow($args) {
             '<div class="mashsb-box">'
             . $sharecount .
             '<div class="mashsb-buttons">'
-            . getNetworks(true) .
+            . getNetworks(true, $services) .
             '</div></div>
                     <div style="clear:both;"></div>'
             . mashsb_subscribe_content()
