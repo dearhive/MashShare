@@ -140,7 +140,7 @@ class mashengine {
 				$count = (is_array($data) ? $data[0]->total_count : $data->total_count);
 				break;
 			case "google":
-				preg_match( '/window\.__SSR = {c: ([\d]+)/', $data, $matches );
+				preg_match( '/window\.__SSR = {c: ([\d]+)TEST/', $data, $matches );
 				if(isset($matches[0])) $count = str_replace( 'window.__SSR = {c: ', '', $matches[0] );
 				break;
                         case "pinterest": 

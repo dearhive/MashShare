@@ -8,9 +8,23 @@
  * @version 1.1
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 if ( ! class_exists( 'MASHSB_License' ) ) :
+
+// uncomment for debugging    
+//add_action( 'http_api_debug', 'viper_http_api_debug', 10, 5 );
+ 
+function mashsb_http_api_debug( $response, $type, $class, $args, $url ) {
+    // You can change this from error_log() to var_dump() but it can break AJAX requests
+    error_log( 'Request URL: ' . var_export( $url, true ) );
+    error_log( 'Request Args: ' . var_export( $args, true ) );
+    error_log( 'Request Response : ' . var_export( $response, true ) );
+    var_dump( 'Request URL: ' . var_export( $url, true ) );
+    var_dump( 'Request Args: ' . var_export( $args, true ) );
+    var_dump( 'Request Response : ' . var_export( $response, true ) );
+}
 
 /**
  * MASHSB_License Class
@@ -23,7 +37,7 @@ class MASHSB_License {
 	private $version;
 	private $author;
 	private $api_url = 'https://www.mashshare.net/edd-sl-api/'; // production
-        //private $api_url = 'http://dev.mashshare.net/edd-sl-api/'; // development
+        private $api_url_debug = 'http://src.wordpress-develop.dev/edd-sl-api/'; // development
 	/**
 	 * Class constructor
 	 *
@@ -43,8 +57,14 @@ class MASHSB_License {
 		$this->item_shortname = 'mashsb_' . preg_replace( '/[^a-zA-Z0-9_\s]/', '', str_replace( ' ', '_', strtolower( $this->item_name ) ) );
 		$this->version        = $_version;
 		$this->license        = isset( $mashsb_options[ $this->item_shortname . '_license_key' ] ) ? trim( $mashsb_options[ $this->item_shortname . '_license_key' ] ) : '';
-		$this->author         = $_author;
-		$this->api_url        = is_null( $_api_url ) ? $this->api_url : $_api_url;
+                $this->author         = $_author;
+                if (MASHSB_DEBUG){
+                $this->api_url        = is_null( $_api_url ) ? $this->api_url_debug : $_api_url;
+                }else{
+                $this->api_url        = is_null( $_api_url ) ? $this->api_url : $_api_url;   
+                }
+
+
 
 		/**
 		 * Allows for backwards compatibility with old license options,
@@ -63,7 +83,7 @@ class MASHSB_License {
 		// Setup hooks
 		$this->includes();
 		$this->hooks();
-		//$this->auto_updater();
+
 	}
 
 	/**
@@ -73,7 +93,9 @@ class MASHSB_License {
 	 * @return  void
 	 */
 	private function includes() {
-		if ( ! class_exists( 'MASHSB_SL_Plugin_Updater' ) ) require_once 'MASHSB_SL_Plugin_Updater.php';         
+		if ( ! class_exists( 'MASHSB_SL_Plugin_Updater' ) ) {
+                    require_once 'MASHSB_SL_Plugin_Updater.php';    
+                }
 	}
 
 	/**
@@ -87,49 +109,56 @@ class MASHSB_License {
 		// Register settings
 		add_filter( 'mashsb_settings_licenses', array( $this, 'settings' ), 1 );
 
+		// Display help text at the top of the Licenses tab
+		add_action( 'mashsb_settings_tab_top', array( $this, 'license_help_text' ) );
+
 		// Activate license key on settings save
 		add_action( 'admin_init', array( $this, 'activate_license' ) );
 
 		// Deactivate license key
 		add_action( 'admin_init', array( $this, 'deactivate_license' ) );
 
+		// Check that license is valid once per week
+		add_action( 'mashsb_weekly_scheduled_events', array( $this, 'weekly_license_check' ) );
+
+		// For testing license notices, uncomment this line to force checks on every page load
+		//add_action( 'admin_init', array( $this, 'weekly_license_check' ) );
+
 		// Updater
 		add_action( 'admin_init', array( $this, 'auto_updater' ), 0 );
 
+		// Display notices to admins
 		add_action( 'admin_notices', array( $this, 'notices' ) );
+
+		add_action( 'in_plugin_update_message-' . plugin_basename( $this->file ), array( $this, 'plugin_row_license_missing' ), 10, 2 );
+
 	}
 
 	/**
 	 * Auto updater
 	 *
 	 * @access  private
-	 * @global  array $mashsb_options
 	 * @return  void
 	 */
 	public function auto_updater() {
-
-		//if ( 'valid' !== get_option( $this->item_shortname . '_license_active' ) )
-			//return;
-            //rhe
- 
-            /*$test = array(
-				'version'   => $this->version,
-				'license'   => $this->license,
-				'item_name' => $this->item_name,
-				'author'    => $this->author
-			);*/
-
-
+            
+		$args = array(
+			'version'   => $this->version,
+			'license'   => $this->license,
+			'author'    => $this->author
+		);
+            
+		if( ! empty( $this->item_id ) ) {
+			$args['item_id']   = $this->item_id;
+		} else {
+			$args['item_name'] = $this->item_name;
+		}
+            
 		// Setup the updater
 		$mashsb_updater = new MASHSB_SL_Plugin_Updater(
 			$this->api_url,
 			$this->file,
-			array(
-				'version'   => $this->version,
-				'license'   => $this->license,
-				'item_name' => $this->item_name,
-				'author'    => $this->author
-			)
+			$args
 		);
 	}
 
@@ -158,38 +187,76 @@ class MASHSB_License {
 
 
 	/**
+	 * Display help text at the top of the Licenses tag
+	 *
+	 * @access  public
+	 * @since   2.5
+	 * @param   string   $active_tab
+	 * @return  void
+	 */
+	public function license_help_text( $active_tab = '' ) {
+
+		static $has_ran;
+
+		if( 'licenses' !== $active_tab ) {
+			return;
+		}
+
+		if( ! empty( $has_ran ) ) {
+			return;
+		}
+
+		echo '<p>' . sprintf(
+			__( 'Enter your extension license keys here to receive updates for purchased extensions. If your license key has expired, please <a href="%s" target="_blank" title="License renewal FAQ">renew your license</a>.', 'mashsb' ),
+			'https://www.mashshare.net/documentation/license-renewal/#How_do_I_renew_my_license'
+		) . '</p>';
+
+		$has_ran = true;
+
+	}
+
+
+	/**
 	 * Activate the license key
 	 *
 	 * @access  public
 	 * @return  void
 	 */
 	public function activate_license() {
-		if ( ! isset( $_POST['mashsb_settings'] ) ) {
+           
+
+		if ( ! isset( $_POST["mashsb_settings"] ) ) {
+			//return;
+		}
+
+		if ( ! isset( $_REQUEST[ $this->item_shortname . '_license_key-nonce'] ) || ! wp_verify_nonce( $_REQUEST[ $this->item_shortname . '_license_key-nonce'], $this->item_shortname . '_license_key-nonce' ) ) {
+
+			return;
+
+		}                
+
+               if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
 
-		if ( ! isset( $_POST['mashsb_settings'][ $this->item_shortname . '_license_key'] ) ) {
+		if ( empty( $_POST['mashsb_settings'][ $this->item_shortname . '_license_key'] ) ) {
+		
+			delete_option( $this->item_shortname . '_license_active' );
+                
 			return;
-		}
 
-		foreach( $_POST as $key => $value ) {
+		}
+                
+		foreach ( $_POST as $key => $value ) {
 			if( false !== strpos( $key, 'license_key_deactivate' ) ) {
 				// Don't activate a key when deactivating a different key
 				return;
 			}
 		}
 
-		if( ! wp_verify_nonce( $_REQUEST[ $this->item_shortname . '_license_key-nonce'], $this->item_shortname . '_license_key-nonce' ) ) {
-		
-			wp_die( __( 'Nonce verification failed', 'mashsb' ), __( 'Error', 'mashsb' ), array( 'response' => 403 ) );
-                
-		}
-                
-               if( ! current_user_can( 'manage_options' ) ) {
-			return;
-		}
+		$details = get_option( $this->item_shortname . '_license_active' );
 
-		if ( 'valid' === get_option( $this->item_shortname . '_license_active' ) ) {
+		if ( is_object( $details ) && 'valid' === $details->license ) {
 			return;
 		}
 
@@ -228,14 +295,9 @@ class MASHSB_License {
 		// Decode license data
 		$license_data = json_decode( wp_remote_retrieve_body( $response ) );
 
-		update_option( $this->item_shortname . '_license_active', $license_data->license );
+		update_option( $this->item_shortname . '_license_active', $license_data );
 
-		if( ! (bool) $license_data->success ) {
-			set_transient( 'mashsb_license_error', $license_data, 1000 );
-		} else {
-			delete_transient( 'mashsb_license_error' );
                 }
-	}
 
 
 	/**
@@ -293,13 +355,55 @@ class MASHSB_License {
 
 			delete_option( $this->item_shortname . '_license_active' );
 
-			if( ! (bool) $license_data->success ) {
-				set_transient( 'mashsb_license_error', $license_data, 1000 );
-			} else {
-				delete_transient( 'mashsb_license_error' );
 		}
 	}
-}
+        
+        
+        /**
+	 * Check if license key is valid once per week
+	 *
+	 * @access  public
+	 * @since   2.5
+	 * @return  void
+	 */
+	public function weekly_license_check() {
+
+		if( ! empty( $_POST['mashsb_settings'] ) ) {
+			return; // Don't fire when saving settings
+		}
+
+		if( empty( $this->license ) ) {
+			return;
+		}
+
+		// data to send in our API request
+		$api_params = array(
+			'edd_action'=> 'check_license',
+			'license' 	=> $this->license,
+			'item_name' => urlencode( $this->item_name ),
+			'url'       => home_url()
+		);
+
+		// Call the API
+		$response = wp_remote_post(
+			$this->api_url,
+			array(
+				'timeout'   => 15,
+				'sslverify' => false,
+				'body'      => $api_params
+			)
+		);
+
+		// make sure the response came back okay
+		if ( is_wp_error( $response ) ) {
+			return false;
+		}
+
+		$license_data = json_decode( wp_remote_retrieve_body( $response ) );
+
+		update_option( $this->item_shortname . '_license_active', $license_data );
+
+	}
 
 
 	/**
@@ -310,49 +414,38 @@ class MASHSB_License {
 	 */
 	public function notices() {
 
-		if( ! isset( $_GET['page'] ) || 'mashsb-settings' !== $_GET['page'] ) {
+		static $showed_invalid_message;
+
+		if( empty( $this->license ) ) {
 			return;
 		}
 
-		if( ! isset( $_GET['tab'] ) || 'licenses' !== $_GET['tab'] ) {
+                if( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
 
-		$license_error = get_transient( 'mashsb_license_error' );
+		$messages = array();
 
-		if( false === $license_error ) {
-			return;
-		}
+		$license = get_option( $this->item_shortname . '_license_active' );
 
-		if( ! empty( $license_error->error ) ) {
+		if( is_object( $license ) && 'valid' !== $license->license && empty( $showed_invalid_message ) ) {
 
-			switch( $license_error->error ) {
+			if( empty( $_GET['tab'] ) || 'licenses' !== $_GET['tab'] ) {
 
-				case 'item_name_mismatch' :
+				$messages[] = sprintf(
+					__( 'You have invalid or expired license keys for MashShare. Please go to the <a href="%s" title="Go to Licenses page">Licenses page</a> to correct this issue.', 'mashsb' ),
+					admin_url( 'admin.php?page=mashsb-settings&tab=licenses' )
+				);
 
-					$message = __( 'This license does not belong to the product you have entered it for.', 'mashsb' );
-					break;
-
-				case 'no_activations_left' :
-
-					$message = __( 'This license does not have any activations left', 'mashsb' );
-					break;
-
-				case 'expired' :
-
-					$message = __( 'This license key is expired. Please renew it.', 'mashsb' );
-					break;
-
-				default :
-
-					$message = sprintf( __( 'There was a problem activating your license key, please try again or contact support. Error code: %s', 'mashsb' ), $license_error->error );
-					break;
+				$showed_invalid_message = true;
 
 			}
 
 		}
 
-		if( ! empty( $message ) ) {
+		if( ! empty( $messages ) ) {
+
+			foreach( $messages as $message ) {
 
 			echo '<div class="error">';
 				echo '<p>' . $message . '</p>';
@@ -360,9 +453,30 @@ class MASHSB_License {
 
 		}
 
-		delete_transient( 'mashsb_license_error' );
+		}
 
 	}
+        
+       /**
+	 * Displays message inline on plugin row that the license key is missing
+	 *
+	 * @access  public
+	 * @since   2.5
+	 * @return  void
+	 */
+	public function plugin_row_license_missing( $plugin_data, $version_info ) {
+
+		static $showed_imissing_key_message;
+
+		$license = get_option( $this->item_shortname . '_license_active' );
+
+		if( ( ! is_object( $license ) || 'valid' !== $license->license ) && empty( $showed_imissing_key_message[ $this->item_shortname ] ) ) {
+
+			echo '&nbsp;<strong><a href="' . esc_url( admin_url( 'admin.php?page=mashsb-settings&tab=licenses' ) ) . '">' . __( 'Enter valid license key for automatic updates.', 'mashsb' ) . '</a></strong>';
+			$showed_imissing_key_message[ $this->item_shortname ] = true;
+		}
+
+	} 
 }
 
 endif; // end class_exists check

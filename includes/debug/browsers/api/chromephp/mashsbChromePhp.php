@@ -383,8 +383,7 @@ class mashsbChromePhp
     protected function _writeHeader($data)
     {
         //ob_start();
-        @header(self::HEADER_NAME . ': ' . $this->_encode($data));
-        //echo self::HEADER_NAME . ': ' . $this->_encode($data);
+        //@header(self::HEADER_NAME . ': ' . $this->_encode($data));
         //ob_end_clean();  
     }
 

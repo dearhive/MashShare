@@ -7,10 +7,10 @@
  * @copyright   Copyright (c) 2014, René Hermenau
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       1.0
-*/
-
+ */
 // Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit;
+if( !defined( 'ABSPATH' ) )
+    exit;
 
 /* Returns list elements for jQuery tab navigation 
  * based on header callback
@@ -20,24 +20,23 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * @return string
  */
 
-function getTabHeader($page, $section){
+function getTabHeader( $page, $section ) {
     global $mashsb_options;
     global $wp_settings_fields;
-    
-    if (!isset($wp_settings_fields[$page][$section]))
+
+    if( !isset( $wp_settings_fields[$page][$section] ) )
         return;
-    
+
     echo '<ul>';
-    foreach ((array) $wp_settings_fields[$page][$section] as $field) {  
-    $sanitizedID = str_replace('[', '', $field['id'] );
-    $sanitizedID = str_replace(']', '', $sanitizedID );     
-     if (strpos($field['callback'],'header') !== false) { 
-         echo '<li class="mashsb-tabs"><a href="#' . $sanitizedID . '">' . $field['title'] .'</a></li>';
-     }      
+    foreach ( ( array ) $wp_settings_fields[$page][$section] as $field ) {
+        $sanitizedID = str_replace( '[', '', $field['id'] );
+        $sanitizedID = str_replace( ']', '', $sanitizedID );
+        if( strpos( $field['callback'], 'header' ) !== false ) {
+            echo '<li class="mashsb-tabs" id="' . $sanitizedID . '-nav"><a href="#' . $sanitizedID . '">' . $field['title'] . '</a></li>';
+        }
     }
     echo '</ul>';
 }
-
 
 /**
  * Print out the settings fields for a particular settings section
@@ -57,59 +56,65 @@ function getTabHeader($page, $section){
  * Copied from WP Core 4.0 /wp-admin/includes/template.php do_settings_fields()
  * We use our own function to be able to create jQuery tabs with easytabs()
  * 
-*  We dont use tables here any longer. Are we stuck in the nineties?
+ *  We dont use tables here any longer. Are we stuck in the nineties?
  * @todo Use sprintf to sanitize  $field['id'] instead using str_replace() Should be faster?
  * @todo some media queries for better responisbility
  */
-function mashsb_do_settings_fields($page, $section) {
+function mashsb_do_settings_fields( $page, $section ) {
     global $wp_settings_fields;
     $header = false;
     $firstHeader = false;
-    
-    if (!isset($wp_settings_fields[$page][$section]))
+
+    if( !isset( $wp_settings_fields[$page][$section] ) )
         return;
-    
+
     // Check first if any callback header registered
-    foreach ((array) $wp_settings_fields[$page][$section] as $field) {
-       strpos($field['callback'],'header') !== false ? $header = true : $header = false; 
-       
-       if ($header === true)
-               break;
+    foreach ( ( array ) $wp_settings_fields[$page][$section] as $field ) {
+        strpos( $field['callback'], 'header' ) !== false ? $header = true : $header = false;
+
+        if( $header === true )
+            break;
     }
-    
-    foreach ((array) $wp_settings_fields[$page][$section] as $field) {
-        
-       $sanitizedID = str_replace('[', '', $field['id'] );
-       $sanitizedID = str_replace(']', '', $sanitizedID );
-       
-       // Check if header has been created previously
-       if (strpos($field['callback'],'header') !== false && $firstHeader === false) { 
-           echo '<div id="' . $sanitizedID . '">'; 
-           echo '<table class="form-table"><tbody>';
-           $firstHeader = true;
-       } elseif (strpos($field['callback'],'header') !== false && $firstHeader === true) { 
-       // Header has been created previously so we have to close the first opened div
-           echo '</table></div><div id="' . $sanitizedID . '">'; 
-           echo '<table class="form-table"><tbody>';
-           
-       }  
+
+    foreach ( ( array ) $wp_settings_fields[$page][$section] as $field ) {
+
+        $sanitizedID = str_replace( '[', '', $field['id'] );
+        $sanitizedID = str_replace( ']', '', $sanitizedID );
+
+        // Check if header has been created previously
+        if( strpos( $field['callback'], 'header' ) !== false && $firstHeader === false ) {
+            echo '<div id="' . $sanitizedID . '">';
+            echo '<table class="form-table"><tbody>';
+            $firstHeader = true;
+        } elseif( strpos( $field['callback'], 'header' ) !== false && $firstHeader === true ) {
+            // Header has been created previously so we have to close the first opened div
+            echo '</table></div><div id="' . $sanitizedID . '">';
+            echo '<table class="form-table"><tbody>';
+        }
         echo '<tr class="row"><th class="row th">';
-        //echo "<pre>";
-        //var_dump($field);
-        if (!empty($field['args']['label_for']))
-            echo '<label for="' . esc_attr($field['args']['label_for']) . '">' . $field['title'] . '</label>';
-        else
-            echo '<div class="col-title">' . $field['title'] . '<span class="description">' . $field['args']['desc'] . '</span></div>';
+
+        if( !empty( $field['args']['label_for'] ) || empty( $field['args']['desc'] ) ) {
+        //if( empty( $field['args']['desc'] ) ) {
+            //echo '<label for="' . esc_attr( $field['args']['label_for'] ) . '" class="col-title">' . $field['title'] . '</label>';
+            echo '<div class="col-title">' . $field['title'] . '</div>';
+        } else {
+            //echo '<div class="col-title">' . $field['title'] . '<span class="description">' . $field['args']['desc'] . '</span></div>';
+            echo '<div class="col-title">' . $field['title'] .
+            '<a class="mashsb-helper" href="#"></a>' .
+            '<div class="mashsb-message">' . $field['args']['desc'] . '</div>' .
+            '</div>';
+        }
         echo '</th>';
-        echo '<td>';
-        call_user_func($field['callback'], $field['args']);
-        echo '</td></tr>';
-        
-        
+        //if( !empty( $field['args']['name'] ) ) {
+            echo '<td>';
+            call_user_func( $field['callback'], $field['args'] );
+            echo '</td>';
+        //}
+        echo '</tr>';
     }
     echo '</tbody></table>';
-    if ($header === true){
-    echo '</div>';
+    if( $header === true ) {
+        echo '</div>';
     }
 }
 
@@ -123,62 +128,69 @@ function mashsb_do_settings_fields($page, $section) {
  * @return void
  */
 function mashsb_options_page() {
-	global $mashsb_options;
+    global $mashsb_options;
 
-	$active_tab = isset( $_GET[ 'tab' ] ) && array_key_exists( $_GET['tab'], mashsb_get_settings_tabs() ) ? $_GET[ 'tab' ] : 'general';
+    $active_tab = isset( $_GET['tab'] ) && array_key_exists( $_GET['tab'], mashsb_get_settings_tabs() ) ? $_GET['tab'] : 'general';
 
-	ob_start();
-	?>
-	<div class="wrap mashsb_admin">
-            <span class="mashsharelogo"> <?php echo __('MashShare ', 'mashsb'); ?></span><span class="mashsb-version"><?php echo MASHSB_VERSION; ?></span>
-            <div class="about-text" style="clear:both;font-weight: 600;font-size: 19px;line-height: 0px;">
-                <?php if (!function_exists('curl_init')){ echo '<br><span style="color:red;">' . __('php_curl is not working on your server. </span><a href="http://us.informatiweb.net/programmation/32--enable-curl-extension-of-php-on-windows.html" target="_blank">Please enable it.</a>'); } ?>
-                <!--<iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Fmashshare.net&amp;width=100&amp;layout=standard&amp;action=like&amp;show_faces=false&amp;share=true&amp;height=35&amp;appId=449277011881884" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:400px; height:25px;" allowTransparency="true"></iframe>-->
-                <ul id="mash-social-admin-head">
+    ob_start();
+    ?>
+    <div class="wrap mashsb_admin">
+        <span class="mashsharelogo"> <?php echo __( 'MashShare ', 'mashsb' ); ?></span><span class="mashsb-version"><?php echo MASHSB_VERSION; ?></span>
+        <div class="about-text" style="clear:both;font-weight: 600;font-size: 19px;line-height: 0px;">
+            <?php
+            if( !function_exists( 'curl_init' ) ) {
+                echo '<br><span style="color:red;">' . __( 'php_curl is not working on your server. </span><a href="http://us.informatiweb.net/programmation/32--enable-curl-extension-of-php-on-windows.html" target="_blank">Please enable it.</a>' );
+            }
+            ?>
+            <!--<iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Fmashshare.net&amp;width=100&amp;layout=standard&amp;action=like&amp;show_faces=false&amp;share=true&amp;height=35&amp;appId=449277011881884" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:400px; height:25px;" allowTransparency="true"></iframe>-->
+            <ul id="mash-social-admin-head">
                 <li><iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.mashshare.net%2F&amp;width=100&amp;layout=standard&amp;action=like&amp;show_faces=false&amp;share=true&amp;height=35&amp;appId=449277011881884" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:96px; height:20px;" allowTransparency="true"></iframe>
                 <li><a class="twitter-follow-button" href="https://twitter.com/mashshare" data-size="small" id="twitter-wjs" style="display: block;">Follow @mashshare</a></li>
                 <li><a class="twitter-follow-button" href="https://twitter.com/renehermenau" data-size="small" id="twitter-wjs" style="display: block;">Follow @renehermenau</a></li>
                 <li><a href="https://twitter.com/intent/tweet?button_hashtag=mashshare&text=Boost%20your%20traffic%20more%20than%20double%20with%20incredible%20fast%20share%20share%20buttons" class="twitter-hashtag-button" data-size="small" data-related="mashshare" data-url="https://www.mashshare.net/" data-dnt="true">Tweet #mashshare</a></li>
-                </ul>
-            
-            </div>
+            </ul>
 
-		<h2 class="mashsb nav-tab-wrapper">
-			<?php
-			foreach( mashsb_get_settings_tabs() as $tab_id => $tab_name ) {
+        </div>
 
-				$tab_url = esc_url(add_query_arg( array(
-					'settings-updated' => false,
-					'tab' => $tab_id
-				) ));
+        <h2 class="mashsb nav-tab-wrapper">
+            <?php
+            foreach ( mashsb_get_settings_tabs() as $tab_id => $tab_name ) {
 
-				$active = $active_tab == $tab_id ? ' nav-tab-active' : '';
+                $tab_url = esc_url( add_query_arg( array(
+                    'settings-updated' => false,
+                    'tab' => $tab_id
+                        ) ) );
 
-				echo '<a href="' . esc_url( $tab_url ) . '" title="' . esc_attr( $tab_name ) . '" class="nav-tab' . $active . '">';
-					echo esc_html( $tab_name );
-				echo '</a>';
-			}
-			?>
-		</h2>
-		<div id="tab_container" class="tab_container">
-                        <?php getTabHeader( 'mashsb_settings_' . $active_tab, 'mashsb_settings_' . $active_tab ); ?>   
-                    <div class="panel-container"> <!-- new //-->
-			<form method="post" action="options.php">
-				<?php
-				settings_fields( 'mashsb_settings' );
-				mashsb_do_settings_fields( 'mashsb_settings_' . $active_tab, 'mashsb_settings_' . $active_tab );
-				?>
-				<!--</table>-->
-                                
-				<?php 
-                                // do not show save button on add-on page
-                                if ($active_tab !== 'addons')
-                                    submit_button(); 
-                                ?>
-			</form>
-                    </div> <!-- new //-->
-		</div><!-- #tab_container-->
-	</div><!-- .wrap -->
-	<?php
-	echo ob_get_clean();
+                $active = $active_tab == $tab_id ? ' nav-tab-active' : '';
+
+                echo '<a href="' . esc_url( $tab_url ) . '" title="' . esc_attr( $tab_name ) . '" class="nav-tab' . $active . '">';
+                echo esc_html( $tab_name );
+                echo '</a>';
+            }
+            ?>
+        </h2>
+        <div id="tab_container" class="tab_container">
+                    <?php getTabHeader( 'mashsb_settings_' . $active_tab, 'mashsb_settings_' . $active_tab ); ?>   
+            <div class="panel-container"> <!-- new //-->
+                <form method="post" action="options.php">
+                    <?php
+                    settings_fields( 'mashsb_settings' );
+                    mashsb_do_settings_fields( 'mashsb_settings_' . $active_tab, 'mashsb_settings_' . $active_tab );
+                    ?>
+                    <!--</table>-->
+
+                    <?php
+                    // do not show save button on add-on page
+                    if( $active_tab !== 'addons' )
+                        submit_button();
+                    ?>
+                </form>
+            </div> <!-- new //-->
+        </div><!-- #tab_container-->
+        <div  class="mashsb-sidebar">
+            <?php  echo MASHSB()->template->get_template('sidebar') ?>
+        </div> <!-- #sidebar-->
+    </div><!-- .wrap -->
+    <?php
+    echo ob_get_clean();
 }

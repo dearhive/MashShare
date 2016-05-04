@@ -1,7 +1,9 @@
 <?php
 
-// uncomment this line for testing
+if (MASHSB_DEBUG){
+// Debug mode - Force plugin update
 //set_site_transient( 'update_plugins', null );
+}
 
 /**
  * Allows plugins to use their own update API.

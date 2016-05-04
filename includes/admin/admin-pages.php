@@ -30,7 +30,7 @@ function mashsb_add_options_link() {
 	$mashsb_parent_page   = add_menu_page( 'Mashshare Settings', __( 'MashShare', 'mashsb' ), 'manage_options', 'mashsb-settings', 'mashsb_options_page', 'data:image/svg+xml;base64,' . $mashshare_logo );
         $mashsb_settings_page = add_submenu_page( 'mashsb-settings', __( 'MashShare Settings', 'mashsb' ), __( 'Settings', 'mashsb' ), 'manage_options', 'mashsb-settings', 'mashsb_options_page' );
         $mashsb_add_ons_page  = add_submenu_page( 'mashsb-settings', __( 'MashShare Add Ons', 'mashsb' ), __( 'Get Add Ons', 'mashsb' ), 'manage_options', 'mashsb-addons', 'mashsb_add_ons_page' ); 
-        $mashsb_tools_page = add_submenu_page( 'mashsb-settings', __( 'MashShare Tools', 'mashsb' ), __( 'In/Export & System', 'mashsb' ), 'manage_options', 'mashsb-tools', 'mashsb_tools_page' );
+        $mashsb_tools_page = add_submenu_page( 'mashsb-settings', __( 'MashShare Tools', 'mashsb' ), __( 'Im/Export & System', 'mashsb' ), 'manage_options', 'mashsb-tools', 'mashsb_tools_page' );
 
 }
 add_action( 'admin_menu', 'mashsb_add_options_link', 10 );
@@ -53,7 +53,6 @@ function mashsb_is_admin_page() {
 	global $mashsb_parent_page, $pagenow, $typenow, $mashsb_settings_page, $mashsb_add_ons_page, $mashsb_tools_page;
 
 	if ( 'mashsb-settings' == $currentpage || 'mashsb-addons' == $currentpage || 'mashsb-tools' == $currentpage) {
-                mashdebug()->info("mashsb_is_admin_page() = true");
 		return true;      
 	}
          

@@ -144,6 +144,7 @@ color:#ffffff;
     float:left;
     text-decoration: none;
     border:0px;
+    box-shadow: none;
 }
 
 /* Click on plus sign adds this class to switch the float */

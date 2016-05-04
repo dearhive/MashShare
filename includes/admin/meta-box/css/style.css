@@ -13,7 +13,7 @@
 .mashsb-rwmb-field {
 	*zoom: 1;
 
-	margin: 0 0 10px;
+	margin: 0px;
 }
 .mashsb-rwmb-label,
 .mashsb-rwmb-input {
@@ -168,11 +168,29 @@ select.error {
   text-align: center;
 }
 
+#mashsb_meta .button-small {
+    background-color: #00ACEE;
+    color: #fff;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: none;
+    padding: 5px;
+    height: 30px;
+    font-style: italic;
+    font-weight: lighter;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    text-decoration: none;
+}
+
 #mashsb_meta textarea {
     width:100%;
 }
 
-#mashsb_meta .button:hover {
+#mashsb_meta .button:hover,
+#mashsb_meta .button-small:hover {
 	background-color: #0096D0;
 }
 
@@ -259,4 +277,51 @@ select.error {
 
 .mashsb-rwmb-image-item .mashsb-rwmb-media-preview {
     width: 100% !important;
+}
+
+.mashsb-rwmb-image-item img{
+width:100%;
+height:100%;
+}
+
+
+
+.mashsb-helper {
+    border-radius: 50%;
+    border: 2px solid #fff;
+    background-color: #0097df;
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    position: relative;
+    top: 4px;
+    margin-top: -4px;
+    cursor: pointer;
+    margin-left: 2px;
+}
+
+.mashsb-helper:after {
+    height: 20px;
+    top:-2px;
+    font-family: sans-serif;
+    content: "?";
+    color: #fff;
+    font-size: 11px;
+    font-weight: bold;
+    left: 4px;
+    position: absolute;
+}
+
+.mashsb-message{
+    display:block;
+    padding: 10px;
+    border: 1px solid #FBFBFB;
+    border-radius: 2px;
+    background-color: #F8F8F8;
+    position: absolute;
+    max-width: 500px;
+    z-index: 9999;
+    display: none;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    font-weight: normal;
 }

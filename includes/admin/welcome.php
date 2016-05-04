@@ -123,57 +123,50 @@ class MASHSB_Welcome {
             $this->welcome_message();
             $this->tabs();
             ?>
-            <p class="about-description"><?php _e( 'Use the tips below to get started using MashShare. You will be up and running in no time!', 'mashsb' ); ?></p>
+            <p class="about-description"><?php _e( 'Use the steps  below to get started using MashShare. You will be up and running in no time!', 'mashsb' ); ?></p>
 
             <div class="changelog">
-                <h3><?php _e( 'Creating Your First Download Product', 'mashsb' ); ?></h3>
+                <h3><?php _e( 'Step 1: Creating Your First Social Sharing Button', 'mashsb' ); ?></h3>
                 <div class="feature-section">
                     <div class="feature-section-media">
-                        <img src="<?php echo EDD_PLUGIN_URL . 'assets/images/screenshots/edit-download.png'; ?>" class="mashsb-welcome-screenshots"/>
+                        <img src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/social-networks-settings.png'; ?>" class="mashsb-welcome-screenshots"/>
                     </div>
                     <div class="feature-section-content">
-                        <h4><a href="<?php echo admin_url( 'post-new.php?post_type=download' ) ?>"><?php printf( __( '%s &rarr; Add New', 'mashsb' ), edd_get_label_plural() ); ?></a></h4>
-                        <p><?php printf( __( 'The %s menu is your access point for all aspects of your MashShare product creation and setup. To create your first product, simply click Add New and then fill out the product details.', 'mashsb' ), edd_get_label_plural() ); ?></p>
-
-
-                        <h4><?php _e( 'Download Files', 'mashsb' ); ?></h4>
-                        <p><?php _e( 'Uploading the downloadable files is simple. Click <em>Upload File</em> in the Download Files section and choose your download file. To add more than one file, simply click the <em>Add New</em> button.', 'mashsb' ); ?></p>
+                        <h4><a href="<?php echo admin_url( 'admin.php?page=mashsb-settings#mashsb_settingsservices_header' ) ?>" target="blank"><?php _e( 'Settings &rarr; Social Networks', 'mashsb' ); ?></a></h4>
+                        <p><?php _e( 'The Social Network menu is your general access point for activating the desired share buttons and for customizing the share button label', 'mashsb' ); ?></p>
+                        <h3><?php _e( 'Step 2: Set Share Button Location & Position', 'mashsb' ); ?></h3>
+                        <h4><a href="<?php echo admin_url( 'admin.php?page=mashsb-settings#mashsb_settingslocation_header' ) ?>" target="blank"><?php _e( 'Settings &rarr; Location & Position', 'mashsb' ); ?></a></h4>
+                        <p><?php _e( 'Specify the location and exact position of the share buttons within your content', 'mashsb' ); ?></p>
                     </div>
                 </div>
             </div>
 
             <div class="changelog">
-                <h3><?php _e( 'Display a Product Grid', 'mashsb' ); ?></h3>
+                <h3><?php _e( 'Display a Most Shared Post Widget', 'mashsb' ); ?></h3>
                 <div class="feature-section">
                     <div class="feature-section-media">
-                        <img src="<?php echo EDD_PLUGIN_URL . 'assets/images/screenshots/grid.png'; ?>"/>
+                        <img src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/most-shared-posts.png'; ?>"/>
                     </div>
                     <div class="feature-section-content">
-                        <h4><?php _e( 'Flexible Product Grids', 'mashsb' ); ?></h4>
-                        <p><?php _e( 'The [downloads] shortcode will display a product grid that works with any theme, no matter the size. It is even responsive!', 'mashsb' ); ?></p>
+                        <h4><a href="<?php echo admin_url( 'widgets.php' ) ?>" target="blank"><?php _e( 'Appearance &rarr; Widgets', 'mashsb' ); ?></a></h4>
 
-                        <h4><?php _e( 'Change the Number of Columns', 'mashsb' ); ?></h4>
-                        <p><?php _e( 'You can easily change the number of columns by adding the columns="x" parameter:', 'mashsb' ); ?></p>
-                        <p><pre>[downloads columns="4"]</pre></p>
+                        <p><?php _e( 'Drag and drop the widget </br> "<i>MashShare - Most Shared Posts</i>" </br>into the desired widget location and save it', 'mashsb' ); ?></p>
 
-                        <h4><?php _e( 'Additional Display Options', 'mashsb' ); ?></h4>
-                        <p><?php printf( __( 'The product grids can be customized in any way you wish and there is <a href="%s">extensive documentation</a> to assist you.', 'mashsb' ), 'http://docs.easydigitaldownloads.com/' ); ?></p>
                     </div>
                 </div>
             </div>
 
             <div class="changelog">
-                <h3><?php _e( 'Purchase Buttons Anywhere', 'mashsb' ); ?></h3>
+                <h3><?php _e( 'Content Shortcodes', 'mashsb' ); ?></h3>
                 <div class="feature-section">
                     <div class="feature-section-media">
-                        <img src="<?php echo EDD_PLUGIN_URL . 'assets/images/screenshots/purchase-link.png'; ?>"/>
+                        <img src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/shortcodes.png'; ?>"/>
                     </div>
                     <div class="feature-section-content">
-                        <h4><?php _e( 'The <em>[purchase_link]</em> Shortcode', 'mashsb' ); ?></h4>
-                        <p><?php _e( 'With easily accessible shortcodes to display purchase buttons, you can add a Buy Now or Add to Cart button for any product anywhere on your site in seconds.', 'mashsb' ); ?></p>
-
-                        <h4><?php _e( 'Buy Now Buttons', 'mashsb' ); ?></h4>
-                        <p><?php _e( 'Purchase buttons can behave as either Add to Cart or Buy Now buttons. With Buy Now buttons customers are taken straight to PayPal, giving them the most frictionless purchasing experience possible.', 'mashsb' ); ?></p>
+                        <p><?php _e( 'Add Share buttons manually with using the shortcode <i>[mashshare]</i> in content of your posts or pages.', 'mashsb' ); ?>
+                        </p>
+                            <?php echo sprintf(__( 'Find a list of all available shortcode parameters <a href="%s" target="blank">here</a>', 'mashsb'), 'https://www.mashshare.net/documentation/shortcodes/'); ?><br>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -182,43 +175,12 @@ class MASHSB_Welcome {
                 <h3><?php _e( 'Need Help?', 'mashsb' ); ?></h3>
                 <div class="feature-section two-col">
                     <div class="col">
-                        <h4><?php _e( 'Phenomenal Support', 'mashsb' ); ?></h4>
-                        <p><?php _e( 'We do our best to provide the best support we can. If you encounter a problem or have a question, simply open a ticket using our <a href="https://easydigitaldownloads.com/support">support form</a>.', 'mashsb' ); ?></p>
-                    </div>
-                    <div class="col">
-                        <h4><?php _e( 'Need Even Faster Support?', 'mashsb' ); ?></h4>
-                        <p><?php _e( 'Our <a href="https://easydigitaldownloads.com/support/pricing/">Priority Support</a> system is there for customers that need faster and/or more in-depth assistance.', 'mashsb' ); ?></p>
+                        <h4><?php _e( 'Great Support', 'mashsb' ); ?></h4>
+                        <p><?php _e( 'We do our best to provide the best support we can. If you encounter a problem or have a question, simply open a ticket using our <a href="https://www.mashshare.net/contact-developer/" target="blank">support form</a>.', 'mashsb' ); ?></p>
                     </div>
                 </div>
             </div>
 
-            <div class="changelog">
-                <h3><?php _e( 'Stay Up to Date', 'mashsb' ); ?></h3>
-                <div class="feature-section two-col">
-                    <div class="col">
-                        <h4><?php _e( 'Get Notified of Extension Releases', 'mashsb' ); ?></h4>
-                        <p><?php _e( 'New extensions that make MashShare even more powerful are released nearly every single week. Subscribe to the newsletter to stay up to date with our latest releases. <a href="http://eepurl.com/kaerz" target="_blank">Sign up now</a> to ensure you do not miss a release!', 'mashsb' ); ?></p>
-                    </div>
-                    <div class="col">
-                        <h4><?php _e( 'Get Alerted About New Tutorials', 'mashsb' ); ?></h4>
-                        <p><?php _e( '<a href="http://eepurl.com/kaerz" target="_blank">Sign up now</a> to hear about the latest tutorial releases that explain how to take MashShare further.', 'mashsb' ); ?></p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="changelog">
-                <h3><?php _e( 'Extensions for Everything', 'mashsb' ); ?></h3>
-                <div class="feature-section two-col">
-                    <div class="col">
-                        <h4><?php _e( 'Over 250 Extensions', 'mashsb' ); ?></h4>
-                        <p><?php _e( 'Add-on plugins are available that greatly extend the default functionality of MashShare. There are extensions for payment processors, such as Stripe and PayPal, extensions for newsletter integrations, and many, many more.', 'mashsb' ); ?></p>
-                    </div>
-                    <div class="col">
-                        <h4><?php _e( 'Visit the Extension Store', 'mashsb' ); ?></h4>
-                        <p><?php _e( '<a href="https://easydigitaldownloads.com/downloads" target="_blank">The Extensions store</a> has a list of all available extensions, including convenient category filters so you can find exactly what you are looking for.', 'mashsb' ); ?></p>
-                    </div>
-                </div>
-            </div>
         </div>
         <?php
     }
@@ -262,7 +224,7 @@ class MASHSB_Welcome {
                 <h3><?php _e( 'Amazon Payments', 'mashsb' ); ?></h3>
                 <div class="feature-section">
                     <div class="feature-section-media">
-                        <img src="<?php echo EDD_PLUGIN_URL . 'assets/images/screenshots/24-checkout.png'; ?>"/>
+                        <img src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/24-checkout.png'; ?>"/>
                     </div>
                     <div class="feature-section-content">
                         <p><?php _e( 'With MashShare version 2.4, you can now accept payments through Amazon\'s Login and Pay with the new built-in payment gateway.', 'mashsb' ); ?></p>
@@ -283,7 +245,7 @@ class MASHSB_Welcome {
                 <h3><?php _e( 'Earnings / Sales By Category', 'mashsb' ); ?></h3>
                 <div class="feature-section">
                     <div class="feature-section-media">
-                        <img src="<?php echo EDD_PLUGIN_URL . 'assets/images/screenshots/24-category-earnings.png'; ?>"/>
+                        <img src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/24-category-earnings.png'; ?>"/>
                     </div>
                     <div class="feature-section-content">
                         <p><?php _e( 'MashShare version 2.4 introduces a new Report that displays earnings and sales for your product categories.', 'mashsb' ); ?></p>
@@ -301,7 +263,7 @@ class MASHSB_Welcome {
                 <h3><?php _e( 'Improved Data Export', 'mashsb' ); ?></h3>
                 <div class="feature-section">
                     <div class="feature-section-media">
-                        <img src="<?php echo EDD_PLUGIN_URL . 'assets/images/screenshots/24-export.png'; ?>" class="mashsb-welcome-screenshots"/>
+                        <img src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/24-export.png'; ?>" class="mashsb-welcome-screenshots"/>
                     </div>
                     <div class="feature-section-content">
                         <h4><?php _e( 'Big Data Support', 'mashsb' ); ?></h4>
@@ -392,9 +354,10 @@ class MASHSB_Welcome {
             $this->welcome_message();
             $this->tabs();
             ?>
-            <p class="about-description"><?php _e( 'Mashshare is created by a team of developers who aim to provide the #1 ecosystem for growing social media traffic through WordPress.', 'mashsb' ); ?></p>
+            <p class="about-description"><?php _e( 'Mashshare is created by a René Hermenau and developers all over the world who aim to provide the #1 ecosystem for growing social media traffic through WordPress.', 'mashsb' ); ?></p>
 
             <?php echo $this->contributors(); ?>
+            <p class="small"><?php sprintf(_e(' If you want to be credited here participate on the development and  make your pull request on <a href="%s" target="_blank">github</a>',' mashsb'), 'https://github.com/mashshare/Mashshare')?></p>
         </div>
         <?php
     }
@@ -416,7 +379,7 @@ class MASHSB_Welcome {
 
         foreach ( $contributors as $contributor ) {
             $contributor_list .= '<li class="wp-person">';
-            $contributor_list .= sprintf( '<a href="%s" title="%s">', esc_url( 'https://github.com/' . $contributor->login ), esc_html( sprintf( __( 'View %s', 'easy-digital-downloads' ), $contributor->login ) )
+            $contributor_list .= sprintf( '<a href="%s" title="%s">', esc_url( 'https://github.com/' . $contributor->login ), esc_html( sprintf( __( 'View %s', 'mashsb' ), $contributor->login ) )
             );
             $contributor_list .= sprintf( '<img src="%s" width="64" height="64" class="gravatar" alt="%s" />', esc_url( $contributor->avatar_url ), esc_html( $contributor->login ) );
             $contributor_list .= '</a>';
@@ -438,22 +401,25 @@ class MASHSB_Welcome {
      * @return array $contributors List of contributors
      */
     public function get_contributors() {
-        $contributors = get_transient( 'edd_contributors' );
+        $contributors = get_transient( 'mashsb_contributors' );
 
-        if( false !== $contributors )
+        if( false !== $contributors ){
             return $contributors;
+        }
 
         $response = wp_remote_get( 'https://api.github.com/repos/mashshare/mashshare/contributors?per_page=999', array('sslverify' => false) );
 
-        if( is_wp_error( $response ) || 200 != wp_remote_retrieve_response_code( $response ) )
+        if( is_wp_error( $response ) || 200 != wp_remote_retrieve_response_code( $response ) ){
             return array();
+        }
 
         $contributors = json_decode( wp_remote_retrieve_body( $response ) );
 
-        if( !is_array( $contributors ) )
+        if( !is_array( $contributors ) ){
             return array();
+        }
 
-        set_transient( 'edd_contributors', $contributors, 3600 );
+        set_transient( 'mashsb_contributors', $contributors, 3600 );
 
         return $contributors;
     }

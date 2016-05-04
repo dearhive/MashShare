@@ -261,7 +261,7 @@ class MASHSB_Tracking {
                         $source         = substr( md5( get_bloginfo( 'admin_email' ) ), 0, 10 );
 			$extensions_url = 'https://www.mashshare.net/add-ons/?utm_source=' . $source . '&utm_medium=admin&utm_term=notice&utm_campaign=MASHSBUsageTracking';
 			echo '<div class="updated"><p>';
-				echo sprintf( __( 'Allow Mashshare to track plugin usage? Opt-in to tracking and our newsletter and immediately be emailed a <strong>10%% discount to the Mashshare shop</strong>, valid towards the <a href="%s" target="_blank">purchase of Add-Ons</a>. No sensitive data is tracked.', 'mashsb' ), $extensions_url );
+				echo sprintf( __( 'Allow Mashshare to track plugin usage? Opt-in to tracking and our newsletter and immediately be emailed a <strong>20%% discount to the Mashshare shop</strong>, valid towards the <a href="%s" target="_blank">purchase of Add-Ons</a>. No sensitive data is tracked.', 'mashsb' ), $extensions_url );
 				echo '&nbsp;<a href="' . esc_url( $optin_url ) . '" class="button-secondary">' . __( 'Allow', 'mashsb' ) . '</a>';
 				echo '&nbsp;<a href="' . esc_url( $optout_url ) . '" class="button-secondary">' . __( 'Do not allow', 'mashsb' ) . '</a>';
 			echo '</p></div>';

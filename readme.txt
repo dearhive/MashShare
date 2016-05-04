@@ -9,7 +9,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email
 Requires at least: 3.6+
 Tested up to: 4.5
-Stable tag: 2.5.6
+Stable tag: 3.0.0
 
 Social Media Icons & Share Buttons, a highly customizable social sharing and & Media SEO ecosystem Facebook, Twitter and more ...
 
@@ -313,19 +313,32 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 == Changelog == 
 
-= 2.5.6 not released =
+= 3.0.0 not released =
 * New: Most Popular Post Widget for displaying posts sorted by shares
 * New: Enable networks independantely mobile / desktop device 
 * New: Make the basic buttons responsive
 * New: admin menue icon
 * New: Filter mashsb_visible_services for modifying the visible networks
 * New: Filter mashsb_shortcode_atts for modifying the shortcode arguments
+* New: Rename General tab into Settings
+* New: Remove settings "Visual" and "Social networks" and merge them into new Settings tab 
+* New: Stay on last active tab after saving admin settings
+* New: Included open graph and twitter card meta tags. 
+* New: Facebook rescraping is done automatically on post save
+* New: New field in WordPress user profiles: Twitter author url for giving credits to authors when sharing a link on twitter (twitter:creator) 
+* New: Email Subscribe marketing sidebar
 * Performance: Only cached shares are served when page is requested by bot or spider
 * Tweak: New UI elements for admin checkboxes
 * Tweak: Enable Twitter and Facebook share button per default on first time installation
 * Tweak: Change Mashshare to MashShare for better branding
+* Tweak: Change twitter username description in settings and make sure @Mashshare is not used by user
+* Tweak: Get 20% instead 10% discount for allowing tracking
+* Tweak: Improved license activation workflow and much better license error messages
 * Fix: New function for returning share title shows correct title even on archive, categories and non posts like bbpress and buddyPress pages
 * Fix: Missing </div> in checkbox callback function
+* Fix: disable class mashdebug() which causes header notices on some systems
+* Fix: Undefined function wp_get_document_title() Compatibility backward fix
+* Fix: Undefined $post object on several places
 
 
 = 2.5.5 =
@@ -383,232 +396,6 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 * New: Store shares even on non post pages like category and archive pages
 * Fix: undefined var notice
 
-= 2.4.9 =
-* New: Free signup on newsharecount.com with your twitter account is necessary to get the twitter count. Sign up instruction in Mashshare->settings->General settings
-
-= 2.4.8 =
-* New: Mashshare Share Buttons are supporting again twitter counts. Thanks to our friend Artur and his service newsharecounts.com.
-* New: Additional class mashsb-main for mashsb-container class allows easier customization of the main share buttons independantely from add-on buttons
-
-= 2.4.7 =
-* New: If mashshare debug mode is enabled run non-minified scripts
-* Tweak: Remove border bottom on admin settings rows
-* Tweak: Move renderhr callback function into mashshare core
-* Tweak: Show "rate our plugin" only to administrators and make it more user friendly
-* Fix: Undefined var $mashsb_options['mashsharer_hashtag'];
-* Fix: Undefined var $mashsb_options['debug_mode']
-
-
-= 2.4.6 =
-* New: Support for Skype Share button (only with social network add-on)
-* New: Add Frype / Draugiem to the list of supported social networks
-* Fix: Convert space characters + to %20 in twitter share text
-* Fix: Prevent excessive getSharedcount work when global $post is null
-
-= 2.4.5 =
-* Tweak: Change share links to rel="nofollow"
-
-= 2.4.4 =
-* Fix: Twitter share url not shown when shorturl add-on is not installed
-
-= 2.4.3 =
-* Fix: Notice "Trying to get property of non-object" on some custom post_types
-* New: Tested up to WordPress 4.3
-* New: Performance improvements
-* New: Rewrite of a large code base. Prevent the use of globals all over
-* New: Shortcode attribute "text" to specifiy the share text. E.g. [mashshare text="This is a custom share text. Awesome, isn't it?"]
-* New: Tested up with wp 4.3.1
-* Tweak: Remove deprecated code
-
-
-= 2.4.2 =
-* New: New shortcode argument allows you to define custom url´s, e.g. [mashshare url="yourwebsite.com/yourpage"]
-* New: Tested up to Wordpress 4.2.4
-
-= 2.4.1 =
-* Fix: License API for add-ons not working under all circumstances
-
-= 2.4.0 =
-* New: Update notice to make sure use is activating option "Load JS and css all over" when using do_shortcode['mashshare'] 
-* Fix: Removal of licensing debugging constant which leads to update checks on every page load in admin dashboard. (Performance glitch)
-
-= 2.3.9 =
-Tweak: Performance improvement - Better detection if Mashshare is running and load only js and css files when they are needed.
-New: Important new option "Load JS and CSS all over" in Mashshare->settings->Visual->Location & Position if JS and CSS are not loaded because do_shortcode['mashshare'] is used
-Fix: Wrong constant name WC_VERSION. Changed to MASHSB_VERSION
-
-= 2.3.8 =
-Fix: wrong font icons for whatsapp and memeame
-
-= 2.3.7 =
-* New: Support for yummly.com (network add-on needed)
-* Fix: Mashshare->Tools->System Info does not open
-* Fix: Check if has_shortcode() exists. Compatibility check for wordpress < 3.6
-* Fix: Rename debugging class mashsbChromePhp()
-* Fix: Some 'undefined variables' notices when mashshare is installed first time and settings are not saved
-
-= 2.3.6 =
-* New: Support for mail.ru and line (only with network add-on)
-
-= 2.3.5 =
-* Fix: Wrong social sharing title when mashshare is used on category / archive pages with multiple blog posts
-* New: Tested up to WP 4.2.2
-
-= 2.3.4 =
-* New: Several performance improvements for faster php execution. Removal of duplicate foreach loops and array_filter callback function
-* New: Update notices for add-on even when a license key is not acticated.
-* New: Better error notification when license key can not be triggered as active
-* Fix: Add-On Licensing and automatic updating not working since 2.3.2 because of security updates.
-* Fix: Corrected path to log file in settings description
-
-= 2.3.3 =
-* Fix: New content boxes 'above' and below are reverted. 
-* Fix: Remove predefined var 'kein wert'
-
-
-= 2.3.2 =
-* New: Internal cache and share count return function only fires if requested share count value is higher than previous stored value. This prevents bouncing share count because some networks are deliver inconstant share values from time to time.
-* New: Two more fields for putting content above and below share buttons grouped together with subscribe option field in tabs
-* Fix: PHP notice: "Undefined var" when network add-on is installed but disabled
-* Fix: esc_url for add_query_arg and remove_query_arg
-* Tweak: New recommended minimum cache time is 30min. 
-* Tweak: Move up the Customize tab for faster editing periodical editing cusomization tasks
-
-
-= 2.3.1. =
-* Security Update: Update is highly recommended! It contains two security fixes! Thanks to g0blin research
-
-= 2.3.0 =
-* New: New options: Specify to get facebook share count, likes or the total sum of facebook share count + facebook likes. (This is improved compared to a similar function which existed in versions earlier than 2.2.8)
-* Fix: Broken url to sharedcount.com in admin dashboard of mashshare share buttons
-* Fix: 'MashEngine' was only showing the likes per default in previous version
-
-= 2.2.9 =
-* New: Two more share counts available, Buffer and VK.
-* Fix: Blank page on php 5.3 and older versions
-* Fix: Error message 'Undefined' when sharedcount.com is used and no api key available
-* Fix: Load class RollingCurlX only when not already exists
-* Fix: Create new curl() timeout var for sharedcount class and mashengine
-* Fix: array creation $array = [] not supported in php 5.3 and older
-* Fix: Use of php type 'callable' not supported in php 5.3 and older
-* Fix: Share button url on singular pages appends query string parameter like 'year' or 'name'
-* Fix: Delete all options when uninstaling mashshare share buttons completely
-* Fix: Show 'Ask for rating' box after 7 days of installation
-* Fix: Undefined index warning when mashshare network add-on installed but disabled
-
-= 2.2.8 =
-* New: Integration of a new share count engine. sharedcount.com and api key is not longer needed.
-* New: Check if mashshare is used on paginated page and ' <! -- nextpage -- >' is used. Share primary url without page parameter
-* New: Complete rewrite of the admin layout. New design and better responsibility on mobile devices. Main option description below header. New sub description below option field.
-* Fix: Change class name Logger to mashsbLogger. This fix "redeclare error" on some system
-* Tweak: Add header to the social network tab
-* Tweak: Store all different shares as json string in post meta. We can access this.
-
-= 2.2.7 =
-* New: Translate the word "SHARES" via settings
-* Tweak: Change subscribe content field from rich editor to textarea.
-* Fix: Better english grammar in share buttons settings
-
-= 2.2.6 =
-* New: New sharebutton logging function for debug mode which stores all requested share counts in wp-content/plugins/mashsharer/logs/
-
-= 2.2.5 =
-* New: Optional loading of share button scripts and styles into footer. See new option in Mashshare->Settings->General settings
-* Info: Share buttons no longer compatible to older versions than WordPress 3.6
-
-= 2.2.4 =
-* New: New input field to select the sharedcount api endpoint. e.g. free.sharedcount.com or plus.sharedcount.com
-* Tweak: No more requests to sharedcount api when rate limit exceeds. 
-
-= 2.2.3 =
-Tweak: Prevent duplicate popups for some constellations
-Tweak: Remove a screenshot which indicates that more networks included
-New: Ask for review notice after 7 days
-
-= 2.2.2 =
-* Fix: A bug where twitter does not open 
-
-= 2.2.1 =
-* Fix: array undefined
-* Fix: Missing global $wp
-
-= 2.2.0 =
-* New: Use custom share texts and images for all buttons including Tweeter when free Mashshare Add-On "OpenGraph" is installed. 
-* Use custom predefined hashtags for all posts with free Mashshare Add-On "OpenGraph"
-* Fix: Missing URLencode for shortcode function, prevents "not found" for tumblr button
-* Tweak: Use Current page for social sharing and not permalink url when current page not_singular(). (Compatibility for )
-
-= 2.1.9 =
-* Fix: If Twitter username is empty the plugin still appends "via @" at end of tweet
-* Fix: Exclude posts not working on every constellations.
-
-= 2.1.8 =
-* Fix: Shares on the share buttons are not counted on specific configurations
-* Fix: undefined vars in sharedcount.class.php
-
-= 2.1.7 =
-* New: Tested up to WordPress 4.0.1
-* New: Import / Export function for Mashshare settings
-* Fix: Brace duplicate in css file
-* Fix: Spelling issue
-
-= 2.1.6 =
-
-** if you install this version make sure to also update your Add-Ons which are improved by us as well **
-
-* New: Change width of large share buttons in settings
-* New: New count up animation script which animates even shares in the format like 5.4k
-* Fix: Share button in FB popup not visible, popup window was too small on some screen resolutions
-* Fix: Some changes for better HTML5 compliance
-* Fix: Get FB share count instead total count / selectable
-* Fix: Delete label attribute from plus sign. Fix HTML5 W3C error.
-* Fix: Delete id mashsb-toogle to prevent duplicate use of duplicate id
-* Fix: Twitter popup opened twice when any other third party instance of Twitter tweet button is running
-* Fix: Reddit, Stumbleupon and Linkedin was not shown because of a blank character in the network array.
-* Tweak: Change css for the plus button. Cleaner and easier to adjust. 
-* Tweak: remove id mashsbcount to prevent duplicate use of duplicate id
-* Tweak: Simplified the facebook sharer url
-
-= 2.1.5 =
-* Tweak: Cleaner and more attractive Whatsapp svg share icon 
-* Tweak: No more delay in hiding Whatsapp icon when share buttons not shown on mobile devices (needs network Add-On)
-* Tweak: Change some wordings in admin settings
-* New: Use small share buttons feature
-
-= 2.1.4 =
-* Fix: remove empty characters in html | prevent Wordpress to inject `<br>` and `<p>` codes into buttons code
-* Fix: Prevent jQuery error. Put jQuery nearest() library into document.ready
-
-= 2.1.3 = 
-* New: Use Mashshare on categories and non singular blogposts 
-* New: Use dynamic jQuery tabs in settings backend
-* New: Differentiate between multiple subscribe buttons and opens only one toggle window
-* New: Spanish translation by Nestor Pool
-* New: Tested with bruteprotect plugin
-* Fix: Missing function in mashsb-admin.js
-* Fix: height of Whatsapp button
-* Fix: Rewrite Purge DB Cache function to delete post_meta objects
-* Fix: Delete post_meta on complete uninstall
-* Fix: Undefined property ($post-ID) in template-functions
-* Fix: Whatsapp icon as icon font
-* Fix: Wrong size of large Whatsapp button
-* Fix: Priority number ignored
-
-
-= 2.1.2 =
-* Fix: Padding issue Whatsapp icon
-* Fix: Delete some deprecated code
-* Fix: More values for border radius to create circle like buttons
-* Fix: Gradiant style compatible in Firefox
-* New: New callback function colorpicker for settings
-* New: Performance benchmarks compaired with other plugins published in readme.txt
-
-= 2.1.1 =
-* Fix: Some issues where js and css is not loaded on specific post_types and frontpage on third party plugins like event calender
-* New: WPMU WordPress Multisite compatible
-* New: Some js modifications for compatibility with Twitter Short-URLs Add-On
-* New: Gradiant share button style
-* New: CDN Compatibility - Embed icon fonts as base64 octled to prevent cross origin issues when website is loaded from CDN
 
 See release notes and complete changelog at:
 https://www.mashshare.net/changelog/

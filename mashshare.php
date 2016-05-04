@@ -6,7 +6,7 @@
  * Description: Mashshare is a Share functionality inspired by the the great website Mashable for Facebook and Twitter. More networks available.
  * Author: René Hermenau
  * Author URI: https://www.mashshare.net
- * Version: 2.5.5
+ * Version: 3.0.0
  * Text Domain: mashsb
  * Domain Path: languages
  * Credits: Thanks go to Pippin Williamson and the edd team. When we started with Mashshare we decided to use the EDD code base and 
@@ -32,21 +32,21 @@
  * @version 2.3.6
  */
 // Exit if accessed directly
-if (!defined('ABSPATH'))
+if( !defined( 'ABSPATH' ) )
     exit;
 
 // Plugin version
-if (!defined('MASHSB_VERSION')) {
-    define('MASHSB_VERSION', '2.5.5');
+if( !defined( 'MASHSB_VERSION' ) ) {
+    define( 'MASHSB_VERSION', '3.0.0' );
 }
 
 // Debug mode
-if (!defined('MASHSB_DEBUG')) {
-    define('MASHSB_DEBUG', false);
+if( !defined( 'MASHSB_DEBUG' ) ) {
+    define( 'MASHSB_DEBUG', true );
 }
 
-if (!class_exists('mashshare')) :
-    
+
+if( !class_exists( 'mashshare' ) ) :
 
     /**
      * Main mashsb Class
@@ -69,13 +69,17 @@ if (!class_exists('mashshare')) :
          * @since 2.0.0
          */
         public $html;
-        
+
         /* MASHSB LOGGER Class
          * 
          */
         public $logger;
         
-       
+        /**
+         * MASHSB TEMPLATE Object
+         * @var object 
+         */
+        public $template;
 
         /**
          * Main Mashshare Instance
@@ -93,13 +97,14 @@ if (!class_exists('mashshare')) :
          * @return The one true mashshare
          */
         public static function instance() {
-            if (!isset(self::$instance) && !( self::$instance instanceof Mashshare )) {
+            if( !isset( self::$instance ) && !( self::$instance instanceof Mashshare ) ) {
                 self::$instance = new Mashshare;
                 self::$instance->setup_constants();
                 self::$instance->includes();
                 self::$instance->load_textdomain();
                 self::$instance->html = new MASHSB_HTML_Elements();
-                self::$instance->logger = new mashsbLogger("mashlog_" . date("Y-m-d") . ".log", mashsbLogger::INFO);
+                self::$instance->logger = new mashsbLogger( "mashlog_" . date( "Y-m-d" ) . ".log", mashsbLogger::INFO );
+                self::$instance->template = new mashsbBuildTemplates();
             }
             return self::$instance;
         }
@@ -116,7 +121,7 @@ if (!class_exists('mashshare')) :
          */
         public function __clone() {
             // Cloning instances of the class is forbidden
-            _doing_it_wrong(__FUNCTION__, __('Cheatin&#8217; huh?', 'MASHSB'), '1.0');
+            _doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'MASHSB' ), '1.0' );
         }
 
         /**
@@ -128,7 +133,7 @@ if (!class_exists('mashshare')) :
          */
         public function __wakeup() {
             // Unserializing instances of the class is forbidden
-            _doing_it_wrong(__FUNCTION__, __('Cheatin&#8217; huh?', 'MASHSB'), '1.0');
+            _doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'MASHSB' ), '1.0' );
         }
 
         /**
@@ -142,24 +147,24 @@ if (!class_exists('mashshare')) :
             global $wpdb;
 
             // Plugin Folder Path
-            if (!defined('MASHSB_PLUGIN_DIR')) {
-                define('MASHSB_PLUGIN_DIR', plugin_dir_path(__FILE__));
+            if( !defined( 'MASHSB_PLUGIN_DIR' ) ) {
+                define( 'MASHSB_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
             }
 
             // Plugin Folder URL
-            if (!defined('MASHSB_PLUGIN_URL')) {
-                define('MASHSB_PLUGIN_URL', plugin_dir_url(__FILE__));
+            if( !defined( 'MASHSB_PLUGIN_URL' ) ) {
+                define( 'MASHSB_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
             }
 
             // Plugin Root File
-            if (!defined('MASHSB_PLUGIN_FILE')) {
-                define('MASHSB_PLUGIN_FILE', __FILE__);
+            if( !defined( 'MASHSB_PLUGIN_FILE' ) ) {
+                define( 'MASHSB_PLUGIN_FILE', __FILE__ );
             }
 
             // Plugin database
             // Plugin Root File
-            if (!defined('MASHSB_TABLE')) {
-                define('MASHSB_TABLE', $wpdb->prefix . 'mashsharer');
+            if( !defined( 'MASHSB_TABLE' ) ) {
+                define( 'MASHSB_TABLE', $wpdb->prefix . 'mashsharer' );
             }
         }
 
@@ -185,11 +190,12 @@ if (!class_exists('mashshare')) :
             require_once MASHSB_PLUGIN_DIR . 'includes/actions.php';
             require_once MASHSB_PLUGIN_DIR . 'includes/helper.php';
             require_once MASHSB_PLUGIN_DIR . 'includes/widgets.php';
-                            require_once MASHSB_PLUGIN_DIR . 'includes/admin/settings/metabox-settings.php'; /*move into is_admin*/
-                                            require_once MASHSB_PLUGIN_DIR . 'includes/admin/meta-box/meta-box.php';
-            //require_once MASHSB_PLUGIN_DIR . 'includes/header-meta-tags.php';
+            require_once MASHSB_PLUGIN_DIR . 'includes/admin/settings/metabox-settings.php'; /* move into is_admin */
+            require_once MASHSB_PLUGIN_DIR . 'includes/admin/meta-box/meta-box.php';
+            require_once MASHSB_PLUGIN_DIR . 'includes/header-meta-tags.php';
+            require_once MASHSB_PLUGIN_DIR . 'includes/class-build-templates.php';
 
-            if (is_admin() || ( defined('WP_CLI') && WP_CLI )) {
+            if( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
                 require_once MASHSB_PLUGIN_DIR . 'includes/install.php';
                 require_once MASHSB_PLUGIN_DIR . 'includes/admin/add-ons.php';
                 require_once MASHSB_PLUGIN_DIR . 'includes/admin/admin-actions.php';
@@ -200,9 +206,9 @@ if (!class_exists('mashshare')) :
                 require_once MASHSB_PLUGIN_DIR . 'includes/admin/welcome.php';
                 require_once MASHSB_PLUGIN_DIR . 'includes/admin/settings/display-settings.php';
                 require_once MASHSB_PLUGIN_DIR . 'includes/admin/settings/contextual-help.php';
+                require_once MASHSB_PLUGIN_DIR . 'includes/admin/settings/user-profiles.php';
                 require_once MASHSB_PLUGIN_DIR . 'includes/admin/tools.php';
                 require_once MASHSB_PLUGIN_DIR . 'includes/admin/tracking.php';
-
             }
         }
 
@@ -215,26 +221,26 @@ if (!class_exists('mashshare')) :
          */
         public function load_textdomain() {
             // Set filter for plugin's languages directory
-            $mashsb_lang_dir = dirname(plugin_basename(MASHSB_PLUGIN_FILE)) . '/languages/';
-            $mashsb_lang_dir = apply_filters('mashsb_languages_directory', $mashsb_lang_dir);
+            $mashsb_lang_dir = dirname( plugin_basename( MASHSB_PLUGIN_FILE ) ) . '/languages/';
+            $mashsb_lang_dir = apply_filters( 'mashsb_languages_directory', $mashsb_lang_dir );
 
             // Traditional WordPress plugin locale filter
-            $locale = apply_filters('plugin_locale', get_locale(), 'mashsb');
-            $mofile = sprintf('%1$s-%2$s.mo', 'mashsb', $locale);
+            $locale = apply_filters( 'plugin_locale', get_locale(), 'mashsb' );
+            $mofile = sprintf( '%1$s-%2$s.mo', 'mashsb', $locale );
 
             // Setup paths to current locale file
             $mofile_local = $mashsb_lang_dir . $mofile;
             $mofile_global = WP_LANG_DIR . '/mashsb/' . $mofile;
-//echo $mofile_local;
-            if (file_exists($mofile_global)) {
+            //echo $mofile_local;
+            if( file_exists( $mofile_global ) ) {
                 // Look in global /wp-content/languages/MASHSB folder
-                load_textdomain('mashsb', $mofile_global);
-            } elseif (file_exists($mofile_local)) {
+                load_textdomain( 'mashsb', $mofile_global );
+            } elseif( file_exists( $mofile_local ) ) {
                 // Look in local /wp-content/plugins/mashshare/languages/ folder
-                load_textdomain('mashshare', $mofile_local);
+                load_textdomain( 'mashshare', $mofile_local );
             } else {
                 // Load the default language files
-                load_plugin_textdomain('mashsb', false, $mashsb_lang_dir);
+                load_plugin_textdomain( 'mashsb', false, $mashsb_lang_dir );
             }
         }
 
@@ -258,5 +264,9 @@ function MASHSB() {
     return Mashshare::instance();
 }
 // Get MASHSB Running
-//MASHSB();
-add_action('plugins_loaded', 'MASHSB');
+MASHSB();
+//add_action( 'plugins_loaded', 'MASHSB' );
+
+
+
+

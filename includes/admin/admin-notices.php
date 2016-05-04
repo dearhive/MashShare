@@ -48,7 +48,7 @@ function mashsb_admin_messages() {
         
     if ( mashsb_is_admin_page() && !mashsb_check_active_networks() ) {
         echo '<div class="error">';
-        echo '<p>'. sprintf( __('No Social Networks enabled. Go to <a href="%s"> Mashshare->Settings->Social Networks</a> and enable at least one Social Network.','mashsb') , admin_url('admin.php?page=mashsb-settings&tab=networks') ) .'</p>';
+        echo '<p>'. sprintf( __('No Social Networks enabled. Go to <a href="%s"> Mashshare->Settings->Social Networks</a> and enable at least one Social Network.','mashsb') , admin_url('admin.php?page=mashsb-settings&tab=networks#mashsb_settingsservices_header') ) .'</p>';
         echo '</div>';
     }
 

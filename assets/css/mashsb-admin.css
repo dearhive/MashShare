@@ -49,28 +49,7 @@ min-width: 110px;
 }
 
 /* social icons */
-/*@font-face {
-  font-family: 'mashsb-font';
-  src: url('../../templates/fonts/mashsb-font.eot?3442747');
-  src: url('../../templates/fonts/mashsb-font.eot?3442747#iefix') format('embedded-opentype'),
-       url('../../templates/fonts/mashsb-font.woff?3442747') format('woff'),
-       url('../../templates/fonts/mashsb-font.ttf?3442747') format('truetype'),
-       url('../../templates/fonts/mashsb-font.svg?3442747#mashsb-font') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
-/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
-/*
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-  @font-face {
-    font-family: 'mashsb-font';
-    src: url('../font/mashsb-font.svg?3442747#mashsb-font') format('svg');
-  }
-}
-*/
 
-/* Adjustable specifications */
 
 /* Hover effect */
 [class^="mashicon-"]:hover, [class*=" mashicon-"]:hover {
@@ -732,7 +711,7 @@ padding: 0;
 background: #f1f1f1;
 float: left;
 padding-top: 0px;
-/*list-style-type: square;*/
+max-width:200px;
 }
 
 #tab_container ul li:first-child.selected-tab {
@@ -778,6 +757,7 @@ background: #FFF;
 padding:20px;
 padding-top:0px;
 overflow:auto;
+min-width: 550px;
 }
 
 #tab_container .form-table th {
@@ -786,10 +766,10 @@ text-align: left;
 padding: 20px 10px 20px 0;
 width: 200px;
 line-height: 1.3;
-font-weight: bold;
-font-size: 14px;
+font-weight: 600;
+font-size: 15px;
 color:#484848;
-width: 30%;
+/*width: 30%;*/
 }
 
 /*#tab_container .form-table tr {
@@ -856,6 +836,13 @@ color:#777777;
 }
 .mashsb_admin .nav-tab {
     color: #0097DF;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+    border-top: 1px solid #fff;
+}
+
+.mashsb.nav-tab-wrapper {
+    border-bottom: none !important;
 }
 
 
@@ -921,7 +908,7 @@ color:#777777;
 Fancy checkboxes proto.io
 */
 
-.mashsb-admin-onoffswitch {
+/*.mashsb-admin-onoffswitch {
     position: relative; width: 48px;
     -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
 }
@@ -952,4 +939,184 @@ Fancy checkboxes proto.io
 }
 .mashsb-admin-onoffswitch-checkbox:checked + .mashsb-admin-onoffswitch-label:before {
     right: 0px; 
+}*/
+
+.mashsb-admin-onoffswitch {
+    position: relative; width: 59px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.mashsb-admin-onoffswitch-checkbox {
+    display: none !important;
+}
+.mashsb-admin-onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #D6D6D6; border-radius: 5px;
+}
+.mashsb-admin-onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+.mashsb-admin-onoffswitch-inner:before, .mashsb-admin-onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 22px; padding: 0; line-height: 22px;
+    font-size: 12px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    box-sizing: border-box;
+}
+.mashsb-admin-onoffswitch-inner:before {
+    content: "ON";
+    padding-left: 10px;
+    background-color: #0097DF; color: #FFFFFF;
+}
+.mashsb-admin-onoffswitch-inner:after {
+    content: "OFF";
+    padding-right: 10px;
+    background-color: #EEEEEE; color: #D6D6D6;
+    text-align: right;
+}
+.mashsb-admin-onoffswitch-switch {
+    display: block; width: 11px; margin: 5.5px;
+    background: #FFFFFF;
+    position: absolute; top: 0; bottom: 0;
+    right: 33px;
+    border: 2px solid #D6D6D6; border-radius: 5px;
+    transition: all 0.3s ease-in 0s; 
+}
+.mashsb-admin-onoffswitch-checkbox:checked + .mashsb-admin-onoffswitch-label .mashsb-admin-onoffswitch-inner {
+    margin-left: 0;
+}
+.mashsb-admin-onoffswitch-checkbox:checked + .mashsb-admin-onoffswitch-label .mashsb-admin-onoffswitch-switch {
+    right: 0px; 
+}
+
+/* end checkbox */
+
+
+.mashsb_admin a {
+    text-decoration: none;
+}
+
+#wpbody-content > div.wrap.mashsb_admin > h2 > a.nav-tab.nav-tab-active{
+    background-color: white;
+}
+
+.mashsb_admin .mashsb-helper {
+    border-radius: 50%;
+    border: 2px solid #fff;
+    background-color: #0097df;
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    position: relative;
+    top: 4px;
+    margin-top: -4px;
+    cursor: pointer;
+    margin-left: 2px;
+}
+
+.mashsb_admin .mashsb-helper:after {
+    height: 20px;
+    font-family: sans-serif;
+    content: "?";
+    color: #fff;
+    font-size: 11px;
+    font-weight: bold;
+    left: 4px;
+    position: absolute;
+}
+
+.mashsb_admin .mashsb-message{
+    display:block;
+    padding: 10px;
+    border: 1px solid #FBFBFB;
+    border-radius: 2px;
+    background-color: #F8F8F8;
+    position: absolute;
+    max-width: 500px;
+    z-index: 9999;
+    display: none;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    font-weight: normal;
+}
+
+.mashsb-sidebar{
+    float:left;
+    max-width: 300px;
+    margin-left:25px;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+    border-bottom: 1px solid white;
+}
+
+.mashsb-sidebar h2 {
+    margin:0px;
+}
+.mashsb-sidebar p {
+    
+}
+.mashsb-sidebar .author, .mashsb-sidebar .via {
+text-align: right;
+margin:0px;
+}
+
+.mashsb_admin .panel-container{
+    float:left;
+}
+
+.mashsb_admin .subscribe.block{
+    padding:20px;
+}
+
+.mashsb_admin .block.testimonial{ 
+    padding: 20px;
+    background-color: #E9E9E9;
+}
+.mashsb_admin .block.testimonial a{ 
+color: #0097df;
+}
+
+.mashsb_admin .dashicons-star-filled:before {
+    color: #0097df;
+}
+
+.mashsb_admin .testimonial .via a:before {
+    content: "\f301";
+    display: inline-block;
+    -webkit-font-smoothing: antialiased;
+    font: normal 18px/1 'dashicons';
+    vertical-align: top;
+    margin-right: 3px;
+}
+
+
+.mashsb-license-error-notice,
+.mashsb-license-expires-soon-notice { 
+    background-color: #fff; 
+    padding: 10px; 
+    border-left: 4px solid #7ad03a; 
+    overflow: auto; 
+    -webkit-box-shadow: 0 1px 1px 0 rgba( 0, 0, 0, 0.1 ); 
+    box-shadow: 0 1px 1px 0 rgba( 0, 0, 0, 0.1 ); 
+    border: 1px solid #ECECEC;
+    border-radius: 3px;
+}
+.mashsb-license-error-notice a {
+    color: #0097df;
+    text-decoration: underline;
+}
+.mashsb-license-error-notice { border-left: 4px solid #dd3d36; }
+.mashsb-license-lifetime-notice,
+.mashsb-license-expiration-date-notice,
+.mashsb-license-null { padding: 0 0 0 14px; }
+.mashsb-license-lifetime-notice .mashsb-license-data p,
+.mashsb-license-expiration-date-notice .mashsb-license-data p { color: #666; font-size: 14px; font-style: italic; margin: 4px 0 0; }
+
+#mashsb_settingslicenses_header-nav{
+    display:none;
+}
+
+#mashsb_settingslicenses_header{
+    max-width:640px;
+}
+
+#mashsb_settingslicenses_header .row.th{
+    min-width:250px;
 }

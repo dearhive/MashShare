@@ -1,11 +1,12 @@
 <script id="tmpl-mashsb-rwmb-image-item" type="text/html">
   <input type="hidden" name="{{{ data.fieldName }}}" value="{{{ data.id }}}" class="mashsb-rwmb-media-input">
-  <div class="mashsb-rwmb-media-preview">
-    <div class="mashsb-rwmb-media-content">
+  <!--<div class="mashsb-rwmb-media-preview" style="background-image: url({{{ data.sizes.full.url }}});">-->
+  <img src="{{{ data.sizes.full.url }}}">
+    <!--<div class="mashsb-rwmb-media-content">
       <div class="centered">
            <img src="{{{ data.sizes.full.url }}}">
       </div>
-    </div>
+    </div>//-->
   </div>
   <div class="mashsb-rwmb-overlay"></div>
   <div class="mashsb-rwmb-media-bar">

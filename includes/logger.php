@@ -24,6 +24,7 @@ class mashsbLogger {
                 $this->folder = MASHSB_PLUGIN_DIR . "logs";
 		$this->start();
 	}
+        
 	
 	function info($string)
 	{
