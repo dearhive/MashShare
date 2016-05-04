@@ -414,29 +414,34 @@ function getNetworks($is_shortcode = false, $services = 0 ) {
     $onoffswitch = '';
     /* counter for 'Visible Services' */
     $startcounter = 1;
-    $maxcounter = isset($mashsb_options['visible_services']) ? (int)$mashsb_options['visible_services'] + 1 : 0; // plus 1 because our array values start counting from zero
-    
+    $maxcounter = isset( $mashsb_options['visible_services'] ) ? $mashsb_options['visible_services'] : 0;
+    $maxcounter = apply_filters( 'mashsb_visible_services', $maxcounter );
+    ($maxcounter === "all") ? $maxcounter = "all" : $maxcounter = $maxcounter + 1;// plus 1 because our array values start counting from zero
+
     /* visible services from shortcode attribute */
-    $maxcounter = ($services === 0) ? $maxcounter : $services; 
+    $maxcounter = ($services === 0) ? $maxcounter : $services;
+    
     /* our list of available services, includes the disabled ones! 
      * We have to clean this array first!
      */
-    $getnetworks = isset($mashsb_options['networks']) ? $mashsb_options['networks'] : '';
-    // Delete disabled services from array. Use callback function here. Only once: array_filter is slow. 
-    // Use the newly created array and bypass the callback function than
-    if ( is_array($getnetworks) ) {
-        if ( !is_array($enablednetworks) ) {
-            $enablednetworks = array_filter($getnetworks, 'isStatus');
+    $getnetworks = isset( $mashsb_options['networks'] ) ? $mashsb_options['networks'] : '';
+    
+    /* Delete disabled services from array. Use callback function here. Do this only once because array_filter is slow! 
+     * Use the newly created array and bypass the callback function
+     */
+    if( is_array( $getnetworks ) ) {
+        if( !is_array( $enablednetworks ) ) {
+            $enablednetworks = array_filter( $getnetworks, 'isStatus' );
         } else {
             $enablednetworks = $enablednetworks;
         }
     } else {
         $enablednetworks = $getnetworks;
     }
-    if ( !empty($enablednetworks) ) {
+    if( !empty( $enablednetworks ) ) {
         foreach ( $enablednetworks as $key => $network ):
-            if ( $maxcounter !== 'all' && $maxcounter < count($enablednetworks) ) {
-                if ( $startcounter == $maxcounter ) {
+            if ( $maxcounter !== 'all' && $maxcounter < count($enablednetworks) ) { // $maxcounter + 1 for correct comparision with count()
+                if( $startcounter == $maxcounter ) {
                     $onoffswitch = onOffSwitch();
                     $startsecondaryshares = '<div class="secondary-shares" style="display:none;">';
                 } else {
@@ -545,6 +550,7 @@ function mashshareShortcodeShow($args) {
 
     !empty($mashsb_options['sharecount_title']) ? $sharecount_title = $mashsb_options['sharecount_title'] : $sharecount_title = __('SHARES', 'mashsb');
     !empty($mashsb_options['visible_services']) ? $visible_services = $mashsb_options['visible_services'] : $visible_services = 1;
+    ($visible_services === "all") ? $visible_services = "all" : $visible_services = $visible_services + 1;// plus 1 because our array values start counting from zero
 
     $sharecount = '';
     
@@ -557,7 +563,7 @@ function mashshareShortcodeShow($args) {
         'cache' => '3600',
         'shares' => 'true',
         'buttons' => 'true',
-        'services' => $visible_services + 1, //default is by admin option // plus 1 because our array values start counting from zero
+        'services' => $visible_services, //default is by admin option 
         'align' => 'left',
         'text' => '', // $text
         'url' => '' // $url
@@ -881,19 +887,31 @@ function mashsb_get_title() {
  * 
  * @return string the custom twitter title
  */
-function mashsb_get_twitter_title() {
-    if ( function_exists('MASHOG') ) {
-        $title = MASHOG()->MASHOG_OG_Output->_get_tw_title();
-        $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
-        $title = urlencode($title);
-        $title = str_replace('#', '%23', $title);
-        $title = esc_html($title);
-        $title = str_replace('+', '%20', $title);
-    } else {
-        $title = mashsb_get_title();
-        $title = str_replace('+', '%20', $title);
-    }
-    return $title;
+//function mashsb_get_twitter_title() {
+//    if( function_exists( 'MASHOG' ) ) {
+//        $title = MASHOG()->MASHOG_OG_Output->_get_tw_title();
+//        $title = html_entity_decode( $title, ENT_QUOTES, 'UTF-8' );
+//        $title = urlencode( $title );
+//        $title = str_replace( '#', '%23', $title );
+//        $title = esc_html( $title );
+//        $title = str_replace( '+', '%20', $title );
+//    } else {
+//        $title = mashsb_get_title();
+//        $title = str_replace( '+', '%20', $title );
+//    }
+//    return $title;
+//}
+
+/**
+ * Return twitter custom title
+ * 
+ * @global object $mashsb_meta_tags
+ * @return string the custom twitter title
+ */
+function mashsb_get_twitter_title(){
+    global $mashsb_meta_tags;
+    
+    return $mashsb_meta_tags->get_twitter_title();
 }
 
 /* Get URL to share
