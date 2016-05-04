@@ -53,16 +53,17 @@ jQuery(document).ready( function($) {
     
     /* Opens a new minus buttonwhen plus sign is clicked */
     /* Toogle function for more services */
-    $( ".onoffswitch" ).click(function() {
-        $('.onoffswitch').hide();
-        $('.secondary-shares').show();
-        $('.onoffswitch2').show();
-        /*$( ".mashsb-buttons a" ).toggleClass( 'float-left');*/
-    }); 
-    $( ".onoffswitch2" ).click(function() {
-        $('.onoffswitch').show();
-        $('.secondary-shares').hide();         
-    }); 
+    $('.onoffswitch').on('click', function () { 
+        var $parrent = $(this).parents('.mashsb-container');
+        $parrent.find('.onoffswitch').hide();
+        $parrent.find('.secondary-shares').show();
+        $parrent.find('.onoffswitch2').show();
+    });
+    $('.onoffswitch2').on('click', function () {
+        var $parrent = $(this).parents('.mashsb-container');
+        $parrent.find('.onoffswitch').show();
+        $parrent.find('.secondary-shares').hide();
+    });
 
     /* Network sharer scripts */
     /* deactivate FB sharer when likeaftershare is enabled */
