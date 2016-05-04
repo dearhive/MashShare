@@ -146,6 +146,7 @@ function mashsbGetShareMethod($mashsbSharesObj) {
  * @returns integer $shares
  */
 function mashsbGetNonPostShares($url) {
+
     isset($mashsb_options['mashsharer_cache']) ? $cacheexpire = $mashsb_options['mashsharer_cache'] : $cacheexpire = 300;
     /* make sure 300sec is default value */
     $cacheexpire < 300 ? $cacheexpire = 300 : $cacheexpire;
@@ -155,6 +156,7 @@ function mashsbGetNonPostShares($url) {
     }
 
     if ( isset($mashsb_options['disable_cache']) ) {
+        //$cacheexpire = 2;
         delete_transient('mashcount_' . md5($url));
     }
 
@@ -186,17 +188,12 @@ function mashsbGetNonPostShares($url) {
 /*
  * Return the share count
  * 
- * @param string url of the page the share count is collected for
+ * @param1 string url of the page the share count is collected for
  * @returns int
  */
 
 function getSharedcount($url) {
     global $mashsb_options, $post;
-    
-    // if it's a crawl bot only serve cached results for maximum speed
-    if (isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/bot|crawl|slurp|spider/i', $_SERVER['HTTP_USER_AGENT'])){
-        return 100;
-    }
 
     isset($mashsb_options['mashsharer_cache']) ? $cacheexpire = $mashsb_options['mashsharer_cache'] : $cacheexpire = 300;
     /* make sure 300sec is default value */
@@ -212,10 +209,9 @@ function getSharedcount($url) {
     if ( !empty($url) && is_null($post) ) {
         return mashsbGetNonPostShares($url);
     }
-        
-    
+
     /*
-     * Important: This runs on non singular pages and prevents php from crashing and looping because of timeouts and no results
+     * Important: This runs on non singular pages and prevents php crashes and loops without results
      */
     if ( empty($url) && !is_null($post) ){
         return get_post_meta($post->ID, 'mashsb_shares', true) + getFakecount();
@@ -313,7 +309,6 @@ function mashsb_cleanShortcode($code, $content) {
 /* Round the totalshares
  * 
  * @since 1.0
- * @param $totalshares int
  * @return string
  */
 
@@ -400,7 +395,6 @@ function arrNetworks($name, $is_shortcode) {
  * 
  * @since 2.0
  * @param bool true when used from shortcode [mashshare]
- * @return string html
  */
 
 function getNetworks($is_shortcode = false) {
@@ -414,7 +408,6 @@ function getNetworks($is_shortcode = false) {
     /* counter for 'Visible Services' */
     $startcounter = 1;
     $maxcounter = isset($mashsb_options['visible_services']) ? $mashsb_options['visible_services'] + 1 : 0; // plus 1 because our array values start counting from zero
-    $maxcounter = apply_filters('mashsb_visible_services', $maxcounter);
     /* our list of available services, includes the disabled ones! 
      * We have to clean this array first!
      */
@@ -448,6 +441,9 @@ function getNetworks($is_shortcode = false) {
                     ;
                     $endsecondaryshares = '';
                 }
+
+                //echo "<h1>Debug: Startcounter " . $startcounter . " Hello: " . $maxcounter+1 .
+                //" Debug: Enabled services: " . count($enablednetworks) . "</h1>"; 
             }
             if ( $enablednetworks[$key]['name'] != '' ) {
                 /* replace all spaces with $nbsp; This prevents error in css style content: text-intend */
@@ -541,10 +537,7 @@ function mashshareShortcodeShow($args) {
     !empty($mashsb_options['sharecount_title']) ? $sharecount_title = $mashsb_options['sharecount_title'] : $sharecount_title = __('SHARES', 'mashsb');
 
     $sharecount = '';
-    
-    //Filter shortcode args to add an option for developers to change (add) some args
-    apply_filters('mashsb_shortcode_atts', $args);
-    
+
     extract(shortcode_atts(array(
         'cache' => '3600',
         'shares' => 'true',
@@ -738,19 +731,14 @@ function mashsb_get_image($postID) {
 add_action('mashsb_get_image', 'mashsb_get_image');
 
 /**
- * Get the excerpt
+ * Get excerpt for Facebook Share
  *
  * @since 1.0
  * @param int $postID
- * @changed 2.5.6
  * @return string
  */
 function mashsb_get_excerpt_by_id($post_id) {
-    // Check if the post has an excerpt
-    if( has_excerpt() ) {
-        return get_the_excerpt();
-    }
-    
+    mashdebug()->timer('mashsb_get_exerpt');
     $the_post = get_post($post_id); //Gets post ID
     $the_excerpt = $the_post->post_content; //Gets post_content to be used as a basis for the excerpt
     $excerpt_length = 35; //Sets excerpt length by word count
@@ -763,6 +751,7 @@ function mashsb_get_excerpt_by_id($post_id) {
     endif;
     $the_excerpt = '<p>' . $the_excerpt . '</p>';
     return wp_strip_all_tags($the_excerpt);
+    mashdebug()->timer('mashsb_get_exerpt', true);
 }
 
 add_action('mashsb_get_excerpt_by_id', 'mashsb_get_excerpt_by_id');
@@ -782,11 +771,9 @@ function mashsb_get_fake_factor() {
     return apply_filters('mashsb_fake_factor', $factor);
 }
 
-/* 
- * Sharecount fake number
- * 
- * @since 2.0.9
+/* Sharecount fake number
  * @return int
+ * @since 2.0.9
  * 
  */
 
@@ -858,8 +845,7 @@ function mashsb_content_below() {
  * @return string the default post title, shortcode title or custom twitter title
  */
 function mashsb_get_title() {
-    //function_exists('MASHOG') ? $title = MASHOG()->MASHOG_OG_Output->_get_title() : $title = the_title_attribute('echo=0');
-    function_exists('MASHOG') ? $title = MASHOG()->MASHOG_OG_Output->_get_title() : $title = wp_get_document_title();
+    function_exists('MASHOG') ? $title = MASHOG()->MASHOG_OG_Output->_get_title() : $title = the_title_attribute('echo=0');
     $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
     $title = urlencode($title);
     $title = str_replace('#', '%23', $title);
@@ -883,7 +869,6 @@ function mashsb_get_twitter_title() {
         $title = str_replace('+', '%20', $title);
     } else {
         $title = mashsb_get_title();
-        //$title = wp_get_document_title();
         $title = str_replace('+', '%20', $title);
     }
     return $title;
@@ -897,7 +882,6 @@ function mashsb_get_twitter_title() {
 
 function mashsb_get_url() {
     global $wp, $post, $numpages;
-    
     if ( $numpages > 1 ) { // check if '<!-- nextpage -->' is used
         $url = get_permalink($post->ID);
     } elseif ( is_singular() ) {
@@ -916,9 +900,10 @@ function mashsb_get_url() {
 
 function mashsb_get_twitter_url() {
     if ( function_exists('mashsuGetShortURL') ) {
+        $url = mashsb_get_url();
+        
         //mashsuGetShortURL($url) !== 0 ? $url = mashsuGetShortURL( $url ) : $url = mashsb_get_url();
-        $get_url = mashsb_get_url();
-        $url = mashsuGetShortURL($get_url);
+        $url = mashsuGetShortURL($url);
     } else {
         $url = mashsb_get_url();
     }

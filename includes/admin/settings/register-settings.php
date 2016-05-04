@@ -361,12 +361,6 @@ function mashsb_get_registered_settings() {
 					'desc' => __( 'All buttons will be shown as pure small icons without any text on desktop and mobile devices all the time.<br><strong>Note:</strong> Disable this when you use the <a href="https://www.mashshare.net/downloads/mashshare-responsive/" target="_blank">responsive Add-On</a>', 'mashsb' ),
 					'type' => 'checkbox'
 				),
-                                'image_share' => array(
-					'id' => 'image_share',
-					'name' => __( 'Share buttons on image hover', 'mashsb' ),
-					'desc' => __( '', 'mashsb' ),
-					'type' => 'checkbox'
-				),
                                 'subscribe_behavior' => array(
 					'id' => 'subscribe_behavior',
 					'name' => __( 'Subscribe button', 'mashsb' ),
@@ -792,24 +786,13 @@ function mashsb_header_callback( $args ) {
  * @global $mashsb_options Array of all the MASHSB Options
  * @return void
  */
-/*function mashsb_checkbox_callback( $args ) {
+function mashsb_checkbox_callback( $args ) {
 	global $mashsb_options;
 
 	$checked = isset( $mashsb_options[ $args[ 'id' ] ] ) ? checked( 1, $mashsb_options[ $args[ 'id' ] ], false ) : '';
 	$html = '<input type="checkbox" id="mashsb_settings[' . $args['id'] . ']" name="mashsb_settings[' . $args['id'] . ']" value="1" ' . $checked . '/>';
 	$html .= '<label class="mashsb_hidden" for="mashsb_settings[' . $args['id'] . ']"> '  . $args['desc'] . '</label>';
 
-	echo $html;
-}*/
-function mashsb_checkbox_callback( $args ) {
-	global $mashsb_options;
-
-	$checked = isset( $mashsb_options[ $args[ 'id' ] ] ) ? checked( 1, $mashsb_options[ $args[ 'id' ] ], false ) : '';
-        $html = '<div class="mashsb-admin-onoffswitch">';
-	$html .= '<input type="checkbox" class="mashsb-admin-onoffswitch-checkbox" id="mashsb_settings[' . $args['id'] . ']" name="mashsb_settings[' . $args['id'] . ']" value="1" ' . $checked . '/>';
-	$html .= '<label class="mashsb_hidden mashsb-admin-onoffswitch-label" for="mashsb_settings[' . $args['id'] . ']"></label>';
-        $html .= '</div>';
-        
 	echo $html;
 }
 
@@ -1241,36 +1224,36 @@ if ( ! function_exists( 'mashsb_license_key_callback' ) ) {
 
 function mashsb_networks_callback( $args ) {
 	global $mashsb_options;
-    /* Array in $mashsb_option['networks']
-      
-     array(
-      0 => array (
-      'status' => '1',
-      'name' => 'Share on Facebook',
-      'name2' => 'Share'
-      ),
-      1 => array (
-      'status' => '1',
-      'name' => 'Tweet on Twitter',
-      'name2' => 'Twitter'
-      ),
-      2 => array (
-      'status' => '1',
-      'name' => 'Subscribe',
-      'name2' => 'Subscribe'
-      )
-      )
-     */
+       /* Array in $mashsb_option['networks']
+        * 
+        *                                   array(
+                                                0 => array (
+                                                    'status' => '1',
+                                                    'name' => 'Share on Facebook',
+                                                    'name2' => 'Share'
+                                                ), 
+                                                1 => array (
+                                                    'status' => '1',
+                                                    'name' => 'Tweet on Twitter',
+                                                    'name2' => 'Twitter'
+                                                ),
+                                                2 => array (
+                                                    'status' => '1',
+                                                    'name' => 'Subscribe to us',
+                                                    'name2' => 'Subscribe'
+                                                )
+                                            )
+        */
 
-    ob_start();
+       ob_start();
         ?>
         <p class="description"><?php echo $args['desc']; ?></p>
         <table id="mashsb_network_list" class="wp-list-table fixed posts">
 		<thead>
 			<tr>
-				<th scope="col" style="padding: 15px 10px;"><?php _e( 'Social Network', 'mashsb' ); ?></th>
-                                <th scope="col" style="padding: 15px 10px;"><?php _e( 'Status', 'mashsb' ); ?></th>
-                                <th scope="col" style="padding: 15px 10px;"><?php _e( 'Custom Label', 'mashsb' ); ?></th>
+				<th scope="col" style="padding: 15px 10px;"><?php _e( 'Social Networks', 'mashsb' ); ?></th>
+                                <th scope="col" style="padding: 15px 10px;"><?php _e( 'Enable', 'mashsb' ); ?></th>
+                                <th scope="col" style="padding: 15px 10px;"><?php _e( 'Custom name', 'mashsb' ); ?></th>
 			</tr>
 		</thead>        
         <?php
@@ -1281,14 +1264,10 @@ function mashsb_networks_callback( $args ) {
 			if( isset( $mashsb_options[$args['id']][$key]['status'] ) ) { $enabled = 1; } else { $enabled = NULL; }
                         if( isset( $mashsb_options[$args['id']][$key]['name'] ) ) { $name = $mashsb_options[$args['id']][$key]['name']; } else { $name = NULL; }
 
-                        echo '<td class="mashicon-' . strtolower($option) . '"><span class="icon"></span><span class="text">' . $option . '</span></td>';
-                        echo '<td><input type="hidden" name="mashsb_settings[' . $args['id'] . '][' . $key . '][id]" id="mashsb_settings[' . $args['id'] . '][' . $key . '][id]" value="' . strtolower($option) .'">';
-                        echo '<div class="mashsb-admin-onoffswitch">';
-                        echo '<input name="mashsb_settings[' . $args['id'] . '][' . $key . '][status]" class="mashsb-admin-onoffswitch-checkbox" id="mashsb_settings[' . $args['id'] . '][' . $key . '][status]" type="checkbox" value="1" ' . checked(1, $enabled, false) . '/>';
-                        echo '<label class="mashsb-admin-onoffswitch-label" for="mashsb_settings[' . $args['id'] . '][' . $key . '][status]"></label>';
-                        echo '</div>';
-                        echo '<td><input type="text" class="medium-text" id="mashsb_settings[' . $args['id'] . '][' . $key . '][name]" name="mashsb_settings[' . $args['id'] . '][' . $key . '][name]" value="' . $name .'"/>';
-                        echo '</tr>';
+                        echo '<td class="mashicon-' . strtolower($option) . '"><span class="icon"></span><span class="text">' . $option . '</span></td>
+                        <td><input type="hidden" name="mashsb_settings[' . $args['id'] . '][' . $key . '][id]" id="mashsb_settings[' . $args['id'] . '][' . $key . '][id]" value="' . strtolower($option) .'"><input name="mashsb_settings[' . $args['id'] . '][' . $key . '][status]" id="mashsb_settings[' . $args['id'] . '][' . $key . '][status]" type="checkbox" value="1" ' . checked(1, $enabled, false) . '/><td>
+                        <input type="text" class="medium-text" id="mashsb_settings[' . $args['id'] . '][' . $key . '][name]" name="mashsb_settings[' . $args['id'] . '][' . $key . '][name]" value="' . $name .'"/>
+                        </tr>';
                 endforeach;
 	}
         echo '</table>';
