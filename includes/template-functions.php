@@ -887,31 +887,19 @@ function mashsb_get_title() {
  * 
  * @return string the custom twitter title
  */
-//function mashsb_get_twitter_title() {
-//    if( function_exists( 'MASHOG' ) ) {
-//        $title = MASHOG()->MASHOG_OG_Output->_get_tw_title();
-//        $title = html_entity_decode( $title, ENT_QUOTES, 'UTF-8' );
-//        $title = urlencode( $title );
-//        $title = str_replace( '#', '%23', $title );
-//        $title = esc_html( $title );
-//        $title = str_replace( '+', '%20', $title );
-//    } else {
-//        $title = mashsb_get_title();
-//        $title = str_replace( '+', '%20', $title );
-//    }
-//    return $title;
-//}
-
-/**
- * Return twitter custom title
- * 
- * @global object $mashsb_meta_tags
- * @return string the custom twitter title
- */
-function mashsb_get_twitter_title(){
-    global $mashsb_meta_tags;
-    
-    return $mashsb_meta_tags->get_twitter_title();
+function mashsb_get_twitter_title() {
+    if ( function_exists('MASHOG') ) {
+        $title = MASHOG()->MASHOG_OG_Output->_get_tw_title();
+        $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
+        $title = urlencode($title);
+        $title = str_replace('#', '%23', $title);
+        $title = esc_html($title);
+        $title = str_replace('+', '%20', $title);
+    } else {
+        $title = mashsb_get_title();
+        $title = str_replace('+', '%20', $title);
+    }
+    return $title;
 }
 
 /* Get URL to share
