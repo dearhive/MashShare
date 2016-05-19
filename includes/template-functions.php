@@ -427,7 +427,9 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
     
     /* counter for 'Visible Services' */
     $startcounter = 1;
+    
     $maxcounter = isset( $mashsb_options['visible_services'] ) ? $mashsb_options['visible_services'] : 0;
+    $maxcounter = ($maxcounter === 'all') ? 'all' : ($maxcounter + 1); // plus 1 to get networks correct counted (array's starting counting from zero)
     $maxcounter = apply_filters( 'mashsb_visible_services', $maxcounter );
     
     /* visible services from shortcode attribute */
@@ -453,7 +455,7 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
 
     if( !empty( $enablednetworks ) ) {
         foreach ( $enablednetworks as $key => $network ):
-            if ( $maxcounter !== 'all' && $maxcounter + 1 < count($enablednetworks) ) { // $maxcounter + 1 for correct comparision with count()
+            if ( $maxcounter !== 'all' && $maxcounter < count($enablednetworks) ) { // $maxcounter + 1 for correct comparision with count()
                 if( $startcounter == $maxcounter ) {
                     $onoffswitch = onOffSwitch();
                     $startsecondaryshares = '<div class="secondary-shares" style="display:none;">';
@@ -549,17 +551,23 @@ function mashsb_render_sharecounts( $customurl = '', $align = 'left' ) {
     return $html;
 }
 
-/* Shortcode function
+/* 
+ * Shortcode function
  * Select Share count from database and returns share buttons and share counts
+ * 
  * @since 1.0
  * @returns string
  */
 
 function mashshareShortcodeShow( $args ) {
-    global $wpdb, $mashsb_options, $post, $wp, $mashsb_custom_url, $mashsb_custom_text;
+    global $mashsb_options, $mashsb_custom_url, $mashsb_custom_text;
 
-    !empty( $mashsb_options['sharecount_title'] ) ? $sharecount_title = $mashsb_options['sharecount_title'] : $sharecount_title = __( 'SHARES', 'mashsb' );
-    !empty($mashsb_options['visible_services']) ? $visible_services = $mashsb_options['visible_services'] : $visible_services = 1;
+    //!empty( $mashsb_options['sharecount_title'] ) ? $sharecount_title = $mashsb_options['sharecount_title'] : $sharecount_title = __( 'SHARES', 'mashsb' );
+    //!empty($mashsb_options['visible_services']) ? $visible_services = $mashsb_options['visible_services'] : $visible_services = 1;
+    //$sharecount_title = !empty( $mashsb_options['sharecount_title'] ) ? $mashsb_options['sharecount_title'] : __( 'SHARES', 'mashsb' );
+    
+    $services = !empty($mashsb_options['visible_services']) ? $mashsb_options['visible_services'] : 1;
+    $visible_services = ($services === 'all') ? 'all' : ($services +1); // plus 1 to get networks correct counted (array's starting counting from zero)
     
     $sharecount = '';
 
@@ -773,7 +781,10 @@ function mashsb_get_excerpt_by_id( $post_id ) {
         return get_the_excerpt();
     }
    
-
+    if(!isset($post_id)){
+        return "";
+    }
+    
     $the_post = get_post( $post_id ); //Gets post ID
     
     /*
@@ -887,14 +898,28 @@ function mashsb_content_below() {
  * @param string $title default post title
  * @return string the default post title, shortcode title or custom twitter title
  */
-function mashsb_get_title() {
-    function_exists( 'MASHOG' ) ? $title = MASHOG()->MASHOG_OG_Output->_get_title() : $title = mashsb_get_document_title();
-    $title = html_entity_decode( $title, ENT_QUOTES, 'UTF-8' );
-    $title = urlencode( $title );
-    $title = str_replace( '#', '%23', $title );
-    $title = esc_html( $title );
+//function mashsb_get_title() {
+//    function_exists( 'MASHOG' ) ? $title = MASHOG()->MASHOG_OG_Output->_get_title() : $title = mashsb_get_document_title();
+//    $title = html_entity_decode( $title, ENT_QUOTES, 'UTF-8' );
+//    $title = urlencode( $title );
+//    $title = str_replace( '#', '%23', $title );
+//    $title = esc_html( $title );
+//
+//    return $title;
+//}
 
-    return $title;
+/**
+ * Return general post title
+ * 
+ * @param string $title default post title
+ * @global obj $mashsb_meta_tags
+ * 
+ * @return string the default post title, shortcode title or custom twitter title
+ */
+function mashsb_get_title() {
+    global $mashsb_meta_tags;
+    
+    return $mashsb_meta_tags->get_og_title();
 }
 
 /**
@@ -921,6 +946,8 @@ function mashsb_get_title() {
  * Return twitter custom title
  * 
  * @global object $mashsb_meta_tags
+ * @changed 3.0.0
+ * 
  * @return string the custom twitter title
  */
 function mashsb_get_twitter_title(){

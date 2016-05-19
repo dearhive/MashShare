@@ -163,7 +163,7 @@ select.error {
   font-weight: lighter;
   margin-bottom: 15px;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   width: 100%;
   text-align: center;
 }
@@ -183,6 +183,7 @@ select.error {
     letter-spacing: 1px;
     text-align: center;
     text-decoration: none;
+    border-radius:3px;
 }
 
 #mashsb_meta textarea {

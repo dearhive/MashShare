@@ -56,8 +56,13 @@ function mashsb_install_multisite( $networkwide ) {
  */
 function mashsb_install() {
     global $wpdb, $mashsb_options, $wp_version;
+    
+    // Disable MashShare Open Graph plugin
+    if (class_exists( 'MashshareOpenGraph' )){
+    deactivate_plugins( '/mashshare-opengraph/mashshare-opengraph.php' );
+    }
 
-    // Try to load some settings. If this fails we write some default settings:
+    // Try to load some settings. If there are no ones we write some default settings:
     $settings = get_option( 'mashsb_settings' );
     // Write default settings
     if( count( $settings ) === 0 ) {
@@ -76,7 +81,10 @@ function mashsb_install() {
                 )
             ),
             'post_types' => array('post'=>'post'),
-            'mashsharer_position' => 'before'
+            'mashsharer_position' => 'before',
+            'loadall' => '1',
+            'twitter_card' => '1',
+            'mashsb_sharemethod' => 'mashengine'
         );
 
         update_option( 'mashsb_settings', $settings_new );

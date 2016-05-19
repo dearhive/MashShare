@@ -52,17 +52,17 @@ class MASHSB_Welcome {
         );
 
         // Changelog Page
-        add_dashboard_page(
+        $mashsb_about = add_dashboard_page(
                 __( 'MashShare Changelog', 'mashsb' ), __( 'MashShare Changelog', 'mashsb' ), $this->minimum_capability, 'mashsb-changelog', array($this, 'changelog_screen')
         );
 
         // Getting Started Page
-        add_submenu_page(
+        $mashsb_quickstart = add_submenu_page(
                 'mashsb-settings', __( 'Quickstart', 'mashsb' ), __( 'Quickstart', 'mashsb' ), $this->minimum_capability, 'mashsb-getting-started', array($this, 'getting_started_screen')
         );
 
         // Credits Page
-        add_dashboard_page(
+        $mashsb_credits = add_dashboard_page(
                 __( 'The people that build MashShare', 'mashsb' ), __( 'The people that build MashShare', 'mashsb' ), $this->minimum_capability, 'mashsb-credits', array($this, 'credits_screen')
         );
     }
@@ -172,11 +172,14 @@ class MASHSB_Welcome {
             </div>
 
             <div class="changelog">
-                <h3><?php _e( 'Need Help?', 'mashsb' ); ?></h3>
+                <h2><?php _e( 'Need Help?', 'mashsb' ); ?></h2>
                 <div class="feature-section two-col">
-                    <div class="col">
-                        <h4><?php _e( 'Great Support', 'mashsb' ); ?></h4>
+                    <div>
+                        <h3><?php _e( 'Great Support', 'mashsb' ); ?></h3>
                         <p><?php _e( 'We do our best to provide the best support we can. If you encounter a problem or have a question, simply open a ticket using our <a href="https://www.mashshare.net/contact-developer/" target="blank">support form</a>.', 'mashsb' ); ?></p>
+                        <ul id="mash-social-admin-head">
+                            <?php echo mashsb_share_buttons(); ?>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -310,7 +313,12 @@ class MASHSB_Welcome {
             <div class="return-to-dashboard">
                 <a href="<?php echo esc_url( admin_url( add_query_arg( array('page' => 'mashsb-settings&tab=visual#mashsb_settingslocation_header'), 'edit.php' ) ) ); ?>"><?php _e( 'Go to MashShare Settings', 'mashsb' ); ?></a> &middot;
                 <a href="<?php echo esc_url( admin_url( add_query_arg( array('page' => 'mashsb-changelog'), 'admin.php' ) ) ); ?>"><?php _e( 'View the Full Changelog', 'mashsb' ); ?></a>
+                <ul id="mash-social-admin-head">
+                    <?php echo mashsb_share_buttons(); ?>
+                </ul>
             </div>
+            
+
         </div>
         <?php
     }
@@ -357,7 +365,10 @@ class MASHSB_Welcome {
             <p class="about-description"><?php _e( 'Mashshare is created by a René Hermenau and developers all over the world who aim to provide the #1 ecosystem for growing social media traffic through WordPress.', 'mashsb' ); ?></p>
 
             <?php echo $this->contributors(); ?>
-            <p class="small"><?php sprintf(_e(' If you want to be credited here participate on the development and  make your pull request on <a href="%s" target="_blank">github</a>',' mashsb'), 'https://github.com/mashshare/Mashshare')?></p>
+            <p class="small"><?php echo sprintf(__(' If you want to be credited here participate on the development and  make your pull request on <a href="%s" target="_blank">github</a>',' mashsb'), 'https://github.com/mashshare/Mashshare')?></p>
+            <ul id="mash-social-admin-head">
+                <?php echo mashsb_share_buttons(); ?>
+            </ul>
         </div>
         <?php
     }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Admin Notices
  *
@@ -7,10 +8,10 @@
  * @copyright   Copyright (c) 2014, René Hermenau
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       1.0
-*/
-
+ */
 // Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit;
+if( !defined( 'ABSPATH' ) )
+    exit;
 
 /**
  * Check if at least one social network is enabled
@@ -18,20 +19,19 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * @global array $mashsb_options
  * @return boolean false when no network is enabled
  */
-function mashsb_check_active_networks(){
+function mashsb_check_active_networks() {
     global $mashsb_options;
-    
-    $networks = isset($mashsb_options['networks']) ? $mashsb_options['networks'] : false;
-    
-    if ( isset($networks) && is_array($networks) )
-    foreach ($networks as $key => $value){
-        if ( isset ($networks[$key]['status']) )
-            return true;
-    }
-    
-    return false; 
-}
 
+    $networks = isset( $mashsb_options['networks'] ) ? $mashsb_options['networks'] : false;
+
+    if( isset( $networks ) && is_array( $networks ) )
+        foreach ( $networks as $key => $value ) {
+            if( isset( $networks[$key]['status'] ) )
+                return true;
+        }
+
+    return false;
+}
 
 /**
  * Admin Messages
@@ -41,25 +41,33 @@ function mashsb_check_active_networks(){
  * @return void
  */
 function mashsb_admin_messages() {
-	global $mashsb_options;
-        
-        if (!current_user_can('update_plugins'))
+    global $mashsb_options;
+
+    if( !current_user_can( 'update_plugins' ) )
         return;
-        
-    if ( mashsb_is_admin_page() && !mashsb_check_active_networks() ) {
+
+
+    // notice no Networks enabled    
+    if( mashsb_is_admin_page() && !mashsb_check_active_networks() ) {
         echo '<div class="error">';
-        echo '<p>'. sprintf( __('No Social Networks enabled. Go to <a href="%s"> Mashshare->Settings->Social Networks</a> and enable at least one Social Network.','mashsb') , admin_url('admin.php?page=mashsb-settings&tab=networks#mashsb_settingsservices_header') ) .'</p>';
+        echo '<p>' . sprintf( __( 'No Social Networks enabled. Go to <a href="%s"> Mashshare->Settings->Social Networks</a> and enable at least one Social Network.', 'mashsb' ), admin_url( 'admin.php?page=mashsb-settings&tab=networks#mashsb_settingsservices_header' ) ) . '</p>';
+        echo '</div>';
+    }
+    // Notice MashShare Open Graph Add-On installed and activated
+    if( class_exists( 'MashshareOpenGraph' ) ) {
+        echo '<div class="error">';
+        echo '<p>' . sprintf( __( '<strong>Important:</strong> Deactivate the MashShare Open Graph Add-On. It is not longer needed and having it activated leads to duplicate open graph tags on your site. Go to <a href="%s"> Plugin Settings</a> ', 'mashsb' ), admin_url( 'plugins.php' ) ) . '</p>';
         echo '</div>';
     }
 
-    $install_date = get_option('mashsb_installDate');
-        $display_date = date('Y-m-d h:i:s');
-	$datetime1 = new DateTime($install_date);
-	$datetime2 = new DateTime($display_date);
-	$diff_intrval = round(($datetime2->format('U') - $datetime1->format('U')) / (60*60*24));
-        if($diff_intrval >= 7 && get_option('mashsb_RatingDiv')=="no")
-    {
-	 echo '<div class="mashsb_fivestar" style="box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);">
+    // Please rate us
+    $install_date = get_option( 'mashsb_installDate' );
+    $display_date = date( 'Y-m-d h:i:s' );
+    $datetime1 = new DateTime( $install_date );
+    $datetime2 = new DateTime( $display_date );
+    $diff_intrval = round( ($datetime2->format( 'U' ) - $datetime1->format( 'U' )) / (60 * 60 * 24) );
+    if( $diff_intrval >= 7 && get_option( 'mashsb_RatingDiv' ) == "no" ) {
+        echo '<div class="mashsb_fivestar" style="box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);">
     	<p>Awesome, you\'ve been using <strong>Mashshare Social Sharing</strong> for more than 1 week. <br> May i ask you to give it a <strong>5-star rating</strong> on Wordpress? </br>
         This will help to spread its popularity and to make this plugin a better one.
         <br><br>Your help is much appreciated. Thank you very much,<br> ~René Hermenau
@@ -76,7 +84,7 @@ function mashsb_admin_messages() {
         var data={\'action\':\'hideRating\'}
              jQuery.ajax({
         
-        url: "'.admin_url( 'admin-ajax.php' ).'",
+        url: "' . admin_url( 'admin-ajax.php' ) . '",
         type: "post",
         data: data,
         dataType: "json",
@@ -97,6 +105,7 @@ function mashsb_admin_messages() {
     // Disabled since 2.4.7
     //mashsb_update_notices();
 }
+
 add_action( 'admin_notices', 'mashsb_admin_messages' );
 
 /**
@@ -104,18 +113,18 @@ add_action( 'admin_notices', 'mashsb_admin_messages' );
  * @since 2.4.1
  * @deprecated since 2.4.7
  */
-function mashsb_update_notices(){
-    if ( get_option('mashsb_update_notice') !='no' ) {
-    // admin notice after updating Mashshare
-    echo '<div class="mashsb_update_notice update-nag">' . __('Mashshare notice: If you are using the php shortcode function <strong>do_shortcode[\'mashshare\'] </strong>and Mashshare styles are not loaded, enable the option <strong><a href="'.admin_url( 'options-general.php?page=mashsb-settings&tab=visual#mashsb_settingslocation_header' ).'">Load JS and CSS all over</a></strong> in Mashshare->settings->Visual->Location & Position', 'mashsb') . 
-            '<p><a href="javascript:void(0);" class="mashsb_hide_update" title="I understand" style="text-decoration:none;">I understand! <br>Do not show again this notice</a>'
-            . '</div>'
-            . '<script>
+function mashsb_update_notices() {
+    if( get_option( 'mashsb_update_notice' ) != 'no' ) {
+        // admin notice after updating Mashshare
+        echo '<div class="mashsb_update_notice update-nag">' . __( 'Mashshare notice: If you are using the php shortcode function <strong>do_shortcode[\'mashshare\'] </strong>and Mashshare styles are not loaded, enable the option <strong><a href="' . admin_url( 'options-general.php?page=mashsb-settings&tab=visual#mashsb_settingslocation_header' ) . '">Load JS and CSS all over</a></strong> in Mashshare->settings->Visual->Location & Position', 'mashsb' ) .
+        '<p><a href="javascript:void(0);" class="mashsb_hide_update" title="I understand" style="text-decoration:none;">I understand! <br>Do not show again this notice</a>'
+        . '</div>'
+        . '<script>
     jQuery( document ).ready(function( $ ) {
         jQuery(\'.mashsb_hide_update\').click(function(){
             var data={\'action\':\'hide_update\'}
             jQuery.ajax({
-                url: "'.admin_url( 'admin-ajax.php' ).'",
+                url: "' . admin_url( 'admin-ajax.php' ) . '",
                 type: "post",
                 data: data,
                 dataType: "json",
@@ -144,11 +153,13 @@ function mashsb_update_notices(){
  * 
  */
 
-function mashsb_HideRatingDiv(){
-    update_option('mashsb_RatingDiv','yes');
-    echo json_encode(array("success")); exit;
+function mashsb_HideRatingDiv() {
+    update_option( 'mashsb_RatingDiv', 'yes' );
+    echo json_encode( array("success") );
+    exit;
 }
-add_action('wp_ajax_hideRating','mashsb_HideRatingDiv');
+
+add_action( 'wp_ajax_hideRating', 'mashsb_HideRatingDiv' );
 
 /* Hide the update notice div
  * 
@@ -160,21 +171,24 @@ add_action('wp_ajax_hideRating','mashsb_HideRatingDiv');
  * @return json string
  * 
  */
-function mashsb_hide_update_div(){
-    update_option('mashsb_update_notice','yes');
-    echo json_encode(array("success")); exit;
+
+function mashsb_hide_update_div() {
+    update_option( 'mashsb_update_notice', 'yes' );
+    echo json_encode( array("success") );
+    exit;
 }
-add_action('wp_ajax_hide_update','mashsb_hide_update_div');
+
+add_action( 'wp_ajax_hide_update', 'mashsb_hide_update_div' );
 
 /**
  * Admin Add-ons Notices
  *
  * @since 1.0
  * @return void
-*/
+ */
 function mashsb_admin_addons_notices() {
-	add_settings_error( 'mashsb-notices', 'mashsb-addons-feed-error', __( 'There seems to be an issue with the server. Please try again in a few minutes.', 'mashsb' ), 'error' );
-	settings_errors( 'mashsb-notices' );
+    add_settings_error( 'mashsb-notices', 'mashsb-addons-feed-error', __( 'There seems to be an issue with the server. Please try again in a few minutes.', 'mashsb' ), 'error' );
+    settings_errors( 'mashsb-notices' );
 }
 
 /**
@@ -182,18 +196,19 @@ function mashsb_admin_addons_notices() {
  *
  * @since 1.8
  * @return void
-*/
+ */
 function mashsb_dismiss_notices() {
 
-	$notice = isset( $_GET['mashsb_notice'] ) ? $_GET['mashsb_notice'] : false;
-	if( ! $notice )
-		return; // No notice, so get out of here
+    $notice = isset( $_GET['mashsb_notice'] ) ? $_GET['mashsb_notice'] : false;
+    if( !$notice )
+        return; // No notice, so get out of here
 
-	update_user_meta( get_current_user_id(), '_mashsb_' . $notice . '_dismissed', 1 );
-      
-	wp_redirect( esc_url(remove_query_arg( array( 'mashsb_action', 'mashsb_notice' ) ) ) ); exit;
+    update_user_meta( get_current_user_id(), '_mashsb_' . $notice . '_dismissed', 1 );
 
+    wp_redirect( esc_url( remove_query_arg( array('mashsb_action', 'mashsb_notice') ) ) );
+    exit;
 }
+
 add_action( 'mashsb_dismiss_notices', 'mashsb_dismiss_notices' );
 
 /*
@@ -206,37 +221,38 @@ add_action( 'mashsb_dismiss_notices', 'mashsb_dismiss_notices' );
 function mashsb_in_plugin_update_message( $args ) {
     $transient_name = 'mashsb_upgrade_notice_' . $args['Version'];
 
-    if ( false === ( $upgrade_notice = get_transient( $transient_name ) ) ) {
+    if( false === ( $upgrade_notice = get_transient( $transient_name ) ) ) {
 
-      $response = wp_remote_get( 'https://plugins.svn.wordpress.org/mashsharer/trunk/readme.txt' );
+        $response = wp_remote_get( 'https://plugins.svn.wordpress.org/mashsharer/trunk/readme.txt' );
 
-      if ( ! is_wp_error( $response ) && ! empty( $response['body'] ) ) {
+        if( !is_wp_error( $response ) && !empty( $response['body'] ) ) {
 
-        // Output Upgrade Notice
-        $matches        = null;
-        $regexp         = '~==\s*Upgrade Notice\s*==\s*=\s*(.*)\s*=(.*)(=\s*' . preg_quote( MASHSB_VERSION ) . '\s*=|$)~Uis';
-        $upgrade_notice = '';
+            // Output Upgrade Notice
+            $matches = null;
+            $regexp = '~==\s*Upgrade Notice\s*==\s*=\s*(.*)\s*=(.*)(=\s*' . preg_quote( MASHSB_VERSION ) . '\s*=|$)~Uis';
+            $upgrade_notice = '';
 
-        if ( preg_match( $regexp, $response['body'], $matches ) ) {
-          $version        = trim( $matches[1] );
-          $notices        = (array) preg_split('~[\r\n]+~', trim( $matches[2] ) );
-          
-          if ( version_compare( MASHSB_VERSION, $version, '<' ) ) {
+            if( preg_match( $regexp, $response['body'], $matches ) ) {
+                $version = trim( $matches[1] );
+                $notices = ( array ) preg_split( '~[\r\n]+~', trim( $matches[2] ) );
 
-            $upgrade_notice .= '<div class="mashsb_plugin_upgrade_notice" style="padding:10px;background-color:#58C1FF;color: #FFF;">';
+                if( version_compare( MASHSB_VERSION, $version, '<' ) ) {
 
-            foreach ( $notices as $index => $line ) {
-              $upgrade_notice .= wp_kses_post( preg_replace( '~\[([^\]]*)\]\(([^\)]*)\)~', '<a href="${2}" style="text-decoration:underline;color:#ffffff;">${1}</a>', $line ) );
+                    $upgrade_notice .= '<div class="mashsb_plugin_upgrade_notice" style="padding:10px;background-color:#58C1FF;color: #FFF;">';
+
+                    foreach ( $notices as $index => $line ) {
+                        $upgrade_notice .= wp_kses_post( preg_replace( '~\[([^\]]*)\]\(([^\)]*)\)~', '<a href="${2}" style="text-decoration:underline;color:#ffffff;">${1}</a>', $line ) );
+                    }
+
+                    $upgrade_notice .= '</div> ';
+                }
             }
 
-            $upgrade_notice .= '</div> ';
-          }
+            set_transient( $transient_name, $upgrade_notice, DAY_IN_SECONDS );
         }
-
-        set_transient( $transient_name, $upgrade_notice, DAY_IN_SECONDS );
-      }
     }
 
     echo wp_kses_post( $upgrade_notice );
-  }
- add_action ( 'in_plugin_update_message-mashsharer/mashshare.php', 'mashsb_in_plugin_update_message'  );
+}
+
+add_action( 'in_plugin_update_message-mashsharer/mashshare.php', 'mashsb_in_plugin_update_message' );

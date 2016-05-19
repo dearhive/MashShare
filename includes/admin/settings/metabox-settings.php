@@ -66,9 +66,9 @@ function mashsb_meta_boxes( $meta_boxes ) {
             ),
             // Setup the pinterest optimized image
             array(
-                'name' => '<span class="mashicon mashicon-pinterest"></span> ' . __( 'Pinterest Image', 'mashsb' ) . '<a class="mashsb-helper" href="#"></a><div class="mashsb-message" style="display: none;">'.sprintf(__('Get the <a href="%s" target="_blank">Network Add-On</a> to make use of the Pinterest Features','mashsb'),'https://www.mashshare.net/pricing/?utm_source=meta_box&utm_medium=core_plugin&utm_campaign=make_use_of_network_addon').'</div>',
+                'name' => '<span class="mashicon mashicon-pinterest"></span> ' . __( 'Pinterest Image', 'mashsb' ) . '<a class="mashsb-helper" href="#"></a><div class="mashsb-message" style="display: none;">'.sprintf(__('Get the <a href="%s" target="_blank">Network Add-On</a> to make use of the Pinterest Features','mashsb'),'https://www.mashshare.net/pricing/?utm_source=meta_box&utm_medium=core_plugin&utm_campaign=pinterest_helper').'</div>',
                 'desc' => __( 'Pinned images need to be more vertical than horizontal in orientation. Use an aspect ratio of 2:3 to 1:3.5 and a minimum width of 600 pixels. So an image that is 600 pixels wide should be between 900 and 2100 pixels tall.', 'mashsb' ),
-                'id' => $prefix . 'pinterest-image',
+                'id' => $prefix . 'pinterest_image',
                 'type' => 'image_advanced',
                 'clone' => false,
                 'max_file_uploads' => 1,
@@ -76,7 +76,7 @@ function mashsb_meta_boxes( $meta_boxes ) {
             ),
             // Setup the pinterest description
             array(
-                'name' => '<span class="mashicon mashicon-pinterest"></span> ' . __('Pinterest Description', 'mashsb' ) . '<a class="mashsb-helper" href="#"></a><div class="mashsb-message" style="display: none;">'.sprintf(__('Get the <a href="%s" target="_blank">Network Add-On</a> to make use of the Pinterest Features','mashsb'),'https://www.mashshare.net/pricing/?utm_source=meta_box&utm_medium=core_plugin&utm_campaign=make_use_of_network_addon').'</div>',
+                'name' => '<span class="mashicon mashicon-pinterest"></span> ' . __('Pinterest Description', 'mashsb' ) . '<a class="mashsb-helper" href="#"></a><div class="mashsb-message" style="display: none;">'.sprintf(__('Get the <a href="%s" target="_blank">Network Add-On</a> to make use of the Pinterest Features','mashsb'),'https://www.mashshare.net/pricing/?utm_source=meta_box&utm_medium=core_plugin&utm_campaign=pinterest_helper').'</div>',
                 'desc' => __( 'Place a customized message that will be used when this post is shared on Pinterest. Leave this blank to use the ', 'mashsb' ) . (mashsb_yoast_active() ? __( 'Yoast SEO title', 'mashsb' ) : __( 'the post title', 'mashsb' )),
                 'id' => $prefix . 'pinterest_description',
                 'type' => 'textarea',
@@ -86,7 +86,7 @@ function mashsb_meta_boxes( $meta_boxes ) {
             // Setup the Custom Tweet box
             array(
                 'name' => '<span class="mashicon mashicon-twitter"></span> ' . __('Custom Tweet','mashsb'),
-                'desc' =>  __('If this is left blank the post title will be used. ','mashsb') . (mashsb_get_twitter_username() ?  __('Based on your username @','mashsb') . mashsb_get_twitter_username() . ', ' . __('Based on the shortened post url, the current content above','mashsb') : __('Based on the shortened post url and the current content above','mashsb') ) . __(' your tweet has a maximum of 140 characters.','mashsb'),
+                'desc' =>  mashsb_twitter_desc(),
                 'id' => $prefix . 'custom_tweet',
                 'type' => 'textarea',
                 'clone' => false,
@@ -102,8 +102,9 @@ function mashsb_meta_boxes( $meta_boxes ) {
                 'type' => 'custom_html',
             ),*/
             array(
+                'helper'=> '<a class="mashsb-helper" href="#" style="margin-left:-4px;"></a><div class="mashsb-message" style="display: none;">'.__('Publish the post and validate if the open graph meta tags on your site are correct! Incorrect data can result in wrong share description, title or images and should be fixed! In the facebook debugger click the link "Fetch new scrape information" to purge the facebook cache.','mashsb').'</div>',
                 'id' => $prefix . 'validate_og',
-                'type' => 'validate_og',
+                'type' => 'validate_og'
             ),
             array(
                 'id' => $prefix . 'twitter_handle',
@@ -125,4 +126,22 @@ function mashsb_yoast_active() {
     if( defined( 'WPSEO_VERSION' ) ) {
         return true;
     }
+}
+
+
+function mashsb_twitter_desc() {
+    $str = "";
+    if( mashsb_get_twitter_username() ) {
+        $str .= __( 'Based on your username @', 'mashsb' ) . mashsb_get_twitter_username() . __( ' ,the shortened post url and the current content above', 'mashsb' );
+    } else {
+        $str .= __( 'Based on the shortened post url and the current content above', 'mashsb' );
+    }
+    $str .= __( ' your tweet has a maximum of 140 characters. ', 'mashsb' );
+    if (!mashsb_yoast_active()){
+    $str .= __( 'If this is left blank the post title will be used. ', 'mashsb' );
+    }else{
+    $str .= __( 'If this is left blank the Yoast Twitter Title or post title will be used. ', 'mashsb' );    
+    }
+
+    return $str;
 }

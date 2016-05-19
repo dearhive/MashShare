@@ -843,6 +843,10 @@ color:#777777;
 
 .mashsb.nav-tab-wrapper {
     border-bottom: none !important;
+    margin:0px;
+}
+.mashsb.nav-tab-wrapper .nav-tab-active{
+    background-color: #ffffff;
 }
 
 
@@ -898,7 +902,24 @@ color:#777777;
 #mash-social-admin-head > li{
     float:left;
     margin-right:5px;
+    padding-bottom:20px;
 }
+
+#mash-social-admin-head a, #mash-social-admin-head .icon:before {
+    font-size: 12px;
+    font-weight: normal;
+    float:none;
+}
+#mash-social-admin-head a {
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    text-decoration: none;
+}
+
+
+
 
 .mashsb.nav-tab-wrapper{
     clear:both;
@@ -1039,8 +1060,7 @@ Fancy checkboxes proto.io
 
 .mashsb-sidebar{
     float:left;
-    max-width: 300px;
-    margin-left:25px;
+    max-width: 299px;
     border-left: 1px solid white;
     border-right: 1px solid white;
     border-bottom: 1px solid white;

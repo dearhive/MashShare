@@ -314,26 +314,31 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 == Changelog == 
 
 = 3.0.0 not released =
+* New: If YOAST open graph and social settings for twitter and facebook are defined use them for sharing instead usingthe post title
 * New: Most Popular Post Widget for displaying posts sorted by shares
-* New: Enable networks independantely mobile / desktop device 
-* New: Make the basic buttons responsive
-* New: admin menue icon
+* New: Included open graph and twitter card meta tags. Rewritten from scratch. Makes use of Yoast open graph data if specified.
+* New: Define extra large Pinterest image and dedicated sharing description
+* New: Basic responsive button behavior included per default
+* New: Facebook open graph rescraping is done automatically on post save. No more need to open facebook debugger to fetch new scrape information!
+* New: Validate open graph data button
 * New: Filter mashsb_visible_services for modifying the visible networks
 * New: Filter mashsb_shortcode_atts for modifying the shortcode arguments
 * New: Rename General tab into Settings
 * New: Remove settings "Visual" and "Social networks" and merge them into new Settings tab 
 * New: Stay on last active tab after saving admin settings
-* New: Included open graph and twitter card meta tags. 
-* New: Facebook rescraping is done automatically on post save
 * New: New field in WordPress user profiles: Twitter author url for giving credits to authors when sharing a link on twitter (twitter:creator) 
-* New: Email Subscribe marketing sidebar
-* Performance: Only cached shares are served when page is requested by bot or spider
+* New: Performance Tweak: Only cached share counts are served when page is requested by bots or spiders
+* New: Clicking the PLUS button only affects the adequate parent share buttons not other share buttons on same page.
+* Tweak: Improved license activation workflow and much better license error messages
 * Tweak: New UI elements for admin checkboxes
 * Tweak: Enable Twitter and Facebook share button per default on first time installation
 * Tweak: Change Mashshare to MashShare for better branding
-* Tweak: Change twitter username description in settings and make sure @Mashshare is not used by user
+* Tweak: Change twitter username description in settings and make sure @Mashshare is not used
 * Tweak: Get 20% instead 10% discount for allowing tracking
-* Tweak: Improved license activation workflow and much better license error messages
+* Tweak: admin menue icon
+* Tweak: Deactivates the MashShare Open Graph Add-On or throws an warning message if its still enabled
+* Tweak: Load JS and CSS all over setting is enabled per default 
+* Tweak: Static share buttons on admin dashboard for quicker response
 * Fix: New function for returning share title shows correct title even on archive, categories and non posts like bbpress and buddyPress pages
 * Fix: Missing </div> in checkbox callback function
 * Fix: disable class mashdebug() which causes header notices on some systems

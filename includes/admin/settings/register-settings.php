@@ -152,6 +152,24 @@ function mashsb_get_registered_settings() {
                 'type' => 'select',
                 'options' => mashsb_get_expiretimes()
             ),
+            'facebook_count' => array(
+                'id' => 'facebook_count_mode',
+                'name' => __( 'Facebook Count', 'mashsb' ),
+                'desc' => __( 'Get the Facebook total count including "likes" and "shares" or get only the pure share count', 'mashsb' ),
+                'type' => 'select',
+                'options' => array(
+                    'shares' => 'Shares',
+                    'likes' => 'Likes',
+                    'total' => 'Total: likes + shares + comments'
+                )
+            ),
+            'fake_count' => array(
+                'id' => 'fake_count',
+                'name' => __( 'Fake Share counts', 'mashsb' ),
+                'desc' => __( 'This number will be aggregated to all your share counts and is multiplied with a post specific factor. (Number of post title words divided with 10).', 'mashsb' ),
+                'type' => 'text',
+                'size' => 'medium'
+            ),
             'disable_sharecount' => array(
                 'id' => 'disable_sharecount',
                 'name' => __( 'Disable Sharecount', 'mashsb' ),
@@ -173,29 +191,25 @@ function mashsb_get_registered_settings() {
                 'size' => 'small',
                 'std' => 1000
             ),
-            'fake_count' => array(
-                'id' => 'fake_count',
-                'name' => __( 'Fake Share counts', 'mashsb' ),
-                'desc' => __( 'This number will be aggregated to all your share counts and is multiplied with a post specific factor. (Number of post title words divided with 10).', 'mashsb' ),
-                'type' => 'text',
-                'size' => 'medium'
-            ),
             'load_scripts_footer' => array(
                 'id' => 'load_scripts_footer',
-                'name' => __( 'JS Load Order', 'mashsb' ),
+                'name' => __( 'JavaScript in Footer', 'mashsb' ),
                 'desc' => __( 'Enable this to load all *.js files into footer. Make sure your theme uses the wp_footer() template tag in the appropriate place. Default: Disabled', 'mashsb' ),
                 'type' => 'checkbox'
             ),
-            'facebook_count' => array(
-                'id' => 'facebook_count_mode',
-                'name' => __( 'Facebook Count', 'mashsb' ),
-                'desc' => __( 'Get the Facebook total count including "likes" and "shares" or get only the pure share count', 'mashsb' ),
-                'type' => 'select',
-                'options' => array(
-                    'shares' => 'Shares',
-                    'likes' => 'Likes',
-                    'total' => 'Total: likes + shares + comments'
-                )
+            'loadall' => array(
+                'id' => 'loadall',
+                'name' => __( 'JS & CSS Everywhere', 'mashsb' ),
+                'desc' => __( 'Enable this option if you are using </br> <strong>&lt;?php echo do_shortcode("[mashshare]"); ?&gt;</strong> to make sure that all css and js files are loaded. If Top or Bottom automatic position is used you can deactivate this option to allow conditional loading so MashShare\'s JS and CSS files are loaded only on pages where MashShare is used.', 'mashsb' ),
+                'type' => 'checkbox',
+                'std' => 'false'
+            ),
+            'twitter_popup' => array(
+                'id' => 'twitter_popup',
+                'name' => __( 'Twitter Popup disabled', 'mashsb' ),
+                'desc' => __( 'Check this box if your twitter popup is openening twice. This happens sometimes when you are using any third party twitter plugin or the twitter SDK on your website.', 'mashsb' ),
+                'type' => 'checkbox',
+                'std' => '0'
             ),
             'uninstall_on_delete' => array(
                 'id' => 'uninstall_on_delete',
@@ -211,7 +225,7 @@ function mashsb_get_registered_settings() {
             ),
             'services_header' => array(
                 'id' => 'services_header',
-                'name' => __( 'Select available networks', 'mashsb' ),
+                'name' => __( 'Social Networks', 'mashsb' ),
                 'desc' => '',
                 'type' => 'header'
             ),
@@ -229,6 +243,25 @@ function mashsb_get_registered_settings() {
                 'type' => 'text',
                 'size' => 'medium'
             ),
+            'mashsharer_hashtag' => array(
+                'id' => 'mashsharer_hashtag',
+                'name' => __( 'Twitter Username', 'mashsb' ),
+                'desc' => __( '<strong>Optional:</strong> Using your twitter username results in via @username', 'mashsb' ),
+                'type' => 'text',
+                'size' => 'medium'
+            ),
+            'twitter_card' => array(
+                'id' => 'twitter_card',
+                'name' => __( 'Twitter Card', 'mashsb' ),
+                'desc' => __( 'Enable Twitter card meta tags. If you are using the Yoast SEO or Jetpack plugin their meta tags will be removed and MashShare will use existing meta data from these plugins. Default: On', 'mashsb' ),
+                'type' => 'checkbox'
+            ),
+            'open_graph' => array(
+                'id' => 'open_graph',
+                'name' => __( 'Open Graph Meta Tags', 'mashsb' ),
+                'desc' => __( 'Enable MashShare Open Graph meta tags. If you are using the Yoast SEO or Jetpack plugin their meta tags will be removed and MashShare will use existing meta data from these plugins.', 'mashsb' ),
+                'type' => 'checkbox'
+            ),
             'visible_services' => array(
                 'id' => 'visible_services',
                 'name' => __( 'Large Buttons', 'mashsb' ),
@@ -238,31 +271,32 @@ function mashsb_get_registered_settings() {
             ),
             'networks' => array(
                 'id' => 'networks',
-                'name' => '<strong>' . __( 'Services', 'mashsb' ) . '</strong>',
-                'desc' => __( 'Drag and drop the Share Buttons to sort them and specify which ones should be enabled. <br>If you enable more networks than "Large Buttons", the plus sign is automatically added <br>to the last visible large share button.s', 'mashsb' ),
+                'name' => __( 'Social Networks', 'mashsb' ),
+                'desc' => __( 'Drag and drop the Social Networks Buttons to sort them and enable the ones that should be visible. <br>If you activate more networks than number of "Large Share Buttons" setting the plus sign will be added automatically.', 'mashsb' ),
                 'type' => 'networks',
                 'options' => mashsb_get_networks_list()
             ),
-            'services_header' => array(
+            /*'networks' => array(
+                'id' => 'networks',
+                'name' => '<strong>' . __( 'Services', 'mashsb' ) . '</strong>',
+                'desc' => __( 'Drag and drop the Share Buttons to sort them and specify which ones should be enabled. <br>If you enable more networks than "Large Buttons", the plus sign is automatically added <br>to the last visible large share buttons', 'mashsb' ),
+                'type' => 'networks',
+                'options' => mashsb_get_networks_list()
+            ),*/
+            /*'services_header' => array(
                 'id' => 'services_header',
                 'name' => __( 'Social Networks', 'mashsb' ),
                 'desc' => '',
                 'type' => 'header'
-            ),
-            'visible_services' => array(
+            ),*/
+            /*'visible_services' => array(
                 'id' => 'visible_services',
-                'name' => __( 'Large Buttons', 'mashsb' ),
-                'desc' => __( 'Specify how many services and social networks are visible before the "Plus" Button is shown. This buttons turn into large prominent buttons.', 'mashsb' ),
+                'name' => __( 'Large Share Buttons', 'mashsb' ),
+                'desc' => __( 'Specify how many services and social networks are visible before the "Plus" Button is shown. These buttons turn into large prominent buttons.', 'mashsb' ),
                 'type' => 'select',
                 'options' => numberServices()
-            ),
-            'networks' => array(
-                'id' => 'networks',
-                'name' => '<strong>' . __( 'Services', 'mashsb' ) . '</strong>',
-                'desc' => __( 'Drag and drop the Share Buttons to sort them and specify which ones should be enabled. <br>If you enable more networks than "Large Buttons", the plus sign is automatically added <br>to the last visible large share button.s', 'mashsb' ),
-                'type' => 'networks',
-                'options' => mashsb_get_networks_list()
-            ),
+            ),*/
+            
             'style_header' => array(
                 'id' => 'style_header',
                 'name' => '<strong>' . __( 'Customization', 'mashsb' ) . '</strong>',
@@ -271,7 +305,7 @@ function mashsb_get_registered_settings() {
             ),
             'mashsharer_round' => array(
                 'id' => 'mashsharer_round',
-                'name' => __( 'Round Shares', 'mashsb' ),
+                'name' => __( 'Round up Shares', 'mashsb' ),
                 'desc' => __( 'Share counts greater than 1.000 will be shown as 1k. Greater than 1 Million as 1M', 'mashsb' ),
                 'type' => 'checkbox'
             ),
@@ -283,22 +317,15 @@ function mashsb_get_registered_settings() {
             ),
             'sharecount_title' => array(
                 'id' => 'sharecount_title',
-                'name' => __( 'Share count title', 'mashsb' ),
+                'name' => __( 'Share Count Label', 'mashsb' ),
                 'desc' => __( 'Change the text of the Share count title. <strong>Default:</strong> SHARES', 'mashsb' ),
                 'type' => 'text',
                 'size' => 'medium',
                 'std' => 'SHARES'
             ),
-            'mashsharer_hashtag' => array(
-                'id' => 'mashsharer_hashtag',
-                'name' => __( 'Twitter handle', 'mashsb' ),
-                'desc' => __( '<strong>Optional:</strong> Using your twitter username results in via @username', 'mashsb' ),
-                'type' => 'text',
-                'size' => 'medium'
-            ),
             /* 'share_color' => array(
               'id' => 'share_color',
-              'name' => __( 'Share count color', 'mashsb' ),
+              'name' => __( 'Share count Color', 'mashsb' ),
               'desc' => __( 'Choose color of the share number in hex format, e.g. #7FC04C: ', 'mashsb' ),
               'type' => 'text',
               'size' => 'medium',
@@ -306,7 +333,7 @@ function mashsb_get_registered_settings() {
               ), */
             'share_color' => array(
                 'id' => 'share_color',
-                'name' => __( 'Share count color', 'mashsb' ),
+                'name' => __( 'Share Count Color', 'mashsb' ),
                 'desc' => __( 'Choose color of the share number in hex format, e.g. #7FC04C: ', 'mashsb' ),
                 'type' => 'text',
                 'size' => 'medium',
@@ -345,7 +372,7 @@ function mashsb_get_registered_settings() {
             ),
             array(
                 'id' => 'button_width',
-                'name' => __( 'Button width', 'mashpv' ),
+                'name' => __( 'Button Width', 'mashpv' ),
                 'desc' => __( 'Minimum with of the large share buttons in pixels', 'mashpv' ),
                 'type' => 'number',
                 'size' => 'normal',
@@ -353,7 +380,7 @@ function mashsb_get_registered_settings() {
             ),
             'mash_style' => array(
                 'id' => 'mash_style',
-                'name' => __( 'Share button style', 'mashsb' ),
+                'name' => __( 'Share Button Style', 'mashsb' ),
                 'desc' => __( 'Change visual appearance of the share buttons.', 'mashsb' ),
                 'type' => 'select',
                 'options' => array(
@@ -365,19 +392,19 @@ function mashsb_get_registered_settings() {
             ),
             'small_buttons' => array(
                 'id' => 'small_buttons',
-                'name' => __( 'Use small buttons', 'mashsb' ),
+                'name' => __( 'Small Share Buttons', 'mashsb' ),
                 'desc' => __( 'All buttons will be shown as pure small icons without any text on desktop and mobile devices all the time.<br><strong>Note:</strong> Disable this when you use the <a href="https://www.mashshare.net/downloads/mashshare-responsive/" target="_blank">responsive Add-On</a>', 'mashsb' ),
                 'type' => 'checkbox'
             ),
-            'image_share' => array(
+            /*'image_share' => array(
                 'id' => 'image_share',
                 'name' => __( 'Share buttons on image hover', 'mashsb' ),
                 'desc' => __( '', 'mashsb' ),
                 'type' => 'checkbox'
-            ),
+            ),*/
             'subscribe_behavior' => array(
                 'id' => 'subscribe_behavior',
-                'name' => __( 'Subscribe button', 'mashsb' ),
+                'name' => __( 'Subscribe Button', 'mashsb' ),
                 'desc' => __( 'Specify if the subscribe button is opening a content box below the button or if the button is linked to the "subscribe url" below.', 'mashsb' ),
                 'type' => 'select',
                 'options' => array(
@@ -467,7 +494,7 @@ function mashsb_get_registered_settings() {
             'mashsharer_position' => array(
                 'id' => 'mashsharer_position',
                 'name' => __( 'Position', 'mashsb' ),
-                'desc' => __( 'Position of Share Buttons. If this is set to <i>manual</i> use the shortcode function [mashshare] or use php code <br>&lt;?php echo do_shortcode("[mashshare]"); ?&gt; in template files. </p>You must activate the option "<strong>Load JS and CSS all over</strong>" if you experience issues with do_shortcode() and the buttons are not shown as expected. List of <a href="https://www.mashshare.net/faq/#Shortcodes" target="_blank">available shortcodes</a>', 'mashsb' ),
+                'desc' => __( 'Position of Share Buttons. If this is set to <i>manual</i> use the shortcode function [mashshare] or use php code <br>&lt;?php echo do_shortcode("[mashshare]"); ?&gt; in template files. </p>You must activate the option "<strong>Load JS and CSS all over</strong>" if you experience issues with do_shortcode() and the buttons are not shown as expected. See all <a href="https://www.mashshare.net/faq/#Shortcodes" target="_blank">available shortcodes</a>.', 'mashsb' ),
                 'type' => 'select',
                 'options' => array(
                     'before' => __( 'Top', 'mashsb' ),
@@ -479,19 +506,12 @@ function mashsb_get_registered_settings() {
             'post_types' => array(
                 'id' => 'post_types',
                 'name' => __( 'Post Types', 'mashsb' ),
-                'desc' => __( 'Select on which post_types the share buttons appear. This values will be ignored when position is specified "manual".', 'mashsb' ),
+                'desc' => __( 'Select on which post_types the share buttons appear. These values will be ignored when "manual" position is selected.', 'mashsb' ),
                 'type' => 'posttypes'
-            ),
-            'loadall' => array(
-                'id' => 'loadall',
-                'name' => __( '<strong>IMPORTANT:</strong> Load JS and CSS all over', 'mashsb' ),
-                'desc' => __( 'Enable this option if you are using </br> <strong>&lt;?php echo do_shortcode("[mashshare]"); ?&gt;</strong>.', 'mashsb' ),
-                'type' => 'checkbox',
-                'std' => 'false'
             ),
             'excluded_from' => array(
                 'id' => 'excluded_from',
-                'name' => __( 'Exclude from', 'mashsb' ),
+                'name' => __( 'Exclude from post id', 'mashsb' ),
                 'desc' => __( 'Exclude share buttons from a list of post ids. Put in the post id separated by a comma, e.g. 23, 63, 114 ', 'mashsb' ),
                 'type' => 'text',
                 'size' => 'medium'
@@ -508,13 +528,6 @@ function mashsb_get_registered_settings() {
                 'name' => __( 'Frontpage', 'mashsb' ),
                 'desc' => __( 'Enable share buttons on frontpage', 'mashsb' ),
                 'type' => 'checkbox'
-            ),
-            'twitter_popup' => array(
-                'id' => 'twitter_popup',
-                'name' => __( 'Twitter Popup disable', 'mashsb' ),
-                'desc' => __( 'Check this box if your twitter popup is openening twice. This happens sometimes when you are using any third party twitter plugin or the twitter SDK on your website.', 'mashsb' ),
-                'type' => 'checkbox',
-                'std' => '0'
             ),
             'debug_header' => array(
                 'id' => 'debug_header',

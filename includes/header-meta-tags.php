@@ -25,6 +25,8 @@ class MASHSB_HEADER_META_TAGS {
     protected $twitter_image;
     protected $twitter_site;
     protected $twitter_creator;
+    protected $pinterest_description;
+    protected $pinterest_image;
     // Yoast Data
     protected $yoast_og_title;
     protected $yoast_og_description;
@@ -58,8 +60,11 @@ class MASHSB_HEADER_META_TAGS {
         $this->post_title = $this->get_title();
         $this->post_featured_image = $this->get_featured_image();
         $this->post_description = $this->get_excerpt_by_id( $this->postID );
+        $this->pinterest_image = $this->get_pinterest_image_url();
+        $this->pinterest_description = $this->get_pinterest_description();
+        
         $this->get_og_data();
-        // Do not want to support the old stuff so let's disable this
+        // We do not want to support the old stuff so let's disable this. Hopefully no one demands it!
         //$this->get_og_add_on_data();
         $this->remove_jetpack_og();
         $this->remove_simple_podcast_press_og();
@@ -68,16 +73,7 @@ class MASHSB_HEADER_META_TAGS {
     }
 
     /**
-     * DEPRECATED 
-     * @param type $content
-     * @return string
-     */
-    function remove_sw_meta_tags( $content ) {
-        return '';
-    }
-
-    /**
-     * Get relevant main open graph and twitter data and use it for later functions
+     * Get relevant main open graph, twitter and pinterest data and use it for later functions
      * 
      * @return void
      */
@@ -96,11 +92,12 @@ class MASHSB_HEADER_META_TAGS {
      * @deprecated
      * @return void
      */
-    public function get_og_add_on_data() {
+    /*public function get_og_add_on_data() {
         $this->addon_og_title = htmlspecialchars( get_post_meta( $this->postID, '_og_title', true ) );
         $this->addon_og_description = htmlspecialchars( get_post_meta( $this->postID, '_og_description', true ) );
         $this->addon_twitter_title = htmlspecialchars( get_post_meta( $this->postID, 'mashog_tw_title', true ) );
-    }
+    }*/
+    
 
     /**
      * Get Yoast open graph and social data
@@ -145,9 +142,13 @@ class MASHSB_HEADER_META_TAGS {
      */
     public function remove_jetpack_og() {
         if( class_exists( 'JetPack' ) ) {
-            remove_action( 'wp_head', 'jetpack_og_tags' );
+            add_filter( 'jetpack_enable_opengraph', '__return_false', 99 );
         }
     }
+
+    
+    
+    
 
     /**
      * Get the title
@@ -155,7 +156,8 @@ class MASHSB_HEADER_META_TAGS {
      * @return string
      */
     public function get_title() {
-        return $this->replace_quote_characters( htmlspecialchars_decode( get_the_title() ) );
+        //return $this->replace_quote_characters( htmlspecialchars_decode( get_the_title() ) );
+        return $this->replace_quote_characters( htmlspecialchars_decode( mashsb_get_document_title() ) );
     }
 
     /**
@@ -253,7 +255,8 @@ class MASHSB_HEADER_META_TAGS {
      * @return mixed array[0] = width, array[1] = height | boolean false
      */
     public function get_og_image_size() {
-        if( empty( $this->get_og_image() ) ) {
+        $og_image = $this->get_og_image();
+        if( empty( $og_image ) ) {
             return;
         }
         $upload_dir = wp_upload_dir();
@@ -297,21 +300,53 @@ class MASHSB_HEADER_META_TAGS {
      * @return string  
      */
     public function get_image_url() {
-        $og_image = $this->get_og_image_id();
+        $og_image = get_post_meta( $this->postID, 'mashsb_og_image', true );
         if( $og_image ) {
             //return rawurlencode( wp_get_attachment_url( $og_image ) );
             return wp_get_attachment_url( $og_image );
         }
     }
-
     /**
-     * Get the image id
+     * Get Pinterst image url from mashsb meta box settings
      * 
-     * @return int
+     * @return string  
      */
-    public function get_og_image_id() {
-        return get_post_meta( $this->postID, 'mashsb_og_image', true );
+    public function get_pinterest_image_url() {
+        $image = get_post_meta( $this->postID, 'mashsb_pinterest_image', true );
+        if( $image ) {
+            //return rawurlencode( wp_get_attachment_url( $og_image ) );
+            return wp_get_attachment_url( $image );
+        }
+        
+        $og_image = get_post_meta( $this->postID, 'mashsb_og_image', true );
+        if( $og_image ) {
+            //return rawurlencode( wp_get_attachment_url( $og_image ) );
+            return wp_get_attachment_url( $og_image );
+        }
+        
+        return $this->post_featured_image;
+        
     }
+    
+    /**
+     * Get pinterest description
+     * 
+     * @return string
+     */
+    public function get_pinterest_description() {
+        $desc = get_post_meta( $this->postID, 'mashsb_pinterest_description', true );
+        if( !empty( $desc ) ) {
+            return $desc;
+        }
+
+        if( !empty( $this->og_description ) ) {
+            return $this->og_description;
+        }
+
+        // Default return value
+        return $this->post_description;
+    }
+
 
     /**
      * Get the facebook author url
@@ -377,6 +412,7 @@ class MASHSB_HEADER_META_TAGS {
         if( !empty( $this->yoast ) && !empty( $this->yoast['fbadminapp'] ) ) {
             return $this->yoast['fbadminapp'];
         }
+        return false;
     }
 
     /**
@@ -426,6 +462,8 @@ class MASHSB_HEADER_META_TAGS {
         // Default return value
         return $this->post_description;
     }
+    
+
 
     /**
      * Remove Simple Podcast Press open graph tags
@@ -465,14 +503,26 @@ class MASHSB_HEADER_META_TAGS {
 
         $html = PHP_EOL . '<!-- Open Graph Meta Tags & Twitter Card generated by MashShare ' . MASHSB_VERSION . ' - https://mashshare.net -->';
         $html .= PHP_EOL . '<meta property="og:type" content="article" /> ';
+        if ($this->get_og_title()){
         $html .= PHP_EOL . '<meta property="og:title" content="' . $this->get_og_title() . '" />';
+        }
+        if ($this->get_og_description()){
         $html .= PHP_EOL . '<meta property="og:description" content="' . $this->get_og_description() . '" />';
+        }
+        if ($this->get_og_image()){
         $html .= PHP_EOL . '<meta property="og:image" content="' . $this->get_og_image() . '" />';
+        }
         $html .= PHP_EOL . '<meta property="og:url" content="' . get_permalink() . '" />';
         $html .= PHP_EOL . '<meta property="og:site_name" content="' . get_bloginfo( 'name' ) . '" />';
+        if ($this->get_fb_author_url()){
         $html .= PHP_EOL . '<meta property="article:author" content="' . $this->get_fb_author_url() . '" />';
+        }
+        if ($this->get_fb_publisher_url()){
         $html .= PHP_EOL . '<meta property="article:publisher" content="' . $this->get_fb_publisher_url() . '" />';
+        }
+        if($this->get_fb_app_id()){
         $html .= PHP_EOL . '<meta property="fb:app_id" content="' . $this->get_fb_app_id() . '" />';
+        }
         $html .= PHP_EOL . '<meta property="article:published_time" content="' . get_post_time( 'c' ) . '" />';
         $html .= PHP_EOL . '<meta property="article:modified_time" content="' . get_post_modified_time( 'c' ) . '" />';
         $html .= PHP_EOL . '<meta property="og:updated_time" content="' . get_post_modified_time( 'c' ) . '" />';
@@ -533,6 +583,6 @@ function mashsb_meta_tags_init() {
 
 add_action( 'wp_head', 'mashsb_meta_tags_init', 1 );
 
-//Remove Social Warfare tags open graph tags (Soory Social Warfare guys)
+// Remove Social Warfare tags open graph tags (Soory Social Warfare guys - You did a great job)
 add_filter( 'sw_meta_tags', '__return_false', 99 );
 
