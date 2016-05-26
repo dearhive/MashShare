@@ -42,7 +42,7 @@ if( !defined( 'MASHSB_VERSION' ) ) {
 
 // Debug mode
 if( !defined( 'MASHSB_DEBUG' ) ) {
-    define( 'MASHSB_DEBUG', false );
+    define( 'MASHSB_DEBUG', true );
 }
 
 

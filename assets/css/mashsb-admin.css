@@ -1161,3 +1161,7 @@ color: #0097df;
     width: 150px;
 }
 
+
+.mashsb-about-wrap img {
+    max-width: 99%;
+}

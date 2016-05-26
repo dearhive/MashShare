@@ -877,7 +877,7 @@ function mashsb_get_registered_settings() {
             'licenses_header' => array(
                 'id' => 'licenses_header',
                 'name' => __( 'Activate your Add-Ons', 'mashsb' ),
-                'desc' => 'Activate your license key to get important security and feature updates for your Add-On!',
+                'desc' => mashsb_check_active_addons() ? __('Activate your license key to get important security and feature updates for your Add-On!','mashsb') : sprintf(__('No Add-Ons are active or installed! <a href="%s" target="blank">See all Add-Ons</a>','mashsb'), 'https://www.mashshare.net/add-ons/?utm_source=insideplugin&utm_medium=userwebsite&utm_content=see_all_add_ons&utm_campaign=freeplugin'),
                 'type' => 'header'
             ),)
         ),
@@ -2006,3 +2006,22 @@ function mashsb_sanitize_key( $key ) {
 	 */
 	return apply_filters( 'mashsb_sanitize_key', $key, $raw_key );
 }
+
+
+function mashsb_return_self($content = array()){
+    return $content;
+}
+
+/**
+ * Check if MashShare Add-Ons are installed and active
+ * 
+ * @return boolean true when active
+ */
+function mashsb_check_active_addons(){
+
+    $content = apply_filters('mashsb_settings_licenses', array()); 
+    if (count($content) > 0){
+        return true;
+    }
+}
+

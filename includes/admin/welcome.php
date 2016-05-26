@@ -229,88 +229,49 @@ class MASHSB_Welcome {
             $this->tabs();
             ?>
             <div class="changelog">
-                <h3><?php _e( 'Amazon Payments', 'mashsb' ); ?></h3>
                 <div class="feature-section">
+                <h4><?php _e( 'Asyncronous Share Count Aggregation', 'mashsb' ); ?></h4>
+
                     <div class="feature-section-media">
-                        <img src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/24-checkout.png'; ?>"/>
+                                                <p></p>
+                        <img src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/social_sharing_settings.png'; ?>"/>
+
+
                     </div>
                     <div class="feature-section-content">
-                        <p><?php _e( 'With MashShare version 2.4, you can now accept payments through Amazon\'s Login and Pay with the new built-in payment gateway.', 'mashsb' ); ?></p>
+                        <p><?php _e( 'With MashShare version 3.0 you get the advantage of our biggest performance update. Use the new <i>Async Cache Refresh</i> method and your share counts will be aggregated only after page loading and never while page loads. This is a huge performance update.', 'mashsb' ); ?></p>
+                        <img src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/async_cache_refresh.png'; ?>"/>
+                        <p></p>
+                        <h4><?php _e( 'Open Graph and Twitter Card Integration', 'mashsb' ); ?></h4>
+                        <p><?php _e( 'Use open graph and twitter card to specify the content you like to share. If you are using Yoast, MashShare will use the Yoast open graph data instead and extend it with custom data to get the maximum out of your valuable content.', 'mashsb' ); ?></p>
+                        <p></p>
+                        <img src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/social_media_integration.png'; ?>"/>
+                        <p></p>
+                        <h4><?php _e( 'Responsive Buttons per default', 'mashsb' ); ?></h4>
+                        <p><?php _e( 'MashShare 3.0 arrives you with basic responsive button support. So the buttons look great on mobile and desktop devices.', 'mashsb' ); ?></p>
 
-                        <h4><?php _e( 'Secure Checkout', 'mashsb' ); ?></h4>
-                        <p><?php _e( 'When using Amazon Payments, credit / debit card details are entered on Amazon\'s secure servers and never pass through your own server, making the entire process dramatically more secure and reliable.', 'mashsb' ); ?></p>
-
-                        <h4><?php _e( 'Accept Credit and Debit Card Payments', 'mashsb' ); ?></h4>
-                        <p><?php _e( 'Amazon Payments allows your customers to easily pay with their debit or credit cards. During checkout, customers will be provided an option to use a stored card or enter a new one.', 'mashsb' ); ?></p>
-
-                        <h4><?php _e( 'Simple Customer Authentication', 'mashsb' ); ?></h4>
-                        <p><?php _e( 'Customers can log into their Amazon account from your checkout screen and have all of their billing details retrieved automatically from Amazon. With just a few clicks, customers can effortlessly complete their purchase.', 'mashsb' ); ?></p>
+                        <h4><?php _e( 'A much cleaner user interface', 'mashsb' ); ?></h4>
+                        <p><?php _e( 'We spent a lot of time to make useful first time settings and improved the user interface for an easier experience.', 'mashsb' ); ?></p>
+                        <p></p>
                     </div>
                 </div>
             </div>
 
-            <div class="changelog">
-                <h3><?php _e( 'Earnings / Sales By Category', 'mashsb' ); ?></h3>
-                <div class="feature-section">
-                    <div class="feature-section-media">
-                        <img src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/24-category-earnings.png'; ?>"/>
-                    </div>
-                    <div class="feature-section-content">
-                        <p><?php _e( 'MashShare version 2.4 introduces a new Report that displays earnings and sales for your product categories.', 'mashsb' ); ?></p>
-
-                        <h4><?php _e( 'Earnings and Sales Overview', 'mashsb' ); ?></h4>
-                        <p><?php _e( 'Quickly see how each of your categories has performed over the lifetime of your store. The total sales and earnings are displayed, as well as the average monthly sales and earnings for each category.', 'mashsb' ); ?></p>
-
-                        <h4><?php _e( 'Category Sales / Earnings Mix', 'mashsb' ); ?></h4>
-                        <p><?php _e( 'The report includes a visual break down of the sales / earnings mix for your categories. Quickly see which categories account for the highest (or lowest) percentage of your sales and earnings.', 'mashsb' ); ?></p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="changelog">
-                <h3><?php _e( 'Improved Data Export', 'mashsb' ); ?></h3>
-                <div class="feature-section">
-                    <div class="feature-section-media">
-                        <img src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/24-export.png'; ?>" class="mashsb-welcome-screenshots"/>
-                    </div>
-                    <div class="feature-section-content">
-                        <h4><?php _e( 'Big Data Support', 'mashsb' ); ?></h4>
-                        <p><?php _e( 'With the new export processing in MashShare 2.4, you can easily export massive amounts of data. Need to export 20,000 payment records? No problem.', 'mashsb' ); ?></p>
-
-                        <h4><?php _e( 'Standardized Customer Export', 'mashsb' ); ?></h4>
-                        <p><?php _e( 'The Customer export has been standardized so it now produces the same data during export for all export options. It can also easily handle 20,000 or even 50,000 customer records in a single export.', 'mashsb' ); ?></p>
-                    </div>
-                </div>
-            </div>
 
             <div class="changelog">
                 <h3><?php _e( 'Additional Updates', 'mashsb' ); ?></h3>
                 <div class="feature-section three-col">
                     <div class="col">
-                        <h4><?php _e( 'REST API Versioning', 'mashsb' ); ?></h4>
-                        <p><?php _e( 'The REST API now supports a version parameter that allows you to specify which version of the API you wish to use.', 'mashsb' ); ?></p>
+                        <h4><?php _e( 'Developer Friendly', 'mashsb' ); ?></h4>
+                        <p><?php echo sprintf(__( 'Are you a theme developer and want to use MashShare as your build in share count aggregator? Read the <a href="%s" target="blank">developer instructions.</a>', 'mashsb' ), 'https://www.mashshare.net/documentation/developer-instruction-for-commercial-theme-integration/'); ?></p>
                     </div>
                     <div class="col">
-                        <h4><?php _e( 'Better Cart Tax Display', 'mashsb' ); ?></h4>
-                        <p><?php _e( 'Cart widgets now display estimated taxes for customers before reaching the checkout page.', 'mashsb' ); ?></p>
+                        <h4><?php _e( 'Check Open Graph Settings', 'mashsb' ); ?></h4>
+                        <p><?php _e( 'Use the <i>Validate Open Graph Data</i> button and check if the open graph data on your site is working as expected or conflicts with other open graph data.', 'mashsb' ); ?></p>
                     </div>
                     <div class="col">
-                        <h4><?php _e( 'Customer > User Synchronization', 'mashsb' ); ?></h4>
-                        <p><?php _e( 'Customer email addresses are now updated when the associated user account\'s email is changed.', 'mashsb' ); ?></p>
-                    </div>
-                    <div class="clear">
-                        <div class="col">
-                            <h4><?php _e( 'Better Test Mode Settings', 'mashsb' ); ?></h4>
-                            <p><?php _e( 'Test Mode has been improved by moving the option to the Payment Gateways screen. Sales / earnings stats are now incremented in test mode.', 'mashsb' ); ?></p>
-                        </div>
-                        <div class="col">
-                            <h4><?php _e( 'Exclude Taxes from Reports', 'mashsb' ); ?></h4>
-                            <p><?php _e( 'Earnings and sales reports can now be shown exclusive of tax, allowing you to easily see how your store is performing after taxes.', 'mashsb' ); ?></p>
-                        </div>
-                        <div class="col">
-                            <h4><?php _e( 'Default Gateway First', 'mashsb' ); ?></h4>
-                            <p><?php _e( 'The gateway selected as the default option will always be displayed first on checkout.', 'mashsb' ); ?></p>
-                        </div>
+                        <h4><?php _e( 'Use Yoast SEO Title', 'mashsb' ); ?></h4>
+                        <p><?php _e( 'MashShare will use the YOAST SEO title if it is defined.', 'mashsb' ); ?></p>
                     </div>
                 </div>
             </div>
