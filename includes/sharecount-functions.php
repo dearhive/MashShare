@@ -1,0 +1,239 @@
+<?php
+
+/**
+ * Helper functions for retriviving the chare counts from social networks
+ *
+ * @package     MASHSB
+ * @subpackage  Functions/sharecount
+ * @copyright   Copyright (c) 2015, René Hermenau
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since       3.0.0
+ */
+// Exit if accessed directly
+if( !defined( 'ABSPATH' ) ) {
+    exit;
+}
+
+/**
+ * Check if cache time is expired and post must be refreshed
+ * 
+ * @global array $post
+ * @return boolean 
+ */
+function mashsb_is_cache_refresh() {
+    global $post, $wp;
+
+    if( MASHSB_DEBUG || isset( $mashsb_options['disable_cache'] ) ) {
+        MASHSB()->logger->info( 'mashsb_is_cache_refresh: MASHSB_DEBUG - refresh Cache' );
+        return true;
+    }
+
+    // Never count shares on these pages
+    if( is_404() || is_search() ) {
+        return false;
+    }
+
+    // New cache on singular pages
+    // 
+    // Refreshing cache on blog posts like categories will lead 
+    // to high load and multiple API requests so we only check 
+    // the main url on these other pages
+    if( is_singular() ) {
+        // last updated timestamp 
+        $last_updated = get_post_meta( $post->ID, 'mashsb_timestamp', true );
+        if( !empty( $last_updated ) ) {
+            MASHSB()->logger->info( 'mashsb_is_cache_refresh - is_singular() url: ' . get_permalink($post->ID) . ' : last updated:' . date( 'Y-m-d H:i:s', $last_updated ) );
+        }
+    } else if( mashsb_get_main_url() ) {
+
+        // Get transient timeout and calculate last update time
+        $url = mashsb_get_main_url();
+        $transient = '_transient_timeout_mashcount_' . md5( mashsb_get_main_url() );
+        $last_updated = get_option( $transient ) - mashsb_get_expiration();
+        if( !empty( $last_updated ) ) {
+            MASHSB()->logger->info( 'mashsb_is_cache_refresh mashsb_get_main_url() url: ' . $url . ' last updated:' . date( 'Y-m-d H:i:s', $last_updated ) );
+        }
+    } else {
+        // No valid URL so do not refresh cache
+        MASHSB()->logger->info( 'mashsb_is_cache_refresh: No valid URL - do not refresh cache' );
+        return false;
+    }
+
+    // No timestamp so let's create cache for the first time
+    if( empty( $last_updated ) ) {
+        MASHSB()->logger->info( 'mashsb_is_cache_refresh: No Timestamp. Refresh Cache' );
+        return true;
+    }
+
+    // The caching expiration
+    $expiration = mashsb_get_expiration();
+    $next_update = $last_updated + $expiration;
+    MASHSB()->logger->info( 'mashsb_is_cache_refresh. Next update ' . date( 'Y-m-d H:i:s', $next_update ) . ' current time: ' . date( 'Y-m-d H:i:s', time() ) );
+
+    // Refresh Cache when last update plus expiration is older than current time
+    if( ($last_updated + $expiration) <= time() ) {
+        MASHSB()->logger->info( 'mashsb_is_cache_refresh: Refresh Cache!' );
+        return true;
+    }
+}
+
+/**
+ * Check via ajax if cache should be updated
+ * 
+ * @deprecated not used
+ * @return string numerical 
+ */
+function mashsb_ajax_refresh_cache() {
+    if( mashsb_is_cache_refresh ) {
+        wp_die( '1' );
+    } else {
+        wp_die( '0' );
+    }
+}
+
+add_action( 'wp_ajax_mashsb_refresh_cache', 'mashsb_ajax_refresh_cache' );
+add_action( 'wp_ajax_nopriv_mashsb_refresh_cache', 'mashsb_ajax_refresh_cache' );
+
+/**
+ * Get expiration time for new Asyn Cache Method
+ * 
+ * @param int $post_age
+ * @since 3.0.0
+ * @return int
+ */
+function mashsb_get_expiration_method_async() {
+    // post age in seconds
+    $post_age = floor( date( 'U' ) - get_post_time( 'U', true ) );
+
+    if( isset( $post_age ) && $post_age > 2592000 ) {
+        // Post older than 30 days - expire cache after 12 hours
+        $seconds = 43200;
+    } else if( isset( $post_age ) && $post_age > 1209600 ) {
+        // Post older than 14 days - expire cache after 4 hours.
+        $seconds = 14400;
+    } else {
+        // expire cache after one hour
+        $seconds = 3600;
+    }
+
+    return $seconds;
+}
+
+/**
+ * Get expiration time for old method "Refresh On Loading"
+ * 
+ * @param int $post_age
+ * @since 3.0.0
+ * @return int
+ */
+function mashsb_get_expiration_method_loading() {
+    global $mashsb_options;
+    // Get the expiration time
+    $seconds = isset( $mashsb_options['mashsharer_cache'] ) ? ( int ) ($mashsb_options['mashsharer_cache']) : 300;
+
+    return $seconds;
+}
+
+/**
+ * Get expiration time
+ * 
+ * @return int
+ */
+function mashsb_get_expiration() {
+    global $mashsb_options;
+    $expiration = (isset( $mashsb_options['caching_method'] ) && $mashsb_options['caching_method'] == 'async_cache') ? mashsb_get_expiration_method_async() : mashsb_get_expiration_method_loading();
+
+    // Set expiration time to zero if debug mode is enabled or cache deactivated
+    if( MASHSB_DEBUG || isset( $mashsb_options['disable_cache'] ) ) {
+        $expiration = 0;
+    }
+
+    return ( int ) $expiration;
+}
+
+/**
+ * Check if we can use the REST API
+ * 
+ * @deprecated not used
+ * @return boolean true
+ */
+function mashsb_allow_rest_api() {
+    if( version_compare( get_bloginfo( 'version' ), '4.4.0', '>=' ) ) {
+        return true;
+    }
+}
+
+/**
+ * Check via REST API if cache should be updated
+ * 
+ * @since 3.0.0
+ * @deprecated not used
+ * @return string numerical 
+ */
+function mashsb_restapi_refresh_cache( $request ) {
+    if( mashsb_is_cache_refresh() ) {
+        return '1';
+    } else {
+        return '0';
+    }
+}
+
+/**
+ * Register the API route
+ * Used in WP 4.4 and later The WP REST API got a better performance than native ajax endpoints
+ * Endpoint: /wp-json/mashshare/v1/verifycache/
+ * 
+ * @since 3.0.0
+ * @deprecated not used
+ * */
+if( mashsb_allow_rest_api() ) {
+    add_action( 'rest_api_init', 'mashsb_rest_routes' );
+}
+
+function mashsb_rest_routes() {
+    register_rest_route( 'mashshare/v1', '/verifycache/', array(
+        'methods' => \WP_REST_Server::READABLE,
+        'callback' => 'mashsb_restapi_refresh_cache'
+            )
+    );
+}
+
+/**
+ * Return the current url
+ * 
+ * @return mixed string|bool current url or false
+ */
+function mashsb_get_main_url() {
+    global $wp;
+    
+    // Check if permalinks are enabled
+    $permalinks = get_option('permalink_structure'); 
+    if (empty($permalinks)){
+        return home_url( add_query_arg( NULL, NULL ) );
+    }
+    
+    // Else
+    
+    $url = home_url( add_query_arg( array(), $wp->request ) );
+    if( !empty( $url ) ) {
+
+        return untrailingslashit( mashsb_sanitize_url($sanitize2) );
+    }
+}
+
+/**
+ * Sanitize url and remove mashshare specific url parameters
+ * 
+ * @param string $url
+ * @return string $url
+ */
+function mashsb_sanitize_url( $url ) {
+    if( empty( $url ) ) {
+        return "";
+    }
+
+    $url1 = str_replace( '?mashsb-refresh', '', $url );
+    $url2 = str_replace( '&mashsb-refresh', '', $url1 );
+    $url3 = str_replace( '%26mashsb-refresh', '', $url2 );
+    return $url3;
+}
