@@ -1,4 +1,4 @@
-=== Mashshare - Social Media Share Buttons for Facebook, Twitter, Subscribe & more === 
+=== Facebook Share Buttons by MashShare === 
 
 Author URL: https://www.mashshare.net
 Plugin URL: https://www.mashshare.net
@@ -8,14 +8,14 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email
 Requires at least: 3.6+
-Tested up to: 4.5
+Tested up to: 4.5.2
 Stable tag: 3.0.0
 
-Social Media Icons & Share Buttons, a highly customizable social sharing and & Media SEO ecosystem Facebook, Twitter and more ...
+Share Buttons & High Performance Social Media Icons for Twitter, Facebook and other social networks. Highly customizable Social Media ecosystem
 
 == Description == 
 
-> #### Mashshare - The Social Media Ecosystem (Twitter counts supported)
+> #### MashShare - The Social Media Ecosystem (Twitter counts supported)
 > This free Social Media Icons Plugin is a professional and highly customizable<br />
 > ecosystem for social media sharing and optimizing of your valuable content.<br /> 
 > 
@@ -55,8 +55,8 @@ Social Media Icons & Share Buttons, a highly customizable social sharing and & M
 >
 > [Demo](https://www.mashshare.net?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-info-link) | [More Add-Ons >>](https://www.mashshare.net/downloads?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=get-addons)
 
-
-<h3> Mashshare Share Buttons Social Media Icons </h3>
+ 
+<h4> Share Buttons & MashShare Social Sharing Post Optmization </h4>
 
 This Social Media share button plugin is in active development and will be updated on a regular basis - Please do not rate negative before we tried to solve your issue.
 
@@ -313,23 +313,24 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 == Changelog == 
 
-= 3.0.0 not released =
-* New: If YOAST open graph and social settings for twitter and facebook are defined use them for sharing instead usingthe post title
+= 3.0.0 =
+* HUGE PERFORMANCE & FEATURE UPDATE
+
+* Performance: New asyncronous method for cache rebuilding. No more increase in loading time while page loads
+* Performance: No cache rebuild when site is visited by bots or spiders
+* Performance: Structural and logic improvements reduces number of db requests.
 * New: Most Popular Post Widget for displaying posts sorted by shares
-* New: Included open graph and twitter card meta tags. Rewritten from scratch. Makes use of Yoast open graph data if specified.
-* New: Define extra large Pinterest image and dedicated sharing description
+* New: Yoast and Jetpack support for social settings
+* New: Build in open graph and twitter card meta tags. Rewritten from scratch. Makes use of Yoast open graph data if specified.
+* New: Extra large Pinterest image and dedicated sharing description
 * New: Basic responsive button behavior included per default
-* New: Facebook open graph rescraping is done automatically on post save. No more need to open facebook debugger to fetch new scrape information!
-* New: Validate open graph data button
-* New: Filter mashsb_visible_services for modifying the visible networks
-* New: Filter mashsb_shortcode_atts for modifying the shortcode arguments
-* New: Rename General tab into Settings
-* New: Remove settings "Visual" and "Social networks" and merge them into new Settings tab 
-* New: Stay on last active tab after saving admin settings
-* New: New field in WordPress user profiles: Twitter author url for giving credits to authors when sharing a link on twitter (twitter:creator) 
-* New: Performance Tweak: Only cached share counts are served when page is requested by bots or spiders
+* New: Facebook open graph rescraping is done automatically on post save. 
+* New: Validate open graph data button for fetching new scrape information and forcing facebook to purge its cache.
+* New: Filter "mashsb_visible_services" for modifying the visible networks
+* New: Filter "mashsb_shortcode_atts" for modifying the shortcode arguments
+* New: New field in WordPress user profiles: Twitter author url for giving credits to authors when sharing a link on twitter (meta tag twitter:creator) 
 * New: Clicking the PLUS button only affects the adequate parent share buttons not other share buttons on same page.
-* Tweak: Improved license activation workflow and much better license error messages
+* New: Improved license activation workflow and much better license error messages
 * Tweak: New UI elements for admin checkboxes
 * Tweak: Enable Twitter and Facebook share button per default on first time installation
 * Tweak: Change Mashshare to MashShare for better branding
@@ -339,12 +340,14 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 * Tweak: Deactivates the MashShare Open Graph Add-On or throws an warning message if its still enabled
 * Tweak: Load JS and CSS all over setting is enabled per default 
 * Tweak: Static share buttons on admin dashboard for quicker response
+* Tweak: Rename General tab into Settings
+* Tweak: Remove settings "Visual" and "Social networks" and merge them into new Settings tab 
+* Tweak: Stay on last active tab after saving admin settings
 * Fix: New function for returning share title shows correct title even on archive, categories and non posts like bbpress and buddyPress pages
 * Fix: Missing </div> in checkbox callback function
 * Fix: disable class mashdebug() which causes header notices on some systems
 * Fix: Undefined function wp_get_document_title() Compatibility backward fix
 * Fix: Undefined $post object on several places
-
 
 = 2.5.5 =
 * Fix: Button width ignored after last update
