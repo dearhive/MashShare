@@ -210,6 +210,7 @@ if( !class_exists( 'mashshare' ) ) :
                 require_once MASHSB_PLUGIN_DIR . 'includes/admin/settings/user-profiles.php';
                 require_once MASHSB_PLUGIN_DIR . 'includes/admin/tools.php';
                 require_once MASHSB_PLUGIN_DIR . 'includes/admin/tracking.php';
+                require_once MASHSB_PLUGIN_DIR . 'includes/admin/dashboard.php';
             }
         }
 

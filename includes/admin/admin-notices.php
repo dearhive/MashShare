@@ -58,6 +58,14 @@ function mashsb_admin_messages() {
         echo '<p>' . sprintf( __( '<strong>Important:</strong> Deactivate the MashShare Open Graph Add-On. It is not longer needed and having it activated leads to duplicate open graph tags on your site. Go to <a href="%s"> Plugin Settings</a> ', 'mashsb' ), admin_url( 'plugins.php' ) ) . '</p>';
         echo '</div>';
     }
+    // Share count is deactivated when permalinks are not used
+    if( mashsb_is_admin_page() && !mashsb_is_enabled_permalinks() ) {
+        echo '<div class="error">';
+        echo '<p>' . sprintf( __( '<strong>No Share Count aggregation possible!</strong> <a href="%s">Permalinks</a> must be enabled to count shares. Share count is deactivated until you have fixed this.', 'mashsb' ), admin_url( 'options-permalink.php' ) ) . '</p>';
+        echo '</div>';
+    }
+    
+    
 
     // Please rate us
     $install_date = get_option( 'mashsb_installDate' );

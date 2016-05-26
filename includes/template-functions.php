@@ -478,20 +478,12 @@ function mashshareShow() {
 function mashsb_render_sharecounts( $customurl = '', $align = 'left' ) {
     global $mashsb_options;
 
-    if( isset( $mashsb_options['disable_sharecount'] ) || !mashsb_curl_installed() ) {
+    if( isset( $mashsb_options['disable_sharecount'] ) || !mashsb_curl_installed() || !mashsb_is_enabled_permalinks() ) {
         return;
     }
 
     $url = empty( $customurl ) ? mashsb_get_url() : $customurl;
     $sharetitle = isset( $mashsb_options['sharecount_title'] ) ? $mashsb_options['sharecount_title'] : __( 'SHARES', 'mashsb' );
-    // If $url is valid wordpress url store and return share count from getSharedcount() else with mashsbGetNonPostShares()
-    /* if( $url == mashsb_get_url() ) {
-      $shares = getSharedcount( $url );
-      $sharecount = isset( $mashsb_options['mashsharer_round'] ) ? roundshares( $shares ) : getSharedcount( $url );
-      } else {
-      $shares = mashsbGetNonPostShares( $url );
-      $sharecount = isset( $mashsb_options['mashsharer_round'] ) ? roundshares( $shares ) : mashsbGetNonPostShares( $url );
-      } */
 
     $shares = getSharedcount( $url );
     $sharecount = isset( $mashsb_options['mashsharer_round'] ) ? roundshares( $shares ) : getSharedcount( $url );
@@ -502,7 +494,6 @@ function mashsb_render_sharecounts( $customurl = '', $align = 'left' ) {
     }
 
     $html = '<div class="mashsb-count" style="float:' . $align . ';"><div class="counts mashsbcount">' . $sharecount . '</div><span class="mashsb-sharetext">' . $sharetitle . '</span></div>';
-    //$html .= 'Debug: mashsb_get_url():' . mashsb_get_url() . '</br>customurl:' . $customurl;
     return $html;
 }
 

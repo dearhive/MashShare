@@ -233,8 +233,10 @@ class MASHSB_Welcome {
                 <h4><?php _e( 'Asyncronous Share Count Aggregation', 'mashsb' ); ?></h4>
 
                     <div class="feature-section-media">
-                                                <p></p>
+                        <p></p>
                         <img src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/social_sharing_settings.png'; ?>"/>
+                        <p></p>
+                        <img src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/dashboard.png'; ?>"/>
 
 
                     </div>
@@ -249,7 +251,10 @@ class MASHSB_Welcome {
                         <p></p>
                         <h4><?php _e( 'Responsive Buttons per default', 'mashsb' ); ?></h4>
                         <p><?php _e( 'MashShare 3.0 arrives you with basic responsive button support. So the buttons look great on mobile and desktop devices.', 'mashsb' ); ?></p>
-
+                        <p></p>
+                        <h4><?php _e( 'Share Count Dashboard', 'mashsb' ); ?></h4>
+                        <p><?php _e( 'See the shares of your posts at a glance on the admin posts listing.', 'mashsb' ); ?></p>
+                        <p></p>
                         <h4><?php _e( 'A much cleaner user interface', 'mashsb' ); ?></h4>
                         <p><?php _e( 'We spent a lot of time to make useful first time settings and improved the user interface for an easier experience.', 'mashsb' ); ?></p>
                         <p></p>
