@@ -29,7 +29,7 @@ function mashsb_is_cache_refresh() {
     }
 
     // Never count shares on these pages
-    if( is_404() || is_search() ) {
+    if( is_404() || is_search() || is_admin() ) {
         return false;
     }
 
@@ -213,11 +213,9 @@ function mashsb_get_main_url() {
     }
     
     // Else
-    
     $url = home_url( add_query_arg( array(), $wp->request ) );
     if( !empty( $url ) ) {
-
-        return untrailingslashit( mashsb_sanitize_url($sanitize2) );
+        return untrailingslashit( mashsb_sanitize_url($url) );
     }
 }
 
