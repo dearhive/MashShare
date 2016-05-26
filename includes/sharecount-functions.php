@@ -22,15 +22,25 @@ if( !defined( 'ABSPATH' ) ) {
  */
 function mashsb_is_cache_refresh() {
     global $post, $wp;
+    
+    /*
+     * Deactivate share count on:
+     * - 404 pages
+     * - search page
+     * - empty url
+     * - disabled permalinks
+     * - admin pages
+     * 
+        Exit here to save cpu time
+     */
+
+    if( is_404() || is_search() || empty( $url ) || is_admin() || !mashsb_is_enabled_permalinks() ) {
+        return false;
+    }
 
     if( MASHSB_DEBUG || isset( $mashsb_options['disable_cache'] ) ) {
         MASHSB()->logger->info( 'mashsb_is_cache_refresh: MASHSB_DEBUG - refresh Cache' );
         return true;
-    }
-
-    // Never count shares on these pages
-    if( is_404() || is_search() || is_admin() ) {
-        return false;
     }
 
     // New cache on singular pages
@@ -198,6 +208,19 @@ function mashsb_rest_routes() {
     );
 }
 
+
+/**
+ * Check if permalinks are enabled
+ * 
+ * @return boolean true when enabled
+ */
+function mashsb_is_enabled_permalinks() {
+    $permalinks = get_option( 'permalink_structure' );
+    if( !empty( $permalinks ) ) {
+        return true;
+    }
+}
+
 /**
  * Return the current url
  * 
@@ -205,17 +228,10 @@ function mashsb_rest_routes() {
  */
 function mashsb_get_main_url() {
     global $wp;
-    
-    // Check if permalinks are enabled
-    $permalinks = get_option('permalink_structure'); 
-    if (empty($permalinks)){
-        return home_url( add_query_arg( NULL, NULL ) );
-    }
-    
-    // Else
+
     $url = home_url( add_query_arg( array(), $wp->request ) );
     if( !empty( $url ) ) {
-        return untrailingslashit( mashsb_sanitize_url($url) );
+        return untrailingslashit( mashsb_sanitize_url( $url ) );
     }
 }
 

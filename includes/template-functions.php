@@ -106,7 +106,7 @@ function mashsbGetNonPostShares( $url ) {
 
     // Cache is disabled
     if( isset( $mashsb_options['disable_cache'] ) || MASHSB_DEBUG ) {
-        delete_transient( 'mashcount_' . md5( $url ) );
+        delete_transient( 'mashcount_' . md5( $url_clean ) );
     }
 
     // Get any existing copy of our transient data and fill the cache
@@ -148,12 +148,17 @@ function getSharedcount( $url ) {
     global $mashsb_options, $post;
     
     // Remove trailingslash
-    $url = untrailingslashit($url);
+    $url = untrailingslashit(mashsb_sanitize_url($url) );
     
     /*
-     * Deactivate share count
+     * Deactivate share count on:
+     * - 404 pages
+     * - search page
+     * - empty url
+     * - disabled permalinks
+     * - admin pages
      */
-    if( is_404() || is_search() || empty($url) ) {
+    if( is_404() || is_search() || empty($url) || is_admin() || !mashsb_is_enabled_permalinks() ) {
         return apply_filters( 'filter_get_sharedcount', 0 );
     }
 
