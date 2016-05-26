@@ -132,8 +132,9 @@ class MASHSB_Tracking {
 
 
                 
-                if (!MASHSB_DEBUG)
+                if (!MASHSB_DEBUG){
 		update_option( 'mashsb_tracking_last_send', time() );
+                }
                 
                 $data = $this->data;
 	}

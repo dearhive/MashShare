@@ -116,6 +116,7 @@ class MASHSB_Welcome {
      * @return void
      */
     public function getting_started_screen() {
+        global $mashsb_redirect;
         ?>
         <div class="wrap about-wrap mashsb-about-wrap">
             <?php
@@ -123,8 +124,9 @@ class MASHSB_Welcome {
             $this->welcome_message();
             $this->tabs();
             ?>
-            <p class="about-description"><?php _e( 'Use the steps  below to get started using MashShare. You will be up and running in no time!', 'mashsb' ); ?></p>
-
+            <?php if (isset($_GET['redirect'])) {?>
+            <p class="about-description mashsb-notice notice-success"><?php _e( 'Facebook and Twitter Share Buttons are successfully enabled on all your posts! <br> Use the steps  below to customize MashShare.', 'mashsb' ); ?></p>
+            <?php } ?>
             <div class="changelog">
                 <h3><?php _e( 'Step 1: Creating Your First Social Sharing Button', 'mashsb' ); ?></h3>
                 <div class="feature-section">
@@ -132,11 +134,14 @@ class MASHSB_Welcome {
                         <img src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/social-networks-settings.png'; ?>" class="mashsb-welcome-screenshots"/>
                     </div>
                     <div class="feature-section-content">
-                        <h4><a href="<?php echo admin_url( 'admin.php?page=mashsb-settings#mashsb_settingsservices_header' ) ?>" target="blank"><?php _e( 'Settings &rarr; Social Networks', 'mashsb' ); ?></a></h4>
+                        <h4>Go to <a href="<?php echo admin_url( 'admin.php?page=mashsb-settings#mashsb_settingsservices_header' ) ?>" target="blank"><?php _e( 'Settings &rarr; Social Networks', 'mashsb' ); ?></a></h4>
                         <p><?php _e( 'The Social Network menu is your general access point for activating the desired share buttons and for customizing the share button label', 'mashsb' ); ?></p>
                         <h3><?php _e( 'Step 2: Set Share Button Location & Position', 'mashsb' ); ?></h3>
-                        <h4><a href="<?php echo admin_url( 'admin.php?page=mashsb-settings#mashsb_settingslocation_header' ) ?>" target="blank"><?php _e( 'Settings &rarr; Location & Position', 'mashsb' ); ?></a></h4>
+                        <h4>Go to <a href="<?php echo admin_url( 'admin.php?page=mashsb-settings#mashsb_settingslocation_header' ) ?>" target="blank"><?php _e( 'Settings &rarr; Location & Position', 'mashsb' ); ?></a></h4>
                         <p><?php _e( 'Specify the location and exact position of the share buttons within your content', 'mashsb' ); ?></p>
+                        <h3><?php _e('You are done! Easy, isn\'t it?', 'mashsb'); ?></h3>
+                        <p></p>
+                            
                     </div>
                 </div>
             </div>
@@ -202,7 +207,7 @@ class MASHSB_Welcome {
             <!--<img class="mashsb-badge" src="<?php //echo  . 'assets/images/mashsb-logo.svg';  ?>" alt="<?php //_e( 'MashShare', 'mashsb' );  ?>" / >//-->
             <h1><?php printf( __( 'Welcome to MashShare %s', 'mashsb' ), $display_version ); ?></h1>
             <p class="about-text">
-                <?php printf( __( 'Thank you for updating to the latest version! MashShare %s is ready to grow your traffic from social networks!', 'mashsb' ), $display_version ); ?>
+                <?php _e( 'Thank you for updating to the latest version! MashShare is installed and ready to grow your traffic from social networks!', 'mashsb' ); ?>
             </p>
         </div>
         <?php
@@ -507,7 +512,7 @@ class MASHSB_Welcome {
         // Bail if no activation redirect
         if( !get_transient( '_mashsb_activation_redirect' ) )
             return;
-
+        
         // Delete the redirect transient
         delete_transient( '_mashsb_activation_redirect' );
 
@@ -518,11 +523,11 @@ class MASHSB_Welcome {
         $upgrade = get_option( 'mashsb_version_upgraded_from' );
         //@since 2.0.3
         if( !$upgrade ) { // First time install
-            wp_safe_redirect( admin_url( 'options-general.php?page=mashsb-settings&tab=visual#mashsb_settingslocation_header' ) );
-            //wp_safe_redirect( admin_url( 'admin.php?page=mashsb-getting-started' ) );
+            wp_safe_redirect( admin_url( 'admin.php?page=mashsb-getting-started&redirect=1' ) );
             exit;
         } else { // Update
-            wp_safe_redirect( admin_url( 'admin.php?page=mashsb-getting-started' ) );
+            wp_safe_redirect( admin_url( 'admin.php?page=mashsb-getting-started&redirect=1' ) );
+            //wp_safe_redirect( admin_url( 'options-general.php?page=mashsb-settings&tab=visual#mashsb_settingslocation_header' ) );
             exit;
         }
     }

@@ -123,7 +123,7 @@ function mashsb_get_registered_settings() {
             'mashsb_sharemethod' => array(
                 'id' => 'mashsb_sharemethod',
                 'name' => __( 'Share counts', 'mashsb' ),
-                'desc' => __( '<i>MashEngine</i> collects shares by requesting social networks API from your site. Share count is completely cached. <p> <i>Sharedcount.com</i> needs an API key and is limited (no twitter count) </strong> <p></p>Shares are collected for Facebook, Twitter, LinkedIn, Google+, Pinterest, Stumbleupon, Buffer, VK. <p></p>Twitter count is aggreagated with the help of <a href="http://newsharecounts.com" target="_blank" rel="external nofollow">newsharecounts.com</a> Sign up with your Twitter account for this free service to get the twitter share count. Visit the newsharecount site, fill in your website domain and click on <i>Sign in with Twitter</i>. Thats it, nothing more to do!', 'mashsb' ),
+                'desc' => __( '<i>MashEngine</i> collects shares by direct request to social networks. <br><br><i>Sharedcount.com</i> needs an API key and is limited (No twitter shares) <p></p>Shares are collected for Facebook, Twitter, LinkedIn, Google+, Pinterest, Stumbleupon, Buffer, VK. <p></p>Twitter count is aggreagated via <a href="http://newsharecounts.com" target="_blank" rel="external nofollow">newsharecounts.com</a>. Sign up with your Twitter account for this free service to get the twitter share count. Visit the newsharecount site, fill in your website domain and click on <i>Sign in with Twitter</i>. Thats it!', 'mashsb' ),
                 'type' => 'select',
                 'options' => array(
                     'mashengine' => 'MashEngine (including twitter count)',
@@ -145,10 +145,20 @@ function mashsb_get_registered_settings() {
                 'size' => 'medium',
                 'std' => 'free.sharedcount.com'
             ),
+            'caching_method' => array(
+                'id' => 'caching_method',
+                'name' => __( 'Caching Method', 'mashsb' ),
+                'desc' => __( 'The <i>Async Cache Refresh</i> method never adds additonal load time for a visitor and refreshes the cache asyncronously in the background. New posts are updated at each hour. Older posts are updated from 4 hours to 12 hours for very old ones. <br><br> "Refresh while loading" rebuilds expired cache while page is loading and adds a little extra time during inital page load. If your shares are not counted try this method. "Refresh while loading" is the default method MashShare was using before version 3.0', 'mashsb' ),
+                'type' => 'select',
+                'options' => array(
+                    'async_cache' => 'Async Cache Refresh',
+                    'refresh_loading' => 'Refresh while loading'
+                )
+            ),
             'mashsharer_cache' => array(
                 'id' => 'mashsharer_cache',
                 'name' => __( 'Cache expiration', 'mashsb' ),
-                'desc' => __( 'Shares are counted for every post after this time. Notice that Sharedcount.com uses his own cache (30 - 60min) so share count does not update immediately. Make sure to increase this value especially when you use MashEngine! Otherwise it could happen that some networks block your requests due to hammering their rate limits. <p><strong>Default: </strong>5 min. <strong>Recommended: </strong>30min and more', 'mashsb' ),
+                'desc' => __( 'Shares are counted for posts after a certain time and counts are not updated immediately. Sharedcount.com uses his own cache (30 - 60min). <p><strong>Default: </strong>5 min. <strong>Recommended: </strong>30min and more', 'mashsb' ),
                 'type' => 'select',
                 'options' => mashsb_get_expiretimes()
             ),
@@ -272,7 +282,7 @@ function mashsb_get_registered_settings() {
             'networks' => array(
                 'id' => 'networks',
                 'name' => __( 'Social Networks', 'mashsb' ),
-                'desc' => __( 'Drag and drop the Social Networks Buttons to sort them and enable the ones that should be visible. <br>If you activate more networks than number of "Large Share Buttons" setting the plus sign will be added automatically.', 'mashsb' ),
+                'desc' => __( 'Drag and drop the Social Networks Buttons to sort them and enable the ones that should be visible. <br>Activate more networks than number of "Large Share Buttons" and the [+] PLUS button<br> will be added automatically.', 'mashsb' ),
                 'type' => 'networks',
                 'options' => mashsb_get_networks_list()
             ),
@@ -1715,13 +1725,13 @@ function mashsb_networks_callback( $args ) {
 
     ob_start();
     ?>
-    <p class="description"><?php echo $args['desc']; ?></p>
+    <p class="description" style='display:none;'><?php echo $args['desc']; ?></p>
     <table id="mashsb_network_list" class="wp-list-table fixed posts">
         <thead>
             <tr>
-                <th scope="col" style="padding: 15px 10px;"><?php _e( 'Social Network', 'mashsb' ); ?></th>
-                <th scope="col" style="padding: 15px 10px;"><?php _e( 'Status', 'mashsb' ); ?></th>
-                <th scope="col" style="padding: 15px 10px;"><?php _e( 'Custom Label', 'mashsb' ); ?></th>
+                <th scope="col" class='mashsb-network-col' style="padding: 2px 0px 10px 0px"><?php _e( 'Social Network', 'mashsb' ); ?></th>
+                <th scope="col" class='mashsb-status-col' style="padding: 2px 0px 10px 10px"><?php _e( 'Status', 'mashsb' ); ?></th>
+                <th scope="col" class='mashsb-label-col' style="padding: 2px 0px 10px 10px"><?php _e( 'Custom Label', 'mashsb' ); ?></th>
             </tr>
         </thead>        
         <?php

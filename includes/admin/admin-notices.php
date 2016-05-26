@@ -46,7 +46,6 @@ function mashsb_admin_messages() {
     if( !current_user_can( 'update_plugins' ) )
         return;
 
-
     // notice no Networks enabled    
     if( mashsb_is_admin_page() && !mashsb_check_active_networks() ) {
         echo '<div class="error">';

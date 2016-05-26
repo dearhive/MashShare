@@ -49,6 +49,8 @@ function mashsb_load_scripts( $hook ) {
     $desc = mashsb_get_excerpt_by_id( $post->ID );
     }
     
+    $restapi = mashsb_allow_rest_api() ? "1" : "0";
+    
     /* Load hashshags */
     $hashtag = !empty( $mashsb_options['mashsharer_hashtag'] ) ? $mashsb_options['mashsharer_hashtag'] : '';
 
@@ -74,6 +76,8 @@ function mashsb_load_scripts( $hook ) {
         'activestatus' => mashsbGetActiveStatus(),
         'singular' => is_singular() ? 1 : 0,
         'twitter_popup' => isset( $mashsb_options['twitter_popup'] ) ? 0 : 1,
+        //'restapi' => $restapi
+        'refresh' => mashsb_is_cache_refresh() ? 1 : 0
     ) );
 }
 

@@ -42,7 +42,7 @@ if( !defined( 'MASHSB_VERSION' ) ) {
 
 // Debug mode
 if( !defined( 'MASHSB_DEBUG' ) ) {
-    define( 'MASHSB_DEBUG', true );
+    define( 'MASHSB_DEBUG', false );
 }
 
 
@@ -194,6 +194,7 @@ if( !class_exists( 'mashshare' ) ) :
             require_once MASHSB_PLUGIN_DIR . 'includes/admin/meta-box/meta-box.php';
             require_once MASHSB_PLUGIN_DIR . 'includes/header-meta-tags.php';
             require_once MASHSB_PLUGIN_DIR . 'includes/class-build-templates.php';
+            require_once MASHSB_PLUGIN_DIR . 'includes/sharecount-functions.php';
 
             if( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
                 require_once MASHSB_PLUGIN_DIR . 'includes/install.php';

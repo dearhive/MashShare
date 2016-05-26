@@ -84,7 +84,9 @@ function mashsb_install() {
             'mashsharer_position' => 'before',
             'loadall' => '1',
             'twitter_card' => '1',
-            'mashsb_sharemethod' => 'mashengine'
+            'open_graph' => '1',
+            'mashsb_sharemethod' => 'mashengine',
+            'caching_method' => 'async_cache'
         );
 
         update_option( 'mashsb_settings', $settings_new );

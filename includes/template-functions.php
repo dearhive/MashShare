@@ -38,56 +38,6 @@ function getExecutionOrder() {
     return $priority;
 }
 
-/* Creates some shares for older posts which has been already 
- * shared dozens of times
- * This smooths the Velocity Graph Add-On if available
- * 
- * @since 2.0.9
- * @return int
- * 
- * @deprecated deprecated since version 2.2.8
- */
-
-function mashsbSmoothVelocity( $mashsbShareCounts ) {
-    switch ( $mashsbShareCounts ) {
-        case $mashsbShareCounts >= 1000:
-            $mashsbShareCountArr = array(100, 170, 276, 329, 486, 583, 635, 736, 875, $mashsbShareCounts);
-            return $mashsbShareCountArr;
-            break;
-        case $mashsbShareCounts >= 600:
-            $mashsbShareCountArr = array(75, 99, 165, 274, 384, 485, 573, $mashsbShareCounts);
-            return $mashsbShareCountArr;
-            break;
-        case $mashsbShareCounts >= 400:
-            $mashsbShareCountArr = array(25, 73, 157, 274, 384, 399, $mashsbShareCounts);
-            return $mashsbShareCountArr;
-            break;
-        case $mashsbShareCounts >= 200:
-            $mashsbShareCountArr = array(52, 88, 130, 176, 199, $mashsbShareCounts);
-            return $mashsbShareCountArr;
-            break;
-        case $mashsbShareCounts >= 100:
-            $mashsbShareCountArr = array(23, 54, 76, 87, 99, $mashsbShareCounts);
-            return $mashsbShareCountArr;
-            break;
-        case $mashsbShareCounts >= 60:
-            $mashsbShareCountArr = array(2, 10, 14, 18, 27, 33, 45, 57, $mashsbShareCounts);
-            return $mashsbShareCountArr;
-            break;
-        case $mashsbShareCounts >= 20:
-            $mashsbShareCountArr = array(2, 5, 7, 9, 9, 10, 11, 13, 15, 20, $mashsbShareCounts);
-            return $mashsbShareCountArr;
-            break;
-        case $mashsbShareCounts == 0:
-            $mashsbShareCountArr = array(0);
-            return $mashsbShareCountArr;
-            break;
-        default:
-            $mashsbShareCountArr = array(0);
-            return $mashsbShareCountArr;
-    }
-}
-
 /* Get mashsbShareObject 
  * depending if MashEngine or sharedcount.com is used
  * 
@@ -114,7 +64,8 @@ function mashsbGetShareObj( $url ) {
     return $mashsbSharesObj;
 }
 
-/* Get the correct share method depending if mashshare networks is enabled
+/*
+ * Get the correct share method depending if mashshare networks is enabled
  * 
  * @since 2.0.9
  * @return var
@@ -138,7 +89,7 @@ function mashsbGetShareMethod( $mashsbSharesObj ) {
 }
 
 /**
- * Get share count for all pages where $post is empty or a custom url is used E.g. category or blog list pages or in shortcodes
+ * Get share count for all non singular pages where $post is empty or a custom url is used E.g. category or blog list pages or for shortcodes
  * Uses transients 
  * 
  * @param string $url
@@ -146,36 +97,39 @@ function mashsbGetShareMethod( $mashsbSharesObj ) {
  * @returns integer $shares
  */
 function mashsbGetNonPostShares( $url ) {
-    isset( $mashsb_options['mashsharer_cache'] ) ? $cacheexpire = $mashsb_options['mashsharer_cache'] : $cacheexpire = 300;
-    /* make sure 300sec is default value */
-    $cacheexpire < 300 ? $cacheexpire = 300 : $cacheexpire;
+    global $mashsb_options;
 
-    if( MASHSB_DEBUG ) {
-        $cacheexpire = 10;
-    }
+    // Expiration
+    $expiration = mashsb_get_expiration();
+    // Clean URL
+    $url_clean = mashsb_sanitize_url($url);
 
-    if( isset( $mashsb_options['disable_cache'] ) ) {
+    // Cache is disabled
+    if( isset( $mashsb_options['disable_cache'] ) || MASHSB_DEBUG ) {
         delete_transient( 'mashcount_' . md5( $url ) );
     }
 
-    // Get any existing copy of our transient data
-    if( false === get_transient( 'mashcount_' . md5( $url ) ) ) {
+    // Get any existing copy of our transient data and fill the cache
+    //if( (false === get_transient( 'mashcount_' . md5( $url ) )) && mashsb_force_cache_refresh() ) {
+    if( mashsb_force_cache_refresh() ) {
 
-        // It wasn't there, so regenerate the data and save the transient
+        // Regenerate the data and save the transient
         // Get the share Object
-        $mashsbSharesObj = mashsbGetShareObj( $url );
-
+        $mashsbSharesObj = mashsbGetShareObj( $url_clean );
         // Get the share counts object
         $mashsbShareCounts = mashsbGetShareMethod( $mashsbSharesObj );
 
-        // Set the transient
-        set_transient( 'mashcount_' . md5( $url ), $mashsbShareCounts->total, $cacheexpire );
-        mashdebug( 'mashsbGetNonPostShares set_transient:' . $mashsbShareCounts->total );
+        // Set the transient and return shares
+        set_transient( 'mashcount_' . md5( $url_clean ), $mashsbShareCounts->total, $expiration );
+        MASHSB()->logger->info( 'mashsbGetNonPostShares set_transient - shares:' . $mashsbShareCounts->total . ' url: ' . $url_clean );
         return $mashsbShareCounts->total + getFakecount();
     } else {
-        $shares = get_transient( 'mashcount_' . md5( $url ) );
+        // Get shares from transient cache
+        
+        $shares = get_transient( 'mashcount_' . md5( $url_clean ) );
+
         if( isset( $shares ) && is_numeric( $shares ) ) {
-            mashdebug()->info( 'mashsbGetNonPostShares() get_transient: ' . $shares );
+            MASHSB()->logger->info( 'mashsbGetNonPostShares() get shares from get_transient. URL: ' . $url_clean . ' SHARES: ' . $shares );
             return $shares + getFakecount();
         } else {
             return 0 + getFakecount(); // we need a result
@@ -192,87 +146,79 @@ function mashsbGetNonPostShares( $url ) {
 
 function getSharedcount( $url ) {
     global $mashsb_options, $post;
-
-    // if it's a crawl bot only serve cached results for maximum speed
-    if( isset( $_SERVER['HTTP_USER_AGENT'] ) && preg_match( '/bot|crawl|slurp|spider/i', $_SERVER['HTTP_USER_AGENT'] ) ) {
-        return apply_filters( 'filter_get_sharedcount', 100 );;
-    }
-
-    isset( $mashsb_options['mashsharer_cache'] ) ? $cacheexpire = $mashsb_options['mashsharer_cache'] : $cacheexpire = 300;
-    /* make sure 300sec is default value */
-    $cacheexpire < 300 ? $cacheexpire = 300 : $cacheexpire;
-
-    if( MASHSB_DEBUG ) {
-        $cacheexpire = 10;
-    }
-
-    /* Bypass next lines and return share count for pages wher $post is not set but where $url is not empty
-       Possible on: Category, blog list pages, non singular() pages. This store the shares in transients with mashsbGetNonPostShares();
-     */
-    if( !empty( $url ) && is_null( $post ) ) {
-        return apply_filters( 'filter_get_sharedcount', mashsbGetNonPostShares( $url ) );
-    }
-
+    
+    // Remove trailingslash
+    $url = untrailingslashit($url);
+    
     /*
-     * Catch everything else!
-     * If post ID isn't set
+     * Deactivate share count
      */
-    if( !isset( $post->ID ) ) {
+    if( is_404() || is_search() || empty($url) ) {
         return apply_filters( 'filter_get_sharedcount', 0 );
     }
+
+    // if it's a crawl bot only serve non calculated numbers to save load
+    if( isset( $_SERVER['HTTP_USER_AGENT'] ) && preg_match( '/bot|crawl|slurp|spider/i', $_SERVER['HTTP_USER_AGENT'] ) ) {
+        return apply_filters( 'filter_get_sharedcount', 100 );
+    }
+
+    /* 
+     * Return share count on non singular pages when url is defined
+       Possible: Category, blog list pages, non singular() pages. This store the shares in transients with mashsbGetNonPostShares();
+     */
+
+    if( !is_singular() ) {
+        return apply_filters( 'filter_get_sharedcount', mashsbGetNonPostShares( $url ) );
+    }
+    /* if( !empty( $url ) && is_null( $post ) ) {
+      return apply_filters( 'filter_get_sharedcount', mashsbGetNonPostShares( $url ) );
+      } */
 
     /*
      * Important: This runs on non singular pages 
      * and prevents php from crashing and looping 
-     * because of timeouting and no results query
+     * because of timeouts and no results query
      */
-    if( empty( $url ) && !is_null( $post ) ) {
+    /*if( !is_null( $post ) ) {
         return apply_filters( 'filter_get_sharedcount', get_post_meta( $post->ID, 'mashsb_shares', true ) + getFakecount() );
-    }
+    }*/
 
-    $mashsbNextUpdate = ( int ) $cacheexpire;
-    $mashsbLastUpdated = get_post_meta( $post->ID, 'mashsb_timestamp', true );
+    /*
+     * Refresh Cache
+     */
+    if( mashsb_force_cache_refresh() ) {
 
-
-    if( empty( $mashsbLastUpdated ) ) {
-        $mashsbLastUpdated = 0;
-    }
-
-    if( $mashsbLastUpdated + $mashsbNextUpdate <= time() ) {
-        // Write timestamp (Use this on top of this conditional. If this is not on top following return statements will be skipped and ignored - possible bug?)
+        // Write timestamp (Use this on top of this condition. If this is not on top following return statements will be skipped and ignored - possible bug?)
         update_post_meta( $post->ID, 'mashsb_timestamp', time() );
 
-        //update_post_meta($post->ID, 'mashsb_timestamp', time());
-        mashdebug()->info( "First Update - Frequency: " . $mashsbNextUpdate . " Next update: " . date( 'Y-m-d H:i:s', $mashsbLastUpdated + $mashsbNextUpdate ) . " last updated: " . date( 'Y-m-d H:i:s', $mashsbLastUpdated ) . " Current time: " . date( 'Y-m-d H:i:s', time() ) );
+        MASHSB()->logger->info( 'Refresh Cache: Update Timestamp: ' . time() );
 
         // Get the share Object
         $mashsbSharesObj = mashsbGetShareObj( $url );
-        // Get the share counts
+        // Get the share count Method
         $mashsbShareCounts = mashsbGetShareMethod( $mashsbSharesObj );
-        //$mashsbShareCounts = new stdClass(); // USE THIS FOR DEBUGGING
-        //$mashsbShareCounts->total = 13; // USE THIS FOR DEBUGGING
-        $mashsbStoredDBMeta = get_post_meta( $post->ID, 'mashsb_shares', true );
+        // Get stored share count
+        $mashsbStoredShareCount = get_post_meta( $post->ID, 'mashsb_shares', true );
 
         /*
          * Update post_meta only when API is requested and
          * API share count is greater than real fresh requested share count ->
          */
 
-        if( $mashsbShareCounts->total >= $mashsbStoredDBMeta ) {
+        if( $mashsbShareCounts->total >= $mashsbStoredShareCount ) {
             update_post_meta( $post->ID, 'mashsb_shares', $mashsbShareCounts->total );
             update_post_meta( $post->ID, 'mashsb_jsonshares', json_encode( $mashsbShareCounts ) );
-            mashdebug()->info( "updated database with share count: " . $mashsbShareCounts->total );
-            mashdebug()->info( "fake count: " . getFakecount() );
+            MASHSB()->logger->info( "Refresh Cache: Update database with share count: " . $mashsbShareCounts->total );
             /* return counts from getAllCounts() after DB update */
             return apply_filters( 'filter_get_sharedcount', $mashsbShareCounts->total + getFakecount() );
         }
         /* return previous counts from DB Cache | this happens when API has a hiccup and does not return any results as expected */
-        return apply_filters( 'filter_get_sharedcount', $mashsbStoredDBMeta + getFakecount() );
+        return apply_filters( 'filter_get_sharedcount', $mashsbStoredShareCount + getFakecount() );
     } else {
-        /* return counts from post_meta plus fake count | This is regular cached result */
+        // Return cached results
         $cachedCountsMeta = get_post_meta( $post->ID, 'mashsb_shares', true );
         $cachedCounts = $cachedCountsMeta + getFakecount();
-        mashdebug()->info( "Cached result - Frequency: " . $mashsbNextUpdate . " Next update: " . date( 'Y-m-d H:i:s', $mashsbLastUpdated + $mashsbNextUpdate ) . " last updated: " . date( 'Y-m-d H:i:s', $mashsbLastUpdated ) . " Current time: " . date( 'Y-m-d H:i:s', time() ) );
+        MASHSB()->logger->info( 'Cached Results: ' . $cachedCounts . ' url:' . $url );
         return apply_filters( 'filter_get_sharedcount', $cachedCounts );
     }
 }
@@ -358,7 +304,7 @@ function onOffSwitch2() {
     return apply_filters( 'mashsh_onoffswitch2', $output );
 }
 
-/* 
+/*
  * Delete all services from array which are not enabled
  * @since 2.0.0
  * @return callback
@@ -368,7 +314,7 @@ function isStatus( $var ) {
     return (!empty( $var["status"] ));
 }
 
-/* 
+/*
  * Array of all available network share urls
  * 
  * @param string $name id of the network
@@ -403,7 +349,7 @@ function arrNetworks( $name, $is_shortcode ) {
         'subscribe' => '#',
         'url' => $url,
         'title' => $title
-    ) );
+            ) );
     return isset( $networks[$name] ) ? $networks[$name] : '';
 }
 
@@ -421,25 +367,25 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
     $output = '';
     $startsecondaryshares = '';
     $endsecondaryshares = '';
-    
+
     /* content of 'more services' button */
     $onoffswitch = '';
-    
+
     /* counter for 'Visible Services' */
     $startcounter = 1;
-    
+
     $maxcounter = isset( $mashsb_options['visible_services'] ) ? $mashsb_options['visible_services'] : 0;
     $maxcounter = ($maxcounter === 'all') ? 'all' : ($maxcounter + 1); // plus 1 to get networks correct counted (array's starting counting from zero)
     $maxcounter = apply_filters( 'mashsb_visible_services', $maxcounter );
-    
+
     /* visible services from shortcode attribute */
-    $maxcounter = ($services === 0) ? $maxcounter : $services; 
-    
+    $maxcounter = ($services === 0) ? $maxcounter : $services;
+
     /* our list of available services, includes the disabled ones! 
      * We have to clean this array first!
      */
     $getnetworks = isset( $mashsb_options['networks'] ) ? $mashsb_options['networks'] : '';
-    
+
     /* Delete disabled services from array. Use callback function here. Do this only once because array_filter is slow! 
      * Use the newly created array and bypass the callback function
      */
@@ -455,7 +401,7 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
 
     if( !empty( $enablednetworks ) ) {
         foreach ( $enablednetworks as $key => $network ):
-            if ( $maxcounter !== 'all' && $maxcounter < count($enablednetworks) ) { // $maxcounter + 1 for correct comparision with count()
+            if( $maxcounter !== 'all' && $maxcounter < count( $enablednetworks ) ) { // $maxcounter + 1 for correct comparision with count()
                 if( $startcounter == $maxcounter ) {
                     $onoffswitch = onOffSwitch();
                     $startsecondaryshares = '<div class="secondary-shares" style="display:none;">';
@@ -534,13 +480,17 @@ function mashsb_render_sharecounts( $customurl = '', $align = 'left' ) {
     $url = empty( $customurl ) ? mashsb_get_url() : $customurl;
     $sharetitle = isset( $mashsb_options['sharecount_title'] ) ? $mashsb_options['sharecount_title'] : __( 'SHARES', 'mashsb' );
     // If $url is valid wordpress url store and return share count from getSharedcount() else with mashsbGetNonPostShares()
-    if( $url == mashsb_get_url() ) {
-        $shares = getSharedcount( $url );
-        $sharecount = isset( $mashsb_options['mashsharer_round'] ) ? roundshares( $shares ) : getSharedcount( $url );
-    } else {
-        $shares = mashsbGetNonPostShares( $url );
-        $sharecount = isset( $mashsb_options['mashsharer_round'] ) ? roundshares( $shares ) : mashsbGetNonPostShares( $url );
-    }
+    /* if( $url == mashsb_get_url() ) {
+      $shares = getSharedcount( $url );
+      $sharecount = isset( $mashsb_options['mashsharer_round'] ) ? roundshares( $shares ) : getSharedcount( $url );
+      } else {
+      $shares = mashsbGetNonPostShares( $url );
+      $sharecount = isset( $mashsb_options['mashsharer_round'] ) ? roundshares( $shares ) : mashsbGetNonPostShares( $url );
+      } */
+
+    $shares = getSharedcount( $url );
+    $sharecount = isset( $mashsb_options['mashsharer_round'] ) ? roundshares( $shares ) : getSharedcount( $url );
+
     // do not show shares after x shares
     if( mashsb_hide_shares( $shares ) ) {
         return;
@@ -551,7 +501,7 @@ function mashsb_render_sharecounts( $customurl = '', $align = 'left' ) {
     return $html;
 }
 
-/* 
+/*
  * Shortcode function
  * Select Share count from database and returns share buttons and share counts
  * 
@@ -565,10 +515,10 @@ function mashshareShortcodeShow( $args ) {
     //!empty( $mashsb_options['sharecount_title'] ) ? $sharecount_title = $mashsb_options['sharecount_title'] : $sharecount_title = __( 'SHARES', 'mashsb' );
     //!empty($mashsb_options['visible_services']) ? $visible_services = $mashsb_options['visible_services'] : $visible_services = 1;
     //$sharecount_title = !empty( $mashsb_options['sharecount_title'] ) ? $mashsb_options['sharecount_title'] : __( 'SHARES', 'mashsb' );
-    
-    $services = !empty($mashsb_options['visible_services']) ? $mashsb_options['visible_services'] : 1;
-    $visible_services = ($services === 'all') ? 'all' : ($services +1); // plus 1 to get networks correct counted (array's starting counting from zero)
-    
+
+    $services = !empty( $mashsb_options['visible_services'] ) ? $mashsb_options['visible_services'] : 1;
+    $visible_services = ($services === 'all') ? 'all' : ($services + 1); // plus 1 to get networks correct counted (array's starting counting from zero)
+
     $sharecount = '';
 
     //Filter shortcode args to add an option for developers to change (add) some args
@@ -687,6 +637,11 @@ function mashshare_filter_content( $content ) {
     $excluded = isset( $mashsb_options['excluded_from'] ) ? $mashsb_options['excluded_from'] : null;
     $singular = isset( $mashsb_options['singular'] ) ? $singular = true : $singular = false;
 
+    if( !is_main_query() ) {
+        mashdebug()->info( "is_main_query()" );
+        return $content;
+    }
+
     if( mashsb_is_excluded() )
         return $content;
 
@@ -780,13 +735,13 @@ function mashsb_get_excerpt_by_id( $post_id ) {
     if( has_excerpt() ) {
         return get_the_excerpt();
     }
-   
-    if(!isset($post_id)){
+
+    if( !isset( $post_id ) ) {
         return "";
     }
-    
+
     $the_post = get_post( $post_id ); //Gets post ID
-    
+
     /*
      * If post_content isn't set
      */
@@ -806,6 +761,7 @@ function mashsb_get_excerpt_by_id( $post_id ) {
     $the_excerpt = '<p>' . $the_excerpt . '</p>';
     return wp_strip_all_tags( $the_excerpt );
 }
+
 add_action( 'mashsb_get_excerpt_by_id', 'mashsb_get_excerpt_by_id' );
 
 /**
@@ -918,7 +874,7 @@ function mashsb_content_below() {
  */
 function mashsb_get_title() {
     global $mashsb_meta_tags;
-    
+
     return $mashsb_meta_tags->get_og_title();
 }
 
@@ -950,9 +906,9 @@ function mashsb_get_title() {
  * 
  * @return string the custom twitter title
  */
-function mashsb_get_twitter_title(){
+function mashsb_get_twitter_title() {
     global $mashsb_meta_tags;
-    
+
     return $mashsb_meta_tags->get_twitter_title();
 }
 
@@ -963,14 +919,14 @@ function mashsb_get_twitter_title(){
  */
 
 function mashsb_get_url() {
-    global $wp, $post, $numpages;
+    global $wp, $post;
 
-    if( $numpages > 1 ) { // check if '<!-- nextpage -->' is used
+    if( is_singular() ) {
+        // The permalink for singular pages
         $url = get_permalink( $post->ID );
-    } elseif( is_singular() ) {
-        $url = get_permalink( $post->ID );
-    } elseif ( isset ($post->ID) ) { 
-        $url = get_permalink($post->ID);
+    } else if( mashsb_get_main_url() ) {
+        // The main URL
+        $url = mashsb_get_main_url();
     } else {
         $url = "";
     }
@@ -1040,23 +996,6 @@ function mashsb_is_excluded() {
 }
 
 /**
- * Get mashsb cache expiration time
- * 
- * @return int
- */
-function mashsb_get_cache_expiration() {
-    isset( $mashsb_options['mashsharer_cache'] ) ? $cacheexpire = $mashsb_options['mashsharer_cache'] : $cacheexpire = 300;
-    /* make sure 300sec is default value */
-    $cacheexpire < 300 ? $cacheexpire = 300 : $cacheexpire;
-
-    if( isset( $mashsb_options['disable_cache'] ) ) {
-        $cacheexpire = 2;
-    }
-
-    return $cacheexpire;
-}
-
-/**
  * Get sanitized twitter handle
  * 
  * @global array $mashsb_options
@@ -1091,120 +1030,118 @@ function mashsb_get_twitter_username() {
  */
 function mashsb_get_document_title() {
     // wp_get_document_title() exist since WP 4.4
-    if (  function_exists( 'wp_get_document_title')){
+    if( function_exists( 'wp_get_document_title' ) ) {
         return wp_get_document_title();
     }
 
-	/**
-	 * Filter the document title before it is generated.
-	 *
-	 * Passing a non-empty value will short-circuit wp_get_document_title(),
-	 * returning that value instead.
-	 *
-	 * @since 4.4.0
-	 *
-	 * @param string $title The document title. Default empty string.
-	 */
-	$title = apply_filters( 'pre_get_document_title', '' );
-	if ( ! empty( $title ) ) {
-		return $title;
-	}
+    /**
+     * Filter the document title before it is generated.
+     *
+     * Passing a non-empty value will short-circuit wp_get_document_title(),
+     * returning that value instead.
+     *
+     * @since 4.4.0
+     *
+     * @param string $title The document title. Default empty string.
+     */
+    $title = apply_filters( 'pre_get_document_title', '' );
+    if( !empty( $title ) ) {
+        return $title;
+    }
 
-	global $page, $paged;
+    global $page, $paged;
 
-	$title = array(
-		'title' => '',
-	);
+    $title = array(
+        'title' => '',
+    );
 
-	// If it's a 404 page, use a "Page not found" title.
-	if ( is_404() ) {
-		$title['title'] = __( 'Page not found' );
+    // If it's a 404 page, use a "Page not found" title.
+    if( is_404() ) {
+        $title['title'] = __( 'Page not found' );
 
-	// If it's a search, use a dynamic search results title.
-	} elseif ( is_search() ) {
-		/* translators: %s: search phrase */
-		$title['title'] = sprintf( __( 'Search Results for &#8220;%s&#8221;' ), get_search_query() );
+        // If it's a search, use a dynamic search results title.
+    } elseif( is_search() ) {
+        /* translators: %s: search phrase */
+        $title['title'] = sprintf( __( 'Search Results for &#8220;%s&#8221;' ), get_search_query() );
 
-	// If on the front page, use the site title.
-	} elseif ( is_front_page() ) {
-		$title['title'] = get_bloginfo( 'name', 'display' );
+        // If on the front page, use the site title.
+    } elseif( is_front_page() ) {
+        $title['title'] = get_bloginfo( 'name', 'display' );
 
-	// If on a post type archive, use the post type archive title.
-	} elseif ( is_post_type_archive() ) {
-		$title['title'] = post_type_archive_title( '', false );
+        // If on a post type archive, use the post type archive title.
+    } elseif( is_post_type_archive() ) {
+        $title['title'] = post_type_archive_title( '', false );
 
-	// If on a taxonomy archive, use the term title.
-	} elseif ( is_tax() ) {
-		$title['title'] = single_term_title( '', false );
+        // If on a taxonomy archive, use the term title.
+    } elseif( is_tax() ) {
+        $title['title'] = single_term_title( '', false );
 
-	/*
-	 * If we're on the blog page that is not the homepage or
-	 * a single post of any post type, use the post title.
-	 */
-	} elseif ( is_home() || is_singular() ) {
-		$title['title'] = single_post_title( '', false );
+        /*
+         * If we're on the blog page that is not the homepage or
+         * a single post of any post type, use the post title.
+         */
+    } elseif( is_home() || is_singular() ) {
+        $title['title'] = single_post_title( '', false );
 
-	// If on a category or tag archive, use the term title.
-	} elseif ( is_category() || is_tag() ) {
-		$title['title'] = single_term_title( '', false );
+        // If on a category or tag archive, use the term title.
+    } elseif( is_category() || is_tag() ) {
+        $title['title'] = single_term_title( '', false );
 
-	// If on an author archive, use the author's display name.
-	} elseif ( is_author() && $author = get_queried_object() ) {
-		$title['title'] = $author->display_name;
+        // If on an author archive, use the author's display name.
+    } elseif( is_author() && $author = get_queried_object() ) {
+        $title['title'] = $author->display_name;
 
-	// If it's a date archive, use the date as the title.
-	} elseif ( is_year() ) {
-		$title['title'] = get_the_date( _x( 'Y', 'yearly archives date format' ) );
+        // If it's a date archive, use the date as the title.
+    } elseif( is_year() ) {
+        $title['title'] = get_the_date( _x( 'Y', 'yearly archives date format' ) );
+    } elseif( is_month() ) {
+        $title['title'] = get_the_date( _x( 'F Y', 'monthly archives date format' ) );
+    } elseif( is_day() ) {
+        $title['title'] = get_the_date();
+    }
 
-	} elseif ( is_month() ) {
-		$title['title'] = get_the_date( _x( 'F Y', 'monthly archives date format' ) );
+    // Add a page number if necessary.
+    if( ( $paged >= 2 || $page >= 2 ) && !is_404() ) {
+        $title['page'] = sprintf( __( 'Page %s' ), max( $paged, $page ) );
+    }
 
-	} elseif ( is_day() ) {
-		$title['title'] = get_the_date();
-	}
+    // Append the description or site title to give context.
+    if( is_front_page() ) {
+        $title['tagline'] = get_bloginfo( 'description', 'display' );
+    } else {
+        $title['site'] = get_bloginfo( 'name', 'display' );
+    }
 
-	// Add a page number if necessary.
-	if ( ( $paged >= 2 || $page >= 2 ) && ! is_404() ) {
-		$title['page'] = sprintf( __( 'Page %s' ), max( $paged, $page ) );
-	}
+    /**
+     * Filter the separator for the document title.
+     *
+     * @since 4.4.0
+     *
+     * @param string $sep Document title separator. Default '-'.
+     */
+    $sep = apply_filters( 'document_title_separator', '-' );
 
-	// Append the description or site title to give context.
-	if ( is_front_page() ) {
-		$title['tagline'] = get_bloginfo( 'description', 'display' );
-	} else {
-		$title['site'] = get_bloginfo( 'name', 'display' );
-	}
+    /**
+     * Filter the parts of the document title.
+     *
+     * @since 4.4.0
+     *
+     * @param array $title {
+     *     The document title parts.
+     *
+     *     @type string $title   Title of the viewed page.
+     *     @type string $page    Optional. Page number if paginated.
+     *     @type string $tagline Optional. Site description when on home page.
+     *     @type string $site    Optional. Site title when not on home page.
+     * }
+     */
+    $title = apply_filters( 'document_title_parts', $title );
 
-	/**
-	 * Filter the separator for the document title.
-	 *
-	 * @since 4.4.0
-	 *
-	 * @param string $sep Document title separator. Default '-'.
-	 */
-	$sep = apply_filters( 'document_title_separator', '-' );
+    $title = implode( " $sep ", array_filter( $title ) );
+    $title = wptexturize( $title );
+    $title = convert_chars( $title );
+    $title = esc_html( $title );
+    $title = capital_P_dangit( $title );
 
-	/**
-	 * Filter the parts of the document title.
-	 *
-	 * @since 4.4.0
-	 *
-	 * @param array $title {
-	 *     The document title parts.
-	 *
-	 *     @type string $title   Title of the viewed page.
-	 *     @type string $page    Optional. Page number if paginated.
-	 *     @type string $tagline Optional. Site description when on home page.
-	 *     @type string $site    Optional. Site title when not on home page.
-	 * }
-	 */
-	$title = apply_filters( 'document_title_parts', $title );
-
-	$title = implode( " $sep ", array_filter( $title ) );
-	$title = wptexturize( $title );
-	$title = convert_chars( $title );
-	$title = esc_html( $title );
-	$title = capital_P_dangit( $title );
-
-	return $title;
+    return $title;
 }

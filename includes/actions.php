@@ -41,4 +41,33 @@ function mashsb_post_actions() {
 	}
 }
 add_action( 'init', 'mashsb_post_actions' );
+
+/**
+ * Force cache refresh via GET REQUEST
+ * 
+ * @global array $mashsb_options
+ * @return boolean true for cache refresh
+ */
+function mashsb_force_cache_refresh() {
+    global $mashsb_options;
+    
+    // Needed for testing (phpunit)
+    if (MASHSB_DEBUG){
+        return true;
+    }
+    
+    // Old method and less performant - Cache is rebuild during pageload
+    if(isset($mashsb_options['caching_method']) && $mashsb_options['caching_method'] == 'refresh_loading'){
+        if (mashsb_is_cache_refresh()){
+            return true;
+        }
+    }
+    
+    // New method - Cache will be rebuild after complete pageloading and will be initiated via ajax.
+    if( isset( $_GET['mashsb-refresh'] ) && $mashsb_options['caching_method'] == 'async_cache' ) {
+        MASHSB()->logger->info('Force Cache Refresh');
+        return true;
+    }
+}
+add_action( 'init', 'mashsb_force_cache_refresh' );
  

@@ -51,9 +51,23 @@ class TemplateFunctions extends WP_UnitTestCase {
     }
     
     public function test_getSharedcount(){
-        global $mashsb_options;
+        global $mashsb_options, $post;
         //$mashsb_options['mashsharer_cache'] = 2;
         $mashsb_options['mashsb_sharemethod'] = 'mashengine';
+        $mashsb_options['caching_method'] = 'refresh_loading';
+        $mashsb_options['mashsharer_cache'] = 0;
+        $args = array('post_type' => 'post');
+        $id = $this->factory->post->create($args);
+        $post = get_post($id);
+        $url = 'http://google.com';
+        $shares = getSharedcount($url);      
+        $this->assertGreaterThan(20000, $shares);
+    }
+    public function test_getSharedcount_async_cache(){
+        global $mashsb_options, $post;
+        $mashsb_options['mashsb_sharemethod'] = 'mashengine';
+        $mashsb_options['caching_method'] = 'async_cache';
+        $mashsb_options['mashsharer_cache'] = 0;
         $args = array('post_type' => 'post');
         $id = $this->factory->post->create($args);
         $post = get_post($id);

@@ -46,6 +46,25 @@ jQuery(document).ready(function ($) {
     {
         $('#mashsb_settingsgeneral_header .row:nth-child(3), #mashsb_settingsgeneral_header .row:nth-child(4)').fadeIn(500);
     }
+    
+    
+    /* Fade in Caching method settings if needed */
+    $('#mashsb_settings\\[caching_method\\]').change(function () {
+        if ($('#mashsb_settings\\[caching_method\\]').val() === "refresh_loading")
+        {
+            $('#mashsb_settingsgeneral_header .row:nth-child(6)').fadeIn(500);
+        }
+        else
+        {
+            $('#mashsb_settingsgeneral_header .row:nth-child(6)').fadeOut(500);
+        }
+    });
+
+    /*make visible when setting "Refresh on Loading" is used*/
+    if ($('#mashsb_settings\\[caching_method\\]').val() === "refresh_loading")
+    {
+        $('#mashsb_settingsgeneral_header .row:nth-child(6)').fadeIn(500);
+    }
 
     // Find active tab and set cookie with #ID
     function find_active_tab() {
