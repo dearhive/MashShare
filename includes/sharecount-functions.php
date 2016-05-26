@@ -21,7 +21,7 @@ if( !defined( 'ABSPATH' ) ) {
  * @return boolean 
  */
 function mashsb_is_cache_refresh() {
-    global $post, $wp;
+    global $post;
     
     /*
      * Deactivate share count on:
