@@ -356,7 +356,7 @@ class MASHSB_Welcome {
      * Render Credits Screen
      *
      * @access public
-     * @since 2.5.6
+     * @since 3.0.0
      * @return void
      */
     public function credits_screen() {
@@ -381,7 +381,7 @@ class MASHSB_Welcome {
     /**
      * Render Contributors List
      *
-     * @since 2.5.6
+     * @since 3.0.0
      * @uses MASHSB_Welcome::get_contributors()
      * @return string $contributor_list HTML formatted list of all the contributors for MASHSB
      */
@@ -413,7 +413,7 @@ class MASHSB_Welcome {
      * Retreive list of contributors from GitHub.
      *
      * @access public
-     * @since 2.5.6
+     * @since 3.0.0
      * @return array $contributors List of contributors
      */
     public function get_contributors() {
@@ -443,7 +443,7 @@ class MASHSB_Welcome {
     /**
      * Parse the MASHSB readme.txt file
      *
-     * @since 2.5.6
+     * @since 3.0.0
      * @return string $readme HTML formatted readme file
      */
     public function parse_readme() {

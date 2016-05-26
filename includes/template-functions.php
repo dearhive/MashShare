@@ -727,7 +727,7 @@ add_action( 'mashsb_get_image', 'mashsb_get_image' );
  *
  * @since 1.0
  * @param int $postID
- * @changed 2.5.6
+ * @changed 3.0.0
  * @return string
  */
 function mashsb_get_excerpt_by_id( $post_id ) {

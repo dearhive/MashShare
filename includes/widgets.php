@@ -4,7 +4,7 @@
  * Most shared posts widget class
  * package MASHSB
  * 
- * @since 2.5.6
+ * @since 3.0.0
  *
  */
 class mashsb_mostshared_posts_widget extends WP_Widget {

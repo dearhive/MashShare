@@ -1527,7 +1527,7 @@ function mashsb_color_callback( $args ) {
 /**
  * Registers the license field callback for MashShare Add-Ons
  *
- * @since 2.5.6
+ * @since 3.0.0
  * @param array $args Arguments passed by the setting
  * @global $mashsb_options Array of all the MASHSB options
  * @return void

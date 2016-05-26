@@ -6,7 +6,7 @@
  * 
  * @package MASHSB
  *
- * @2.5.6
+ * @3.0.0
  */
 
 add_filter( 'mashsb_rwmb_meta_boxes', 'mashsb_meta_boxes' );
