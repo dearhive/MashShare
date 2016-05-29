@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Helper functions for retriviving the chare counts from social networks
+ * Helper functions for retriviving the share counts from social networks
  *
  * @package     MASHSB
  * @subpackage  Functions/sharecount
@@ -34,10 +34,11 @@ function mashsb_is_cache_refresh() {
         Exit here to save cpu time
      */
 
-    if( is_404() || is_search() || empty( $url ) || is_admin() || !mashsb_is_enabled_permalinks() ) {
+    if( is_404() || is_search() || is_admin() || !mashsb_is_enabled_permalinks() ) {
         return false;
     }
 
+    // Debug mode or cache activated
     if( MASHSB_DEBUG || isset( $mashsb_options['disable_cache'] ) ) {
         MASHSB()->logger->info( 'mashsb_is_cache_refresh: MASHSB_DEBUG - refresh Cache' );
         return true;
@@ -231,7 +232,7 @@ function mashsb_get_main_url() {
 
     $url = home_url( add_query_arg( array(), $wp->request ) );
     if( !empty( $url ) ) {
-        return untrailingslashit( mashsb_sanitize_url( $url ) );
+        return mashsb_sanitize_url( $url );
     }
 }
 
@@ -249,5 +250,9 @@ function mashsb_sanitize_url( $url ) {
     $url1 = str_replace( '?mashsb-refresh', '', $url );
     $url2 = str_replace( '&mashsb-refresh', '', $url1 );
     $url3 = str_replace( '%26mashsb-refresh', '', $url2 );
-    return $url3;
+    
+    // remove trailingslash
+    $url6 = untrailingslashit ($url3);
+    
+    return $url6;
 }

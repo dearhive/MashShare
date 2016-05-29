@@ -52,7 +52,8 @@ function mashsb_force_cache_refresh() {
     global $mashsb_options;
     
     // Needed for testing (phpunit)
-    if (MASHSB_DEBUG){
+    if (MASHSB_DEBUG || isset( $mashsb_options['disable_cache'] ) ){
+        mashsb()->logger->info('mashsb_force_cache_refresh() -> Debug mode enabled');
         return true;
     }
     

@@ -101,16 +101,11 @@ function mashsbGetNonPostShares( $url ) {
 
     // Expiration
     $expiration = mashsb_get_expiration();
-    // Clean URL
-    $url_clean = mashsb_sanitize_url($url);
-
-    // Cache is disabled
-    if( isset( $mashsb_options['disable_cache'] ) || MASHSB_DEBUG ) {
-        delete_transient( 'mashcount_' . md5( $url_clean ) );
-    }
+    
+    // Remove variables, parameters and trailingslash
+    $url_clean = mashsb_sanitize_url( $url );
 
     // Get any existing copy of our transient data and fill the cache
-    //if( (false === get_transient( 'mashcount_' . md5( $url ) )) && mashsb_force_cache_refresh() ) {
     if( mashsb_force_cache_refresh() ) {
 
         // Regenerate the data and save the transient
@@ -845,121 +840,6 @@ function mashsb_content_below() {
 }
 
 /**
- * Return general post title
- * 
- * @param string $title default post title
- * @return string the default post title, shortcode title or custom twitter title
- */
-//function mashsb_get_title() {
-//    function_exists( 'MASHOG' ) ? $title = MASHOG()->MASHOG_OG_Output->_get_title() : $title = mashsb_get_document_title();
-//    $title = html_entity_decode( $title, ENT_QUOTES, 'UTF-8' );
-//    $title = urlencode( $title );
-//    $title = str_replace( '#', '%23', $title );
-//    $title = esc_html( $title );
-//
-//    return $title;
-//}
-
-/**
- * Return general post title
- * 
- * @param string $title default post title
- * @global obj $mashsb_meta_tags
- * 
- * @return string the default post title, shortcode title or custom twitter title
- */
-function mashsb_get_title() {
-    global $mashsb_meta_tags;
-
-    return $mashsb_meta_tags->get_og_title();
-}
-
-/**
- * Return twitter custom title
- * 
- * @return string the custom twitter title
- */
-//function mashsb_get_twitter_title() {
-//    if( function_exists( 'MASHOG' ) ) {
-//        $title = MASHOG()->MASHOG_OG_Output->_get_tw_title();
-//        $title = html_entity_decode( $title, ENT_QUOTES, 'UTF-8' );
-//        $title = urlencode( $title );
-//        $title = str_replace( '#', '%23', $title );
-//        $title = esc_html( $title );
-//        $title = str_replace( '+', '%20', $title );
-//    } else {
-//        $title = mashsb_get_title();
-//        $title = str_replace( '+', '%20', $title );
-//    }
-//    return $title;
-//}
-
-/**
- * Return twitter custom title
- * 
- * @global object $mashsb_meta_tags
- * @changed 3.0.0
- * 
- * @return string the custom twitter title
- */
-function mashsb_get_twitter_title() {
-    global $mashsb_meta_tags;
-
-    return $mashsb_meta_tags->get_twitter_title();
-}
-
-/* Get URL to share
- * 
- * @return url  $string
- * @scince 2.2.8
- */
-
-function mashsb_get_url() {
-    global $wp, $post;
-
-    if( is_singular() ) {
-        // The permalink for singular pages
-        $url = get_permalink( $post->ID );
-    } else if( mashsb_get_main_url() ) {
-        // The main URL
-        $url = mashsb_get_main_url();
-    } else {
-        $url = "";
-    }
-    return apply_filters( 'mashsb_get_url', $url );
-}
-
-/* Get twitter URL to share
- * 
- * @return url  $string
- * @scince 2.2.8
- */
-
-function mashsb_get_twitter_url() {
-    if( function_exists( 'mashsuGetShortURL' ) ) {
-        //mashsuGetShortURL($url) !== 0 ? $url = mashsuGetShortURL( $url ) : $url = mashsb_get_url();
-        $get_url = mashsb_get_url();
-        $url = mashsuGetShortURL( $get_url );
-    } else {
-        $url = mashsb_get_url();
-    }
-    return apply_filters( 'mashsb_get_twitter_url', $url );
-}
-
-/**
- * Wrapper for mashsuGetShortURL() which exists in shorturl addon
- * 
- * @param string $url
- * @return string
- */
-function mashsb_get_shorturl( $url ) {
-    if( function_exists( 'mashsuGetShortURL' ) )
-        return mashsuGetShortURL( $url );
-
-    return $url;
-}
-
-/**
  * Check if buttons are excluded from a specific post id
  * 
  * @return true if post is excluded
@@ -990,6 +870,106 @@ function mashsb_is_excluded() {
     //mashdebug()->info( "is not excluded" );
     return false;
 }
+
+
+/**
+ * Return general post title
+ * 
+ * @param string $title default post title
+ * @global obj $mashsb_meta_tags
+ * 
+ * @return string the default post title, shortcode title or custom twitter title
+ */
+function mashsb_get_title() {
+    if( is_singular() ) {
+        global $mashsb_meta_tags;
+        return $mashsb_meta_tags->get_og_title();
+    } else {
+        return mashsb_get_document_title();
+    }
+}
+
+/**
+ * Return twitter custom title
+ * 
+ * @global object $mashsb_meta_tags
+ * @changed 3.0.0
+ * 
+ * @return string the custom twitter title
+ */
+function mashsb_get_twitter_title() {
+    global $mashsb_meta_tags;
+    // $mashsb_meta_tags is only available on singular pages
+    if( is_singular() ) {
+        $title = $mashsb_meta_tags->get_twitter_title();
+    } else {
+        // title for non singular pages
+        $title = mashsb_get_title();
+        //$title = str_replace( '+', '%20', $title );
+    }
+    return apply_filters('mashsb_twitter_title', $title);
+}
+
+/* Get URL to share
+ * 
+ * @return url  $string
+ * @scince 2.2.8
+ */
+
+function mashsb_get_url() {
+    global $wp, $post;
+
+    if( is_singular() ) {
+        // The permalink for singular pages
+        $url = get_permalink( $post->ID );
+    } else if( mashsb_get_main_url() ) {
+        // The main URL
+        $url = mashsb_get_main_url();
+    } else {
+        $url = "";
+    }
+    return apply_filters( 'mashsb_get_url', $url );
+}
+
+/* 
+ * Get twitter URL to share
+ * 
+ * @return url  $string
+ * @scince 2.2.8
+ */
+
+//function mashsb_get_twitter_url() {
+//    if( function_exists( 'mashsuGetShortURL' ) ) {
+//        //mashsuGetShortURL($url) !== 0 ? $url = mashsuGetShortURL( $url ) : $url = mashsb_get_url();
+//        $get_url = mashsb_get_url();
+//        $url = mashsuGetShortURL( $get_url );
+//    } else {
+//        $url = mashsb_get_url();
+//    }
+//    return apply_filters( 'mashsb_get_twitter_url', $url );
+//}
+function mashsb_get_twitter_url() {
+    $url = mashsb_get_shortened_url(mashsb_get_url());
+    return apply_filters( 'mashsb_get_twitter_url', $url );
+}
+
+/**
+ * Wrapper for mashsb_get_shortened_url()
+ * 
+ * @param string $url
+ * @return string
+ */
+function mashsb_get_shorturl( $url ) {
+
+    if( !empty( $url ) ) {
+        $url = mashsb_get_shortened_url( $url );
+    } else {
+        $url = "";
+    }
+
+    return $url;
+}
+
 
 /**
  * Get sanitized twitter handle

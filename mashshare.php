@@ -195,6 +195,9 @@ if( !class_exists( 'mashshare' ) ) :
             require_once MASHSB_PLUGIN_DIR . 'includes/header-meta-tags.php';
             require_once MASHSB_PLUGIN_DIR . 'includes/class-build-templates.php';
             require_once MASHSB_PLUGIN_DIR . 'includes/sharecount-functions.php';
+            require_once MASHSB_PLUGIN_DIR . 'includes/shorturls.php';
+            require_once MASHSB_PLUGIN_DIR . 'includes/libraries/class-google-shorturl.php';
+            require_once MASHSB_PLUGIN_DIR . 'includes/libraries/class-bitly-shorturl.php';
 
             if( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
                 require_once MASHSB_PLUGIN_DIR . 'includes/install.php';

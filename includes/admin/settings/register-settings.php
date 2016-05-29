@@ -306,7 +306,38 @@ function mashsb_get_registered_settings() {
                 'type' => 'select',
                 'options' => numberServices()
             ),*/
-            
+            array(
+                'id' => 'shorturl_header',
+                'name' => '<strong>' . __( 'Short URL Integration', 'mashsb' ) . '</strong>',
+                'desc' => '',
+                'type' => 'header',
+                'size' => 'regular'
+            ),
+            array(
+                'id' => 'bitly_access_token',
+                'name' => __( 'Bitly access token', 'mashsu' ),
+                'desc' => sprintf(__( 'If you like to use bitly.com shortener get a free bitly access token <a href="%s" target="_blank">here</a>. This turn urls into a format: http://bit.ly/cXnjsh. ', 'mashsb' ), 'https://bitly.com/a/oauth_apps'),
+                'type' => 'text',
+                'size' => 'large'
+            ),
+            array(
+                'id' => 'google_app_id',
+                'name' => __( 'Google API Key (goo.gl)', 'mashsu' ),
+                'desc' => sprintf(__( 'If you like to use goo.gl shortener get a free Google API key <a href="%s" target="_blank">here</a>. This turn urls into a format: http://goo.gl/cXnjsh. ' . mashsb_check_google_apikey(), 'mashsb' ),'https://console.developers.google.com/'),
+                'type' => 'text',
+                'size' => 'large'
+            ),
+            array(
+                'id' => 'mashsu_methods',
+                'name' => __( 'Shorturl method', 'mashsb' ),
+                'desc' => '',
+                'type' => 'select',
+                'options' => array(
+                    'wpshortlinks' => 'WP Short links',
+                    'bitly' => 'Bitly',
+                    'google' => 'Google',
+                )
+            ),
             'style_header' => array(
                 'id' => 'style_header',
                 'name' => '<strong>' . __( 'Customization', 'mashsb' ) . '</strong>',

@@ -52,9 +52,9 @@ class MASHSB_HEADER_META_TAGS {
         if( !get_the_ID() ) {
             return;
         }
-        // Create Open Graph tags only on single blog post pages
+        // Create Open Graph tags only on singular pages and frontpage
         if( !is_singular() ) {
-            return;
+            return false;
         }
 
         $this->postID = get_the_ID();
@@ -152,7 +152,6 @@ class MASHSB_HEADER_META_TAGS {
      * @return string
      */
     public function get_title() {
-        //return $this->replace_quote_characters( htmlspecialchars_decode( get_the_title() ) );
         return $this->replace_quote_characters( htmlspecialchars_decode( mashsb_get_document_title() ) );
     }
 

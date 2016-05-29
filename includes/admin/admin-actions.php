@@ -72,3 +72,4 @@ function mashsb_rescrape_fb_debugger(){
     $body = wp_remote_retrieve_body( wp_remote_get('https://graph.facebook.com/?id=' . $url, $args) );
 }
 add_action('save_post', 'mashsb_rescrape_fb_debugger' );
+

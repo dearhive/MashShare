@@ -52,10 +52,34 @@ function mashsb_admin_messages() {
         echo '<p>' . sprintf( __( 'No Social Networks enabled. Go to <a href="%s"> Mashshare->Settings->Social Networks</a> and enable at least one Social Network.', 'mashsb' ), admin_url( 'admin.php?page=mashsb-settings&tab=networks#mashsb_settingsservices_header' ) ) . '</p>';
         echo '</div>';
     }
+    // Share bar add-on notice    
+    if( mashsb_is_admin_page() && version_compare(MASHBAR_VERSION, '1.2.5', '<') ) {
+        echo '<div class="error">';
+        echo '<p>' . sprintf( __( 'Your Sharebar Add-On version is not working with the new built in short url mechanism of MashShare 3.X. Please <a href="%s" target="blank"> update the Sharebar Add-On</a> to at least version 1.2.5. if you want to use twitter short urls. This requires a valid license.', 'mashsb' ), 'https://www.mashshare.net/downloads/sticky-sharebar/?utm_source=insideplugin&utm_medium=userwebsite&utm_content=update_sharebar&utm_campaign=freeplugin' ) . '</p>';
+        echo '</div>';
+    }
+    // Check google API key  
+    if( mashsb_is_admin_page() && mashsb_check_google_apikey() ) {
+        echo '<div class="error">';
+        echo '<p>' . sprintf( __( 'Google API key is invalid. Go to <a href="%s"><i>Mashshare->Settings->Short URL Integration</i></a> and check the Google API key.', 'mashsb' ), admin_url( 'admin.php?page=mashsb-settings#mashsb_settingsshorturl_header' ) ) . '</p>';
+        echo '</div>';
+    }
+    // Check Bitly API key  
+    if( mashsb_is_admin_page() && !mashsb_check_bitly_apikey() ) {
+        echo '<div class="error">';
+        echo '<p>' . sprintf( __( 'Bitly Access Token is invalid or bitly.com endpoint can not be reached. Go to <a href="%s"><i>Mashshare->Settings->Short URL Integration</i></a> and check the Bitly API key.', 'mashsb' ), admin_url( 'admin.php?page=mashsb-settings#mashsb_settingsshorturl_header' ) ) . '</p>';
+        echo '</div>';
+    }
     // Notice MashShare Open Graph Add-On installed and activated
     if( class_exists( 'MashshareOpenGraph' ) ) {
         echo '<div class="error">';
         echo '<p>' . sprintf( __( '<strong>Important:</strong> Deactivate the MashShare Open Graph Add-On. It is not longer needed and having it activated leads to duplicate open graph tags on your site. Go to <a href="%s"> Plugin Settings</a> ', 'mashsb' ), admin_url( 'plugins.php' ) ) . '</p>';
+        echo '</div>';
+    }
+    // Notice MashShare ShortURL Add-On installed and activated
+    if( class_exists( 'MashshareShorturls' ) ) {
+        echo '<div class="error">';
+        echo '<p>' . sprintf( __( '<strong>Important:</strong> Deactivate the MashShare Shorturls Add-On. It is not longer needed and already built in MashShare. Deactivate it from <a href="%s"> Plugin Settings</a> ', 'mashsb' ), admin_url( 'plugins.php' ) ) . '</p>';
         echo '</div>';
     }
     // Share count is deactivated when permalinks are not used

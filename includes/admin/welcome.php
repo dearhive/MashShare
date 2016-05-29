@@ -125,7 +125,7 @@ class MASHSB_Welcome {
             $this->tabs();
             ?>
             <?php if (isset($_GET['redirect'])) {?>
-            <p class="about-description mashsb-notice notice-success"><?php _e( 'Facebook and Twitter Share Buttons are successfully enabled on all your posts! <br> Use the steps  below to customize MashShare.', 'mashsb' ); ?></p>
+            <p class="about-description mashsb-notice notice-success"><?php _e( 'Facebook and Twitter Share Buttons are successfully enabled on all your posts! <br> Now you can use the steps  below to customize MashShare to your needs.', 'mashsb' ); ?></p>
             <?php } ?>
             <div class="changelog">
                 <h3><?php _e( 'Step 1: Creating Your First Social Sharing Button', 'mashsb' ); ?></h3>

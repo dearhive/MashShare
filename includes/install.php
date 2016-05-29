@@ -61,6 +61,8 @@ function mashsb_install() {
     if (class_exists( 'MashshareOpenGraph' )){
     deactivate_plugins( '/mashshare-opengraph/mashshare-opengraph.php' );
     }
+    // Deactivate Shorturl Add-On because it is integrated in MashShare 3.0
+    deactivate_plugins( '/mashshare-shorturls/mashshare-shorturls.php' );
 
     // Try to load some settings. If there are no ones we write some default settings:
     $settings = get_option( 'mashsb_settings' );
