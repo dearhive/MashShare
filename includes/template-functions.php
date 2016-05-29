@@ -341,7 +341,7 @@ function arrNetworks( $name, $is_shortcode ) {
         $twitter_url = mashsb_get_twitter_url();
     }
 
-    $via = mashsb_get_twitter_username() ? '&via=' . mashsb_get_twitter_username() : '&via=';
+    $via = mashsb_get_twitter_username() ? '&via=' . mashsb_get_twitter_username() : '';
 
     $networks = apply_filters( 'mashsb_array_networks', array(
         'facebook' => 'http://www.facebook.com/sharer.php?u=' . $url,
@@ -987,7 +987,7 @@ function mashsb_get_shorturl( $url ) {
 function mashsb_get_twitter_username() {
     global $mashsb_options;
 
-    if( !isset( $mashsb_options['mashsharer_hashtag'] ) ) {
+    if( empty( $mashsb_options['mashsharer_hashtag'] ) ) {
         return;
     }
 
