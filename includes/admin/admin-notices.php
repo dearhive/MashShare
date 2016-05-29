@@ -65,13 +65,13 @@ function mashsb_admin_messages() {
         echo '</div>';
     }
     // Check google API key  
-    if( mashsb_is_admin_page() && mashsb_check_google_apikey() ) {
+    if( mashsb_is_admin_page() && ( mashsb_check_google_apikey() && isset( $mashsb_options['mashsu_methods'] ) && $mashsb_options['mashsu_methods'] === 'google' ) ) {
         echo '<div class="error">';
         echo '<p>' . sprintf( __( 'Google API key is invalid. Go to <a href="%s"><i>Mashshare->Settings->Short URL Integration</i></a> and check the Google API key.', 'mashsb' ), admin_url( 'admin.php?page=mashsb-settings#mashsb_settingsshorturl_header' ) ) . '</p>';
         echo '</div>';
     }
     // Check Bitly API key  
-    if( mashsb_is_admin_page() && !mashsb_check_bitly_apikey() ) {
+    if( mashsb_is_admin_page() && (false === mashsb_check_bitly_apikey() && isset( $mashsb_options['mashsu_methods'] ) && $mashsb_options['mashsu_methods'] === 'bitly' ) ) {
         echo '<div class="error">';
         echo '<p>' . sprintf( __( 'Bitly Access Token is invalid or bitly.com endpoint can not be reached. Go to <a href="%s"><i>Mashshare->Settings->Short URL Integration</i></a> and check the Bitly API key.', 'mashsb' ), admin_url( 'admin.php?page=mashsb-settings#mashsb_settingsshorturl_header' ) ) . '</p>';
         echo '</div>';

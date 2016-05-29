@@ -29,9 +29,9 @@ function mashsb_check_google_apikey() {
     $statusArr = $shorturl->checkApiKey( 'http://www.google.de' );
     isset( $statusArr['error']['errors'][0]['reason'] ) ? $statusArr['error']['errors'][0]['reason'] : $statusArr['error']['errors'][0]['reason'] = '';
 
-    if( !empty( $mashsb_options['google_app_id'] ) && !empty( $statusArr['error']['errors'][0]['reason'] ) ){
+    if( !empty( $statusArr['error']['errors'][0]['reason'] ) ){
         return '<strong style="color:red;font-weight:bold;"> Notice: </strong>' . $statusArr['error']['errors'][0]['reason'];
-    }
+    } 
 }
 /*
  * Check if Bitly API Key is working properly
@@ -47,7 +47,7 @@ function mashsb_check_bitly_apikey() {
     // url to check
     $url = "http://www.google.de";
     
-    if( !empty( $bitly_access_token ) && !empty( $url ) && !is_null( $url ) ) {
+    //if( !empty( $bitly_access_token ) && !empty( $url ) && !is_null( $url ) ) {
 
         $params = array();
         $params['access_token'] = $bitly_access_token;
@@ -62,7 +62,7 @@ function mashsb_check_bitly_apikey() {
             // Error
             return false;
         }
-    }
+    //}
 }
 
 /**
