@@ -55,7 +55,13 @@ function mashsb_admin_messages() {
     // Share bar add-on notice    
     if( mashsb_is_admin_page() && version_compare(MASHBAR_VERSION, '1.2.5', '<') ) {
         echo '<div class="error">';
-        echo '<p>' . sprintf( __( 'Your Sharebar Add-On version is not working with the new built in short url mechanism of MashShare 3.X. Please <a href="%s" target="blank"> update the Sharebar Add-On</a> to at least version 1.2.5. if you want to use twitter short urls. This requires a valid license.', 'mashsb' ), 'https://www.mashshare.net/downloads/sticky-sharebar/?utm_source=insideplugin&utm_medium=userwebsite&utm_content=update_sharebar&utm_campaign=freeplugin' ) . '</p>';
+        echo '<p>' . sprintf( __( 'Your Sharebar Add-On version is not using new short url mechanism of MashShare 3.X. Please <a href="%s" target="blank"> update the Sharebar Add-On</a> to at least version 1.2.5. if you want to make sure that twitter short urls will not stop working in one of the next updates. This requires a valid license of the Sharebar Add-On', 'mashsb' ), 'https://www.mashshare.net/downloads/sticky-sharebar/?utm_source=insideplugin&utm_medium=userwebsite&utm_content=update_sharebar&utm_campaign=freeplugin' ) . '</p>';
+        echo '</div>';
+    }
+    // Floating Sidebar add-on notice    
+    if( mashsb_is_admin_page() && version_compare(MASHFS_VERSION, '1.1.6', '<') ) {
+        echo '<div class="error">';
+        echo '<p>' . sprintf( __( 'Your Floating Sidebar Add-On version is not using new short url mechanism of MashShare 3.X. Please <a href="%s" target="blank"> update the Floating Sidebar Add-On</a> to at least version 1.2.6. if you want to make sure that twitter short urls will not stop working in one of the next updates. This requires a valid license of the Floating Sidebar Add-On', 'mashsb' ), 'https://www.mashshare.net/downloads/floating-sidebar/?utm_source=insideplugin&utm_medium=userwebsite&utm_content=update_sharebar&utm_campaign=freeplugin' ) . '</p>';
         echo '</div>';
     }
     // Check google API key  

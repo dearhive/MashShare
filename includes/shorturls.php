@@ -57,10 +57,8 @@ function mashsb_check_bitly_apikey() {
         $results = $bitly->bitly_get( 'shorten', $params );
 
         if( !empty( $results['data']['url'] ) ) {
-            var_dump($results['data']['url']);
             return $results['data']['url'];
         } else {
-            var_dump($results['data']['url']);
             // Error
             return false;
         }

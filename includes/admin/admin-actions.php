@@ -73,3 +73,14 @@ function mashsb_rescrape_fb_debugger(){
 }
 add_action('save_post', 'mashsb_rescrape_fb_debugger' );
 
+
+function mashsb_purge_cache(){
+    global $post;
+    
+    if (!isset($post)){
+        return;
+    }
+    
+    update_post_meta($post->ID, 'mashsb_timestamp', '');
+}
+add_action('save_post', 'mashsb_purge_cache' );

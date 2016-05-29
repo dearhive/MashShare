@@ -949,7 +949,14 @@ function mashsb_get_url() {
 //    return apply_filters( 'mashsb_get_twitter_url', $url );
 //}
 function mashsb_get_twitter_url() {
-    $url = mashsb_get_shortened_url(mashsb_get_url());
+    if( function_exists( 'mashsb_get_shortened_url' ) ) {
+        $url = mashsb_get_shortened_url( mashsb_get_url() );
+    } else if( function_exists( 'mashsuGetShortURL' ) ) { // compatibility mode for MashShare earlier than 3.0
+        $get_url = mashsb_get_url();
+        $url = mashsuGetShortURL( $get_url );
+    } else {
+        $url = mashsb_get_url();
+    }
     return apply_filters( 'mashsb_get_twitter_url', $url );
 }
 

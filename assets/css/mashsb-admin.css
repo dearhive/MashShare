@@ -966,7 +966,7 @@ Fancy checkboxes proto.io
 }*/
 
 .mashsb-admin-onoffswitch {
-    position: relative; width: 59px;
+    position: relative; width: 55px;
     -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
 }
 .mashsb-admin-onoffswitch-checkbox {
@@ -974,7 +974,7 @@ Fancy checkboxes proto.io
 }
 .mashsb-admin-onoffswitch-label {
     display: block; overflow: hidden; cursor: pointer;
-    border: 2px solid #D6D6D6; border-radius: 5px;
+    border: 1px solid #D6D6D6; border-radius: 0px;
 }
 .mashsb-admin-onoffswitch-inner {
     display: block; width: 200%; margin-left: -100%;
@@ -997,18 +997,21 @@ Fancy checkboxes proto.io
     text-align: right;
 }
 .mashsb-admin-onoffswitch-switch {
-    display: block; width: 11px; margin: 5.5px;
+    display: block; 
+    width: 12px;
+    max-height: 12px;
+    margin: 5.5px;
     background: #FFFFFF;
     position: absolute; top: 0; bottom: 0;
     right: 33px;
-    border: 2px solid #D6D6D6; border-radius: 5px;
+    border: 0px solid #D6D6D6; border-radius: 0px;
     transition: all 0.3s ease-in 0s; 
 }
 .mashsb-admin-onoffswitch-checkbox:checked + .mashsb-admin-onoffswitch-label .mashsb-admin-onoffswitch-inner {
     margin-left: 0;
 }
 .mashsb-admin-onoffswitch-checkbox:checked + .mashsb-admin-onoffswitch-label .mashsb-admin-onoffswitch-switch {
-    right: 0px; 
+    right: 2px; 
 }
 
 /* end checkbox */
