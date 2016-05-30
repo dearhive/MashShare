@@ -325,8 +325,9 @@ function isStatus( $var ) {
  */
 
 function arrNetworks( $name, $is_shortcode ) {
-    global $mashsb_options, $post, $mashsb_custom_url, $mashsb_custom_text;
-    $singular = isset( $mashsb_options['singular'] ) ? $singular = true : $singular = false;
+    //global $mashsb_options, $post, $mashsb_custom_url, $mashsb_custom_text;
+    global $mashsb_custom_url, $mashsb_custom_text;
+    //$singular = isset( $mashsb_options['singular'] ) ? $singular = true : $singular = false;
 
     if( $is_shortcode ) {
         $url = !empty( $mashsb_custom_url ) ? $mashsb_custom_url : mashsb_get_url();
@@ -342,14 +343,23 @@ function arrNetworks( $name, $is_shortcode ) {
     }
 
     $via = mashsb_get_twitter_username() ? '&via=' . mashsb_get_twitter_username() : '';
-
-    $networks = apply_filters( 'mashsb_array_networks', array(
+    
+//    $networks_arr = array(
+//        'facebook' => 'http://www.facebook.com/sharer.php?u=' . $url,
+//        'twitter' => 'https://twitter.com/intent/tweet?text=' . $twitter_title . '&url=' . $twitter_url . $via,
+//        'subscribe' => '#',
+//        'url' => $url,
+//        'title' => $title
+//    );
+    $networks_arr = array(
         'facebook' => 'http://www.facebook.com/sharer.php?u=' . $url,
         'twitter' => 'https://twitter.com/intent/tweet?text=' . $twitter_title . '&url=' . $twitter_url . $via,
         'subscribe' => '#',
         'url' => $url,
         'title' => $title
-            ) );
+    );
+
+    $networks = apply_filters( 'mashsb_array_networks', $networks_arr );
     return isset( $networks[$name] ) ? $networks[$name] : '';
 }
 

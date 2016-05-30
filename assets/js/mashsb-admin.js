@@ -1,4 +1,6 @@
 jQuery(document).ready(function ($) {
+    // Activate chosen select boxes
+    $(".mashsb-chosen-select").chosen({width: "400px"});
 
     function mashsb_setCookie(name, value, days) {
         if (days) {

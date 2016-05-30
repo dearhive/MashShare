@@ -73,6 +73,11 @@ function mashsb_check_bitly_apikey() {
  */
 function mashsb_get_shorturl_singular( $url ) {
     global $mashsb_options, $post;
+    
+    // no shorturl
+    if( isset( $mashsb_options['mashsu_methods'] ) && $mashsb_options['mashsu_methods'] === 'disabled' ) {
+        return $url;
+    }
 
     $shorturl = "";
     

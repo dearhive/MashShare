@@ -1168,3 +1168,16 @@ color: #0097df;
 .mashsb-about-wrap img {
     max-width: 99%;
 }
+
+.mashsb-chosen-select ul li .search-choice-close {
+    padding:0px;
+}
+
+#mashsb_settingsshorturl_header ul > li a{
+        padding:0px;
+}
+#mashsb_settingsshorturl_header ul{
+    float:none;
+    max-width: 400px;
+    background-color: #fff;
+}

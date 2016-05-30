@@ -136,6 +136,11 @@ function mashsb_load_admin_scripts( $hook ) {
     wp_enqueue_script( 'thickbox' ); //Responsible for managing the modal window.
     wp_enqueue_style( 'thickbox' ); //Provides the styles needed for this window.
     wp_enqueue_style( 'mashsb-admin', $css_dir . 'mashsb-admin' . $suffix . '.css', MASHSB_VERSION );
+    wp_register_style( 'jquery-chosen', $css_dir . 'chosen' . $suffix . '.css', array(), MASHSB_VERSION );
+    wp_enqueue_style( 'jquery-chosen' );
+
+    wp_register_script( 'jquery-chosen', $js_dir . 'chosen.jquery' . $suffix . '.js', array('jquery'), MASHSB_VERSION );
+    wp_enqueue_script( 'jquery-chosen' );
 }
 
 /**

@@ -336,8 +336,22 @@ function mashsb_get_registered_settings() {
                     'wpshortlinks' => 'WP Short links',
                     'bitly' => 'Bitly',
                     'google' => 'Google',
+                    'disabled' => 'Short URLs Disabled',
                 )
             ),
+//            array(
+//                'id' => 'shorturl_type',
+//                'name' => __( 'Enable on', 'mashsb' ),
+//                'desc' => __( 'You can choose multiple networks where short url\'s should be used.', 'mashsb' ),
+//                'type' => 'multiselect',
+//                'placeholder' => 'Select the networks',
+//                'options' => array(
+//                    'twitter' => 'Twitter',
+//                    'facebook' => 'Facebook',
+//                    'default' => 'All Networks'
+//                ),
+//                'std' => 'All networks'
+//            ),
             'style_header' => array(
                 'id' => 'style_header',
                 'name' => '<strong>' . __( 'Customization', 'mashsb' ) . '</strong>',
@@ -1202,19 +1216,19 @@ function mashsb_radio_callback( $args ) {
  * @global $mashsb_options Array of all the MASHSB Options
  * @return void
  */
-function mashsb_gateways_callback( $args ) {
-    global $mashsb_options;
-
-    foreach ( $args['options'] as $key => $option ) :
-        if( isset( $mashsb_options['gateways'][$key] ) )
-            $enabled = '1';
-        else
-            $enabled = null;
-
-        echo '<input name="mashsb_settings[' . $args['id'] . '][' . $key . ']"" id="mashsb_settings[' . $args['id'] . '][' . $key . ']" type="checkbox" value="1" ' . checked( '1', $enabled, false ) . '/>&nbsp;';
-        echo '<label for="mashsb_settings[' . $args['id'] . '][' . $key . ']">' . $option['admin_label'] . '</label><br/>';
-    endforeach;
-}
+//function mashsb_gateways_callback( $args ) {
+//    global $mashsb_options;
+//
+//    foreach ( $args['options'] as $key => $option ) :
+//        if( isset( $mashsb_options['gateways'][$key] ) )
+//            $enabled = '1';
+//        else
+//            $enabled = null;
+//
+//        echo '<input name="mashsb_settings[' . $args['id'] . '][' . $key . ']"" id="mashsb_settings[' . $args['id'] . '][' . $key . ']" type="checkbox" value="1" ' . checked( '1', $enabled, false ) . '/>&nbsp;';
+//        echo '<label for="mashsb_settings[' . $args['id'] . '][' . $key . ']">' . $option['admin_label'] . '</label><br/>';
+//    endforeach;
+//}
 
 /**
  * Dropdown Callback (drop down)
@@ -1226,19 +1240,19 @@ function mashsb_gateways_callback( $args ) {
  * @global $mashsb_options Array of all the MASHSB Options
  * @return void
  */
-function mashsb_gateway_select_callback($args) {
-  global $mashsb_options;
-
-  echo '<select name="mashsb_settings[' . $args['id'] . ']"" id="mashsb_settings[' . $args['id'] . ']">';
-
-  foreach ( $args['options'] as $key => $option ) :
-		$selected = isset( $mashsb_options[ $args['id'] ] ) ? selected( $key, $mashsb_options[$args['id']], false ) : '';
-  echo '<option value="' . esc_attr( $key ) . '"' . $selected . '>' . esc_html( $option['admin_label'] ) . '</option>';
-  endforeach;
-
-  echo '</select>';
-	echo '<label for="mashsb_settings[' . $args['id'] . ']"> '  . $args['desc'] . '</label>';
-}
+//function mashsb_gateway_select_callback($args) {
+//  global $mashsb_options;
+//
+//  echo '<select name="mashsb_settings[' . $args['id'] . ']"" id="mashsb_settings[' . $args['id'] . ']">';
+//
+//  foreach ( $args['options'] as $key => $option ) :
+//		$selected = isset( $mashsb_options[ $args['id'] ] ) ? selected( $key, $mashsb_options[$args['id']], false ) : '';
+//  echo '<option value="' . esc_attr( $key ) . '"' . $selected . '>' . esc_html( $option['admin_label'] ) . '</option>';
+//  endforeach;
+//
+//  echo '</select>';
+//	echo '<label for="mashsb_settings[' . $args['id'] . ']"> '  . $args['desc'] . '</label>';
+//}
 
 /**
  * Text Callback
@@ -1365,7 +1379,7 @@ function mashsb_missing_callback( $args ) {
  * @since 1.0
  * @param array $args Arguments passed by the setting
  * @global $mashsb_options Array of all the MASHSB Options
- * @return void
+ * @return string
  */
 function mashsb_select_callback( $args ) {
     global $mashsb_options;
@@ -1387,6 +1401,43 @@ function mashsb_select_callback( $args ) {
 
     echo $html;
 }
+
+/**
+ * Multi Select Callback
+ *
+ * @since 3.0.0
+ * @param array $args Arguments passed by the settings
+ * @global $mashsb_options Array of all the MASHSB Options
+ * @return string $output dropdown
+ */
+function mashsb_multiselect_callback( $args = array() ) {
+global $mashsb_options;
+
+//if( isset( $mashsb_options[$args['id']] ) ) {
+//        $value = $mashsb_options[$args['id']];
+//    } else {
+//        $value = isset( $args['std'] ) ? $args['std'] : '';
+//    }
+
+    $selected = isset($mashsb_options[$args['id']]) ? $mashsb_options[$args['id']] : '';
+    //echo '<pre>';
+    //var_dump($selected);
+
+    $html = '<select name="mashsb_settings[' . $args['id'] . '][]" data-placeholder="Select Networks" style="width:350px;" multiple tabindex="4" class="mashsb-select mashsb-chosen-select">';
+    $i = 0;
+    foreach ( $args['options'] as $key => $value ) :
+        if( is_array($selected)){
+        //echo '<br>value: ' . $value . ' key:'. $key . ' in array: ' . in_array( $key, $selected ) . '<br>';
+        $checked = selected( true, in_array( $key, $selected ), false );
+        }
+        $html .= '<option value="' . $key . '" ' . $checked . '>' . $value . '</option>';
+    endforeach;
+    $html .= '</select>';
+    echo $html;
+}
+
+
+
 
 /**
  * Color select Callback
