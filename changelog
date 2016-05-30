@@ -1,0 +1,36 @@
+= 3.0.0 =
+* HUGE PERFORMANCE & FEATURE UPDATE
+
+* Performance: New asyncronous method for cache rebuilding. No more increase in loading time while page loads
+* Performance: No cache rebuild when site is visited by bots or spiders
+* Performance: Structural and logic improvements reduces number of db requests.
+* New: Most Popular Post Widget for displaying posts sorted by shares
+* New: Yoast and Jetpack support for social settings
+* New: Build in open graph and twitter card meta tags. Rewritten from scratch. Makes use of Yoast open graph data if specified.
+* New: Extra large Pinterest image and dedicated sharing description
+* New: Basic responsive button behavior included per default
+* New: Facebook open graph rescraping is done automatically on post save. 
+* New: Validate open graph data button for fetching new scrape information and forcing facebook to purge its cache.
+* New: Filter "mashsb_visible_services" for modifying the visible networks
+* New: Filter "mashsb_shortcode_atts" for modifying the shortcode arguments
+* New: New field in WordPress user profiles: Twitter author url for giving credits to authors when sharing a link on twitter (meta tag twitter:creator) 
+* New: Clicking the PLUS button only affects the adequate parent share buttons not other share buttons on same page.
+* New: Improved license activation workflow and much better license error messages
+* Tweak: New UI elements for admin checkboxes
+* Tweak: Enable Twitter and Facebook share button per default on first time installation
+* Tweak: Change MashShare to MashShare for better branding
+* Tweak: Change twitter username description in settings and make sure @MashShare is not used
+* Tweak: Get 20% instead 10% discount for allowing tracking
+* Tweak: admin menue icon
+* Tweak: Deactivates the MashShare Open Graph Add-On or throws an warning message if its still enabled
+* Tweak: Load JS and CSS all over setting is enabled per default 
+* Tweak: Static share buttons on admin dashboard for quicker response
+* Tweak: Rename General tab into Settings
+* Tweak: Remove settings "Visual" and "Social networks" and merge them into new Settings tab 
+* Tweak: Stay on last active tab after saving admin settings
+* Fix: New function for returning share title shows correct title even on archive, categories and non posts like bbpress and buddyPress pages
+* Fix: Missing </div> in checkbox callback function
+* Fix: disable class mashdebug() which causes header notices on some systems
+* Fix: Undefined function wp_get_document_title() Compatibility backward fix
+* Fix: Undefined $post object on several places
+* Fix: Hide @ on twitter share when no twitter handle is used
