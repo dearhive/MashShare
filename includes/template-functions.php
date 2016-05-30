@@ -167,12 +167,12 @@ function getSharedcount( $url ) {
        Possible: Category, blog list pages, non singular() pages. This store the shares in transients with mashsbGetNonPostShares();
      */
 
-    if( !is_singular() ) {
+    /*if( !is_singular() ) {
         return apply_filters( 'filter_get_sharedcount', mashsbGetNonPostShares( $url ) );
-    }
-    /* if( !empty( $url ) && is_null( $post ) ) {
+    }*/
+    if( !empty( $url ) && is_null( $post ) ) {
       return apply_filters( 'filter_get_sharedcount', mashsbGetNonPostShares( $url ) );
-      } */
+      }
 
     /*
      * Important: This runs on non singular pages 
@@ -186,7 +186,7 @@ function getSharedcount( $url ) {
     /*
      * Refresh Cache
      */
-    if( mashsb_force_cache_refresh() ) {
+    if( mashsb_force_cache_refresh() && is_singular() ) {
 
         // Write timestamp (Use this on top of this condition. If this is not on top following return statements will be skipped and ignored - possible bug?)
         update_post_meta( $post->ID, 'mashsb_timestamp', time() );
@@ -481,6 +481,7 @@ function mashsb_render_sharecounts( $customurl = '', $align = 'left' ) {
     $sharetitle = isset( $mashsb_options['sharecount_title'] ) ? $mashsb_options['sharecount_title'] : __( 'SHARES', 'mashsb' );
 
     $shares = getSharedcount( $url );
+
     $sharecount = isset( $mashsb_options['mashsharer_round'] ) ? roundshares( $shares ) : getSharedcount( $url );
 
     // do not show shares after x shares
@@ -881,12 +882,19 @@ function mashsb_is_excluded() {
  * @return string the default post title, shortcode title or custom twitter title
  */
 function mashsb_get_title() {
+    global $post, $mashsb_meta_tags;
     if( is_singular() ) {
-        global $mashsb_meta_tags;
-        return $mashsb_meta_tags->get_og_title();
+        $title = $mashsb_meta_tags->get_og_title();
+    } else if( !empty( $post->ID ) ) {
+        $title = get_the_title( $post->ID );
+        $title = html_entity_decode( $title, ENT_QUOTES, 'UTF-8' );
+        $title = urlencode( $title );
+        $title = str_replace( '#', '%23', $title );
+        $title = esc_html( $title );
     } else {
-        return mashsb_get_document_title();
+        $title = mashsb_get_document_title();
     }
+    return apply_filters( 'mashsb_get_title', $title );
 }
 
 /**
@@ -905,12 +913,13 @@ function mashsb_get_twitter_title() {
     } else {
         // title for non singular pages
         $title = mashsb_get_title();
-        //$title = str_replace( '+', '%20', $title );
+        $title = str_replace( '+', '%20', $title );
     }
     return apply_filters('mashsb_twitter_title', $title);
 }
 
-/* Get URL to share
+/* 
+ * Get URL to share
  * 
  * @return url  $string
  * @scince 2.2.8
@@ -919,14 +928,12 @@ function mashsb_get_twitter_title() {
 function mashsb_get_url() {
     global $wp, $post;
 
-    if( is_singular() ) {
+    if( isset($post->ID )) {
         // The permalink for singular pages
-        $url = get_permalink( $post->ID );
-    } else if( mashsb_get_main_url() ) {
-        // The main URL
-        $url = mashsb_get_main_url();
+        $url = mashsb_sanitize_url(get_permalink( $post->ID ));
     } else {
-        $url = "";
+         // The main URL
+        $url = mashsb_get_main_url();
     }
     return apply_filters( 'mashsb_get_url', $url );
 }
@@ -949,8 +956,8 @@ function mashsb_get_url() {
 //    return apply_filters( 'mashsb_get_twitter_url', $url );
 //}
 function mashsb_get_twitter_url() {
-    if( function_exists( 'mashsb_get_shortened_url' ) ) {
-        $url = mashsb_get_shortened_url( mashsb_get_url() );
+    if( function_exists( 'mashsb_get_shorturl_singular' ) ) {
+        $url = mashsb_get_shorturl_singular( mashsb_get_url() );
     } else if( function_exists( 'mashsuGetShortURL' ) ) { // compatibility mode for MashShare earlier than 3.0
         $get_url = mashsb_get_url();
         $url = mashsuGetShortURL( $get_url );
@@ -961,7 +968,7 @@ function mashsb_get_twitter_url() {
 }
 
 /**
- * Wrapper for mashsb_get_shortened_url()
+ * Wrapper for mashsb_get_shorturl_singular()
  * 
  * @param string $url
  * @return string
@@ -969,7 +976,7 @@ function mashsb_get_twitter_url() {
 function mashsb_get_shorturl( $url ) {
 
     if( !empty( $url ) ) {
-        $url = mashsb_get_shortened_url( $url );
+        $url = mashsb_get_shorturl_singular( $url );
     } else {
         $url = "";
     }

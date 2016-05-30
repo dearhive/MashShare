@@ -223,7 +223,7 @@ function mashsb_is_enabled_permalinks() {
 }
 
 /**
- * Return the current url
+ * Return the current main url
  * 
  * @return mixed string|bool current url or false
  */

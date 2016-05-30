@@ -348,6 +348,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 * Fix: disable class mashdebug() which causes header notices on some systems
 * Fix: Undefined function wp_get_document_title() Compatibility backward fix
 * Fix: Undefined $post object on several places
+* Fix: Hide @ on twitter share when no twitter handle is used
 
 = 2.5.5 =
 * Fix: Button width ignored after last update
