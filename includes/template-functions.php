@@ -1014,8 +1014,9 @@ function mashsb_get_twitter_username() {
         $replace_first = str_ireplace( 'mashshare', '', $mashsb_options['mashsharer_hashtag'] );
         $replace_second = str_ireplace( '@', '', $replace_first );
         return $replace_second;
+    } else {
+        return $mashsb_options['mashsharer_hashtag'];
     }
-    return $mashsb_options['mashsharer_hashtag'];
 }
 
 /**

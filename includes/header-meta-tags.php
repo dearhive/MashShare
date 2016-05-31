@@ -127,12 +127,12 @@ class MASHSB_HEADER_META_TAGS {
             $this->yoast_seo_description = get_post_meta( $this->postID, '_yoast_wpseo_metadesc', true );
 
             // Remove Yoast open graph and twitter cards data from head of site
-            if ($this->is_open_graph()){
-            remove_action( 'wpseo_head', array($wpseo_og, 'opengraph'), 30 );
+            if( $this->is_open_graph() ) {
+                remove_action( 'wpseo_head', array($wpseo_og, 'opengraph'), 30 );
             }
-            
-            if($this->is_twitter_card()){
-            remove_action( 'wpseo_head', array('WPSEO_Twitter', 'get_instance'), 40 );
+
+            if( $this->is_twitter_card() ) {
+                remove_action( 'wpseo_head', array('WPSEO_Twitter', 'get_instance'), 40 );
             }
 
             // Get Yoast social settings
