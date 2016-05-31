@@ -127,8 +127,13 @@ class MASHSB_HEADER_META_TAGS {
             $this->yoast_seo_description = get_post_meta( $this->postID, '_yoast_wpseo_metadesc', true );
 
             // Remove Yoast open graph and twitter cards data from head of site
+            if ($this->is_open_graph()){
             remove_action( 'wpseo_head', array($wpseo_og, 'opengraph'), 30 );
+            }
+            
+            if($this->is_twitter_card()){
             remove_action( 'wpseo_head', array('WPSEO_Twitter', 'get_instance'), 40 );
+            }
 
             // Get Yoast social settings
             $this->yoast = get_option( 'wpseo_social' );
@@ -141,7 +146,7 @@ class MASHSB_HEADER_META_TAGS {
      * @return void
      */
     public function remove_jetpack_og() {
-        if( class_exists( 'JetPack' ) ) {
+        if( class_exists( 'JetPack' ) && $this->is_open_graph() ) {
             add_filter( 'jetpack_enable_opengraph', '__return_false', 99 );
         }
     }
@@ -463,6 +468,9 @@ class MASHSB_HEADER_META_TAGS {
      * @global array $ob_wp_simplepodcastpress
      */
     public function remove_simple_podcast_press_og() {
+        if(!$this->is_open_graph()){
+            return;
+        }
         include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
         if( is_plugin_active( 'simple-podcast-press/simple-podcast-press.php' ) ) {
             global $ob_wp_simplepodcastpress;
@@ -500,7 +508,7 @@ class MASHSB_HEADER_META_TAGS {
     }
 
     /**
-     * Check if open graph meta tags are enabled
+     * Check if mashshare open graph meta tags are enabled
      * 
      * @global array $mashsb_options
      * @return boolean
