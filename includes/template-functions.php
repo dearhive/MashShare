@@ -1009,7 +1009,7 @@ function mashsb_get_twitter_username() {
     }
 
     // If plugin is not running on mashshare.net or dev environment replace @mashshare
-    if( $_SERVER['HTTP_HOST'] !== 'mashshare.net' && $_SERVER['HTTP_HOST'] !== 'src.wordpress-develop.dev' ) {
+    if( $_SERVER['HTTP_HOST'] !== 'www.mashshare.net' && $_SERVER['HTTP_HOST'] !== 'src.wordpress-develop.dev' ) {
         //Sanitize it
         $replace_first = str_ireplace( 'mashshare', '', $mashsb_options['mashsharer_hashtag'] );
         $replace_second = str_ireplace( '@', '', $replace_first );
