@@ -189,7 +189,7 @@ if( !class_exists( 'mashshare' ) ) :
             require_once MASHSB_PLUGIN_DIR . 'includes/logger.php';
             require_once MASHSB_PLUGIN_DIR . 'includes/actions.php';
             require_once MASHSB_PLUGIN_DIR . 'includes/helper.php';
-            require_once MASHSB_PLUGIN_DIR . 'includes/widgets.php';
+            require_once MASHSB_PLUGIN_DIR . 'includes/class-mashsb-shared-posts-widget.php';
             require_once MASHSB_PLUGIN_DIR . 'includes/admin/settings/metabox-settings.php'; /* move into is_admin */
             require_once MASHSB_PLUGIN_DIR . 'includes/admin/meta-box/meta-box.php';
             require_once MASHSB_PLUGIN_DIR . 'includes/header-meta-tags.php';

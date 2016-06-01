@@ -19,8 +19,9 @@ class mashsb_mostshared_posts_widget extends WP_Widget {
             $count = esc_attr( $instance['count'] );
             $showShares = esc_textarea( $instance['showShares'] );
             $countLabel = esc_textarea( $instance['countLabel'] );
-            //$separator = esc_textarea( $instance['separator'] ); // Maybe use this later when there is need
+            //$separator = esc_textarea( $instance['separator'] ); // Maybe use this later if there is need
             $wrapShares = esc_textarea( $instance['wrapShares'] );
+            $period = esc_textarea( $instance['period'] );
         } else {
             $title = 'Most Shared Posts';
             $count = '10';
@@ -28,6 +29,7 @@ class mashsb_mostshared_posts_widget extends WP_Widget {
             $countLabel = 'Shares';
             //$separator = '|';
             $wrapShares = 'false';
+            $period = '7';
         }
         ?>
 
@@ -56,10 +58,21 @@ class mashsb_mostshared_posts_widget extends WP_Widget {
             <input class="widefat" id="<?php //echo $this->get_field_id( 'separator' ); ?>" name="<?php //echo $this->get_field_name( 'separator' ); ?>" type="text" value="<?php //echo $separator; ?>" />
         </p>//-->
         <p>
-            <label for="<?php echo $this->get_field_id( 'wrapShares' ); ?>"><?php _e( 'Show shares below post title?', 'mashsb' ); ?></label>
+            <label for="<?php echo $this->get_field_id( 'wrapShares' ); ?>"><?php _e( 'Show shares below post title', 'mashsb' ); ?></label>
             <select class="widefat" id="<?php echo $this->get_field_id( 'wrapShares' ); ?>" name="<?php echo $this->get_field_name( 'wrapShares' ); ?>">
                 <option value="true" <?php if( $wrapShares === 'true' ) echo 'selected'; ?>>Yes</option>
                 <option value="false" <?php if( $wrapShares === 'false' ) echo 'selected'; ?>>No</option>
+            </select>
+        </p>
+        <p>
+            <label for="<?php echo $this->get_field_id( 'period' ); ?>"><?php _e( 'Time period and age of posts', 'mashsb' ); ?></label>
+            <select class="widefat" id="<?php echo $this->get_field_id( 'period' ); ?>" name="<?php echo $this->get_field_name( 'period' ); ?>">
+                <option value="7" <?php if( $period === '7' ) echo 'selected'; ?>>7 Days</option>
+                <option value="7" <?php if( $period === '14' ) echo 'selected'; ?>>14 Days</option>
+                <option value="30" <?php if( $period === '30' ) echo 'selected'; ?>>1 Month</option>
+                <option value="90" <?php if( $period === '90' ) echo 'selected'; ?>>3 Months</option>
+                <option value="180" <?php if( $period === '180' ) echo 'selected'; ?>>6 Months</option>
+                <option value="365" <?php if( $period === '365' ) echo 'selected'; ?>>1 Year</option>
             </select>
         </p>
 
@@ -75,6 +88,7 @@ class mashsb_mostshared_posts_widget extends WP_Widget {
         $instance['countLabel'] = strip_tags( $new_instance['countLabel'] );
         //$instance['separator'] = strip_tags( $new_instance['separator'] );
         $instance['wrapShares'] = strip_tags( $new_instance['wrapShares'] );
+        $instance['period'] = strip_tags( $new_instance['period'] );
         return $instance;
     }
 
@@ -89,6 +103,7 @@ class mashsb_mostshared_posts_widget extends WP_Widget {
         $countLabel = $instance['countLabel'];
         //$separator = $instance['separator'];
         $wrapShares = $instance['wrapShares'];
+        $period = $instance['period'];
 
         $break = $wrapShares === 'true' ? '</br>' : '';
 
@@ -104,11 +119,20 @@ class mashsb_mostshared_posts_widget extends WP_Widget {
         $args = array(
             'posts_per_page' => $count,
             'post_type' => 'post',
+            'post_status' => 'publish',
             'meta_key' => 'mashsb_shares',
             'orderby' => 'meta_value_num',
-            'order' => 'DESC'
+            'order' => 'DESC',
+            'date_query' => array(
+                array(
+                    'after' => $period . ' days ago', // or '-7 days'
+                    'inclusive' => true,
+                ),
+            ),
         );
-        $wpq = new WP_Query( $args );
+        //$wpq = new WP_Query( $args );
+        $wpq = $this->get_qry_from_cache($args);
+        //var_dump($wpq);
         if( $wpq->have_posts() ) :
             echo '<ul>';
             while ( $wpq->have_posts() ):
@@ -125,6 +149,28 @@ class mashsb_mostshared_posts_widget extends WP_Widget {
         wp_reset_postdata();
         echo $after_widget;
         echo '<!-- MashShare Most Popular Widget End //-->';
+    }
+    
+    /**
+     * Get and store query from transient
+     * 
+     * @param array $args
+     * @return \WP_Query
+     */
+    public function get_qry_from_cache( $args ) {
+        $expiration = mashsb_get_expiration();
+
+        if (!MASHSB_DEBUG){
+        delete_transient('mashwidget_' . md5( json_encode( $args ) )); // debug
+        }
+        
+        if( false === ( $qry = get_transient( 'mashwidget_' . md5( json_encode( $args ) ) ) ) ) {
+            $wpq = new WP_Query( $args );
+            set_transient( 'mashwidget_' . md5( json_encode( $args ) ), $wpq, $expiration );
+            return $wpq;
+        } else {
+            return $qry;
+        }
     }
 
 }
