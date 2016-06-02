@@ -53,13 +53,13 @@ function mashsb_admin_messages() {
         echo '</div>';
     }
     // Share bar add-on notice    
-    if( mashsb_is_admin_page() && version_compare(MASHBAR_VERSION, '1.2.5', '<') ) {
+    if( mashsb_is_admin_page() && mashsb_incorrect_sharebar_version() ) { 
         echo '<div class="error">';
         echo '<p>' . sprintf( __( 'Your Sharebar Add-On version is not using new short url mechanism of MashShare 3.X. Please <a href="%s" target="blank"> update the Sharebar Add-On</a> to at least version 1.2.5. if you want to make sure that twitter short urls will not stop working in one of the next updates. This requires a valid license of the Sharebar Add-On', 'mashsb' ), 'https://www.mashshare.net/downloads/sticky-sharebar/?utm_source=insideplugin&utm_medium=userwebsite&utm_content=update_sharebar&utm_campaign=freeplugin' ) . '</p>';
         echo '</div>';
     }
     // Floating Sidebar add-on notice    
-    if( mashsb_is_admin_page() && version_compare(MASHFS_VERSION, '1.1.6', '<') ) {
+    if( mashsb_is_admin_page() && mashsb_incorrect_sidebar_version() ) {
         echo '<div class="error">';
         echo '<p>' . sprintf( __( 'Your Floating Sidebar Add-On version is not using new short url mechanism of MashShare 3.X. Please <a href="%s" target="blank"> update the Floating Sidebar Add-On</a> to at least version 1.2.6. if you want to make sure that twitter short urls will not stop working in one of the next updates. This requires a valid license of the Floating Sidebar Add-On', 'mashsb' ), 'https://www.mashshare.net/downloads/floating-sidebar/?utm_source=insideplugin&utm_medium=userwebsite&utm_content=update_sharebar&utm_campaign=freeplugin' ) . '</p>';
         echo '</div>';
@@ -142,8 +142,33 @@ function mashsb_admin_messages() {
     // Disabled since 2.4.7
     //mashsb_update_notices();
 }
-
 add_action( 'admin_notices', 'mashsb_admin_messages' );
+
+
+/**
+ * Check if sharebar add-on version is fully supported
+ * 
+ * @return boolean true if incorrect
+ */
+function mashsb_incorrect_sharebar_version() {
+    if( defined( 'MASHBAR_VERSION' ) ) {
+        return version_compare( MASHBAR_VERSION, '1.2.5', '<' );
+    } else {
+        return false;
+    }
+}
+/**
+ * Check if sharebar add-on version is fully supported
+ * 
+ * @return boolean true if incorrect
+ */
+function mashsb_incorrect_sidebar_version() {
+    if( defined( 'MASHFS_VERSION' ) ) {
+        return version_compare(MASHFS_VERSION, '1.1.6', '<');
+    } else {
+        return false;
+    }
+}
 
 /**
  * Return update notices

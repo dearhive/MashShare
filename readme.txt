@@ -316,6 +316,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 = 3.0.1 =
 * New: Most Shared Post Widget -> Select posts by date of publish like 14 days, 1 month ago and so on.
 * Fix: When twitter card or open graph tags are disabled mashshare must not disable yoast open graph and twitter cards data
+* Fix: Admin notices for floating sidebar and share bar are shown even when they are not installed.
 
 = 3.0.0 =
 * HUGE PERFORMANCE & FEATURE UPDATE
