@@ -656,12 +656,16 @@ function mashshare_filter_content( $content ) {
     $singular = isset( $mashsb_options['singular'] ) ? $singular = true : $singular = false;
 
     if( !is_main_query() ) {
-        mashdebug()->info( "is_main_query()" );
         return $content;
     }
 
-    if( mashsb_is_excluded() )
+    if( mashsb_is_excluded() ){
         return $content;
+    }
+    
+    if (is_feed()){
+        return $content;
+    }
 
     if( $frontpage == false && is_front_page() ) {
         return $content;

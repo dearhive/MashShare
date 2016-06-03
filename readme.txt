@@ -316,6 +316,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 = 3.0.2 =
 * Fix: syntax error on php 5.3
 * Fix: Missing negated debug constant leads to removing most shares posts transient all the time and performance issues when most shared post widget is used.
+* Fix: Do not use automatic buttons for feeds
 * Tweak: Reduce number of requests to one API request on singular post and use global $mashsb_sharecount for storing sharecount
 
 = 3.0.1 =
