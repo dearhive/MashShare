@@ -9,7 +9,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email
 Requires at least: 3.6+
 Tested up to: 4.5.2
-Stable tag: 3.0.2
+Stable tag: 3.0.3
 
 Social Media Share Buttons for Twitter, Facebook and other social networks. Highly customizable Social Media ecosystem
 
@@ -24,7 +24,11 @@ Social Media Share Buttons for Twitter, Facebook and other social networks. High
 
 > MashShare is using NO external script dependencies. All code is loaded directly from your website and <strong>MashShare ensures yours and your visitors privacy!</strong>  <br /> 
 >
-> <strong>New: </strong> Support for Accelerated Mobile Pages (AMP) when using the [official WordPress AMP plugin](https://wordpress.org/plugins/amp/):
+> <strong>New: </strong> Most Shared Posts Widget
+> <strong>New: </strong> Async share count aggregation
+> <strong>New: </strong> Dashboard for total share count on posts screen
+> <strong>New: </strong> Short URL integration
+> <strong>New: </strong> Support for Accelerated Mobile Pages (AMP) when using the [official WordPress AMP plugin](https://wordpress.org/plugins/amp/)
 
 <strong>See a demonstration video by Katrinah.com</strong>
 [youtube https://www.youtube.com/watch?v=vRSE-pQJTBQ]
@@ -313,11 +317,52 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 == Changelog == 
 
+= 3.0.3 =
+* Fix: Undefined method on AMP pages
+
 = 3.0.2 =
+
+* HUGE PERFORMANCE & FEATURE UPDATE
+
+* Performance: New asyncronous method for cache rebuilding. No more increase in loading time while page loads
+* Performance: No cache rebuild when site is visited by bots or spiders
+* Performance: Structural and logic improvements reduces number of db requests.
+* New: Most Popular Post Widget for displaying posts sorted by shares
+* New: Yoast and Jetpack support for social settings
+* New: Build in open graph and twitter card meta tags. Rewritten from scratch. Makes use of Yoast open graph data if specified.
+* New: Extra large Pinterest image and dedicated sharing description
+* New: Basic responsive button behavior included per default
+* New: Facebook open graph rescraping is done automatically on post save. 
+* New: Validate open graph data button for fetching new scrape information and forcing facebook to purge its cache.
+* New: Filter "mashsb_visible_services" for modifying the visible networks
+* New: Filter "mashsb_shortcode_atts" for modifying the shortcode arguments
+* New: New field in WordPress user profiles: Twitter author url for giving credits to authors when sharing a link on twitter (meta tag twitter:creator) 
+* New: Clicking the PLUS button only affects the adequate parent share buttons not other share buttons on same page.
+* New: Improved license activation workflow and much better license error messages
+* Tweak: New UI elements for admin checkboxes
+* Tweak: Enable Twitter and Facebook share button per default on first time installation
+* Tweak: Change MashShare to MashShare for better branding
+* Tweak: Change twitter username description in settings and make sure @MashShare is not used
+* Tweak: Get 20% instead 10% discount for allowing tracking
+* Tweak: admin menue icon
+* Tweak: Deactivates the MashShare Open Graph Add-On or throws an warning message if its still enabled
+* Tweak: Load JS and CSS all over setting is enabled per default 
+* Tweak: Static share buttons on admin dashboard for quicker response
+* Tweak: Rename General tab into Settings
+* Tweak: Remove settings "Visual" and "Social networks" and merge them into new Settings tab 
+* Tweak: Stay on last active tab after saving admin settings
+* Fix: New function for returning share title shows correct title even on archive, categories and non posts like bbpress and buddyPress pages
+* Fix: Missing </div> in checkbox callback function
+* Fix: disable class mashdebug() which causes header notices on some systems
+* Fix: Undefined function wp_get_document_title() Compatibility backward fix
+* Fix: Undefined $post object on several places
+* Fix: Hide @ on twitter share when no twitter handle is used
+
 * Fix: syntax error on php 5.3
 * Fix: Missing negated debug constant leads to removing most shares posts transient all the time and performance issues when most shared post widget is used.
 * Fix: Do not use automatic buttons for feeds
 * Tweak: Reduce number of requests to one API request on singular post and use global $mashsb_sharecount for storing sharecount
+
 
 = 3.0.1 =
 * New: Most Shared Post Widget -> Select posts by date of publish like 14 days, 1 month ago and so on.
@@ -422,5 +467,5 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 2.5.3 =
-2.5.3  <strong>Several tweaks, fixes and performance improvements!</strong> <a href="https://wordpress.org/plugins/mashsharer/changelog/" style="color:white;text-decoration: underline;">Complete Changelog!</a> It's recommended to test plugin updates on a testing website first before installing them on a live site. (Use <a href="https://wordpress.org/plugins/wp-staging/" target="_blank" style="color:white;text-decoration: underline;">WP Staging</a> for creating a test site)
+= 3.0.2 =
+3.0.2  <strong>New major update - MashShare 3.0 - Feature & performance improvements!</strong> <a href="https://wordpress.org/plugins/mashsharer/changelog/" style="color:white;text-decoration: underline;">Complete Changelog!</a> It's recommended to test plugin updates on a testing website first before installing them on a live site. (Use <a href="https://wordpress.org/plugins/wp-staging/" target="_blank" style="color:white;text-decoration: underline;">WP Staging</a> for creating a test site)

@@ -915,7 +915,7 @@ function mashsb_is_excluded() {
  */
 function mashsb_get_title() {
     global $post, $mashsb_meta_tags;
-    if( is_singular() ) {
+    if( is_singular() && method_exists($mashsb_meta_tags, 'get_og_title')) {
         $title = $mashsb_meta_tags->get_og_title();
     } else if( !empty( $post->ID ) ) {
         $title = get_the_title( $post->ID );
@@ -940,7 +940,7 @@ function mashsb_get_title() {
 function mashsb_get_twitter_title() {
     global $mashsb_meta_tags;
     // $mashsb_meta_tags is only available on singular pages
-    if( is_singular() ) {
+    if( is_singular() && method_exists($mashsb_meta_tags, 'get_twitter_title') ) {
         $title = $mashsb_meta_tags->get_twitter_title();
     } else {
         // title for non singular pages
