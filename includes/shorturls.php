@@ -72,14 +72,15 @@ function mashsb_check_bitly_apikey() {
  * @return string
  */
 function mashsb_get_shorturl_singular( $url ) {
-    global $mashsb_options, $post;
+    global $mashsb_options, $post ;
     
     // no shorturl
     if( isset( $mashsb_options['mashsu_methods'] ) && $mashsb_options['mashsu_methods'] === 'disabled' ) {
         return $url;
     }
-
+    
     $shorturl = "";
+
     
     // Force cache rebuild
     if( mashsb_force_cache_refresh() ) {
@@ -89,13 +90,15 @@ function mashsb_get_shorturl_singular( $url ) {
         // bitly shortlink
         if( isset( $mashsb_options['mashsu_methods'] ) && $mashsb_options['mashsu_methods'] === 'bitly' ) {
             $shorturl = mashsb_get_bitly_link( $url );
+            MASHSB()->logger->info('create shorturl singular: ' . $url . ' ' . $shorturl);
         }
 
         // Google shortlink
         if( isset( $mashsb_options['mashsu_methods'] ) && $mashsb_options['mashsu_methods'] === 'google' ) {
             $shorturl = mashsb_get_google_link( $url );
         }
-
+        // create global $mashsb_shorturl;
+        $mashsb_shorturl = array($url, $shorturl);
         update_post_meta( $post->ID, 'mashsb_shorturl', $shorturl );
     } else {
         $shorturl = get_post_meta( $post->ID, 'mashsb_shorturl', true );
@@ -144,6 +147,7 @@ function mashsb_get_shortened_url( $url ) {
         // bitly shortlink
         if( isset( $mashsb_options['mashsu_methods'] ) && $mashsb_options['mashsu_methods'] === 'bitly' ) {
             $shorturl = mashsb_get_bitly_link( $url );
+            MASHSB()->logger->info('create shorturl: ' . $url . ' ' . $shorturl);
         }
 
         // Google shortlink

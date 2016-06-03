@@ -31,7 +31,7 @@ add_action( 'amp_post_template_css', 'mashsb_amp_load_css', 10 );
  * @param string $hook Page hook
  */
 function mashsb_load_scripts( $hook ) {
-    global $wp, $mashsb_options, $post;
+    global $mashsb_options, $post, $mashsb_sharecount;
     if( !apply_filters( 'mashsb_load_scripts', mashsbGetActiveStatus(), $hook ) ) {
         mashdebug()->info( "mashsb_load_script not active" );
         return;

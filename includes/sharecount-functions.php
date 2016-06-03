@@ -62,7 +62,7 @@ function mashsb_is_cache_refresh() {
         $transient = '_transient_timeout_mashcount_' . md5( mashsb_get_main_url() );
         $last_updated = get_option( $transient ) - mashsb_get_expiration();
         if( !empty( $last_updated ) ) {
-            MASHSB()->logger->info( 'mashsb_is_cache_refresh mashsb_get_main_url() url: ' . $url . ' last updated:' . date( 'Y-m-d H:i:s', $last_updated ) );
+            MASHSB()->logger->info( 'mashsb_is_cache_refresh() mashsb_get_main_url() url: ' . $url . ' last updated:' . date( 'Y-m-d H:i:s', $last_updated ) );
         }
     } else {
         // No valid URL so do not refresh cache
@@ -252,7 +252,7 @@ function mashsb_sanitize_url( $url ) {
     $url3 = str_replace( '%26mashsb-refresh', '', $url2 );
     
     // remove trailingslash
-    $url6 = untrailingslashit ($url3);
+    //$url6 = untrailingslashit ($url3);
     
-    return $url6;
+    return $url3;
 }

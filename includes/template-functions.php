@@ -140,10 +140,17 @@ function mashsbGetNonPostShares( $url ) {
  */
 
 function getSharedcount( $url ) {
-    global $mashsb_options, $post;
+    //global $mashsb_options, $post;
+    global $mashsb_options, $post, $mashsb_sharecount; // todo test a global share count var if it reduces the amount of requests
+
+//    // Return global share count variable to prevent multiple execution
+    if (isset($mashsb_sharecount) && !mashsb_is_cache_refresh() ){
+        return $mashsb_sharecount[$url] + getFakecount();
+    }
+   
     
-    // Remove trailingslash
-    $url = untrailingslashit(mashsb_sanitize_url($url) );
+    // Remove mashsb-refresh query parameter
+    $url = mashsb_sanitize_url($url);
     
     /*
      * Deactivate share count on:
@@ -167,12 +174,16 @@ function getSharedcount( $url ) {
        Possible: Category, blog list pages, non singular() pages. This store the shares in transients with mashsbGetNonPostShares();
      */
 
-    /*if( !is_singular() ) {
-        return apply_filters( 'filter_get_sharedcount', mashsbGetNonPostShares( $url ) );
-    }*/
+//    if( !is_singular() ) {
+//        // global sharecount
+//        $shares = mashsbGetNonPostShares( mashsb_get_main_url() ) + getFakecount();
+//        $mashsb_sharecount = array($url => $shares);
+//        echo "url2: " . $mashsb_sharecount[$url];
+//        return apply_filters( 'filter_get_sharedcount', $shares );
+//    }
     if( !empty( $url ) && is_null( $post ) ) {
       return apply_filters( 'filter_get_sharedcount', mashsbGetNonPostShares( $url ) );
-      }
+    }
 
     /*
      * Important: This runs on non singular pages 
@@ -187,7 +198,10 @@ function getSharedcount( $url ) {
      * Refresh Cache
      */
     if( mashsb_force_cache_refresh() && is_singular() ) {
-
+        
+        // free some memory
+        unset ( $mashsb_sharecount[$url] );
+        
         // Write timestamp (Use this on top of this condition. If this is not on top following return statements will be skipped and ignored - possible bug?)
         update_post_meta( $post->ID, 'mashsb_timestamp', time() );
 
@@ -200,6 +214,8 @@ function getSharedcount( $url ) {
         // Get stored share count
         $mashsbStoredShareCount = get_post_meta( $post->ID, 'mashsb_shares', true );
 
+        // Create global sharecount
+        $mashsb_sharecount = array($url => $mashsbShareCounts->total);
         /*
          * Update post_meta only when API is requested and
          * API share count is greater than real fresh requested share count ->
@@ -209,9 +225,11 @@ function getSharedcount( $url ) {
             update_post_meta( $post->ID, 'mashsb_shares', $mashsbShareCounts->total );
             update_post_meta( $post->ID, 'mashsb_jsonshares', json_encode( $mashsbShareCounts ) );
             MASHSB()->logger->info( "Refresh Cache: Update database with share count: " . $mashsbShareCounts->total );
+            
             /* return counts from getAllCounts() after DB update */
             return apply_filters( 'filter_get_sharedcount', $mashsbShareCounts->total + getFakecount() );
         }
+        
         /* return previous counts from DB Cache | this happens when API has a hiccup and does not return any results as expected */
         return apply_filters( 'filter_get_sharedcount', $mashsbStoredShareCount + getFakecount() );
     } else {
@@ -326,34 +344,26 @@ function isStatus( $var ) {
 
 function arrNetworks( $name, $is_shortcode ) {
     //global $mashsb_options, $post, $mashsb_custom_url, $mashsb_custom_text;
-    global $mashsb_custom_url, $mashsb_custom_text;
-    //$singular = isset( $mashsb_options['singular'] ) ? $singular = true : $singular = false;
+    global $mashsb_custom_url, $mashsb_custom_text, $mashsb_twitter_url;
 
     if( $is_shortcode ) {
         $url = !empty( $mashsb_custom_url ) ? $mashsb_custom_url : mashsb_get_url();
         $title = !empty( $mashsb_custom_text ) ? $mashsb_custom_text : mashsb_get_title();
         $twitter_title = !empty( $mashsb_custom_text ) ? $mashsb_custom_text : mashsb_get_twitter_title();
-        $twitter_url = !empty( $mashsb_custom_url ) ? mashsb_get_shorturl( $mashsb_custom_url ) : mashsb_get_twitter_url();
+        //$twitter_url = !empty( $mashsb_custom_url ) ? mashsb_get_shorturl( $mashsb_custom_url ) : mashsb_get_twitter_url();
     }
     if( !$is_shortcode ) {
         $url = mashsb_get_url();
         $title = mashsb_get_title();
         $twitter_title = mashsb_get_twitter_title();
-        $twitter_url = mashsb_get_twitter_url();
+        //$twitter_url = mashsb_get_twitter_url();
     }
 
     $via = mashsb_get_twitter_username() ? '&via=' . mashsb_get_twitter_username() : '';
     
-//    $networks_arr = array(
-//        'facebook' => 'http://www.facebook.com/sharer.php?u=' . $url,
-//        'twitter' => 'https://twitter.com/intent/tweet?text=' . $twitter_title . '&url=' . $twitter_url . $via,
-//        'subscribe' => '#',
-//        'url' => $url,
-//        'title' => $title
-//    );
     $networks_arr = array(
         'facebook' => 'http://www.facebook.com/sharer.php?u=' . $url,
-        'twitter' => 'https://twitter.com/intent/tweet?text=' . $twitter_title . '&url=' . $twitter_url . $via,
+        'twitter' => 'https://twitter.com/intent/tweet?text=' . $twitter_title . '&url=' . $mashsb_twitter_url . $via,
         'subscribe' => '#',
         'url' => $url,
         'title' => $title
@@ -372,7 +382,14 @@ function arrNetworks( $name, $is_shortcode ) {
  */
 
 function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
-    global $mashsb_options, $enablednetworks;
+    global $mashsb_options, $mashsb_custom_url, $enablednetworks, $mashsb_twitter_url;
+    
+    // define globals
+    if( $is_shortcode ) {
+        $mashsb_twitter_url = !empty( $mashsb_custom_url ) ? mashsb_get_shorturl( $mashsb_custom_url ) : mashsb_get_twitter_url();
+    }else{
+        $mashsb_twitter_url = mashsb_get_twitter_url();
+    }
 
     $output = '';
     $startsecondaryshares = '';
@@ -491,8 +508,7 @@ function mashsb_render_sharecounts( $customurl = '', $align = 'left' ) {
     $sharetitle = isset( $mashsb_options['sharecount_title'] ) ? $mashsb_options['sharecount_title'] : __( 'SHARES', 'mashsb' );
 
     $shares = getSharedcount( $url );
-
-    $sharecount = isset( $mashsb_options['mashsharer_round'] ) ? roundshares( $shares ) : getSharedcount( $url );
+    $sharecount = isset( $mashsb_options['mashsharer_round'] ) ? roundshares( $shares ) : $shares;
 
     // do not show shares after x shares
     if( mashsb_hide_shares( $shares ) ) {
@@ -662,21 +678,23 @@ function mashshare_filter_content( $content ) {
     if( in_array( 'get_the_excerpt', $wp_current_filter ) ) {
         return $content;
     }
-
+    
+    // Get one instance (prevents multiple similar calls)
+    $mashsb_instance = mashshareShow();
     switch ( $position ) {
         case 'manual':
             break;
 
         case 'both':
-            $content = mashshareShow() . $content . mashshareShow();
+            $content = $mashsb_instance . $content . $mashsb_instance;
             break;
 
         case 'before':
-            $content = mashshareShow() . $content;
+            $content = $mashsb_instance . $mashsb_instance;
             break;
 
         case 'after':
-            $content .= mashshareShow();
+            $content .= $mashsb_instance;
             break;
     }
     return $content;
@@ -939,7 +957,10 @@ function mashsb_get_url() {
     global $wp, $post;
 
     if( isset($post->ID )) {
-        // The permalink for singular pages
+        // The permalink for singular pages!
+        // Do not check here for is_singular() (like e.g. the sharebar addon does.)
+        // Need to check for post id because on category and archiv pages 
+        // we want the pageID within the loop instead the first appearing one.
         $url = mashsb_sanitize_url(get_permalink( $post->ID ));
     } else {
          // The main URL

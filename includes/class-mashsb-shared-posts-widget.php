@@ -160,7 +160,7 @@ class mashsb_mostshared_posts_widget extends WP_Widget {
     public function get_qry_from_cache( $args ) {
         $expiration = mashsb_get_expiration();
 
-        if (!MASHSB_DEBUG){
+        if (MASHSB_DEBUG){
         delete_transient('mashwidget_' . md5( json_encode( $args ) )); // debug
         }
         
