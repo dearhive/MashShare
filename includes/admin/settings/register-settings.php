@@ -315,14 +315,14 @@ function mashsb_get_registered_settings() {
             ),
             array(
                 'id' => 'bitly_access_token',
-                'name' => __( 'Bitly access token', 'mashsu' ),
+                'name' => __( 'Bitly access token', 'mashsb' ),
                 'desc' => sprintf(__( 'If you like to use bitly.com shortener get a free bitly access token <a href="%s" target="_blank">here</a>. This turn urls into a format: http://bit.ly/cXnjsh. ', 'mashsb' ), 'https://bitly.com/a/oauth_apps'),
                 'type' => 'text',
                 'size' => 'large'
             ),
             array(
                 'id' => 'google_app_id',
-                'name' => __( 'Google API Key (goo.gl)', 'mashsu' ),
+                'name' => __( 'Google API Key (goo.gl)', 'mashsb' ),
                 'desc' => sprintf(__( 'If you like to use goo.gl shortener get a free Google API key <a href="%s" target="_blank">here</a>. This turn urls into a format: http://goo.gl/cXnjsh. ' . mashsb_check_google_apikey(), 'mashsb' ),'https://console.developers.google.com/'),
                 'type' => 'text',
                 'size' => 'large'
@@ -338,6 +338,13 @@ function mashsb_get_registered_settings() {
                     'google' => 'Google',
                     'disabled' => 'Short URLs Disabled',
                 )
+            ),
+            array(
+                'id' => 'shorturl_explanation',
+                'name' => __( 'Important: Read this!', 'mashsb' ),
+                'desc' => __('<strong>The post short url is NOT generated immediatly after first page load!</strong>  It\'s generated after a while with some background processing so you have to <strong>wait at least 1 hour.</strong> Short urls for posts older than 14 days are generated every 4 hours.','mashsb'),
+                'type' => 'renderhr',
+                'size' => 'large'
             ),
 //            array(
 //                'id' => 'shorturl_type',
@@ -1807,7 +1814,7 @@ function mashsb_networks_callback( $args ) {
 
     ob_start();
     ?>
-    <p class="description" style='display:none;'><?php echo $args['desc']; ?></p>
+    <p class="description"><?php echo $args['desc']; ?></p>
     <table id="mashsb_network_list" class="wp-list-table fixed posts">
         <thead>
             <tr>

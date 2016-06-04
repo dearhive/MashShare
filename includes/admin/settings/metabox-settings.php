@@ -92,6 +92,11 @@ function mashsb_meta_boxes( $meta_boxes ) {
                 'clone' => false,
                 'class' => 'mashsb-custom-tweet'
             ),
+            /*array(
+                'helper'=> '<a class="mashsb-helper" href="#" style="margin-left:-4px;"></a><div class="mashsb-message" style="display: none;">'.__('Force aggregation of post share counts & create shortlink instantly without waiting for background processing and cache expiration.','mashsb').'</div>',
+                'id' => $prefix . 'force_creation',
+                'type' => 'force_creation'
+            ),*/
             array(
                 'name' => 'divider',
                 'id' => 'divider',

@@ -86,7 +86,6 @@ function mashsb_get_shorturl_singular( $url ) {
     
     $shorturl = "";
 
-    
     // Force cache rebuild
     if( mashsb_force_cache_refresh() ) {
         
@@ -102,8 +101,6 @@ function mashsb_get_shorturl_singular( $url ) {
         if( isset( $mashsb_options['mashsu_methods'] ) && $mashsb_options['mashsu_methods'] === 'google' ) {
             $shorturl = mashsb_get_google_link( $url );
         }
-        // create global $mashsb_shorturl;
-        $mashsb_shorturl = array($url, $shorturl);
         update_post_meta( $post->ID, 'mashsb_shorturl', $shorturl );
     } else {
         $shorturl = get_post_meta( $post->ID, 'mashsb_shorturl', true );
