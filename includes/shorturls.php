@@ -79,6 +79,11 @@ function mashsb_get_shorturl_singular( $url ) {
         return $url;
     }
     
+    // Use native WP Shortlinks
+    if( $mashsb_options['mashsu_methods'] === 'wpshortlinks' ) {
+        return wp_get_shortlink();
+    }
+    
     $shorturl = "";
 
     
