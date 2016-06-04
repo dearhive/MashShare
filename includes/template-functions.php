@@ -694,7 +694,7 @@ function mashshare_filter_content( $content ) {
             break;
 
         case 'before':
-            $content = $mashsb_instance . $mashsb_instance;
+            $content = $mashsb_instance . $content;
             break;
 
         case 'after':
