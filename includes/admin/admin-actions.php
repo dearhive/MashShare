@@ -73,7 +73,12 @@ function mashsb_rescrape_fb_debugger(){
 }
 add_action('save_post', 'mashsb_rescrape_fb_debugger' );
 
-
+/**
+ * Purge the MashShare Cache
+ * 
+ * @global array $post
+ * @return bool false
+ */
 function mashsb_purge_cache(){
     global $post;
     
@@ -84,3 +89,33 @@ function mashsb_purge_cache(){
     update_post_meta($post->ID, 'mashsb_timestamp', '');
 }
 add_action('save_post', 'mashsb_purge_cache' );
+
+/**
+ * Create bitly or google shorturls and store them initially in post meta
+ * 
+ * @global array $post
+ * @return string
+ */
+function mashsb_create_shorturls() {
+    global $mashsb_options, $post;
+    
+    if (!isset($post)){
+        return;
+    }
+
+    $shorturl = "";
+    $url = get_permalink($post->ID);
+
+    // bitly shortlink
+    if( isset( $mashsb_options['mashsu_methods'] ) && $mashsb_options['mashsu_methods'] === 'bitly' ) {
+        $shorturl = mashsb_get_bitly_link( $url );
+    }
+
+    // Google shortlink
+    if( isset( $mashsb_options['mashsu_methods'] ) && $mashsb_options['mashsu_methods'] === 'google' ) {
+        $shorturl = mashsb_get_google_link( $url );
+    }
+    if (!empty($shorturl)){
+    update_post_meta( $post->ID, 'mashsb_shorturl', $shorturl );
+    }
+}
