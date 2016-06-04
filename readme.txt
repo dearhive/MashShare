@@ -9,7 +9,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email
 Requires at least: 3.6+
 Tested up to: 4.5.2
-Stable tag: 3.0.4
+Stable tag: 3.0.5
 
 Social Media Share Buttons for Twitter, Facebook and other social networks. Highly customizable Social Media ecosystem
 
@@ -316,6 +316,12 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 
 == Changelog == 
+
+= 3.0.5 =
+* Fix: WP Shortlinks not workings
+* Fix: Better twitter title sanitizing. Some special characters are not shown 
+* Tweak: Make clear that bitly links are not generated on the fly and background processing can take up to 1 hour
+* Tweak: Notice to make sure that network buttons can be arranged via drag and drop
 
 = 3.0.4 =
 * Fix: Position top not working after version 3.0.3

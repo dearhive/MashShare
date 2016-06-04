@@ -342,7 +342,7 @@ function mashsb_get_registered_settings() {
             array(
                 'id' => 'shorturl_explanation',
                 'name' => __( 'Important: Read this!', 'mashsb' ),
-                'desc' => __('<strong>The post short url is NOT generated immediatly after first page load!</strong>  It\'s generated after a while with some background processing so you have to <strong>wait at least 1 hour.</strong> Short urls for posts older than 14 days are generated every 4 hours.','mashsb'),
+                'desc' => __('<strong>The post short url is NOT generated immediatly after first page load!</strong>  Background processing can take up to 1 hour for new posts and 4 - 12 hours for old posts.','mashsb'),
                 'type' => 'renderhr',
                 'size' => 'large'
             ),

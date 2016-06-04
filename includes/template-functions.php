@@ -917,6 +917,10 @@ function mashsb_get_title() {
     global $post, $mashsb_meta_tags;
     if( is_singular() && method_exists($mashsb_meta_tags, 'get_og_title')) {
         $title = $mashsb_meta_tags->get_og_title();
+        $title = html_entity_decode( $title, ENT_QUOTES, 'UTF-8' );
+        $title = urlencode( $title );
+        $title = str_replace( '#', '%23', $title );
+        $title = esc_html( $title );
     } else if( !empty( $post->ID ) ) {
         $title = get_the_title( $post->ID );
         $title = html_entity_decode( $title, ENT_QUOTES, 'UTF-8' );
@@ -925,6 +929,10 @@ function mashsb_get_title() {
         $title = esc_html( $title );
     } else {
         $title = mashsb_get_document_title();
+        $title = html_entity_decode( $title, ENT_QUOTES, 'UTF-8' );
+        $title = urlencode( $title );
+        $title = str_replace( '#', '%23', $title );
+        $title = esc_html( $title );
     }
     return apply_filters( 'mashsb_get_title', $title );
 }
@@ -942,10 +950,17 @@ function mashsb_get_twitter_title() {
     // $mashsb_meta_tags is only available on singular pages
     if( is_singular() && method_exists($mashsb_meta_tags, 'get_twitter_title') ) {
         $title = $mashsb_meta_tags->get_twitter_title();
+        $title = html_entity_decode( $title, ENT_QUOTES, 'UTF-8' );
+        $title = urlencode( $title );
+        $title = str_replace( '#', '%23', $title );
+        $title = esc_html( $title );
+        //$title = str_replace( '+', '%20', $title );
+        //$title = str_replace('|','',$title);
     } else {
         // title for non singular pages
         $title = mashsb_get_title();
         $title = str_replace( '+', '%20', $title );
+        $title = str_replace('|','',$title);
     }
     return apply_filters('mashsb_twitter_title', $title);
 }
