@@ -301,7 +301,7 @@ class MASHSB_RWMB_File_Field extends MASHSB_RWMB_Field
 		$value = array();
 		foreach ( (array) $file_ids as $file_id )
 		{
-			if ( $file_info = call_user_func( array( RW_Meta_Box::get_class_name( $field ), 'file_info' ), $file_id, $args ) )
+			if ( $file_info = call_user_func( array( MASHSB_RW_Meta_Box::get_class_name( $field ), 'file_info' ), $file_id, $args ) )
 			{
 				$value[$file_id] = $file_info;
 			}

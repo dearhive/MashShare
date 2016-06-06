@@ -8,7 +8,7 @@
  * @license GNU GPL2+
  * @package Meta Box
  */
-class RW_Meta_Box
+class MASHSB_RW_Meta_Box
 {
 	/**
 	 * @var array Meta box information
@@ -126,9 +126,9 @@ class RW_Meta_Box
 		/**
 		 * Allow developers to enqueue more scripts and styles
 		 *
-		 * @param RW_Meta_Box $object Meta Box object
+		 * @param MASHSB_RW_Meta_Box $object Meta Box object
 		 */
-		do_action( 'rwmb_enqueue_scripts', $this );
+		do_action( 'mashsb_rwmb_enqueue_scripts', $this );
 	}
 
 	/**
@@ -224,8 +224,8 @@ class RW_Meta_Box
 		// Allow users to add custom code after meta box content
 		// 1st action applies to all meta boxes
 		// 2nd action applies to only current meta box
-		do_action( 'rwmb_after', $this );
-		do_action( "rwmb_after_{$this->meta_box['id']}", $this );
+		do_action( 'mashsb_rwmb_after', $this );
+		do_action( "mashsb_rwmb_after_{$this->meta_box['id']}", $this );
 
 		// End container
 		echo '</div>';
@@ -280,8 +280,8 @@ class RW_Meta_Box
 		}
 
 		// After save action
-		do_action( 'rwmb_after_save_post', $post_id );
-		do_action( "rwmb_{$this->meta_box['id']}_after_save_post", $post_id );
+		do_action( 'mashsb_rwmb_after_save_post', $post_id );
+		do_action( "mashsb_rwmb_{$this->meta_box['id']}_after_save_post", $post_id );
 	}
 
 	/**************************************************

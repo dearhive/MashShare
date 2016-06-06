@@ -61,7 +61,7 @@ class MASHSB_RWMB_Core
 		$meta_boxes = self::get_meta_boxes();
 		foreach ( $meta_boxes as $meta_box )
 		{
-			new RW_Meta_Box( $meta_box );
+			new MASHSB_RW_Meta_Box( $meta_box );
 		}
 	}
 

@@ -47,8 +47,6 @@ function mashsb_check_bitly_apikey() {
     // url to check
     $url = "http://www.google.de";
     
-    //if( !empty( $bitly_access_token ) && !empty( $url ) && !is_null( $url ) ) {
-
         $params = array();
         $params['access_token'] = $bitly_access_token;
         $params['longUrl'] = $url;
@@ -62,7 +60,7 @@ function mashsb_check_bitly_apikey() {
             // Error
             return false;
         }
-    //}
+
 }
 
 /**
@@ -72,15 +70,16 @@ function mashsb_check_bitly_apikey() {
  * @return string
  */
 function mashsb_get_shorturl_singular( $url ) {
-    global $mashsb_options, $post ;
+    global $mashsb_options, $post, $mashsb_custom_url;
+    
     
     // no shorturl
     if( isset( $mashsb_options['mashsu_methods'] ) && $mashsb_options['mashsu_methods'] === 'disabled' ) {
         return $url;
     }
     
-    // Use native WP Shortlinks
-    if( $mashsb_options['mashsu_methods'] === 'wpshortlinks' ) {
+    // Use native WP Shortlinks | only when $mashsb_custom_url is empty. WP Shortlinks are not possible for non wordpress urls like www.google.com
+    if( isset( $mashsb_options['mashsu_methods'] ) && $mashsb_options['mashsu_methods'] === 'wpshortlinks' && empty($mashsb_custom_url) ) {
         return wp_get_shortlink();
     }
     

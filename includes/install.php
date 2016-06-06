@@ -67,7 +67,8 @@ function mashsb_install() {
     // Try to load some settings. If there are no ones we write some default settings:
     $settings = get_option( 'mashsb_settings' );
     // Write default settings
-    if( count( $settings ) === 0 ) {
+    //if( false === get_option( 'mashsb_settings' ) || count( $settings ) === 0 ) {
+    if( false === get_option( 'mashsb_settings' ) || count( $settings ) === 0 ) {
         $settings_new = array(
             'visible_services' => '1',
             'networks' => array(

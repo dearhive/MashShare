@@ -44,7 +44,7 @@ class MASHSB_RWMB_Input_List_Walker extends MASHSB_RWMB_Walker
 		$id          = $this->db_fields['id'];
 		$meta        = $this->meta;
 		$field       = $this->field;
-		$field_class = RW_Meta_Box::get_class_name( $field );
+		$field_class = MASHSB_RW_Meta_Box::get_class_name( $field );
 		$attributes  = call_user_func( array( $field_class, 'get_attributes' ), $field, $object->$id );
 
 		$output .= sprintf(

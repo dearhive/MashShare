@@ -14,16 +14,16 @@ class MASHSB_RWMB_Validation
 	 */
 	public function __construct()
 	{
-		add_action( 'rwmb_after', array( $this, 'rules' ) );
-		add_action( 'rwmb_enqueue_scripts', array( $this, 'scripts' ) );
+		add_action( 'mashsb_rwmb_after', array( $this, 'rules' ) );
+		add_action( 'mashsb_rwmb_enqueue_scripts', array( $this, 'scripts' ) );
 	}
 
 	/**
 	 * Output validation rules of each meta box.
 	 * The rules are outputted in [data-rules] attribute of an hidden <script> and will be converted into JSON by JS.
-	 * @param RW_Meta_Box $object Meta Box object
+	 * @param MASHSB_RW_Meta_Box $object Meta Box object
 	 */
-	public function rules( RW_Meta_Box $object )
+	public function rules( MASHSB_RW_Meta_Box $object )
 	{
 		if ( ! empty( $object->meta_box['validation'] ) )
 		{

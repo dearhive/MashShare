@@ -173,7 +173,7 @@ class MASHSB_RWMB_Datetime_Field extends MASHSB_RWMB_Text_Field
 		{
 			return $meta;
 		}
-		$method = array( RW_Meta_Box::get_class_name( $field ), 'translate_format' );
+		$method = array( MASHSB_RW_Meta_Box::get_class_name( $field ), 'translate_format' );
 		if ( is_array( $meta ) )
 		{
 			foreach ( $meta as $key => $value )

@@ -25,7 +25,7 @@ class MASHSB_RWMB_Helper
 		$meta_boxes = MASHSB_RWMB_Core::get_meta_boxes();
 		foreach ( $meta_boxes as $meta_box )
 		{
-			$meta_box = RW_Meta_Box::normalize( $meta_box );
+			$meta_box = MASHSB_RW_Meta_Box::normalize( $meta_box );
 			if ( ! in_array( $post_type, $meta_box['post_types'] ) )
 			{
 				continue;
@@ -61,7 +61,7 @@ class MASHSB_RWMB_Helper
 			return false;
 		}
 		$field = $fields[$field_id];
-		return call_user_func( array( RW_Meta_Box::get_class_name( $field ), 'normalize' ), $field );
+		return call_user_func( array( MASHSB_RW_Meta_Box::get_class_name( $field ), 'normalize' ), $field );
 	}
 
 	/**
@@ -93,7 +93,7 @@ class MASHSB_RWMB_Helper
 			'clone'    => $args['clone'],
 			'multiple' => $args['multiple'],
 		);
-		$class = RW_Meta_Box::get_class_name( $field );
+		$class = MASHSB_RW_Meta_Box::get_class_name( $field );
 
 		switch ( $args['type'] )
 		{

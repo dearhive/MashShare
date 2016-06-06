@@ -143,8 +143,10 @@ function getSharedcount( $url ) {
     //global $mashsb_options, $post;
     global $mashsb_options, $post, $mashsb_sharecount; // todo test a global share count var if it reduces the amount of requests
 
-//    // Return global share count variable to prevent multiple execution
-    if (isset($mashsb_sharecount) && !mashsb_is_cache_refresh() ){
+    // Return global share count variable to prevent multiple execution
+    //if (!empty($mashsb_sharecount[$url]) && !mashsb_is_cache_refresh() ){
+    if (is_array($mashsb_sharecount) && array_key_exists($url, $mashsb_sharecount) && !empty($mashsb_sharecount[$url]) && !mashsb_is_cache_refresh() ){
+        //echo "debug" . $mashsb_sharecount[$url];
         return $mashsb_sharecount[$url] + getFakecount();
     }
    
@@ -386,6 +388,7 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
     
     // define globals
     if( $is_shortcode ) {
+        //$mashsb_twitter_url = !empty( $mashsb_custom_url ) ? mashsb_get_shorturl( $mashsb_custom_url ) : mashsb_get_twitter_url();
         $mashsb_twitter_url = !empty( $mashsb_custom_url ) ? mashsb_get_shorturl( $mashsb_custom_url ) : mashsb_get_twitter_url();
     }else{
         $mashsb_twitter_url = mashsb_get_twitter_url();
@@ -405,7 +408,7 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
     $maxcounter = ($maxcounter === 'all') ? 'all' : ($maxcounter + 1); // plus 1 to get networks correct counted (array's starting counting from zero)
     $maxcounter = apply_filters( 'mashsb_visible_services', $maxcounter );
 
-    /* visible services from shortcode attribute */
+    /* Overwrite maxcounter with shortcode attribute */
     $maxcounter = ($services === 0) ? $maxcounter : $services;
 
     /* our list of available services, includes the disabled ones! 
@@ -1071,9 +1074,9 @@ function mashsb_get_twitter_username() {
  */
 function mashsb_get_document_title() {
     // wp_get_document_title() exist since WP 4.4
-    if( function_exists( 'wp_get_document_title' ) ) {
+    /*if( function_exists( 'wp_get_document_title' ) ) {
         return wp_get_document_title();
-    }
+    }*/
 
     /**
      * Filter the document title before it is generated.
@@ -1147,11 +1150,11 @@ function mashsb_get_document_title() {
     }
 
     // Append the description or site title to give context.
-    if( is_front_page() ) {
-        $title['tagline'] = get_bloginfo( 'description', 'display' );
-    } else {
-        $title['site'] = get_bloginfo( 'name', 'display' );
-    }
+//    if( is_front_page() ) {
+//        $title['tagline'] = get_bloginfo( 'description', 'display' );
+//    } else {
+//        $title['site'] = get_bloginfo( 'name', 'display' );
+//    }
 
     /**
      * Filter the separator for the document title.
@@ -1176,7 +1179,7 @@ function mashsb_get_document_title() {
      *     @type string $site    Optional. Site title when not on home page.
      * }
      */
-    $title = apply_filters( 'document_title_parts', $title );
+    //$title = apply_filters( 'document_title_parts', $title );
 
     $title = implode( " $sep ", array_filter( $title ) );
     $title = wptexturize( $title );

@@ -39,7 +39,7 @@ abstract class MASHSB_RWMB_Field
 		$post    = get_post();
 		$post_id = isset( $post->ID ) ? $post->ID : 0;
 
-		$field_class = RW_Meta_Box::get_class_name( $field );
+		$field_class = MASHSB_RW_Meta_Box::get_class_name( $field );
 		$meta        = call_user_func( array( $field_class, 'meta' ), $post_id, $saved, $field );
 		$meta        = MASHSB_RWMB_Core::filter( 'field_meta', $meta, $field, $saved );
 
@@ -175,7 +175,7 @@ abstract class MASHSB_RWMB_Field
 	 */
 	static function end_html( $meta, $field )
 	{
-		$button = $field['clone'] ? call_user_func( array( RW_Meta_Box::get_class_name( $field ), 'add_clone_button' ), $field ) : '';
+		$button = $field['clone'] ? call_user_func( array( MASHSB_RW_Meta_Box::get_class_name( $field ), 'add_clone_button' ), $field ) : '';
 		$desc   = $field['desc'] ? "<p id='{$field['id']}_description' class='description'>{$field['desc']}</p>" : '';
 
 		// Closes the container
@@ -236,7 +236,7 @@ abstract class MASHSB_RWMB_Field
 		$meta = ( ! $saved && '' === $meta || array() === $meta ) ? $field['std'] : $meta;
 
 		// Escape attributes
-		$meta = call_user_func( array( RW_Meta_Box::get_class_name( $field ), 'esc_meta' ), $meta );
+		$meta = call_user_func( array( MASHSB_RW_Meta_Box::get_class_name( $field ), 'esc_meta' ), $meta );
 
 		// Make sure meta value is an array for clonable and multiple fields
 		if ( $field['clone'] || $field['multiple'] )
@@ -479,7 +479,7 @@ abstract class MASHSB_RWMB_Field
 	 */
 	static function the_value( $field, $args = array(), $post_id = null )
 	{
-		$value  = call_user_func( array( RW_Meta_Box::get_class_name( $field ), 'get_value' ), $field, $args, $post_id );
+		$value  = call_user_func( array( MASHSB_RW_Meta_Box::get_class_name( $field ), 'get_value' ), $field, $args, $post_id );
 		$output = $value;
 		if ( is_array( $value ) )
 		{

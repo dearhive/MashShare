@@ -13,7 +13,7 @@ abstract class MASHSB_RWMB_Input_Field extends MASHSB_RWMB_Field
 	 */
 	static function html( $meta, $field )
 	{
-		$attributes = call_user_func( array( RW_Meta_Box::get_class_name( $field ), 'get_attributes' ), $field, $meta );
+		$attributes = call_user_func( array( MASHSB_RW_Meta_Box::get_class_name( $field ), 'get_attributes' ), $field, $meta );
 		return sprintf( '<input %s>%s', self::render_attributes( $attributes ), self::datalist_html( $field ) );
 	}
 

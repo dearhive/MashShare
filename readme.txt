@@ -9,7 +9,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email
 Requires at least: 3.6+
 Tested up to: 4.5.2
-Stable tag: 3.0.5
+Stable tag: 3.0.8
 
 Social Media Share Buttons for Twitter, Facebook and other social networks. Highly customizable Social Media ecosystem
 
@@ -316,6 +316,18 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 
 == Changelog == 
+
+= 3.0.8 =
+* Fix: Remove Sitename from twitter share title
+* Fix: WP Shorturls deactivated for shortcodes with custom url like [mashshare url="https://www.google.com" text="share it"]
+
+= 3.0.7 =
+* Fix: Fatal error with themes using the meta-box framework
+* Fix: Undefined index mashsu_methods
+
+= 3.0.6 =
+* Fix: Fatal error: Cannot redeclare rwmb_meta_shortcode()
+* Fix: Under some circumstances previous settings are overwritten with default values when plugin is updated
 
 = 3.0.5 =
 * Fix: WP Shortlinks not workings

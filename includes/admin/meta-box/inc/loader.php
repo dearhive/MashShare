@@ -83,14 +83,14 @@ class MASHSB_RWMB_Loader
 	public function autoload( $class )
 	{
 		// Only load plugin's classes
-		if ( 'RW_Meta_Box' != $class && 0 !== strpos( $class, 'MASHSB_RWMB_' ) )
+		if ( 'MASHSB_RW_Meta_Box' != $class && 0 !== strpos( $class, 'MASHSB_RWMB_' ) )
 		{
 			return;
 		}
 
 		// Get file name
 		$file = 'meta-box';
-		if ( 'RW_Meta_Box' != $class )
+		if ( 'MASHSB_RW_Meta_Box' != $class )
 		{
 			// Remove prefix 'MASHSB_RWMB_'
 			$file = substr( $class, 12 );

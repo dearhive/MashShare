@@ -26,7 +26,7 @@ class MASHSB_RWMB_Autocomplete_Field extends MASHSB_RWMB_Multiple_Values_Field
 		if ( ! is_array( $meta ) )
 			$meta = array( $meta );
 
-		$field   = apply_filters( 'rwmb_autocomplete_field', $field, $meta );
+		$field   = apply_filters( 'mashsb_rwmb_autocomplete_field', $field, $meta );
 		$options = $field['options'];
 
 		if ( ! is_string( $field['options'] ) )
@@ -87,7 +87,7 @@ class MASHSB_RWMB_Autocomplete_Field extends MASHSB_RWMB_Multiple_Values_Field
 			{
 				if ( empty( $value ) )
 					continue;
-				$label = apply_filters( 'rwmb_autocomplete_result_label', $value, $field );
+				$label = apply_filters( 'mashsb_rwmb_autocomplete_result_label', $value, $field );
 				$html .= sprintf(
 					$tpl,
 					$label,

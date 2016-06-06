@@ -47,7 +47,7 @@ class MASHSB_RWMB_Select_Tree_Walker
 		$field       = $this->field;
 		$meta        = $this->meta;
 		$walker      = new MASHSB_RWMB_Select_Walker( $this->db_fields, $this->field, $this->meta );
-		$field_class = RW_Meta_Box::get_class_name( $field );
+		$field_class = MASHSB_RW_Meta_Box::get_class_name( $field );
 		$attributes  = call_user_func( array( $field_class, 'get_attributes' ), $field, $meta );
 
 		$children = $options[$parent_id];
