@@ -116,11 +116,11 @@ function mashsb_get_expiration_method_async() {
     // post age in seconds
     $post_age = floor( date( 'U' ) - get_post_time( 'U', true ) );
 
-    if( isset( $post_age ) && $post_age > 2592000 ) {
-        // Post older than 30 days - expire cache after 12 hours
+    if( isset( $post_age ) && $post_age > 5184000 ) {
+        // Post older than 60 days - expire cache after 12 hours
         $seconds = 43200;
-    } else if( isset( $post_age ) && $post_age > 1209600 ) {
-        // Post older than 14 days - expire cache after 4 hours.
+    } else if( isset( $post_age ) && $post_age > 75600 ) {
+        // Post older than 21 days - expire cache after 4 hours.
         $seconds = 14400;
     } else {
         // expire cache after one hour
