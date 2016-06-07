@@ -60,7 +60,7 @@ class MASHSB_HEADER_META_TAGS {
         $this->postID = get_the_ID();
         $this->post_title = $this->get_title();
         $this->post_featured_image = $this->get_featured_image();
-        $this->post_description = $this->get_excerpt_by_id( $this->postID );
+        $this->post_description = $this->sanitize_data( $this->get_excerpt_by_id( $this->postID ) );
         $this->pinterest_image = $this->get_pinterest_image_url();
         $this->pinterest_description = $this->get_pinterest_description();
 
@@ -79,12 +79,17 @@ class MASHSB_HEADER_META_TAGS {
      * @return void
      */
     public function get_og_data() {
-        $this->og_title = htmlspecialchars( get_post_meta( $this->postID, 'mashsb_og_title', true ) );
-        $this->og_description = htmlspecialchars( get_post_meta( $this->postID, 'mashsb_og_description', true ) );
+        $this->og_title = $this->sanitize_data( get_post_meta( $this->postID, 'mashsb_og_title', true ) );
+        $this->og_description = $this->sanitize_data( get_post_meta( $this->postID, 'mashsb_og_description', true ) );
         $this->og_image = $this->get_image_url();
-        $this->twitter_title = htmlspecialchars( get_post_meta( $this->postID, 'mashsb_custom_tweet', true ) );
+        $this->twitter_title = $this->sanitize_data( get_post_meta( $this->postID, 'mashsb_custom_tweet', true ) );
         $this->twitter_creator = $this->get_twitter_creator();
         $this->twitter_site = mashsb_get_twitter_username();
+    }
+    
+    public function sanitize_data($string){
+        //return $string;
+        return htmlspecialchars(preg_replace( "/\r|\n/", " ", $string ));
     }
 
     /**
@@ -158,6 +163,7 @@ class MASHSB_HEADER_META_TAGS {
      */
     public function get_title() {
         return $this->replace_quote_characters( htmlspecialchars_decode( mashsb_get_document_title() ) );
+        //return $this->replace_quote_characters( htmlspecialchars_decode( "testtitle" ) );
     }
 
     /**
