@@ -320,6 +320,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 = 3.0.9 not released =
 * New. Modified cache expiration for async method: New posts: Updated once every hour! Posts older than 3 weeks: Updated once every 4 hours! Posts older than 2 month: Updated once every 12 hours!
 * Fix: Never fire async cache for bots
+* Fix: Remove correct sharecount even when a bot is visiting the site. Important to make sure that the cache gets filled correct
 * Tweak: Explain shorturl and show sample url formats for different shorturls on settings tab
 * Tweak: Better explanation of the different Caching Methods
 * Tweak: Change footer link to the documentation
