@@ -370,6 +370,12 @@ function arrNetworks( $name, $is_shortcode ) {
         'url' => $url,
         'title' => $title
     );
+    
+    
+    // Delete custom text
+    unset ($mashsb_custom_text);
+    // Delete custom url 
+    unset ($mashsb_custom_url);
 
     $networks = apply_filters( 'mashsb_array_networks', $networks_arr );
     return isset( $networks[$name] ) ? $networks[$name] : '';
@@ -559,7 +565,7 @@ function mashshareShortcodeShow( $args ) {
     $mashsb_custom_url = empty( $url ) ? mashsb_get_url() : $url;
 
     // Define custom text to share
-    $mashsb_custom_text = empty( $text ) ? mashsb_get_title() : $text;
+    $mashsb_custom_text = !empty( $text ) ? $text : false;
 
     if( $shares != 'false' ) {
         $sharecount = mashsb_render_sharecounts( $mashsb_custom_url, $align );
@@ -1108,10 +1114,6 @@ function mashsb_get_document_title() {
         /* translators: %s: search phrase */
         $title['title'] = sprintf( __( 'Search Results for &#8220;%s&#8221;' ), get_search_query() );
 
-        // If on the front page, use the site title.
-    } elseif( is_front_page() ) {
-        $title['title'] = get_bloginfo( 'name', 'display' );
-
         // If on a post type archive, use the post type archive title.
     } elseif( is_post_type_archive() ) {
         $title['title'] = post_type_archive_title( '', false );
@@ -1127,7 +1129,11 @@ function mashsb_get_document_title() {
     } elseif( is_home() || is_singular() ) {
         $title['title'] = single_post_title( '', false );
 
-        // If on a category or tag archive, use the term title.
+        // If on the front page, use the site title.
+    } elseif( is_front_page() ) {
+        $title['title'] = get_bloginfo( 'name', 'display' );
+        
+        // If on a category or tag archive, use the term title.   
     } elseif( is_category() || is_tag() ) {
         $title['title'] = single_term_title( '', false );
 

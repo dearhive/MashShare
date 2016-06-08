@@ -23,6 +23,11 @@ if( !defined( 'ABSPATH' ) ) {
 function mashsb_is_cache_refresh() {
     global $post;
     
+    // if it's a crawl deactivate cache
+    if( isset( $_SERVER['HTTP_USER_AGENT'] ) && preg_match( '/bot|crawl|slurp|spider/i', $_SERVER['HTTP_USER_AGENT'] ) ) {
+        return false;
+    }
+    
     /*
      * Deactivate share count on:
      * - 404 pages

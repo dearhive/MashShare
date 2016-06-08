@@ -9,28 +9,27 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email
 Requires at least: 3.6+
 Tested up to: 4.5.2
-Stable tag: 3.0.8
+Stable tag: 3.0.9
 
 Social Media Share Buttons for Twitter, Facebook and other social networks. Highly customizable Social Media ecosystem
 
 == Description == 
 
 > #### MashShare - The Social Media Ecosystem (Twitter counts supported)
-> This free Social Media Icons Plugin is a professional and highly customizable<br />
+> A free Social Media Plugin, professional and highly customizable<br />
 > ecosystem for social media sharing and optimizing of your valuable content.<br /> 
 > 
-> <strong>Stop slow loading times of your website with other sharing buttons and prevent ranking loose.</strong>
-> Other social buttons are often using external scripts which are increasing loading time of your entire website.
-
+> <strong>Stop slowing down your website and prevent ranking loose.</strong>
+> Other social buttons are often using external scripts which are increasing loading times.
 > MashShare is using NO external script dependencies. All code is loaded directly from your website and <strong>MashShare ensures yours and your visitors privacy!</strong>  <br /> 
 >
-> <strong>New: </strong> Most Shared Posts Widget
-> <strong>New: </strong> Async share count aggregation
-> <strong>New: </strong> Dashboard for total share count on posts screen
-> <strong>New: </strong> Short URL integration
-> <strong>New: </strong> Support for Accelerated Mobile Pages (AMP) when using the [official WordPress AMP plugin](https://wordpress.org/plugins/amp/)
+> * <strong>New: </strong> Most Shared Posts Widget
+> * <strong>New: </strong> Async share count aggregation
+> * <strong>New: </strong> Dashboard for total share count on posts screen
+> * <strong>New: </strong> Short URL integration
+> * <strong>New: </strong> Support for Accelerated Mobile Pages (AMP) when using the [official WordPress AMP plugin](https://wordpress.org/plugins/amp/)
 
-<strong>See a demonstration video by Katrinah.com</strong>
+<strong>Installation</strong>
 [youtube https://www.youtube.com/watch?v=vRSE-pQJTBQ]
 
 > It gives you per default a large total share counter beside three large 
@@ -304,22 +303,32 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 1. Subscribe form with Facebook button and mail subscribe
 2. Default share buttons with separate available responsive Add-On
-3. Add-On Marketplace with free and premium Add-Ons
+3. Sortable Total Share Dashboard
 4. Default Sharebuttons with separate available responsive Add-On
 5. Responsive Design + Social-Networks (separate Add-Ons)
 6. Default Share buttons + Subscribe Button opened (included)
-7. Sticky Sharebar Add-On on mobile device
+7. Social Media Settings on post edit screen
 8. Sticky Sharebar Add-On on desktop device
 9. Round circle style (included)
 11. Default share buttons (included)
 12. Custom Social Sharing descriptions with free MashShare Open Graph Add-On
+13. Extend MashShare with great Add-Ons
 
 
 == Changelog == 
 
+= 3.0.9 not released =
+* New. Modified cache expiration for async method: New posts: Updated once every hour! Posts older than 3 weeks: Updated once every 4 hours! Posts older than 2 month: Updated once every 12 hours!
+* Fix: Never fire async cache for bots
+* Tweak: Explain shorturl and show sample url formats for different shorturls on settings tab
+* Tweak: Better explanation of the different Caching Methods
+* Tweak: Change footer link to the documentation
+
 = 3.0.8 =
 * Fix: Remove Sitename from twitter share title
 * Fix: WP Shorturls deactivated for shortcodes with custom url like [mashshare url="https://www.google.com" text="share it"]
+* Fix: Wrong twitter title used when Yoast seo url and MashShare custom tweet setting is not defined
+* Fix: Wrong og:title generated on frontpage
 
 = 3.0.7 =
 * Fix: Fatal error with themes using the meta-box framework
@@ -488,5 +497,5 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 3.0.2 =
-3.0.2  <strong>New major update - MashShare 3.0 - Feature & performance improvements!</strong> <a href="https://wordpress.org/plugins/mashsharer/changelog/" style="color:white;text-decoration: underline;">Complete Changelog!</a> It's recommended to test plugin updates on a testing website first before installing them on a live site. (Use <a href="https://wordpress.org/plugins/wp-staging/" target="_blank" style="color:white;text-decoration: underline;">WP Staging</a> for creating a test site)
+= 3.0.8 =
+3.0.8  <strong>New major update - MashShare 3.8 - Feature & performance improvements!</strong> <a href="https://wordpress.org/plugins/mashsharer/changelog/" style="color:white;text-decoration: underline;">Complete Changelog!</a> It's recommended to test plugin updates on a testing website first before installing them on a live site. (Use <a href="https://wordpress.org/plugins/wp-staging/" target="_blank" style="color:white;text-decoration: underline;">WP Staging</a> for creating a test site)

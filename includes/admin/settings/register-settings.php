@@ -148,7 +148,7 @@ function mashsb_get_registered_settings() {
             'caching_method' => array(
                 'id' => 'caching_method',
                 'name' => __( 'Caching Method', 'mashsb' ),
-                'desc' => __( 'The <i>Async Cache Refresh</i> method never adds additonal load time for a visitor and refreshes the cache asyncronously in the background. New posts are updated at each hour. Older posts are updated from 4 hours to 12 hours for very old ones. <br><br> "Refresh while loading" rebuilds expired cache while page is loading and adds a little extra time during inital page load. If your shares are not counted try this method. "Refresh while loading" is the default method MashShare was using before version 3.0', 'mashsb' ),
+                'desc' => __( 'The <i>Async Cache Refresh</i> method never adds additonal load time for a visitor and refreshes the cache asyncronously in the background. New posts are updated at each hour. Older posts are updated from 4 hours to 12 hours for very old ones. <br><br> <i>Refresh while loading</i> rebuilds expired cache while page is loading and adds a little extra time during inital page load. <br><br><strong>If shares are not updating</strong> or site is heavy cached try <i>Refresh while loading!</i> That\'s the default method MashShare was using before version 3.0', 'mashsb' ),
                 'type' => 'select',
                 'options' => array(
                     'async_cache' => 'Async Cache Refresh',
@@ -330,12 +330,12 @@ function mashsb_get_registered_settings() {
             array(
                 'id' => 'mashsu_methods',
                 'name' => __( 'Shorturl method', 'mashsb' ),
-                'desc' => '',
+                'desc' => sprintf(__('Bitly generated shortlinks will be converted to the url format: <i>http://bit.ly/1PPg9D9</i><br><br>Goo.gl generated urls look like: <br><i>http://goo.gl/vSJwUV</i><br><br>Using WP Shortlinks converts twitter links into:<br> <i>%s ?p=101</i>', 'mashsb'), get_site_url() ),
                 'type' => 'select',
                 'options' => array(
                     'wpshortlinks' => 'WP Short links',
                     'bitly' => 'Bitly',
-                    'google' => 'Google',
+                    'google' => 'Goo.gl',
                     'disabled' => 'Short URLs Disabled',
                 )
             ),
