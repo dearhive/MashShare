@@ -162,8 +162,8 @@ class MASHSB_HEADER_META_TAGS {
      * @return string
      */
     public function get_title() {
-        return $this->replace_quote_characters( htmlspecialchars_decode( mashsb_get_document_title() ) );
-        //return $this->replace_quote_characters( htmlspecialchars_decode( "testtitle" ) );
+        return mashsb_get_document_title();
+        //return $this->replace_quote_characters( htmlspecialchars_decode( mashsb_get_document_title() ) );
     }
 
     /**
@@ -176,7 +176,6 @@ class MASHSB_HEADER_META_TAGS {
         if( !empty( $this->og_title ) ) {
             return $this->og_title;
         }
-
         if( defined( 'WPSEO_VERSION' ) ) {
             if( !empty( $this->yoast_og_title ) ) {
                 return $this->yoast_og_title;

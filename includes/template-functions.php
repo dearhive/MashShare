@@ -167,9 +167,9 @@ function getSharedcount( $url ) {
     }
 
     // if it's a crawl bot only serve non calculated numbers to save load
-    if( isset( $_SERVER['HTTP_USER_AGENT'] ) && preg_match( '/bot|crawl|slurp|spider/i', $_SERVER['HTTP_USER_AGENT'] ) ) {
+    /*if( isset( $_SERVER['HTTP_USER_AGENT'] ) && preg_match( '/bot|crawl|slurp|spider/i', $_SERVER['HTTP_USER_AGENT'] ) ) {
         return apply_filters( 'filter_get_sharedcount', 100 );
-    }
+    }*/
 
     /* 
      * Return share count on non singular pages when url is defined
@@ -938,10 +938,10 @@ function mashsb_get_title() {
         $title = esc_html( $title );
     } else {
         $title = mashsb_get_document_title();
-        $title = html_entity_decode( $title, ENT_QUOTES, 'UTF-8' );
-        $title = urlencode( $title );
-        $title = str_replace( '#', '%23', $title );
-        $title = esc_html( $title );
+        $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
+        $title = urlencode($title);
+        $title = str_replace('#', '%23', $title);
+        $title = esc_html($title);
     }
     return apply_filters( 'mashsb_get_title', $title );
 }
@@ -962,9 +962,10 @@ function mashsb_get_twitter_title() {
         $title = html_entity_decode( $title, ENT_QUOTES, 'UTF-8' );
         $title = urlencode( $title );
         $title = str_replace( '#', '%23', $title );
+        $title = str_replace( '+', '%20', $title );
+        $title = str_replace('|','',$title);
         $title = esc_html( $title );
-        //$title = str_replace( '+', '%20', $title );
-        //$title = str_replace('|','',$title);
+       
     } else {
         // title for non singular pages
         $title = mashsb_get_title();
@@ -1073,8 +1074,7 @@ function mashsb_get_twitter_username() {
  *
  * @since 3.0
  *
- * @global int $page  Page number of a single post.
- * @global int $paged Page number of a list of posts.
+ * @global int $post Page number of a list of posts.
  *
  * @return string Tag with the document title.
  */
@@ -1083,7 +1083,7 @@ function mashsb_get_document_title() {
     /*if( function_exists( 'wp_get_document_title' ) ) {
         return wp_get_document_title();
     }*/
-
+    
     /**
      * Filter the document title before it is generated.
      *
@@ -1094,104 +1094,74 @@ function mashsb_get_document_title() {
      *
      * @param string $title The document title. Default empty string.
      */
-    $title = apply_filters( 'pre_get_document_title', '' );
-    if( !empty( $title ) ) {
+    //$title = apply_filters( 'pre_get_document_title', '' );
+    /*if( !empty( $title ) ) {
         return $title;
-    }
+    }*/
 
-    global $page, $paged;
+    global $post;
 
-    $title = array(
-        'title' => '',
-    );
 
     // If it's a 404 page, use a "Page not found" title.
     if( is_404() ) {
-        $title['title'] = __( 'Page not found' );
+        $title = __( 'Page not found' );
 
         // If it's a search, use a dynamic search results title.
     } elseif( is_search() ) {
         /* translators: %s: search phrase */
-        $title['title'] = sprintf( __( 'Search Results for &#8220;%s&#8221;' ), get_search_query() );
+        $title = sprintf( __( 'Search Results for &#8220;%s&#8221;' ), get_search_query() );
 
         // If on a post type archive, use the post type archive title.
     } elseif( is_post_type_archive() ) {
-        $title['title'] = post_type_archive_title( '', false );
+        $title = post_type_archive_title( '', false );
 
         // If on a taxonomy archive, use the term title.
     } elseif( is_tax() ) {
-        $title['title'] = single_term_title( '', false );
+        $title = single_term_title( '', false );
 
         /*
          * If we're on the blog page that is not the homepage or
          * a single post of any post type, use the post title.
          */
     } elseif( is_home() || is_singular() ) {
-        $title['title'] = single_post_title( '', false );
+        //$title = single_post_title( '', false );
+        //$title = get_the_title( $post->ID );
+        $title = the_title_attribute('echo=0');
 
         // If on the front page, use the site title.
     } elseif( is_front_page() ) {
-        $title['title'] = get_bloginfo( 'name', 'display' );
+        $title = get_bloginfo( 'name', 'display' );
         
         // If on a category or tag archive, use the term title.   
     } elseif( is_category() || is_tag() ) {
-        $title['title'] = single_term_title( '', false );
+        $title = single_term_title( '', false );
 
         // If on an author archive, use the author's display name.
     } elseif( is_author() && $author = get_queried_object() ) {
-        $title['title'] = $author->display_name;
+        $title = $author->display_name;
 
         // If it's a date archive, use the date as the title.
     } elseif( is_year() ) {
-        $title['title'] = get_the_date( _x( 'Y', 'yearly archives date format' ) );
+        $title = get_the_date( _x( 'Y', 'yearly archives date format' ) );
     } elseif( is_month() ) {
-        $title['title'] = get_the_date( _x( 'F Y', 'monthly archives date format' ) );
+        $title = get_the_date( _x( 'F Y', 'monthly archives date format' ) );
     } elseif( is_day() ) {
-        $title['title'] = get_the_date();
+        $title = get_the_date();
     }
 
-    // Add a page number if necessary.
-    if( ( $paged >= 2 || $page >= 2 ) && !is_404() ) {
-        $title['page'] = sprintf( __( 'Page %s' ), max( $paged, $page ) );
-    }
 
-    // Append the description or site title to give context.
-//    if( is_front_page() ) {
-//        $title['tagline'] = get_bloginfo( 'description', 'display' );
-//    } else {
-//        $title['site'] = get_bloginfo( 'name', 'display' );
-//    }
+    //$title = wptexturize( $title );
+    //$title = convert_chars( $title );
 
-    /**
-     * Filter the separator for the document title.
-     *
-     * @since 4.4.0
-     *
-     * @param string $sep Document title separator. Default '-'.
-     */
-    $sep = apply_filters( 'document_title_separator', '-' );
+    //$title = esc_html( $title );
+    //$title = str_replace('|','',$title);
 
-    /**
-     * Filter the parts of the document title.
-     *
-     * @since 4.4.0
-     *
-     * @param array $title {
-     *     The document title parts.
-     *
-     *     @type string $title   Title of the viewed page.
-     *     @type string $page    Optional. Page number if paginated.
-     *     @type string $tagline Optional. Site description when on home page.
-     *     @type string $site    Optional. Site title when not on home page.
-     * }
-     */
-    //$title = apply_filters( 'document_title_parts', $title );
-
-    $title = implode( " $sep ", array_filter( $title ) );
-    $title = wptexturize( $title );
-    $title = convert_chars( $title );
-    $title = esc_html( $title );
-    $title = capital_P_dangit( $title );
-
+    //$title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
+    //$title = urlencode($title);
+    //$title = str_replace('#', '%23', $title);
+    //$title = esc_html($title);
+    //$title = str_replace('|','',$title);
+    //$title = strip_tags( $title );
+    $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
     return $title;
 }
