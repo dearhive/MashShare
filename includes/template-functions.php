@@ -543,8 +543,7 @@ function mashshareShortcodeShow( $args ) {
     //!empty($mashsb_options['visible_services']) ? $visible_services = $mashsb_options['visible_services'] : $visible_services = 1;
     //$sharecount_title = !empty( $mashsb_options['sharecount_title'] ) ? $mashsb_options['sharecount_title'] : __( 'SHARES', 'mashsb' );
 
-    $services = !empty( $mashsb_options['visible_services'] ) ? $mashsb_options['visible_services'] : 1;
-    $visible_services = ($services === 'all') ? 'all' : ($services + 1); // plus 1 to get networks correct counted (array's starting counting from zero)
+
 
     $sharecount = '';
 
@@ -555,12 +554,18 @@ function mashshareShortcodeShow( $args ) {
         'cache' => '3600',
         'shares' => 'true',
         'buttons' => 'true',
-        'services' => $visible_services + 1, //default is by admin option - plus 1 because array starts counting from zero
+        'services' => '0', //default is by admin option - plus 1 because array starts counting from zero
         'align' => 'left',
         'text' => '', // $text
         'url' => '' // $url
                     ), $args ) );
-
+    
+    // Visible services
+    //$services = !empty( $mashsb_options['visible_services'] ) ? $mashsb_options['visible_services'] : 0;
+    //$visible_services = ($services === 'all') ? 'all' : ($services + 1); // plus 1 to get networks correct counted (array's starting counting from zero)
+    $count_services = !empty($services) ? $services : 0;
+    
+    
     // Define custom url var to share
     $mashsb_custom_url = empty( $url ) ? mashsb_get_url() : $url;
 
@@ -580,7 +585,7 @@ function mashshareShortcodeShow( $args ) {
             '<div class="mashsb-box">'
             . $sharecount .
             '<div class="mashsb-buttons">'
-            . mashsb_getNetworks( true, $services ) .
+            . mashsb_getNetworks( true, $count_services ) .
             '</div></div>
                     <div style="clear:both;"></div>'
             . mashsb_subscribe_content()

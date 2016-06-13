@@ -9,7 +9,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email
 Requires at least: 3.6+
 Tested up to: 4.5.2
-Stable tag: 3.0.9
+Stable tag: 3.1.1
 
 Social Media Share Buttons for Twitter, Facebook and other social networks. Highly customizable Social Media ecosystem
 
@@ -317,7 +317,14 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 == Changelog == 
 
-= 3.0.9 not released =
+= 3.1.1 =
+* Fix: When using shortcode [mashshare] without an "services" argument the number of large buttons is wrong.
+
+= 3.1.0 =
+* Fix: Undefined var $mashsb_options
+* Fix: Default caching method async cache not working after update 2.5 > 3.x when settings were not saved manually
+
+= 3.0.9 =
 * New. Modified cache expiration for async method: New posts: Updated once every hour! Posts older than 3 weeks: Updated once every 4 hours! Posts older than 2 month: Updated once every 12 hours!
 * Fix: Never fire async cache for bots
 * Fix: Remove correct sharecount even when a bot is visiting the site. Important to make sure that the cache gets filled correct

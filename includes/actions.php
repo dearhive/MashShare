@@ -57,15 +57,17 @@ function mashsb_force_cache_refresh() {
         return true;
     }
     
+    $caching_method = !empty($mashsb_options['caching_method']) ? $mashsb_options['caching_method'] : 'refresh_loading';
+    
     // Old method and less performant - Cache is rebuild during pageload
-    if(isset($mashsb_options['caching_method']) && $mashsb_options['caching_method'] == 'refresh_loading'){
+    if($caching_method == 'refresh_loading'){
         if (mashsb_is_cache_refresh()){
             return true;
         }
     }
     
     // New method - Cache will be rebuild after complete pageloading and will be initiated via ajax.
-    if( isset( $_GET['mashsb-refresh'] ) && $mashsb_options['caching_method'] == 'async_cache' ) {
+    if( isset( $_GET['mashsb-refresh'] ) && $caching_method == 'async_cache' ) {
         MASHSB()->logger->info('Force Cache Refresh');
         return true;
     }

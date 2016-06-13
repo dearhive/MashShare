@@ -21,7 +21,7 @@ if( !defined( 'ABSPATH' ) ) {
  * @return boolean 
  */
 function mashsb_is_cache_refresh() {
-    global $post;
+    global $post, $mashsb_options;
     
     // if it's a crawl deactivate cache
     if( isset( $_SERVER['HTTP_USER_AGENT'] ) && preg_match( '/bot|crawl|slurp|spider/i', $_SERVER['HTTP_USER_AGENT'] ) ) {
