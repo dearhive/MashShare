@@ -27,7 +27,7 @@ function getTabHeader( $page, $section ) {
     if( !isset( $wp_settings_fields[$page][$section] ) )
         return;
 
-    echo '<ul>';
+    echo '<ul id="mashsb-tabs-sidebar">';
     foreach ( ( array ) $wp_settings_fields[$page][$section] as $field ) {
         $sanitizedID = str_replace( '[', '', $field['id'] );
         $sanitizedID = str_replace( ']', '', $sanitizedID );
