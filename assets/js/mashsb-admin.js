@@ -101,7 +101,7 @@ jQuery(document).ready(function ($) {
 
     // Start easytabs()
     if ($(".mashsb-tabs").length) {
-        $('#tab_container').easytabs({
+        $('#mashsb_container').easytabs({
             animate: true,
             updateHash: true,
             defaultTab: mashsb_get_default_array()
@@ -109,7 +109,7 @@ jQuery(document).ready(function ($) {
     }
 
     // Get active tab (Not for Add-On Settings)
-    $('#tab_container').bind('easytabs:after', function () {
+    $('#mashsb_container').bind('easytabs:after', function () {
         if (jQuery('.mashsb.nav-tab-wrapper a.nav-tab-active:nth-child(2)').length == 0) {
             find_active_tab();
         }

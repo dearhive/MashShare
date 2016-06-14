@@ -703,7 +703,7 @@ colpick Color Picker / colpick.com
 
 /* CSS for Tabs */
 
-#tab_container ul {
+#mashsb_container ul {
 /*height: 200px;*/
 list-style: none;
 margin: 0;
@@ -714,24 +714,24 @@ padding-top: 0px;
 max-width:200px;
 }
 
-#tab_container ul li:first-child.selected-tab {
+#mashsb_container ul li:first-child.selected-tab {
 border-top: none;
 }
 
-#tab_container ul li a.selected-tab {
+#mashsb_container ul li a.selected-tab {
 font-weight: bold;
 text-decoration: none;
 }
 
 
 
-#tab_container .row{ 
+#mashsb_container .row{ 
     padding-top:10px; 
     padding-bottom:12px;
 }
 
 
-#tab_container .row label strong, #tab_container .row strong {
+#mashsb_container .row label strong, #mashsb_container .row strong {
 font-weight: bold;
 }
 
@@ -739,7 +739,7 @@ font-weight: bold;
     padding:5px;
 }
 
-#tab_container > ul > li.mashsb-tabs.active {
+#mashsb_container > ul > li.mashsb-tabs.active {
     background-color:white;
 }
 
@@ -755,7 +755,7 @@ font-weight: bold;
 /* Layout of admin table and rows
 */
 
-#tab_container .panel-container {
+#mashsb_container .panel-container {
 background: #FFF;
 padding:20px;
 padding-top:0px;
@@ -763,7 +763,7 @@ overflow:auto;
 min-width: 550px;
 }
 
-#tab_container .form-table th {
+#mashsb_container .form-table th {
 vertical-align: top;
 text-align: left;
 padding: 20px 10px 20px 0;
@@ -775,11 +775,11 @@ color:#484848;
 /*width: 30%;*/
 }
 
-/*#tab_container .form-table tr {
+/*#mashsb_container .form-table tr {
   border-bottom: 1px solid #E7E7E7;
 }*/ 
 
-#tab_container span.description{
+#mashsb_container span.description{
     display: block;
     font-weight: 400;
     font-style: normal; 
@@ -788,30 +788,30 @@ color:#484848;
     color:#484848;
 }
 
-#tab_container .col-title{
+#mashsb_container .col-title{
     color:#484848;
 }
 
 @media only screen and (max-width:680px) {
-    #tab_container ul {
+    #mashsb_container ul {
         float:none;
     }
-    #tab_container .form-table tr > th {
+    #mashsb_container .form-table tr > th {
         width:100%;
     } 
-    #tab_container span.description{
+    #mashsb_container span.description{
     font-size: 14px;
     }
-    #tab_container .form-table tr > th, #tab_container .form-table tr > td {
+    #mashsb_container .form-table tr > th, #mashsb_container .form-table tr > td {
         padding:10px;
     }
 }
 
-#tab_container ul li {
+#mashsb_container ul li {
 margin-bottom:0px;
 }
 
-#tab_container ul li a {
+#mashsb_container ul li a {
 display: block;
 padding:10px 4px 10px 14px;
 border-width: 1px 0;
@@ -822,7 +822,7 @@ text-decoration: none;
 color: #0097DF;
 font-weight: bold;
 }
-#tab_container ul li a:hover {
+#mashsb_container ul li a:hover {
 background-color: #e5e5e5;
 color:#777777;
 }
@@ -853,7 +853,7 @@ color:#777777;
 }
 
 
-#tab_container table tbody tr:nth-child(1) > th > div {
+#mashsb_container table tbody tr:nth-child(1) > th > div {
     font-size: 20px;
 }
 
@@ -1156,11 +1156,11 @@ color: #0097df;
     padding: 1px 12px;
 }
 
-#tab_container .form-table th.mashsb-status-col{
+#mashsb_container .form-table th.mashsb-status-col{
     width: 50px;
 }
 
-#tab_container .form-table th.mashsb-network-col{
+#mashsb_container .form-table th.mashsb-network-col{
     width: 150px;
 }
 
@@ -1169,7 +1169,7 @@ color: #0097df;
     max-width: 99%;
 }
 
-.mashsb-chosen-select ul li .search-choice-close {
+/*.mashsb-chosen-select ul li .search-choice-close {
     padding:0px;
 }
 
@@ -1180,4 +1180,16 @@ color: #0097df;
     float:none;
     max-width: 400px;
     background-color: #fff;
+}*/
+/*.mashsb-chosen-select ul li .search-choice-close {
+    padding:0px;
 }
+
+.chosen-container-multi ul > li a{
+        padding:0px;
+}
+.chosen-container-multi ul{
+    float:none;
+    max-width: 400px;
+    background-color: #fff;
+}*/

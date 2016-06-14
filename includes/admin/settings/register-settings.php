@@ -346,19 +346,19 @@ function mashsb_get_registered_settings() {
                 'type' => 'renderhr',
                 'size' => 'large'
             ),
-//            array(
-//                'id' => 'shorturl_type',
-//                'name' => __( 'Enable on', 'mashsb' ),
-//                'desc' => __( 'You can choose multiple networks where short url\'s should be used.', 'mashsb' ),
-//                'type' => 'multiselect',
-//                'placeholder' => 'Select the networks',
-//                'options' => array(
-//                    'twitter' => 'Twitter',
-//                    'facebook' => 'Facebook',
-//                    'default' => 'All Networks'
-//                ),
-//                'std' => 'All networks'
-//            ),
+            array(
+                'id' => 'shorturl_type',
+                'name' => __( 'Enable on', 'mashsb' ),
+                'desc' => __( 'You can choose multiple networks where short url\'s should be used.', 'mashsb' ),
+                'type' => 'multiselect',
+                'placeholder' => 'Select the networks',
+                'options' => array(
+                    'twitter' => 'Twitter',
+                    'facebook' => 'Facebook',
+                    'default' => 'All Networks'
+                ),
+                'std' => 'All networks'
+            ),
             'style_header' => array(
                 'id' => 'style_header',
                 'name' => '<strong>' . __( 'Customization', 'mashsb' ) . '</strong>',
@@ -1420,21 +1420,12 @@ function mashsb_select_callback( $args ) {
 function mashsb_multiselect_callback( $args = array() ) {
 global $mashsb_options;
 
-//if( isset( $mashsb_options[$args['id']] ) ) {
-//        $value = $mashsb_options[$args['id']];
-//    } else {
-//        $value = isset( $args['std'] ) ? $args['std'] : '';
-//    }
-
     $selected = isset($mashsb_options[$args['id']]) ? $mashsb_options[$args['id']] : '';
-    //echo '<pre>';
-    //var_dump($selected);
 
     $html = '<select name="mashsb_settings[' . $args['id'] . '][]" data-placeholder="Select Networks" style="width:350px;" multiple tabindex="4" class="mashsb-select mashsb-chosen-select">';
     $i = 0;
     foreach ( $args['options'] as $key => $value ) :
         if( is_array($selected)){
-        //echo '<br>value: ' . $value . ' key:'. $key . ' in array: ' . in_array( $key, $selected ) . '<br>';
         $checked = selected( true, in_array( $key, $selected ), false );
         }
         $html .= '<option value="' . $key . '" ' . $checked . '>' . $value . '</option>';
