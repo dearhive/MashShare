@@ -1055,8 +1055,9 @@ function mashsb_multiselect_callback( $args = array() ) {
     global $mashsb_options;
 
     $selected = isset($mashsb_options[$args['id']]) ? $mashsb_options[$args['id']] : '';
-
-    $html = '<select name="mashsb_settings[' . $args['id'] . '][]" data-placeholder="Select Networks" style="width:350px;" multiple tabindex="4" class="mashsb-select mashsb-chosen-select">';
+    $checked = '';
+    
+    $html = '<select name="mashsb_settings[' . $args['id'] . '][]" data-placeholder="'. $args['name'] . '" style="width:350px;" multiple tabindex="4" class="mashsb-select mashsb-chosen-select">';
     $i = 0;
     foreach ( $args['options'] as $key => $value ) :
         if( is_array($selected)){
@@ -1729,9 +1730,9 @@ function mashsb_check_active_addons(){
 function mashsb_get_user_roles() {
     global $wp_roles;
     $roles = array();
-    //var_dump($wp_roles->roles);
+
     foreach ( $wp_roles->roles as $role ) {
-        if( isset( $role["capabilities"]["edit_posts"] ) || ( isset( $role["capabilities"]["edit_posts"] ) && $role["capabilities"]["edit_posts"] === true ) ){
+        if( isset( $role["capabilities"]["edit_posts"] ) && $role["capabilities"]["edit_posts"] === true ) {
             $value = str_replace( ' ', null, strtolower( $role["name"] ) );
             $roles[$value] = $role["name"];
         }
