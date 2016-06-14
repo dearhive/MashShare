@@ -1729,8 +1729,9 @@ function mashsb_check_active_addons(){
 function mashsb_get_user_roles() {
     global $wp_roles;
     $roles = array();
+    //var_dump($wp_roles->roles);
     foreach ( $wp_roles->roles as $role ) {
-        if( isset( $role["capabilities"]["edit_posts"] ) || $role["capabilities"]["edit_posts"] === true ){
+        if( isset( $role["capabilities"]["edit_posts"] ) || ( isset( $role["capabilities"]["edit_posts"] ) && $role["capabilities"]["edit_posts"] === true ) ){
             $value = str_replace( ' ', null, strtolower( $role["name"] ) );
             $roles[$value] = $role["name"];
         }
