@@ -49,7 +49,9 @@ function mashsb_meta_boxes( $meta_boxes ) {
     unset($user);
 
     // Don't display meta boxes
-    if ($shouldMetaBoxesBeDisplayed !== true) return apply_filters( 'mashsb_meta_box_settings', $meta_boxes, 10, 0 );
+    if ($shouldMetaBoxesBeDisplayed !== true) {
+        return apply_filters( 'mashsb_meta_box_settings', $meta_boxes, 10, 0 );
+    }
 
     // Setup our meta box using an array
     $meta_boxes[0] = array(
