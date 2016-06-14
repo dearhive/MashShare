@@ -9,8 +9,36 @@
  * @3.0.0
  */
 
-add_filter( 'mashsb_rwmb_meta_boxes', 'mashsb_meta_boxes' );
+/**
+ * Check if meta boxes must be shown for a specific user role
+ * Show meta box when user role is not specified
+ * 
+ * @global array $mashsb_options
+ * @return bool true when meta boxes are should be shown for a specific user role
+ */
+function mashsb_show_meta_box(){
+    global $mashsb_options, $wp_roles;
+    
+    // Show meta boxes per default in any case when user roles are not defined
+    if(!empty($mashsb_options) && !isset($mashsb_options['user_roles_for_sharing_options'])){
+        return true;
+    }
+    
+    // Get user roles and plugin settings
+    $user = wp_get_current_user();
 
+    // Loop through user roles
+    foreach($user->roles as $role) {
+        // Rule exists and it is set
+        if( isset( $mashsb_options["user_roles_for_sharing_options"] ) && in_array( str_replace( ' ', null, strtolower( $role ) ), $mashsb_options["user_roles_for_sharing_options"] ) ) {
+            // Garbage collection
+            unset($user);
+            return true;
+        }
+    }
+}
+
+add_filter( 'mashsb_rwmb_meta_boxes', 'mashsb_meta_boxes' );
 function mashsb_meta_boxes( $meta_boxes ) {
     global $mashsb_options, $post;
     $prefix = 'mashsb_';
@@ -22,34 +50,39 @@ function mashsb_meta_boxes( $meta_boxes ) {
     $post_type[] = 'page';
 
     $twitter_handle = isset( $mashsb_options['mashsharer_hashtag'] ) ? $mashsb_options['mashsharer_hashtag'] : '';
+    
+    
 
-    // Get user roles and plugin settings
-    $user = wp_get_current_user();
-
-    // No roles for this user or couldn't retrieve plugin settings
-    if (empty($user->roles) || !is_array($user->roles)) {
-        return apply_filters( 'mashsb_meta_box_settings', $meta_boxes, 10, 0 );
-    }
-
-    // Should meta boxes be displayed?
-    $shouldMetaBoxesBeDisplayed = false;
-
-    // Loop through user roles
-    foreach($user->roles as $role) {
-        // Rule exists and it is set
-        if (isset($mashsb_options["user_roles_for_sharing_options"]) &&
-            in_array(str_replace(' ', null, strtolower($role)), $mashsb_options["user_roles_for_sharing_options"])
-        ) {
-            $shouldMetaBoxesBeDisplayed = true;
-            // We got it, no need to check for more
-            break;
-        }
-    }
-    // Garbage collection
-    unset($user);
-
-    // Don't display meta boxes
-    if ($shouldMetaBoxesBeDisplayed !== true) {
+//    // Get user roles and plugin settings
+//    $user = wp_get_current_user();
+//
+//    // No roles for this user or couldn't retrieve plugin settings
+//    if (empty($user->roles) || !is_array($user->roles)) {
+//        return apply_filters( 'mashsb_meta_box_settings', $meta_boxes, 10, 0 );
+//    }
+//
+//    // Should meta boxes be displayed?
+//    $shouldMetaBoxesBeDisplayed = false;
+//
+//    // Loop through user roles
+//    foreach($user->roles as $role) {
+//        // Rule exists and it is set
+//        if( isset( $mashsb_options["user_roles_for_sharing_options"] ) && in_array( str_replace( ' ', null, strtolower( $role ) ), $mashsb_options["user_roles_for_sharing_options"] ) ) {
+//            $shouldMetaBoxesBeDisplayed = true;
+//            // We got it, no need to check for more
+//            break;
+//        }
+//    }
+//    // Garbage collection
+//    unset($user);
+//
+//    // Don't display meta boxes
+//    if ($shouldMetaBoxesBeDisplayed !== true) {
+//        return apply_filters( 'mashsb_meta_box_settings', $meta_boxes, 10, 0 );
+//    }
+    
+    // Do not show meta boxes
+    if( !mashsb_show_meta_box() ) {
         return apply_filters( 'mashsb_meta_box_settings', $meta_boxes, 10, 0 );
     }
 
