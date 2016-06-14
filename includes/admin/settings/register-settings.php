@@ -99,6 +99,7 @@ function mashsb_register_settings() {
 
 add_action( 'admin_init', 'mashsb_register_settings' );
 
+
 /**
  * Retrieve the array of plugin settings
  *
@@ -106,14 +107,7 @@ add_action( 'admin_init', 'mashsb_register_settings' );
  * @return array
  */
 function mashsb_get_registered_settings() {
-    global $wp_roles;
-
-    $roles = array();
-    foreach($wp_roles->roles as $role) {
-        if (!isset($role["capabilities"]["edit_posts"]) || $role["capabilities"]["edit_posts"] !== true) continue;
-        $roles[str_replace(' ', null, strtolower($role["name"]))] = $role["name"];
-    }
-
+    
     /**
      * 'Whitelisted' MASHSB settings, filters are provided for each settings
      * section to allow extensions and other plugins to add their own settings
@@ -242,15 +236,12 @@ function mashsb_get_registered_settings() {
                 ),
                 "user_roles_for_sharing_options" => array(
                     "id"            => "user_roles_for_sharing_options",
-                    "name"          => __("Visibility of Options", "mashnsb"),
-                    "desc"          => __(
-                        "Select user roles which can display page and post MashShare Social Sharing Options",
-                        "mashnsb"
-                    ),
+                    "name"          => __("Visibility of Options", "mashsb"),
+                    "desc"          => __("Select user roles which can display page and post MashShare Social Sharing Options", "mashsb"),
                     "type"          => "multiselect",
-                    "options"       => $roles,
-                    "placeholder"   => __("Select User Roles", "mashnsb"),
-                    "std"           => __("All Roles", "mashnsb"),
+                    "options"       => mashsb_get_user_roles(),
+                    "placeholder"   => __("Select User Roles", "mashsb"),
+                    "std"           => __("All Roles", "mashsb"),
                 ),
                 'services_header' => array(
                     'id' => 'services_header',
@@ -365,19 +356,19 @@ function mashsb_get_registered_settings() {
                     'type' => 'renderhr',
                     'size' => 'large'
                 ),
-                array(
-                    'id' => 'shorturl_type',
-                    'name' => __( 'Enable on', 'mashsb' ),
-                    'desc' => __( 'You can choose multiple networks where short url\'s should be used.', 'mashsb' ),
-                    'type' => 'multiselect',
-                    'placeholder' => 'Select the networks',
-                    'options' => array(
-                        'twitter' => 'Twitter',
-                        'facebook' => 'Facebook',
-                        'default' => 'All Networks'
-                    ),
-                    'std' => 'All networks'
-                ),
+//                array(
+//                    'id' => 'shorturl_type',
+//                    'name' => __( 'Enable on', 'mashsb' ),
+//                    'desc' => __( 'You can choose multiple networks where short url\'s should be used.', 'mashsb' ),
+//                    'type' => 'multiselect',
+//                    'placeholder' => 'Select the networks',
+//                    'options' => array(
+//                        'twitter' => 'Twitter',
+//                        'facebook' => 'Facebook',
+//                        'default' => 'All Networks'
+//                    ),
+//                    'std' => 'All networks'
+//                ),
                 'style_header' => array(
                     'id' => 'style_header',
                     'name' => '<strong>' . __( 'Customization', 'mashsb' ) . '</strong>',
@@ -964,7 +955,6 @@ function mashsb_get_registered_settings() {
             )
         )
     );
-    unset($roles);
 
     return $mashsb_settings;
 }
@@ -2125,3 +2115,21 @@ function mashsb_check_active_addons(){
     }
 }
 
+/**
+ * 
+ * Get user roles with capability 'edit_posts'
+ * 
+ * @global array $wp_roles
+ * @return array
+ */
+function mashsb_get_user_roles() {
+    global $wp_roles;
+    $roles = array();
+    foreach ( $wp_roles->roles as $role ) {
+        if( isset( $role["capabilities"]["edit_posts"] ) || $role["capabilities"]["edit_posts"] === true ){
+            $value = str_replace( ' ', null, strtolower( $role["name"] ) );
+            $roles[$value] = $role["name"];
+        }
+    }
+    return $roles;
+}
