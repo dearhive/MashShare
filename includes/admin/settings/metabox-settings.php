@@ -23,6 +23,35 @@ function mashsb_meta_boxes( $meta_boxes ) {
 
     $twitter_handle = isset( $mashsb_options['mashsharer_hashtag'] ) ? $mashsb_options['mashsharer_hashtag'] : '';
 
+    // Get user roles and plugin settings
+    $user       = wp_get_current_user();
+    $settings   = get_option("mashsb_settings", false);
+
+    // No roles for this user or couldn't retrieve plugin settings
+    if (empty($user->roles) || !is_array($user->roles) || !$settings) {
+        return apply_filters( 'mashsb_meta_box_settings', $meta_boxes, 10, 0 );
+    }
+
+    // Should meta boxes be displayed?
+    $shouldMetaBoxesBeDisplayed = false;
+
+    // Loop through user roles
+    foreach($user->roles as $role) {
+        // Rule exists and it is set
+        if (isset($settings["user_roles_for_sharing_options"]) &&
+            in_array(str_replace(' ', null, strtolower($role)), $settings["user_roles_for_sharing_options"])
+        ) {
+            $shouldMetaBoxesBeDisplayed = true;
+            // We got it, no need to check for more
+            break;
+        }
+    }
+    // Garbage collection
+    unset($user, $settings);
+
+    // Don't display meta boxes
+    if ($shouldMetaBoxesBeDisplayed !== true) return apply_filters( 'mashsb_meta_box_settings', $meta_boxes, 10, 0 );
+
     // Setup our meta box using an array
     $meta_boxes[0] = array(
         'id' => 'mashsb_meta',
@@ -124,7 +153,7 @@ function mashsb_meta_boxes( $meta_boxes ) {
 
 /**
  * Check if Yoast is active
- * 
+ *
  * @return boolean true when yoast is active
  */
 function mashsb_yoast_active() {
@@ -143,9 +172,9 @@ function mashsb_twitter_desc() {
     }
     $str .= __( ' your tweet has a maximum of 140 characters. ', 'mashsb' );
     if (!mashsb_yoast_active()){
-    $str .= __( 'If this is left blank the post title will be used. ', 'mashsb' );
+        $str .= __( 'If this is left blank the post title will be used. ', 'mashsb' );
     }else{
-    $str .= __( 'If this is left blank the Yoast Twitter Title or post title will be used. ', 'mashsb' );    
+        $str .= __( 'If this is left blank the Yoast Twitter Title or post title will be used. ', 'mashsb' );
     }
 
     return $str;
