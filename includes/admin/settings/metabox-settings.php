@@ -24,11 +24,10 @@ function mashsb_meta_boxes( $meta_boxes ) {
     $twitter_handle = isset( $mashsb_options['mashsharer_hashtag'] ) ? $mashsb_options['mashsharer_hashtag'] : '';
 
     // Get user roles and plugin settings
-    $user       = wp_get_current_user();
-    $settings   = get_option("mashsb_settings", false);
+    $user = wp_get_current_user();
 
     // No roles for this user or couldn't retrieve plugin settings
-    if (empty($user->roles) || !is_array($user->roles) || !$settings) {
+    if (empty($user->roles) || !is_array($user->roles)) {
         return apply_filters( 'mashsb_meta_box_settings', $meta_boxes, 10, 0 );
     }
 
@@ -38,8 +37,8 @@ function mashsb_meta_boxes( $meta_boxes ) {
     // Loop through user roles
     foreach($user->roles as $role) {
         // Rule exists and it is set
-        if (isset($settings["user_roles_for_sharing_options"]) &&
-            in_array(str_replace(' ', null, strtolower($role)), $settings["user_roles_for_sharing_options"])
+        if (isset($mashsb_options["user_roles_for_sharing_options"]) &&
+            in_array(str_replace(' ', null, strtolower($role)), $mashsb_options["user_roles_for_sharing_options"])
         ) {
             $shouldMetaBoxesBeDisplayed = true;
             // We got it, no need to check for more
@@ -47,7 +46,7 @@ function mashsb_meta_boxes( $meta_boxes ) {
         }
     }
     // Garbage collection
-    unset($user, $settings);
+    unset($user);
 
     // Don't display meta boxes
     if ($shouldMetaBoxesBeDisplayed !== true) return apply_filters( 'mashsb_meta_box_settings', $meta_boxes, 10, 0 );
