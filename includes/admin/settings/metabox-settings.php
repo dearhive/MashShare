@@ -36,6 +36,9 @@ function mashsb_show_meta_box(){
             return true;
         }
     }
+    
+    unset ($user);
+    return false;
 }
 
 add_filter( 'mashsb_rwmb_meta_boxes', 'mashsb_meta_boxes' );
