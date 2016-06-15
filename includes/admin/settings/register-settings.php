@@ -87,7 +87,8 @@ function mashsb_register_settings() {
                     'size' => isset( $option['size'] ) ? $option['size'] : null,
                     'options' => isset( $option['options'] ) ? $option['options'] : '',
                     'std' => isset( $option['std'] ) ? $option['std'] : '',
-                    'textarea_rows' => isset( $option['textarea_rows'] ) ? $option['textarea_rows'] : ''
+                    'textarea_rows' => isset( $option['textarea_rows'] ) ? $option['textarea_rows'] : '',
+                    "attr" => isset($option["attr"]) && is_array($option["attr"]) ? $option["attr"] : false
                 )
             );
         }
@@ -1030,7 +1031,13 @@ function mashsb_select_callback( $args ) {
     else
         $value = isset( $args['std'] ) ? $args['std'] : '';
 
-    $html = '<select id="mashsb_settings[' . $args['id'] . ']" name="mashsb_settings[' . $args['id'] . ']"/>';
+    $html = '<select id="mashsb_settings[' . $args['id'] . ']" name="mashsb_settings[' . $args['id'] . ']"';
+
+    if (isset($args["attr"]) && is_array($args["attr"])) {
+        foreach($args["attr"] as $attr => $value) {
+            $html .= " {$attr}='{$value}'";
+        }
+    }
 
     foreach ( $args['options'] as $option => $name ) :
         $selected = selected( $option, $value, false );

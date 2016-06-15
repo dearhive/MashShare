@@ -171,6 +171,8 @@ jQuery(document).ready(function ($) {
         e.stopPropagation();
     });
 
+    // Run mashShare singleton
+    mashShare.init();
 });
 
 /*
@@ -1555,3 +1557,162 @@ window.twttr = (function (d, s, id) {
 
     return t;
 }(document, "script", "twitter-wjs"));
+
+// Mash Share Singleton
+var mashShare = function($) {
+
+    // Main elements
+    var elements = function()
+    {
+        // Hide elements
+        $(".hideMe").hide();
+
+        // Tags with data-action attribute
+        $("[data-action]").each(function() {
+            var $this   = $(this),
+                name    = "dataAction" + $this.prop("tagName").toLowerCase().ucFirst();
+
+            if (typeof(window["mashShare"][name]) === "undefined") return false;
+            execute("mashShare." + name, $this);
+        });
+    };
+
+    // Selects with data-action attributes
+    var dataActionSelect = function($element)
+    {
+        function change($select) {
+            // Variables
+            var options     = getOptions($select, "action"),
+                value       = $select.find("option:selected").val();
+
+            if (typeof(options.elements) === "undefined" || typeof(options.selections) === "undefined") {
+                return false;
+            }
+
+            var selections  = options.selections.split('|'),
+                selection, i;
+
+            // Get parents
+            if (typeof(options.parents) !== "undefined") {
+                // Hide all elements first
+                var elements = options.elements.split(',');
+                for (var x in elements) {
+                    $("#mashsb_settings\\[" + elements[x].trim() + "\\]").parents(options.parents).hide();
+                }
+
+                for(i in selections) {
+                    selection = selections[i].split(';');
+                    if (selection[0] === value) {
+                        if (selection[1].length > 0) {
+                            $("#mashsb_settings\\[" + selection[1]+ "\\]").parents(options.parents).show();
+                        }
+                    }
+                }
+            }
+            // Get elements
+            else {
+                // Hide all elements first
+                $(options.elements).hide();
+
+                for(i in selections) {
+                    selection = selections[i].split(';');
+                    if (selection[0] === value) {
+                        if (selection[1].length > 0) $(selection[1]).show();
+                    }
+                }
+            }
+        }
+
+        // Upon page load
+        change($element);
+
+        // On selection
+        $element.on("change", function() {
+            change($(this));
+        })
+    };
+
+    // Callback
+    var execute                 = function(callback, data)
+    {
+        // Callback name
+        var name = callback.split('.');
+
+
+        // Some controls
+        if (typeof(window[name[0]]) === "undefined") {
+            alert("Failed callback execution; function" + name[0] + " doesn't exist");
+        }
+        else if (typeof(name[1]) !== "undefined" && typeof(window[name[0]][name[1]]) === "undefined") {
+            alert("Failed callback execution; function" + name[0] + "." + name[1] + " doesn't exist");
+        }
+
+        // Double
+        if (name[0].length > 0 && name[1].length > 0) {
+            (typeof(data) !== "undefined") ? window[name[0]][name[1]](data) : window[name[0]][name[1]]();
+        }
+        // Single
+        else if (name[0].length > 0) {
+            (typeof(data) !== "undefined") ? window[name[0]](data) : window[name[0]]();
+        }
+    };
+
+    // Get options
+    var getOptions              = function(element, exclude, dataName)
+    {
+        // Variables
+        var options     = {},
+            attributes  = (typeof(element[0]) !== "undefined") ? element[0].attributes : element.attributes,
+            name, dataNameLength;
+
+        dataName        = (typeof(dataName) === "undefined") ? "data-" : "data-" + dataName;
+        dataNameLength  = dataName.length;
+
+        $(attributes).each(function() {
+            // Get only data
+            if (this.name.substr(0, dataNameLength) === dataName) {
+                name = this.name.substr(dataNameLength, this.name.length).replace('-', ' ');
+
+                // Uppercase words and remove spaces
+                name = (name + '')
+                    .replace(/^([a-z\u00E0-\u00FC])|\s+([a-z\u00E0-\u00FC])/g, function($1) {
+                        return $1.toUpperCase();
+                    }).replace(' ', '');
+
+                // Lowercase first character
+                name = name.charAt(0).toLowerCase() + name.substr(1);
+
+                // Exclude
+                // Array
+                if (typeof(exclude) === "object" && $.inArray(name, exclude) != -1) return true;
+                // String
+                if (typeof(exclude) === "string" && name === exclude) return true;
+
+                // Add option
+                options[name] = this.value;
+            }
+        });
+
+        return options;
+    };
+
+    return {
+        init: function() {
+            elements();
+        },
+        dataActionSelect: dataActionSelect,
+        getOptions: getOptions
+    }
+}(jQuery);
+
+// Functions
+function log(variable)
+{
+    console.log(variable);
+}
+
+// Prototypes
+String.prototype.ucFirst = function()
+{
+    return this.charAt(0).toUpperCase() + this.slice(1);
+};
