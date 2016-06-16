@@ -317,11 +317,16 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 == Changelog == 
 
+= 3.1.3 not released =
+* Fix: Share Buttons are not shown on a few ajax based themes. (Remove is_main_query() condition)
+* Fix: WP Shorturls are enabled per default
+
 = 3.1.2 =
 * New: Option to show Social Sharing options meta box only for specific user roles
 
 = 3.1.1 =
 * Fix: When using shortcode [mashshare] without an "services" argument the number of large buttons is wrong.
+* Tweak: remove unused code and clean up
 
 = 3.1.0 =
 * Fix: Undefined var $mashsb_options
