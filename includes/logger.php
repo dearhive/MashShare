@@ -78,7 +78,11 @@ class mashsbLogger {
   
 	private function write($string)
 	{
-	  return fwrite($this->stream, $string);
+		try {
+			return ($this->stream === null) ? false : fwrite($this->stream, $string);
+		} catch(Exception $e) {
+			return false;
+		}
 	}
   
         /* Check if mashshare debug mode is enabled
