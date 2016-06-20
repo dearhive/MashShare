@@ -22,17 +22,22 @@ if( !defined( 'ABSPATH' ) ) {
  */
 
 function mashsb_check_google_apikey() {
+
     global $mashsb_options;
     $appid = isset( $mashsb_options['google_app_id'] ) ? $appid = $mashsb_options['google_app_id'] : $appid = '';
-    $shorturl = new mashsb_google_shorturl( $appid );
 
-    $statusArr = $shorturl->checkApiKey( 'http://www.google.de' );
+    if( function_exists( 'curl_init' ) ) {
+        $shorturl = new mashsb_google_shorturl( $appid );
+        $statusArr = $shorturl->checkApiKey( 'http://www.google.de' );
+    }
+
     isset( $statusArr['error']['errors'][0]['reason'] ) ? $statusArr['error']['errors'][0]['reason'] : $statusArr['error']['errors'][0]['reason'] = '';
 
-    if( !empty( $statusArr['error']['errors'][0]['reason'] ) ){
+    if( !empty( $statusArr['error']['errors'][0]['reason'] ) ) {
         return '<strong style="color:red;font-weight:bold;"> Notice: </strong>' . $statusArr['error']['errors'][0]['reason'];
-    } 
+    }
 }
+
 /*
  * Check if Bitly API Key is working properly
  * 

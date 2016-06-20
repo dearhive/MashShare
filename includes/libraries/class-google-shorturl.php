@@ -29,6 +29,7 @@ class mashsb_google_shorturl
 	private static $buffer = array();
 
 	function __construct($apiKey = null) {
+            
 		# Extended output mode
 		$extended = false;
 
