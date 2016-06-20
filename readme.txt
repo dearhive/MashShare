@@ -321,6 +321,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 * Fix: Share Buttons are not shown on a few ajax based themes. (Remove is_main_query() condition)
 * Fix: WP Shorturls are enabled per default
 * Fix: Warning message when log folder is not writeable
+* Fix: Warning message when curl_init not availabe
 
 = 3.1.2 =
 * New: Option to show Social Sharing options meta box only for specific user roles
