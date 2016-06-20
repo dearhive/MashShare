@@ -137,11 +137,6 @@ function mashsb_options_page() {
     <div class="mashsb_admin">
         <span class="mashsharelogo"> <?php echo __( 'MashShare ', 'mashsb' ); ?></span><span class="mashsb-version"><?php echo MASHSB_VERSION; ?></span>
         <div class="about-text" style="clear:both;">
-            <?php
-            if( !function_exists( 'curl_init' ) ) {
-                echo '<br><span style="color:red;">' . __( 'php_curl is not working on your server. </span><a href="http://us.informatiweb.net/programmation/32--enable-curl-extension-of-php-on-windows.html" target="_blank">Please enable it.</a>' );
-            }
-            ?>
             <!--<iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Fmashshare.net&amp;width=100&amp;layout=standard&amp;action=like&amp;show_faces=false&amp;share=true&amp;height=35&amp;appId=449277011881884" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:400px; height:25px;" allowTransparency="true"></iframe>-->
             <ul id="mash-social-admin-head">
                 <!--<iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.mashshare.net%2F&amp;width=100&amp;layout=standard&amp;action=like&amp;show_faces=false&amp;share=true&amp;height=35&amp;appId=449277011881884" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:96px; height:20px;" allowTransparency="true"></iframe>

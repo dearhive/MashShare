@@ -45,6 +45,12 @@ function mashsb_admin_messages() {
 
     if( !current_user_can( 'update_plugins' ) )
         return;
+    
+    if( mashsb_is_admin_page() && function_exists( 'curl_init' ) ) {
+        echo '<div class="error">';
+        echo '<p>' . sprintf(__('MashShare needs the PHP extension cURL which is not installed on your server. Please <a href="%s" target="_blank">install and activate</a> it to be able to collect share count of your posts.', 'mashsb'), 'https://www.google.com/search?btnG=1&pws=0&q=enable+curl+on+php') . '</p>';
+        echo '</div>';
+    }
 
     // notice no Networks enabled    
     if( mashsb_is_admin_page() && !mashsb_check_active_networks() ) {

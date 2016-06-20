@@ -9,7 +9,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email
 Requires at least: 3.6+
 Tested up to: 4.5.2
-Stable tag: 3.1.2
+Stable tag: 3.1.3
 
 Social Media Share Buttons for Twitter, Facebook and other social networks. Highly customizable Social Media ecosystem
 
@@ -320,6 +320,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 = 3.1.3 not released =
 * Fix: Share Buttons are not shown on a few ajax based themes. (Remove is_main_query() condition)
 * Fix: WP Shorturls are enabled per default
+* Fix: Warning message when log folder is not writeable
 
 = 3.1.2 =
 * New: Option to show Social Sharing options meta box only for specific user roles
