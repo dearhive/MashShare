@@ -13,7 +13,7 @@
 if( !defined( 'ABSPATH' ) ) exit;
 
 /**
- * Add rating links to the admin dashboard
+ * Add rating links to the settings footer
  *
  * @since	    1.0.0
  * @global		string $typenow
@@ -35,4 +35,4 @@ function mashsb_admin_rate_us( $footer_text ) {
 		return $footer_text;
 	}
 }
-add_filter( 'admin_footer_text', 'mashsb_admin_rate_us' );
+//add_filter( 'admin_footer_text', 'mashsb_admin_rate_us' );

@@ -94,22 +94,17 @@ function mashsb_do_settings_fields( $page, $section ) {
         echo '<tr class="row"><th class="row th">';
 
         if( !empty( $field['args']['label_for'] ) || empty( $field['args']['desc'] ) ) {
-        //if( empty( $field['args']['desc'] ) ) {
-            //echo '<label for="' . esc_attr( $field['args']['label_for'] ) . '" class="col-title">' . $field['title'] . '</label>';
             echo '<div class="col-title">' . $field['title'] . '</div>';
         } else {
-            //echo '<div class="col-title">' . $field['title'] . '<span class="description">' . $field['args']['desc'] . '</span></div>';
             echo '<div class="col-title">' . $field['title'] .
             '<a class="mashsb-helper" href="#"></a>' .
             '<div class="mashsb-message">' . $field['args']['desc'] . '</div>' .
             '</div>';
         }
         echo '</th>';
-        //if( !empty( $field['args']['name'] ) ) {
             echo '<td>';
             call_user_func( $field['callback'], $field['args'] );
             echo '</td>';
-        //}
         echo '</tr>';
     }
     echo '</tbody></table>';
@@ -137,13 +132,7 @@ function mashsb_options_page() {
     <div class="mashsb_admin">
         <span class="mashsharelogo"> <?php echo __( 'MashShare ', 'mashsb' ); ?></span><span class="mashsb-version"><?php echo MASHSB_VERSION; ?></span>
         <div class="about-text" style="clear:both;">
-            <!--<iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Fmashshare.net&amp;width=100&amp;layout=standard&amp;action=like&amp;show_faces=false&amp;share=true&amp;height=35&amp;appId=449277011881884" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:400px; height:25px;" allowTransparency="true"></iframe>-->
             <ul id="mash-social-admin-head">
-                <!--<iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.mashshare.net%2F&amp;width=100&amp;layout=standard&amp;action=like&amp;show_faces=false&amp;share=true&amp;height=35&amp;appId=449277011881884" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:96px; height:20px;" allowTransparency="true"></iframe>
-                <li><a class="twitter-follow-button" href="https://twitter.com/mashshare" data-size="small" id="twitter-wjs" style="display: block;">Follow @mashshare</a></li>
-                <li><a class="twitter-follow-button" href="https://twitter.com/renehermenau" data-size="small" id="twitter-wjs" style="display: block;">Follow @renehermenau</a></li>
-                <li><a href="https://twitter.com/intent/tweet?button_hashtag=mashshare&text=Boost%20your%20traffic%20more%20than%20double%20with%20incredible%20fast%20share%20share%20buttons" class="twitter-hashtag-button" data-size="small" data-related="mashshare" data-url="https://www.mashshare.net/" data-dnt="true">Tweet #mashshare</a></li>
-                //-->
                 <?php echo mashsb_share_buttons(); ?>
             </ul>
 
@@ -182,6 +171,7 @@ function mashsb_options_page() {
                         submit_button();
                     ?>
                 </form>
+                                    <div><?php echo mashsb_admin_rate_us(); ?></div>
             </div> <!-- new //-->
         </div><!-- #tab_container-->
         <div  class="mashsb-sidebar">
