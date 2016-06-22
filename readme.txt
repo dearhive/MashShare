@@ -323,6 +323,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 * Fix: Warning message when log folder is not writeable
 * Fix: Warning message when curl_init not availabe
 * Fix: Possible Security Warning Issue Resolved when using Vaultpress
+* Tweak: New admin footer in mashshare settings pages
 
 = 3.1.2 =
 * New: Option to show Social Sharing options meta box only for specific user roles
