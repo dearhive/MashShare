@@ -30,7 +30,7 @@ function mashsb_admin_rate_us( $footer_text ) {
 			'https://www.mashshare.net/documentation/'
 		);
 
-		return str_replace( '</span>', '', '' ) . $rate_text . '</span>';
+		return $rate_text . '</span>';
 	} else {
 		return $footer_text;
 	}
