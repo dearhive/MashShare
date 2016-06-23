@@ -173,11 +173,11 @@ function mashsb_get_expiration() {
  * @deprecated not used
  * @return boolean true
  */
-function mashsb_allow_rest_api() {
-    if( version_compare( get_bloginfo( 'version' ), '4.4.0', '>=' ) ) {
-        return true;
-    }
-}
+//function mashsb_allow_rest_api() {
+//    if( version_compare( get_bloginfo( 'version' ), '4.4.0', '>=' ) ) {
+//        return true;
+//    }
+//}
 
 /**
  * Check via REST API if cache should be updated
@@ -186,13 +186,13 @@ function mashsb_allow_rest_api() {
  * @deprecated not used
  * @return string numerical 
  */
-function mashsb_restapi_refresh_cache( $request ) {
-    if( mashsb_is_cache_refresh() ) {
-        return '1';
-    } else {
-        return '0';
-    }
-}
+//function mashsb_restapi_refresh_cache( $request ) {
+//    if( mashsb_is_cache_refresh() ) {
+//        return '1';
+//    } else {
+//        return '0';
+//    }
+//}
 
 /**
  * Register the API route
@@ -202,17 +202,17 @@ function mashsb_restapi_refresh_cache( $request ) {
  * @since 3.0.0
  * @deprecated not used
  * */
-if( mashsb_allow_rest_api() ) {
-    add_action( 'rest_api_init', 'mashsb_rest_routes' );
-}
-
-function mashsb_rest_routes() {
-    register_rest_route( 'mashshare/v1', '/verifycache/', array(
-        'methods' => \WP_REST_Server::READABLE,
-        'callback' => 'mashsb_restapi_refresh_cache'
-            )
-    );
-}
+//if( mashsb_allow_rest_api() ) {
+//    add_action( 'rest_api_init', 'mashsb_rest_routes' );
+//}
+//
+//function mashsb_rest_routes() {
+//    register_rest_route( 'mashshare/v1', '/verifycache/', array(
+//        'methods' => \WP_REST_Server::READABLE,
+//        'callback' => 'mashsb_restapi_refresh_cache'
+//            )
+//    );
+//}
 
 
 /**
@@ -255,9 +255,6 @@ function mashsb_sanitize_url( $url ) {
     $url1 = str_replace( '?mashsb-refresh', '', $url );
     $url2 = str_replace( '&mashsb-refresh', '', $url1 );
     $url3 = str_replace( '%26mashsb-refresh', '', $url2 );
-    
-    // remove trailingslash
-    //$url6 = untrailingslashit ($url3);
     
     return $url3;
 }

@@ -9,7 +9,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email
 Requires at least: 3.6+
 Tested up to: 4.5.2
-Stable tag: 3.1.3
+Stable tag: 3.1.4
 
 Social Media Share Buttons for Twitter, Facebook and other social networks. Highly customizable Social Media ecosystem
 
@@ -316,6 +316,9 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 
 == Changelog == 
+
+= 3.1.4 =
+* Fix: Remove deprecated REST API functions which are throwing error on php 5.2
 
 = 3.1.3 =
 * Fix: Share Buttons are not shown on a few ajax based themes. (Remove is_main_query() condition)

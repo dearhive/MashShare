@@ -48,8 +48,8 @@ function mashsb_load_scripts( $hook ) {
     $image = mashsb_get_image( $post->ID );
     $desc = mashsb_get_excerpt_by_id( $post->ID );
     }
-    
-    $restapi = mashsb_allow_rest_api() ? "1" : "0";
+    // Rest API Not used any longer
+    //$restapi = mashsb_allow_rest_api() ? "1" : "0";
     
     /* Load hashshags */
     $hashtag = !empty( $mashsb_options['mashsharer_hashtag'] ) ? $mashsb_options['mashsharer_hashtag'] : '';
