@@ -236,8 +236,8 @@ function mashsb_get_registered_settings() {
                 ),
                 "user_roles_for_sharing_options" => array(
                     "id"            => "user_roles_for_sharing_options",
-                    "name"          => __("User Roles Options Visibility", "mashsb"),
-                    "desc"          => __("Select user roles which can see page and post MashShare Social Sharing Meta Box Options", "mashsb"),
+                    "name"          => __("Meta Box Visibility", "mashsb"),
+                    "desc"          => __("Select user roles which can see MashShare Social Sharing Meta Box Options on posts and pages edit screen", "mashsb"),
                     "type"          => "multiselect",
                     "options"       => mashsb_get_user_roles(),
                     "placeholder"   => __("Select User Roles", "mashsb"),
