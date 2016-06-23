@@ -1,15 +1,14 @@
 <?php
+
 /**
- * Plugin Name: Meta Box
- * Plugin URI: https://metabox.io
- * Description: Create custom meta boxes and custom fields for any post type in WordPress.
- * Version: 4.8.4
- * Author: Rilwis
- * Author URI: http://www.deluxeblogtips.com
- * License: GPL2+
- * Text Domain: meta-box
- * Domain Path: /lang/
- */
+ * META BOX Functions
+ *
+ * @package     MASHSB
+ * @subpackage  Admin
+ * @copyright   Copyright (c) 2016
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since       3.0
+*/
 
 if ( defined( 'ABSPATH' ) && ! class_exists( 'MASHSB_RWMB_Loader' ) )
 {

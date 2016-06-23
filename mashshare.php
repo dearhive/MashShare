@@ -8,7 +8,7 @@
  * Author URI: https://www.mashshare.net
  * Version: 3.1.4
  * Text Domain: mashsb
- * Domain Path: languages
+ * Domain Path: /languages
  * Credits: Thanks go to Pippin Williamson and the edd team. When we started with Mashshare we decided to use the EDD code base and 
  * essential parts of the EDD framework because its very reliable and robust. Check out more by pippin on https://pippinsplugins.com/
 

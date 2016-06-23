@@ -321,6 +321,8 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 * Fix: Remove deprecated REST API functions which are throwing error on php 5.2
 * Tweak: Change label of User Roles Options Visibility to Meta Box Visibility Permissions
 * Tweak: remove is_admin() condition for sharecount creation. Leads to zero sharecounts on themes with bad infinite scroll implementation where is_admin() everytime true
+* Fix: Change domain path to /languages
+* Fix: Change doc header of meta-box.php and remove wrong declarations
 
 = 3.1.3 =
 * Fix: Share Buttons are not shown on a few ajax based themes. (Remove is_main_query() condition)
