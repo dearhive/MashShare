@@ -98,7 +98,6 @@ function mashsbGetShareMethod( $mashsbSharesObj ) {
  */
 function mashsbGetNonPostShares( $url ) {
     global $mashsb_options;
-
     // Expiration
     $expiration = mashsb_get_expiration();
     
@@ -160,9 +159,11 @@ function getSharedcount( $url ) {
      * - search page
      * - empty url
      * - disabled permalinks
-     * - admin pages
+     * - deprecated: admin pages (we need to remove this for themes which are using a bad infinite scroll implementation where is_admin() is always true)
      */
-    if( is_404() || is_search() || empty($url) || is_admin() || !mashsb_is_enabled_permalinks() ) {
+
+       
+    if( is_404() || is_search() || empty($url) || !mashsb_is_enabled_permalinks()) {
         return apply_filters( 'filter_get_sharedcount', 0 );
     }
 
@@ -1002,6 +1003,7 @@ function mashsb_get_url() {
          // The main URL
         $url = mashsb_get_main_url();
     }
+    
     return apply_filters( 'mashsb_get_url', $url );
 }
 

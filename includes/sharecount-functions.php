@@ -225,6 +225,7 @@ function mashsb_is_enabled_permalinks() {
     if( !empty( $permalinks ) ) {
         return true;
     }
+    return false;
 }
 
 /**
