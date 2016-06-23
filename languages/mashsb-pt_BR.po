@@ -1,21 +1,21 @@
 # Copyright (C) 2016 Mashshare Share Buttons
 # This file is distributed under the same license as the Mashshare Share Buttons package.
 # Translators:
-# Nestor Pool <nestor.pool@gmail.com>, 2014
+# Marcelo Ghelman <marcelo.ghelman@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Mashshare\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/mashsharer\n"
 "POT-Creation-Date: 2016-06-23 15:40:58+00:00\n"
-"PO-Revision-Date: 2016-06-23 19:09+0100\n"
+"PO-Revision-Date: 2016-06-23 19:11+0100\n"
 "Last-Translator: Rene Hermenau <info@mashshare.net>\n"
-"Language-Team: Spanish (http://www.transifex.com/renehermenau/mashshare/"
-"language/es/)\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/renehermenau/"
+"mashshare/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 1.5.6\n"
 
 msgid ""
@@ -47,27 +47,27 @@ msgstr ""
 
 #: includes/admin/add-ons.php:27
 msgid "Add Ons for Mashshare"
-msgstr "Add Ons  para Mashshare"
+msgstr "Complementos para Mashshare"
 
 #: includes/admin/add-ons.php:28
 msgid "Visit Website"
-msgstr "Visita el Sitio"
+msgstr "Visitar site"
 
 #: includes/admin/add-ons.php:28
 msgid "See Details"
-msgstr "Ver detalles"
+msgstr "Ver detalhes"
 
 #: includes/admin/add-ons.php:30
 msgid "These add-ons extend the functionality of Mashshare."
-msgstr "Estos add-ons agregan funcionalidad extra a Mashshare"
+msgstr "Estes complementos estendem a funcionalidade do Mashshare."
 
 #: includes/admin/add-ons.php:54
 msgid ""
 "There was an error retrieving the Mashshare addon list from the server. "
 "Please try again later."
 msgstr ""
-"Hubo un error tratando de obtener la lista de addon para Mashshare desde el "
-"servidor. Por favor intente más tarde."
+"Houve um erro ao obter a lista de complementos para Mashshare a partir do "
+"servidor. Tente novamente mais tarde."
 
 #: includes/admin/admin-footer.php:24
 msgid ""
@@ -148,8 +148,7 @@ msgid ""
 "There seems to be an issue with the server. Please try again in a few "
 "minutes."
 msgstr ""
-"Tal parece que hay un problema con el servidor. Por favor intenta dentro de "
-"unos minutos."
+"Parece haver um problema com o servidor. Tente novamente em alguns minutos."
 
 #: includes/admin/admin-pages.php:31
 msgid "MashShare"
@@ -162,7 +161,7 @@ msgstr ""
 #: includes/admin/admin-pages.php:32
 #: includes/admin/settings/register-settings.php:744
 msgid "Settings"
-msgstr "Configuración"
+msgstr "Configurações"
 
 #: includes/admin/admin-pages.php:33
 msgid "MashShare Add Ons"
@@ -186,7 +185,7 @@ msgstr ""
 
 #: includes/admin/meta-box/inc/core.php:41
 msgid "Extensions"
-msgstr "Extensiones"
+msgstr "Extensões"
 
 #: includes/admin/meta-box/inc/field.php:196
 msgid "+ Add more"
@@ -352,11 +351,11 @@ msgstr ""
 
 #: includes/admin/meta-box/inc/fields/select.php:91
 msgid "All"
-msgstr "Todo"
+msgstr "Todos"
 
 #: includes/admin/meta-box/inc/fields/select.php:91
 msgid "None"
-msgstr "Ninguno"
+msgstr "Nenhum"
 
 #: includes/admin/meta-box/inc/fields/taxonomy.php:47
 msgid "Select a term"
@@ -372,37 +371,40 @@ msgstr ""
 
 #: includes/admin/plugins.php:27
 msgid "General Settings"
-msgstr "Configuraciones Generales"
+msgstr "Configurações gerais"
 
 #: includes/admin/plugins.php:50 includes/admin/welcome.php:329
 msgid "Getting Started"
-msgstr "Empezando"
+msgstr "Primeiros passos"
 
 #: includes/admin/plugins.php:51
 msgid "Add Ons"
-msgstr "Add Ons"
+msgstr "Complementos"
 
 #: includes/admin/settings/contextual-help.php:29
 msgid "For more information:"
-msgstr "Para mas información:"
+msgstr "Para mais informações:"
 
 #: includes/admin/settings/contextual-help.php:30
 msgid "Visit the <a href=\"%s\">documentation</a> on the Mashshare website."
-msgstr ""
+msgstr "Consulte a <a href=\"%s\">documentação</a> no site do Mashshare."
 
 #: includes/admin/settings/contextual-help.php:32
 msgid ""
 "<a href=\"%s\">Post an issue</a> on <a href=\"%s\">Mashshare</a>. View <a "
 "href=\"%s\">extensions</a>."
 msgstr ""
+"<a href=\"%s\">Informe um problema</a> no <a href=\"%s\">Mashshare</a>. Veja "
+"<a href=\"%s\">extensões</a>."
 
 #: includes/admin/settings/contextual-help.php:41
 msgid "General"
-msgstr "General"
+msgstr "Geral"
 
 #: includes/admin/settings/contextual-help.php:42
 msgid "This screen provides the most basic settings for configuring Mashshare."
-msgstr "Esta pantalla muestra las configuraciones más básicas de Mashashare."
+msgstr ""
+"Esta tela fornece as definições mais básicas para configurar o Mashshare."
 
 #: includes/admin/settings/display-settings.php:133
 msgid "MashShare "
@@ -523,7 +525,7 @@ msgstr ""
 
 #: includes/admin/settings/register-settings.php:120
 msgid "General settings"
-msgstr "Opciones generales"
+msgstr "Configurações gerais"
 
 #: includes/admin/settings/register-settings.php:126
 msgid "Share counts"
@@ -603,7 +605,7 @@ msgstr ""
 
 #: includes/admin/settings/register-settings.php:179
 msgid "Fake Share counts"
-msgstr "Contador falso "
+msgstr "Contagens falsas de compartilhamentos"
 
 #: includes/admin/settings/register-settings.php:180
 msgid ""
@@ -613,7 +615,7 @@ msgstr ""
 
 #: includes/admin/settings/register-settings.php:186
 msgid "Disable Sharecount"
-msgstr "Deshabilitar contador "
+msgstr "Desabilitar o Sharecount"
 
 #: includes/admin/settings/register-settings.php:187
 msgid ""
@@ -625,20 +627,20 @@ msgstr ""
 
 #: includes/admin/settings/register-settings.php:192
 msgid "Hide Sharecount"
-msgstr "Esconder contador"
+msgstr "Ocultar o Sharecount"
 
 #: includes/admin/settings/register-settings.php:193
 msgid ""
 "<strong>Optional:</strong> If you fill in any number here, the shares for a "
 "specific post are not shown until the share count of this number is reached."
 msgstr ""
-"<strong>Opcional:</strong> Si rellenas con cualquier numero aquí, el "
-"contador de una entrada especifica no se mostrará hasta que el contador "
-"alcance este número."
+"<strong>Opcional:</strong> Se você inserir qualquer número aqui, os "
+"compartilhamentos de uma postagem específica não são exibidos até que a "
+"contagem de compartilhamentos alcance este número."
 
 #: includes/admin/settings/register-settings.php:199
 msgid "Execution Order"
-msgstr "Orden de ejecución "
+msgstr "Ordem de execução"
 
 #: includes/admin/settings/register-settings.php:200
 msgid ""
@@ -647,11 +649,11 @@ msgid ""
 "executed before any other plugin (When the other plugin is not overwriting "
 "our execution order). Default is \"1000\""
 msgstr ""
-"Si utilizas otros plugins tu puedes especificar el orden de ejecución, "
-"números bajos corresponden a ejecuciones iniciales, ej. Si usas "
-"\"0\"Mashshare será ejecutado antes que cualquier otro plugin (al menos que "
-"otro plugin no este sobrescribiendo el orden de ejecución). Por defecto es "
-"\"1000\""
+"Se você usa outros plugins de conteúdo, você pode definir aqui a ordem de "
+"execução. Números menores significam execução mais cedo. Por exemplo, "
+"colocando \"0\" o Mashshare é executado antes de qualquer outro plugin (se "
+"outro plugin não estiver sobrescrevendo nossa ordem de execução). O valor "
+"padrão é \"1000\""
 
 #: includes/admin/settings/register-settings.php:207
 msgid "JavaScript in Footer"
@@ -689,15 +691,15 @@ msgstr ""
 
 #: includes/admin/settings/register-settings.php:227
 msgid "Remove Data on Uninstall?"
-msgstr "Eliminar los datos al desinstalar?"
+msgstr "Remover dados ao desinstalar?"
 
 #: includes/admin/settings/register-settings.php:228
 msgid ""
 "Check this box if you would like Mashshare to completely remove all of its "
 "data when the plugin is deleted."
 msgstr ""
-"Marca la casilla si te gustaría que Mashshare elimine completamente todos "
-"datos cuando se desístale el Pluggin."
+"Marque esta opção se quiser que o Mashshare remova completamente todos os "
+"seus dados quando o plugin for apagado."
 
 #: includes/admin/settings/register-settings.php:233
 msgid "Allow Usage Tracking"
@@ -734,7 +736,7 @@ msgstr ""
 #: includes/admin/settings/register-settings.php:294
 #: includes/admin/settings/register-settings.php:751
 msgid "Social Networks"
-msgstr "Redes Sociales"
+msgstr "Redes sociais"
 
 #: includes/admin/settings/register-settings.php:254
 msgid "Facebook page url"
@@ -789,16 +791,15 @@ msgstr ""
 
 #: includes/admin/settings/register-settings.php:287
 msgid "Large Buttons"
-msgstr "Botones grandes"
+msgstr "Botões grandes"
 
 #: includes/admin/settings/register-settings.php:288
 msgid ""
 "Specify how many services and social networks are visible before the \"Plus"
 "\" Button is shown. This buttons turn into large prominent buttons."
 msgstr ""
-"Especifica cuanto servicios y redes sociales están visibles antes del botón "
-"con el signo “+” se mostrara. El mismo se convierte en un botón grande "
-"destacado."
+"Especifica quantos serviços e redes sociais ficam visíveis antes que o botão "
+"\"Mais\" seja exibido. Estes botões se tornam maiores e proeminentes."
 
 #: includes/admin/settings/register-settings.php:295
 msgid ""
@@ -865,7 +866,7 @@ msgstr ""
 
 #: includes/admin/settings/register-settings.php:386
 msgid "Animate Shares"
-msgstr "Contador Animado"
+msgstr "Animar compartilhamentos"
 
 #: includes/admin/settings/register-settings.php:387
 msgid ""
@@ -889,19 +890,21 @@ msgstr ""
 
 #: includes/admin/settings/register-settings.php:409
 msgid "Choose color of the share number in hex format, e.g. #7FC04C: "
-msgstr "Selecciona el color del contador numérico en formato hex, ej. $7FC04C."
+msgstr ""
+"Escolha a cor do número de compartilhamentos em formato hexa, por exemplo "
+"#7FC04C: "
 
 #: includes/admin/settings/register-settings.php:416
 msgid "Border Radius"
-msgstr "Radio del borde"
+msgstr "Raio da borda"
 
 #: includes/admin/settings/register-settings.php:417
 msgid ""
 "Specify the border radius of all buttons in pixel. A border radius of 20px "
 "results in circle buttons. Default value is zero."
 msgstr ""
-"Especifica la medida del borde de todos los botones en pixeles. Un borde de "
-"20px da como resultado botones circulares, el valor por defecto es 0px."
+"Especifique o raio da borda de todos os botões em pixels. Um raio de borda "
+"de 20px resulta em botões circulares. O valor padrão é zero."
 
 #: includes/admin/settings/register-settings.php:447
 msgid "Button Width"
@@ -909,7 +912,7 @@ msgstr ""
 
 #: includes/admin/settings/register-settings.php:448
 msgid "Minimum with of the large share buttons in pixels"
-msgstr ""
+msgstr "Largura mínima dos botões de compartilhamento grandes, em pixels"
 
 #: includes/admin/settings/register-settings.php:455
 msgid "Share Button Style"
@@ -917,7 +920,7 @@ msgstr ""
 
 #: includes/admin/settings/register-settings.php:456
 msgid "Change visual appearance of the share buttons."
-msgstr "Cambiar la apariencia visual de los botones para compartir"
+msgstr "Muda a aparência visual dos botões de compartilhamento."
 
 #: includes/admin/settings/register-settings.php:467
 msgid "Small Share Buttons"
@@ -930,11 +933,10 @@ msgid ""
 "you use the <a href=\"https://www.mashshare.net/downloads/mashshare-"
 "responsive/\" target=\"_blank\">responsive Add-On</a>"
 msgstr ""
-"Todos los botones serán mostrado como iconos pequeños sin ningún texto desde "
-"la pc y dispositivos móviles todo el tiempo.\n"
-"<strong>Nota:</strong> Deshabilita esto cuando uses el <a href=\"https://www."
-"mashshare.net/downloads/mashshare-responsive/\" target=\"_blank\"> Add-On "
-"responsive</a> (adaptable)."
+"Todos os botões serão exibidos como ícones pequenos puros, sem nenhum texto, "
+"em dispositivos móveis e de mesa, todo o tempo.<br><strong>Nota:</strong> "
+"Desabilite isso quando usar o <a href=\"https://www.mashshare.net/downloads/"
+"mashshare-responsive/\" target=\"_blank\">complemento Responsive</a>"
 
 #: includes/admin/settings/register-settings.php:479
 msgid "Subscribe Button"
@@ -982,7 +984,7 @@ msgstr ""
 
 #: includes/admin/settings/register-settings.php:520
 msgid "Subscribe content"
-msgstr "Contenido Subscrito"
+msgstr "Conteúdo da inscrição"
 
 #: includes/admin/settings/register-settings.php:521
 msgid ""
@@ -990,9 +992,6 @@ msgid ""
 "formulars, like button, links or any other text. Shortcodes are supported, e."
 "g.: [contact-form-7]"
 msgstr ""
-"Define aquí el contenido que se mostrara en la ventana desplegable para "
-"subscribirse. Usa formularios como botón me gusta, enlaces, o cualquier "
-"texto. Los atajos son soportados ej. [contact-form-7]"
 
 #: includes/admin/settings/register-settings.php:530
 msgid "Custom Styles"
@@ -1021,11 +1020,11 @@ msgstr ""
 
 #: includes/admin/settings/register-settings.php:562
 msgid "Location & Position"
-msgstr "Localización & Posición"
+msgstr "Local & Posição"
 
 #: includes/admin/settings/register-settings.php:568
 msgid "Position"
-msgstr "Posición"
+msgstr "Posição"
 
 #: includes/admin/settings/register-settings.php:569
 msgid ""
@@ -1040,15 +1039,15 @@ msgstr ""
 
 #: includes/admin/settings/register-settings.php:572
 msgid "Top"
-msgstr "Arriba"
+msgstr "Topo"
 
 #: includes/admin/settings/register-settings.php:573
 msgid "Bottom"
-msgstr "Abajo"
+msgstr "Base"
 
 #: includes/admin/settings/register-settings.php:574
 msgid "Top and Bottom"
-msgstr "Arriba y Abajo"
+msgstr "Topo e base"
 
 #: includes/admin/settings/register-settings.php:575
 msgid "Manual"
@@ -1056,7 +1055,7 @@ msgstr "Manual"
 
 #: includes/admin/settings/register-settings.php:580
 msgid "Post Types"
-msgstr "Tipo de entradas"
+msgstr "Tipos de postagem"
 
 #: includes/admin/settings/register-settings.php:581
 msgid ""
@@ -1086,15 +1085,15 @@ msgstr ""
 
 #: includes/admin/settings/register-settings.php:600
 msgid "Frontpage"
-msgstr "Portada"
+msgstr "Frontpage"
 
 #: includes/admin/settings/register-settings.php:601
 msgid "Enable share buttons on frontpage"
-msgstr "Habilita los botones sociales en la portada"
+msgstr "Habilitar botões de compartilhamento no frontpage"
 
 #: includes/admin/settings/register-settings.php:606
 msgid "Debug"
-msgstr "Depurar"
+msgstr "Debug"
 
 #: includes/admin/settings/register-settings.php:612
 msgid "Disable Cache"
@@ -1106,7 +1105,7 @@ msgstr ""
 
 #: includes/admin/settings/register-settings.php:624
 msgid "Debug mode"
-msgstr "Modo depurador"
+msgstr "Modo debug"
 
 #: includes/admin/settings/register-settings.php:633
 msgid "Activate your Add-Ons"
@@ -1126,7 +1125,7 @@ msgstr ""
 
 #: includes/admin/settings/register-settings.php:714
 msgid "Settings updated."
-msgstr "Configuración actualizada"
+msgstr "Configurações atualizadas."
 
 #: includes/admin/settings/register-settings.php:747
 msgid "Visual"
@@ -1138,7 +1137,7 @@ msgstr ""
 
 #: includes/admin/settings/register-settings.php:759
 msgid "Licenses"
-msgstr "Licencias"
+msgstr "Licenças"
 
 #: includes/admin/settings/register-settings.php:761
 msgid "Get More Add-Ons"
@@ -1148,12 +1147,11 @@ msgstr ""
 msgid ""
 "The callback function used for the <strong>%s</strong> setting is missing."
 msgstr ""
-"La función de llamada de la configuración usada para él <strong>%s</strong> "
-"está ausente. "
+"A função callback usada para a definição <strong>%s</strong> está faltando."
 
 #: includes/admin/settings/register-settings.php:1152
 msgid "Upload File"
-msgstr "Cargar archivo"
+msgstr "Enviar arquivo"
 
 #: includes/admin/settings/register-settings.php:1255
 msgid ""
@@ -1200,7 +1198,7 @@ msgstr ""
 
 #: includes/admin/settings/register-settings.php:1363
 msgid "Deactivate License"
-msgstr "Desactivar Licencia"
+msgstr "Desativar licença"
 
 #: includes/admin/settings/register-settings.php:1427
 msgid "Social Network"
@@ -1216,25 +1214,24 @@ msgstr ""
 
 #: includes/admin/settings/register-settings.php:1497
 msgid "Select Image"
-msgstr "Selecciona una imagen"
+msgstr "Selecionar imagem"
 
 #: includes/admin/settings/register-settings.php:1636
 msgid "All Services"
-msgstr "Todos los servicios"
+msgstr "Todos os serviços"
 
 #: includes/admin/settings/register-settings.php:1653
 msgid ""
 "DB cache deleted! Do not forget to uncheck this box for performance increase "
 "after doing the job."
 msgstr ""
-"¡Eliminar! el cache de la base de datos. No te olvides de desmarcar esta "
-"casilla para incrementar el rendimiento luego de hacer el trabajo."
+"Cache de banco de dados excluído! Não esqueça de desmarcar esta caixa para "
+"melhorar o desempenho depois de completar a tarefa."
 
 #: includes/admin/settings/register-settings.php:1666
 msgid "Transient Cache disabled! Enable it for performance increase."
 msgstr ""
-"Cache de corta duración ¡deshabilitado! Habilitar para aumentar el "
-"rendimiento"
+"Cache transiente está desabilitado! Habilite para melhoria no desempenho."
 
 #: includes/admin/settings/register-settings.php:1679
 msgid ""
@@ -1564,20 +1561,20 @@ msgstr ""
 #: includes/class-mashsb-html-elements.php:43
 msgctxt "all dropdown items"
 msgid "All"
-msgstr "Todo"
+msgstr "Todos"
 
 #: includes/class-mashsb-html-elements.php:44
 msgctxt "no dropdown items"
 msgid "None"
-msgstr "Ninguno"
+msgstr "Nenhum"
 
 #: includes/class-mashsb-html-elements.php:232
 msgid "Enter username"
-msgstr "Ingresa el nombre de usuario"
+msgstr "Digite o nome de usuário"
 
 #: includes/class-mashsb-license-handler.php:177
 msgid "%1$s License Key"
-msgstr "%1$s Código de Licencia"
+msgstr "Chave de licença %1$s"
 
 #: includes/class-mashsb-license-handler.php:210
 msgid ""
@@ -1627,11 +1624,11 @@ msgstr ""
 
 #: includes/template-functions.php:249
 msgid "Subscribe"
-msgstr "Subscribirse"
+msgstr "Inscrever"
 
 #: includes/template-functions.php:517
 msgid "SHARES"
-msgstr "Compartido"
+msgstr "COMPARTILHAMENTOS"
 
 #: includes/template-functions.php:1114
 msgid "Page not found"
@@ -1654,7 +1651,7 @@ msgstr ""
 
 #: mashshare.php:124 mashshare.php:136
 msgid "Cheatin&#8217; huh?"
-msgstr "Haciendo trampa&#8217 ; ¿he? "
+msgstr "Trapaceando, hein?"
 
 #: templates/sidebar.php:17
 msgid "Increase your Shares and Social Traffic"
