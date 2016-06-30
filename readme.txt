@@ -318,12 +318,13 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 == Changelog == 
 
 = 3.1.4 =
-* Fix: Remove deprecated REST API functions which are throwing error on php 5.2
+* Fix: Remove deprecated REST API functions which are throwing errors on php 5.2
 * Fix: Change domain path to /languages
 * Fix: Change doc header of meta-box.php and remove wrong declarations
 * Tweak: Change label of User Roles Options Visibility to Meta Box Visibility Permissions
-* Tweak: remove is_admin() condition for sharecount creation. Leads to zero sharecounts on themes with bad infinite scroll implementation where is_admin() everytime true
+* Tweak: remove is_admin() condition for sharecount creation. Leads to zero sharecounts on themes with bad infinite scroll implementation where is_admin() is true even on frontpage
 * Tweak: Add more translations
+* New: Support for Telegram button included in network add-on
 
 = 3.1.3 =
 * Fix: Share Buttons are not shown on a few ajax based themes. (Remove is_main_query() condition)
