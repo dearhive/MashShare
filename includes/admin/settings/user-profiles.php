@@ -13,6 +13,7 @@ add_action( 'edit_user_profile_update', 'mashsb_save_user_profiles' );
  * @return string html
  */
 function mashsb_render_user_profiles( $user ) {
+    
     $html = '<h3>' . __( 'MashShare Social Media Integration', 'mashsb' ) . '</h3>' .
             '<table class="form-table">' .
             '<tr>' .
@@ -28,8 +29,10 @@ function mashsb_render_user_profiles( $user ) {
             '</td>' .
             '</tr>' .
             '</table>';
-
-    echo $html;
+    
+    if( mashsb_show_meta_box() ){
+        echo $html;
+    }
 }
 
 /**

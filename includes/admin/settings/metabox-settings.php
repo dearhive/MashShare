@@ -14,7 +14,7 @@
  * Show meta box when user role is not specified
  * 
  * @global array $mashsb_options
- * @return bool true when meta boxes are should be shown for a specific user role
+ * @return bool true when meta boxes should be shown for a specific user role
  */
 function mashsb_show_meta_box(){
     global $mashsb_options, $wp_roles;

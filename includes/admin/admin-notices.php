@@ -43,8 +43,9 @@ function mashsb_check_active_networks() {
 function mashsb_admin_messages() {
     global $mashsb_options;
 
-    if( !current_user_can( 'update_plugins' ) )
+    if( !current_user_can( 'update_plugins' ) ){
         return;
+    }
     
     if( mashsb_is_admin_page() && !function_exists( 'curl_init' ) ) {
         echo '<div class="error">';
@@ -101,7 +102,17 @@ function mashsb_admin_messages() {
         echo '</div>';
     }
     
-    
+    // Show save notice
+    if( isset( $_GET['mashsb-message'] ) ) {
+        switch ( $_GET['mashsb-message'] ) {
+            case 'settings-imported' :
+                echo '<div class="updated">';
+                echo '<p>' . __( 'The settings have been imported', 'mashsb' ) . '</p>';
+                echo '</div>';
+                break;
+        }
+    }
+
 
     // Please rate us
     $install_date = get_option( 'mashsb_installDate' );

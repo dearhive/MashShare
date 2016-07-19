@@ -9,7 +9,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email
 Requires at least: 3.6+
 Tested up to: 4.5.2
-Stable tag: 3.1.4
+Stable tag: 3.1.5
 
 Social Media Share Buttons for Twitter, Facebook and other social networks. Highly customizable Social Media ecosystem
 
@@ -316,6 +316,13 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 
 == Changelog == 
+
+= 3.1.5 =
+* Fix: Twitter title for floating sidebar and sharebar add-on is wrong when on frontpages with multiple blogposts
+* Fix: Telegram button missing style in mashsb.css
+* Tweak: Missing update notice after succesfull settings import
+* Tweak: Improve Open Graph and Twitter Card settings description
+* New: Hide User Profile MashShare meta box with setting Meta Box Visibility in general settings
 
 = 3.1.4 =
 * Fix: Remove deprecated REST API functions which are throwing errors on php 5.2

@@ -938,12 +938,12 @@ function mashsb_get_title() {
         $title = urlencode( $title );
         $title = str_replace( '#', '%23', $title );
         $title = esc_html( $title );
-    } else if( !empty( $post->ID ) ) {
-        $title = get_the_title( $post->ID );
-        $title = html_entity_decode( $title, ENT_QUOTES, 'UTF-8' );
-        $title = urlencode( $title );
-        $title = str_replace( '#', '%23', $title );
-        $title = esc_html( $title );
+//    } else if( !empty( $post->ID ) ) {
+//        $title = get_the_title( $post->ID );
+//        $title = html_entity_decode( $title, ENT_QUOTES, 'UTF-8' );
+//        $title = urlencode( $title );
+//        $title = str_replace( '#', '%23', $title );
+//        $title = esc_html( $title );
     } else {
         $title = mashsb_get_document_title();
         $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
@@ -1088,10 +1088,6 @@ function mashsb_get_twitter_username() {
  * @return string Tag with the document title.
  */
 function mashsb_get_document_title() {
-    // wp_get_document_title() exist since WP 4.4
-    /*if( function_exists( 'wp_get_document_title' ) ) {
-        return wp_get_document_title();
-    }*/
     
     /**
      * Filter the document title before it is generated.
@@ -1103,13 +1099,6 @@ function mashsb_get_document_title() {
      *
      * @param string $title The document title. Default empty string.
      */
-    //$title = apply_filters( 'pre_get_document_title', '' );
-    /*if( !empty( $title ) ) {
-        return $title;
-    }*/
-
-    global $post;
-
 
     // If it's a 404 page, use a "Page not found" title.
     if( is_404() ) {
@@ -1123,7 +1112,7 @@ function mashsb_get_document_title() {
         // If on a post type archive, use the post type archive title.
     } elseif( is_post_type_archive() ) {
         $title = post_type_archive_title( '', false );
-
+        
         // If on a taxonomy archive, use the term title.
     } elseif( is_tax() ) {
         $title = single_term_title( '', false );
@@ -1132,9 +1121,8 @@ function mashsb_get_document_title() {
          * If we're on the blog page that is not the homepage or
          * a single post of any post type, use the post title.
          */
-    } elseif( is_home() || is_singular() ) {
-        //$title = single_post_title( '', false );
-        //$title = get_the_title( $post->ID );
+    //} elseif( !is_home() || is_singular() ) {
+    } elseif( is_singular() ) {
         $title = the_title_attribute('echo=0');
 
         // If on the front page, use the site title.

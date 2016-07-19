@@ -237,7 +237,7 @@ function mashsb_get_registered_settings() {
                 "user_roles_for_sharing_options" => array(
                     "id"            => "user_roles_for_sharing_options",
                     "name"          => __("Meta Box Visibility", "mashsb"),
-                    "desc"          => __("Select user roles which can see MashShare Social Sharing Meta Box Options on posts and pages edit screen", "mashsb"),
+                    "desc"          => __("Select user roles which can only see MashShare Social Sharing Meta Box Options on posts and pages edit screen and User Meta Box on user profiles. If nothing is set meta boxes are shown for all user roles", "mashsb"),
                     "type"          => "multiselect",
                     "options"       => mashsb_get_user_roles(),
                     "placeholder"   => __("Select User Roles", "mashsb"),
@@ -273,13 +273,15 @@ function mashsb_get_registered_settings() {
                 'twitter_card' => array(
                     'id' => 'twitter_card',
                     'name' => __( 'Twitter Card', 'mashsb' ),
-                    'desc' => __( 'Enable Twitter card meta tags. If you are using the Yoast SEO or Jetpack plugin their meta tags will be removed and MashShare will use existing meta data from these plugins. Default: On', 'mashsb' ),
+                    'desc' => __( 'If this is activated MashShare is creating new tags in head of your site for twitter card data and populates them with data coming from the MashShare Twitter Meta Box from the post editing screen or in case you are using Yoast these fields will be populated with the Yoast Twitter Card Data.<br><br>
+So the MashShare twitter card tags will be containing the same social meta data that YOAST would be supplying on your site. So you can use that feature parallel to the Yoast twitter card integration and you do not need to deactivate it even when you prefer to use the Yoast Twitter Card editor.', 'mashsb' ),
                     'type' => 'checkbox'
                 ),
                 'open_graph' => array(
                     'id' => 'open_graph',
                     'name' => __( 'Open Graph Meta Tags', 'mashsb' ),
-                    'desc' => __( 'Enable MashShare Open Graph meta tags. If you are using the Yoast SEO or Jetpack plugin their meta tags will be removed and MashShare will use existing meta data from these plugins.', 'mashsb' ),
+                    'desc' => __( 'If this is activated MashShare is creating new tags in head of your site for open graph data and populates them with data coming from the MashShare Open Graph Meta Box from the post editing screen or in case you are using Yoast these fields will be populated with the Yoast Open Graph Data.<br><br>
+So the MashShare open graph data will be containing the same social meta data that YOAST would be supplying on your site. So you can use that feature parallel to the Yoast open graph integration and you do not need to deactivate it even when you prefer to use the Yoast Open Graph editor.', 'mashsb' ),
                     'type' => 'checkbox'
                 ),
                 'visible_services' => array(
