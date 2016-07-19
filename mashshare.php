@@ -241,8 +241,8 @@ if( !class_exists( 'mashshare' ) ) :
                 // Look in global /wp-content/languages/MASHSB folder
                 load_textdomain( 'mashsb', $mofile_global );
             } elseif( file_exists( $mofile_local ) ) {
-                // Look in local /wp-content/plugins/mashshare/languages/ folder
-                load_textdomain( 'mashshare', $mofile_local );
+                // Look in local /wp-content/plugins/mashsharer/languages/ folder
+                load_textdomain( 'mashsb', $mofile_local );
             } else {
                 // Load the default language files
                 load_plugin_textdomain( 'mashsb', false, $mashsb_lang_dir );
