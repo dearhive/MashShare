@@ -260,7 +260,24 @@ function mashsb_amp_load_css() {
     $amp_css = isset( $mashsb_options['amp_css'] ) ? $mashsb_options['amp_css'] : '';
 
     // Get default css
-    $css = file_get_contents( MASHSB_PLUGIN_DIR . '/templates/mashsb.min.css' );
+
+    //$css = file_get_contents( MASHSB_PLUGIN_DIR . '/templates/mashsb.min.css' );
+    
+    $css = "@font-face {
+  font-family: 'mashsb-font';
+  src: url('" . MASHSB_PLUGIN_URL . "templates/fonts/mashsb-font.eot?29924580');
+  src: url('" . MASHSB_PLUGIN_URL . "templates/fonts/mashsb-font.eot?29924580#iefix') format('embedded-opentype'),
+       url('" . MASHSB_PLUGIN_URL . "templates/fonts/mashsb-font.woff2?29924580') format('woff2'),
+       url('" . MASHSB_PLUGIN_URL . "templates/fonts/mashsb-font.woff?29924580') format('woff'),
+       url('" . MASHSB_PLUGIN_URL . "templates/fonts/mashsb-font.ttf?29924580') format('truetype'),
+       url('" . MASHSB_PLUGIN_URL . "templates/fonts/mashsb-font.svg?29924580#mashsb-font') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}";
+    
+ 
+    $css .= file_get_contents( MASHSB_PLUGIN_DIR . '/templates/mashsb-amp.css' );
+    
 
     // add custom css
     $css .= $custom_css;
