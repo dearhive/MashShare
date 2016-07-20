@@ -121,7 +121,7 @@ color:#ffffff;
 .mashicon-frype .icon:before { content: '\e81c'; } /* '' */
 .mashicon-skype .icon:before { content: '\e81d'; } /* '' */
 .mashicon-share:before { content: '\e81E'; } /* '' */
-.mashicon-telegram:before { content: '\e81F'; } /* '' */
+.mashicon-telegram .icon:before { content: '\e81F'; } /* '' */
 
 
 /* Upper and lower distance share button to next elements  */

@@ -320,6 +320,8 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 = 3.1.5 =
 * Fix: Twitter title for floating sidebar and sharebar add-on is wrong when on frontpages with multiple blogposts
 * Fix: Telegram button missing style in mashsb.css
+* Fix: Wrong textdomain
+* Fix: Size of inline css when using AMP Plugin is too big.
 * Tweak: Missing update notice after succesfull settings import
 * Tweak: Improve Open Graph and Twitter Card settings description
 * New: Hide User Profile MashShare meta box with setting Meta Box Visibility in general settings
