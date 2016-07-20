@@ -258,10 +258,6 @@ function mashsb_amp_load_css() {
     $share_color = isset( $mashsb_options['share_color'] ) ? $mashsb_options['share_color'] : '#ccc';
     $custom_css = isset( $mashsb_options['custom_css'] ) ? $mashsb_options['custom_css'] : '';
     $amp_css = isset( $mashsb_options['amp_css'] ) ? $mashsb_options['amp_css'] : '';
-
-    // Get default css
-
-    //$css = file_get_contents( MASHSB_PLUGIN_DIR . '/templates/mashsb.min.css' );
     
     $css = "@font-face {
   font-family: 'mashsb-font';
@@ -275,7 +271,7 @@ function mashsb_amp_load_css() {
   font-style: normal;
 }";
     
- 
+    // Get default css file
     $css .= file_get_contents( MASHSB_PLUGIN_DIR . '/templates/mashsb-amp.css' );
     
 
