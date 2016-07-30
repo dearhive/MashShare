@@ -318,13 +318,13 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 == Changelog == 
 
 = 3.1.6 = 
+* Fix: jQuery error nearest() not defined
 
 = 3.1.5 =
 * Fix: Twitter title for floating sidebar and sharebar add-on is wrong when on frontpages with multiple blogposts
 * Fix: Telegram button missing style in mashsb.css
 * Fix: Wrong textdomain
 * Fix: Size of inline css when using AMP Plugin is too big.
-* Fix: jQuery error nearest() not defined
 * Tweak: Missing update notice after succesfull settings import
 * Tweak: Improve Open Graph and Twitter Card settings description
 * New: Hide User Profile MashShare meta box with setting Meta Box Visibility in general settings
