@@ -90,17 +90,17 @@ function mashsbGetShareMethod( $mashsbSharesObj ) {
 
 /**
  * Get share count for all non singular pages where $post is empty or a custom url is used E.g. category or blog list pages or for shortcodes
- * Uses transients 
- * 
+ * Uses transients
+ *
  * @param string $url
- *  
+ *
  * @returns integer $shares
  */
 function mashsbGetNonPostShares( $url ) {
     global $mashsb_options;
     // Expiration
     $expiration = mashsb_get_expiration();
-    
+
     // Remove variables, parameters and trailingslash
     $url_clean = mashsb_sanitize_url( $url );
 
@@ -119,7 +119,7 @@ function mashsbGetNonPostShares( $url ) {
         return $mashsbShareCounts->total + getFakecount();
     } else {
         // Get shares from transient cache
-        
+
         $shares = get_transient( 'mashcount_' . md5( $url_clean ) );
 
         if( isset( $shares ) && is_numeric( $shares ) ) {
@@ -148,11 +148,11 @@ function getSharedcount( $url ) {
         //echo "debug" . $mashsb_sharecount[$url];
         return $mashsb_sharecount[$url] + getFakecount();
     }
-   
-    
+
+
     // Remove mashsb-refresh query parameter
     $url = mashsb_sanitize_url($url);
-    
+
     /*
      * Deactivate share count on:
      * - 404 pages
@@ -162,7 +162,7 @@ function getSharedcount( $url ) {
      * - deprecated: admin pages (we need to remove this for themes which are using a bad infinite scroll implementation where is_admin() is always true)
      */
 
-       
+
     if( is_404() || is_search() || empty($url) || !mashsb_is_enabled_permalinks()) {
         return apply_filters( 'filter_get_sharedcount', 0 );
     }
@@ -185,7 +185,7 @@ function getSharedcount( $url ) {
 //        return apply_filters( 'filter_get_sharedcount', $shares );
 //    }
     if( !empty( $url ) && is_null( $post ) ) {
-      return apply_filters( 'filter_get_sharedcount', mashsbGetNonPostShares( $url ) );
+        return apply_filters( 'filter_get_sharedcount', mashsbGetNonPostShares( $url ) );
     }
 
     /*
@@ -201,10 +201,10 @@ function getSharedcount( $url ) {
      * Refresh Cache
      */
     if( mashsb_force_cache_refresh() && is_singular() ) {
-        
+
         // free some memory
         unset ( $mashsb_sharecount[$url] );
-        
+
         // Write timestamp (Use this on top of this condition. If this is not on top following return statements will be skipped and ignored - possible bug?)
         update_post_meta( $post->ID, 'mashsb_timestamp', time() );
 
@@ -228,11 +228,11 @@ function getSharedcount( $url ) {
             update_post_meta( $post->ID, 'mashsb_shares', $mashsbShareCounts->total );
             update_post_meta( $post->ID, 'mashsb_jsonshares', json_encode( $mashsbShareCounts ) );
             MASHSB()->logger->info( "Refresh Cache: Update database with share count: " . $mashsbShareCounts->total );
-            
+
             /* return counts from getAllCounts() after DB update */
             return apply_filters( 'filter_get_sharedcount', $mashsbShareCounts->total + getFakecount() );
         }
-        
+
         /* return previous counts from DB Cache | this happens when API has a hiccup and does not return any results as expected */
         return apply_filters( 'filter_get_sharedcount', $mashsbStoredShareCount + getFakecount() );
     } else {
@@ -247,7 +247,7 @@ function getSharedcount( $url ) {
 function mashsb_subscribe_button() {
     global $mashsb_options;
     if( $mashsb_options['networks'][2] ) {
-        $subscribebutton = '<a href="javascript:void(0)" class="mashicon-subscribe" id="mash-subscribe-control"><span class="icon"></span><span class="text">' . __( 'Subscribe', 'mashsb' ) . '</span></a>';
+        $subscribebutton = '<a href="javascript:void(0)" class="mashicon-subscribe" id="mash-subscribe-control"><span class="mash-button-wrapper"><span class="icon"></span><span class="text">' . __( 'Subscribe', 'mashsb' ) . '</span></span></a>';
     } else {
         $subscribebutton = '';
     }
@@ -363,7 +363,7 @@ function arrNetworks( $name, $is_shortcode ) {
     }
 
     $via = mashsb_get_twitter_username() ? '&via=' . mashsb_get_twitter_username() : '';
-    
+
     $networks_arr = array(
         'facebook' => 'http://www.facebook.com/sharer.php?u=' . $url,
         'twitter' => 'https://twitter.com/intent/tweet?text=' . $twitter_title . '&url=' . $mashsb_twitter_url . $via,
@@ -371,8 +371,8 @@ function arrNetworks( $name, $is_shortcode ) {
         'url' => $url,
         'title' => $title
     );
-    
-    
+
+
     // Delete custom text
     unset ($mashsb_custom_text);
     // Delete custom url 
@@ -392,7 +392,7 @@ function arrNetworks( $name, $is_shortcode ) {
 
 function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
     global $mashsb_options, $mashsb_custom_url, $enablednetworks, $mashsb_twitter_url;
-    
+
     // define globals
     if( $is_shortcode ) {
         //$mashsb_twitter_url = !empty( $mashsb_custom_url ) ? mashsb_get_shorturl( $mashsb_custom_url ) : mashsb_get_twitter_url();
@@ -462,7 +462,7 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
             }
             $enablednetworks[$key]['id'] == 'whatsapp' ? $display = 'display:none;' : $display = ''; // Whatsapp button is made visible via js when opened on mobile devices
 
-            $output .= '<a style="' . $display . '" class="mashicon-' . $enablednetworks[$key]['id'] . '" href="' . arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="nofollow"><span class="icon"></span><span class="text">' . $name . '</span></a>';
+            $output .= '<a style="' . $display . '" class="mashicon-' . $enablednetworks[$key]['id'] . '" href="' . arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="nofollow"><span class="mash-button-wrapper"><span class="icon"></span><span class="text">' . $name . '</span></span></a>';
             $output .= $onoffswitch;
             $output .= $startsecondaryshares;
 
@@ -486,23 +486,23 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
 function mashshareShow() {
 
     $return = '<aside class="mashsb-container mashsb-main">'
-            . mashsb_content_above() .
-            '<div class="mashsb-box">'
-            . apply_filters( 'mashsb_sharecount_filter', mashsb_render_sharecounts() ) .
-            '<div class="mashsb-buttons">'
-            . mashsb_getNetworks() .
-            '</div></div>
+        . mashsb_content_above() .
+        '<div class="mashsb-box">'
+        . apply_filters( 'mashsb_sharecount_filter', mashsb_render_sharecounts() ) .
+        '<div class="mashsb-buttons">'
+        . mashsb_getNetworks() .
+        '</div></div>
                     <div style="clear:both;"></div>'
-            . mashsb_subscribe_content()
-            . mashsb_content_below() .
-            '</aside>
+        . mashsb_subscribe_content()
+        . mashsb_content_below() .
+        '</aside>
             <!-- Share buttons by mashshare.net - Version: ' . MASHSB_VERSION . '-->';
     return apply_filters( 'mashsb_output_buttons', $return );
 }
 
 /**
  * Render the sharecount template
- * 
+ *
  * @param string $customurl default empty
  * @param string alignment default left
  * @return string html
@@ -559,14 +559,14 @@ function mashshareShortcodeShow( $args ) {
         'align' => 'left',
         'text' => '', // $text
         'url' => '' // $url
-                    ), $args ) );
-    
+    ), $args ) );
+
     // Visible services
     //$services = !empty( $mashsb_options['visible_services'] ) ? $mashsb_options['visible_services'] : 0;
     //$visible_services = ($services === 'all') ? 'all' : ($services + 1); // plus 1 to get networks correct counted (array's starting counting from zero)
     $count_services = !empty($services) ? $services : 0;
-    
-    
+
+
     // Define custom url var to share
     $mashsb_custom_url = empty( $url ) ? mashsb_get_url() : $url;
 
@@ -582,16 +582,16 @@ function mashshareShortcodeShow( $args ) {
     }
 
     $return = '<aside class="mashsb-container mashsb-main">'
-            . mashsb_content_above() .
-            '<div class="mashsb-box">'
-            . $sharecount .
-            '<div class="mashsb-buttons">'
-            . mashsb_getNetworks( true, $count_services ) .
-            '</div></div>
+        . mashsb_content_above() .
+        '<div class="mashsb-box">'
+        . $sharecount .
+        '<div class="mashsb-buttons">'
+        . mashsb_getNetworks( true, $count_services ) .
+        '</div></div>
                     <div style="clear:both;"></div>'
-            . mashsb_subscribe_content()
-            . mashsb_content_below() .
-            '</aside>
+        . mashsb_subscribe_content()
+        . mashsb_content_below() .
+        '</aside>
             <!-- Share buttons made by mashshare.net - Version: ' . MASHSB_VERSION . '-->';
 
     return apply_filters( 'mashsb_output_buttons', $return );
@@ -679,7 +679,7 @@ function mashshare_filter_content( $content ) {
     if( mashsb_is_excluded() ){
         return $content;
     }
-    
+
     if (is_feed()){
         return $content;
     }
@@ -699,7 +699,7 @@ function mashshare_filter_content( $content ) {
     if( in_array( 'get_the_excerpt', $wp_current_filter ) ) {
         return $content;
     }
-    
+
     // Get one instance (prevents multiple similar calls)
     $mashsb_instance = mashshareShow();
     switch ( $position ) {
@@ -806,7 +806,7 @@ function mashsb_get_excerpt_by_id( $post_id ) {
 add_action( 'mashsb_get_excerpt_by_id', 'mashsb_get_excerpt_by_id' );
 
 /**
- * Create a factor for calculating individual fake counts 
+ * Create a factor for calculating individual fake counts
  * based on the number of word within a page title
  *
  * @since 2.0
@@ -891,7 +891,7 @@ function mashsb_content_below() {
 
 /**
  * Check if buttons are excluded from a specific post id
- * 
+ *
  * @return true if post is excluded
  */
 function mashsb_is_excluded() {
@@ -924,10 +924,10 @@ function mashsb_is_excluded() {
 
 /**
  * Return general post title
- * 
+ *
  * @param string $title default post title
  * @global obj $mashsb_meta_tags
- * 
+ *
  * @return string the default post title, shortcode title or custom twitter title
  */
 function mashsb_get_title() {
@@ -956,10 +956,10 @@ function mashsb_get_title() {
 
 /**
  * Return twitter custom title
- * 
+ *
  * @global object $mashsb_meta_tags
  * @changed 3.0.0
- * 
+ *
  * @return string the custom twitter title
  */
 function mashsb_get_twitter_title() {
@@ -973,7 +973,7 @@ function mashsb_get_twitter_title() {
         $title = str_replace( '+', '%20', $title );
         $title = str_replace('|','',$title);
         $title = esc_html( $title );
-       
+
     } else {
         // title for non singular pages
         $title = mashsb_get_title();
@@ -1000,10 +1000,10 @@ function mashsb_get_url() {
         // we want the pageID within the loop instead the first appearing one.
         $url = mashsb_sanitize_url(get_permalink( $post->ID ));
     } else {
-         // The main URL
+        // The main URL
         $url = mashsb_get_main_url();
     }
-    
+
     return apply_filters( 'mashsb_get_url', $url );
 }
 
@@ -1038,7 +1038,7 @@ function mashsb_get_twitter_url() {
 
 /**
  * Wrapper for mashsb_get_shorturl_singular()
- * 
+ *
  * @param string $url
  * @return string
  */
@@ -1056,7 +1056,7 @@ function mashsb_get_shorturl( $url ) {
 
 /**
  * Get sanitized twitter handle
- * 
+ *
  * @global array $mashsb_options
  * @return mixed string | bool false
  */
@@ -1088,7 +1088,7 @@ function mashsb_get_twitter_username() {
  * @return string Tag with the document title.
  */
 function mashsb_get_document_title() {
-    
+
     /**
      * Filter the document title before it is generated.
      *
@@ -1112,7 +1112,7 @@ function mashsb_get_document_title() {
         // If on a post type archive, use the post type archive title.
     } elseif( is_post_type_archive() ) {
         $title = post_type_archive_title( '', false );
-        
+
         // If on a taxonomy archive, use the term title.
     } elseif( is_tax() ) {
         $title = single_term_title( '', false );
@@ -1121,14 +1121,14 @@ function mashsb_get_document_title() {
          * If we're on the blog page that is not the homepage or
          * a single post of any post type, use the post title.
          */
-    //} elseif( !is_home() || is_singular() ) {
+        //} elseif( !is_home() || is_singular() ) {
     } elseif( is_singular() ) {
         $title = the_title_attribute('echo=0');
 
         // If on the front page, use the site title.
     } elseif( is_front_page() ) {
         $title = get_bloginfo( 'name', 'display' );
-        
+
         // If on a category or tag archive, use the term title.   
     } elseif( is_category() || is_tag() ) {
         $title = single_term_title( '', false );

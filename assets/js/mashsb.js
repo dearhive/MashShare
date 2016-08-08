@@ -1,36 +1,93 @@
 var strict;
 
+/*!------------------------------------------------------
+ * jQuery nearest v1.0.3
+ * http://github.com/jjenzz/jQuery.nearest
+ * ------------------------------------------------------
+ * Copyright (c) 2012 J. Smith (@jjenzz)
+ * Dual licensed under the MIT and GPL licenses:
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.gnu.org/licenses/gpl.html
+ */
+(function ($, d) {
+    $.fn.nearest = function (selector) {
+        var self, nearest, el, s, p,
+            hasQsa = d.querySelectorAll;
+
+        function update(el) {
+            nearest = nearest ? nearest.add(el) : $(el);
+        }
+
+        this.each(function () {
+            self = this;
+
+            $.each(selector.split(','), function () {
+                s = $.trim(this);
+
+                if (!s.indexOf('#')) {
+                    // selector starts with an ID
+                    update((hasQsa ? d.querySelectorAll(s) : $(s)));
+                } else {
+                    // is a class or tag selector
+                    // so need to traverse
+                    p = self.parentNode;
+                    while (p) {
+                        el = hasQsa ? p.querySelectorAll(s) : $(p).find(s);
+                        if (el.length) {
+                            update(el);
+                            break;
+                        }
+                        p = p.parentNode;
+                    }
+                }
+            });
+
+        });
+
+        return nearest || $();
+    };
+}(jQuery, document));
+
+// Calculate width of text from DOM element or string. By Phil Freo <http://philfreo.com>
+(function($) {
+    $.fn.textWidth = function(text, font) {
+        if (!$.fn.textWidth.fakeEl) $.fn.textWidth.fakeEl = $('<span>').hide().appendTo(document.body);
+        $.fn.textWidth.fakeEl.text(text || this.val() || this.text()).css('font', font || this.css('font'));
+        return $.fn.textWidth.fakeEl.width();
+    };
+}(jQuery));
+
 jQuery(document).ready(function ($) {
-    
+
     mashsb_check_cache();
-    
+
     /**
      * Check Cache
-     * 
+     *
      */
     function mashsb_check_cache() {
         setTimeout(function () {
-                if (typeof(mashsb) && mashsb.refresh == "1") {
-                    mashsb_update_cache();
-                    //console.log('Cache will be updated');
-                }
+            if (typeof(mashsb) && mashsb.refresh == "1") {
+                mashsb_update_cache();
+                //console.log('Cache will be updated');
+            }
 
         }, 6000);
     }
 
     /**
-     * 
+     *
      * Deprecated
      */
     /*if (typeof('mashsb') && mashsb.restapi == "1"){
-        mashsb_restapi_check_cache(); 
-    }
-    else if (typeof('mashsb') && mashsb.restapi == "0"){
-            mashsb_check_cache_ajax(); 
-    }*/
+     mashsb_restapi_check_cache();
+     }
+     else if (typeof('mashsb') && mashsb.restapi == "0"){
+     mashsb_check_cache_ajax();
+     }*/
     /**
      * Check Cache via ajax endpoint
-     * 
+     *
      */
     function mashsb_check_cache_ajax() {
 
@@ -51,7 +108,7 @@ jQuery(document).ready(function ($) {
     }
     /**
      * Check Cache via rest api
-     * 
+     *
      */
     function mashsb_restapi_check_cache() {
 
@@ -194,6 +251,7 @@ jQuery(document).ready(function ($) {
         // Ajax Listener
         var ajaxListener                        = {},
             interval                            = {},
+            $primaryButtons                     = $("aside.mashsb-container.mashsb-main > .mashsb-box > .mashsb-buttons > a[class^='mashicon-']:visible:not(.secondary-shares a)"),
             $secondaryShareButtonsContainer     = $("aside.mashsb-container .secondary-shares");
 
         // Added listener so in case if somehow the ajax request is being made, the buttons will resize again.
@@ -265,10 +323,10 @@ jQuery(document).ready(function ($) {
         $("body")
             .on("click", ".onoffswitch", function() {
                 $secondaryShareButtonsContainer.css("display","block");
-                calculate();
+                setTimeout(function() {calculate();}, 200);
             })
             .on("click", ".onoffswitch2", function() {
-                calculate(false);
+                calculate();
             });
 
         // Window resize
@@ -287,68 +345,116 @@ jQuery(document).ready(function ($) {
         // No need animation adjusting
         else calculate();
 
-        function calculate(animation)
+        /**
+         * Calculation for buttons
+         */
+        function calculate()
         {
-            animation = (typeof(animation) !== "undefined");
-
             // Variables
-            var $mashShareContainer             = $("aside.mashsb-container.mashsb-main"),
-                $container                      = $mashShareContainer.find(".mashsb-buttons"),
-                $shareCountContainer            = $mashShareContainer.find(".mashsb-box > .mashsb-count"),
-                isShareCountContainerVisible    = ($shareCountContainer.length > 0 && $shareCountContainer.is(":visible")),
-                $viewCounterContainer           = $container.find(".mashpv.mashsb-count"),
-                isViewCounterContainerVisible   = $viewCounterContainer.is(":visible"),
-                $plusButton                     = $container.find(".onoffswitch"),
-                isPlusButtonVisible             = $plusButton.is(":visible"),
-                $visibleButtons                 = $container.find("a[class^='mashicon-']:visible:not(.secondary-shares a)"),
-                totalUsedWidth                  = 0,
-                averageWidth;
+            var averageWidth = getAverageWidth();
 
-
-            // Share counter is visible
-            if (isShareCountContainerVisible === true) {
-                totalUsedWidth = $shareCountContainer.outerWidth(true);
-            }
-
-            // View counter is visible
-            if (isViewCounterContainerVisible === true) {
-                totalUsedWidth += $viewCounterContainer.outerWidth(true);
-            }
-
-            // Plus button is visible
-            if (isPlusButtonVisible === true) {
-                totalUsedWidth += $plusButton.outerWidth(true);
-            }
-
-            // Calculate average width of each button (including their margins)
-            averageWidth = ($container.width() - totalUsedWidth) / $visibleButtons.length;
-            if (isNaN(averageWidth)) {
-                console.log("Couldn't calculate average width");
-                return;
-            }
-
-            // We're only interested in positive numbers
-            if (averageWidth < 0) averageWidth = Math.abs(averageWidth);
-
-            // Now get the right width without the margin
-            averageWidth = averageWidth - ($visibleButtons.first().outerWidth(true) - $visibleButtons.first().outerWidth());
+            console.log("average width : " + averageWidth);
 
             // Do the styling...
-            $visibleButtons.each(function() {
-                // Don't animate
-                if (animation) {
-                    this.style.width = averageWidth + "px";
-                    this.style.minWidth = averageWidth + "px";
-                }
-                // Animate
-                else {
-                    $(this).stop(true, false).animate({'width': averageWidth + "px"}, 1000, function() {
-                        this.style.minWidth = averageWidth + "px";
-                    });
-                }
+            $primaryButtons.css({
+                "width"             : averageWidth + "px",
+                "min-width"         : averageWidth + "px",
+                // Below this part is just to ensure the stability...
+                // Not all themes are apparently adding these rules
+                // thus messing up the whole width of the elements
+                "box-sizing"        : "border-box",
+                "-moz-box-sizing"   : "border-box",
+                "-webkit-box-sizing": "border-box",
+
+                // These we need for hiding / showing labels
+                "text-align": "center",
+                "overflow":"hidden"
             });
+
+            toggleLabels();
         }
 
+        /**
+         * Used for toggling labels by sliding them right / left
+         */
+        function toggleLabels()
+        {
+            if ($primaryButtons.length < 5) return;
+
+            var averageWidth= getAverageWidth(),
+                margin      = "-" + (averageWidth * 2) + "px";
+
+            $primaryButtons.find("span:first").css({
+                "display": "inline-block",
+                "overflow": "hidden",
+                "height": "16px"
+            });
+
+            $primaryButtons.find("span.icon").css({
+                "display":"inline-block",
+                "float":"left"
+            });
+
+            $primaryButtons.find("span.text").css({
+                "display":"inline-block",
+                "float":"left",
+                "margin-right": margin
+            });
+
+            $primaryButtons.hover(
+                function() {
+                    var $this       = $(this),
+                        $text       = $this.find("span.text"),
+                        $icon       = $this.find("span.icon"),
+                        totalWidth  = ($text[0].getBoundingClientRect().width + $icon[0].getBoundingClientRect().width) + 1,
+                        innerWidth  = $this.width(),
+                        widthNeeded = innerWidth - totalWidth;
+
+                    // Need to toggle other buttons
+                    if (widthNeeded < 0) {
+                        // From this point, we are only interested in positive numbers
+                        widthNeeded = Math.abs(widthNeeded);
+
+                        var $otherVisibleButtons= $primaryButtons.not($this), // Except this one
+                            originalWidth       = $this[0].getBoundingClientRect().width,
+                            newWidth            = floorDown(originalWidth - (widthNeeded / $otherVisibleButtons.length));
+
+                        $otherVisibleButtons.each(function(index, element) {
+                            $(element).animate({
+                                "width" : newWidth + "px",
+                                "min-width" : newWidth + "px"
+                            }, 0);
+                        });
+
+                        $this.animate({"width" : (averageWidth + widthNeeded) + "px"}, 500);
+                        $(this).find("span.text").animate({'margin-right': 0}, 1000);
+                    }
+                    else $(this).find("span.text").animate({'margin-right': 0}, 500);
+                },
+                function() {
+                    // Variables
+                    var $this       = $(this),
+                        averageWidth= getAverageWidth();
+
+                    // Animate text
+                    $this.find("span.text").animate({'margin-right': margin}, 500);
+
+                    // Width has changed, change it back
+                    if ($this[0].getBoundingClientRect().width > averageWidth) {
+                        $primaryButtons.stop(true, true).animate({
+                            "width" : averageWidth + "px",
+                            "min-width" : averageWidth + "px"
+                        }, 0);
+                    }
+                }
+            );
+        }
+
+        /**
+         * Get action from URL string
+         * @param data
+         * @returns {*}
+         */
         function getAction(data)
         {
             // Split data
@@ -369,6 +475,72 @@ jQuery(document).ready(function ($) {
             }
 
             return '';
+        }
+
+        /**
+         * Floors / rounds down given number to its closest with allowed decimal points
+         * @param number
+         * @param decimals
+         * @returns {number}
+         */
+        function floorDown(number, decimals)
+        {
+            decimals = decimals || 0;
+            return ( Math.floor( number * Math.pow(10, decimals) ) / Math.pow(10, decimals) );
+        }
+
+        /**
+         * Gets average widht of each primary button
+         * @returns {number|*}
+         */
+        function getAverageWidth()
+        {
+            // Variables
+            var $mashShareContainer             = $("aside.mashsb-container.mashsb-main"),
+                $container                      = $mashShareContainer.find(".mashsb-buttons"),
+                $shareCountContainer            = $mashShareContainer.find(".mashsb-box > .mashsb-count"),
+                isShareCountContainerVisible    = ($shareCountContainer.length > 0 && $shareCountContainer.is(":visible")),
+                $viewCounterContainer           = $container.find(".mashpv.mashsb-count"),
+                isViewCounterContainerVisible   = $viewCounterContainer.is(":visible"),
+                $plusButton                     = $container.find(".onoffswitch"),
+                isPlusButtonVisible             = $plusButton.is(":visible"),
+                totalUsedWidth                  = 0,
+                averageWidth;
+
+            $plusButton.css("margin-right", 0);
+
+            // Share counter is visible
+            if (isShareCountContainerVisible === true) {
+                totalUsedWidth += $shareCountContainer.outerWidth(true);
+            }
+
+            // View counter is visible
+            if (isViewCounterContainerVisible === true) {
+                totalUsedWidth += $viewCounterContainer.outerWidth(true);
+            }
+
+            // Plus button is visible
+            if (isPlusButtonVisible === true) {
+                totalUsedWidth += $plusButton.outerWidth(true);
+            }
+
+            // Calculate average width of each button (including their margins)
+            // We need to get precise width of the container, jQuery's width() is rounding up the numbers
+            averageWidth = ($container[0].getBoundingClientRect().width - totalUsedWidth) / $primaryButtons.length;
+            if (isNaN(averageWidth)) {
+                console.log("Couldn't calculate average width");
+                return;
+            }
+
+            // We're only interested in positive numbers
+            if (averageWidth < 0) averageWidth = Math.abs(averageWidth);
+
+            // Now get the right width without the margin
+            averageWidth = averageWidth - ($primaryButtons.first().outerWidth(true) - $primaryButtons.first().outerWidth());
+            // Floor it down
+            averageWidth = floorDown(averageWidth, 2);
+
+            return averageWidth;
         }
     }
 
@@ -395,14 +567,14 @@ jQuery(document).ready(function ($) {
 
                 // how many times to update the value, and how much to increment the value on each update
                 var loops = Math.ceil(settings.speed / settings.refreshInterval),
-                        increment = (settings.to - settings.from) / loops;
+                    increment = (settings.to - settings.from) / loops;
 
                 // references & variables that will change with each update
                 var self = this,
-                        $self = $(this),
-                        loopCount = 0,
-                        value = settings.from,
-                        data = $self.data('countTo') || {};
+                    $self = $(this),
+                    loopCount = 0,
+                    value = settings.from,
+                    data = $self.data('countTo') || {};
 
                 $self.data('countTo', data);
 
@@ -472,52 +644,4 @@ jQuery(document).ready(function ($) {
 
 
 });
-
-/*!------------------------------------------------------
- * jQuery nearest v1.0.3
- * http://github.com/jjenzz/jQuery.nearest
- * ------------------------------------------------------
- * Copyright (c) 2012 J. Smith (@jjenzz)
- * Dual licensed under the MIT and GPL licenses:
- * http://www.opensource.org/licenses/mit-license.php
- * http://www.gnu.org/licenses/gpl.html
- */
-(function ($, d) {
-    $.fn.nearest = function (selector) {
-        var self, nearest, el, s, p,
-                hasQsa = d.querySelectorAll;
-
-        function update(el) {
-            nearest = nearest ? nearest.add(el) : $(el);
-        }
-
-        this.each(function () {
-            self = this;
-
-            $.each(selector.split(','), function () {
-                s = $.trim(this);
-
-                if (!s.indexOf('#')) {
-                    // selector starts with an ID
-                    update((hasQsa ? d.querySelectorAll(s) : $(s)));
-                } else {
-                    // is a class or tag selector
-                    // so need to traverse
-                    p = self.parentNode;
-                    while (p) {
-                        el = hasQsa ? p.querySelectorAll(s) : $(p).find(s);
-                        if (el.length) {
-                            update(el);
-                            break;
-                        }
-                        p = p.parentNode;
-                    }
-                }
-            });
-
-        });
-
-        return nearest || $();
-    };
-}(jQuery, document));
 
