@@ -470,6 +470,12 @@ So the MashShare open graph data will be containing the same social meta data th
                     'desc' => __( 'All buttons will be shown as pure small icons without any text on desktop and mobile devices all the time.<br><strong>Note:</strong> Disable this when you use the <a href="https://www.mashshare.net/downloads/mashshare-responsive/" target="_blank">responsive Add-On</a>', 'mashsb' ),
                     'type' => 'checkbox'
                 ),
+                'responsive_buttons' => array(
+                    'id' => 'responsive_buttons',
+                    'name' => __( 'Responsive Buttons', 'mashsb' ),
+                    'desc' => __( 'Use Mashshare responsive buttons to fill make buttons fit the container', 'mashsb' ),
+                    'type' => 'checkbox'
+                ),
                 /*'image_share' => array(
                     'id' => 'image_share',
                     'name' => __( 'Share buttons on image hover', 'mashsb' ),

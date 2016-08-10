@@ -66,6 +66,7 @@ function mashsb_load_scripts( $hook ) {
         'round_shares' => isset( $mashsb_options['mashsharer_round'] ),
         /* Do not animate shares on blog posts. The share count would be wrong there and performance bad */
         'animate_shares' => isset( $mashsb_options['animate_shares'] ) && is_singular() ? 1 : 0,
+        'responsive_buttons' => isset( $mashsb_options['responsive_buttons'] ) ? 1 : 0,
         'share_url' => $url,
         'title' => $titleclean,
         'image' => $image,
