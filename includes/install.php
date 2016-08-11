@@ -93,6 +93,8 @@ function mashsb_install() {
             'mashsu_methods' => 'disabled',
             'dynamic_button_resize' => '1',
             'dynamic_button_margin' => '1',
+            'buttons_size' => 'mash-medium',
+            'text_align_center' => '1',
         );
 
         update_option( 'mashsb_settings', $settings_new );

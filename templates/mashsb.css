@@ -92,6 +92,10 @@ color:#ffffff;
   /* For IE 8 Important */
   float:left;
 }
+
+[class^="mashicon-"].mash-center .icon:before {
+  float:none;
+}
 /* Icon definitions */
 .mashicon-facebook .icon:before { content: '\e800'; } /* '' */
 .mashicon-google .icon:before { content: '\e801'; } /* '' */
@@ -137,6 +141,10 @@ color:#ffffff;
  */
 .mashsb-buttons a{
     min-width: 177px;
+}
+
+.mashsb-buttons a.mash-center{
+    text-align: center;
 }
 
 /* General design of all buttons */

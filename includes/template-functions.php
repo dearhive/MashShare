@@ -414,6 +414,9 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
     // Get class names for buttons margin
     $class_margin = isset($mashsb_options['button_margin']) ? ' ' : ' mash-nomargin';
 
+    // Get class names for center align
+    $class_center = isset($mashsb_options['text_align_center']) ? ' mash-center' : '';
+
     $output = '';
     $startsecondaryshares = '';
     $endsecondaryshares = '';
@@ -475,7 +478,7 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
             }
             $enablednetworks[$key]['id'] == 'whatsapp' ? $display = 'display:none;' : $display = ''; // Whatsapp button is made visible via js when opened on mobile devices
 
-            $output .= '<a style="' . $display . '" class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . $class_margin . '" href="' . arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="nofollow"><span class="mash-button-wrapper"><span class="icon"></span><span class="text">' . $name . '</span></span></a>';
+            $output .= '<a style="' . $display . '" class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . $class_margin . $class_center . '" href="' . arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="nofollow"><span class="mash-button-wrapper"><span class="icon"></span><span class="text">' . $name . '</span></span></a>';
             $output .= $onoffswitch;
             $output .= $startsecondaryshares;
 
