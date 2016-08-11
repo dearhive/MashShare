@@ -412,7 +412,7 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
     $class_size = isset($mashsb_options['buttons_size']) ? ' ' . $mashsb_options['buttons_size'] : '';
     
     // Get class names for buttons margin
-    $class_margin = isset($mashsb_options['button_margin']) ? ' ' : ' mash-nomargin';
+    $class_margin = isset($mashsb_options['button_margin']) ? '' : ' mash-nomargin';
 
     // Get class names for center align
     $class_center = isset($mashsb_options['text_align_center']) ? ' mash-center' : '';

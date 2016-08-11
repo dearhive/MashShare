@@ -321,10 +321,10 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 * Fix: jQuery error nearest() not defined
 * Fix: Remove inline css completely when custom css is not used
 * Tweak: default font-family sans-serif for the buttons
+* Twak: Allow Headlines for admin settings
 * New: Dynamic Button Resize (enabled per default on fresh installations)
 * New: Color Picker for Share count color
-* New: Allow Headlines for admin settings
-* New: Three different button sizes: Small | Medium | Large
+* New: Three different button sizes: Small | Medium | Large (Default is Medium)
 * New: Button Margin Option
 * New: Button label And share icon align center option
 

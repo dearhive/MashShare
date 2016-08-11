@@ -170,7 +170,9 @@ function mashsb_load_inline_styles() {
     global $mashsb_options;
 
     /* VARS */
-    $share_color = !empty( mashsb_get_share_color() ) ? '.mashsb-count {color:#' . mashsb_get_share_color() . ';}' : '';
+    
+    $is_share_color = mashsb_get_share_color();
+    $share_color = !empty( $is_share_color ) ? '.mashsb-count {color:#' . $is_share_color . ';}' : '';
     isset( $mashsb_options['custom_css'] ) ? $custom_css = $mashsb_options['custom_css'] : $custom_css = '';
     isset( $mashsb_options['small_buttons'] ) ? $smallbuttons = true : $smallbuttons = false;
     $button_width = isset( $mashsb_options['button_width'] ) ? $mashsb_options['button_width'] : null;

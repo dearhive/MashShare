@@ -66,8 +66,8 @@ function mashsb_install() {
 
     // Try to load some settings. If there are no ones we write some default settings:
     $settings = get_option( 'mashsb_settings' );
+    
     // Write default settings
-    //if( false === get_option( 'mashsb_settings' ) || count( $settings ) === 0 ) {
     if( false === get_option( 'mashsb_settings' ) || count( $settings ) === 0 ) {
         $settings_new = array(
             'visible_services' => '1',
@@ -92,22 +92,31 @@ function mashsb_install() {
             'caching_method' => 'async_cache',
             'mashsu_methods' => 'disabled',
             'dynamic_button_resize' => '1',
-            'dynamic_button_margin' => '1',
+            'button_margin' => '1',
             'buttons_size' => 'mash-medium',
             'text_align_center' => '1',
         );
-
         update_option( 'mashsb_settings', $settings_new );
     }
-
-    // Add Upgraded From Option
+    // Get current version number
     $current_version = get_option( 'mashsb_version' );
+        
+    // Add Upgraded From Option
     if( $current_version ) {
         update_option( 'mashsb_version_upgraded_from', $current_version );
     }
+    
+    // Update routine from version < 3.1.6
+    if (  version_compare( $current_version, '3.1.6', '<' ) && !isset($mashsb_options['button_margin'])){
+        $button_margin = array('button_margin' => '1');
+        $settings_upgrade = array_merge($button_margin, $settings);
+        update_option( 'mashsb_settings', $settings_upgrade );
+    }
+
 
     // Update the current version
     update_option( 'mashsb_version', MASHSB_VERSION );
+    
     // Add plugin installation date and variable for rating div
     add_option( 'mashsb_installDate', date( 'Y-m-d h:i:s' ) );
     add_option( 'mashsb_RatingDiv', 'no' );
