@@ -428,6 +428,12 @@ So the MashShare open graph data will be containing the same social meta data th
                     ),
                     'std' => 'Large'
                 ),
+                'button_margin' => array(
+                    'id' => 'button_margin',
+                    'name' => __( 'Button Margin', 'mashsb' ),
+                    'desc' => __('Decide if there is a small gap between the buttons or not', 'mashsb'),
+                    'type' => 'checkbox',
+                ),
                 'border_radius' => array(
                     'id' => 'border_radius',
                     'name' => __( 'Border Radius', 'mashsb' ),

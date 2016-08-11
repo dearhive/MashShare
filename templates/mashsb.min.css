@@ -149,6 +149,12 @@ color:#ffffff;
     border:0px;
     box-shadow: none;
 }
+
+.mashsb-box .mashsb-buttons a.mash-nomargin{
+    margin-right: 0px;
+}
+
+
 .mashsb-box .mashsb-buttons a.mash-medium{
   padding:10px;
 }

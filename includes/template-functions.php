@@ -403,7 +403,6 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
     
     // define globals
     if( $is_shortcode ) {
-        //$mashsb_twitter_url = !empty( $mashsb_custom_url ) ? mashsb_get_shorturl( $mashsb_custom_url ) : mashsb_get_twitter_url();
         $mashsb_twitter_url = !empty( $mashsb_custom_url ) ? mashsb_get_shorturl( $mashsb_custom_url ) : mashsb_get_twitter_url();
     }else{
         $mashsb_twitter_url = mashsb_get_twitter_url();
@@ -411,6 +410,9 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
     
     // Get class names for buttons size
     $class_size = isset($mashsb_options['buttons_size']) ? ' ' . $mashsb_options['buttons_size'] : '';
+    
+    // Get class names for buttons margin
+    $class_margin = isset($mashsb_options['button_margin']) ? ' ' : ' mash-nomargin';
 
     $output = '';
     $startsecondaryshares = '';
@@ -473,7 +475,7 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
             }
             $enablednetworks[$key]['id'] == 'whatsapp' ? $display = 'display:none;' : $display = ''; // Whatsapp button is made visible via js when opened on mobile devices
 
-            $output .= '<a style="' . $display . '" class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . '" href="' . arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="nofollow"><span class="mash-button-wrapper"><span class="icon"></span><span class="text">' . $name . '</span></span></a>';
+            $output .= '<a style="' . $display . '" class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . $class_margin . '" href="' . arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="nofollow"><span class="mash-button-wrapper"><span class="icon"></span><span class="text">' . $name . '</span></span></a>';
             $output .= $onoffswitch;
             $output .= $startsecondaryshares;
 
@@ -539,7 +541,8 @@ function mashsb_render_sharecounts( $customurl = '', $align = 'left' ) {
     // Get class names for buttons size
     $class_size = isset($mashsb_options['buttons_size']) ? ' ' . $mashsb_options['buttons_size'] : '';
 
-    $html = '<div class="mashsb-count'.$class_size.'" style="float:' . $align . ';"><div class="counts mashsbcount">' . $sharecount . '</div><span class="mashsb-sharetext">' . $sharetitle . '</span></div>';
+
+    $html = '<div class="mashsb-count'.$class_size . '" style="float:' . $align . ';"><div class="counts mashsbcount">' . $sharecount . '</div><span class="mashsb-sharetext">' . $sharetitle . '</span></div>';
     return $html;
 }
 

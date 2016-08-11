@@ -325,6 +325,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 * New: Color Picker for Share count color
 * New: Allow Headlines for admin settings
 * New: Three different button sizes: Small | Medium | Large
+* New: Button Margin Option
 
 = 3.1.5 =
 * Fix: Twitter title for floating sidebar and sharebar add-on is wrong when on frontpages with multiple blogposts

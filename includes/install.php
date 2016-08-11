@@ -92,6 +92,7 @@ function mashsb_install() {
             'caching_method' => 'async_cache',
             'mashsu_methods' => 'disabled',
             'dynamic_button_resize' => '1',
+            'dynamic_button_margin' => '1',
         );
 
         update_option( 'mashsb_settings', $settings_new );
