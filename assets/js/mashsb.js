@@ -48,6 +48,15 @@ var strict;
     };
 }(jQuery, document));
 
+// Calculate width of text from DOM element or string. By Phil Freo <http://philfreo.com>
+(function($) {
+    $.fn.textWidth = function(text, font) {
+        if (!$.fn.textWidth.fakeEl) $.fn.textWidth.fakeEl = $('<span>').hide().appendTo(document.body);
+        $.fn.textWidth.fakeEl.text(text || this.val() || this.text()).css('font', font || this.css('font'));
+        return $.fn.textWidth.fakeEl.width();
+    };
+}(jQuery));
+
 jQuery(document).ready(function ($) {
     
     mashsb_check_cache();
@@ -230,6 +239,229 @@ jQuery(document).ready(function ($) {
         /* zero decimals */
         return value.toFixed(0);
     }
+    
+    
+ /**
+     * Responsive Buttons
+     */
+    function responsiveButtons()
+    {
+        // Responsive buttons are not in use
+        if (mashsb.dynamic_buttons != 1) return;
+
+        // Ajax Listener
+        var ajaxListener                        = {},
+            interval                            = {},
+            $primaryButtons                     = $("aside.mashsb-container.mashsb-main > .mashsb-box > .mashsb-buttons > a[class^='mashicon-']:visible:not(.secondary-shares a)"),
+            $secondaryShareButtonsContainer     = $("aside.mashsb-container .secondary-shares");
+
+        // Added listener so in case if somehow the ajax request is being made, the buttons will resize again.
+        // This is useful for good reasons for example;
+        // 1. No need to include responsiveButtons() in case if anything changes or ajax request needs to be added
+        // or modified.
+        // 2. If the ajax request is done outside of MashShare work such as theme customisations
+        ajaxListener.open       = XMLHttpRequest.prototype.open;
+        ajaxListener.send       = XMLHttpRequest.prototype.send;
+        ajaxListener.callback   = function () {
+            //console.log("ajax listener call back : " + this.action);
+            // Re-calculate the width of the buttons on Get View ajax call
+            if (this.action === "mashpv_get_views") {
+                console.log("Get views is called");
+                // Adjust for animation
+                setTimeout(function() {
+                    calculate();
+                }, 1100);
+            }
+
+            // Clear the interval for it
+            clearInterval(interval[this.action]);
+        };
+
+        // When an ajax requests is opened
+        XMLHttpRequest.prototype.open = function(method, url) {
+            // In case if they are not defined
+            if (!method) method = '';
+            if (!url) url = '';
+
+            // Attach values
+            ajaxListener.open.apply(this, arguments);
+            ajaxListener.method = method;
+            ajaxListener.url = url;
+
+            // If that's the get method, attach data to our listener
+            if (method.toLowerCase() === "get") {
+                ajaxListener.data   = url.split('?');
+                ajaxListener.data   = ajaxListener.data[1];
+                ajaxListener.action = getAction(ajaxListener.data);
+            }
+        };
+
+        // When an ajax request is sent
+        XMLHttpRequest.prototype.send = function(data, params) {
+            ajaxListener.send.apply(this, arguments);
+
+            // If that's the post method, attach data to our listener
+            if (ajaxListener.method.toLowerCase() === "post") {
+                ajaxListener.data   = data;
+                ajaxListener.action = getAction(ajaxListener.data);
+            }
+
+            // jQuery overwrites onstatechange (darn you jQuery!),
+            // we need to monitor readyState and the status
+            var pointer     = this;
+            interval[ajaxListener.action] = window.setInterval(function() {
+                // Request is not completed yet
+                if (pointer.readyState != 4 && pointer.status != 200){
+                    return;
+                }
+
+                // Request is ready, execute call back
+                ajaxListener.callback();
+            }, 100);
+        };
+
+        // Recalculate width of the buttons when plus / minus button is clicked
+        $("body")
+            .on("click", ".onoffswitch", function() {
+                $secondaryShareButtonsContainer.css("display","block");
+                setTimeout(function() {calculate();}, 0);
+            })
+            .on("click", ".onoffswitch2", function() {
+                calculate();
+            });
+
+        // Window resize
+        $(window).resize(function() {
+            calculate();
+        });
+
+        // When there is no ajax call, this one is required to be here!
+        // No worries though, once ajax call is done, it will adjust
+        // Adjustment for animation
+        if (mashsb.animate_shares == 1) {
+            setTimeout(function() {
+                calculate();
+            }, 0);
+        }
+        // No need animation adjusting
+        else calculate();
+
+        /**
+         * Calculation for buttons
+         */
+        function calculate()
+        {
+            // Variables
+            var averageWidth = getAverageWidth();
+
+            // Do the styling...
+            $primaryButtons.css({
+                //"width"             : averageWidth + "px", // Need to de-activate this for long labels
+                "min-width"         : averageWidth + "px",
+                // Below this part is just to ensure the stability...
+                // Not all themes are apparently adding these rules
+                // thus messing up the whole width of the elements
+                "box-sizing"        : "border-box",
+                "-moz-box-sizing"   : "border-box",
+                "-webkit-box-sizing": "border-box"
+            });
+        }
+
+        /**
+         * Get action from URL string
+         * @param data
+         * @returns {*}
+         */
+        function getAction(data)
+        {
+            // Split data
+            data = data.split('&');
+
+            // Let's work our magic here
+            // Split data
+            var dataLength  = data.length,
+                i;
+
+            if (dataLength == 1) return data[0];
+
+            // Get the action
+            for (i = 0; i < dataLength; i++) {
+                if (data[i].startsWith("action=")) {
+                    return data[i].replace("action=", '');
+                }
+            }
+
+            return '';
+        }
+
+        /**
+         * Floors / rounds down given number to its closest with allowed decimal points
+         * @param number
+         * @param decimals
+         * @returns {number}
+         */
+        function floorDown(number, decimals)
+        {
+            decimals = decimals || 0;
+            return ( Math.floor( number * Math.pow(10, decimals) ) / Math.pow(10, decimals) );
+        }
+
+        /**
+         * Gets average widht of each primary button
+         * @returns {number|*}
+         */
+        function getAverageWidth()
+        {
+            // Variables
+            var $mashShareContainer             = $("aside.mashsb-container.mashsb-main"),
+                $container                      = $mashShareContainer.find(".mashsb-buttons"),
+                $shareCountContainer            = $mashShareContainer.find(".mashsb-box > .mashsb-count"),
+                isShareCountContainerVisible    = ($shareCountContainer.length > 0 && $shareCountContainer.is(":visible")),
+                $viewCounterContainer           = $container.find(".mashpv.mashsb-count"),
+                isViewCounterContainerVisible   = $viewCounterContainer.is(":visible"),
+                $plusButton                     = $container.find(".onoffswitch"),
+                isPlusButtonVisible             = $plusButton.is(":visible"),
+                totalUsedWidth                  = 0,
+                averageWidth;
+
+            $plusButton.css("margin-right", 0);
+
+            // Share counter is visible
+            if (isShareCountContainerVisible === true) {
+                totalUsedWidth += $shareCountContainer.outerWidth(true);
+            }
+
+            // View counter is visible
+            if (isViewCounterContainerVisible === true) {
+                totalUsedWidth += $viewCounterContainer.outerWidth(true);
+            }
+
+            // Plus button is visible
+            if (isPlusButtonVisible === true) {
+                totalUsedWidth += $plusButton.outerWidth(true);
+            }
+
+            // Calculate average width of each button (including their margins)
+            // We need to get precise width of the container, jQuery's width() is rounding up the numbers
+            averageWidth = ($container[0].getBoundingClientRect().width - totalUsedWidth) / $primaryButtons.length;
+            if (isNaN(averageWidth)) {
+                console.log("Couldn't calculate average width");
+                return;
+            }
+
+            // We're only interested in positive numbers
+            if (averageWidth < 0) averageWidth = Math.abs(averageWidth);
+
+            // Now get the right width without the margin
+            averageWidth = averageWidth - ($primaryButtons.first().outerWidth(true) - $primaryButtons.first().outerWidth());
+            // Floor it down
+            averageWidth = floorDown(averageWidth, 2);
+
+            return averageWidth;
+        }
+    }
+
+    responsiveButtons();
 
     /* Count up script jquery-countTo
      * by mhuggins

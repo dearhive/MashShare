@@ -8,7 +8,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email
 Requires at least: 3.6+
-Tested up to: 4.5.2
+Tested up to: 4.6
 Stable tag: 3.1.6
 
 Social Media Share Buttons for Twitter, Facebook and other social networks. Highly customizable Social Media ecosystem
@@ -319,6 +319,12 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 = 3.1.6 = 
 * Fix: jQuery error nearest() not defined
+* Fix: Remove inline css completely when custom css is not used
+* Tweak: default font-family sans-serif for the buttons
+* New: Dynamic Button Resize (enabled per default on fresh installations)
+* New: Color Picker for Share count color
+* New: Allow Headlines for admin settings
+* New: Three different button sizes: Small | Medium | Large
 
 = 3.1.5 =
 * Fix: Twitter title for floating sidebar and sharebar add-on is wrong when on frontpages with multiple blogposts

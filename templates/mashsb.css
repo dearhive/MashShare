@@ -48,7 +48,9 @@ color:#ffffff;
 }
 /* Font color */
 [class^="mashicon-"] .text, [class*=" mashicon-"] .text {
+    font-family: sans-serif;
     color:#ffffff;
+    
 }
 /* General visual settings,like border, shadow, shine etc. */
  [class^="mashicon-"], [class*=" mashicon-"] .onoffswitch-label{
@@ -147,6 +149,13 @@ color:#ffffff;
     border:0px;
     box-shadow: none;
 }
+.mashsb-box .mashsb-buttons a.mash-medium{
+  padding:10px;
+}
+.mashsb-box .mashsb-buttons a.mash-small{
+  padding:6px;
+}
+
 
 /* Click on plus sign adds this class to switch the float */
 .mashsb-buttons .float-right {
@@ -257,20 +266,30 @@ color: #ffffff;
 .mashicon-subscribe .icon {
 color: #000000;
 }
-/* Define Share count number */
+/* Define Share count number for default buttons*/
 .mashsb-count {
 display: block;
 padding-bottom: 0px;
 font-size: 43px;
 font-weight: bold;
 font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
-color: #7FC04C;
+color: #ccc;
 border: #FFF solid 0px;
 text-align: center;
 margin-right: 10px;
 margin-top: 10px;
 float: left;
 line-height: 13px;
+}
+/* Medium Size Buttons */
+.mashsb-count.mash-medium {
+font-size: 33px;
+margin-top: 7px;
+}
+/* Small Size Buttons */
+.mashsb-count.mash-small {
+font-size: 20px;
+margin-top: 1px;
 }
 /* Define Share text below share count number */
 .mashsb-sharetext {
@@ -322,7 +341,7 @@ color:#8A8C8E;
     -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
     display: inline-block;
     float: left;
-    margin-right: 3px;
+    margin-right: 0px;
     margin-bottom:3px;
     margin-left: 0px;
     cursor: pointer;
@@ -331,6 +350,16 @@ color:#8A8C8E;
     height: 42px; 
     line-height: 42px;
     text-align: center;
+}
+.onoffswitch.mash-small {
+    width: 36px;
+    height: 36px; 
+    line-height: 36px;
+}
+.onoffswitch.mash-small {
+    width: 28px;
+    height: 28px; 
+    line-height: 28px;
 }
 
 .onoffswitch:before {
@@ -349,7 +378,7 @@ color:#8A8C8E;
     -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
     display: inline-block;
     float: left;
-    margin-right: 3px;
+    margin-right: 0px;
     margin-bottom:3px;
     margin-left: 0px;
     cursor: pointer;
@@ -358,6 +387,18 @@ color:#8A8C8E;
     height: 42px;
     line-height: 42px;
     text-align: center;
+}
+
+.onoffswitch2.mash-small {
+    width: 36px;
+    height: 36px; 
+    line-height: 36px;
+}
+
+.onoffswitch2.mash-small {
+    width: 28px;
+    height: 28px; 
+    line-height: 28px;
 }
 
 .onoffswitch2:before {
@@ -419,50 +460,4 @@ color:#8A8C8E;
         width: 41px;
     }
     
-}
-
-// Image Sidebar Sharer
-.mashsb-micro > .mashsb-buttons a {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-flex: 1 1 auto;
-    -ms-flex: 1 1 auto;
-    flex: 1 1 auto;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    min-width: 0px;
-    margin-right: 6px;
-    text-align: center;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
-}
-.mashsb-micro { position: absolute; left: 6px; right: auto; top: 6px; }
-@media only screen and (min-width: 1024px) { .mashsb-micro { right: 100%; left: auto; top: 0; padding-right: 6px; } }
-.mashsb-micro .mashsb-buttons { display: none; overflow: hidden; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; width:48px;}
-.mashsb-micro .mashsb-buttons a { margin: 0px; padding: 0px; -moz-border-radius: 0; -webkit-border-radius: 0; border-radius: 0; min-width: 0px; width:48px;}
-.mashsb-micro .mashsb-buttons a .icon { display: block; width: 48px; height: 48px; margin: 0; text-align: center; }
-.mashsb-micro .mashsb-buttons a .icon:before { float: none; margin: 0; line-height: 48px; }
-.mashsb-micro .mashsb-buttons .text { display: none; }
-
-.mashsb-micro-toggle { display: block; width: 32px; height: 32px; cursor: pointer; text-align: center; font-size: 18px; line-height: 32px; font-weight: normal; font-family: "bimber"; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; background: #c5c5c5; color: #fff; }
-
-.mashsb-micro-toggle:before { font-family:'mashsb-font';content: "\e81E"; }
-
-.mashsb-img-wrap { display: block; position: relative; }
-
-.mashsb-micro-wrapper { display: block; position: relative; }
-.mashsb-micro-wrapper .onoffswitch, .mashsb-micro-wrapper .onoffswitch2 { position: absolute; clip: rect(1px, 1px, 1px, 1px); width: 1px; height: 1px; overflow: hidden; }
-
-.mashsb-hoverable .mashsb-micro-wrapper:hover .mashsb-micro .mashsb-micro-toggle, .mashsb-micro-wrapper-expanded .mashsb-micro .mashsb-micro-toggle { display: none; }
-.mashsb-hoverable .mashsb-micro-wrapper:hover .mashsb-micro .mashsb-buttons, .mashsb-micro-wrapper-expanded .mashsb-micro .mashsb-buttons { display: block; }
-
-.mashsb-link-toggle { display: none; position: absolute; left: 50%; right: auto; bottom: 0; width: 0; height: 0; margin-left: -6px; border-width: 6px; border-style: solid; border-color: transparent transparent currentColor transparent; content: ""; }
-
-.mashsb-img-wrap { display: block; position: relative; }
-
-.mashsb-micro-wrapper:hover{
-    .mashsb-micro .mashsb-buttons {display: block;}
 }

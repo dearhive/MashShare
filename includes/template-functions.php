@@ -247,7 +247,7 @@ function getSharedcount( $url ) {
 function mashsb_subscribe_button() {
     global $mashsb_options;
     if( $mashsb_options['networks'][2] ) {
-        $subscribebutton = '<a href="javascript:void(0)" class="mashicon-subscribe" id="mash-subscribe-control"><span class="icon"></span><span class="text">' . __( 'Subscribe', 'mashsb' ) . '</span></a>';
+        $subscribebutton = '<a href="javascript:void(0)" class="mashicon-subscribe" id="mash-subscribe-control"><span class="mash-button-wrapper"><span class="icon"></span><span class="text">' . __( 'Subscribe', 'mashsb' ) . '</span></span></a>';
     } else {
         $subscribebutton = '';
     }
@@ -308,7 +308,11 @@ function roundshares( $totalshares ) {
  */
 
 function onOffSwitch() {
-    $output = '<div class="onoffswitch"></div>';
+    global $mashsb_options;
+    // Get class names for buttons size
+    $class_size = isset($mashsb_options['buttons_size']) ? ' ' . $mashsb_options['buttons_size'] : '';
+    
+    $output = '<div class="onoffswitch' . $class_size . '"></div>';
     return apply_filters( 'mashsh_onoffswitch', $output );
 }
 
@@ -321,7 +325,11 @@ function onOffSwitch() {
  */
 
 function onOffSwitch2() {
-    $output = '<div class="onoffswitch2" style="display:none;"></div>';
+    global $mashsb_options;
+    // Get class names for buttons size
+    $class_size = isset($mashsb_options['buttons_size']) ? ' ' . $mashsb_options['buttons_size'] : '';
+    
+    $output = '<div class="onoffswitch2' .$class_size .'" style="display:none;"></div>';
     return apply_filters( 'mashsh_onoffswitch2', $output );
 }
 
@@ -400,6 +408,9 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
     }else{
         $mashsb_twitter_url = mashsb_get_twitter_url();
     }
+    
+    // Get class names for buttons size
+    $class_size = isset($mashsb_options['buttons_size']) ? ' ' . $mashsb_options['buttons_size'] : '';
 
     $output = '';
     $startsecondaryshares = '';
@@ -462,7 +473,7 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
             }
             $enablednetworks[$key]['id'] == 'whatsapp' ? $display = 'display:none;' : $display = ''; // Whatsapp button is made visible via js when opened on mobile devices
 
-            $output .= '<a style="' . $display . '" class="mashicon-' . $enablednetworks[$key]['id'] . '" href="' . arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="nofollow"><span class="icon"></span><span class="text">' . $name . '</span></a>';
+            $output .= '<a style="' . $display . '" class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . '" href="' . arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="nofollow"><span class="mash-button-wrapper"><span class="icon"></span><span class="text">' . $name . '</span></span></a>';
             $output .= $onoffswitch;
             $output .= $startsecondaryshares;
 
@@ -524,8 +535,11 @@ function mashsb_render_sharecounts( $customurl = '', $align = 'left' ) {
     if( mashsb_hide_shares( $shares ) ) {
         return;
     }
+    
+    // Get class names for buttons size
+    $class_size = isset($mashsb_options['buttons_size']) ? ' ' . $mashsb_options['buttons_size'] : '';
 
-    $html = '<div class="mashsb-count" style="float:' . $align . ';"><div class="counts mashsbcount">' . $sharecount . '</div><span class="mashsb-sharetext">' . $sharetitle . '</span></div>';
+    $html = '<div class="mashsb-count'.$class_size.'" style="float:' . $align . ';"><div class="counts mashsbcount">' . $sharecount . '</div><span class="mashsb-sharetext">' . $sharetitle . '</span></div>';
     return $html;
 }
 

@@ -851,11 +851,6 @@ color:#777777;
     background-color: #ffffff;
 }
 
-
-#mashsb_container table tbody tr:nth-child(1) > th > div {
-    font-size: 20px;
-}
-
 .mashsb_hidden{
     display: none;
 }
