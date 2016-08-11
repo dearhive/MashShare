@@ -261,10 +261,17 @@ jQuery(document).ready(function ($) {
         // 2. If the ajax request is done outside of MashShare work such as theme customisations
         ajaxListener.open       = XMLHttpRequest.prototype.open;
         ajaxListener.send       = XMLHttpRequest.prototype.send;
-        ajaxListener.callback   = function () {
-            //console.log("ajax listener call back : " + this.action);
+        ajaxListener.callback   = function (pointer)
+        {
+            // Request is not completed yet
+            if (pointer.readyState != 4 || pointer.status != 200) {
+                return;
+            }
+
+            var action = getAction(pointer.responseURL);
+
             // Re-calculate the width of the buttons on Get View ajax call
-            if (this.action === "mashpv_get_views") {
+            if (action === "mashpv_get_views") {
                 console.log("Get views is called");
                 // Adjust for animation
                 setTimeout(function() {
@@ -272,9 +279,21 @@ jQuery(document).ready(function ($) {
                 }, 1100);
             }
 
+            //console.log(interval);
             // Clear the interval for it
-            clearInterval(interval[this.action]);
+            clearInterval(interval[action]);
         };
+
+        // Executes 5 min later to clear IF any interval that's left
+        setTimeout(function() {
+            var key;
+            for (key in interval) {
+                if (interval.hasOwnProperty(key)) {
+                    clearInterval(interval[key]);
+                }
+            }
+
+        }, 5 * (60 * 1000));
 
         // When an ajax requests is opened
         XMLHttpRequest.prototype.open = function(method, url) {
@@ -308,15 +327,7 @@ jQuery(document).ready(function ($) {
             // jQuery overwrites onstatechange (darn you jQuery!),
             // we need to monitor readyState and the status
             var pointer     = this;
-            interval[ajaxListener.action] = window.setInterval(function() {
-                // Request is not completed yet
-                if (pointer.readyState != 4 && pointer.status != 200){
-                    return;
-                }
-
-                // Request is ready, execute call back
-                ajaxListener.callback();
-            }, 100);
+            interval[ajaxListener.action] = window.setInterval(ajaxListener.callback, 100, pointer);
         };
 
         // Recalculate width of the buttons when plus / minus button is clicked
