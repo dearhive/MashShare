@@ -289,8 +289,8 @@ line-height: 13px;
 }
 /* Medium Size Buttons */
 .mashsb-count.mash-medium {
-font-size: 33px;
-margin-top: 7px;
+font-size: 30px;
+margin-top: 5px;
 }
 /* Small Size Buttons */
 .mashsb-count.mash-small {
@@ -357,7 +357,7 @@ color:#8A8C8E;
     line-height: 42px;
     text-align: center;
 }
-.onoffswitch.mash-small {
+.onoffswitch.mash-medium {
     width: 36px;
     height: 36px; 
     line-height: 36px;
@@ -395,7 +395,7 @@ color:#8A8C8E;
     text-align: center;
 }
 
-.onoffswitch2.mash-small {
+.onoffswitch2.mash-medium {
     width: 36px;
     height: 36px; 
     line-height: 36px;
