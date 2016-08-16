@@ -360,6 +360,8 @@ jQuery(document).ready(function ($) {
                     var $this           = $(this),
                         $primaryButtons = $this.find(".mashsb-box > .mashsb-buttons > .mashsb-primary-shares > a[class^='mashicon-']");
 
+                    $this.find(".mashsb-box > .mashsb-buttons > .secondary-shares").css("clear", "both");
+
                     // Variables
                     var averageWidth = getAverageWidth($primaryButtons);
 
@@ -472,8 +474,6 @@ jQuery(document).ready(function ($) {
             if (isPlusButtonVisible === true) {
                 totalUsedWidth += $plusButton[0].getBoundingClientRect().width;
             }
-
-            var tempWidth = $container[0].getBoundingClientRect().width;
 
             // Calculate average width of each button (including their margins)
             // We need to get precise width of the container, jQuery's width() is rounding up the numbers
@@ -593,3 +593,4 @@ jQuery(document).ready(function ($) {
         $('.mashsbcount').countTo({from: 0, to: mashsb.shares, speed: 1000, refreshInterval: 100});
     }
 });
+
