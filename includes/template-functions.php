@@ -308,7 +308,7 @@ function roundshares( $totalshares ) {
  */
 
 function onOffSwitch() {
-    $output = '<div class="onoffswitch"></div>';
+    $output = '<span class="onoffswitch"></span>';
     return apply_filters( 'mashsh_onoffswitch', $output );
 }
 
@@ -321,7 +321,7 @@ function onOffSwitch() {
  */
 
 function onOffSwitch2() {
-    $output = '<div class="onoffswitch2" style="display:none;"></div>';
+    $output = '<span class="onoffswitch2" style="display:none;"></span>';
     return apply_filters( 'mashsh_onoffswitch2', $output );
 }
 
@@ -395,7 +395,6 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
     
     // define globals
     if( $is_shortcode ) {
-        //$mashsb_twitter_url = !empty( $mashsb_custom_url ) ? mashsb_get_shorturl( $mashsb_custom_url ) : mashsb_get_twitter_url();
         $mashsb_twitter_url = !empty( $mashsb_custom_url ) ? mashsb_get_shorturl( $mashsb_custom_url ) : mashsb_get_twitter_url();
     }else{
         $mashsb_twitter_url = mashsb_get_twitter_url();
@@ -435,23 +434,20 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
     } else {
         $enablednetworks = $getnetworks;
     }
-
+    
+    // Start Primary Buttons
+    $output .= '<div class="mashsb-primary-shares">';
+    
     if( !empty( $enablednetworks ) ) {
         foreach ( $enablednetworks as $key => $network ):
             if( $maxcounter !== 'all' && $maxcounter < count( $enablednetworks ) ) { // $maxcounter + 1 for correct comparision with count()
                 if( $startcounter == $maxcounter ) {
-                    $onoffswitch = onOffSwitch();
-                    $startsecondaryshares = '<div class="secondary-shares" style="display:none;">';
-                } else {
-                    $onoffswitch = '';
-                    $onoffswitch2 = '';
-                    $startsecondaryshares = '';
+                    $onoffswitch = onOffSwitch(); // Start More Button
+                    $startsecondaryshares = '</div>'; // End Primary Buttons
+                    $startsecondaryshares .= '<div class="secondary-shares" style="display:none;">'; // Start secondary-shares
                 }
                 if( $startcounter === (count( $enablednetworks )) ) {
                     $endsecondaryshares = '</div>';
-                } else {
-                    ;
-                    $endsecondaryshares = '';
                 }
             }
             if( $enablednetworks[$key]['name'] != '' ) {
@@ -488,11 +484,12 @@ function mashshareShow() {
     $return = '<aside class="mashsb-container mashsb-main">'
             . mashsb_content_above() .
             '<div class="mashsb-box">'
-            . apply_filters( 'mashsb_sharecount_filter', mashsb_render_sharecounts() ) .
-            '<div class="mashsb-buttons">'
-            . mashsb_getNetworks() .
-            '</div></div>
-                    <div style="clear:both;"></div>'
+                . apply_filters( 'mashsb_sharecount_filter', mashsb_render_sharecounts() ) .
+                '<div class="mashsb-buttons">'
+                . mashsb_getNetworks() .
+                '</div>
+            </div>
+                <div style="clear:both;"></div>'
             . mashsb_subscribe_content()
             . mashsb_content_below() .
             '</aside>
@@ -526,7 +523,7 @@ function mashsb_render_sharecounts( $customurl = '', $align = 'left' ) {
     }
 
     $html = '<div class="mashsb-count" style="float:' . $align . ';"><div class="counts mashsbcount">' . $sharecount . '</div><span class="mashsb-sharetext">' . $sharetitle . '</span></div>';
-    return $html;
+    return apply_filters('mashsb_share_count', $html);
 }
 
 /*
