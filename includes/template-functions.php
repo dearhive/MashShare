@@ -548,7 +548,7 @@ function mashsb_render_sharecounts( $customurl = '', $align = 'left' ) {
     // Get class names for buttons size
     $class_size = isset($mashsb_options['buttons_size']) ? ' ' . $mashsb_options['buttons_size'] : '';
 
-    $html = '<div class="mashsb-count" style="float:' . $align . ';"><div class="counts mashsbcount">' . $sharecount . '</div><span class="mashsb-sharetext">' . $sharetitle . '</span></div>';
+    $html = '<div class="mashsb-count'.$class_size . '" style="float:' . $align . ';"><div class="counts mashsbcount">' . $sharecount . '</div><span class="mashsb-sharetext">' . $sharetitle . '</span></div>';
     return apply_filters('mashsb_share_count', $html);
 }
 
