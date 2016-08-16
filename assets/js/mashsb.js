@@ -12,7 +12,7 @@ var strict;
 (function ($, d) {
     $.fn.nearest = function (selector) {
         var self, nearest, el, s, p,
-                hasQsa = d.querySelectorAll;
+            hasQsa = d.querySelectorAll;
 
         function update(el) {
             nearest = nearest ? nearest.add(el) : $(el);
@@ -48,46 +48,37 @@ var strict;
     };
 }(jQuery, document));
 
-// Calculate width of text from DOM element or string. By Phil Freo <http://philfreo.com>
-(function($) {
-    $.fn.textWidth = function(text, font) {
-        if (!$.fn.textWidth.fakeEl) $.fn.textWidth.fakeEl = $('<span>').hide().appendTo(document.body);
-        $.fn.textWidth.fakeEl.text(text || this.val() || this.text()).css('font', font || this.css('font'));
-        return $.fn.textWidth.fakeEl.width();
-    };
-}(jQuery));
-
 jQuery(document).ready(function ($) {
-    
+
     mashsb_check_cache();
-    
+
     /**
      * Check Cache
-     * 
+     *
      */
     function mashsb_check_cache() {
         setTimeout(function () {
-                if (typeof(mashsb) && mashsb.refresh == "1") {
-                    mashsb_update_cache();
-                    //console.log('Cache will be updated');
-                }
+            if (typeof(mashsb) && mashsb.refresh == "1") {
+                mashsb_update_cache();
+                //console.log('Cache will be updated');
+            }
 
         }, 6000);
     }
 
     /**
-     * 
+     *
      * Deprecated
      */
     /*if (typeof('mashsb') && mashsb.restapi == "1"){
-        mashsb_restapi_check_cache(); 
-    }
-    else if (typeof('mashsb') && mashsb.restapi == "0"){
-            mashsb_check_cache_ajax(); 
-    }*/
+     mashsb_restapi_check_cache();
+     }
+     else if (typeof('mashsb') && mashsb.restapi == "0"){
+     mashsb_check_cache_ajax();
+     }*/
     /**
      * Check Cache via ajax endpoint
-     * 
+     *
      */
     function mashsb_check_cache_ajax() {
 
@@ -108,7 +99,7 @@ jQuery(document).ready(function ($) {
     }
     /**
      * Check Cache via rest api
-     * 
+     *
      */
     function mashsb_restapi_check_cache() {
 
@@ -239,9 +230,8 @@ jQuery(document).ready(function ($) {
         /* zero decimals */
         return value.toFixed(0);
     }
-    
-    
-  /**
+
+    /**
      * Responsive Buttons
      */
     function responsiveButtons()
@@ -363,14 +353,13 @@ jQuery(document).ready(function ($) {
         function calculate()
         {
             var $container = $("aside.mashsb-container.mashsb-main");
-            console.log("calculating...");
 
             if ($container.length > 0) {
                 $container.each(function() {
                     var $this           = $(this),
-                        $primaryButtons = $this.find(".mashsb-box > .mashsb-buttons > .mashsb-primary-shares > a[class^='mashicon-']");
-                        
-                        $this.find(".mashsb-box > .mashsb-buttons > .secondary-shares").css("clear", "both");
+                        $primaryButtons = $this.find(".mashsb-box > .mashsb-buttons > .mashsb-primary-shares > a[class^='mashicon-']:visible");
+
+                    //$this.find(".mashsb-box > .mashsb-buttons > .secondary-shares").css("clear", "both");
 
                     // Variables
                     var averageWidth = getAverageWidth($primaryButtons);
@@ -531,14 +520,14 @@ jQuery(document).ready(function ($) {
 
                 // how many times to update the value, and how much to increment the value on each update
                 var loops = Math.ceil(settings.speed / settings.refreshInterval),
-                        increment = (settings.to - settings.from) / loops;
+                    increment = (settings.to - settings.from) / loops;
 
                 // references & variables that will change with each update
                 var self = this,
-                        $self = $(this),
-                        loopCount = 0,
-                        value = settings.from,
-                        data = $self.data('countTo') || {};
+                    $self = $(this),
+                    loopCount = 0,
+                    value = settings.from,
+                    data = $self.data('countTo') || {};
 
                 $self.data('countTo', data);
 
@@ -605,6 +594,5 @@ jQuery(document).ready(function ($) {
     if (typeof mashsb !== 'undefined' && mashsb.animate_shares == 1 && $('.mashsbcount').length) {
         $('.mashsbcount').countTo({from: 0, to: mashsb.shares, speed: 1000, refreshInterval: 100});
     }
-
-
 });
+
