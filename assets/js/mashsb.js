@@ -237,7 +237,7 @@ jQuery(document).ready(function ($) {
     function responsiveButtons()
     {
         // Responsive buttons are not in use
-        //if (mashsb.dynamic_buttons != 1) return;
+        if (mashsb.dynamic_buttons != 1) return;
 
         // Ajax Listener
         var ajaxListener                        = {},
