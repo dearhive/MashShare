@@ -445,9 +445,15 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
                     $onoffswitch = onOffSwitch(); // Start More Button
                     $startsecondaryshares = '</div>'; // End Primary Buttons
                     $startsecondaryshares .= '<div class="secondary-shares" style="display:none;">'; // Start secondary-shares
+                } else {
+                    $onoffswitch = '';
+                    $onoffswitch2 = '';
+                    $startsecondaryshares = '';
                 }
                 if( $startcounter === (count( $enablednetworks )) ) {
                     $endsecondaryshares = '</div>';
+                } else {
+                    $endsecondaryshares = '';
                 }
             }
             if( $enablednetworks[$key]['name'] != '' ) {
