@@ -241,7 +241,7 @@ jQuery(document).ready(function ($) {
     }
     
     
- /**
+  /**
      * Responsive Buttons
      */
     function responsiveButtons()
@@ -251,9 +251,9 @@ jQuery(document).ready(function ($) {
 
         // Ajax Listener
         var ajaxListener                        = {},
-            interval                            = {},
-            $primaryButtons                     = $("aside.mashsb-container.mashsb-main > .mashsb-box > .mashsb-buttons > a[class^='mashicon-']:visible:not(.secondary-shares a)"),
-            $secondaryShareButtonsContainer     = $("aside.mashsb-container .secondary-shares");
+            interval                            = {};
+        //$primaryButtons                     = $("aside.mashsb-container.mashsb-main > .mashsb-box > .mashsb-buttons > a[class^='mashicon-']:visible:not(.secondary-shares a)"),
+        //$secondaryShareButtonsContainer     = $("aside.mashsb-container .secondary-shares");
 
         // Added listener so in case if somehow the ajax request is being made, the buttons will resize again.
         // This is useful for good reasons for example;
@@ -262,20 +262,39 @@ jQuery(document).ready(function ($) {
         // 2. If the ajax request is done outside of MashShare work such as theme customisations
         ajaxListener.open       = XMLHttpRequest.prototype.open;
         ajaxListener.send       = XMLHttpRequest.prototype.send;
-        ajaxListener.callback   = function () {
-            //console.log("ajax listener call back : " + this.action);
+        ajaxListener.callback   = function (pointer) {
+            // Request is not completed yet
+            if (pointer.readyState != 4 || pointer.status != 200) {
+                return;
+            }
+
+            var action = getAction(pointer.responseURL);
+
             // Re-calculate the width of the buttons on Get View ajax call
-            if (this.action === "mashpv_get_views") {
+            if (action === "mashpv_get_views") {
                 console.log("Get views is called");
                 // Adjust for animation
                 setTimeout(function() {
+                    console.log("calling calculate");
                     calculate();
                 }, 1100);
             }
 
+            //console.log(interval);
             // Clear the interval for it
-            clearInterval(interval[this.action]);
+            clearInterval(interval[action]);
         };
+
+        // Executes 5 min later to clear IF any interval that's left
+        setTimeout(function() {
+            var key;
+            for (key in interval) {
+                if (interval.hasOwnProperty(key)) {
+                    clearInterval(interval[key]);
+                }
+            }
+
+        }, 5 * (60 * 1000));
 
         // When an ajax requests is opened
         XMLHttpRequest.prototype.open = function(method, url) {
@@ -309,22 +328,14 @@ jQuery(document).ready(function ($) {
             // jQuery overwrites onstatechange (darn you jQuery!),
             // we need to monitor readyState and the status
             var pointer     = this;
-            interval[ajaxListener.action] = window.setInterval(function() {
-                // Request is not completed yet
-                if (pointer.readyState != 4 && pointer.status != 200){
-                    return;
-                }
-
-                // Request is ready, execute call back
-                ajaxListener.callback();
-            }, 100);
+            interval[ajaxListener.action] = window.setInterval(ajaxListener.callback, 100, pointer);
         };
 
         // Recalculate width of the buttons when plus / minus button is clicked
         $("body")
             .on("click", ".onoffswitch", function() {
-                $secondaryShareButtonsContainer.css("display","block");
-                setTimeout(function() {calculate();}, 0);
+                //$secondaryShareButtonsContainer.css("display","block");
+                setTimeout(function() {calculate();}, 200);
             })
             .on("click", ".onoffswitch2", function() {
                 calculate();
@@ -341,7 +352,7 @@ jQuery(document).ready(function ($) {
         if (mashsb.animate_shares == 1) {
             setTimeout(function() {
                 calculate();
-            }, 0);
+            }, 500);
         }
         // No need animation adjusting
         else calculate();
@@ -351,20 +362,32 @@ jQuery(document).ready(function ($) {
          */
         function calculate()
         {
-            // Variables
-            var averageWidth = getAverageWidth();
+            var $container = $("aside.mashsb-container.mashsb-main");
+            console.log("calculating...");
 
-            // Do the styling...
-            $primaryButtons.css({
-                //"width"             : averageWidth + "px", // Need to de-activate this for long labels
-                "min-width"         : averageWidth + "px",
-                // Below this part is just to ensure the stability...
-                // Not all themes are apparently adding these rules
-                // thus messing up the whole width of the elements
-                "box-sizing"        : "border-box",
-                "-moz-box-sizing"   : "border-box",
-                "-webkit-box-sizing": "border-box"
-            });
+            if ($container.length > 0) {
+                $container.each(function() {
+                    var $this           = $(this),
+                        $primaryButtons = $this.find(".mashsb-box > .mashsb-buttons > .mashsb-primary-shares > a[class^='mashicon-']");
+                        
+                        $this.find(".mashsb-box > .mashsb-buttons > .secondary-shares").css("clear", "both");
+
+                    // Variables
+                    var averageWidth = getAverageWidth($primaryButtons);
+
+                    // Do the styling...
+                    $primaryButtons.css({
+                        //"width"             : averageWidth + "px", // Need to de-activate this for long labels
+                        "min-width"         : averageWidth + "px",
+                        // Below this part is just to ensure the stability...
+                        // Not all themes are apparently adding these rules
+                        // thus messing up the whole width of the elements
+                        "box-sizing"        : "border-box",
+                        "-moz-box-sizing"   : "border-box",
+                        "-webkit-box-sizing": "border-box"
+                    });
+                });
+            }
         }
 
         /**
@@ -407,17 +430,28 @@ jQuery(document).ready(function ($) {
         }
 
         /**
+         * Rounds up given number to is closest with allowed decimal points
+         * @param number
+         * @param decimals
+         * @returns {number}
+         */
+        function round(number, decimals)
+        {
+            return Math.round(number * Math.pow(10, decimals)) / Math.pow(10, decimals);
+        }
+
+        /**
          * Gets average widht of each primary button
          * @returns {number|*}
          */
-        function getAverageWidth()
+        function getAverageWidth(primaryButtons)
         {
             // Variables
-            var $mashShareContainer             = $("aside.mashsb-container.mashsb-main"),
-                $container                      = $mashShareContainer.find(".mashsb-buttons"),
-                $shareCountContainer            = $mashShareContainer.find(".mashsb-box > .mashsb-count"),
+            var $mashShareContainer             = primaryButtons.parents("aside.mashsb-container.mashsb-main"),
+                $container                      = $mashShareContainer.find(".mashsb-buttons > .mashsb-primary-shares"),
+                $shareCountContainer            = $mashShareContainer.find(".mashsb-box > .mashsb-count:not(.mashpv)"),
                 isShareCountContainerVisible    = ($shareCountContainer.length > 0 && $shareCountContainer.is(":visible")),
-                $viewCounterContainer           = $container.find(".mashpv.mashsb-count"),
+                $viewCounterContainer           = $mashShareContainer.find(".mashsb-box > .mashpv.mashsb-count"),
                 isViewCounterContainerVisible   = $viewCounterContainer.is(":visible"),
                 $plusButton                     = $container.find(".onoffswitch"),
                 isPlusButtonVisible             = $plusButton.is(":visible"),
@@ -428,22 +462,34 @@ jQuery(document).ready(function ($) {
 
             // Share counter is visible
             if (isShareCountContainerVisible === true) {
-                totalUsedWidth += $shareCountContainer.outerWidth(true);
+                var shareCountContainerWidth = parseFloat($shareCountContainer.css("margin-right"));
+                if (isNaN(shareCountContainerWidth)) shareCountContainerWidth = 0;
+                shareCountContainerWidth = shareCountContainerWidth + $shareCountContainer[0].getBoundingClientRect().width;
+                shareCountContainerWidth = round(shareCountContainerWidth, 2);
+
+                totalUsedWidth += shareCountContainerWidth;
             }
 
             // View counter is visible
             if (isViewCounterContainerVisible === true) {
-                totalUsedWidth += $viewCounterContainer.outerWidth(true);
+                var viewCountContainerWidth = parseFloat($viewCounterContainer.css("margin-right"));
+                if (isNaN(viewCountContainerWidth)) viewCountContainerWidth = 0;
+                viewCountContainerWidth = viewCountContainerWidth + $viewCounterContainer[0].getBoundingClientRect().width;
+                viewCountContainerWidth = round(viewCountContainerWidth, 2);
+
+                totalUsedWidth += viewCountContainerWidth;
             }
 
             // Plus button is visible
             if (isPlusButtonVisible === true) {
-                totalUsedWidth += $plusButton.outerWidth(true);
+                totalUsedWidth += $plusButton[0].getBoundingClientRect().width;
             }
+
+            //var tempWidth = $container[0].getBoundingClientRect().width;
 
             // Calculate average width of each button (including their margins)
             // We need to get precise width of the container, jQuery's width() is rounding up the numbers
-            averageWidth = ($container[0].getBoundingClientRect().width - totalUsedWidth) / $primaryButtons.length;
+            averageWidth = ($container[0].getBoundingClientRect().width - totalUsedWidth) / primaryButtons.length;
             if (isNaN(averageWidth)) {
                 console.log("Couldn't calculate average width");
                 return;
@@ -453,7 +499,7 @@ jQuery(document).ready(function ($) {
             if (averageWidth < 0) averageWidth = Math.abs(averageWidth);
 
             // Now get the right width without the margin
-            averageWidth = averageWidth - ($primaryButtons.first().outerWidth(true) - $primaryButtons.first().outerWidth());
+            averageWidth = averageWidth - (primaryButtons.first().outerWidth(true) - primaryButtons.first().outerWidth());
             // Floor it down
             averageWidth = floorDown(averageWidth, 2);
 
@@ -462,6 +508,7 @@ jQuery(document).ready(function ($) {
     }
 
     responsiveButtons();
+
 
     /* Count up script jquery-countTo
      * by mhuggins

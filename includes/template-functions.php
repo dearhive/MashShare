@@ -506,7 +506,7 @@ function mashshareShow() {
 
     $return = '<aside class="mashsb-container mashsb-main">'
             . mashsb_content_above() .
-            '<div class="mashsb-box">'
+            '<div class="mashsb-box mash-fade-in">'
                 . apply_filters( 'mashsb_sharecount_filter', mashsb_render_sharecounts() ) .
                 '<div class="mashsb-buttons">'
                 . mashsb_getNetworks() .
