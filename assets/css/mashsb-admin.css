@@ -744,12 +744,12 @@ font-weight: bold;
 
 
 
-#mashsb_settingsgeneral_header .row:nth-child(3), #mashsb_settingsgeneral_header .row:nth-child(4){
+/*#mashsb_settingsgeneral_header .row:nth-child(3), #mashsb_settingsgeneral_header .row:nth-child(4){
     display:none;
 }
 #mashsb_settingsgeneral_header .row:nth-child(6){
     display:none;
-}
+}*/
 
 /* Layout of admin table and rows
 */

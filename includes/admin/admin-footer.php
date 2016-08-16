@@ -24,7 +24,7 @@ function mashsb_admin_rate_us() {
 		$rate_text = sprintf( __( 'Thank you for using <a href="%1$s" target="_blank">Mashshare</a>! Please <a href="%2$s" target="_blank">rate us</a> on <a href="%2$s" target="_blank">WordPress.org</a> and help to support this project.<br>Something not working as expected or need help? Read our <a href="%3$s" target="blank">Documentation</a>', 'mashsb' ),
 			'https://www.mashshare.net',
 			'http://wordpress.org/support/view/plugin-reviews/mashsharer?filter=5#postform',
-			'https://www.mashshare.net/documentation/'
+			'http://docs.mashshare.net/'
 		);
 
 		return $rate_text;
