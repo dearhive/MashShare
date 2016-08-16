@@ -377,6 +377,11 @@ So the MashShare open graph data will be containing the same social meta data th
                     'desc' => __( '', 'mashsb' ),
                     'type' => 'header'
                 ),
+                'share_headline' => array(
+                    'id' => 'share_headline',
+                    'name' => __( 'Shares', 'mashsb' ),
+                    'type' => 'headline'
+                ),
                 'mashsharer_round' => array(
                     'id' => 'mashsharer_round',
                     'name' => __( 'Round up Shares', 'mashsb' ),
@@ -397,21 +402,37 @@ So the MashShare open graph data will be containing the same social meta data th
                     'size' => 'medium',
                     'std' => 'SHARES'
                 ),
-                /* 'share_color' => array(
-                  'id' => 'share_color',
-                  'name' => __( 'Share count Color', 'mashsb' ),
-                  'desc' => __( 'Choose color of the share number in hex format, e.g. #7FC04C: ', 'mashsb' ),
-                  'type' => 'text',
-                  'size' => 'medium',
-                  'std' => '#cccccc'
-                  ), */
                 'share_color' => array(
                     'id' => 'share_color',
                     'name' => __( 'Share Count Color', 'mashsb' ),
                     'desc' => __( 'Choose color of the share number in hex format, e.g. #7FC04C: ', 'mashsb' ),
-                    'type' => 'text',
+                    'type' => 'color_select',
                     'size' => 'medium',
                     'std' => '#cccccc'
+                ),
+                'button_headline' => array(
+                    'id' => 'button_headline',
+                    'name' => __( 'Buttons', 'mashsb' ),
+                    'type' => 'headline'
+                ),
+                #######################
+                'buttons_size' => array(
+                    'id' => 'buttons_size',
+                    'name' => __( 'Buttons Size', 'mashsb' ),
+                    'desc' => __('', 'mashsb'),
+                    'type' => 'select',
+                    'options' => array(
+                        'mash-small' => 'Small',
+                        'mash-medium' => 'Medium',
+                        'mash-large' => 'Large'
+                    ),
+                    'std' => 'Large'
+                ),
+                'button_margin' => array(
+                    'id' => 'button_margin',
+                    'name' => __( 'Button Margin', 'mashsb' ),
+                    'desc' => __('Decide if there is a small gap between the buttons or not', 'mashsb'),
+                    'type' => 'checkbox',
                 ),
                 'border_radius' => array(
                     'id' => 'border_radius',
@@ -444,6 +465,12 @@ So the MashShare open graph data will be containing the same social meta data th
                     ),
                     'std' => 'default'
                 ),
+                'dynamic_button_resize' => array(
+                    'id' => 'dynamic_button_resize',
+                    'name' => __( 'Dynamic Button Resize', 'mashsb' ),
+                    'desc' => __( 'Calculate available space around buttons to detect automatically maximum button width. Deactivate to specify a fixed button width.', 'mashsb' ),
+                    'type' => 'checkbox'
+                ),
                 array(
                     'id' => 'button_width',
                     'name' => __( 'Button Width', 'mashpv' ),
@@ -468,6 +495,12 @@ So the MashShare open graph data will be containing the same social meta data th
                     'id' => 'small_buttons',
                     'name' => __( 'Small Share Buttons', 'mashsb' ),
                     'desc' => __( 'All buttons will be shown as pure small icons without any text on desktop and mobile devices all the time.<br><strong>Note:</strong> Disable this when you use the <a href="https://www.mashshare.net/downloads/mashshare-responsive/" target="_blank">responsive Add-On</a>', 'mashsb' ),
+                    'type' => 'checkbox'
+                ),
+                'text_align_center' => array(
+                    'id' => 'text_align_center',
+                    'name' => __( 'Text Align Center', 'mashsb' ),
+                    'desc' => __( 'Buttons Text labels and social icons will be aligned in center of the buttons', 'mashsb' ),
                     'type' => 'checkbox'
                 ),
                 /*'image_share' => array(
@@ -803,6 +836,18 @@ function mashsb_get_networks_list() {
     return apply_filters( 'mashsb_get_networks_list', $networks );
 }
 
+/**
+ * Page Header Callback
+ *
+ * Renders the header.
+ *
+ * @since 1.0
+ * @param array $args Arguments passed by the setting
+ * @return void
+ */
+function mashsb_headline_callback( $args ) {
+    echo '&nbsp';
+}
 /**
  * Header Callback
  *

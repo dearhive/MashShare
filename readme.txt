@@ -321,6 +321,23 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 * New: Plus button is span element instead div
 * New: Class mashsb-primary-buttons as wrapper for the large buttons
 
+= 3.1.6 = 
+@todo remove sharedcount
+
+
+* Fix: jQuery error nearest() not defined
+* Fix: Remove inline css completely when custom css is not used
+* Tweak: default font-family sans-serif for the buttons
+* Tweak: Allow Headlines for admin settings
+* Tweak: Clean up admin js
+* Tweak: Remove deprecated sharedcount endpoint
+* Tweak: Change link to docs
+* New: Dynamic Button Resize (enabled per default on fresh installations)
+* New: Color Picker for Share count color
+* New: Three different button sizes: Small | Medium | Large (Default is Medium)
+* New: Button Margin Option
+* New: Button label And share icon align center option
+
 = 3.1.5 =
 * Fix: Twitter title for floating sidebar and sharebar add-on is wrong when on frontpages with multiple blogposts
 * Fix: Telegram button missing style in mashsb.css

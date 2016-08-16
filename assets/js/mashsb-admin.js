@@ -1,4 +1,37 @@
 jQuery(document).ready(function ($) {
+    
+    // Share Color Picker
+    $('.share_color').colpick({
+        layout: 'hex',
+        submit: 0,
+        colorScheme: 'light',
+        onChange: function (hsb, hex, rgb, el, bySetColor) {
+            $(el).css('border-color', '#' + hex);
+            // Fill the text box just if the color was set using the picker, and not the colpickSetColor function.
+            if (!bySetColor)
+                $(el).val(hex);
+        }
+    }).mouseup(function () {
+        $(this).colpickSetColor(this.value);
+    });
+    
+        
+    // Toggle Admin Settings Dynamic Button Resize + Button Width
+    if ($("#mashsb_settings\\[dynamic_button_resize\\]").attr('checked')) {
+        $("#mashsb_settings\\[button_width\\]").closest('.row').css("display", "none");
+    } else {
+        $("#mashsb_settings\\[button_width\\]").closest('.row').css("display", "table-row");
+    }
+    $("#mashsb_settings\\[dynamic_button_resize\\]").click(function () {
+        if ($(this).attr('checked')) {
+            $("#mashsb_settings\\[button_width\\]").closest('.row').css("display", "none");
+        } else {
+            $("#mashsb_settings\\[button_width\\]").closest('.row').css("display", "table-row");
+        }
+    })
+    
+
+    
     // Activate chosen select boxes
     $(".mashsb-chosen-select").chosen({width: "400px"});
 
@@ -35,18 +68,24 @@ jQuery(document).ready(function ($) {
     $('#mashsb_settings\\[mashsb_sharemethod\\]').change(function () {
         if ($('#mashsb_settings\\[mashsb_sharemethod\\]').val() === "sharedcount")
         {
-            $('#mashsb_settingsgeneral_header .row:nth-child(3), #mashsb_settingsgeneral_header .row:nth-child(4)').fadeIn(500);
+            $('#mashsb_settings\\[mashsharer_apikey\\]').closest('.row').css("display", "table-row");
+            $('#mashsb_settings\\[mashsharer_sharecount_domain\\]').closest('.row').css("display", "table-row");
         }
         else
         {
-            $('#mashsb_settingsgeneral_header .row:nth-child(3), #mashsb_settingsgeneral_header .row:nth-child(4)').fadeOut(500);
+            $('#mashsb_settings\\[mashsharer_apikey\\]').closest('.row').css("display", "none");
+            $('#mashsb_settings\\[mashsharer_sharecount_domain\\]').closest('.row').css("display", "none");
         }
     });
 
     /*make visible when sharedcount.com is used*/
     if ($('#mashsb_settings\\[mashsb_sharemethod\\]').val() === "sharedcount")
     {
-        $('#mashsb_settingsgeneral_header .row:nth-child(3), #mashsb_settingsgeneral_header .row:nth-child(4)').fadeIn(500);
+        $('#mashsb_settings\\[mashsharer_apikey\\]').closest('.row').css("display", "table-row");
+        $('#mashsb_settings\\[mashsharer_sharecount_domain\\]').closest('.row').css("display", "table-row");
+    } else {
+        $('#mashsb_settings\\[mashsharer_apikey\\]').closest('.row').css("display", "none");
+        $('#mashsb_settings\\[mashsharer_sharecount_domain\\]').closest('.row').css("display", "none");
     }
     
     
@@ -54,18 +93,25 @@ jQuery(document).ready(function ($) {
     $('#mashsb_settings\\[caching_method\\]').change(function () {
         if ($('#mashsb_settings\\[caching_method\\]').val() === "refresh_loading")
         {
-            $('#mashsb_settingsgeneral_header .row:nth-child(6)').fadeIn(500);
+            $('#mashsb_settings\\[mashsharer_cache\\]').closest('.row').css("display", "table-row");
         }
         else
         {
-            $('#mashsb_settingsgeneral_header .row:nth-child(6)').fadeOut(500);
+            $('#mashsb_settings\\[mashsharer_cache\\]').closest('.row').css("display", "none");
         }
     });
+
+
+
 
     /*make visible when setting "Refresh on Loading" is used*/
     if ($('#mashsb_settings\\[caching_method\\]').val() === "refresh_loading")
     {
-        $('#mashsb_settingsgeneral_header .row:nth-child(6)').fadeIn(500);
+        $('#mashsb_settings\\[mashsharer_cache\\]').closest('.row').css("display", "table-row");
+    }
+    else
+    {
+        $('#mashsb_settings\\[mashsharer_cache\\]').closest('.row').css("display", "none");
     }
 
     // Find active tab and set cookie with #ID

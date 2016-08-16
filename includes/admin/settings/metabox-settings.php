@@ -10,11 +10,11 @@
  */
 
 /**
- * Check if meta boxes must be shown for a specific user role
- * Show meta box when user role is not specified
+ * Check if meta boxes are shown for a specific user role and 
+ * Show meta box when a specific user role is not specified
  * 
  * @global array $mashsb_options
- * @return bool true when meta boxes should be shown for a specific user role
+ * @return bool true when meta boxes should should be visible for a specific user role
  */
 function mashsb_show_meta_box(){
     global $mashsb_options, $wp_roles;
@@ -51,38 +51,12 @@ function mashsb_meta_boxes( $meta_boxes ) {
     endforeach;
     $post_type[] = 'post';
     $post_type[] = 'page';
+    //echo "<pre>";
+//    echo(var_dump($post_type));
+//        echo "</pre>";
 
     $twitter_handle = isset( $mashsb_options['mashsharer_hashtag'] ) ? $mashsb_options['mashsharer_hashtag'] : '';
     
-    
-
-//    // Get user roles and plugin settings
-//    $user = wp_get_current_user();
-//
-//    // No roles for this user or couldn't retrieve plugin settings
-//    if (empty($user->roles) || !is_array($user->roles)) {
-//        return apply_filters( 'mashsb_meta_box_settings', $meta_boxes, 10, 0 );
-//    }
-//
-//    // Should meta boxes be displayed?
-//    $shouldMetaBoxesBeDisplayed = false;
-//
-//    // Loop through user roles
-//    foreach($user->roles as $role) {
-//        // Rule exists and it is set
-//        if( isset( $mashsb_options["user_roles_for_sharing_options"] ) && in_array( str_replace( ' ', null, strtolower( $role ) ), $mashsb_options["user_roles_for_sharing_options"] ) ) {
-//            $shouldMetaBoxesBeDisplayed = true;
-//            // We got it, no need to check for more
-//            break;
-//        }
-//    }
-//    // Garbage collection
-//    unset($user);
-//
-//    // Don't display meta boxes
-//    if ($shouldMetaBoxesBeDisplayed !== true) {
-//        return apply_filters( 'mashsb_meta_box_settings', $meta_boxes, 10, 0 );
-//    }
     
     // Do not show meta boxes
     if( !mashsb_show_meta_box() ) {

@@ -744,12 +744,12 @@ font-weight: bold;
 
 
 
-#mashsb_settingsgeneral_header .row:nth-child(3), #mashsb_settingsgeneral_header .row:nth-child(4){
+/*#mashsb_settingsgeneral_header .row:nth-child(3), #mashsb_settingsgeneral_header .row:nth-child(4){
     display:none;
 }
 #mashsb_settingsgeneral_header .row:nth-child(6){
     display:none;
-}
+}*/
 
 /* Layout of admin table and rows
 */
@@ -849,11 +849,6 @@ color:#777777;
 }
 .mashsb.nav-tab-wrapper .nav-tab-active{
     background-color: #ffffff;
-}
-
-
-#mashsb_container table tbody tr:nth-child(1) > th > div {
-    font-size: 20px;
 }
 
 .mashsb_hidden{

@@ -66,6 +66,7 @@ function mashsb_load_scripts( $hook ) {
         'round_shares' => isset( $mashsb_options['mashsharer_round'] ),
         /* Do not animate shares on blog posts. The share count would be wrong there and performance bad */
         'animate_shares' => isset( $mashsb_options['animate_shares'] ) && is_singular() ? 1 : 0,
+        'dynamic_buttons' => isset( $mashsb_options['dynamic_button_resize'] ) ? 1 : 0,
         'share_url' => $url,
         'title' => $titleclean,
         'image' => $image,
@@ -144,6 +145,21 @@ function mashsb_load_admin_scripts( $hook ) {
 }
 
 /**
+ * Get Share Count Color incl. compatibility mode for earlier version
+ * 
+ * @global $mashsb_options $mashsb_options
+ * @return string
+ */
+function mashsb_get_share_color(){
+    global $mashsb_options;
+    // Compatibility mode. Early values were stored including #
+    // New values are stored without #
+    
+    $value = !empty($mashsb_options['share_color']) ? $mashsb_options['share_color'] : '';
+    return str_replace('#', '', $value); 
+}
+
+/**
  * Add Custom Styles with WP wp_add_inline_style Method
  *
  * @since 1.0
@@ -154,16 +170,16 @@ function mashsb_load_inline_styles() {
     global $mashsb_options;
 
     /* VARS */
-    isset( $mashsb_options['share_color'] ) ? $share_color = $mashsb_options['share_color'] : $share_color = '#ccc';
+    
+    $is_share_color = mashsb_get_share_color();
+    $share_color = !empty( $is_share_color ) ? '.mashsb-count {color:#' . $is_share_color . ';}' : '';
     isset( $mashsb_options['custom_css'] ) ? $custom_css = $mashsb_options['custom_css'] : $custom_css = '';
     isset( $mashsb_options['small_buttons'] ) ? $smallbuttons = true : $smallbuttons = false;
     $button_width = isset( $mashsb_options['button_width'] ) ? $mashsb_options['button_width'] : null;
 
     /* STYLES */
-    $mashsb_custom_css = "
-        .mashsb-count {
-        color: {$share_color};
-        }";
+    $mashsb_custom_css = $share_color;
+    
     if( !empty( $mashsb_options['border_radius'] ) && $mashsb_options['border_radius'] != 'default' ) {
         $mashsb_custom_css .= '
         [class^="mashicon-"], .onoffswitch-label, .onoffswitch2-label, .onoffswitch {
@@ -255,7 +271,7 @@ function mashsb_load_inline_styles() {
 function mashsb_amp_load_css() {
     global $mashsb_options;
 
-    $share_color = isset( $mashsb_options['share_color'] ) ? $mashsb_options['share_color'] : '#ccc';
+    $share_color = !empty( $mashsb_options['share_color'] ) ? '.mashsb-count {color:' . $mashsb_options['share_color'] . '}' : '';
     $custom_css = isset( $mashsb_options['custom_css'] ) ? $mashsb_options['custom_css'] : '';
     $amp_css = isset( $mashsb_options['amp_css'] ) ? $mashsb_options['amp_css'] : '';
     
@@ -282,7 +298,7 @@ function mashsb_amp_load_css() {
     $css .= $amp_css;
 
     // STYLES
-    $css .= '.mashsb-count {color:' . $share_color . '}';
+    $css .= $share_color;
 
     if( !empty( $mashsb_options['border_radius'] ) && $mashsb_options['border_radius'] != 'default' ) {
         $css .= '
