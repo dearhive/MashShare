@@ -237,7 +237,7 @@ jQuery(document).ready(function ($) {
     function responsiveButtons()
     {
         // Responsive buttons are not in use
-        if (mashsb.dynamic_buttons != 1) return;
+        //if (mashsb.dynamic_buttons != 1) return;
 
         // Ajax Listener
         var ajaxListener                        = {},
@@ -353,14 +353,13 @@ jQuery(document).ready(function ($) {
         function calculate()
         {
             var $container = $("aside.mashsb-container.mashsb-main");
-            console.log("calculating...");
 
             if ($container.length > 0) {
                 $container.each(function() {
                     var $this           = $(this),
-                        $primaryButtons = $this.find(".mashsb-box > .mashsb-buttons > .mashsb-primary-shares > a[class^='mashicon-']");
+                        $primaryButtons = $this.find(".mashsb-box > .mashsb-buttons > .mashsb-primary-shares > a[class^='mashicon-']:visible");
 
-                    $this.find(".mashsb-box > .mashsb-buttons > .secondary-shares").css("clear", "both");
+                    //$this.find(".mashsb-box > .mashsb-buttons > .secondary-shares").css("clear", "both");
 
                     // Variables
                     var averageWidth = getAverageWidth($primaryButtons);
