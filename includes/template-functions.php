@@ -896,7 +896,7 @@ function mashsb_hide_shares( $sharecount ) {
 
 function mashsb_content_above() {
     global $mashsb_options;
-    $html = !empty( $mashsb_options['content_above'] ) ? '<div class="mashsb_above_buttons">' . $mashsb_options['content_above'] . '</div>' : '';
+    $html = !empty( $mashsb_options['content_above'] ) ? '<div class="mashsb_above_buttons">' . mashsb_cleanShortcode('mashshare', $mashsb_options['content_above']) . '</div>' : '';
     return apply_filters( 'mashsb_above_buttons', $html );
 }
 
@@ -908,7 +908,7 @@ function mashsb_content_above() {
 
 function mashsb_content_below() {
     global $mashsb_options;
-    $html = !empty( $mashsb_options['content_below'] ) ? '<div class="mashsb_below_buttons">' . $mashsb_options['content_below'] . '</div>' : '';
+    $html = !empty( $mashsb_options['content_below'] ) ? '<div class="mashsb_below_buttons">' . mashsb_cleanShortcode('mashshare', $mashsb_options['content_below']) . '</div>' : '';
     return apply_filters( 'mashsb_below_buttons', $html );
 }
 
