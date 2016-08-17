@@ -83,7 +83,7 @@ function mashsb_load_scripts( $hook ) {
 }
 
 /**
- * Register Styles
+ * Register CSS Styles
  *
  * Checks the styles option and hooks the required filter.
  *
@@ -105,7 +105,7 @@ function mashsb_register_styles( $hook ) {
     $suffix = ( mashsbIsDebugMode() ) ? '' : '.min';
     $file = 'mashsb' . $suffix . '.css';
 
-    $url = MASHSB_PLUGIN_URL . 'templates/' . $file;
+    $url = MASHSB_PLUGIN_URL . 'assets/css/' . $file;
     wp_enqueue_style( 'mashsb-styles', $url, array(), MASHSB_VERSION );
 }
 
@@ -277,18 +277,18 @@ function mashsb_amp_load_css() {
     
     $css = "@font-face {
   font-family: 'mashsb-font';
-  src: url('" . MASHSB_PLUGIN_URL . "templates/fonts/mashsb-font.eot?29924580');
-  src: url('" . MASHSB_PLUGIN_URL . "templates/fonts/mashsb-font.eot?29924580#iefix') format('embedded-opentype'),
-       url('" . MASHSB_PLUGIN_URL . "templates/fonts/mashsb-font.woff2?29924580') format('woff2'),
-       url('" . MASHSB_PLUGIN_URL . "templates/fonts/mashsb-font.woff?29924580') format('woff'),
-       url('" . MASHSB_PLUGIN_URL . "templates/fonts/mashsb-font.ttf?29924580') format('truetype'),
-       url('" . MASHSB_PLUGIN_URL . "templates/fonts/mashsb-font.svg?29924580#mashsb-font') format('svg');
+  src: url('" . MASHSB_PLUGIN_URL . "/assets/css/fonts/mashsb-font.eot?29924580');
+  src: url('" . MASHSB_PLUGIN_URL . "/assets/css/fonts/mashsb-font.eot?29924580#iefix') format('embedded-opentype'),
+       url('" . MASHSB_PLUGIN_URL . "/assets/css/fonts/mashsb-font.woff2?29924580') format('woff2'),
+       url('" . MASHSB_PLUGIN_URL . "/assets/css/fonts/mashsb-font.woff?29924580') format('woff'),
+       url('" . MASHSB_PLUGIN_URL . "/assets/css/fonts/mashsb-font.ttf?29924580') format('truetype'),
+       url('" . MASHSB_PLUGIN_URL . "/assets/css/fonts/mashsb-font.svg?29924580#mashsb-font') format('svg');
   font-weight: normal;
   font-style: normal;
 }";
     
     // Get default css file
-    $css .= file_get_contents( MASHSB_PLUGIN_DIR . '/templates/mashsb-amp.css' );
+    $css .= file_get_contents( MASHSB_PLUGIN_DIR . '/assets/css/mashsb-amp.css' );
     
 
     // add custom css

@@ -318,22 +318,25 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 == Changelog ==
 
 = 3.1.6 =
-* New: Create new filter mashsb_share_count
-* New: Plus button is span element instead div
-* New: Class mashsb-primary-buttons as wrapper for the large buttons
+* New: Tested up to WP 4.6
+* New: Dynamic Button Resize Feature that expands buttons to full width ones (enabled per default on new installations)
+* New: Three more button sizes: Small | Medium | Large (Default is Medium)
+* New: Color Picker for Share count color
+* New: Button Margin Option
+* New: Button label And share icon align center option
+* New: Add Flipoard and Hacker News to the supported networks
+* New: All Fonts and CSS are located in assets folder. Template folder not used any longer for assets
 * Fix: jQuery error nearest() not defined
 * Fix: Remove inline css completely when custom css is not used
 * Fix: Shortcodes not working in above and below content section
 * Tweak: default font-family sans-serif for the buttons
-* Tweak: Allow Headlines for admin settings
+* Tweak: Allow Headlines in admin settings
 * Tweak: Clean up admin js
 * Tweak: Remove deprecated sharedcount endpoint
 * Tweak: Change link to docs
-* New: Dynamic Button Resize (enabled per default on fresh installations)
-* New: Color Picker for Share count color
-* New: Three different button sizes: Small | Medium | Large (Default is Medium)
-* New: Button Margin Option
-* New: Button label And share icon align center option
+* Tweak: Create new filter mashsb_share_count
+* Tweak: Plus button as span element instead div
+* Tweak: Class mashsb-primary-buttons as wrapper for the large buttons
 
 = 3.1.5 =
 * Fix: Twitter title for floating sidebar and sharebar add-on is wrong when on frontpages with multiple blogposts
