@@ -315,7 +315,8 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 13. Extend MashShare with great Add-Ons
 
 
-== Changelog == 
+== Changelog ==
+
 = 3.1.6 =
 * New: Create new filter mashsb_share_count
 * New: Plus button is span element instead div
@@ -554,5 +555,5 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 3.0.8 =
-3.0.8  <strong>New major update - MashShare 3.8 - Feature & performance improvements!</strong> <a href="https://wordpress.org/plugins/mashsharer/changelog/" style="color:white;text-decoration: underline;">Complete Changelog!</a> It's recommended to test plugin updates on a testing website first before installing them on a live site. (Use <a href="https://wordpress.org/plugins/wp-staging/" target="_blank" style="color:white;text-decoration: underline;">WP Staging</a> for creating a test site)
+= 3.1.6 =
+3.1.6  <strong>MashShare 3.1.6 - Feature Update</strong> <a href="https://wordpress.org/plugins/mashsharer/changelog/" style="color:white;text-decoration: underline;">Complete Changelog!</a>

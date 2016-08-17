@@ -1490,8 +1490,12 @@ function mashsb_networks_callback( $args ) {
             } else {
                 $name = NULL;
             }
-
-            echo '<td class="mashicon-' . strtolower( $option ) . '"><span class="icon"></span><span class="text">' . $option . '</span></td>';
+            
+            if ($option === 'Flipboard'){ // Darn you multi color flipboard svg icon.
+            echo '<td class="mashicon-' . strtolower( $option ) . '"><div class="icon"><span class="mash-path1"></span><span class="mash-path2"></span><span class="mash-path3"></span><span class="mash-path4"></span></div><span class="text">' . $option . '</span></td>';
+            } else {
+            echo '<td class="mashicon-' . strtolower( $option ) . '"><span class="icon"></span><span class="text">' . $option . '</span></td>';    
+            }
             echo '<td><input type="hidden" name="mashsb_settings[' . $args['id'] . '][' . $key . '][id]" id="mashsb_settings[' . $args['id'] . '][' . $key . '][id]" value="' . strtolower( $option ) . '">';
             echo '<div class="mashsb-admin-onoffswitch">';
             echo '<input name="mashsb_settings[' . $args['id'] . '][' . $key . '][status]" class="mashsb-admin-onoffswitch-checkbox" id="mashsb_settings[' . $args['id'] . '][' . $key . '][status]" type="checkbox" value="1" ' . checked( 1, $enabled, false ) . '/>';

@@ -481,7 +481,11 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
             }
             $enablednetworks[$key]['id'] == 'whatsapp' ? $display = 'display:none;' : $display = ''; // Whatsapp button is made visible via js when opened on mobile devices
 
+            if ($enablednetworks[$key]['id'] == 'flipboard'){ // We need a special format for the multi layer svg icon of flipboard
+            $output .= '<a style="' . $display . '" class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . $class_margin . $class_center . '" href="' . arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="nofollow"><span class="mash-button-wrapper"><span class="mash-path1"></span><span class="mash-path2"></span><span class="mash-path3"></span><span class="mash-path4"></span><span class="text">' . $name . '</span></span></a>';
+            } else {
             $output .= '<a style="' . $display . '" class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . $class_margin . $class_center . '" href="' . arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="nofollow"><span class="mash-button-wrapper"><span class="icon"></span><span class="text">' . $name . '</span></span></a>';
+            }
             $output .= $onoffswitch;
             $output .= $startsecondaryshares;
 
