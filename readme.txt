@@ -326,6 +326,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 * New: Button label And share icon align center option
 * New: Add Flipoard and Hacker News to the supported networks
 * New: All Fonts and CSS are located in assets folder. Template folder not used any longer for assets
+* New: Clean up the user interface and change some wordings
 * Fix: jQuery error nearest() not defined
 * Fix: Remove inline css completely when custom css is not used
 * Fix: Shortcodes not working in above and below content section

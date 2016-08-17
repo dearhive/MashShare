@@ -236,7 +236,7 @@ function mashsb_get_registered_settings() {
                 ),
                 "user_roles_for_sharing_options" => array(
                     "id"            => "user_roles_for_sharing_options",
-                    "name"          => __("Meta Box Visibility", "mashsb"),
+                    "name"          => __("Meta Box Permission", "mashsb"),
                     "desc"          => __("Select user roles which can only see MashShare Social Sharing Meta Box Options on posts and pages edit screen and User Meta Box on user profiles. If nothing is set meta boxes are shown for all user roles", "mashsb"),
                     "type"          => "multiselect",
                     "options"       => mashsb_get_user_roles(),
@@ -1105,7 +1105,7 @@ function mashsb_multiselect_callback( $args = array() ) {
     $selected = isset($mashsb_options[$args['id']]) ? $mashsb_options[$args['id']] : '';
     $checked = '';
     
-    $html = '<select name="mashsb_settings[' . $args['id'] . '][]" data-placeholder="'. $args['name'] . '" style="width:350px;" multiple tabindex="4" class="mashsb-select mashsb-chosen-select">';
+    $html = '<select name="mashsb_settings[' . $args['id'] . '][]" data-placeholder="" style="width:350px;" multiple tabindex="4" class="mashsb-select mashsb-chosen-select">';
     $i = 0;
     foreach ( $args['options'] as $key => $value ) :
         if( is_array($selected)){
