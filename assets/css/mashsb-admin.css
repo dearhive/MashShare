@@ -894,9 +894,9 @@ color:#777777;
     color:#0097DF;
     font-weight:bold;
     font-size: 36px;
-    padding-top: 10px;
+    padding-top: 20px;
     padding-bottom:20px;
-    width:210px;
+    width:200px;
 }
 .mashsb_admin .nav-tab {
     color: #0097DF;
@@ -953,7 +953,7 @@ color:#777777;
 .mashsb-version{
     display: block;
     padding-left:14px;
-    padding-top:17px;
+    padding-top:28px;
     font-size:15px;
 }
 
@@ -1121,11 +1121,12 @@ Fancy checkboxes proto.io
 }
 
 .mashsb-sidebar{
-    float:left;
+    float: left;
     max-width: 299px;
-    border-left: 1px solid white;
-    border-right: 1px solid white;
-    border-bottom: 1px solid white;
+    border-left: 2px solid white;
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
+    margin-left: 1px;
 }
 
 .mashsb-sidebar h2 {

@@ -11,10 +11,10 @@
         font-size:13px;
         display: block;
     }
- .mashsb-buttons .secondary-shares a {
+/* .mashsb-buttons .secondary-shares a {
         min-width:0;
         font-size: 0px;
-    }
+    }*/
   .mashsb-buttons .secondary-shares a .icon:before {
         margin-right:0px;
     }
@@ -390,6 +390,10 @@ color:#8A8C8E;
 }
 .mashicon-flipboard .text {
     margin-left: 0.7em;
+}
+/* important to prevent wrapping of layer if parent container on site is using word-wrap */
+.mash-button-wrapper span{
+    word-wrap: normal;
 }
 
 /* END flipboard button */
