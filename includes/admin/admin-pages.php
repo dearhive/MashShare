@@ -28,13 +28,12 @@ function mashsb_add_options_link() {
 
     $mashshare_logo = 'PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbDpzcGFjZT0icHJlc2VydmUiIGZpbGw9Im5vbmUiIHdpZHRoPSI1MDBweCIgaGVpZ2h0PSI1MDBweCIgdmlld0JveD0iMCAwIDUxMiA1MTIiPg0KPGc+DQoJPHBhdGggc3R5bGU9ImZpbGw6I2ZmZiIgZD0iTTIuOSw0OGgxNDZsMTAxLjMsMjM4TDM1Mi4xLDQ4aDE0NS43djQ0NC44SDM4OS4zVjE2Ny41TDI4Ni44LDQwNy4zaC03Mi43TDExMS42LDE2Ny41djMyNS4zSDIuOVY0OHoiLz4NCjwvZz4NCjwvc3ZnPg==';
     // Getting Started Page
-    $mashsb_parent_page = add_menu_page( 'Mashshare Settings', __( 'MashShare', 'mashsb' ), 'manage_options', 'mashsb-settings', 'mashsb_options_page', 'data:image/svg+xml;base64,' . $mashshare_logo );
+    $mashsb_parent_page = add_menu_page( 'Mashshare Settings', __( 'MashShare', 'mashsb' ), 'manage_options', 'mashsb-settings', 'mashsb_options_page', 'data:image/svg+xml;base64,' . $mashshare_logo);
     $mashsb_settings_page = add_submenu_page( 'mashsb-settings', __( 'MashShare Settings', 'mashsb' ), __( 'Settings', 'mashsb' ), 'manage_options', 'mashsb-settings', 'mashsb_options_page' );
-    $mashsb_add_ons_page = add_submenu_page( 'mashsb-settings', __( 'MashShare Add Ons', 'mashsb' ), __( 'Get Add Ons', 'mashsb' ), 'manage_options', 'mashsb-addons', 'mashsb_add_ons_page' );
+    $mashsb_add_ons_page = add_submenu_page( 'mashsb-settings', __( 'MashShare Add-Ons', 'mashsb' ), '<span style="color:#f18500">' . __( 'Install Add-Ons', 'mashsb' ) . '</span>', 'manage_options', 'mashsb-addons', 'mashsb_add_ons_page' );
     $mashsb_tools_page = add_submenu_page( 'mashsb-settings', __( 'MashShare Tools', 'mashsb' ), __( 'Im/Export & System', 'mashsb' ), 'manage_options', 'mashsb-tools', 'mashsb_tools_page' );
 
 }
-
 add_action( 'admin_menu', 'mashsb_add_options_link', 10 );
 
 /**

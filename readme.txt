@@ -337,6 +337,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 * Tweak: Create new filter mashsb_share_count
 * Tweak: Plus button as span element instead div
 * Tweak: Class mashsb-primary-buttons as wrapper for the large buttons
+* Tweak: New admin footer and several CSS improvements
 
 = 3.1.5 =
 * Fix: Twitter title for floating sidebar and sharebar add-on is wrong when on frontpages with multiple blogposts

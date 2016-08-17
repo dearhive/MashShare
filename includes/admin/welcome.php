@@ -134,9 +134,9 @@ class MASHSB_Welcome {
                         <img style="display:none;" src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/social-networks-settings.png'; ?>" class="mashsb-welcome-screenshots"/>
                     </div>
                     <div class="feature-section-content">
-                        <h4>Step 1: Go to <a href="<?php echo admin_url( 'admin.php?page=mashsb-settings#mashsb_settingsservices_header' ) ?>" target="blank"><?php _e( 'Settings &rarr; Social Networks', 'mashsb' ); ?></a></h4>
+                        <h4>Step 1: Go to <a href="<?php echo admin_url( 'admin.php?page=mashsb-settings#mashsb_settingsservices_header' ) ?>" target="blank"><?php _e( 'Settings &rarr; Networks', 'mashsb' ); ?></a></h4>
                         <p><?php _e( 'The Social Network menu is your general access point for activating the desired share buttons and for customizing the share button label', 'mashsb' ); ?></p>
-                        <h4>Step 2: Go to <a href="<?php echo admin_url( 'admin.php?page=mashsb-settings#mashsb_settingslocation_header' ) ?>" target="blank"><?php _e( 'Settings &rarr; Location & Position', 'mashsb' ); ?></a></h4>
+                        <h4>Step 2: Go to <a href="<?php echo admin_url( 'admin.php?page=mashsb-settings#mashsb_settingslocation_header' ) ?>" target="blank"><?php _e( 'Settings &rarr; Position', 'mashsb' ); ?></a></h4>
                         <p><?php _e( 'Select the location and exact position of the share buttons within your content', 'mashsb' ); ?></p>
                         <h3><?php _e('You are done! Easy, isn\'t it?', 'mashsb'); ?></h3>
                         <p></p>
@@ -173,7 +173,7 @@ class MASHSB_Welcome {
                         </p>
                         <?php _e( 'Paste the shortcode in content of your posts or pages with the post editor at the place you want the share buttons appear', 'mashsb' ); ?>
                         <p>
-                            <?php echo sprintf(__( 'There are various parameters you can use for the mashshare shortcode. Find a list of all available shortcode parameters <a href="%s" target="blank">here</a>', 'mashsb'), 'https://www.mashshare.net/documentation/shortcodes/'); ?><br>
+                            <?php echo sprintf(__( 'There are various parameters you can use for the mashshare shortcode. Find a list of all available shortcode parameters <a href="%s" target="blank">here</a>', 'mashsb'), 'http://docs.mashshare.net/article/67-shortcodes'); ?><br>
                         </p>
                     </div>
                 </div>

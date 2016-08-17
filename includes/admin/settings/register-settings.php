@@ -117,7 +117,7 @@ function mashsb_get_registered_settings() {
         'general' => apply_filters( 'mashsb_settings_general', array(
                 'general_header' => array(
                     'id' => 'general_header',
-                    'name' => '<strong>' . __( 'General settings', 'mashsb' ) . '</strong>',
+                    'name' => '<strong>' . __( 'General', 'mashsb' ) . '</strong>',
                     'desc' => __( '', 'mashsb' ),
                     'type' => 'header'
                 ),
@@ -245,7 +245,7 @@ function mashsb_get_registered_settings() {
                 ),
                 'services_header' => array(
                     'id' => 'services_header',
-                    'name' => __( 'Social Networks', 'mashsb' ),
+                    'name' => __( 'Networks', 'mashsb' ),
                     'desc' => '',
                     'type' => 'header'
                 ),
@@ -318,46 +318,7 @@ So the MashShare open graph data will be containing the same social meta data th
                     'type' => 'select',
                     'options' => numberServices()
                 ),*/
-                array(
-                    'id' => 'shorturl_header',
-                    'name' => '<strong>' . __( 'Short URL Integration', 'mashsb' ) . '</strong>',
-                    'desc' => '',
-                    'type' => 'header',
-                    'size' => 'regular'
-                ),
-                array(
-                    'id' => 'bitly_access_token',
-                    'name' => __( 'Bitly access token', 'mashsb' ),
-                    'desc' => sprintf(__( 'If you like to use bitly.com shortener get a free bitly access token <a href="%s" target="_blank">here</a>. This turn urls into a format: http://bit.ly/cXnjsh. ', 'mashsb' ), 'https://bitly.com/a/oauth_apps'),
-                    'type' => 'text',
-                    'size' => 'large'
-                ),
-                array(
-                    'id' => 'google_app_id',
-                    'name' => __( 'Google API Key (goo.gl)', 'mashsb' ),
-                    'desc' => sprintf(__( 'If you like to use goo.gl shortener get a free Google API key <a href="%s" target="_blank">here</a>. This turn urls into a format: http://goo.gl/cXnjsh. ' . mashsb_check_google_apikey(), 'mashsb' ),'https://console.developers.google.com/'),
-                    'type' => 'text',
-                    'size' => 'large'
-                ),
-                array(
-                    'id' => 'mashsu_methods',
-                    'name' => __( 'Shorturl method', 'mashsb' ),
-                    'desc' => sprintf(__('Bitly generated shortlinks will be converted to the url format: <i>http://bit.ly/1PPg9D9</i><br><br>Goo.gl generated urls look like: <br><i>http://goo.gl/vSJwUV</i><br><br>Using WP Shortlinks converts twitter links into:<br> <i>%s ?p=101</i>', 'mashsb'), get_site_url() ),
-                    'type' => 'select',
-                    'options' => array(
-                        'wpshortlinks' => 'WP Short links',
-                        'bitly' => 'Bitly',
-                        'google' => 'Goo.gl',
-                        'disabled' => 'Short URLs Disabled',
-                    )
-                ),
-                array(
-                    'id' => 'shorturl_explanation',
-                    'name' => __( 'Important: Read this!', 'mashsb' ),
-                    'desc' => __('<strong>The post short url is NOT generated immediatly after first page load!</strong>  Background processing can take up to 1 hour for new posts and 4 - 12 hours for old posts.','mashsb'),
-                    'type' => 'renderhr',
-                    'size' => 'large'
-                ),
+                
 //                array(
 //                    'id' => 'shorturl_type',
 //                    'name' => __( 'Enable on', 'mashsb' ),
@@ -373,7 +334,7 @@ So the MashShare open graph data will be containing the same social meta data th
 //                ),
                 'style_header' => array(
                     'id' => 'style_header',
-                    'name' => '<strong>' . __( 'Customization', 'mashsb' ) . '</strong>',
+                    'name' => '<strong>' . __( 'Visual', 'mashsb' ) . '</strong>',
                     'desc' => __( '', 'mashsb' ),
                     'type' => 'header'
                 ),
@@ -594,7 +555,7 @@ So the MashShare open graph data will be containing the same social meta data th
                   ), */
                 'location_header' => array(
                     'id' => 'location_header',
-                    'name' => '<strong>' . __( 'Location & Position', 'mashsb' ) . '</strong>',
+                    'name' => '<strong>' . __( 'Position', 'mashsb' ) . '</strong>',
                     'desc' => __( '', 'mashsb' ),
                     'type' => 'header'
                 ),
@@ -635,6 +596,46 @@ So the MashShare open graph data will be containing the same social meta data th
                     'name' => __( 'Frontpage', 'mashsb' ),
                     'desc' => __( 'Enable share buttons on frontpage', 'mashsb' ),
                     'type' => 'checkbox'
+                ),
+            array(
+                    'id' => 'shorturl_header',
+                    'name' => '<strong>' . __( 'Short URLs', 'mashsb' ) . '</strong>',
+                    'desc' => '',
+                    'type' => 'header',
+                    'size' => 'regular'
+                ),
+                array(
+                    'id' => 'bitly_access_token',
+                    'name' => __( 'Bitly access token', 'mashsb' ),
+                    'desc' => sprintf(__( 'If you like to use bitly.com shortener get a free bitly access token <a href="%s" target="_blank">here</a>. This turn urls into a format: http://bit.ly/cXnjsh. ', 'mashsb' ), 'https://bitly.com/a/oauth_apps'),
+                    'type' => 'text',
+                    'size' => 'large'
+                ),
+                array(
+                    'id' => 'google_app_id',
+                    'name' => __( 'Google API Key (goo.gl)', 'mashsb' ),
+                    'desc' => sprintf(__( 'If you like to use goo.gl shortener get a free Google API key <a href="%s" target="_blank">here</a>. This turn urls into a format: http://goo.gl/cXnjsh. ' . mashsb_check_google_apikey(), 'mashsb' ),'https://console.developers.google.com/'),
+                    'type' => 'text',
+                    'size' => 'large'
+                ),
+                array(
+                    'id' => 'mashsu_methods',
+                    'name' => __( 'Shorturl method', 'mashsb' ),
+                    'desc' => sprintf(__('Bitly generated shortlinks will be converted to the url format: <i>http://bit.ly/1PPg9D9</i><br><br>Goo.gl generated urls look like: <br><i>http://goo.gl/vSJwUV</i><br><br>Using WP Shortlinks converts twitter links into:<br> <i>%s ?p=101</i>', 'mashsb'), get_site_url() ),
+                    'type' => 'select',
+                    'options' => array(
+                        'wpshortlinks' => 'WP Short links',
+                        'bitly' => 'Bitly',
+                        'google' => 'Goo.gl',
+                        'disabled' => 'Short URLs Disabled',
+                    )
+                ),
+                array(
+                    'id' => 'shorturl_explanation',
+                    'name' => __( 'Important: Read this!', 'mashsb' ),
+                    'desc' => __('<strong>The post short url is NOT generated immediatly after first page load!</strong>  Background processing can take up to 1 hour for new posts and 4 - 12 hours for old posts.','mashsb'),
+                    'type' => 'renderhr',
+                    'size' => 'large'
                 ),
                 'debug_header' => array(
                     'id' => 'debug_header',

@@ -3,7 +3,7 @@
  *
  * @package     MASHSB
  * @subpackage  Admin CSS
- * @copyright   Copyright (c) 2014, René Hermenau
+ * @copyright   Copyright (c) 2016, René Hermenau
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
 */
 
@@ -881,8 +881,17 @@ border-top-color:white;
 border-bottom-color:#e7e7e7;
 text-decoration: none;
 color: #0097DF;
-font-weight: bold;
+/*font-weight: bold;*/
+text-transform: uppercase;
+min-width: 120px;
 }
+
+/*#mashsb-tabs-sidebar li a strong {
+font-weight: bold;
+}*/
+
+
+
 #mashsb_container ul li a:hover {
 background-color: #e5e5e5;
 color:#777777;
@@ -911,6 +920,13 @@ color:#777777;
 }
 .mashsb.nav-tab-wrapper .nav-tab-active{
     background-color: #ffffff;
+}
+
+.mashsb.nav-tab-wrapper{
+    clear:both;
+}
+h2.mashsb.nav-tab-wrapper a{
+    font-weight: bold
 }
 
 .mashsb_hidden{
@@ -977,12 +993,6 @@ color:#777777;
     text-decoration: none;
 }
 
-
-
-
-.mashsb.nav-tab-wrapper{
-    clear:both;
-}
 
 /*
 Fancy checkboxes proto.io
