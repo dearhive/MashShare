@@ -321,6 +321,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 * New: Tested up to WP 4.6
 * New: Dynamic Button Resize Feature that expands buttons to full width ones (enabled per default on new installations)
 * New: Three more button sizes: Small | Medium | Large (Default is Medium)
+* New: Post Thumbnail in Most Shared Post widget plus extra options
 * New: Color Picker for Share count color
 * New: Button Margin Option
 * New: Button label And share icon align center option

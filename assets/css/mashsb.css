@@ -1,5 +1,4 @@
 
-
 /* START Delete text for buttons behind Plus sign */
  .mashsb-buttons .secondary-shares a .text{
         text-indent: -9999px;
@@ -555,4 +554,39 @@ color:#8A8C8E;
     animation-duration:0.1s;
     -webkit-animation-delay: 1s;
     animation-delay: 1s;
+}
+
+.mashsb-widget-img {
+/*    width: 80px;
+    height: 80px;*/
+    border:1px solid #ccc;
+    margin-right: 5px;
+    margin-top: 0px;
+}
+.mashsb-widget-img{
+    float:left;
+}
+.mashsb-widget-post-title {
+    font-weight: bold;
+}
+.mashsb-share-widget li{
+    clear: both;
+    min-height: 90px;
+    border-bottom: 1px solid #f5f5f5;
+}
+.mashsb-excerpt{
+    font-size: 12px;
+}
+.mashicon-share{
+    line-height: 12px;
+        
+    font-size: 12px;
+    cursor: default;
+}
+.mashicon-share:before{
+    font-size: 12px;
+    margin-right: 5px;
+}
+.mashicon-share:hover{
+    opacity: 1;
 }
