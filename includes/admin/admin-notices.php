@@ -120,15 +120,15 @@ function mashsb_admin_messages() {
     $datetime1 = new DateTime( $install_date );
     $datetime2 = new DateTime( $display_date );
     $diff_intrval = round( ($datetime2->format( 'U' ) - $datetime1->format( 'U' )) / (60 * 60 * 24) );
-    if( $diff_intrval >= 7 && get_option( 'mashsb_RatingDiv' ) == "no" ) {
-        echo '<div class="mashsb_fivestar" style="box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);">
-    	<p>Awesome, you\'ve been using <strong>Mashshare Social Sharing</strong> for more than 1 week. <br> May i ask you to give it a <strong>5-star rating</strong> on Wordpress? </br>
+    //if( $diff_intrval >= 7 && get_option( 'mashsb_RatingDiv' ) == "no" ) {
+        echo '<div class="mashsb_fivestar update-nag" style="box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);">
+    	<p>Awesome, you\'ve been using <strong>Mashshare Social Sharing Plugin</strong> for more than 1 week. <br> May i ask you to give it a <strong>5-star rating</strong> on Wordpress? </br>
         This will help to spread its popularity and to make this plugin a better one.
         <br><br>Your help is much appreciated. Thank you very much,<br> ~René Hermenau
         <ul>
-            <li><a href="https://wordpress.org/support/view/plugin-reviews/mashsharer" class="thankyou" target="_new" title="Ok, you deserved it" style="font-weight:bold;">Ok, you deserved it</a></li>
-            <li><a href="javascript:void(0);" class="mashsbHideRating" title="I already did" style="font-weight:bold;">I already did</a></li>
-            <li><a href="javascript:void(0);" class="mashsbHideRating" title="No, not good enough" style="font-weight:bold;">No, not good enough, i do not like to rate it!</a></li>
+            <li class="float:left"><a href="https://wordpress.org/support/view/plugin-reviews/mashsharer" class="thankyou button" target="_new" title=Yes, MashShare Increased My Shares" style="color: #ffffff;border-color: #256e34;background: #5bae46;-webkit-box-shadow: 0 1px 0 #256e34;box-shadow: 0 1px 0 #256e34;font-weight: normal;float:left;margin-right:10px;">Yes, MashShare Increased My Shares</a></li>
+            <li><a href="javascript:void(0);" class="mashsbHideRating button" title="I already did" style="">I already did</a></li>
+            <li><a href="javascript:void(0);" class="mashsbHideRating" title="No, not good enough" style="">No, not good enough, i do not like to rate it!</a></li>
         </ul>
     </div>
     <script>
@@ -145,7 +145,7 @@ function mashsb_admin_messages() {
         async: !0,
         success: function(e) {
             if (e=="success") {
-               jQuery(\'.mashsb_fivestar\').slideUp(\'slow\');
+               jQuery(\'.mashsb_fivestar\').slideUp(\'fast\');
 			   
             }
         }
@@ -155,7 +155,7 @@ function mashsb_admin_messages() {
     });
     </script>
     ';
-    }
+    //}
     // Disabled since 2.4.7
     //mashsb_update_notices();
 }

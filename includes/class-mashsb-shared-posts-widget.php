@@ -22,7 +22,7 @@ class mashsb_mostshared_posts_widget extends WP_Widget {
             $title_length = !empty( $instance['title_length']) ? esc_attr( $instance['title_length'] ) : 70;
             $showShares = isset($instance['showShares']) ? esc_textarea( $instance['showShares'] ) : 'true';
             $countLabel = isset($instance['countLabel']) ? esc_textarea( $instance['countLabel'] ) : 'Shares';
-            $period = isset($instance['period'] ) ? esc_textarea( $instance['period'] ) : '7';
+            $period = isset($instance['period'] ) ? esc_textarea( $instance['period'] ) : '365';
             $image_size = !empty($instance['image_size'] ) ? esc_textarea( $instance['image_size'] ) : 80;
 
                                 
@@ -31,7 +31,7 @@ class mashsb_mostshared_posts_widget extends WP_Widget {
             $count = '10';
             $showShares = 'true';
             $countLabel = 'Shares';
-            $period = '7';
+            $period = '365';
             $excerpt_length = 100;
             $title_length = 70;
             $image_size = 80;
