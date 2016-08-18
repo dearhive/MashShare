@@ -128,7 +128,7 @@ function mashsb_get_registered_settings() {
                     'type' => 'select',
                     'options' => array(
                         'mashengine' => 'MashEngine (including twitter count)',
-                        'sharedcount' => 'Sharedcount.com (no twitter count)'
+                        'sharedcount' => 'Sharedcount.com (Do not use any longer!)'
                     )
                 ),
                 'mashsharer_apikey' => array(
@@ -245,7 +245,7 @@ function mashsb_get_registered_settings() {
                 ),
                 'services_header' => array(
                     'id' => 'services_header',
-                    'name' => __( 'Networks', 'mashsb' ),
+                    'name' => '<strong>' . __( 'Networks', 'mashsb' ) . '</strong>',
                     'desc' => '',
                     'type' => 'header'
                 ),
