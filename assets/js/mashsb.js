@@ -238,6 +238,12 @@ jQuery(document).ready(function ($) {
     {
         // Responsive buttons are not in use
         if (mashsb.dynamic_buttons != 1) return;
+        
+        // Listener
+        var element = $("aside.mashsb-container.mashsb-main");
+        new ResizeSensor(element, function () {
+            calculate();
+        });
 
         // Ajax Listener
         var ajaxListener                        = {},
@@ -266,7 +272,7 @@ jQuery(document).ready(function ($) {
                 // Adjust for animation
                 setTimeout(function() {
                     console.log("calling calculate");
-                    calculate();
+                    //calculate();
                 }, 1100);
             }
 
@@ -341,7 +347,7 @@ jQuery(document).ready(function ($) {
         // Adjustment for animation
         if (mashsb.animate_shares == 1) {
             setTimeout(function() {
-                calculate();
+                //calculate();
             }, 500);
         }
         // No need animation adjusting

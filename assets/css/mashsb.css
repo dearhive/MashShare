@@ -11,10 +11,10 @@
         font-size:13px;
         display: block;
     }
-/* .mashsb-buttons .secondary-shares a {
+ .mashsb-buttons .secondary-shares a {
         min-width:0;
-        font-size: 0px;
-    }*/
+        /*font-size: 0px;*/
+    }
   .mashsb-buttons .secondary-shares a .icon:before {
         margin-right:0px;
     }

@@ -59,7 +59,11 @@ function mashsb_load_scripts( $hook ) {
     $suffix = ( mashsbIsDebugMode() ) ? '' : '.min';
 
     isset( $mashsb_options['load_scripts_footer'] ) ? $in_footer = true : $in_footer = false;
+    
     wp_enqueue_script( 'mashsb', $js_dir . 'mashsb' . $suffix . '.js', array('jquery'), MASHSB_VERSION, $in_footer );
+    //wp_enqueue_script( 'element-queries', $js_dir . 'ElementQueries' . '.js', array('jquery'), MASHSB_VERSION, $in_footer );
+    wp_enqueue_script( 'resize-sensor', $js_dir . 'ResizeSensor' . '.js', array('jquery'), MASHSB_VERSION, $in_footer );
+    
     !isset( $mashsb_options['disable_sharecount'] ) ? $shareresult = getSharedcount( $url ) : $shareresult = 0;
     wp_localize_script( 'mashsb', 'mashsb', array(
         'shares' => $shareresult,
