@@ -149,7 +149,9 @@ class mashsb_mostshared_posts_widget extends WP_Widget {
                 $wpq->the_post();
                 $postID = get_the_ID();
                 
-                if (!empty(wp_get_attachment_url( get_post_thumbnail_id($postID) ))){
+                $image_url = wp_get_attachment_url( get_post_thumbnail_id($postID) );
+                
+                if (!empty($image_url)){
                     $css = 'background-image: url('.wp_get_attachment_url( get_post_thumbnail_id($postID) ).');background-size: cover;background-repeat: no-repeat;background-position: 50% 50%;width:'.$image_size.'px;height:' . $image_size . 'px;';
                     $image = '<div class="mashsb-widget-img" style="' . $css . '"><a class="mashsb-widget-link" href="' . get_the_permalink() . '" style="display:block;width:'.$image_size.'px;height:' . $image_size.'px;">&nbsp</a></div>';
   
