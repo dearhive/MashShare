@@ -95,6 +95,7 @@ function mashsb_install() {
             'button_margin' => '1',
             'buttons_size' => 'mash-medium',
             'text_align_center' => '1',
+            'mashsharer_round' => '1',
         );
         update_option( 'mashsb_settings', $settings_new );
     }
