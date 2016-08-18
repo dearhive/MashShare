@@ -567,12 +567,6 @@ function mashsb_render_sharecounts( $customurl = '', $align = 'left' ) {
 function mashshareShortcodeShow( $args ) {
     global $mashsb_options, $mashsb_custom_url, $mashsb_custom_text;
 
-    //!empty( $mashsb_options['sharecount_title'] ) ? $sharecount_title = $mashsb_options['sharecount_title'] : $sharecount_title = __( 'SHARES', 'mashsb' );
-    //!empty($mashsb_options['visible_services']) ? $visible_services = $mashsb_options['visible_services'] : $visible_services = 1;
-    //$sharecount_title = !empty( $mashsb_options['sharecount_title'] ) ? $mashsb_options['sharecount_title'] : __( 'SHARES', 'mashsb' );
-
-
-
     $sharecount = '';
 
     //Filter shortcode args to add an option for developers to change (add) some args
@@ -610,7 +604,7 @@ function mashshareShortcodeShow( $args ) {
 
     $return = '<aside class="mashsb-container mashsb-main">'
             . mashsb_content_above() .
-            '<div class="mashsb-box">'
+            '<div class="mashsb-box mash-fade-in">'
             . $sharecount .
             '<div class="mashsb-buttons">'
             . mashsb_getNetworks( true, $count_services ) .
