@@ -114,7 +114,7 @@ class mashsb_mostshared_posts_widget extends WP_Widget {
         $image_size= !empty( $instance['image_size']) ? esc_attr( $instance['image_size'] ) : 80;
         $showShares = $instance['showShares'];
         $countLabel = $instance['countLabel'];
-        $period = $instance['period'];
+        $period = !empty($instance['period']) ? $instance['period'] : '7';
 
         
         echo '<!-- MashShare Most Popular Widget //-->';
