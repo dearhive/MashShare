@@ -120,7 +120,7 @@ function mashsb_admin_messages() {
     $datetime1 = new DateTime( $install_date );
     $datetime2 = new DateTime( $display_date );
     $diff_intrval = round( ($datetime2->format( 'U' ) - $datetime1->format( 'U' )) / (60 * 60 * 24) );
-    //if( $diff_intrval >= 7 && get_option( 'mashsb_RatingDiv' ) == "no" ) {
+    if( $diff_intrval >= 7 && get_option( 'mashsb_RatingDiv' ) == "no" ) {
         echo '<div class="mashsb_fivestar update-nag" style="box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);">
     	<p>Awesome, you\'ve been using <strong>Mashshare Social Sharing Plugin</strong> for more than 1 week. <br> May i ask you to give it a <strong>5-star rating</strong> on Wordpress? </br>
         This will help to spread its popularity and to make this plugin a better one.
@@ -155,7 +155,7 @@ function mashsb_admin_messages() {
     });
     </script>
     ';
-    //}
+    }
     // Disabled since 2.4.7
     //mashsb_update_notices();
 }
