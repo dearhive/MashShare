@@ -483,16 +483,6 @@ color:#8A8C8E;
     vertical-align: super;
 }
 
-.widget_mashsb_mostshared_posts_widget li{
-    padding: 0.4688em 0;
-    list-style: none;
-}
-
-.widget_mashsb_mostshared_posts_widget li:first-child {
-    border-top: 0;
-    padding-top: 0;
-}
-
 
 /* Smartphones (portrait) (iPhone 4 / 5) No text buttons  ----------- */
 @media only screen and (max-width: 568px) {
@@ -556,14 +546,12 @@ color:#8A8C8E;
     animation-delay: 1s;
 }
 
+/* start widget */
+
 .mashsb-widget-img {
-/*    width: 80px;
-    height: 80px;*/
     border:1px solid #ccc;
     margin-right: 5px;
-    margin-top: 0px;
-}
-.mashsb-widget-img{
+    margin-top: 5px;
     float:left;
 }
 .mashsb-widget-post-title {
@@ -573,9 +561,10 @@ color:#8A8C8E;
     clear: both;
     min-height: 90px;
     border-bottom: 1px solid #f5f5f5;
+    list-style: none;
 }
 .mashsb-share-widget{
-    margin:0px;
+    margin: 0px;
 }
 .mashsb-excerpt{
     font-size: 12px;
@@ -593,3 +582,17 @@ color:#8A8C8E;
 .mashicon-share:hover{
     opacity: 1;
 }
+
+/* End widget */
+
+
+
+/*.widget_mashsb_mostshared_posts_widget li{
+    padding: 0.4688em 0;
+    list-style: none;
+}
+
+.widget_mashsb_mostshared_posts_widget li:first-child {
+    border-top: 0;
+    padding-top: 0;
+}*/
