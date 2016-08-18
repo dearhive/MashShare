@@ -157,12 +157,15 @@ color:#ffffff;
     text-decoration: none;
     border:0px;
     box-shadow: none;
+    text-decoration: none;
+}
+.mashsb-box .mashsb-buttons a:hover{
+    text-decoration: none;
 }
 
 .mashsb-box .mashsb-buttons a.mash-nomargin{
     margin-right: 0px;
 }
-
 
 .mashsb-box .mashsb-buttons a.mash-medium{
   padding:10px;
