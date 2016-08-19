@@ -8,8 +8,8 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email
 Requires at least: 3.6+
-Tested up to: 4.6
-Stable tag: 3.1.6
+Tested up to: 4.6.1
+Stable tag: 3.1.8
 
 Social Media Share Buttons for Twitter, Facebook and other social networks. Highly customizable Social Media ecosystem
 
@@ -317,9 +317,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 == Changelog ==
 
-= 3.1.6 =
-
-* IMPORTANT: This update is mandatory to get the facebook share count back!
+= 3.1.8 =
 
 * New: Tested up to WP 4.6
 * New: Dynamic Button Resize Feature that expands buttons to full width ones (enabled per default on new installations)
@@ -332,6 +330,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 * New: All Fonts and CSS are located in assets folder. Template folder not used any longer for assets
 * New: Clean up the user interface and change some wordings
 * New: Changed facebook api endpoint
+* New: New content filter for deactivating buttons on amp pages 'mashsb_the_content'
 * Fix: jQuery error nearest() not defined
 * Fix: Remove inline css completely when custom css is not used
 * Fix: Shortcodes not working in above and below content section
@@ -344,6 +343,15 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 * Tweak: Plus button as span element instead div
 * Tweak: Class mashsb-primary-buttons as wrapper for the large buttons
 * Tweak: New admin footer and several CSS improvements
+* Tweak: Remove deprecated functions
+
+= 3.1.7 =
+* New: Hotfix for changing facebook api endpoint
+
+= 3.1.6 =
+
+* Removed and merged into 3.1.8
+
 
 = 3.1.5 =
 * Fix: Twitter title for floating sidebar and sharebar add-on is wrong when on frontpages with multiple blogposts

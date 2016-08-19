@@ -722,7 +722,7 @@ function mashshare_filter_content( $content ) {
     }
     
     // Get one instance (prevents multiple similar calls)
-    $mashsb_instance = mashshareShow();
+    $mashsb_instance = apply_filters('mashsb_the_content', mashshareShow());
     switch ( $position ) {
         case 'manual':
             break;
