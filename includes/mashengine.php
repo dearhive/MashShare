@@ -44,19 +44,21 @@ class mashengine {
                 //CURLOPT_USERAGENT, 'MashEngine v.1.1',
                 );
                 
-                //$RCX->addRequest($url, $post_data, 'callback_functn', $user_data, $options, $headers);
                 
                 $RollingCurlX = new RollingCurlX(2);    // max 10 simultaneous downloads
 		$RollingCurlX->setOptions($options);
                 switch ($fb_mode){
                     case $fb_mode === 'likes':
-                        $RollingCurlX->addRequest("https://api.facebook.com/method/links.getStats?format=json&urls=" . $this->url, $post_data, array($this, 'getCount'), array('facebook_likes'), $headers);
+                        //$RollingCurlX->addRequest("https://api.facebook.com/method/links.getStats?format=json&urls=" . $this->url, $post_data, array($this, 'getCount'), array('facebook_likes'), $headers);
+                        $RollingCurlX->addRequest("http://graph.facebook.com/?id=" . $this->url, $post_data, array($this, 'getCount'), array('facebook_likes'), $headers);
                         break;
-                    case $fb_mode === 'total':    
-                        $RollingCurlX->addRequest("https://api.facebook.com/method/links.getStats?format=json&urls=" . $this->url, $post_data, array($this, 'getCount'), array('facebook_total'), $headers);
+                    case $fb_mode === 'total':   
+                        $RollingCurlX->addRequest("http://graph.facebook.com/?id=" . $this->url, $post_data, array($this, 'getCount'), array('facebook_total'), $headers);
+                        //$RollingCurlX->addRequest("https://api.facebook.com/method/links.getStats?format=json&urls=" . $this->url, $post_data, array($this, 'getCount'), array('facebook_total'), $headers);
                         break;
                     default:
-                        $RollingCurlX->addRequest("https://api.facebook.com/method/links.getStats?format=json&urls=" . $this->url, $post_data, array($this, 'getCount'), array('facebook_shares'), $headers);
+                        $RollingCurlX->addRequest("http://graph.facebook.com/?id=" . $this->url, $post_data, array($this, 'getCount'), array('facebook_shares'), $headers);
+                        //$RollingCurlX->addRequest("https://api.facebook.com/method/links.getStats?format=json&urls=" . $this->url, $post_data, array($this, 'getCount'), array('facebook_shares'), $headers);
                 }
                 //$RollingCurlX->addRequest("http://urls.api.twitter.com/1/urls/count.json?url=" . $this->url, $post_data, array($this, 'getCount'),  array('twitter'), $headers);
                 $RollingCurlX->addRequest("http://public.newsharecounts.com/count.json?url=" . $this->url, $post_data, array($this, 'getCount'),  array('twitter'), $headers);
@@ -90,13 +92,14 @@ class mashengine {
 		$RollingCurlX->setOptions($options);
                 switch ($fb_mode){
                     case $fb_mode === 'likes':
-                        $RollingCurlX->addRequest("https://api.facebook.com/method/links.getStats?format=json&urls=" . $this->url, $post_data, array($this, 'getCount'), array('facebook_likes'), $headers);
+                        $RollingCurlX->addRequest("http://graph.facebook.com/?id=" . $this->url, $post_data, array($this, 'getCount'), array('facebook_likes'), $headers);
+                        //$RollingCurlX->addRequest("https://api.facebook.com/method/links.getStats?format=json&urls=" . $this->url, $post_data, array($this, 'getCount'), array('facebook_likes'), $headers);
                         break;
                     case $fb_mode === 'total':    
-                        $RollingCurlX->addRequest("https://api.facebook.com/method/links.getStats?format=json&urls=" . $this->url, $post_data, array($this, 'getCount'), array('facebook_total'), $headers);
+                        $RollingCurlX->addRequest("http://graph.facebook.com/?id=" . $this->url, $post_data, array($this, 'getCount'), array('facebook_total'), $headers);
                         break;
                     default:
-                        $RollingCurlX->addRequest("https://api.facebook.com/method/links.getStats?format=json&urls=" . $this->url, $post_data, array($this, 'getCount'), array('facebook_shares'), $headers);
+                        $RollingCurlX->addRequest("http://graph.facebook.com/?id=" . $this->url, $post_data, array($this, 'getCount'), array('facebook_shares'), $headers);
                 }
                 //$RollingCurlX->addRequest("http://urls.api.twitter.com/1/urls/count.json?url=" . $this->url, $post_data, array($this, 'getCount'),  array('twitter'), $headers);
                 $RollingCurlX->addRequest("http://public.newsharecounts.com/count.json?url=" . $this->url, $post_data, array($this, 'getCount'),  array('twitter'), $headers);
@@ -118,9 +121,8 @@ class mashengine {
 		return $data;
 	}  
         
-      /* Callback function to get share counts 
-       * 
-       *
+      /* 
+       * Callback function to get share counts 
        */
         
          function getCount($data, $url, $request_info, $service, $time){
@@ -128,16 +130,19 @@ class mashengine {
 		if ($data) {
 			switch($service[0]) {
 			case "facebook_likes":
-				$data = json_decode($data); 
-				$count = (is_array($data) ? $data[0]->like_count : $data->like_count);
+				$data = json_decode($data, true); 
+                                $count = isset($data['share']['share_count']) || array_key_exists('share_count', $data) ? $data['share']['share_count'] : 0;
+				//$count = (is_array($data) ? $data["share"]->share_count : $data->share_count);
 				break;
                         case "facebook_shares":
-				$data = json_decode($data); 
-				$count = (is_array($data) ? $data[0]->share_count : $data->share_count);
+				$data = json_decode($data, true); // return assoc array
+                                $count = isset($data['share']['share_count']) || array_key_exists('share_count', $data) ? $data['share']['share_count'] : 0;
+				//$count = (is_array($data) ? $data["share"]->share_count : $data->share_count);
 				break;
                         case "facebook_total":
-				$data = json_decode($data); 
-				$count = (is_array($data) ? $data[0]->total_count : $data->total_count);
+				$data = json_decode($data, true); 
+				//$count = (is_array($data) ? $data[0]->share_count : $data->share_count);
+                                $count = isset($data['share']['share_count']) || array_key_exists('share_count', $data) ? $data['share']['share_count'] : 0;
 				break;
 			case "google":
 				preg_match( '/window\.__SSR = {c: ([\d]+)TEST/', $data, $matches );
