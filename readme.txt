@@ -8,8 +8,8 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email
 Requires at least: 3.6+
-Tested up to: 4.5.2
-Stable tag: 3.1.5
+Tested up to: 4.6
+Stable tag: 3.1.7
 
 Social Media Share Buttons for Twitter, Facebook and other social networks. Highly customizable Social Media ecosystem
 
@@ -317,6 +317,13 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 == Changelog == 
 
+= 3.1.7 =
+* Fix: Hotfix changes facebook api endpoint
+* Fix: Remove all changes in 3.1.6 and put them into 3.1.8 for testing first the new API endpoint before creating new features
+
+= 3.1.6 =
+* REMOVED 
+
 = 3.1.5 =
 * Fix: Twitter title for floating sidebar and sharebar add-on is wrong when on frontpages with multiple blogposts
 * Fix: Telegram button missing style in mashsb.css
@@ -537,5 +544,5 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 3.0.8 =
-3.0.8  <strong>New major update - MashShare 3.8 - Feature & performance improvements!</strong> <a href="https://wordpress.org/plugins/mashsharer/changelog/" style="color:white;text-decoration: underline;">Complete Changelog!</a> It's recommended to test plugin updates on a testing website first before installing them on a live site. (Use <a href="https://wordpress.org/plugins/wp-staging/" target="_blank" style="color:white;text-decoration: underline;">WP Staging</a> for creating a test site)
+= 3.1.7 =
+3.1.7  <strong>Hotfix: Changing facebook API Endpints</strong>
