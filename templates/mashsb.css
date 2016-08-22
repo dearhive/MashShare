@@ -249,7 +249,7 @@ background: #00afef;
 background: #1d94d3;
 }
 
-.mashicon-buffer .text, mashicon-buffer .icon{
+.mashicon-buffer .text, .mashicon-buffer .icon{
 color: #ffffff;
 }
 /* Overwrite text color for subscribe button */
@@ -313,7 +313,7 @@ color:#8A8C8E;
     /*height:49px;*/
     line-height: 1;
 }
-.mashsb-count > counts {
+.mashsb-count > .counts {
     clear:both;
 }
 
@@ -421,7 +421,7 @@ color:#8A8C8E;
     
 }
 
-// Image Sidebar Sharer
+/* Image Sidebar Sharer */
 .mashsb-micro > .mashsb-buttons a {
     display: -webkit-flex;
     display: -ms-flexbox;
