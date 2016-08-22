@@ -139,13 +139,10 @@ function mashsbGetNonPostShares( $url ) {
  */
 
 function getSharedcount( $url ) {
-    //global $mashsb_options, $post;
     global $mashsb_options, $post, $mashsb_sharecount; // todo test a global share count var if it reduces the amount of requests
 
     // Return global share count variable to prevent multiple execution
-    //if (!empty($mashsb_sharecount[$url]) && !mashsb_is_cache_refresh() ){
     if (is_array($mashsb_sharecount) && array_key_exists($url, $mashsb_sharecount) && !empty($mashsb_sharecount[$url]) && !mashsb_is_cache_refresh() ){
-        //echo "debug" . $mashsb_sharecount[$url];
         return $mashsb_sharecount[$url] + getFakecount();
     }
    
