@@ -13,7 +13,8 @@
     }
  .mashsb-buttons .secondary-shares a {
         min-width:0;
-        /*font-size: 0px;*/
+        font-size: 16px;
+        display: block;
     }
   .mashsb-buttons .secondary-shares a .icon:before {
         margin-right:0px;
@@ -357,7 +358,7 @@ color:#8A8C8E;
 
 /* START flipboard button */
 
-.mashicon-flipboard .mash-button-wrapper {
+.mashicon-flipboard {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'mashsb-flipboard';
   speak: none;
@@ -370,6 +371,11 @@ color:#8A8C8E;
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.mashicon-flipboard > span {
+    display: inherit;
+    text-align: left;
 }
 
 .mashicon-flipboard .mash-path1:before {
@@ -395,9 +401,9 @@ color:#8A8C8E;
     margin-left: 0.7em;
 }
 /* important to prevent wrapping of layer if parent container on site is using word-wrap */
-.mash-button-wrapper span{
+/*.mash-button-wrapper span{
     word-wrap: normal;
-}
+}*/
 
 /* END flipboard button */
 
