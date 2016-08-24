@@ -1,5 +1,35 @@
 jQuery(document).ready(function ($) {
     
+    $('#mashsb_settings\\[fb_access_token\\]').on("change paste keyup",function(){
+
+        var two_month = 60 * 60 * 24 * 60 * 1000; // timestamp in miliseconds
+        var expiration_timestamp = (new Date().getTime()) + two_month; // time in miliseconds
+
+        var unixtimestamp = (new Date().getTime() + (60 * 60 * 24 * 60 * 1000)) / 1000; // timestamp in seconds
+                
+        var human_date = new Date(expiration_timestamp);
+        //console.log('test' + (new Date().getTime() / 1000) + two_month);
+        //document.getElementById('mashsb_settings[expire_fb_access_token]').value = expiration
+        if ($('#mashsb_settings\\[fb_access_token\\]').val()){
+            document.getElementById('mashsb_expire_token_status').innerHTML = 'Token needs renewal on ' + human_date + '<br>MashShare will reminds you with a admin notice in your dashboard.';
+            //document.getElementById('mashsb_settings[expire_fb_access_token]').value = parseInt(unixtimestamp);
+        }else {
+            document.getElementById('mashsb_expire_token_status').innerHTML = '';
+            //document.getElementById('mashsb_settings[expire_fb_access_token]').value = '';
+        }
+        
+    });
+    
+    $('#mashsb_fb_auth').click(function (e) {
+        e.preventDefault();
+        winWidth = 520;
+        winHeight = 350;
+        var winTop = (screen.height / 2) - (winHeight / 2);
+        var winLeft = (screen.width / 2) - (winWidth / 2);
+        var url = $(this).attr('href');
+        mashsb_fb_auth = window.open(url, 'mashsb_fb_auth', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight + ',resizable=yes');
+    });
+    
     // Share Color Picker
     $('.share_color').colpick({
         layout: 'hex',
@@ -64,36 +94,40 @@ jQuery(document).ready(function ($) {
         setCookie(name, "", -1);
     }
 
-    /* Fade in sharedcount settings if needed */
-    $('#mashsb_settings\\[mashsb_sharemethod\\]').change(function () {
-        if ($('#mashsb_settings\\[mashsb_sharemethod\\]').val() === "sharedcount")
-        {
-            $('#mashsb_settings\\[mashsharer_apikey\\]').closest('.row').css("display", "table-row");
-            $('#mashsb_settings\\[mashsharer_sharecount_domain\\]').closest('.row').css("display", "table-row");
-        }
-        else
-        {
-            $('#mashsb_settings\\[mashsharer_apikey\\]').closest('.row').css("display", "none");
-            $('#mashsb_settings\\[mashsharer_sharecount_domain\\]').closest('.row').css("display", "none");
-        }
-    });
+    /* 
+     * Fade in sharedcount settings if needed
+     * @deprecated 
+     * 
+     * */
+//    $('#mashsb_settings\\[mashsb_sharemethod\\]').change(function () {
+//        if ($('#mashsb_settings\\[mashsb_sharemethod\\]').val() === "sharedcount")
+//        {
+//            $('#mashsb_settings\\[mashsharer_apikey\\]').closest('.row').css("display", "table-row");
+//            $('#mashsb_settings\\[mashsharer_sharecount_domain\\]').closest('.row').css("display", "table-row");
+//        }
+//        else
+//        {
+//            $('#mashsb_settings\\[mashsharer_apikey\\]').closest('.row').css("display", "none");
+//            $('#mashsb_settings\\[mashsharer_sharecount_domain\\]').closest('.row').css("display", "none");
+//        }
+//    });
 
     /*make visible when sharedcount.com is used*/
-    if ($('#mashsb_settings\\[mashsb_sharemethod\\]').val() === "sharedcount")
-    {
-        $('#mashsb_settings\\[mashsharer_apikey\\]').closest('.row').css("display", "table-row");
-        $('#mashsb_settings\\[mashsharer_sharecount_domain\\]').closest('.row').css("display", "table-row");
-    } else {
-        $('#mashsb_settings\\[mashsharer_apikey\\]').closest('.row').css("display", "none");
-        $('#mashsb_settings\\[mashsharer_sharecount_domain\\]').closest('.row').css("display", "none");
-    }
+//    if ($('#mashsb_settings\\[mashsb_sharemethod\\]').val() === "sharedcount")
+//    {
+//        $('#mashsb_settings\\[mashsharer_apikey\\]').closest('.row').css("display", "table-row");
+//        $('#mashsb_settings\\[mashsharer_sharecount_domain\\]').closest('.row').css("display", "table-row");
+//    } else {
+//        $('#mashsb_settings\\[mashsharer_apikey\\]').closest('.row').css("display", "none");
+//        $('#mashsb_settings\\[mashsharer_sharecount_domain\\]').closest('.row').css("display", "none");
+//    }
     
     
     /* Fade in Caching method settings if needed */
     $('#mashsb_settings\\[caching_method\\]').change(function () {
         if ($('#mashsb_settings\\[caching_method\\]').val() === "refresh_loading")
         {
-            $('#mashsb_settings\\[mashsharer_cache\\]').closest('.row').css("display", "table-row");
+            $('#mashsb_settings\\[mashsharer_cache\\]').closest('.row').fadeIn(300).css("display", "table-row");
         }
         else
         {
@@ -102,12 +136,10 @@ jQuery(document).ready(function ($) {
     });
 
 
-
-
     /*make visible when setting "Refresh on Loading" is used*/
     if ($('#mashsb_settings\\[caching_method\\]').val() === "refresh_loading")
     {
-        $('#mashsb_settings\\[mashsharer_cache\\]').closest('.row').css("display", "table-row");
+        $('#mashsb_settings\\[mashsharer_cache\\]').closest('.row').fadeIn(300).css("display", "table-row");
     }
     else
     {

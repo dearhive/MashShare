@@ -336,7 +336,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 * Tweak: default font-family sans-serif for the buttons
 * Tweak: Allow Headlines in admin settings
 * Tweak: Clean up admin js
-* TODO Tweak: Remove deprecated sharedcount endpoint
+* Tweak: Remove sharedcount.com endpoint because its not working anymore
 * Tweak: Change link to docs
 * Tweak: Create new filter mashsb_share_count
 * Tweak: New admin footer and several CSS improvements

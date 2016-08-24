@@ -38,45 +38,34 @@ function getExecutionOrder() {
     return $priority;
 }
 
-/* Get mashsbShareObject 
- * depending if MashEngine or sharedcount.com is used
+/* 
+ * Get mashsbShareObject 
+ * depending on MashEngine (or sharedcount.com deprecated) is used
  * 
  * @since 2.0.9
  * @return object
- * @changed 2.2.7
+ * @changed 3.1.8
  */
 
 function mashsbGetShareObj( $url ) {
-    global $mashsb_options;
-    $mashengine = isset( $mashsb_options['mashsb_sharemethod'] ) && $mashsb_options['mashsb_sharemethod'] === 'mashengine' ? true : false;
-    if( $mashengine ) {
-        if( !class_exists( 'RollingCurlX' ) )
+        if( !class_exists( 'RollingCurlX' ) ){
             require_once MASHSB_PLUGIN_DIR . 'includes/libraries/RolingCurlX.php';
-        if( !class_exists( 'mashengine' ) )
+        }
+        if( !class_exists( 'mashengine' ) ){
             require_once(MASHSB_PLUGIN_DIR . 'includes/mashengine.php');
-        mashdebug()->error( 'mashsbGetShareObj() url: ' . $url );
+        }
+
+        mashdebug()->info( 'mashsbGetShareObj() url: ' . $url );
         $mashsbSharesObj = new mashengine( $url );
         return $mashsbSharesObj;
-    }
-    require_once(MASHSB_PLUGIN_DIR . 'includes/sharedcount.class.php');
-    $apikey = isset( $mashsb_options['mashsharer_apikey'] ) ? $mashsb_options['mashsharer_apikey'] : '';
-    $mashsbSharesObj = new mashsbSharedcount( $url, 10, $apikey );
-    return $mashsbSharesObj;
+
 }
 
 /*
- * Get the correct share method depending if mashshare networks is enabled
+ * Use the correct share method depending on mashshare networks enabled or not
  * 
  * @since 2.0.9
- * @return var
- * 
- */
-
-/* Get the sharecounts from sharedcount.com or MashEngine
- * Creates the share count cache using post_meta db fields.
- * 
- * @since 2.0.9
- * @returns int
+ * @returns int share count
  */
 
 function mashsbGetShareMethod( $mashsbSharesObj ) {

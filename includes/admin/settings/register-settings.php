@@ -121,35 +121,35 @@ function mashsb_get_registered_settings() {
                     'desc' => __( '', 'mashsb' ),
                     'type' => 'header'
                 ),
-                'mashsb_sharemethod' => array(
-                    'id' => 'mashsb_sharemethod',
-                    'name' => __( 'Share counts', 'mashsb' ),
-                    'desc' => __( '<i>MashEngine</i> collects shares by direct request to social networks. <br><br><i>Sharedcount.com</i> needs an API key and is limited (No twitter shares) <p></p>Shares are collected for Facebook, Twitter, LinkedIn, Google+, Pinterest, Stumbleupon, Buffer, VK. <p></p>Twitter count is aggreagated via <a href="http://newsharecounts.com" target="_blank" rel="external nofollow">newsharecounts.com</a>. Sign up with your Twitter account for this free service to get the twitter share count. Visit the newsharecount site, fill in your website domain and click on <i>Sign in with Twitter</i>. Thats it!', 'mashsb' ),
-                    'type' => 'select',
-                    'options' => array(
-                        'mashengine' => 'MashEngine (including twitter count)',
-                        'sharedcount' => 'Sharedcount.com (Do not use any longer!)'
-                    )
-                ),
-                'mashsharer_apikey' => array(
-                    'id' => 'mashsharer_apikey',
-                    'name' => __( 'Sharedcount.com API Key', 'mashsb' ),
-                    'desc' => __( 'Get it at <a href="https://www.sharedcount.com" target="_blank">SharedCount.com</a> for 10.000 free daily requests.', 'mashsb' ),
-                    'type' => 'text',
-                    'size' => 'medium'
-                ),
-                'mashsharer_sharecount_domain' => array(
-                    'id' => 'mashsharer_sharecount_domain',
-                    'name' => __( 'Sharedcount.com endpint', 'mashsb' ),
-                    'desc' => __( 'The SharedCount Domain your API key is configured to query. For example, free.sharedcount.com. This may update automatically if configured incorrectly.', 'mashsb' ),
-                    'type' => 'text',
-                    'size' => 'medium',
-                    'std' => 'free.sharedcount.com'
-                ),
+//                'mashsb_sharemethod' => array(
+//                    'id' => 'mashsb_sharemethod',
+//                    'name' => __( 'Share counts', 'mashsb' ),
+//                    'desc' => __( '<i>MashEngine</i> collects shares by direct request to social networks. <br><br>Shares are collected for Facebook, Twitter, LinkedIn, Google+, Pinterest, Stumbleupon, Buffer, VK. <p></p>Twitter count is aggreagated via <a href="http://newsharecounts.com" target="_blank" rel="external nofollow">newsharecounts.com</a>. You must sign up with your Twitter account for this free service to get the twitter share count. Visit the site newsharecount.com, fill in your website domain and click on <i>Sign in with Twitter</i>. Thats it!', 'mashsb' ),
+//                    'type' => 'select',
+//                    'options' => array(
+//                        'mashengine' => 'MashEngine (including twitter count)',
+//                        'sharedcount' => 'Sharedcount.com (Not working any longer)'
+//                    )
+//                ),
+//                'mashsharer_apikey' => array(
+//                    'id' => 'mashsharer_apikey',
+//                    'name' => __( 'Sharedcount.com API Key', 'mashsb' ),
+//                    'desc' => __( 'Get it at <a href="https://www.sharedcount.com" target="_blank">SharedCount.com</a> for 10.000 free daily requests.', 'mashsb' ),
+//                    'type' => 'text',
+//                    'size' => 'medium'
+//                ),
+//                'mashsharer_sharecount_domain' => array(
+//                    'id' => 'mashsharer_sharecount_domain',
+//                    'name' => __( 'Sharedcount.com endpint', 'mashsb' ),
+//                    'desc' => __( 'The SharedCount Domain your API key is configured to query. For example, free.sharedcount.com. This may update automatically if configured incorrectly.', 'mashsb' ),
+//                    'type' => 'text',
+//                    'size' => 'medium',
+//                    'std' => 'free.sharedcount.com'
+//                ),
                 'caching_method' => array(
                     'id' => 'caching_method',
                     'name' => __( 'Caching Method', 'mashsb' ),
-                    'desc' => __( 'The <i>Async Cache Refresh</i> method never adds additonal load time for a visitor and refreshes the cache asyncronously in the background. New posts are updated at each hour. Older posts are updated from 4 hours to 12 hours for very old ones. <br><br> <i>Refresh while loading</i> rebuilds expired cache while page is loading and adds a little extra time during inital page load. <br><br><strong>If shares are not updating</strong> or site is heavy cached try <i>Refresh while loading!</i> That\'s the default method MashShare was using before version 3.0', 'mashsb' ),
+                    'desc' => sprintf(__( 'The <i>Async Cache Refresh</i> method never adds additonal load time for a visitor and refreshes the cache asyncronously in the background. <br><br>- New posts are updated at each hour. <br>- Posts older than 3 weeks are updated every 4 hours<br>- Post older than 2 months are updated every 12 hours<br><br> <i>Refresh while loading</i> rebuilds expired cache while page is loading and adds a little extra time during inital page load. <br><br><strong>If shares are not updating</strong> or site is heavy cached try <i>Refresh while loading!</i> That\'s the default method MashShare was using before version 3.0<br><br>Shares still not shown? <a href="%1s" target="_blank">Read this first!</a>', 'mashsb' ), 'http://docs.mashshare.net/article/4-try-this-first-before-troubleshooting'),
                     'type' => 'select',
                     'options' => array(
                         'async_cache' => 'Async Cache Refresh',
@@ -259,8 +259,22 @@ function mashsb_get_registered_settings() {
                 array(
                     'id' => 'fb_app_id',
                     'name' => __( 'Facebook App ID', 'mashsb' ),
-                    'desc' => sprintf( __( 'Optional but recommended. <a href="%s" target="_blank">Create an App ID</a>', 'mashsb' ), 'https://developers.facebook.com/docs/apps/register' ),
+                    'desc' => sprintf( __( 'Highly recommended or your shares could be inaccurate! Do not forget to enter the facebook app secret as well. <a href="%1s" target="_blank">Create a App ID now</a>.', 'mashsb' ), 'https://developers.facebook.com/docs/apps/register' ),
                     'type' => 'text',
+                    'size' => 'medium'
+                ),
+//                array(
+//                    'id' => 'fb_app_secret',
+//                    'name' => __( 'Facebook App Secret', 'mashsb' ),
+//                    'desc' => sprintf( __( 'Required for getting accurate facebook share numbers. Where do i find the facebook APP Secret?', 'mashsb' ), 'https://developers.facebook.com/docs/apps/register' ),
+//                    'type' => 'text',
+//                    'size' => 'medium'
+//                ),
+                array(
+                    'id' => 'fb_access_token',
+                    'name' => __( 'Facebook Access Token', 'mashsb' ),
+                    'desc' => sprintf( __( 'Required for getting accurate facebook share numbers! Connecting with facebook increases the facebook API call rate limit to 200 calls per hour. This is enough for even huge websites with a lot of traffic as MashShare is caching the calls.', 'mashsb' ), 'https://developers.facebook.com/docs/apps/register' ),
+                    'type' => 'fboauth',
                     'size' => 'medium'
                 ),
                 'mashsharer_hashtag' => array(
@@ -1791,4 +1805,115 @@ function mashsb_get_user_roles() {
         }
     }
     return $roles;
+}
+
+/*
+ * 
+ */
+function mashsb_fboauth_callback( $args ) {
+    global $mashsb_options;
+    ?>
+<!--<script>
+  // This is called with the results from from FB.getLoginStatus().
+  function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    console.log(response);
+    // The response object is returned with a status field that lets the
+    // app know the current login status of the person.
+    // Full docs on the response object can be found in the documentation
+    // for FB.getLoginStatus().
+    if (response.status === 'connected') {
+      // Logged into your app and Facebook.
+      mashtestAPI();
+    } else if (response.status === 'not_authorized') {
+      // The person is logged into Facebook, but not your app.
+      document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
+    } else {
+      // The person is not logged into Facebook, so we're not sure if
+      // they are logged into this app or not.
+      document.getElementById('status').innerHTML = 'Please log ' + 'into Facebook.';
+    }
+  }
+
+  // This function is called when someone finishes with the Login
+  // Button.  See the onlogin handler attached to it in the sample
+  // code below.
+  function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }
+
+  window.fbAsyncInit = function() {
+  FB.init({
+    appId      : '521732784693093',
+    cookie     : true,  // enable cookies to allow the server to access 
+                        // the session
+    xfbml      : true,  // parse social plugins on this page
+    version    : 'v2.7' // use graph api version 2.5
+  });
+
+  // Now that we've initialized the JavaScript SDK, we call 
+  // FB.getLoginStatus().  This function gets the state of the
+  // person visiting this page and can return one of three states to
+  // the callback you provide.  They can be:
+  //
+  // 1. Logged into your app ('connected')
+  // 2. Logged into Facebook, but not your app ('not_authorized')
+  // 3. Not logged into Facebook and can't tell if they are logged into
+  //    your app or not.
+  //
+  // These three cases are handled in the callback function.
+    FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+
+  };
+
+  // Load the SDK asynchronously
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  // Here we run a very simple test of the Graph API after login is
+  // successful.  See statusChangeCallback() for when this call is made.
+  function mashtestAPI() {
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me', function(response) {
+      console.log('Successful login for: ' + response.name);
+      document.getElementById('status').innerHTML = 'You are logged in as, ' + response.name + '!';
+      document.getElementById('mashsb_fb_auth').innerHTML = 'Refresh Access Token';
+    });
+  }        
+</script>-->
+<?php
+    
+    if( isset( $mashsb_options[$args['id']] ) ){
+        $value = $mashsb_options[$args['id']];
+    }else{        
+        $value = isset( $args['std'] ) ? $args['std'] : '';
+    }
+    // Change expiration date
+    if( isset( $mashsb_options['expire_'.$args['id']] ) ){
+        $expire = $mashsb_options['expire_'.$args['id']];
+    }else{        
+        $expire = '';
+    }
+    
+    
+
+    //$auth_url = 'http://src.wordpress-develop.dev/oauth.php/login.html'; // debug
+    $auth_url = 'https://www.mashshare.net/oauth/login.html'; // production
+
+    $html = '<a href="'.$auth_url.'" id="mashsb_fb_auth" class="button button-primary">Connect with Facebook</a>';
+    $html .= '&nbsp; <input type="text" class="medium-text" id="mashsb_settings[' . $args['id'] . ']" name="mashsb_settings[' . $args['id'] . ']" value="' . esc_attr( stripslashes( $value ) ) . '"/>';
+    $html .= '&nbsp; <input type="hidden" class="medium-text" id="mashsb_settings[expire_' . $args['id'] . ']" name="mashsb_settings[expire_' . $args['id'] . ']" value="' . esc_attr( stripslashes( $expire ) ) . '"/>';
+    $html .= '<div><span id="mashsb_expire_token_status"></span></div>';
+    
+echo $html;
+    
 }
