@@ -320,8 +320,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 = 3.1.8 =
 
 * New: Tested up to WP 4.6
-* New: Dynamic Button Resize Feature that expands buttons to full width ones (enabled per default on new installations)
-* New: Three more button sizes: Small | Medium | Large (Default is Medium)
+* New: Three more button sizes: Small | Medium | Large (The Default Size)
 * New: Post Thumbnail in Most Shared Post widget plus extra options
 * New: Color Picker for Share count color
 * New: Button Margin Option
@@ -337,11 +336,9 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 * Tweak: default font-family sans-serif for the buttons
 * Tweak: Allow Headlines in admin settings
 * Tweak: Clean up admin js
-* Tweak: Remove deprecated sharedcount endpoint
+* TODO Tweak: Remove deprecated sharedcount endpoint
 * Tweak: Change link to docs
 * Tweak: Create new filter mashsb_share_count
-* Tweak: Plus button as span element instead div
-* Tweak: Class mashsb-primary-buttons as wrapper for the large buttons
 * Tweak: New admin footer and several CSS improvements
 * Tweak: Remove deprecated functions
 

@@ -426,12 +426,13 @@ So the MashShare open graph data will be containing the same social meta data th
                     ),
                     'std' => 'default'
                 ),
-                'dynamic_button_resize' => array(
-                    'id' => 'dynamic_button_resize',
-                    'name' => __( 'Dynamic Button Resize (Experimental)', 'mashsb' ),
-                    'desc' => __( 'Calculate available space around buttons to detect automatically maximum button width. Deactivate to specify a fixed button width. If you experience issues with it please contact us.', 'mashsb' ),
-                    'type' => 'checkbox'
-                ),
+            // Deactivate it for now. We try CSS flexboxes instead
+//                'dynamic_button_resize' => array(
+//                    'id' => 'dynamic_button_resize',
+//                    'name' => __( 'Dynamic Button Resize (Experimental)', 'mashsb' ),
+//                    'desc' => __( 'Calculate available space around buttons to detect automatically maximum button width. Deactivate to specify a fixed button width. If you experience issues with it please contact us.', 'mashsb' ),
+//                    'type' => 'checkbox'
+//                ),
                 array(
                     'id' => 'button_width',
                     'name' => __( 'Button Width', 'mashpv' ),

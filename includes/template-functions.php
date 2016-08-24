@@ -244,7 +244,7 @@ function getSharedcount( $url ) {
 function mashsb_subscribe_button() {
     global $mashsb_options;
     if( $mashsb_options['networks'][2] ) {
-        $subscribebutton = '<a href="javascript:void(0)" class="mashicon-subscribe" id="mash-subscribe-control"><span class="mash-button-wrapper"><span class="icon"></span><span class="text">' . __( 'Subscribe', 'mashsb' ) . '</span></span></a>';
+        $subscribebutton = '<a href="javascript:void(0)" class="mashicon-subscribe" id="mash-subscribe-control"><span class="icon"><span class="text">' . __( 'Subscribe', 'mashsb' ) . '</span></span></a>';
     } else {
         $subscribebutton = '';
     }
@@ -450,14 +450,14 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
     }
     
     // Start Primary Buttons
-    $output .= '<div class="mashsb-primary-shares">';
+    //$output .= '<div class="mashsb-primary-shares">';
     
     if( !empty( $enablednetworks ) ) {
         foreach ( $enablednetworks as $key => $network ):
             if( $maxcounter !== 'all' && $maxcounter < count( $enablednetworks ) ) { // $maxcounter + 1 for correct comparision with count()
                 if( $startcounter == $maxcounter ) {
                     $onoffswitch = onOffSwitch(); // Start More Button
-                    $startsecondaryshares = '</div>'; // End Primary Buttons
+                    //$startsecondaryshares = '</div>'; // End Primary Buttons
                     $startsecondaryshares .= '<div class="secondary-shares" style="display:none;">'; // Start secondary-shares
                 } else {
                     $onoffswitch = '';
@@ -479,9 +479,9 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
             $enablednetworks[$key]['id'] == 'whatsapp' ? $display = 'display:none;' : $display = ''; // Whatsapp button is made visible via js when opened on mobile devices
 
             if ($enablednetworks[$key]['id'] == 'flipboard'){ // We need a special format for the multi layer svg icon of flipboard
-            $output .= '<a style="' . $display . '" class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . $class_margin . $class_center . '" href="' . arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="nofollow"><span class="mash-button-wrapper"><span class="mash-path1"></span><span class="mash-path2"></span><span class="mash-path3"></span><span class="mash-path4"></span><span class="text">' . $name . '</span></span></a>';
+            $output .= '<a style="' . $display . '" class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . $class_margin . $class_center . '" href="' . arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="nofollow"><span class="mash-path1"></span><span class="mash-path2"><span class="mash-path3"></span><span class="mash-path4"></span><span class="text">' . $name . '</span></span></a>';
             } else {
-            $output .= '<a style="' . $display . '" class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . $class_margin . $class_center . '" href="' . arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="nofollow"><span class="mash-button-wrapper"><span class="icon"></span><span class="text">' . $name . '</span></span></a>';
+            $output .= '<a style="' . $display . '" class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . $class_margin . $class_center . '" href="' . arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="nofollow"><span class="icon"></span><span class="text">' . $name . '</span></a>';
             }
             $output .= $onoffswitch;
             $output .= $startsecondaryshares;
