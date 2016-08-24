@@ -512,8 +512,8 @@ jQuery(document).ready(function ($) {
             return averageWidth;
         }
     }
-
-    responsiveButtons();
+    // Deactivate it for now and check if we can reach the same but better with CSS Flex boxes
+    //responsiveButtons();
 
 
     /* Count up script jquery-countTo
