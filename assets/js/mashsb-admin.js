@@ -64,16 +64,16 @@ jQuery(document).ready(function ($) {
     
         
     // Toggle Admin Settings Dynamic Button Resize + Button Width
-    if ($("#mashsb_settings\\[dynamic_button_resize\\]").attr('checked')) {
+    if ($("#mashsb_settings\\[responsive_buttons\\]").attr('checked')) {
         $("#mashsb_settings\\[button_width\\]").closest('.row').css("display", "none");
     } else {
-        $("#mashsb_settings\\[button_width\\]").closest('.row').css("display", "table-row");
+        $("#mashsb_settings\\[button_width\\]").closest('.row').fadeIn(300).css("display", "table-row");
     }
-    $("#mashsb_settings\\[dynamic_button_resize\\]").click(function () {
+    $("#mashsb_settings\\[responsive_buttons\\]").click(function () {
         if ($(this).attr('checked')) {
             $("#mashsb_settings\\[button_width\\]").closest('.row').css("display", "none");
         } else {
-            $("#mashsb_settings\\[button_width\\]").closest('.row').css("display", "table-row");
+            $("#mashsb_settings\\[button_width\\]").closest('.row').fadeIn(300).css("display", "table-row");
         }
     })
     
@@ -110,34 +110,6 @@ jQuery(document).ready(function ($) {
     function mashsb_eraseCookie(name) {
         setCookie(name, "", -1);
     }
-
-    /* 
-     * Fade in sharedcount settings if needed
-     * @deprecated 
-     * 
-     * */
-//    $('#mashsb_settings\\[mashsb_sharemethod\\]').change(function () {
-//        if ($('#mashsb_settings\\[mashsb_sharemethod\\]').val() === "sharedcount")
-//        {
-//            $('#mashsb_settings\\[mashsharer_apikey\\]').closest('.row').css("display", "table-row");
-//            $('#mashsb_settings\\[mashsharer_sharecount_domain\\]').closest('.row').css("display", "table-row");
-//        }
-//        else
-//        {
-//            $('#mashsb_settings\\[mashsharer_apikey\\]').closest('.row').css("display", "none");
-//            $('#mashsb_settings\\[mashsharer_sharecount_domain\\]').closest('.row').css("display", "none");
-//        }
-//    });
-
-    /*make visible when sharedcount.com is used*/
-//    if ($('#mashsb_settings\\[mashsb_sharemethod\\]').val() === "sharedcount")
-//    {
-//        $('#mashsb_settings\\[mashsharer_apikey\\]').closest('.row').css("display", "table-row");
-//        $('#mashsb_settings\\[mashsharer_sharecount_domain\\]').closest('.row').css("display", "table-row");
-//    } else {
-//        $('#mashsb_settings\\[mashsharer_apikey\\]').closest('.row').css("display", "none");
-//        $('#mashsb_settings\\[mashsharer_sharecount_domain\\]').closest('.row').css("display", "none");
-//    }
     
     
     /* Fade in Caching method settings if needed */

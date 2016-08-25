@@ -91,9 +91,8 @@ function mashsb_install() {
             'mashsb_sharemethod' => 'mashengine',
             'caching_method' => 'async_cache',
             'mashsu_methods' => 'disabled',
-            //'dynamic_button_resize' => '0',
+            'responsive_buttons' => '1',
             'button_margin' => '1',
-            //'buttons_size' => 'mash-medium',
             'text_align_center' => '1',
             'mashsharer_round' => '1',
         );

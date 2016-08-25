@@ -125,6 +125,8 @@ This Social Media share button plugin is in active development and will be updat
 * Odnoklassniki
 * Frype / Draugiem
 * Skype
+* Flipboard
+* Hackernews
 
 = High Performance =
 
@@ -319,9 +321,11 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 = 3.1.8 =
 
-* New: Tested up to WP 4.6
-* New: Three more button sizes: Small | Medium | Large (The Default Size)
-* New: Post Thumbnail in Most Shared Post widget plus extra options
+* New: Facebook App authentication | No more zero shares due to api call limits
+* New: Awesome New Responsive Full Width Buttons
+* New: Three more button sizes: Small | Medium | Large (Default Size)
+* New: Beautiful new Most Shared Post Widget plus extra options and thumbnail generation
+
 * New: Color Picker for Share count color
 * New: Button Margin Option
 * New: Button label And share icon align center option
@@ -330,9 +334,12 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 * New: Clean up the user interface and change some wordings
 * New: Changed facebook api endpoint
 * New: New content filter for deactivating buttons on amp pages 'mashsb_the_content'
+* New: Tested up to WP 4.6
+
 * Fix: jQuery error nearest() not defined
 * Fix: Remove inline css completely when custom css is not used
 * Fix: Shortcodes not working in above and below content section
+
 * Tweak: default font-family sans-serif for the buttons
 * Tweak: Allow Headlines in admin settings
 * Tweak: Clean up admin js

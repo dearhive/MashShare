@@ -490,8 +490,11 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
  */
 
 function mashshareShow() {
+    global $mashsb_options;
+    
+    $class_stretched = isset($mashsb_options['responsive_buttons']) ? 'mashsb-stretched' : '';
 
-    $return = '<aside class="mashsb-container mashsb-main">'
+    $return = '<aside class="mashsb-container mashsb-main ' . $class_stretched . '">'
             . mashsb_content_above() .
             '<div class="mashsb-box mash-fade-in">'
                 . apply_filters( 'mashsb_sharecount_filter', mashsb_render_sharecounts() ) .

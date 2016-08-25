@@ -391,6 +391,7 @@ So the MashShare open graph data will be containing the same social meta data th
                     'type' => 'headline'
                 ),
                 #######################
+
                 'buttons_size' => array(
                     'id' => 'buttons_size',
                     'name' => __( 'Buttons Size', 'mashsb' ),
@@ -402,6 +403,20 @@ So the MashShare open graph data will be containing the same social meta data th
                         'mash-large' => 'Large'
                     ),
                     'std' => 'Large'
+                ),
+                'responsive_buttons' => array(
+                    'id' => 'responsive_buttons',
+                    'name' => __( 'Full Responsive Buttons', 'mashsb' ),
+                    'desc' => __( 'Get full width buttons on large devices and small buttons on mobile devices. Deactivate to specify manually a fixed button width.', 'mashsb' ),
+                    'type' => 'checkbox'
+                ),
+                array(
+                    'id' => 'button_width',
+                    'name' => __( 'Button Width', 'mashpv' ),
+                    'desc' => __( 'Minimum with of the large share buttons in pixels', 'mashpv' ),
+                    'type' => 'number',
+                    'size' => 'normal',
+                    'std' => '177'
                 ),
                 'button_margin' => array(
                     'id' => 'button_margin',
@@ -440,21 +455,6 @@ So the MashShare open graph data will be containing the same social meta data th
                     ),
                     'std' => 'default'
                 ),
-            // Deactivate it for now. We try CSS flexboxes instead
-//                'dynamic_button_resize' => array(
-//                    'id' => 'dynamic_button_resize',
-//                    'name' => __( 'Dynamic Button Resize (Experimental)', 'mashsb' ),
-//                    'desc' => __( 'Calculate available space around buttons to detect automatically maximum button width. Deactivate to specify a fixed button width. If you experience issues with it please contact us.', 'mashsb' ),
-//                    'type' => 'checkbox'
-//                ),
-                array(
-                    'id' => 'button_width',
-                    'name' => __( 'Button Width', 'mashpv' ),
-                    'desc' => __( 'Minimum with of the large share buttons in pixels', 'mashpv' ),
-                    'type' => 'number',
-                    'size' => 'normal',
-                    'std' => '177'
-                ),
                 'mash_style' => array(
                     'id' => 'mash_style',
                     'name' => __( 'Share Button Style', 'mashsb' ),
@@ -470,7 +470,7 @@ So the MashShare open graph data will be containing the same social meta data th
                 'small_buttons' => array(
                     'id' => 'small_buttons',
                     'name' => __( 'Small Share Buttons', 'mashsb' ),
-                    'desc' => __( 'All buttons will be shown as pure small icons without any text on desktop and mobile devices all the time.<br><strong>Note:</strong> Disable this when you use the <a href="https://www.mashshare.net/downloads/mashshare-responsive/" target="_blank">responsive Add-On</a>', 'mashsb' ),
+                    'desc' => __( 'All buttons will be shown as pure small icons without any text on desktop and mobile devices all the time.<br><strong>Note:</strong>Disable this if you want the buttons full width on desktop devices and small on mobile devices.', 'mashsb' ),
                     'type' => 'checkbox'
                 ),
                 'text_align_center' => array(
