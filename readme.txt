@@ -577,5 +577,5 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 3.1.6 =
-3.1.6  <strong>MashShare 3.1.6 - IMPORTANT UPDATE - Update to get facebook shares back</strong> <a href="https://wordpress.org/plugins/mashsharer/changelog/" style="color:white;text-decoration: underline;">Complete Changelog!</a>
+= 3.1.8 =
+3.1.8  <strong>IMPORTANT UPDATE - Update explictely recommended to get accurate share count because of latest changes in facebook API. </strong> <a href="https://wordpress.org/plugins/mashsharer/changelog/" style="color:white;text-decoration: underline;">Read Changelog.</a>
