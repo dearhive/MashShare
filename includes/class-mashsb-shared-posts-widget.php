@@ -216,14 +216,16 @@ class mashsb_mostshared_posts_widget extends WP_Widget {
         $expiration = mashsb_get_expiration();
 
         if (MASHSB_DEBUG){
-        delete_transient('mashwidget_' . md5( json_encode( $args ) )); // debug
+            delete_transient('mashwidget_' . md5( json_encode( $args ) ));
         }
         
         if( false === ( $qry = get_transient( 'mashwidget_' . md5( json_encode( $args ) ) ) ) ) {
             $wpq = new WP_Query( $args );
             set_transient( 'mashwidget_' . md5( json_encode( $args ) ), $wpq, $expiration );
-            return $wpq;
+                        //wp_die( var_dump($wpq));  
+            return $wpq; 
         } else {
+                                //wp_die( var_dump($qry) );
             return $qry;
         }
     }

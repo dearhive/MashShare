@@ -249,30 +249,38 @@ s                    </div>
             ?>
             <div class="changelog">
                 <div class="feature-section">
-                <h4><?php _e( '1. Asyncronous Share Count Aggregation', 'mashsb' ); ?></h4>
-
-                    <div class="feature-section-media">&nbsp;</div>
                     <div class="feature-section-content">
-                        <p><?php _e( 'With MashShare version 3.0 you get the advantage of our biggest performance update. Use the new <i>Async Cache Refresh</i> method and your share counts will be aggregated only after page loading and never while page loads. This is a huge performance update.', 'mashsb' ); ?></p>
+                        <h2><?php _e( 'Use Facebook Connect to Skyrocket Share Count', 'mashsb' ); ?></h2>
+                        <p><?php _e( 'MashShare is the first Social Media plugin that uses the brandnew Facebook Connect Integration to bypass the regular facebook API limit which has been introduced recently. <p>It allows you up to 200 API calls per hour to the facebook server. This is more than enough for even huge traffic sites as MashShare is caching all share counts internally. <p>We are convinced that other social media plugins are going to copy our solution soon... and we will be proud of it;) <p> Your site becomes immediately better than the rest because you are the one whose website is running with full social sharing power. Other sites share count still stucks and are delayed and they do not know it;)', 'mashsb' ); ?></p>
+                        <img src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/oauth.png'; ?>"/>
+                        <p></p>
+                        <h2><?php _e( 'A New Beautiful Sharing Widget', 'mashsb' ); ?></h2>
+                        <p><?php _e( 'We have heard your wishes so the new widget contains the long requested post thumbnail and a beautiful css which gives your side bar sharing super power.', 'mashsb' ); ?></p>
+                        <img src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/widget.png'; ?>"/>
+                        <p></p>
+                        <h2><?php _e( 'Better Customization Options', 'mashsb' ); ?></h2>
+                        <p><?php _e( 'Select from 3 ready to use sizes to make sure that MashShare is looking great on your site. No matter if you prefer small, medium or large buttons.', 'mashsb' ); ?></p>
+                        <img src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/different_sizes.gif'; ?>"/>
+                        <p></p>
+                        <h2><?php _e( 'Asyncronous Share Count Aggregation', 'mashsb' ); ?></h2>
+                        <p><?php _e( 'With MashShare you get our biggest performance update. Use the new <i>Async Cache Refresh</i> method and your share counts will be aggregated only after page loading and never while page loads. This is a huge performance update.', 'mashsb' ); ?></p>
                         <img src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/async_cache_refresh.png'; ?>"/>
                         <p></p>
-                        <h4><?php _e( '2. Open Graph and Twitter Card Integration', 'mashsb' ); ?></h4>
+                        <h2><?php _e( 'Open Graph and Twitter Card Integration', 'mashsb' ); ?></h2>
                         <p><?php _e( 'Use open graph and twitter card to specify the content you like to share. If you are using Yoast, MashShare will use the Yoast open graph data instead and extend it with custom data to get the maximum out of your valuable content.', 'mashsb' ); ?></p>
                         <p></p>
                         
                         <img src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/social_sharing_settings.png'; ?>"/>
                         <p></p>
-                        <img src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/social_media_integration.png'; ?>"/>
+                        <h2><?php _e( 'Great Responsive Buttons', 'mashsb' ); ?></h2>
+                        <p><?php _e( 'MashShare arrives you with excellent responsive support. So the buttons look great on mobile and desktop devices. If you want more customization options for mobile devices you can purchase the responsive Add-On', 'mashsb' ); ?></p>
                         <p></p>
-                        <h4><?php _e( '3. Responsive Buttons per default', 'mashsb' ); ?></h4>
-                        <p><?php _e( 'MashShare 3.0 arrives you with basic responsive button support. So the buttons look great on mobile and desktop devices.', 'mashsb' ); ?></p>
-                        <p></p>
-                        <h4><?php _e( '4. Share Count Dashboard', 'mashsb' ); ?></h4>
+                        <h2><?php _e( 'Share Count Dashboard', 'mashsb' ); ?></h2>
                         <p><?php _e( 'See the shares of your posts at a glance on the admin posts listing:', 'mashsb' ); ?></p>
                         <p></p>
                         <img alt="Share count dashboard" title="Share count dashboard" src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/dashboard.png'; ?>"/>
                         <p></p>
-                        <h4><?php _e( '5. A much cleaner user interface', 'mashsb' ); ?></h4>
+                        <h2><?php _e( 'A much cleaner user interface', 'mashsb' ); ?></h2>
                         <p><?php _e( 'We spent a lot of time to make useful first time settings and improved the user interface for an easier experience.', 'mashsb' ); ?></p>
                         <p></p>
                     </div>
@@ -493,8 +501,9 @@ s                    </div>
         global $mashsb_options;
 
         // Bail if no activation redirect
-        if( !get_transient( '_mashsb_activation_redirect' ) )
+        if( !get_transient( '_mashsb_activation_redirect' ) ){
             return;
+        }
         
         // Delete the redirect transient
         delete_transient( '_mashsb_activation_redirect' );
@@ -509,8 +518,7 @@ s                    </div>
             wp_safe_redirect( admin_url( 'admin.php?page=mashsb-getting-started&redirect=1' ) );
             exit;
         } else { // Update
-            wp_safe_redirect( admin_url( 'admin.php?page=mashsb-getting-started&redirect=1' ) );
-            //wp_safe_redirect( admin_url( 'options-general.php?page=mashsb-settings&tab=visual#mashsb_settingslocation_header' ) );
+            wp_safe_redirect( admin_url( 'admin.php?page=mashsb-about&redirect=1' ) );
             exit;
         }
     }

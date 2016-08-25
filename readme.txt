@@ -8,7 +8,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email
 Requires at least: 3.6+
-Tested up to: 4.6.1
+Tested up to: 4.7
 Stable tag: 3.1.8
 
 Social Media Share Buttons for Twitter, Facebook and other social networks. Highly customizable Social Media ecosystem
@@ -334,7 +334,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 * New: Clean up the user interface and change some wordings
 * New: Changed facebook api endpoint
 * New: New content filter for deactivating buttons on amp pages 'mashsb_the_content'
-* New: Tested up to WP 4.6
+* New: Tested up to WP 4.7
 
 * Fix: jQuery error nearest() not defined
 * Fix: Remove inline css completely when custom css is not used

@@ -1193,8 +1193,13 @@ color: #0097df;
 .mashsb-about-wrap img {
     max-width: 99%;
 }
+.mashsb-about-wrap p {
+    font-size: 16px;
+}
+
 
 .token_status{
     line-height: 19px;
     margin-top: 5px;
 }
+

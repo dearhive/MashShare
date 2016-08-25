@@ -145,7 +145,7 @@ function mashsb_install() {
     }
 
     // Add the transient to redirect / not for multisites
-    set_transient( '_mashsb_activation_redirect', true, 30 );
+    set_transient( '_mashsb_activation_redirect', true, 120 );
 }
 
 /**
