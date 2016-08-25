@@ -90,7 +90,7 @@ module.exports = function(grunt) {
             build: { 
                 files:[
                     {'assets/css/mashsb-admin.min.css' : 'assets/css/mashsb-admin.css'},
-                    {'templates/mashsb.min.css' : 'templates/mashsb.min.css'},
+                    {'assets/css/mashsb.min.css' : 'assets/css/mashsb.min.css'},
                 ]
             }
         },

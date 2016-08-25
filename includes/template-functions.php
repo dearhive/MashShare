@@ -38,45 +38,34 @@ function getExecutionOrder() {
     return $priority;
 }
 
-/* Get mashsbShareObject 
- * depending if MashEngine or sharedcount.com is used
+/* 
+ * Get mashsbShareObject 
+ * depending on MashEngine (or sharedcount.com deprecated) is used
  * 
  * @since 2.0.9
  * @return object
- * @changed 2.2.7
+ * @changed 3.1.8
  */
 
 function mashsbGetShareObj( $url ) {
-    global $mashsb_options;
-    $mashengine = isset( $mashsb_options['mashsb_sharemethod'] ) && $mashsb_options['mashsb_sharemethod'] === 'mashengine' ? true : false;
-    if( $mashengine ) {
-        if( !class_exists( 'RollingCurlX' ) )
+        if( !class_exists( 'RollingCurlX' ) ){
             require_once MASHSB_PLUGIN_DIR . 'includes/libraries/RolingCurlX.php';
-        if( !class_exists( 'mashengine' ) )
+        }
+        if( !class_exists( 'mashengine' ) ){
             require_once(MASHSB_PLUGIN_DIR . 'includes/mashengine.php');
-        mashdebug()->error( 'mashsbGetShareObj() url: ' . $url );
+        }
+
+        mashdebug()->info( 'mashsbGetShareObj() url: ' . $url );
         $mashsbSharesObj = new mashengine( $url );
         return $mashsbSharesObj;
-    }
-    require_once(MASHSB_PLUGIN_DIR . 'includes/sharedcount.class.php');
-    $apikey = isset( $mashsb_options['mashsharer_apikey'] ) ? $mashsb_options['mashsharer_apikey'] : '';
-    $mashsbSharesObj = new mashsbSharedcount( $url, 10, $apikey );
-    return $mashsbSharesObj;
+
 }
 
 /*
- * Get the correct share method depending if mashshare networks is enabled
+ * Use the correct share method depending on mashshare networks enabled or not
  * 
  * @since 2.0.9
- * @return var
- * 
- */
-
-/* Get the sharecounts from sharedcount.com or MashEngine
- * Creates the share count cache using post_meta db fields.
- * 
- * @since 2.0.9
- * @returns int
+ * @returns int share count
  */
 
 function mashsbGetShareMethod( $mashsbSharesObj ) {
@@ -139,13 +128,10 @@ function mashsbGetNonPostShares( $url ) {
  */
 
 function getSharedcount( $url ) {
-    //global $mashsb_options, $post;
     global $mashsb_options, $post, $mashsb_sharecount; // todo test a global share count var if it reduces the amount of requests
 
     // Return global share count variable to prevent multiple execution
-    //if (!empty($mashsb_sharecount[$url]) && !mashsb_is_cache_refresh() ){
     if (is_array($mashsb_sharecount) && array_key_exists($url, $mashsb_sharecount) && !empty($mashsb_sharecount[$url]) && !mashsb_is_cache_refresh() ){
-        //echo "debug" . $mashsb_sharecount[$url];
         return $mashsb_sharecount[$url] + getFakecount();
     }
    
@@ -247,7 +233,7 @@ function getSharedcount( $url ) {
 function mashsb_subscribe_button() {
     global $mashsb_options;
     if( $mashsb_options['networks'][2] ) {
-        $subscribebutton = '<a href="javascript:void(0)" class="mashicon-subscribe" id="mash-subscribe-control"><span class="icon"></span><span class="text">' . __( 'Subscribe', 'mashsb' ) . '</span></a>';
+        $subscribebutton = '<a href="javascript:void(0)" class="mashicon-subscribe" id="mash-subscribe-control"><span class="icon"><span class="text">' . __( 'Subscribe', 'mashsb' ) . '</span></span></a>';
     } else {
         $subscribebutton = '';
     }
@@ -308,7 +294,11 @@ function roundshares( $totalshares ) {
  */
 
 function onOffSwitch() {
-    $output = '<div class="onoffswitch"></div>';
+    global $mashsb_options;
+    // Get class names for buttons size
+    $class_size = isset($mashsb_options['buttons_size']) ? ' ' . $mashsb_options['buttons_size'] : '';
+    
+    $output = '<div class="onoffswitch' . $class_size . '"></div>';
     return apply_filters( 'mashsh_onoffswitch', $output );
 }
 
@@ -321,7 +311,11 @@ function onOffSwitch() {
  */
 
 function onOffSwitch2() {
-    $output = '<div class="onoffswitch2" style="display:none;"></div>';
+    global $mashsb_options;
+    // Get class names for buttons size
+    $class_size = isset($mashsb_options['buttons_size']) ? ' ' . $mashsb_options['buttons_size'] : '';
+    
+    $output = '<div class="onoffswitch2' .$class_size .'" style="display:none;"></div>';
     return apply_filters( 'mashsh_onoffswitch2', $output );
 }
 
@@ -395,11 +389,19 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
     
     // define globals
     if( $is_shortcode ) {
-        //$mashsb_twitter_url = !empty( $mashsb_custom_url ) ? mashsb_get_shorturl( $mashsb_custom_url ) : mashsb_get_twitter_url();
         $mashsb_twitter_url = !empty( $mashsb_custom_url ) ? mashsb_get_shorturl( $mashsb_custom_url ) : mashsb_get_twitter_url();
     }else{
         $mashsb_twitter_url = mashsb_get_twitter_url();
     }
+    
+    // Get class names for buttons size
+    $class_size = isset($mashsb_options['buttons_size']) ? ' ' . $mashsb_options['buttons_size'] : '';
+    
+    // Get class names for buttons margin
+    $class_margin = isset($mashsb_options['button_margin']) ? '' : ' mash-nomargin';
+
+    // Get class names for center align
+    $class_center = isset($mashsb_options['text_align_center']) ? ' mash-center' : '';
 
     $output = '';
     $startsecondaryshares = '';
@@ -435,13 +437,17 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
     } else {
         $enablednetworks = $getnetworks;
     }
-
+    
+    // Start Primary Buttons
+    //$output .= '<div class="mashsb-primary-shares">';
+    
     if( !empty( $enablednetworks ) ) {
         foreach ( $enablednetworks as $key => $network ):
             if( $maxcounter !== 'all' && $maxcounter < count( $enablednetworks ) ) { // $maxcounter + 1 for correct comparision with count()
                 if( $startcounter == $maxcounter ) {
-                    $onoffswitch = onOffSwitch();
-                    $startsecondaryshares = '<div class="secondary-shares" style="display:none;">';
+                    $onoffswitch = onOffSwitch(); // Start More Button
+                    //$startsecondaryshares = '</div>'; // End Primary Buttons
+                    $startsecondaryshares .= '<div class="secondary-shares" style="display:none;">'; // Start secondary-shares
                 } else {
                     $onoffswitch = '';
                     $onoffswitch2 = '';
@@ -450,7 +456,6 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
                 if( $startcounter === (count( $enablednetworks )) ) {
                     $endsecondaryshares = '</div>';
                 } else {
-                    ;
                     $endsecondaryshares = '';
                 }
             }
@@ -462,7 +467,8 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
             }
             $enablednetworks[$key]['id'] == 'whatsapp' ? $display = 'display:none;' : $display = ''; // Whatsapp button is made visible via js when opened on mobile devices
 
-            $output .= '<a style="' . $display . '" class="mashicon-' . $enablednetworks[$key]['id'] . '" href="' . arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="nofollow"><span class="icon"></span><span class="text">' . $name . '</span></a>';
+            $output .= '<a style="' . $display . '" class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . $class_margin . $class_center . '" href="' . arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="nofollow"><span class="icon"></span><span class="text">' . $name . '</span></a>';
+            
             $output .= $onoffswitch;
             $output .= $startsecondaryshares;
 
@@ -484,15 +490,19 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
  */
 
 function mashshareShow() {
+    global $mashsb_options;
+    
+    $class_stretched = isset($mashsb_options['responsive_buttons']) ? 'mashsb-stretched' : '';
 
-    $return = '<aside class="mashsb-container mashsb-main">'
+    $return = '<aside class="mashsb-container mashsb-main ' . $class_stretched . '">'
             . mashsb_content_above() .
-            '<div class="mashsb-box">'
-            . apply_filters( 'mashsb_sharecount_filter', mashsb_render_sharecounts() ) .
-            '<div class="mashsb-buttons">'
-            . mashsb_getNetworks() .
-            '</div></div>
-                    <div style="clear:both;"></div>'
+            '<div class="mashsb-box mash-fade-in">'
+                . apply_filters( 'mashsb_sharecount_filter', mashsb_render_sharecounts() ) .
+                '<div class="mashsb-buttons">'
+                . mashsb_getNetworks() .
+                '</div>
+            </div>
+                <div style="clear:both;"></div>'
             . mashsb_subscribe_content()
             . mashsb_content_below() .
             '</aside>
@@ -524,9 +534,12 @@ function mashsb_render_sharecounts( $customurl = '', $align = 'left' ) {
     if( mashsb_hide_shares( $shares ) ) {
         return;
     }
+    
+    // Get class names for buttons size
+    $class_size = isset($mashsb_options['buttons_size']) ? ' ' . $mashsb_options['buttons_size'] : '';
 
-    $html = '<div class="mashsb-count" style="float:' . $align . ';"><div class="counts mashsbcount">' . $sharecount . '</div><span class="mashsb-sharetext">' . $sharetitle . '</span></div>';
-    return $html;
+    $html = '<div class="mashsb-count'.$class_size . '" style="float:' . $align . ';"><div class="counts mashsbcount">' . $sharecount . '</div><span class="mashsb-sharetext">' . $sharetitle . '</span></div>';
+    return apply_filters('mashsb_share_count', $html);
 }
 
 /*
@@ -539,12 +552,6 @@ function mashsb_render_sharecounts( $customurl = '', $align = 'left' ) {
 
 function mashshareShortcodeShow( $args ) {
     global $mashsb_options, $mashsb_custom_url, $mashsb_custom_text;
-
-    //!empty( $mashsb_options['sharecount_title'] ) ? $sharecount_title = $mashsb_options['sharecount_title'] : $sharecount_title = __( 'SHARES', 'mashsb' );
-    //!empty($mashsb_options['visible_services']) ? $visible_services = $mashsb_options['visible_services'] : $visible_services = 1;
-    //$sharecount_title = !empty( $mashsb_options['sharecount_title'] ) ? $mashsb_options['sharecount_title'] : __( 'SHARES', 'mashsb' );
-
-
 
     $sharecount = '';
 
@@ -583,7 +590,7 @@ function mashshareShortcodeShow( $args ) {
 
     $return = '<aside class="mashsb-container mashsb-main">'
             . mashsb_content_above() .
-            '<div class="mashsb-box">'
+            '<div class="mashsb-box mash-fade-in">'
             . $sharecount .
             '<div class="mashsb-buttons">'
             . mashsb_getNetworks( true, $count_services ) .
@@ -701,7 +708,7 @@ function mashshare_filter_content( $content ) {
     }
     
     // Get one instance (prevents multiple similar calls)
-    $mashsb_instance = mashshareShow();
+    $mashsb_instance = apply_filters('mashsb_the_content', mashshareShow());
     switch ( $position ) {
         case 'manual':
             break;
@@ -873,7 +880,7 @@ function mashsb_hide_shares( $sharecount ) {
 
 function mashsb_content_above() {
     global $mashsb_options;
-    $html = !empty( $mashsb_options['content_above'] ) ? '<div class="mashsb_above_buttons">' . $mashsb_options['content_above'] . '</div>' : '';
+    $html = !empty( $mashsb_options['content_above'] ) ? '<div class="mashsb_above_buttons">' . mashsb_cleanShortcode('mashshare', $mashsb_options['content_above']) . '</div>' : '';
     return apply_filters( 'mashsb_above_buttons', $html );
 }
 
@@ -885,7 +892,7 @@ function mashsb_content_above() {
 
 function mashsb_content_below() {
     global $mashsb_options;
-    $html = !empty( $mashsb_options['content_below'] ) ? '<div class="mashsb_below_buttons">' . $mashsb_options['content_below'] . '</div>' : '';
+    $html = !empty( $mashsb_options['content_below'] ) ? '<div class="mashsb_below_buttons">' . mashsb_cleanShortcode('mashshare', $mashsb_options['content_below']) . '</div>' : '';
     return apply_filters( 'mashsb_below_buttons', $html );
 }
 

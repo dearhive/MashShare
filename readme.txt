@@ -8,8 +8,8 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email
 Requires at least: 3.6+
-Tested up to: 4.6
-Stable tag: 3.1.7
+Tested up to: 4.7
+Stable tag: 3.1.8
 
 Social Media Share Buttons for Twitter, Facebook and other social networks. Highly customizable Social Media ecosystem
 
@@ -125,6 +125,8 @@ This Social Media share button plugin is in active development and will be updat
 * Odnoklassniki
 * Frype / Draugiem
 * Skype
+* Flipboard
+* Hackernews
 
 = High Performance =
 
@@ -315,7 +317,45 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 13. Extend MashShare with great Add-Ons
 
 
-== Changelog == 
+== Changelog ==
+
+= 3.1.8 =
+
+* New: Facebook App authentication | No more zero shares due to api call limits
+* New: Awesome New Responsive Full Width Buttons
+* New: Three more button sizes: Small | Medium | Large (Default Size)
+* New: Beautiful new Most Shared Post Widget plus extra options and thumbnail generation
+
+* New: Color Picker for Share count color
+* New: Button Margin Option
+* New: Button label And share icon align center option
+* New: Add Flipoard and Hacker News to the supported networks
+* New: All Fonts and CSS are located in assets folder. Template folder not used any longer for assets
+* New: Clean up the user interface and change some wordings
+* New: Changed facebook api endpoint
+* New: New content filter for deactivating buttons on amp pages 'mashsb_the_content'
+* New: Tested up to WP 4.7
+
+* Fix: jQuery error nearest() not defined
+* Fix: Remove inline css completely when custom css is not used
+* Fix: Shortcodes not working in above and below content section
+
+* Tweak: default font-family sans-serif for the buttons
+* Tweak: Allow Headlines in admin settings
+* Tweak: Clean up admin js
+* Tweak: Remove sharedcount.com endpoint because its not working anymore
+* Tweak: Change link to docs
+* Tweak: Create new filter mashsb_share_count
+* Tweak: New admin footer and several CSS improvements
+* Tweak: Remove deprecated functions
+
+= 3.1.7 =
+* New: Hotfix for changing facebook api endpoint
+
+= 3.1.6 =
+
+* Removed and merged into 3.1.8
+
 
 = 3.1.7 =
 * Fix: Hotfix changes facebook api endpoint
@@ -544,5 +584,5 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 3.1.7 =
-3.1.7  <strong>Hotfix: Changing facebook API Endpints</strong>
+= 3.1.8 =
+3.1.8  <strong>IMPORTANT UPDATE - Update explictely recommended to get accurate share count because of latest changes in facebook API. </strong> <a href="https://wordpress.org/plugins/mashsharer/changelog/" style="color:white;text-decoration: underline;">Read Changelog.</a>

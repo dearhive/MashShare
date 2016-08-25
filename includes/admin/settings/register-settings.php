@@ -117,39 +117,39 @@ function mashsb_get_registered_settings() {
         'general' => apply_filters( 'mashsb_settings_general', array(
                 'general_header' => array(
                     'id' => 'general_header',
-                    'name' => '<strong>' . __( 'General settings', 'mashsb' ) . '</strong>',
+                    'name' => '<strong>' . __( 'General', 'mashsb' ) . '</strong>',
                     'desc' => __( '', 'mashsb' ),
                     'type' => 'header'
                 ),
-                'mashsb_sharemethod' => array(
-                    'id' => 'mashsb_sharemethod',
-                    'name' => __( 'Share counts', 'mashsb' ),
-                    'desc' => __( '<i>MashEngine</i> collects shares by direct request to social networks. <br><br><i>Sharedcount.com</i> needs an API key and is limited (No twitter shares) <p></p>Shares are collected for Facebook, Twitter, LinkedIn, Google+, Pinterest, Stumbleupon, Buffer, VK. <p></p>Twitter count is aggreagated via <a href="http://newsharecounts.com" target="_blank" rel="external nofollow">newsharecounts.com</a>. Sign up with your Twitter account for this free service to get the twitter share count. Visit the newsharecount site, fill in your website domain and click on <i>Sign in with Twitter</i>. Thats it!', 'mashsb' ),
-                    'type' => 'select',
-                    'options' => array(
-                        'mashengine' => 'MashEngine (including twitter count)',
-                        'sharedcount' => 'Sharedcount.com (no twitter count)'
-                    )
-                ),
-                'mashsharer_apikey' => array(
-                    'id' => 'mashsharer_apikey',
-                    'name' => __( 'Sharedcount.com API Key', 'mashsb' ),
-                    'desc' => __( 'Get it at <a href="https://www.sharedcount.com" target="_blank">SharedCount.com</a> for 10.000 free daily requests.', 'mashsb' ),
-                    'type' => 'text',
-                    'size' => 'medium'
-                ),
-                'mashsharer_sharecount_domain' => array(
-                    'id' => 'mashsharer_sharecount_domain',
-                    'name' => __( 'Sharedcount.com endpint', 'mashsb' ),
-                    'desc' => __( 'The SharedCount Domain your API key is configured to query. For example, free.sharedcount.com. This may update automatically if configured incorrectly.', 'mashsb' ),
-                    'type' => 'text',
-                    'size' => 'medium',
-                    'std' => 'free.sharedcount.com'
-                ),
+//                'mashsb_sharemethod' => array(
+//                    'id' => 'mashsb_sharemethod',
+//                    'name' => __( 'Share counts', 'mashsb' ),
+//                    'desc' => __( '<i>MashEngine</i> collects shares by direct request to social networks. <br><br>Shares are collected for Facebook, Twitter, LinkedIn, Google+, Pinterest, Stumbleupon, Buffer, VK. <p></p>Twitter count is aggreagated via <a href="http://newsharecounts.com" target="_blank" rel="external nofollow">newsharecounts.com</a>. You must sign up with your Twitter account for this free service to get the twitter share count. Visit the site newsharecount.com, fill in your website domain and click on <i>Sign in with Twitter</i>. Thats it!', 'mashsb' ),
+//                    'type' => 'select',
+//                    'options' => array(
+//                        'mashengine' => 'MashEngine (including twitter count)',
+//                        'sharedcount' => 'Sharedcount.com (Not working any longer)'
+//                    )
+//                ),
+//                'mashsharer_apikey' => array(
+//                    'id' => 'mashsharer_apikey',
+//                    'name' => __( 'Sharedcount.com API Key', 'mashsb' ),
+//                    'desc' => __( 'Get it at <a href="https://www.sharedcount.com" target="_blank">SharedCount.com</a> for 10.000 free daily requests.', 'mashsb' ),
+//                    'type' => 'text',
+//                    'size' => 'medium'
+//                ),
+//                'mashsharer_sharecount_domain' => array(
+//                    'id' => 'mashsharer_sharecount_domain',
+//                    'name' => __( 'Sharedcount.com endpint', 'mashsb' ),
+//                    'desc' => __( 'The SharedCount Domain your API key is configured to query. For example, free.sharedcount.com. This may update automatically if configured incorrectly.', 'mashsb' ),
+//                    'type' => 'text',
+//                    'size' => 'medium',
+//                    'std' => 'free.sharedcount.com'
+//                ),
                 'caching_method' => array(
                     'id' => 'caching_method',
                     'name' => __( 'Caching Method', 'mashsb' ),
-                    'desc' => __( 'The <i>Async Cache Refresh</i> method never adds additonal load time for a visitor and refreshes the cache asyncronously in the background. New posts are updated at each hour. Older posts are updated from 4 hours to 12 hours for very old ones. <br><br> <i>Refresh while loading</i> rebuilds expired cache while page is loading and adds a little extra time during inital page load. <br><br><strong>If shares are not updating</strong> or site is heavy cached try <i>Refresh while loading!</i> That\'s the default method MashShare was using before version 3.0', 'mashsb' ),
+                    'desc' => sprintf(__( 'The <i>Async Cache Refresh</i> method never adds additonal load time for a visitor and refreshes the cache asyncronously in the background. <br><br>- New posts are updated at each hour. <br>- Posts older than 3 weeks are updated every 4 hours<br>- Post older than 2 months are updated every 12 hours<br><br> <i>Refresh while loading</i> rebuilds expired cache while page is loading and adds a little extra time during inital page load. <br><br><strong>If shares are not updating</strong> or site is heavy cached try <i>Refresh while loading!</i> That\'s the default method MashShare was using before version 3.0<br><br>Shares still not shown? <a href="%1s" target="_blank">Read this first!</a>', 'mashsb' ), 'http://docs.mashshare.net/article/4-try-this-first-before-troubleshooting'),
                     'type' => 'select',
                     'options' => array(
                         'async_cache' => 'Async Cache Refresh',
@@ -170,14 +170,20 @@ function mashsb_get_registered_settings() {
                     'type' => 'select',
                     'options' => array(
                         'shares' => 'Shares',
-                        'likes' => 'Likes',
-                        'total' => 'Total: likes + shares + comments'
+                        //'likes' => 'Likes', not used any longer
+                        'total' => 'Shares + Comments'
                     )
+                ),
+                'cumulate_http_https' => array(
+                    'id' => 'cumulate_http_https',
+                    'name' => __( 'Cumulate Http(s) Shares', 'mashsb' ),
+                    'desc' => __( 'Activate this if you want facebook shares to be cumulated for https and http scheme. If you switched your site to from http to https this is needed to not loose any previous shares which are cumulated earlier for the non ssl version of your site. If you are not missing any shares do not activate this option.', 'mashsb' ),
+                    'type' => 'checkbox'
                 ),
                 'fake_count' => array(
                     'id' => 'fake_count',
-                    'name' => __( 'Fake Share counts', 'mashsb' ),
-                    'desc' => __( 'This number will be aggregated to all your share counts and is multiplied with a post specific factor. (Number of post title words divided with 10).', 'mashsb' ),
+                    'name' => __( 'Fake Share Count', 'mashsb' ),
+                    'desc' => __( 'This number will be aggregated to all your share counts and is multiplied with a post specific factor. (Number of words of post title divided with 10).', 'mashsb' ),
                     'type' => 'text',
                     'size' => 'medium'
                 ),
@@ -236,7 +242,7 @@ function mashsb_get_registered_settings() {
                 ),
                 "user_roles_for_sharing_options" => array(
                     "id"            => "user_roles_for_sharing_options",
-                    "name"          => __("Meta Box Visibility", "mashsb"),
+                    "name"          => __("Meta Box Permission", "mashsb"),
                     "desc"          => __("Select user roles which can only see MashShare Social Sharing Meta Box Options on posts and pages edit screen and User Meta Box on user profiles. If nothing is set meta boxes are shown for all user roles", "mashsb"),
                     "type"          => "multiselect",
                     "options"       => mashsb_get_user_roles(),
@@ -245,7 +251,7 @@ function mashsb_get_registered_settings() {
                 ),
                 'services_header' => array(
                     'id' => 'services_header',
-                    'name' => __( 'Social Networks', 'mashsb' ),
+                    'name' => '<strong>' . __( 'Networks', 'mashsb' ) . '</strong>',
                     'desc' => '',
                     'type' => 'header'
                 ),
@@ -259,8 +265,22 @@ function mashsb_get_registered_settings() {
                 array(
                     'id' => 'fb_app_id',
                     'name' => __( 'Facebook App ID', 'mashsb' ),
-                    'desc' => sprintf( __( 'Optional but recommended. <a href="%s" target="_blank">Create an App ID</a>', 'mashsb' ), 'https://developers.facebook.com/docs/apps/register' ),
+                    'desc' => sprintf( __( 'Highly recommended or your shares could be inaccurate! Do not forget to enter the facebook app secret as well. <a href="%1s" target="_blank">Create a App ID now</a>.', 'mashsb' ), 'https://developers.facebook.com/docs/apps/register' ),
                     'type' => 'text',
+                    'size' => 'medium'
+                ),
+//                array(
+//                    'id' => 'fb_app_secret',
+//                    'name' => __( 'Facebook App Secret', 'mashsb' ),
+//                    'desc' => sprintf( __( 'Required for getting accurate facebook share numbers. Where do i find the facebook APP Secret?', 'mashsb' ), 'https://developers.facebook.com/docs/apps/register' ),
+//                    'type' => 'text',
+//                    'size' => 'medium'
+//                ),
+                array(
+                    'id' => 'fb_access_token',
+                    'name' => __( 'Facebook Access Token', 'mashsb' ),
+                    'desc' => __( 'Required for getting accurate facebook share numbers! Connecting with facebook increases the facebook API call rate limit to 200 calls per hour. This is enough for even huge websites with a lot of traffic as MashShare is caching the calls.', 'mashsb' ),
+                    'type' => 'fboauth',
                     'size' => 'medium'
                 ),
                 'mashsharer_hashtag' => array(
@@ -318,46 +338,7 @@ So the MashShare open graph data will be containing the same social meta data th
                     'type' => 'select',
                     'options' => numberServices()
                 ),*/
-                array(
-                    'id' => 'shorturl_header',
-                    'name' => '<strong>' . __( 'Short URL Integration', 'mashsb' ) . '</strong>',
-                    'desc' => '',
-                    'type' => 'header',
-                    'size' => 'regular'
-                ),
-                array(
-                    'id' => 'bitly_access_token',
-                    'name' => __( 'Bitly access token', 'mashsb' ),
-                    'desc' => sprintf(__( 'If you like to use bitly.com shortener get a free bitly access token <a href="%s" target="_blank">here</a>. This turn urls into a format: http://bit.ly/cXnjsh. ', 'mashsb' ), 'https://bitly.com/a/oauth_apps'),
-                    'type' => 'text',
-                    'size' => 'large'
-                ),
-                array(
-                    'id' => 'google_app_id',
-                    'name' => __( 'Google API Key (goo.gl)', 'mashsb' ),
-                    'desc' => sprintf(__( 'If you like to use goo.gl shortener get a free Google API key <a href="%s" target="_blank">here</a>. This turn urls into a format: http://goo.gl/cXnjsh. ' . mashsb_check_google_apikey(), 'mashsb' ),'https://console.developers.google.com/'),
-                    'type' => 'text',
-                    'size' => 'large'
-                ),
-                array(
-                    'id' => 'mashsu_methods',
-                    'name' => __( 'Shorturl method', 'mashsb' ),
-                    'desc' => sprintf(__('Bitly generated shortlinks will be converted to the url format: <i>http://bit.ly/1PPg9D9</i><br><br>Goo.gl generated urls look like: <br><i>http://goo.gl/vSJwUV</i><br><br>Using WP Shortlinks converts twitter links into:<br> <i>%s ?p=101</i>', 'mashsb'), get_site_url() ),
-                    'type' => 'select',
-                    'options' => array(
-                        'wpshortlinks' => 'WP Short links',
-                        'bitly' => 'Bitly',
-                        'google' => 'Goo.gl',
-                        'disabled' => 'Short URLs Disabled',
-                    )
-                ),
-                array(
-                    'id' => 'shorturl_explanation',
-                    'name' => __( 'Important: Read this!', 'mashsb' ),
-                    'desc' => __('<strong>The post short url is NOT generated immediatly after first page load!</strong>  Background processing can take up to 1 hour for new posts and 4 - 12 hours for old posts.','mashsb'),
-                    'type' => 'renderhr',
-                    'size' => 'large'
-                ),
+                
 //                array(
 //                    'id' => 'shorturl_type',
 //                    'name' => __( 'Enable on', 'mashsb' ),
@@ -373,9 +354,14 @@ So the MashShare open graph data will be containing the same social meta data th
 //                ),
                 'style_header' => array(
                     'id' => 'style_header',
-                    'name' => '<strong>' . __( 'Customization', 'mashsb' ) . '</strong>',
+                    'name' => '<strong>' . __( 'Visual', 'mashsb' ) . '</strong>',
                     'desc' => __( '', 'mashsb' ),
                     'type' => 'header'
+                ),
+                'share_headline' => array(
+                    'id' => 'share_headline',
+                    'name' => __( 'Shares', 'mashsb' ),
+                    'type' => 'headline'
                 ),
                 'mashsharer_round' => array(
                     'id' => 'mashsharer_round',
@@ -397,21 +383,52 @@ So the MashShare open graph data will be containing the same social meta data th
                     'size' => 'medium',
                     'std' => 'SHARES'
                 ),
-                /* 'share_color' => array(
-                  'id' => 'share_color',
-                  'name' => __( 'Share count Color', 'mashsb' ),
-                  'desc' => __( 'Choose color of the share number in hex format, e.g. #7FC04C: ', 'mashsb' ),
-                  'type' => 'text',
-                  'size' => 'medium',
-                  'std' => '#cccccc'
-                  ), */
                 'share_color' => array(
                     'id' => 'share_color',
                     'name' => __( 'Share Count Color', 'mashsb' ),
                     'desc' => __( 'Choose color of the share number in hex format, e.g. #7FC04C: ', 'mashsb' ),
-                    'type' => 'text',
+                    'type' => 'color_select',
                     'size' => 'medium',
                     'std' => '#cccccc'
+                ),
+                'button_headline' => array(
+                    'id' => 'button_headline',
+                    'name' => __( 'Buttons', 'mashsb' ),
+                    'type' => 'headline'
+                ),
+                #######################
+
+                'buttons_size' => array(
+                    'id' => 'buttons_size',
+                    'name' => __( 'Buttons Size', 'mashsb' ),
+                    'desc' => __('', 'mashsb'),
+                    'type' => 'select',
+                    'options' => array(
+                        'mash-small' => 'Small',
+                        'mash-medium' => 'Medium',
+                        'mash-large' => 'Large'
+                    ),
+                    'std' => 'Large'
+                ),
+                'responsive_buttons' => array(
+                    'id' => 'responsive_buttons',
+                    'name' => __( 'Full Responsive Buttons', 'mashsb' ),
+                    'desc' => __( 'Get full width buttons on large devices and small buttons on mobile devices. Deactivate to specify manually a fixed button width.', 'mashsb' ),
+                    'type' => 'checkbox'
+                ),
+                array(
+                    'id' => 'button_width',
+                    'name' => __( 'Button Width', 'mashpv' ),
+                    'desc' => __( 'Minimum with of the large share buttons in pixels', 'mashpv' ),
+                    'type' => 'number',
+                    'size' => 'normal',
+                    'std' => '177'
+                ),
+                'button_margin' => array(
+                    'id' => 'button_margin',
+                    'name' => __( 'Button Margin', 'mashsb' ),
+                    'desc' => __('Decide if there is a small gap between the buttons or not', 'mashsb'),
+                    'type' => 'checkbox',
                 ),
                 'border_radius' => array(
                     'id' => 'border_radius',
@@ -444,14 +461,6 @@ So the MashShare open graph data will be containing the same social meta data th
                     ),
                     'std' => 'default'
                 ),
-                array(
-                    'id' => 'button_width',
-                    'name' => __( 'Button Width', 'mashpv' ),
-                    'desc' => __( 'Minimum with of the large share buttons in pixels', 'mashpv' ),
-                    'type' => 'number',
-                    'size' => 'normal',
-                    'std' => '177'
-                ),
                 'mash_style' => array(
                     'id' => 'mash_style',
                     'name' => __( 'Share Button Style', 'mashsb' ),
@@ -467,7 +476,13 @@ So the MashShare open graph data will be containing the same social meta data th
                 'small_buttons' => array(
                     'id' => 'small_buttons',
                     'name' => __( 'Small Share Buttons', 'mashsb' ),
-                    'desc' => __( 'All buttons will be shown as pure small icons without any text on desktop and mobile devices all the time.<br><strong>Note:</strong> Disable this when you use the <a href="https://www.mashshare.net/downloads/mashshare-responsive/" target="_blank">responsive Add-On</a>', 'mashsb' ),
+                    'desc' => __( 'All buttons will be shown as pure small icons without any text on desktop and mobile devices all the time.<br><strong>Note:</strong>Disable this if you want the buttons full width on desktop devices and small on mobile devices.', 'mashsb' ),
+                    'type' => 'checkbox'
+                ),
+                'text_align_center' => array(
+                    'id' => 'text_align_center',
+                    'name' => __( 'Text Align Center', 'mashsb' ),
+                    'desc' => __( 'Buttons Text labels and social icons will be aligned in center of the buttons', 'mashsb' ),
                     'type' => 'checkbox'
                 ),
                 /*'image_share' => array(
@@ -561,7 +576,7 @@ So the MashShare open graph data will be containing the same social meta data th
                   ), */
                 'location_header' => array(
                     'id' => 'location_header',
-                    'name' => '<strong>' . __( 'Location & Position', 'mashsb' ) . '</strong>',
+                    'name' => '<strong>' . __( 'Position', 'mashsb' ) . '</strong>',
                     'desc' => __( '', 'mashsb' ),
                     'type' => 'header'
                 ),
@@ -602,6 +617,46 @@ So the MashShare open graph data will be containing the same social meta data th
                     'name' => __( 'Frontpage', 'mashsb' ),
                     'desc' => __( 'Enable share buttons on frontpage', 'mashsb' ),
                     'type' => 'checkbox'
+                ),
+            array(
+                    'id' => 'shorturl_header',
+                    'name' => '<strong>' . __( 'Short URLs', 'mashsb' ) . '</strong>',
+                    'desc' => '',
+                    'type' => 'header',
+                    'size' => 'regular'
+                ),
+                array(
+                    'id' => 'bitly_access_token',
+                    'name' => __( 'Bitly access token', 'mashsb' ),
+                    'desc' => sprintf(__( 'If you like to use bitly.com shortener get a free bitly access token <a href="%s" target="_blank">here</a>. This turn urls into a format: http://bit.ly/cXnjsh. ', 'mashsb' ), 'https://bitly.com/a/oauth_apps'),
+                    'type' => 'text',
+                    'size' => 'large'
+                ),
+                array(
+                    'id' => 'google_app_id',
+                    'name' => __( 'Google API Key (goo.gl)', 'mashsb' ),
+                    'desc' => sprintf(__( 'If you like to use goo.gl shortener get a free Google API key <a href="%s" target="_blank">here</a>. This turn urls into a format: http://goo.gl/cXnjsh. ' . mashsb_check_google_apikey(), 'mashsb' ),'https://console.developers.google.com/'),
+                    'type' => 'text',
+                    'size' => 'large'
+                ),
+                array(
+                    'id' => 'mashsu_methods',
+                    'name' => __( 'Shorturl method', 'mashsb' ),
+                    'desc' => sprintf(__('Bitly generated shortlinks will be converted to the url format: <i>http://bit.ly/1PPg9D9</i><br><br>Goo.gl generated urls look like: <br><i>http://goo.gl/vSJwUV</i><br><br>Using WP Shortlinks converts twitter links into:<br> <i>%s ?p=101</i>', 'mashsb'), get_site_url() ),
+                    'type' => 'select',
+                    'options' => array(
+                        'wpshortlinks' => 'WP Short links',
+                        'bitly' => 'Bitly',
+                        'google' => 'Goo.gl',
+                        'disabled' => 'Short URLs Disabled',
+                    )
+                ),
+                array(
+                    'id' => 'shorturl_explanation',
+                    'name' => __( 'Important: Read this!', 'mashsb' ),
+                    'desc' => __('<strong>The post short url is NOT generated immediatly after first page load!</strong>  Background processing can take up to 1 hour for new posts and 4 - 12 hours for old posts.','mashsb'),
+                    'type' => 'renderhr',
+                    'size' => 'large'
                 ),
                 'debug_header' => array(
                     'id' => 'debug_header',
@@ -803,6 +858,18 @@ function mashsb_get_networks_list() {
     return apply_filters( 'mashsb_get_networks_list', $networks );
 }
 
+/**
+ * Page Header Callback
+ *
+ * Renders the header.
+ *
+ * @since 1.0
+ * @param array $args Arguments passed by the setting
+ * @return void
+ */
+function mashsb_headline_callback( $args ) {
+    echo '&nbsp';
+}
 /**
  * Header Callback
  *
@@ -1059,7 +1126,7 @@ function mashsb_multiselect_callback( $args = array() ) {
     $selected = isset($mashsb_options[$args['id']]) ? $mashsb_options[$args['id']] : '';
     $checked = '';
     
-    $html = '<select name="mashsb_settings[' . $args['id'] . '][]" data-placeholder="'. $args['name'] . '" style="width:350px;" multiple tabindex="4" class="mashsb-select mashsb-chosen-select">';
+    $html = '<select name="mashsb_settings[' . $args['id'] . '][]" data-placeholder="" style="width:350px;" multiple tabindex="4" class="mashsb-select mashsb-chosen-select">';
     $i = 0;
     foreach ( $args['options'] as $key => $value ) :
         if( is_array($selected)){
@@ -1445,8 +1512,12 @@ function mashsb_networks_callback( $args ) {
             } else {
                 $name = NULL;
             }
-
-            echo '<td class="mashicon-' . strtolower( $option ) . '"><span class="icon"></span><span class="text">' . $option . '</span></td>';
+            
+            if ($option === 'Flipboard'){ // Darn you multi color flipboard svg icon.
+            echo '<td class="mashicon-' . strtolower( $option ) . '"><div class="icon"><span class="mash-path1"></span><span class="mash-path2"></span><span class="mash-path3"></span><span class="mash-path4"></span></div><span class="text">' . $option . '</span></td>';
+            } else {
+            echo '<td class="mashicon-' . strtolower( $option ) . '"><span class="icon"></span><span class="text">' . $option . '</span></td>';    
+            }
             echo '<td><input type="hidden" name="mashsb_settings[' . $args['id'] . '][' . $key . '][id]" id="mashsb_settings[' . $args['id'] . '][' . $key . '][id]" value="' . strtolower( $option ) . '">';
             echo '<div class="mashsb-admin-onoffswitch">';
             echo '<input name="mashsb_settings[' . $args['id'] . '][' . $key . '][status]" class="mashsb-admin-onoffswitch-checkbox" id="mashsb_settings[' . $args['id'] . '][' . $key . '][status]" type="checkbox" value="1" ' . checked( 1, $enabled, false ) . '/>';
@@ -1740,4 +1811,118 @@ function mashsb_get_user_roles() {
         }
     }
     return $roles;
+}
+
+/*
+ * 
+ */
+function mashsb_fboauth_callback( $args ) {
+    global $mashsb_options;
+    ?>
+<!--<script>
+  // This is called with the results from from FB.getLoginStatus().
+  function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    console.log(response);
+    // The response object is returned with a status field that lets the
+    // app know the current login status of the person.
+    // Full docs on the response object can be found in the documentation
+    // for FB.getLoginStatus().
+    if (response.status === 'connected') {
+      // Logged into your app and Facebook.
+      mashtestAPI();
+    } else if (response.status === 'not_authorized') {
+      // The person is logged into Facebook, but not your app.
+      document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
+    } else {
+      // The person is not logged into Facebook, so we're not sure if
+      // they are logged into this app or not.
+      document.getElementById('status').innerHTML = 'Please log ' + 'into Facebook.';
+    }
+  }
+
+  // This function is called when someone finishes with the Login
+  // Button.  See the onlogin handler attached to it in the sample
+  // code below.
+  function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }
+
+  window.fbAsyncInit = function() {
+  FB.init({
+    appId      : '521732784693093',
+    cookie     : true,  // enable cookies to allow the server to access 
+                        // the session
+    xfbml      : true,  // parse social plugins on this page
+    version    : 'v2.7' // use graph api version 2.5
+  });
+
+  // Now that we've initialized the JavaScript SDK, we call 
+  // FB.getLoginStatus().  This function gets the state of the
+  // person visiting this page and can return one of three states to
+  // the callback you provide.  They can be:
+  //
+  // 1. Logged into your app ('connected')
+  // 2. Logged into Facebook, but not your app ('not_authorized')
+  // 3. Not logged into Facebook and can't tell if they are logged into
+  //    your app or not.
+  //
+  // These three cases are handled in the callback function.
+    FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+
+  };
+
+  // Load the SDK asynchronously
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  // Here we run a very simple test of the Graph API after login is
+  // successful.  See statusChangeCallback() for when this call is made.
+  function mashtestAPI() {
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me', function(response) {
+      console.log('Successful login for: ' + response.name);
+      document.getElementById('status').innerHTML = 'You are logged in as, ' + response.name + '!';
+      document.getElementById('mashsb_fb_auth').innerHTML = 'Refresh Access Token';
+    });
+  }        
+</script>-->
+<?php
+    
+    if( isset( $mashsb_options[$args['id']] ) ){
+        $value = $mashsb_options[$args['id']];
+    }else{        
+        $value = isset( $args['std'] ) ? $args['std'] : '';
+    }
+    // Change expiration date
+    if( isset( $mashsb_options['expire_'.$args['id']] ) ){
+        $expire = $mashsb_options['expire_'.$args['id']];
+    }else{        
+        $expire = '';
+    }
+    
+    $button_label = empty($mashsb_options[$args['id']]) ? __('Get Access Token | Facebook Login', 'mashsb') : __('Renew Access Token', 'mashsb');
+
+    $auth_url = 'https://www.mashshare.net/oauth/login.html'; // production
+
+    $html = '<a href="'.$auth_url.'" id="mashsb_fb_auth" class="button button-primary">'.$button_label.'</a>';
+    //$html .= empty($mashsb_options[$args['id']]) ? $verify_button : '';
+    $html .= '&nbsp; <input type="text" class="medium-text" id="mashsb_settings[' . $args['id'] . ']" name="mashsb_settings[' . $args['id'] . ']" value="' . esc_attr( stripslashes( $value ) ) . '"/>';
+    $html .= '&nbsp; <input type="hidden" class="medium-text" id="mashsb_settings[expire_' . $args['id'] . ']" name="mashsb_settings[expire_' . $args['id'] . ']" value="' . esc_attr( stripslashes( $expire ) ) . '"/>';
+    $html .= '<div class="token_status">'
+            . '<span id="mashsb_expire_token_status"></span>'
+            . '<span id="mashsb_token_notice"></span>'
+            . '</div>';
+    
+echo $html;
+    
 }

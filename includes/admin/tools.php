@@ -27,7 +27,6 @@ function mashsb_tools_page() {
 	$active_tab = isset( $_GET['tab'] ) ? $_GET['tab'] : 'import_export';
 ?>
 	<div class="wrap">
-		<?php screen_icon(); ?>
 		<h2 class="nav-tab-wrapper">
 			<?php
 			foreach( mashsb_get_tools_tabs() as $tab_id => $tab_name ) {

@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 
 /**
- * Description of class-templates
+ * Load Template Files
  *
  * @author Rene Hermenau
  */

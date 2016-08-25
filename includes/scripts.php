@@ -59,13 +59,18 @@ function mashsb_load_scripts( $hook ) {
     $suffix = ( mashsbIsDebugMode() ) ? '' : '.min';
 
     isset( $mashsb_options['load_scripts_footer'] ) ? $in_footer = true : $in_footer = false;
+    
     wp_enqueue_script( 'mashsb', $js_dir . 'mashsb' . $suffix . '.js', array('jquery'), MASHSB_VERSION, $in_footer );
+    //wp_enqueue_script( 'element-queries', $js_dir . 'ElementQueries' . '.js', array('jquery'), MASHSB_VERSION, $in_footer );
+    //wp_enqueue_script( 'resize-sensor', $js_dir . 'ResizeSensor' . '.js', array('jquery'), MASHSB_VERSION, $in_footer );
+    
     !isset( $mashsb_options['disable_sharecount'] ) ? $shareresult = getSharedcount( $url ) : $shareresult = 0;
     wp_localize_script( 'mashsb', 'mashsb', array(
         'shares' => $shareresult,
         'round_shares' => isset( $mashsb_options['mashsharer_round'] ),
         /* Do not animate shares on blog posts. The share count would be wrong there and performance bad */
         'animate_shares' => isset( $mashsb_options['animate_shares'] ) && is_singular() ? 1 : 0,
+        'dynamic_buttons' => isset( $mashsb_options['dynamic_button_resize'] ) ? 1 : 0,
         'share_url' => $url,
         'title' => $titleclean,
         'image' => $image,
@@ -82,7 +87,7 @@ function mashsb_load_scripts( $hook ) {
 }
 
 /**
- * Register Styles
+ * Register CSS Styles
  *
  * Checks the styles option and hooks the required filter.
  *
@@ -104,7 +109,7 @@ function mashsb_register_styles( $hook ) {
     $suffix = ( mashsbIsDebugMode() ) ? '' : '.min';
     $file = 'mashsb' . $suffix . '.css';
 
-    $url = MASHSB_PLUGIN_URL . 'templates/' . $file;
+    $url = MASHSB_PLUGIN_URL . 'assets/css/' . $file;
     wp_enqueue_style( 'mashsb-styles', $url, array(), MASHSB_VERSION );
 }
 
@@ -144,6 +149,21 @@ function mashsb_load_admin_scripts( $hook ) {
 }
 
 /**
+ * Get Share Count Color incl. compatibility mode for earlier version
+ * 
+ * @global $mashsb_options $mashsb_options
+ * @return string
+ */
+function mashsb_get_share_color(){
+    global $mashsb_options;
+    // Compatibility mode. Early values were stored including #
+    // New values are stored without #
+    
+    $value = !empty($mashsb_options['share_color']) ? $mashsb_options['share_color'] : '';
+    return str_replace('#', '', $value); 
+}
+
+/**
  * Add Custom Styles with WP wp_add_inline_style Method
  *
  * @since 1.0
@@ -154,16 +174,16 @@ function mashsb_load_inline_styles() {
     global $mashsb_options;
 
     /* VARS */
-    isset( $mashsb_options['share_color'] ) ? $share_color = $mashsb_options['share_color'] : $share_color = '#ccc';
+    
+    $is_share_color = mashsb_get_share_color();
+    $share_color = !empty( $is_share_color ) ? '.mashsb-count {color:#' . $is_share_color . ';}' : '';
     isset( $mashsb_options['custom_css'] ) ? $custom_css = $mashsb_options['custom_css'] : $custom_css = '';
     isset( $mashsb_options['small_buttons'] ) ? $smallbuttons = true : $smallbuttons = false;
     $button_width = isset( $mashsb_options['button_width'] ) ? $mashsb_options['button_width'] : null;
 
     /* STYLES */
-    $mashsb_custom_css = "
-        .mashsb-count {
-        color: {$share_color};
-        }";
+    $mashsb_custom_css = $share_color;
+    
     if( !empty( $mashsb_options['border_radius'] ) && $mashsb_options['border_radius'] != 'default' ) {
         $mashsb_custom_css .= '
         [class^="mashicon-"], .onoffswitch-label, .onoffswitch2-label, .onoffswitch {
@@ -255,24 +275,24 @@ function mashsb_load_inline_styles() {
 function mashsb_amp_load_css() {
     global $mashsb_options;
 
-    $share_color = isset( $mashsb_options['share_color'] ) ? $mashsb_options['share_color'] : '#ccc';
+    $share_color = !empty( $mashsb_options['share_color'] ) ? '.mashsb-count {color:' . $mashsb_options['share_color'] . '}' : '';
     $custom_css = isset( $mashsb_options['custom_css'] ) ? $mashsb_options['custom_css'] : '';
     $amp_css = isset( $mashsb_options['amp_css'] ) ? $mashsb_options['amp_css'] : '';
     
     $css = "@font-face {
   font-family: 'mashsb-font';
-  src: url('" . MASHSB_PLUGIN_URL . "templates/fonts/mashsb-font.eot?29924580');
-  src: url('" . MASHSB_PLUGIN_URL . "templates/fonts/mashsb-font.eot?29924580#iefix') format('embedded-opentype'),
-       url('" . MASHSB_PLUGIN_URL . "templates/fonts/mashsb-font.woff2?29924580') format('woff2'),
-       url('" . MASHSB_PLUGIN_URL . "templates/fonts/mashsb-font.woff?29924580') format('woff'),
-       url('" . MASHSB_PLUGIN_URL . "templates/fonts/mashsb-font.ttf?29924580') format('truetype'),
-       url('" . MASHSB_PLUGIN_URL . "templates/fonts/mashsb-font.svg?29924580#mashsb-font') format('svg');
+  src: url('" . MASHSB_PLUGIN_URL . "/assets/css/fonts/mashsb-font.eot?29924580');
+  src: url('" . MASHSB_PLUGIN_URL . "/assets/css/fonts/mashsb-font.eot?29924580#iefix') format('embedded-opentype'),
+       url('" . MASHSB_PLUGIN_URL . "/assets/css/fonts/mashsb-font.woff2?29924580') format('woff2'),
+       url('" . MASHSB_PLUGIN_URL . "/assets/css/fonts/mashsb-font.woff?29924580') format('woff'),
+       url('" . MASHSB_PLUGIN_URL . "/assets/css/fonts/mashsb-font.ttf?29924580') format('truetype'),
+       url('" . MASHSB_PLUGIN_URL . "/assets/css/fonts/mashsb-font.svg?29924580#mashsb-font') format('svg');
   font-weight: normal;
   font-style: normal;
 }";
     
     // Get default css file
-    $css .= file_get_contents( MASHSB_PLUGIN_DIR . '/templates/mashsb-amp.css' );
+    $css .= file_get_contents( MASHSB_PLUGIN_DIR . '/assets/css/mashsb-amp.css' );
     
 
     // add custom css
@@ -282,7 +302,7 @@ function mashsb_amp_load_css() {
     $css .= $amp_css;
 
     // STYLES
-    $css .= '.mashsb-count {color:' . $share_color . '}';
+    $css .= $share_color;
 
     if( !empty( $mashsb_options['border_radius'] ) && $mashsb_options['border_radius'] != 'default' ) {
         $css .= '

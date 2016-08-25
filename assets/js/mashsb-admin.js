@@ -1,4 +1,84 @@
 jQuery(document).ready(function ($) {
+
+    
+    
+
+    $('#mashsb_settings\\[fb_access_token\\]').on("change paste keyup",function(){
+        
+        var two_month = 60 * 60 * 24 * 60 * 1000; // timestamp in miliseconds
+        var expiration_timestamp = (new Date().getTime()) + two_month; // time in miliseconds
+
+        var unixtimestamp = (new Date().getTime() + (60 * 60 * 24 * 60 * 1000)) / 1000; // timestamp in seconds
+                
+        var human_date = new Date(expiration_timestamp);
+
+        if ($('#mashsb_settings\\[fb_access_token\\]').val()){
+            check_access_token();
+            document.getElementById('mashsb_expire_token_status').innerHTML = 'Token needs renewal on ' + human_date + '<br>MashShare will notify you shortly before the access token expires.';
+        }else {
+            document.getElementById('mashsb_expire_token_status').innerHTML = '';
+        }
+    });
+    
+    
+    function check_access_token()
+    {
+        $.ajax("https://graph.facebook.com/v2.7/?id=http://www.google.de&access_token=" + $('#mashsb_settings\\[fb_access_token\\]').val())
+            .done(function (e) {
+                $('#mashsb_token_notice').html('');
+                console.log(e);
+            })
+            .fail(function (e) {
+                $('#mashsb_token_notice').html('<span style="color:red;"> <strong>Error:</strong> Access Token Invalid!</span>');
+                console.log(e);
+            })
+//            .always(function (e) {
+//                $('#mashsb_settings\\[fb_access_token\\]').after(' Access Token Valid ')
+//                console.log(e);
+//            });
+        }
+    $('#mashsb_fb_auth').click(function (e) {
+        e.preventDefault();
+        winWidth = 520;
+        winHeight = 350;
+        var winTop = (screen.height / 2) - (winHeight / 2);
+        var winLeft = (screen.width / 2) - (winWidth / 2);
+        var url = $(this).attr('href');
+        mashsb_fb_auth = window.open(url, 'mashsb_fb_auth', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight + ',resizable=yes');
+    });
+    
+    // Share Color Picker
+    $('.share_color').colpick({
+        layout: 'hex',
+        submit: 0,
+        colorScheme: 'light',
+        onChange: function (hsb, hex, rgb, el, bySetColor) {
+            $(el).css('border-color', '#' + hex);
+            // Fill the text box just if the color was set using the picker, and not the colpickSetColor function.
+            if (!bySetColor)
+                $(el).val(hex);
+        }
+    }).mouseup(function () {
+        $(this).colpickSetColor(this.value);
+    });
+    
+        
+    // Toggle Admin Settings Dynamic Button Resize + Button Width
+    if ($("#mashsb_settings\\[responsive_buttons\\]").attr('checked')) {
+        $("#mashsb_settings\\[button_width\\]").closest('.row').css("display", "none");
+    } else {
+        $("#mashsb_settings\\[button_width\\]").closest('.row').fadeIn(300).css("display", "table-row");
+    }
+    $("#mashsb_settings\\[responsive_buttons\\]").click(function () {
+        if ($(this).attr('checked')) {
+            $("#mashsb_settings\\[button_width\\]").closest('.row').css("display", "none");
+        } else {
+            $("#mashsb_settings\\[button_width\\]").closest('.row').fadeIn(300).css("display", "table-row");
+        }
+    })
+    
+
+    
     // Activate chosen select boxes
     $(".mashsb-chosen-select").chosen({width: "400px"});
 
@@ -30,42 +110,29 @@ jQuery(document).ready(function ($) {
     function mashsb_eraseCookie(name) {
         setCookie(name, "", -1);
     }
-
-    /* Fade in sharedcount settings if needed */
-    $('#mashsb_settings\\[mashsb_sharemethod\\]').change(function () {
-        if ($('#mashsb_settings\\[mashsb_sharemethod\\]').val() === "sharedcount")
-        {
-            $('#mashsb_settingsgeneral_header .row:nth-child(3), #mashsb_settingsgeneral_header .row:nth-child(4)').fadeIn(500);
-        }
-        else
-        {
-            $('#mashsb_settingsgeneral_header .row:nth-child(3), #mashsb_settingsgeneral_header .row:nth-child(4)').fadeOut(500);
-        }
-    });
-
-    /*make visible when sharedcount.com is used*/
-    if ($('#mashsb_settings\\[mashsb_sharemethod\\]').val() === "sharedcount")
-    {
-        $('#mashsb_settingsgeneral_header .row:nth-child(3), #mashsb_settingsgeneral_header .row:nth-child(4)').fadeIn(500);
-    }
     
     
     /* Fade in Caching method settings if needed */
     $('#mashsb_settings\\[caching_method\\]').change(function () {
         if ($('#mashsb_settings\\[caching_method\\]').val() === "refresh_loading")
         {
-            $('#mashsb_settingsgeneral_header .row:nth-child(6)').fadeIn(500);
+            $('#mashsb_settings\\[mashsharer_cache\\]').closest('.row').fadeIn(300).css("display", "table-row");
         }
         else
         {
-            $('#mashsb_settingsgeneral_header .row:nth-child(6)').fadeOut(500);
+            $('#mashsb_settings\\[mashsharer_cache\\]').closest('.row').css("display", "none");
         }
     });
+
 
     /*make visible when setting "Refresh on Loading" is used*/
     if ($('#mashsb_settings\\[caching_method\\]').val() === "refresh_loading")
     {
-        $('#mashsb_settingsgeneral_header .row:nth-child(6)').fadeIn(500);
+        $('#mashsb_settings\\[mashsharer_cache\\]').closest('.row').fadeIn(300).css("display", "table-row");
+    }
+    else
+    {
+        $('#mashsb_settings\\[mashsharer_cache\\]').closest('.row').css("display", "none");
     }
 
     // Find active tab and set cookie with #ID

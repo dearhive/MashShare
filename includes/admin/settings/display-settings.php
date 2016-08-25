@@ -91,21 +91,35 @@ function mashsb_do_settings_fields( $page, $section ) {
             echo '</table></div><div id="' . $sanitizedID . '">';
             echo '<table class="form-table"><tbody>';
         }
-        echo '<tr class="row"><th class="row th">';
-
-        if( !empty( $field['args']['label_for'] ) || empty( $field['args']['desc'] ) ) {
-            echo '<div class="col-title">' . $field['title'] . '</div>';
-        } else {
-            echo '<div class="col-title">' . $field['title'] .
-            '<a class="mashsb-helper" href="#"></a>' .
-            '<div class="mashsb-message">' . $field['args']['desc'] . '</div>' .
-            '</div>';
+        //if( (!empty( $field['args']['label_for'] ) || empty( $field['args']['desc'] )) )  {
+        if( strpos( $field['callback'], 'header' ) !== false ){
+            // Do not return header_callback Its only needed for creating the navigation entries
         }
-        echo '</th>';
+        // The headline
+        else if( strpos( $field['callback'], 'headline' ) !== false )  {
+            echo '<tr class="row"><th class="row th">';
+            echo '<div class="col-title"><h2>' . $field['title'] . '</h2></div>';
+            echo '</th>';
             echo '<td>';
             call_user_func( $field['callback'], $field['args'] );
             echo '</td>';
-        echo '</tr>';
+            echo '</tr>';
+        // The Settings
+        } else {
+            echo '<tr class="row"><th class="row th">';
+            echo '<div class="col-title">' . $field['title'];
+            // Do not show the helper text when its empty
+            if (!empty($field['args']['desc']) ){
+                echo '<a class="mashsb-helper" href="#"></a>';
+                echo '<div class="mashsb-message">' . $field['args']['desc'] . '</div>';
+            }
+            echo '</div>';
+            echo '</th>';
+            echo '<td>';
+            call_user_func( $field['callback'], $field['args'] );
+            echo '</td>';
+            echo '</tr>';
+        }
     }
     echo '</tbody></table>';
     if( $header === true ) {

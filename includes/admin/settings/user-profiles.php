@@ -46,6 +46,6 @@ function mashsb_save_user_profiles( $user_id ) {
     if( !current_user_can( 'edit_user', $user_id ) )
         return false;
 
-    update_usermeta( $user_id, 'mashsb_twitter_handle', $_POST['mashsb_twitter_handle'] );
-    update_usermeta( $user_id, 'mashsb_fb_author_url', $_POST['mashsb_fb_author_url'] );
+    update_user_meta( $user_id, 'mashsb_twitter_handle', $_POST['mashsb_twitter_handle'] );
+    update_user_meta( $user_id, 'mashsb_fb_author_url', $_POST['mashsb_fb_author_url'] );
 }
