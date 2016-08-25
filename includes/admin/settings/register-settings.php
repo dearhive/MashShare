@@ -174,10 +174,16 @@ function mashsb_get_registered_settings() {
                         'total' => 'Shares + Comments'
                     )
                 ),
+                'cumulate_http_https' => array(
+                    'id' => 'cumulate_http_https',
+                    'name' => __( 'Cumulate Http(s) Shares', 'mashsb' ),
+                    'desc' => __( 'Activate this if you want facebook shares to be cumulated for https and http scheme. If you switched your site to from http to https this is needed to not loose any previous shares which are cumulated earlier for the non ssl version of your site. If you are not missing any shares do not activate this option.', 'mashsb' ),
+                    'type' => 'checkbox'
+                ),
                 'fake_count' => array(
                     'id' => 'fake_count',
-                    'name' => __( 'Fake Share counts', 'mashsb' ),
-                    'desc' => __( 'This number will be aggregated to all your share counts and is multiplied with a post specific factor. (Number of post title words divided with 10).', 'mashsb' ),
+                    'name' => __( 'Fake Share Count', 'mashsb' ),
+                    'desc' => __( 'This number will be aggregated to all your share counts and is multiplied with a post specific factor. (Number of words of post title divided with 10).', 'mashsb' ),
                     'type' => 'text',
                     'size' => 'medium'
                 ),
