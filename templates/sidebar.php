@@ -47,6 +47,7 @@ $user = wp_get_current_user();
 		<p class="promise">
 			<?php _e( 'Your email will not be used for anything else and you can unsubscribe with 1-click anytime.', 'mashsb' ); ?>
 		</p>
+                <p style="text-align: center;"><?php echo sprintf(__( '<a href="%s" target="_new" style="font-weight:bold;color:#00adff;">See Our Affiliate Program', 'mashsb'), 'https://www.mashshare.net/become-partner/?utm_source=mashsbadmin&utm_medium=website&utm_campaign=see_our_affiliate_program' ); ?></a></p>
                 
                 
 	</form>
