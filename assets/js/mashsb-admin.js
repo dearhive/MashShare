@@ -1,25 +1,42 @@
 jQuery(document).ready(function ($) {
-    
-    $('#mashsb_settings\\[fb_access_token\\]').on("change paste keyup",function(){
 
+    
+    
+
+    $('#mashsb_settings\\[fb_access_token\\]').on("change paste keyup",function(){
+        
         var two_month = 60 * 60 * 24 * 60 * 1000; // timestamp in miliseconds
         var expiration_timestamp = (new Date().getTime()) + two_month; // time in miliseconds
 
         var unixtimestamp = (new Date().getTime() + (60 * 60 * 24 * 60 * 1000)) / 1000; // timestamp in seconds
                 
         var human_date = new Date(expiration_timestamp);
-        //console.log('test' + (new Date().getTime() / 1000) + two_month);
-        //document.getElementById('mashsb_settings[expire_fb_access_token]').value = expiration
+
         if ($('#mashsb_settings\\[fb_access_token\\]').val()){
-            document.getElementById('mashsb_expire_token_status').innerHTML = 'Token needs renewal on ' + human_date + '<br>MashShare will reminds you with a admin notice in your dashboard.';
-            //document.getElementById('mashsb_settings[expire_fb_access_token]').value = parseInt(unixtimestamp);
+            check_access_token();
+            document.getElementById('mashsb_expire_token_status').innerHTML = 'Token needs renewal on ' + human_date + '<br>MashShare will notify you shortly before the access token expires.';
         }else {
             document.getElementById('mashsb_expire_token_status').innerHTML = '';
-            //document.getElementById('mashsb_settings[expire_fb_access_token]').value = '';
         }
-        
     });
     
+    
+    function check_access_token()
+    {
+        $.ajax("https://graph.facebook.com/v2.7/?id=http://www.google.de&access_token=" + $('#mashsb_settings\\[fb_access_token\\]').val())
+            .done(function (e) {
+                $('#mashsb_token_notice').html('');
+                console.log(e);
+            })
+            .fail(function (e) {
+                $('#mashsb_token_notice').html('<span style="color:red;"> <strong>Error:</strong> Access Token Invalid!</span>');
+                console.log(e);
+            })
+//            .always(function (e) {
+//                $('#mashsb_settings\\[fb_access_token\\]').after(' Access Token Valid ')
+//                console.log(e);
+//            });
+        }
     $('#mashsb_fb_auth').click(function (e) {
         e.preventDefault();
         winWidth = 520;

@@ -170,8 +170,8 @@ function mashsb_get_registered_settings() {
                     'type' => 'select',
                     'options' => array(
                         'shares' => 'Shares',
-                        'likes' => 'Likes',
-                        'total' => 'Total: likes + shares + comments'
+                        //'likes' => 'Likes', not used any longer
+                        'total' => 'Shares + Comments'
                     )
                 ),
                 'fake_count' => array(
@@ -273,7 +273,7 @@ function mashsb_get_registered_settings() {
                 array(
                     'id' => 'fb_access_token',
                     'name' => __( 'Facebook Access Token', 'mashsb' ),
-                    'desc' => sprintf( __( 'Required for getting accurate facebook share numbers! Connecting with facebook increases the facebook API call rate limit to 200 calls per hour. This is enough for even huge websites with a lot of traffic as MashShare is caching the calls.', 'mashsb' ), 'https://developers.facebook.com/docs/apps/register' ),
+                    'desc' => __( 'Required for getting accurate facebook share numbers! Connecting with facebook increases the facebook API call rate limit to 200 calls per hour. This is enough for even huge websites with a lot of traffic as MashShare is caching the calls.', 'mashsb' ),
                     'type' => 'fboauth',
                     'size' => 'medium'
                 ),
@@ -1904,15 +1904,18 @@ function mashsb_fboauth_callback( $args ) {
         $expire = '';
     }
     
-    
+    $button_label = empty($mashsb_options[$args['id']]) ? __('Get Access Token | Facebook Login', 'mashsb') : __('Renew Access Token', 'mashsb');
 
-    //$auth_url = 'http://src.wordpress-develop.dev/oauth.php/login.html'; // debug
     $auth_url = 'https://www.mashshare.net/oauth/login.html'; // production
 
-    $html = '<a href="'.$auth_url.'" id="mashsb_fb_auth" class="button button-primary">Connect with Facebook</a>';
+    $html = '<a href="'.$auth_url.'" id="mashsb_fb_auth" class="button button-primary">'.$button_label.'</a>';
+    //$html .= empty($mashsb_options[$args['id']]) ? $verify_button : '';
     $html .= '&nbsp; <input type="text" class="medium-text" id="mashsb_settings[' . $args['id'] . ']" name="mashsb_settings[' . $args['id'] . ']" value="' . esc_attr( stripslashes( $value ) ) . '"/>';
     $html .= '&nbsp; <input type="hidden" class="medium-text" id="mashsb_settings[expire_' . $args['id'] . ']" name="mashsb_settings[expire_' . $args['id'] . ']" value="' . esc_attr( stripslashes( $expire ) ) . '"/>';
-    $html .= '<div><span id="mashsb_expire_token_status"></span></div>';
+    $html .= '<div class="token_status">'
+            . '<span id="mashsb_expire_token_status"></span>'
+            . '<span id="mashsb_token_notice"></span>'
+            . '</div>';
     
 echo $html;
     
