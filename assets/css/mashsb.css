@@ -605,3 +605,30 @@ color:#8A8C8E;
     border-top: 0;
     padding-top: 0;
 }*/
+
+
+
+/**
+ * Stretched buttons
+ */
+.mashsb-stretched .mashsb-buttons {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+}
+
+.mashsb-stretched .mashsb-buttons a {
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+
+    min-width: 0;
+}
