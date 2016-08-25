@@ -9,7 +9,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email
 Requires at least: 3.6+
 Tested up to: 4.7
-Stable tag: 3.1.8
+Stable tag: 3.1.9
 
 Social Media Share Buttons for Twitter, Facebook and other social networks. Highly customizable Social Media ecosystem
 
@@ -319,6 +319,9 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 == Changelog ==
 
+= 3.1.9 =
+* Fix: Non missing css rules in minified css
+
 = 3.1.8 =
 
 * New: Facebook App authentication | No more zero shares due to api call limits
@@ -577,5 +580,5 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 3.1.8 =
-3.1.8  <strong>IMPORTANT UPDATE - Update explictely recommended to get accurate share count because of latest changes in facebook API. </strong> <a href="https://wordpress.org/plugins/mashsharer/changelog/" style="color:white;text-decoration: underline;">Read Changelog.</a>
+= 3.1.9 =
+3.1.9  <strong>IMPORTANT UPDATE - Update explictely recommended to get accurate share count because of latest changes in facebook API. </strong> <a href="https://wordpress.org/plugins/mashsharer/changelog/" style="color:white;text-decoration: underline;">Read Changelog.</a>
