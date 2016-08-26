@@ -254,7 +254,8 @@ function mashsb_update_notice_101() {
                 }
             });
         })
-        jQuery(\'#mashsb_notice_101_resp\').click(function(){
+        jQuery(\'#mashsb_notice_101_resp\').click(function(e){
+        e.preventDefault();
             jQuery(\'#mashsb_notice_101_more\').show()
         });
         
