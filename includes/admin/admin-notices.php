@@ -202,7 +202,8 @@ function mashsb_incorrect_sidebar_version() {
 
 function mashsb_hide_update_notice() {
     if( !empty( $_POST['action'] ) && $_POST['action'] === 'mashsb_hide_notice' && !empty( $_POST['id'] ) ) {
-        update_option( 'mashsb_update_notice_' . $id, 'no' );
+        //echo $_POST['action'] . '_' . $_POST['id'];
+        update_option( 'mashsb_update_notice_' . $_POST['id'], 'no' );
         $result = array('success');
         echo json_encode( $result );
         exit;
@@ -222,11 +223,14 @@ function mashsb_update_notice_101() {
             . '<a href="#" id="mashsb_notice_101_resp"> Whats also new? </a> </strong>'
                 . '<div style="display:none;" id="mashsb_notice_101_more">'
                 . '<ul style="font-weight:600;">'
-                . '<li>- Full Width Responsive Buttons (Enable them from <a href="http://src.wordpress-develop.dev/wp-admin/http://src.wordpress-develop.dev/wp-admin/admin.php?page=mashsb-settings#mashsb_settingsstyle_header">Visual Setting</a>)<li>'
+                . '<li>- Full Width Responsive Buttons (Enable them from <a href="%2s">Visual Setting</a>)<li>'
                 . '<li>- Most Shared Posts Widget incl. Thumbnails</li>'
                 . '<li>- Cumulate Http(s) Shares - Move your site to ssl without loosing shares</li>'
                 . '</div>'
-            , 'mashsb' ), admin_url( 'http://src.wordpress-develop.dev/wp-admin/admin.php?page=mashsb-settings#mashsb_settingsservices_header' ));
+            , 'mashsb' ), 
+            admin_url() . 'admin.php?page=mashsb-settings#mashsb_settingsservices_header',
+            admin_url() . 'admin.php?page=mashsb-settings#mashsb_settingsstyle_header'
+            );
       
         if( get_option( 'mashsb_update_notice_' . $notice_id ) === 'yes' ) {
   

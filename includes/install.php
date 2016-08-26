@@ -106,8 +106,8 @@ function mashsb_install() {
         update_option( 'mashsb_version_upgraded_from', $current_version );
     }
     
-    // Update routine from version < 3.1.6
-    if (  version_compare( $current_version, '3.1.6', '<' ) && !isset($mashsb_options['button_margin'])){
+    // Update routine from version < 3.2.0
+    if (  version_compare( $current_version, '3.2.0', '<' ) && !isset($mashsb_options['button_margin'])){
         $button_margin = array('button_margin' => '1');
         $settings_upgrade = array_merge($button_margin, $settings);
         update_option( 'mashsb_settings', $settings_upgrade );
@@ -120,7 +120,7 @@ function mashsb_install() {
     // Add plugin installation date and variable for rating div
     add_option( 'mashsb_installDate', date( 'Y-m-d h:i:s' ) );
     add_option( 'mashsb_RatingDiv', 'no' );
-    add_option( 'mashsb_update_notice_101', 'yes' );
+    add_option( 'mashsb_update_notice_101', 'yes' ); // Show facebook access token notice
 
 
     /* Setup some default options
