@@ -496,7 +496,7 @@ function mashshareShow() {
 
     $return = '<aside class="mashsb-container mashsb-main ' . $class_stretched . '">'
             . mashsb_content_above() .
-            '<div class="mashsb-box mash-fade-in">'
+            '<div class="mashsb-box">'
                 . apply_filters( 'mashsb_sharecount_filter', mashsb_render_sharecounts() ) .
                 '<div class="mashsb-buttons">'
                 . mashsb_getNetworks() .
@@ -590,7 +590,7 @@ function mashshareShortcodeShow( $args ) {
 
     $return = '<aside class="mashsb-container mashsb-main">'
             . mashsb_content_above() .
-            '<div class="mashsb-box mash-fade-in">'
+            '<div class="mashsb-box">'
             . $sharecount .
             '<div class="mashsb-buttons">'
             . mashsb_getNetworks( true, $count_services ) .
