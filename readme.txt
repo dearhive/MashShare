@@ -2,7 +2,7 @@
 
 Author URL: https://www.mashshare.net
 Plugin URL: https://www.mashshare.net
-Contributors: ReneHermi, WP-Staging
+Contributors: ReneHermi, WP-Staging, ilgityildirim
 Donate link: 
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
