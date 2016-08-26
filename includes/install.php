@@ -120,9 +120,7 @@ function mashsb_install() {
     // Add plugin installation date and variable for rating div
     add_option( 'mashsb_installDate', date( 'Y-m-d h:i:s' ) );
     add_option( 'mashsb_RatingDiv', 'no' );
-    if( !get_option( 'mashsb_update_notice' ) ) {
-        add_option( 'mashsb_update_notice', 'no' );
-    }
+    add_option( 'mashsb_update_notice_101', 'yes' );
 
 
     /* Setup some default options

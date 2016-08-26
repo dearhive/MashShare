@@ -1489,7 +1489,7 @@ function mashsb_networks_callback( $args ) {
 
     ob_start();
     ?>
-    <p class="description"><?php echo $args['desc']; ?></p>
+    <p class="mashsb_description"><?php echo $args['desc']; ?></p>
     <table id="mashsb_network_list" class="wp-list-table fixed posts">
     <thead>
     <tr>

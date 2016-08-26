@@ -47,6 +47,8 @@ function mashsb_admin_messages() {
         return;
     }
     
+    mashsb_update_notice_101();
+    
     if( mashsb_is_admin_page() && !function_exists( 'curl_init' ) ) {
         echo '<div class="error">';
         echo '<p>' . sprintf(__('MashShare needs the PHP extension cURL which is not installed on your server. Please <a href="%s" target="_blank">install and activate</a> it to be able to collect share count of your posts.', 'mashsb'), 'https://www.google.com/search?btnG=1&pws=0&q=enable+curl+on+php') . '</p>';
@@ -187,21 +189,58 @@ function mashsb_incorrect_sidebar_version() {
     }
 }
 
-/**
- * Return update notices
- * @since 2.4.1
- * @deprecated since 2.4.7
+/* Hide the update notice div
+ * 
+ * @subpackage  Admin/Notices
+ * @copyright   Copyright (c) 2015, René Hermenau
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since       2.4.0
+ * 
+ * @return json string
+ * 
  */
-function mashsb_update_notices() {
-    if( get_option( 'mashsb_update_notice' ) != 'no' ) {
+
+function mashsb_hide_update_notice() {
+    if( !empty( $_POST['action'] ) && $_POST['action'] === 'mashsb_hide_notice' && !empty( $_POST['id'] ) ) {
+        update_option( 'mashsb_update_notice_' . $id, 'no' );
+        $result = array('success');
+        echo json_encode( $result );
+        exit;
+    }
+}
+
+add_action( 'wp_ajax_mashsb_hide_notice', 'mashsb_hide_update_notice' );
+
+/**
+ * Return update notice 101
+ * @since 3.2.0
+ */
+function mashsb_update_notice_101() {
+
+    $notice_id = '101'; //unique id of our notice
+    $message = sprintf(__( 'Admin notices are pain but read this one or you will miss how to fix your facebook share counts in MashShare: <p><strong style="font-weight:bold;">Go to <a href="%1s">Settings->Networks</a> and request your access token via facebook login - That\'s all. '
+            . '<a href="#" id="mashsb_notice_101_resp"> Whats also new? </a> </strong>'
+                . '<div style="display:none;" id="mashsb_notice_101_more">'
+                . '<ul style="font-weight:600;">'
+                . '<li>- Full Width Responsive Buttons (Enable them from <a href="http://src.wordpress-develop.dev/wp-admin/http://src.wordpress-develop.dev/wp-admin/admin.php?page=mashsb-settings#mashsb_settingsstyle_header">Visual Setting</a>)<li>'
+                . '<li>- Most Shared Posts Widget incl. Thumbnails</li>'
+                . '<li>- Cumulate Http(s) Shares - Move your site to ssl without loosing shares</li>'
+                . '</div>'
+            , 'mashsb' ), admin_url( 'http://src.wordpress-develop.dev/wp-admin/admin.php?page=mashsb-settings#mashsb_settingsservices_header' ));
+      
+        if( get_option( 'mashsb_update_notice_' . $notice_id ) === 'yes' ) {
+  
         // admin notice after updating Mashshare
-        echo '<div class="mashsb_update_notice update-nag">' . __( 'Mashshare notice: If you are using the php shortcode function <strong>do_shortcode[\'mashshare\'] </strong>and Mashshare styles are not loaded, enable the option <strong><a href="' . admin_url( 'options-general.php?page=mashsb-settings&tab=visual#mashsb_settingslocation_header' ) . '">Load JS and CSS all over</a></strong> in Mashshare->settings->Visual->Location & Position', 'mashsb' ) .
-        '<p><a href="javascript:void(0);" class="mashsb_hide_update" title="I understand" style="text-decoration:none;">I understand! <br>Do not show again this notice</a>'
+        echo '<div class="mashsb_update_notice_'. $notice_id .' update-nag">' . $message . 
+        '<p><a href="javascript:void(0);" class="mashsb_hide_'. $notice_id .'" title="I got it" style="text-decoration:none;">- Ok, Do Not Show Again</a></a>'
         . '</div>'
         . '<script>
     jQuery( document ).ready(function( $ ) {
-        jQuery(\'.mashsb_hide_update\').click(function(){
-            var data={\'action\':\'hide_update\'}
+        jQuery(\'.mashsb_hide_'. $notice_id .'\').click(function(){
+            var data={
+            \'action\':\'mashsb_hide_notice\',
+            \'id\':\'101\',
+            }
             jQuery.ajax({
                 url: "' . admin_url( 'admin-ajax.php' ) . '",
                 type: "post",
@@ -210,13 +249,16 @@ function mashsb_update_notices() {
                 async: !0,
                 success: function(e) {
                     if (e=="success") {
-                       jQuery(\'.mashsb_update_notice\').slideUp(\'slow\');	   
+                       jQuery(\'.mashsb_update_notice_'. $notice_id .'\').hide();	   
                     }
                 }
             });
         })
-    
-    });
+        jQuery(\'#mashsb_notice_101_resp\').click(function(){
+            jQuery(\'#mashsb_notice_101_more\').show()
+        });
+        
+});
     </script>';
     }
 }
@@ -239,25 +281,6 @@ function mashsb_HideRatingDiv() {
 }
 
 add_action( 'wp_ajax_hideRating', 'mashsb_HideRatingDiv' );
-
-/* Hide the update notice div
- * 
- * @subpackage  Admin/Notices
- * @copyright   Copyright (c) 2015, René Hermenau
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since       2.4.0
- * 
- * @return json string
- * 
- */
-
-function mashsb_hide_update_div() {
-    update_option( 'mashsb_update_notice', 'yes' );
-    echo json_encode( array("success") );
-    exit;
-}
-
-add_action( 'wp_ajax_hide_update', 'mashsb_hide_update_div' );
 
 /**
  * Admin Add-ons Notices

@@ -9,7 +9,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email
 Requires at least: 3.6+
 Tested up to: 4.7
-Stable tag: 3.1.9
+Stable tag: 3.2.0
 
 Social Media Share Buttons for Twitter, Facebook and other social networks. Highly customizable Social Media ecosystem
 
@@ -318,6 +318,9 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 
 == Changelog ==
+
+= 3.2.0 =
+* Fix: buttons not loading on some mobile browsers. Remove css fade-in animation
 
 = 3.1.9 =
 * Fix: Non missing css rules in minified css

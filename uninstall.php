@@ -19,12 +19,17 @@ global $wpdb, $mashsb_options;
 
 if( mashsb_get_option( 'uninstall_on_delete' ) ) {
 	/** Delete all the Plugin Options */
-		delete_option( 'mashsb_settings' );
+	delete_option( 'mashsb_settings' );
         delete_option( 'mashsb_networks');
         delete_option( 'mashsb_installDate');
         delete_option( 'mashsb_RatingDiv');
         delete_option( 'mashsb_version');
         delete_option( 'mashsb_version_upgraded_from');
+        delete_option( 'mashsb_update_notice');
+        delete_option( 'mashsb_tracking_notice');
+        delete_option( 'widget_mashsb_mostshared_posts_widget');
+        delete_option( 'mashsb_tracking_last_send');
+        delete_option( 'mashsb_update_notice_101');
         
 
         /* Delete all post meta options */
