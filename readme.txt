@@ -321,6 +321,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 = 3.2.0 =
 * Fix: buttons not loading on some mobile browsers. Remove css fade-in animation
+* Fix: Button margin deactivated per default on update installation
 * New: Admin notice to show how important the new access token generation is
 
 = 3.1.9 =
