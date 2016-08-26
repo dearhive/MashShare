@@ -202,7 +202,8 @@ function mashsb_incorrect_sidebar_version() {
 
 function mashsb_hide_update_notice() {
     if( !empty( $_POST['action'] ) && $_POST['action'] === 'mashsb_hide_notice' && !empty( $_POST['id'] ) ) {
-        update_option( 'mashsb_update_notice_' . $id, 'no' );
+        //echo $_POST['action'] . '_' . $_POST['id'];
+        update_option( 'mashsb_update_notice_' . $_POST['id'], 'no' );
         $result = array('success');
         echo json_encode( $result );
         exit;
