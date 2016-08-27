@@ -130,6 +130,7 @@ color:#ffffff;
 .mashicon-share:before { content: '\e81E'; } /* '' */
 .mashicon-telegram .icon:before { content: '\e81f'; } /* '' */
 .mashicon-hackernews .icon:before { content: '\e820'; } /* '' */
+.mashicon-flipboard .icon:before { content: '\e821'; } /* '' */
 
 
 /* Background color of drag and drop services */
