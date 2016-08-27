@@ -265,7 +265,7 @@ function mashsb_get_registered_settings() {
                 array(
                     'id' => 'fb_app_id',
                     'name' => __( 'Facebook App ID', 'mashsb' ),
-                    'desc' => sprintf( __( 'Highly recommended or your shares could be inaccurate! Do not forget to enter the facebook app secret as well. <a href="%1s" target="_blank">Create a App ID now</a>.', 'mashsb' ), 'https://developers.facebook.com/docs/apps/register' ),
+                    'desc' => sprintf( __( 'Optional and not needed for basic share buttons. But required by some MashShare Add-Ons. <a href="%1s" target="_blank">Create a App ID now</a>.', 'mashsb' ), 'https://developers.facebook.com/docs/apps/register' ),
                     'type' => 'text',
                     'size' => 'medium'
                 ),
