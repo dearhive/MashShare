@@ -320,12 +320,12 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 == Changelog ==
 
 = 3.2.1 =
-* New: Option in social sharing options meta box to hide share buttons
-* New: Use blank character in share label to show pure icon buttons without share label
+* New: Post specific option in meta box social sharing settings to hide and show share buttons
 * Fix: Button margin is zero when plugin is updated after storing settings
 * Fix: Flipboard button missing on settings page
 * Fix: Buttons are small after saving admin settings. Restore default large size
 * Fix: Pinterest Button Not working on AMP pages
+* Fix: Facebook Share Button not url encoded
 
 = 3.2.0 =
 * Fix: buttons not loading on some mobile browsers. Remove css fade-in animation
