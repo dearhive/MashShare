@@ -135,7 +135,7 @@ function mashsb_meta_boxes( $meta_boxes ) {
             array(
                 'id' => $prefix . 'position',
                 'name' => __('Share Button Position','mashsb'),
-                'type' => 'select_advanced',
+                'type' => 'select',
                 'placeholder' => __('Use Global Setting','mashsb'),
                 'before' => '<div style="max-width:250px;float:left;">',
                 'after' => '</div>',
@@ -153,25 +153,11 @@ function mashsb_meta_boxes( $meta_boxes ) {
                 'after' => '</div>',
                 'type' => 'validate_og'
             ),
-            /*array(
-                'helper'=> '<a class="mashsb-helper" href="#" style="margin-left:-4px;"></a><div class="mashsb-message" style="display: none;">'.__('Force aggregation of post share counts & create shortlink instantly without waiting for background processing and cache expiration.','mashsb').'</div>',
-                'id' => $prefix . 'force_creation',
-                'type' => 'force_creation'
-            ),*/
             array(
                 'name' => 'divider',
                 'id' => 'divider',
                 'type' => 'divider'
             ),
-            /*array(
-                'id' => $prefix . 'custom_html',
-                'type' => 'custom_html',
-            ),*/
-//            array(
-//                'helper'=> '<a class="mashsb-helper" href="#" style="margin-left:-4px;"></a><div class="mashsb-message" style="display: none;">'.__('Publish the post and validate if the open graph meta tags on your site are correct! Incorrect data can result in wrong share description, title or images and should be fixed! In the facebook debugger click the link "Fetch new scrape information" to purge the facebook cache.','mashsb').'</div>',
-//                'id' => $prefix . 'validate_og',
-//                'type' => 'validate_og'
-//            ),
             array(
                 'id' => $prefix . 'twitter_handle',
                 'type' => 'hidden_data',
