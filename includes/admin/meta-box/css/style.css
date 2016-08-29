@@ -159,7 +159,6 @@ select.error {
   border: none;
   padding: 10px 0;
   height: 45px;
-  font-style: italic;
   font-weight: lighter;
   margin-bottom: 15px;
   text-transform: uppercase;
@@ -176,7 +175,7 @@ select.error {
     border: none;
     padding: 5px;
     height: 30px;
-    font-style: italic;
+    /*font-style: italic;*/
     font-weight: lighter;
     margin-bottom: 15px;
     text-transform: uppercase;

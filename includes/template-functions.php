@@ -340,20 +340,17 @@ function isStatus( $var ) {
  */
 
 function arrNetworks( $name, $is_shortcode ) {
-    //global $mashsb_options, $post, $mashsb_custom_url, $mashsb_custom_text;
     global $mashsb_custom_url, $mashsb_custom_text, $mashsb_twitter_url;
 
     if( $is_shortcode ) {
         $url = !empty( $mashsb_custom_url ) ? $mashsb_custom_url : mashsb_get_url();
         $title = !empty( $mashsb_custom_text ) ? $mashsb_custom_text : mashsb_get_title();
         $twitter_title = !empty( $mashsb_custom_text ) ? $mashsb_custom_text : mashsb_get_twitter_title();
-        //$twitter_url = !empty( $mashsb_custom_url ) ? mashsb_get_shorturl( $mashsb_custom_url ) : mashsb_get_twitter_url();
     }
     if( !$is_shortcode ) {
         $url = mashsb_get_url();
         $title = mashsb_get_title();
         $twitter_title = mashsb_get_twitter_title();
-        //$twitter_url = mashsb_get_twitter_url();
     }
 
     $via = mashsb_get_twitter_username() ? '&via=' . mashsb_get_twitter_username() : '';
@@ -424,6 +421,7 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
      * We have to clean this array first!
      */
     $getnetworks = isset( $mashsb_options['networks'] ) ? $mashsb_options['networks'] : '';
+    //echo '<pre>'.var_dump($getnetworks) . '</pre>';
 
     /* Delete disabled services from array. Use callback function here. Do this only once because array_filter is slow! 
      * Use the newly created array and bypass the callback function
@@ -443,6 +441,7 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
     
     if( !empty( $enablednetworks ) ) {
         foreach ( $enablednetworks as $key => $network ):
+                
             if( $maxcounter !== 'all' && $maxcounter < count( $enablednetworks ) ) { // $maxcounter + 1 for correct comparision with count()
                 if( $startcounter == $maxcounter ) {
                     $onoffswitch = onOffSwitch(); // Start More Button
@@ -459,15 +458,17 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
                     $endsecondaryshares = '';
                 }
             }
-            if( $enablednetworks[$key]['name'] != '' ) {
+            //if( $enablednetworks[$key]['name'] != '' ) {
+            if( isset($enablednetworks[$key]['name']) && !empty($enablednetworks[$key]['name']) ) {
                 /* replace all spaces with $nbsp; This prevents error in css style content: text-intend */
-                $name = preg_replace( '/\040{1,}/', '&nbsp;', $enablednetworks[$key]['name'] );
+                $name = preg_replace( '/\040{1,}/', '&nbsp;', $enablednetworks[$key]['name'] ); // The custom share label
             } else {
-                $name = ucfirst( $enablednetworks[$key]['id'] );
+                $name = ucfirst( $enablednetworks[$key]['id'] ); // Use the id as share label. Capitalize it!
             }
-            $enablednetworks[$key]['id'] == 'whatsapp' ? $display = 'display:none;' : $display = ''; // Whatsapp button is made visible via js when opened on mobile devices
+            
+            $enablednetworks[$key]['id'] == 'whatsapp' ? $display = 'style="display:none;"' : $display = ''; // Whatsapp button is made visible via js when opened on mobile devices
 
-            $output .= '<a style="' . $display . '" class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . $class_margin . $class_center . '" href="' . arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="nofollow"><span class="icon"></span><span class="text">' . $name . '</span></a>';
+            $output .= '<a ' . $display . ' class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . $class_margin . $class_center . '" href="' . arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="nofollow"><span class="icon"></span><span class="text">' . $name . '</span></a>';
             
             $output .= $onoffswitch;
             $output .= $startsecondaryshares;
@@ -661,6 +662,26 @@ function mashsbGetActiveStatus() {
     return apply_filters( 'mashsb_active', false );
 }
 
+/**
+ * Get the post meta value of position
+ * 
+ * @global int $post
+ * @return mixed string|bool false
+ */
+function mashsb_get_post_meta_position() {
+    global $post;
+    
+    if( isset( $post->ID ) && !empty($post->ID) ) {
+        $check_position_meta_post = get_post_meta( $post->ID, 'mashsb_position', true );
+        if( !empty( $check_position_meta_post ) ) {
+            return $check_position_meta_post;
+        }else{
+            return false;
+        }
+    }
+    return false;
+}
+
 /* Returns Share buttons on specific positions
  * Uses the_content filter
  * @since 1.0
@@ -669,8 +690,15 @@ function mashsbGetActiveStatus() {
 
 function mashshare_filter_content( $content ) {
     global $mashsb_options, $post, $wp_current_filter, $wp;
-
+    
+    // Default position
     $position = !empty( $mashsb_options['mashsharer_position'] ) ? $mashsb_options['mashsharer_position'] : '';
+    // Check if we have a post meta setting which overrides the global position than we use that one instead
+    if ( true == ($position_meta = mashsb_get_post_meta_position() ) ){
+        $position = $position_meta;
+    }
+
+    
     $enabled_post_types = isset( $mashsb_options['post_types'] ) ? $mashsb_options['post_types'] : null;
     $current_post_type = get_post_type();
     $frontpage = isset( $mashsb_options['frontpage'] ) ? true : false;
@@ -723,6 +751,9 @@ function mashshare_filter_content( $content ) {
 
         case 'after':
             $content .= $mashsb_instance;
+            break;
+        
+        case 'disable':
             break;
     }
     return $content;
@@ -912,7 +943,6 @@ function mashsb_is_excluded() {
 
     // Load scripts when page is not excluded
     if( strpos( $excluded, ',' ) !== false ) {
-        //mashdebug()->error("hoo");
         $excluded = explode( ',', $excluded );
         if( in_array( $post->ID, $excluded ) ) {
             mashdebug()->info( "is excluded" );
@@ -924,7 +954,6 @@ function mashsb_is_excluded() {
         return true;
     }
 
-    //mashdebug()->info( "is not excluded" );
     return false;
 }
 
@@ -945,12 +974,6 @@ function mashsb_get_title() {
         $title = urlencode( $title );
         $title = str_replace( '#', '%23', $title );
         $title = esc_html( $title );
-//    } else if( !empty( $post->ID ) ) {
-//        $title = get_the_title( $post->ID );
-//        $title = html_entity_decode( $title, ENT_QUOTES, 'UTF-8' );
-//        $title = urlencode( $title );
-//        $title = str_replace( '#', '%23', $title );
-//        $title = esc_html( $title );
     } else {
         $title = mashsb_get_document_title();
         $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
@@ -1021,16 +1044,6 @@ function mashsb_get_url() {
  * @scince 2.2.8
  */
 
-//function mashsb_get_twitter_url() {
-//    if( function_exists( 'mashsuGetShortURL' ) ) {
-//        //mashsuGetShortURL($url) !== 0 ? $url = mashsuGetShortURL( $url ) : $url = mashsb_get_url();
-//        $get_url = mashsb_get_url();
-//        $url = mashsuGetShortURL( $get_url );
-//    } else {
-//        $url = mashsb_get_url();
-//    }
-//    return apply_filters( 'mashsb_get_twitter_url', $url );
-//}
 function mashsb_get_twitter_url() {
     if( function_exists( 'mashsb_get_shorturl_singular' ) ) {
         $url = mashsb_get_shorturl_singular( mashsb_get_url() );
@@ -1153,19 +1166,6 @@ function mashsb_get_document_title() {
         $title = get_the_date();
     }
 
-
-    //$title = wptexturize( $title );
-    //$title = convert_chars( $title );
-
-    //$title = esc_html( $title );
-    //$title = str_replace('|','',$title);
-
-    //$title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
-    //$title = urlencode($title);
-    //$title = str_replace('#', '%23', $title);
-    //$title = esc_html($title);
-    //$title = str_replace('|','',$title);
-    //$title = strip_tags( $title );
     $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
     return $title;
 }

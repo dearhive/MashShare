@@ -217,7 +217,7 @@ add_action( 'wp_ajax_mashsb_hide_notice', 'mashsb_hide_update_notice' );
  * @since 3.2.0
  */
 function mashsb_update_notice_101() {
-
+    
     $notice_id = '101'; //unique id of our notice
     $message = sprintf(__( 'Admin notices are pain but read this one or you will miss how to fix your facebook share counts in MashShare: <p><strong style="font-weight:bold;">Go to <a href="%1s">Settings->Networks</a> and request your access token via facebook login - That\'s all. '
             . '<a href="#" id="mashsb_notice_101_resp"> Whats also new? </a> </strong>'

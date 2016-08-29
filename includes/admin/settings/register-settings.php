@@ -404,9 +404,9 @@ So the MashShare open graph data will be containing the same social meta data th
                     'desc' => __('', 'mashsb'),
                     'type' => 'select',
                     'options' => array(
-                        'mash-small' => 'Small',
+                        'mash-large' => 'Large',
                         'mash-medium' => 'Medium',
-                        'mash-large' => 'Large'
+                        'mash-small' => 'Small'
                     ),
                     'std' => 'Large'
                 ),

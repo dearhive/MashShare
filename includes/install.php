@@ -106,8 +106,8 @@ function mashsb_install() {
         update_option( 'mashsb_version_upgraded_from', $current_version );
     }
     
-    // Update routine from version < 3.2.0
-    if (  version_compare( $current_version, '3.2.0', '<' ) && !isset($mashsb_options['button_margin'])){
+    // Update routine from version < 3.2.1. Enable the Margin Option
+    if (  version_compare( $current_version, '3.2.1', '<=' ) && !array_key_exists('button_margin', $settings)){
         $button_margin = array('button_margin' => '1');
         $settings_upgrade = array_merge($button_margin, $settings);
         update_option( 'mashsb_settings', $settings_upgrade );
