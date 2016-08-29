@@ -343,12 +343,12 @@ function arrNetworks( $name, $is_shortcode ) {
     global $mashsb_custom_url, $mashsb_custom_text, $mashsb_twitter_url;
 
     if( $is_shortcode ) {
-        $url = !empty( $mashsb_custom_url ) ? $mashsb_custom_url : mashsb_get_url();
+        $url = !empty( $mashsb_custom_url ) ? urlencode($mashsb_custom_url) : urlencode(mashsb_get_url());
         $title = !empty( $mashsb_custom_text ) ? $mashsb_custom_text : mashsb_get_title();
         $twitter_title = !empty( $mashsb_custom_text ) ? $mashsb_custom_text : mashsb_get_twitter_title();
     }
     if( !$is_shortcode ) {
-        $url = mashsb_get_url();
+        $url = urlencode(mashsb_get_url());
         $title = mashsb_get_title();
         $twitter_title = mashsb_get_twitter_title();
     }
