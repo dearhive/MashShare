@@ -63,13 +63,16 @@ function mashsb_install() {
     }
     // Deactivate Shorturl Add-On because it is integrated in MashShare 3.0
     deactivate_plugins( '/mashshare-shorturls/mashshare-shorturls.php' );
+    
+    // Get current version number
+    $current_version = get_option( 'mashsb_version' );
 
     // Try to load some settings. If there are no ones we write some default settings:
     $settings = get_option( 'mashsb_settings' );
     
-    // Write default settings
-    if( false === get_option( 'mashsb_settings' ) || count( $settings ) === 0 ) {
-        $settings_new = array(
+    // Write default settings. Check first if there are no settings
+    if( !$settings || count( $settings ) === 0 ) {
+        $settings_default = array(
             'visible_services' => '1',
             'networks' => array(
                 0 => array(
@@ -96,25 +99,25 @@ function mashsb_install() {
             'text_align_center' => '1',
             'mashsharer_round' => '1',
         );
-        update_option( 'mashsb_settings', $settings_new );
+        update_option( 'mashsb_settings', $settings_default );
+    }else{
+        // Upgrades here!
+            
+        // Enable the Margin Option. 
+        if ( version_compare( $current_version, '3.2.1', '<=' ) && !array_key_exists('button_margin', $settings)){
+            $button_margin = array('button_margin' => '1');
+            $settings_upgrade = array_merge($button_margin, $settings);
+            update_option( 'mashsb_settings', $settings_upgrade );
+        }
     }
-    // Get current version number
-    $current_version = get_option( 'mashsb_version' );
+
         
     // Add Upgraded From Option
     if( $current_version ) {
         update_option( 'mashsb_version_upgraded_from', $current_version );
     }
-    
-    // Update routine from version < 3.2.1. Enable the Margin Option
-    if (  version_compare( $current_version, '3.2.1', '<=' ) && !array_key_exists('button_margin', $settings)){
-        $button_margin = array('button_margin' => '1');
-        $settings_upgrade = array_merge($button_margin, $settings);
-        update_option( 'mashsb_settings', $settings_upgrade );
-    }
 
-
-    // Update the current version
+    // Update the current version number
     update_option( 'mashsb_version', MASHSB_VERSION );
     
     // Add plugin installation date and variable for rating div
@@ -122,18 +125,16 @@ function mashsb_install() {
     add_option( 'mashsb_RatingDiv', 'no' );
     add_option( 'mashsb_update_notice_101', 'yes' ); // Show facebook access token notice
 
-
-    /* Setup some default options
+    /* 
+     * Setup the default network options
      * Store our initial social networks in separate option row.
-     * For easier modification and to prevent some trouble
      */
-    $networks = array(
-        'Facebook',
-        'Twitter',
-        'Subscribe'
-    );
-
     if( is_plugin_inactive( 'mashshare-networks/mashshare-networks.php' ) ) {
+        $networks = array(
+            'Facebook',
+            'Twitter',
+            'Subscribe'
+        );
         update_option( 'mashsb_networks', $networks );
     }
 
