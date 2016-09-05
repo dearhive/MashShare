@@ -320,8 +320,9 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 == Changelog ==
 
 = 3.2.3 =
-* Fix: Facebook API limit hit and share count not growing
-* New: Hide image and excerpt in Widget Most Shared Post. Use 0 values to do so
+* Fix: Facebook API limit hit and share count not growing.
+* Fix: Broken url property in mashengine can lead to zero shares when FB access token is used
+* New: Hide image and excerpt in Widget Most Shared Post. Use 0 values to do so.
 
 = 3.2.2 =
 * Fix: Default settings not loaded on first time installation
