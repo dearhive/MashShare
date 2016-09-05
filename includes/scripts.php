@@ -190,26 +190,6 @@ function mashsb_load_inline_styles() {
             border-radius: ' . $mashsb_options['border_radius'] . 'px;
         }';
     }
-    if( !empty( $mashsb_options['mash_style'] ) && $mashsb_options['mash_style'] == 'shadow' ) {
-        $mashsb_custom_css .= '
-        .mashsb-buttons a, .onoffswitch, .onoffswitch2, .onoffswitch-inner:before, .onoffswitch2-inner:before  {
-            -webkit-transition: all 0.07s ease-in;
-            -moz-transition: all 0.07s ease-in;
-            -ms-transition: all 0.07s ease-in;
-            -o-transition: all 0.07s ease-in;
-            transition: all 0.07s ease-in;
-            box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.2),inset 0 -1px 0 0 rgba(0, 0, 0, 0.3);
-            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
-            border: none;
-            -moz-user-select: none;
-            -webkit-font-smoothing: subpixel-antialiased;
-            -webkit-transition: all linear .25s;
-            -moz-transition: all linear .25s;
-            -o-transition: all linear .25s;
-            -ms-transition: all linear .25s;
-            transition: all linear .25s;
-        }';
-    }
     if( !empty( $mashsb_options['mash_style'] ) && $mashsb_options['mash_style'] == 'gradiant' ) {
         $mashsb_custom_css .= '.mashsb-buttons a {
         background-image: -webkit-linear-gradient(bottom,rgba(0, 0, 0, 0.17) 0%,rgba(255, 255, 255, 0.17) 100%);
@@ -308,26 +288,6 @@ function mashsb_amp_load_css() {
         $css .= '
         [class^="mashicon-"], .onoffswitch-label, .onoffswitch2-label {
             border-radius: ' . $mashsb_options['border_radius'] . 'px;
-        }';
-    }
-    if( !empty( $mashsb_options['mash_style'] ) && $mashsb_options['mash_style'] == 'shadow' ) {
-        $css .= '
-        .mashsb-buttons a, .onoffswitch, .onoffswitch2, .onoffswitch-inner:before, .onoffswitch2-inner:before  {
-            -webkit-transition: all 0.07s ease-in;
-            -moz-transition: all 0.07s ease-in;
-            -ms-transition: all 0.07s ease-in;
-            -o-transition: all 0.07s ease-in;
-            transition: all 0.07s ease-in;
-            box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.2),inset 0 -1px 0 0 rgba(0, 0, 0, 0.3);
-            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
-            border: none;
-            -moz-user-select: none;
-            -webkit-font-smoothing: subpixel-antialiased;
-            -webkit-transition: all linear .25s;
-            -moz-transition: all linear .25s;
-            -o-transition: all linear .25s;
-            -ms-transition: all linear .25s;
-            transition: all linear .25s;
         }';
     }
     if( !empty( $mashsb_options['mash_style'] ) && $mashsb_options['mash_style'] == 'gradiant' ) {

@@ -295,10 +295,14 @@ function roundshares( $totalshares ) {
 
 function onOffSwitch() {
     global $mashsb_options;
+    
     // Get class names for buttons size
     $class_size = isset($mashsb_options['buttons_size']) ? ' ' . $mashsb_options['buttons_size'] : '';
     
-    $output = '<div class="onoffswitch' . $class_size . '"></div>';
+    // Get class names for button style
+    $class_style = isset($mashsb_options['mash_style']) && $mashsb_options['mash_style'] === 'shadow' ? ' mashsb-shadow' : '';
+    
+    $output = '<div class="onoffswitch' . $class_size . $class_style . '"></div>';
     return apply_filters( 'mashsh_onoffswitch', $output );
 }
 
@@ -312,10 +316,14 @@ function onOffSwitch() {
 
 function onOffSwitch2() {
     global $mashsb_options;
-    // Get class names for buttons size
+    
+// Get class names for buttons size
     $class_size = isset($mashsb_options['buttons_size']) ? ' ' . $mashsb_options['buttons_size'] : '';
     
-    $output = '<div class="onoffswitch2' .$class_size .'" style="display:none;"></div>';
+    // Get class names for button style
+    $class_style = isset($mashsb_options['mash_style']) && $mashsb_options['mash_style'] === 'shadow' ? ' mashsb-shadow' : '';
+    
+    $output = '<div class="onoffswitch2' .$class_size . $class_style . '" style="display:none;"></div>';
     return apply_filters( 'mashsh_onoffswitch2', $output );
 }
 
@@ -399,6 +407,9 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
 
     // Get class names for center align
     $class_center = isset($mashsb_options['text_align_center']) ? ' mash-center' : '';
+    
+    // Get class names for button style
+    $class_style = isset($mashsb_options['mash_style']) && $mashsb_options['mash_style'] === 'shadow' ? ' mashsb-shadow' : '';
 
     $output = '';
     $startsecondaryshares = '';
@@ -468,7 +479,7 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
             
             $enablednetworks[$key]['id'] == 'whatsapp' ? $display = 'style="display:none;"' : $display = ''; // Whatsapp button is made visible via js when opened on mobile devices
 
-            $output .= '<a ' . $display . ' class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . $class_margin . $class_center . '" href="' . arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="nofollow"><span class="icon"></span><span class="text">' . $name . '</span></a>';
+            $output .= '<a ' . $display . ' class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . $class_margin . $class_center . $class_style . '" href="' . arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="nofollow"><span class="icon"></span><span class="text">' . $name . '</span></a>';
             
             $output .= $onoffswitch;
             $output .= $startsecondaryshares;

@@ -172,9 +172,9 @@ class mashengine {
                 }
         }
         $RollingCurlX->addRequest( "http://public.newsharecounts.com/count.json?url=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
-//        if( isset( $mashsb_options['cumulate_http_https'] ) ) {
-//            $RollingCurlX->addRequest( "http://public.newsharecounts.com/count.json?url=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
-//        }
+        if( isset( $mashsb_options['cumulate_http_https'] ) ) {
+            $RollingCurlX->addRequest( "http://public.newsharecounts.com/count.json?url=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
+        }
         $RollingCurlX->addRequest( "https://www.linkedin.com/countserv/count/share?format=json&url=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('linkedin'), $headers );
         $RollingCurlX->addRequest( "http://www.stumbleupon.com/services/1.01/badge.getinfo?url=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('stumbleupon'), $headers );
         $RollingCurlX->addRequest( "https://plusone.google.com/_/+1/fastbutton?url=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('google'), $headers );

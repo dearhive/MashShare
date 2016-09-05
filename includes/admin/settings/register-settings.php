@@ -467,9 +467,9 @@ So the MashShare open graph data will be containing the same social meta data th
                     'desc' => __( 'Change visual appearance of the share buttons.', 'mashsb' ),
                     'type' => 'select',
                     'options' => array(
-                        'shadow' => 'Shadowed buttons',
-                        'gradiant' => 'Gradient colored buttons',
-                        'default' => 'Clean buttons - no effects'
+                        'shadow' => 'Shadowed',
+                        'gradiant' => 'Gradient',
+                        'default' => 'Flat'
                     ),
                     'std' => 'default'
                 ),
