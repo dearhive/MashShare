@@ -13,7 +13,8 @@
 if( !defined( 'ABSPATH' ) )
     exit;
 
-/* Install Multisite
+/* 
+ * Install Multisite
  * check first if multisite is enabled
  * @since 2.1.1
  * 
@@ -55,7 +56,6 @@ function mashsb_install_multisite( $networkwide ) {
  * @return void
  */
 function mashsb_install() {
-    global $wpdb, $mashsb_options, $wp_version;
     
     // Disable MashShare Open Graph plugin
     if (class_exists( 'MashshareOpenGraph' )){
