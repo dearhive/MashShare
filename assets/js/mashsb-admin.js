@@ -1,6 +1,35 @@
 jQuery(document).ready(function ($) {
 
-    
+    $('.mashsb-color-box').each(function () {
+        // Start colorpicker
+        $(this).colpick({
+            layout: 'hex',
+            submit: 0,
+            colorScheme: 'light',
+            onChange: function (hsb, hex, rgb, el, bySetColor) {
+                $(el).css('border-color', '#' + hex);
+                // Fill the text box just if the color was set using the picker, and not the colpickSetColor function.
+                if (!bySetColor)
+                    $(el).val(hex);
+            }
+        }).keyup(function () {
+            $(this).colpickSetColor(this.value);
+        });
+        $(this).colpick({
+            layout: 'hex',
+            submit: 0,
+            colorScheme: 'light',
+            onChange: function (hsb, hex, rgb, el, bySetColor) {
+                $(el).css('border-color', '#' + hex);
+                // Fill the text box just if the color was set using the picker, and not the colpickSetColor function.
+                if (!bySetColor)
+                    $(el).val(hex);
+            }
+        }).keyup(function () {
+            $(this).colpickSetColor(this.value);
+        });
+
+    });
     
 
     $('#mashsb_settings\\[fb_access_token\\]').on("change paste keyup",function(){
@@ -32,11 +61,8 @@ jQuery(document).ready(function ($) {
                 $('#mashsb_token_notice').html('<span style="color:red;"> <strong>Error:</strong> Access Token Invalid!</span>');
                 console.log(e);
             })
-//            .always(function (e) {
-//                $('#mashsb_settings\\[fb_access_token\\]').after(' Access Token Valid ')
-//                console.log(e);
-//            });
         }
+        
     $('#mashsb_fb_auth').click(function (e) {
         e.preventDefault();
         winWidth = 520;
@@ -47,20 +73,20 @@ jQuery(document).ready(function ($) {
         mashsb_fb_auth = window.open(url, 'mashsb_fb_auth', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight + ',resizable=yes');
     });
     
-    // Share Color Picker
-    $('.share_color').colpick({
-        layout: 'hex',
-        submit: 0,
-        colorScheme: 'light',
-        onChange: function (hsb, hex, rgb, el, bySetColor) {
-            $(el).css('border-color', '#' + hex);
-            // Fill the text box just if the color was set using the picker, and not the colpickSetColor function.
-            if (!bySetColor)
-                $(el).val(hex);
-        }
-    }).mouseup(function () {
-        $(this).colpickSetColor(this.value);
-    });
+//    // Share Color Picker
+//    $('.share_color').colpick({
+//        layout: 'hex',
+//        submit: 0,
+//        colorScheme: 'light',
+//        onChange: function (hsb, hex, rgb, el, bySetColor) {
+//            $(el).css('border-color', '#' + hex);
+//            // Fill the text box just if the color was set using the picker, and not the colpickSetColor function.
+//            if (!bySetColor)
+//                $(el).val(hex);
+//        }
+//    }).mouseup(function () {
+//        $(this).colpickSetColor(this.value);
+//    });
     
         
     // Toggle Admin Settings Dynamic Button Resize + Button Width

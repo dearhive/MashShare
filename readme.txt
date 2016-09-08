@@ -323,6 +323,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 * Fix: Remove box-shadow: none; declaration and fix the shadow button style
 * Fix: Review button link in admin notice not working
 * Fix: Button margin upgrade function not working
+* Tweak: Create a more universal to use javascript for the color picker
 
 
 = 3.2.3 =
