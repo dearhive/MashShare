@@ -322,6 +322,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 3.2.4
 * Fix: Remove box-shadow: none; declaration and fix the shadow button style
 * Fix: Review button link in admin notice not working
+* Fix: Button margin upgrade function not working
 
 
 = 3.2.3 =
