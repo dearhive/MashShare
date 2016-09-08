@@ -513,9 +513,8 @@ s                    </div>
             return;
 
         $upgrade = get_option( 'mashsb_version_upgraded_from' );
-        //wp_die($upgrade);
-        //@since 2.0.3
-        if( false === $upgrade ) { // First time install
+
+        if( !$upgrade ) { // First time install
             wp_safe_redirect( admin_url( 'admin.php?page=mashsb-getting-started&redirect=1' ) );
             exit;
         } else { // Update
