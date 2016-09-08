@@ -128,8 +128,8 @@ function mashsb_admin_messages() {
         This will help to spread its popularity and to make this plugin a better one.
         <br><br>Your help is much appreciated. Thank you very much,<br> ~René Hermenau
         <ul>
-            <li class="float:left"><a href="https://wordpress.org/support/view/plugin-reviews/mashsharer" class="thankyou button" target="_new" title=Yes, MashShare Increased My Shares" style="color: #ffffff;border-color: #256e34;background: #5bae46;-webkit-box-shadow: 0 1px 0 #256e34;box-shadow: 0 1px 0 #256e34;font-weight: normal;float:left;margin-right:10px;">Yes, MashShare Increased My Shares</a></li>
-            <li><a href="javascript:void(0);" class="mashsbHideRating button" title="I already did" style="">I already did</a></li>
+            <li class="float:left"><a href="https://wordpress.org/support/plugin/mashsharer/reviews/?filter=5#new-post" class="thankyou button button-primary" target="_new" title=Yes, MashShare Increased My Shares" style="color: #ffffff;-webkit-box-shadow: 0 1px 0 #256e34;box-shadow: 0 1px 0 #256e34;font-weight: normal;float:left;margin-right:10px;">I Like MashShare - It Increased My Shares</a></li>
+            <li><a href="javascript:void(0);" class="mashsbHideRating button" title="I already did" style="">I already rated it</a></li>
             <li><a href="javascript:void(0);" class="mashsbHideRating" title="No, not good enough" style="">No, not good enough, i do not like to rate it!</a></li>
         </ul>
     </div>
