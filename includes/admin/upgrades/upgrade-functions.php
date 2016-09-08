@@ -52,7 +52,9 @@ function mashsb_upgrade_v1() {
     // Try to load some settings.
     $settings = get_option( 'mashsb_settings' );
     // Enable the Margin Option. 
-    $button_margin = array('button_margin' => '1');
-    $settings_upgrade = array_merge( $button_margin, $settings );
-    update_option( 'mashsb_settings', $settings_upgrade );
+    if( !array_key_exists( 'button_margin', $settings ) ) {
+        $button_margin = array('button_margin' => '1');
+        $settings_upgrade = array_merge( $button_margin, $settings );
+        update_option( 'mashsb_settings', $settings_upgrade );
+    }
 }
