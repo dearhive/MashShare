@@ -314,7 +314,7 @@ So the MashShare open graph data will be containing the same social meta data th
                 'networks' => array(
                     'id' => 'networks',
                     'name' => __( 'Social Networks', 'mashsb' ),
-                    'desc' => __( 'Drag and drop the Social Networks Buttons to sort them and enable the ones that should be visible. <br>Activate more networks than number of "Large Share Buttons" and the [+] PLUS button<br> will be added automatically.', 'mashsb' ),
+                    'desc' => __( 'Use Drag and drop for sorting. Enable the ones that should be visible. Activate<br>more networks than number of "Large Buttons" and [+] PLUS button will be<br> added automatically.', 'mashsb' ),
                     'type' => 'networks',
                     'options' => mashsb_get_networks_list()
                 ),
