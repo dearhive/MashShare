@@ -24,10 +24,8 @@ function mashsb_do_automatic_upgrades() {
 	$did_upgrade = false;
 	$mashsb_version = preg_replace( '/[^0-9.].*/', '', get_option( 'mashsb_version' ) );
 
-	if( version_compare( $mashsb_version, '3.3.4', '<' ) ) {
-wp_die($mashsb_version);
+	if( version_compare( $mashsb_version, '3.2.4', '<' ) ) {
 		mashsb_upgrade_v1();
-
 	}
         // Check if version number in DB is lower than version number in current plugin
 	if( version_compare( $mashsb_version, MASHSB_VERSION, '<' ) ) {
@@ -51,6 +49,8 @@ add_action( 'admin_init', 'mashsb_do_automatic_upgrades' );
  * Enable the margin option
  */
 function mashsb_upgrade_v1() {
+    // Try to load some settings.
+    $settings = get_option( 'mashsb_settings' );
     // Enable the Margin Option. 
     $button_margin = array('button_margin' => '1');
     $settings_upgrade = array_merge( $button_margin, $settings );
