@@ -150,14 +150,12 @@ class TemplateFunctions extends WP_UnitTestCase {
 
     public function test_is_active_on_post() {
         global $post, $mashsb_options;
-        $mashsb_options['post_types'] = array('post');
+        //$mashsb_options['post_types'] = array('post');
+        $mashsb_options['post_types'] = 'post';
         
         // Prepare test
         $post_id = $this->factory->post->create( array(
-            'post_title' => 'Hello World',
-            'post_name' => 'hello-world',
-            'post_type' => 'post',
-            'post_status' => 'publish'
+            'post_type' => 'post'
         ) );
         //$id = $this->factory->post->create($args);
 
@@ -205,8 +203,10 @@ class TemplateFunctions extends WP_UnitTestCase {
 		$this->go_to( '/' );
 		$this->assertQueryTrue( 'is_front_page', 'is_page', 'is_singular' );
                 $this->assertTrue(mashsbGetActiveStatus());
+                
 		$this->go_to( get_permalink( $page_for_posts ) );
 		$this->assertQueryTrue( 'is_home', 'is_posts_page' );
+                
 		update_option( 'show_on_front', 'posts' );
 		delete_option( 'page_on_front' );
 		delete_option( 'page_for_posts' );
