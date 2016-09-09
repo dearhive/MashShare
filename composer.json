@@ -1,0 +1,21 @@
+{
+    "name": "mashshare/mashshare",
+    "type": "wordpress-plugin",
+    "description": "The Social Media Ecosystem",
+    "keywords": ["mashshare", "mashsb", "mashshare"],
+    "homepage": "https://mashshare.net",
+    "license": "GPL-2.0+",
+    "support": {
+   	  "issues": "https://www.mashshare.net/contact-developer/"
+    },
+    "require": {
+        "php": ">=5.3.0",
+        "composer/installers": "~1.0"
+    },
+    "require-dev": {
+        "satooshi/php-coveralls": "dev-master",
+        "phpunit/phpunit": "3.7.31",
+        "phpunit/php-invoker": "1.1.3"
+    },
+    "minimum-stability": "dev"
+}
