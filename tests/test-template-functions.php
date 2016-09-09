@@ -43,6 +43,18 @@ class TemplateFunctions extends WP_UnitTestCase {
     public function test_mashsb_is_enabled_permalinks(){
         $this->assertTrue( mashsb_is_enabled_permalinks() );
     }
+    public function test_is_singular(){
+        // Prepare test
+        $post_id = $this->factory->post->create( array(
+            'post_title' => 'Hello World',
+            'post_name' => 'hello-world',
+            'post_type' => 'post',
+            'post_status' => 'publish'
+        ) );
+        $this->go_to(get_permalink($post_id));
+        
+        $this->assertTrue( $post_id);
+    }
 
     public function test_mashengine_FBTW() {
         global $mashsb_options;
