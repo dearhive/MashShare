@@ -291,7 +291,7 @@ class mashengine {
               $this->data->shares->$service[0] = $count;
              * */
             $this->data->total += $count;
-            $this->data->$service[0] = $count;
+            //$this->data->$service[0] = $count;
             MASHSB()->logger->info( 'MashEngine - URL: ' . $url . ' ' . $service[0] . ': ' . $count );
             mashdebug()->info( 'MashEngine - URL: ' . $url . ' ' . $service[0] . ': ' . $count );
         }
