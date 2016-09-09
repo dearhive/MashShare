@@ -6,7 +6,6 @@
 ![Plugin Rating](https://img.shields.io/wordpress/plugin/r/mashsharer.svg?maxAge=2592000) 
 ![WordPress Compatibility](https://img.shields.io/wordpress/v/mashsharer.svg?maxAge=2592000) 
 [![Build Status](https://img.shields.io/travis/mashshare/MashShare/master.svg?maxAge=2592000)](https://travis-ci.org/mashshare/MashShare.svg?branch=master)
-[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/mashshare/MashShare.svg)](https://scrutinizer-ci.com/g/mashshare/MashShare/?branch=master) 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mashshare/MashShare/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/mashshare/MashShare/?branch=master)
 [![License](https://img.shields.io/badge/license-GPL--2.0%2B-red.svg)](https://github.com/mashshare/MashShare/blob/master/license.txt)
 
