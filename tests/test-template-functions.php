@@ -120,7 +120,6 @@ class TemplateFunctions extends WP_UnitTestCase {
             'post_title' => 'page title',
             'post_status' => 'publish',
             'post_type' => 'page',
-            //'post_content' => '[mashshare]'
         );
         $id = $this->factory->post->create($args);
         $post = get_post($id); // Wee need the post object for testing
@@ -128,7 +127,7 @@ class TemplateFunctions extends WP_UnitTestCase {
         update_option('show_on_front', 'page');
         update_option('page_on_front', $id);
 
-        $mashsb_options['frontpage'] = true;
+        $mashsb_options['frontpage'] = 'true';
         $this->go_to(home_url());
 
         $this->assertTrue(mashsbGetActiveStatus());
