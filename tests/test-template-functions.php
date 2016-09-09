@@ -14,20 +14,7 @@ class TemplateFunctions extends WP_UnitTestCase {
      */
     function tearDown() {
         parent::tearDown();
-        //wp_delete_post( $this->post_id );
     }
-
-//    public function test_sharedcount() {
-//
-//        $apikey = '95439f12a0d187fcb0e6872ab0dcac0f177f5c5d';
-//        $url = 'http://google.com';
-//        // include sharedcount.class.php id needed
-//        mashsbGetShareObj($url);
-//
-//        $sharedcount = new mashsbSharedcount($url, 10, $apikey);
-//        $shares = $sharedcount->get_sharedcount();
-//        $this->assertGreaterThan(0, $shares);
-//    }
 
     public function test_mashengine_FBTW() {
         $url = 'http://google.com';
@@ -54,26 +41,23 @@ class TemplateFunctions extends WP_UnitTestCase {
         $mashsb_options['mashsb_sharemethod'] = 'mashengine';
         $mashsb_options['caching_method'] = 'refresh_loading';
         $mashsb_options['mashsharer_cache'] = 0;
-        $mashsb_options['disable_cache'] = true;
+        $mashsb_options['disable_cache'] = 'true';
         $args = array('post_type' => 'post');
         $id = $this->factory->post->create($args);
-        //$post = get_post($id);
         $this->go_to(get_permalink($id));
-        //add_option( 'permalink_structure' , '/%postname%/' );
         $url = 'http://google.com';
         $url2 = 'https://google.com';
         $shares = getSharedcount($url);      
         $shares2 = getSharedcount($url);      
         $this->assertGreaterThan(20000, $shares);
         $this->assertGreaterThan(20000, $shares2);
-        //$this->assertGreaterThan(get_option( 'permalink_structure'), $shares);
-        //$this->assertGreaterThan(mashsb_is_enabled_permalinks(), $shares);
     }
     public function test_getSharedcount_async_cache(){
         global $mashsb_options, $post;
         $mashsb_options['mashsb_sharemethod'] = 'mashengine';
         $mashsb_options['caching_method'] = 'async_cache';
         $mashsb_options['mashsharer_cache'] = 0;
+        $mashsb_options['disable_cache'] = 'true';
         $args = array('post_type' => 'post');
         $id = $this->factory->post->create($args);
         $this->go_to(get_permalink($id));
@@ -117,7 +101,7 @@ class TemplateFunctions extends WP_UnitTestCase {
             'post_title' => 'page title',
             'post_status' => 'publish',
             'post_type' => 'page',
-                //'post_content' => '[mashshare]'
+            //'post_content' => '[mashshare]'
         );
         $id = $this->factory->post->create($args);
         $post = get_post($id);
