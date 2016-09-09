@@ -169,15 +169,6 @@ function getSharedcount( $url ) {
     }
 
     /*
-     * Important: This runs on non singular pages 
-     * and prevents php from crashing and looping 
-     * because of timeouts and no results query
-     */
-    /*if( !is_null( $post ) ) {
-        return apply_filters( 'filter_get_sharedcount', get_post_meta( $post->ID, 'mashsb_shares', true ) + getFakecount() );
-    }*/
-
-    /*
      * Refresh Cache
      */
     if( mashsb_force_cache_refresh() && is_singular() ) {

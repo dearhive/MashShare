@@ -17,6 +17,8 @@ class TemplateFunctions extends WP_UnitTestCase {
     }
 
     public function test_mashengine_FBTW() {
+        global $mashsb_options;
+        $mashsb_options['fb_access_token'] = 'EAAHag2FMn2UBAJwIjdG2jDB39ZAr3lCriDwXgqhk2hDxk1O1iM5Vk2WvxIXop6ZAUikeKcpBXWUQk2jxG8FXag4cEzXJDBggkWIGuEq9ECc6HAyG1UQrgaDr6w8M0tsT6tlHwBpjVGACyQectEU3CdFAgbX32Q83qGZAgv4cbWH39eb3ejc';
         $url = 'http://google.com';
         if ( !class_exists('RollingCurlX') )
             require_once MASHSB_PLUGIN_DIR . 'includes/libraries/RolingCurlX.php';
@@ -28,6 +30,8 @@ class TemplateFunctions extends WP_UnitTestCase {
     }
 
     public function test_mashengine_all_counts() {
+        global $mashsb_options;
+        $mashsb_options['fb_access_token'] = 'EAAHag2FMn2UBAJwIjdG2jDB39ZAr3lCriDwXgqhk2hDxk1O1iM5Vk2WvxIXop6ZAUikeKcpBXWUQk2jxG8FXag4cEzXJDBggkWIGuEq9ECc6HAyG1UQrgaDr6w8M0tsT6tlHwBpjVGACyQectEU3CdFAgbX32Q83qGZAgv4cbWH39eb3ejc';
         global $post;
         $url = 'http://google.com';
         $mash = new mashengine($url);
@@ -37,7 +41,7 @@ class TemplateFunctions extends WP_UnitTestCase {
     
     public function test_getSharedcount(){
         global $mashsb_options, $post;
-        //$mashsb_options['mashsharer_cache'] = 2;
+        $mashsb_options['fb_access_token'] = 'EAAHag2FMn2UBAJwIjdG2jDB39ZAr3lCriDwXgqhk2hDxk1O1iM5Vk2WvxIXop6ZAUikeKcpBXWUQk2jxG8FXag4cEzXJDBggkWIGuEq9ECc6HAyG1UQrgaDr6w8M0tsT6tlHwBpjVGACyQectEU3CdFAgbX32Q83qGZAgv4cbWH39eb3ejc';
         $mashsb_options['mashsb_sharemethod'] = 'mashengine';
         $mashsb_options['caching_method'] = 'refresh_loading';
         $mashsb_options['mashsharer_cache'] = 0;
@@ -54,6 +58,7 @@ class TemplateFunctions extends WP_UnitTestCase {
     }
     public function test_getSharedcount_async_cache(){
         global $mashsb_options, $post;
+        $mashsb_options['fb_access_token'] = 'EAAHag2FMn2UBAJwIjdG2jDB39ZAr3lCriDwXgqhk2hDxk1O1iM5Vk2WvxIXop6ZAUikeKcpBXWUQk2jxG8FXag4cEzXJDBggkWIGuEq9ECc6HAyG1UQrgaDr6w8M0tsT6tlHwBpjVGACyQectEU3CdFAgbX32Q83qGZAgv4cbWH39eb3ejc';
         $mashsb_options['mashsb_sharemethod'] = 'mashengine';
         $mashsb_options['caching_method'] = 'async_cache';
         $mashsb_options['mashsharer_cache'] = 0;
