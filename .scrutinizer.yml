@@ -1,6 +1,6 @@
 # .scrutinizer.yml
-filter:
-    excluded_paths: [vendor/*, tests/*, .tx/*, languages/*, includes/libraries/*, bin/*, assets/*, templates/* ]
+#filter:
+    #excluded_paths: [vendor/*, tests/*, .tx/*, languages/*, includes/libraries/*, bin/*, assets/*, templates/* ]
 before_commands:
     - 'composer install --dev --prefer-source'
 tools:
