@@ -20,10 +20,10 @@ class TemplateFunctions extends WP_UnitTestCase {
         global $mashsb_options;
         $mashsb_options['fb_access_token'] = 'EAAHag2FMn2UBAJwIjdG2jDB39ZAr3lCriDwXgqhk2hDxk1O1iM5Vk2WvxIXop6ZAUikeKcpBXWUQk2jxG8FXag4cEzXJDBggkWIGuEq9ECc6HAyG1UQrgaDr6w8M0tsT6tlHwBpjVGACyQectEU3CdFAgbX32Q83qGZAgv4cbWH39eb3ejc';
         $url = 'http://google.com';
-        if ( !class_exists('RollingCurlX') )
+        
             require_once MASHSB_PLUGIN_DIR . 'includes/libraries/RolingCurlX.php';
-        if ( !class_exists('mashengine') )
             require_once(MASHSB_PLUGIN_DIR . 'includes/mashengine.php');
+        
         $mashsbSharesObj = new mashengine($url);
         $shares = $mashsbSharesObj->getFBTWCounts()->total;
         $this->expectOutputString('foo');
