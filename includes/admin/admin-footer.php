@@ -16,7 +16,6 @@ if( !defined( 'ABSPATH' ) ) exit;
  * Add rating links to the settings footer
  *
  * @since	1.0.0
- * @param       string $footer_text The existing footer text
  * @return      string
  */
 function mashsb_admin_rate_us() {

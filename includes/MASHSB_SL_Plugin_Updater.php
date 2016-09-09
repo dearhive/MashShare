@@ -14,6 +14,7 @@ class MASHSB_SL_Plugin_Updater {
 	private $api_data  = array();
 	private $name      = '';
 	private $slug      = '';
+	private $version   = '';
 
 	/**
 	 * Class constructor.
@@ -84,7 +85,7 @@ class MASHSB_SL_Plugin_Updater {
 
 			if ( false !== $version_info && is_object( $version_info ) && isset( $version_info->new_version ) ) {
 
-				$this->did_check = true;
+				//$this->did_check = true;
 
 				if( version_compare( $this->version, $version_info->new_version, '<' ) ) {
 

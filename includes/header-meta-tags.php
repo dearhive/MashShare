@@ -490,7 +490,7 @@ class MASHSB_HEADER_META_TAGS {
     /**
      * Return special quote characters
      * 
-     * @param string $content
+     * @param string $string
      * @todo write a test
      * @return string
      */

@@ -223,11 +223,7 @@ class MASHSB_License {
 	 * @return  void
 	 */
 	public function activate_license() {
-           
 
-		if ( ! isset( $_POST["mashsb_settings"] ) ) {
-			//return;
-		}
 
 		if ( ! isset( $_REQUEST[ $this->item_shortname . '_license_key-nonce'] ) || ! wp_verify_nonce( $_REQUEST[ $this->item_shortname . '_license_key-nonce'], $this->item_shortname . '_license_key-nonce' ) ) {
 

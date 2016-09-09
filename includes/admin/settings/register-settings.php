@@ -790,7 +790,6 @@ add_filter( 'mashsb_settings_sanitize_text', 'mashsb_sanitize_text_field' );
  * Retrieve settings tabs
  *
  * @since 1.8
- * @param array $input The field value
  * @return string $input Sanitizied value
  */
 function mashsb_get_settings_tabs() {
@@ -826,9 +825,7 @@ function mashsb_get_settings_tabs() {
  * Retrieve a list of possible expire cache times
  *
  * @since  2.0.0
- * @change 
  *
- * @param  array  $methods  Array mit verfügbaren Arten
  */
 
 function mashsb_get_expiretimes() {
@@ -1299,6 +1296,8 @@ function mashsb_color_callback( $args ) {
 if ( ! function_exists( 'mashsb_license_key_callback' ) ) {
     function mashsb_license_key_callback( $args ) {
         global $mashsb_options;
+        
+        $class = '';
 
         $messages = array();
         $license  = get_option( $args['options']['is_valid_license_option'] );

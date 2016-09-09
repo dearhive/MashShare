@@ -199,7 +199,7 @@ class mashsb_mostshared_posts_widget extends WP_Widget {
     /**
      * Cut characters of the excerpt
      * 
-     * @param type $string
+     * @param type $excerpt
      * @param type $int
      * @return type
      */

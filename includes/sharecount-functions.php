@@ -113,7 +113,6 @@ add_action( 'wp_ajax_nopriv_mashsb_refresh_cache', 'mashsb_ajax_refresh_cache' )
 /**
  * Get expiration time for new Asyn Cache Method
  * 
- * @param int $post_age
  * @since 3.0.0
  * @return int
  */
@@ -138,7 +137,6 @@ function mashsb_get_expiration_method_async() {
 /**
  * Get expiration time for old method "Refresh On Loading"
  * 
- * @param int $post_age
  * @since 3.0.0
  * @return int
  */

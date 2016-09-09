@@ -15,7 +15,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * Add new columns in posts dashboard
  * 
- * @param array $content
  * @return string
  */
 function mashsb_create_share_columns($col) {
