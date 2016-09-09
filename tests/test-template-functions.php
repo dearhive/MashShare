@@ -44,6 +44,7 @@ class TemplateFunctions extends WP_UnitTestCase {
         $this->assertTrue( mashsb_is_enabled_permalinks() );
     }
     public function test_is_singular(){
+        global $post;
         // Prepare test
         $post_id = $this->factory->post->create( array(
             'post_title' => 'Hello World',
@@ -52,6 +53,7 @@ class TemplateFunctions extends WP_UnitTestCase {
             'post_status' => 'publish'
         ) );
         $this->go_to(get_permalink($post_id));
+        $post = get_post($post_id);
         
         $this->assertTrue( $post_id);
     }
@@ -89,8 +91,8 @@ class TemplateFunctions extends WP_UnitTestCase {
         
         $args = array('post_type' => 'post');
         $id = $this->factory->post->create($args);
-        $post = get_post($id); // Wee need the post object for testing
         $this->go_to(get_permalink($id));
+        $post = get_post($id); // We need the post object for testing
         
         $url = 'http://google.com';
         $url2 = 'https://google.com';
@@ -112,8 +114,9 @@ class TemplateFunctions extends WP_UnitTestCase {
         
         $args = array('post_type' => 'post');
         $id = $this->factory->post->create($args);
-        $post = get_post($id); // Wee need the post object for testing
         $this->go_to(get_permalink($id));
+        $post = get_post($id); // Wee need the post object for testing
+
 
         $url = 'http://google.com';
         $url2 = 'https://google.com';
@@ -137,9 +140,10 @@ class TemplateFunctions extends WP_UnitTestCase {
         ) );
         $this->go_to( get_permalink( $post_id ) );
         //$id = $this->factory->post->create($args);
-        //$post = get_post($id); // Wee need the post object for testing
         $mashsb_options['post_types'] = array('page');
         $this->go_to(get_permalink($post_id));
+        $post = get_post($post_id); // Wee need the post object for testing
+
         
         $this->assertTrue(mashsbGetActiveStatus());
     }
@@ -155,9 +159,10 @@ class TemplateFunctions extends WP_UnitTestCase {
             'post_status' => 'publish'
         ) );
         //$id = $this->factory->post->create($args);
-        //$post = get_post($id); // Wee need the post object for testing
         $mashsb_options['post_types'] = array('post');
         $this->go_to(get_permalink($post_id));
+        $post = get_post($post_id); // Wee need the post object for testing
+
         $this->assertTrue(mashsbGetActiveStatus());
     }
 
@@ -195,8 +200,8 @@ class TemplateFunctions extends WP_UnitTestCase {
             'post_content' => '[mashshare]'
         );
         $id = $this->factory->post->create($args);
-        $post = get_post($id); // Wee need the post object for testing
         $this->go_to(get_permalink($id));
+        $post = get_post($id); // Wee need the post object for testing
 
         $this->assertTrue(mashsbGetActiveStatus());
     }
