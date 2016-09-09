@@ -12,6 +12,9 @@ class TemplateFunctions extends WP_UnitTestCase {
         $mashsb_options['disable_cache'] = 'true';
         $mashsb_options['fb_access_token'] = 'EAAHag2FMn2UBAJwIjdG2jDB39ZAr3lCriDwXgqhk2hDxk1O1iM5Vk2WvxIXop6ZAUikeKcpBXWUQk2jxG8FXag4cEzXJDBggkWIGuEq9ECc6HAyG1UQrgaDr6w8M0tsT6tlHwBpjVGACyQectEU3CdFAgbX32Q83qGZAgv4cbWH39eb3ejc';
 
+        // enable permalinks
+        update_option( 'permalink_structure', '/%postname%/');
+        
         require_once MASHSB_PLUGIN_DIR . 'includes/libraries/RolingCurlX.php';
         require_once(MASHSB_PLUGIN_DIR . 'includes/mashengine.php');
     }
