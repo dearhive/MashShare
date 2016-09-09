@@ -9,7 +9,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email
 Requires at least: 3.6+
 Tested up to: 4.7
-Stable tag: 3.2.4
+Stable tag: 3.2.5
 
 Social Media Share Buttons for Twitter, Facebook and other social networks. Highly customizable Social Media ecosystem
 
@@ -319,7 +319,10 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 == Changelog ==
 
-3.2.4
+= 3.2.5 =
+* Fix: Fix a bug where only for http schemed urls the shares are returned. This happens only when no FB APP secret is used.
+
+= 3.2.4 = 
 * Fix: Remove box-shadow: none; declaration and fix the shadow button style
 * Fix: Review button link in admin notice not working
 * Fix: Button margin upgrade function not working
