@@ -29,31 +29,31 @@ class TemplateFunctions extends WP_UnitTestCase {
 
     public function test_mashengine_FBTW() {
         global $mashsb_options;
-        //$mashsb_options['disable_cache'] = 'true';
+
         $url = 'http://google.com';
         
         $mashsbSharesObj = new mashengine($url);
         $shares = $mashsbSharesObj->getFBTWCounts()->total;
 
-        $this->assertGreaterThan(0, $shares);
+        $this->assertGreaterThan(1000, $shares);
     }
 
     public function test_mashengine_all_counts() {
         global $mashsb_options, $post;
-        //$mashsb_options['disable_cache'] = 'true';
-        //$mashsb_options['fb_access_token'] = 'EAAHag2FMn2UBAJwIjdG2jDB39ZAr3lCriDwXgqhk2hDxk1O1iM5Vk2WvxIXop6ZAUikeKcpBXWUQk2jxG8FXag4cEzXJDBggkWIGuEq9ECc6HAyG1UQrgaDr6w8M0tsT6tlHwBpjVGACyQectEU3CdFAgbX32Q83qGZAgv4cbWH39eb3ejc';
+        $mashsb_options['disable_cache'] = 'true';
+        $mashsb_options['fb_access_token'] = 'EAAHag2FMn2UBAJwIjdG2jDB39ZAr3lCriDwXgqhk2hDxk1O1iM5Vk2WvxIXop6ZAUikeKcpBXWUQk2jxG8FXag4cEzXJDBggkWIGuEq9ECc6HAyG1UQrgaDr6w8M0tsT6tlHwBpjVGACyQectEU3CdFAgbX32Q83qGZAgv4cbWH39eb3ejc';
         $url = 'http://google.com';
         
         $mash = new mashengine($url);
         $shares = $mash->getALLCounts()->total;
         
-        $this->assertGreaterThan(0, $shares);
+        $this->assertGreaterThan(1000, $shares);
     }
     
     public function test_getSharedcount(){
         global $mashsb_options, $post;
-        //$mashsb_options['fb_access_token'] = 'EAAHag2FMn2UBAJwIjdG2jDB39ZAr3lCriDwXgqhk2hDxk1O1iM5Vk2WvxIXop6ZAUikeKcpBXWUQk2jxG8FXag4cEzXJDBggkWIGuEq9ECc6HAyG1UQrgaDr6w8M0tsT6tlHwBpjVGACyQectEU3CdFAgbX32Q83qGZAgv4cbWH39eb3ejc';
-        //$mashsb_options['mashsb_sharemethod'] = 'mashengine';
+        $mashsb_options['fb_access_token'] = 'EAAHag2FMn2UBAJwIjdG2jDB39ZAr3lCriDwXgqhk2hDxk1O1iM5Vk2WvxIXop6ZAUikeKcpBXWUQk2jxG8FXag4cEzXJDBggkWIGuEq9ECc6HAyG1UQrgaDr6w8M0tsT6tlHwBpjVGACyQectEU3CdFAgbX32Q83qGZAgv4cbWH39eb3ejc';
+        $mashsb_options['mashsb_sharemethod'] = 'mashengine';
         $mashsb_options['caching_method'] = 'refresh_loading';
         $mashsb_options['mashsharer_cache'] = 0;
         //$mashsb_options['disable_cache'] = 'true';
@@ -69,11 +69,11 @@ class TemplateFunctions extends WP_UnitTestCase {
     }
     public function test_getSharedcount_async_cache(){
         global $mashsb_options, $post;
-        //$mashsb_options['fb_access_token'] = 'EAAHag2FMn2UBAJwIjdG2jDB39ZAr3lCriDwXgqhk2hDxk1O1iM5Vk2WvxIXop6ZAUikeKcpBXWUQk2jxG8FXag4cEzXJDBggkWIGuEq9ECc6HAyG1UQrgaDr6w8M0tsT6tlHwBpjVGACyQectEU3CdFAgbX32Q83qGZAgv4cbWH39eb3ejc';
-        //$mashsb_options['mashsb_sharemethod'] = 'mashengine';
+        $mashsb_options['fb_access_token'] = 'EAAHag2FMn2UBAJwIjdG2jDB39ZAr3lCriDwXgqhk2hDxk1O1iM5Vk2WvxIXop6ZAUikeKcpBXWUQk2jxG8FXag4cEzXJDBggkWIGuEq9ECc6HAyG1UQrgaDr6w8M0tsT6tlHwBpjVGACyQectEU3CdFAgbX32Q83qGZAgv4cbWH39eb3ejc';
+        $mashsb_options['mashsb_sharemethod'] = 'mashengine';
         $mashsb_options['caching_method'] = 'async_cache';
         $mashsb_options['mashsharer_cache'] = 0;
-        //$mashsb_options['disable_cache'] = 'true';
+        $mashsb_options['disable_cache'] = 'true';
         $args = array('post_type' => 'post');
         $id = $this->factory->post->create($args);
         $this->go_to(get_permalink($id));
