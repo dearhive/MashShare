@@ -27,7 +27,7 @@ class TemplateFunctions extends WP_UnitTestCase {
         $mashsbSharesObj = new mashengine($url);
         $shares = $mashsbSharesObj->getFBTWCounts()->total;
 
-        fwrite(STDERR, print_r($shares, TRUE));
+        fwrite(STDERR, 'TEST: ' . print_r($shares, TRUE));
         $this->assertGreaterThan(0, $shares);
     }
 
