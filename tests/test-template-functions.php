@@ -33,12 +33,9 @@ class TemplateFunctions extends WP_UnitTestCase {
         $url = 'http://google.com';
         
         $mashsbSharesObj = new mashengine($url);
-        $shares = $mashsbSharesObj->getFBTWCounts();
-        $sharecount = $shares->total;
-        //$this->expectOutputString('foo');
-        //var_dump($shares);
-        //fwrite(STDERR, 'TEST: ' . print_r($shares, TRUE)); 
-        $this->assertGreaterThan(0, $sharecount);
+        $shares = $mashsbSharesObj->getFBTWCounts()->total;
+
+        $this->assertGreaterThan(0, $shares);
     }
 
     public function test_mashengine_all_counts() {
@@ -46,12 +43,11 @@ class TemplateFunctions extends WP_UnitTestCase {
         //$mashsb_options['disable_cache'] = 'true';
         //$mashsb_options['fb_access_token'] = 'EAAHag2FMn2UBAJwIjdG2jDB39ZAr3lCriDwXgqhk2hDxk1O1iM5Vk2WvxIXop6ZAUikeKcpBXWUQk2jxG8FXag4cEzXJDBggkWIGuEq9ECc6HAyG1UQrgaDr6w8M0tsT6tlHwBpjVGACyQectEU3CdFAgbX32Q83qGZAgv4cbWH39eb3ejc';
         $url = 'http://google.com';
-        $mash = new mashengine($url);
-        $shares = $mash->getALLCounts();
-        $sharecount = $shares->total;
-        $sharecount = $mash->getALLCounts()->total;
         
-        $this->assertGreaterThan(0, $sharecount);
+        $mash = new mashengine($url);
+        $shares = $mash->getALLCounts()->total;
+        
+        $this->assertGreaterThan(0, $shares);
     }
     
     public function test_getSharedcount(){
