@@ -26,11 +26,11 @@ class TemplateFunctions extends WP_UnitTestCase {
         
         $mashsbSharesObj = new mashengine($url);
         $shares = $mashsbSharesObj->getFBTWCounts();
-        $shares = $shares->total;
+        $sharecount = $shares->total;
         //$this->expectOutputString('foo');
         //var_dump($shares);
         //fwrite(STDERR, 'TEST: ' . print_r($shares, TRUE)); 
-        $this->assertGreaterThan(0, $shares);
+        $this->assertGreaterThan(0, $sharecount);
     }
 
     public function test_mashengine_all_counts() {
@@ -40,8 +40,8 @@ class TemplateFunctions extends WP_UnitTestCase {
         $url = 'http://google.com';
         $mash = new mashengine($url);
         $shares = $mash->getALLCounts();
-        $shares = $shares->total;
-        $this->assertGreaterThan(0, $shares);
+        $sharecount = $shares->total;
+        $this->assertGreaterThan(0, $sharecount);
     }
     
     public function test_getSharedcount(){
