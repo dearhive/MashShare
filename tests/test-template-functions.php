@@ -193,10 +193,10 @@ class TemplateFunctions extends WP_UnitTestCase {
             global $mashsb_options;
                 $mashsb_options['frontpage'] = 'true';
             
-		$page_on_front = $this->factory()->post->create( array(
+		$page_on_front = $this->factory->post->create( array(
 			'post_type' => 'page',
 		) );
-		$page_for_posts = $this->factory()->post->create( array(
+		$page_for_posts = $this->factory->post->create( array(
 			'post_type' => 'page',
 		) );
 		update_option( 'show_on_front', 'page' );
