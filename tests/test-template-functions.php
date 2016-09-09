@@ -24,7 +24,7 @@ class TemplateFunctions extends WP_UnitTestCase {
             require_once MASHSB_PLUGIN_DIR . 'includes/libraries/RolingCurlX.php';
             require_once(MASHSB_PLUGIN_DIR . 'includes/mashengine.php');
         
-        $mashsbSharesObj = new mashengine($url);
+        //$mashsbSharesObj = new mashengine($url);
         //$shares = $mashsbSharesObj->getFBTWCounts()->total;
         $this->expectOutputString('foo');
         var_dump($shares);
