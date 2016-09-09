@@ -161,8 +161,7 @@ class TemplateFunctions extends WP_UnitTestCase {
         $this->go_to(get_permalink($post_id));
         $post = get_post($post_id); // Wee need the post object for testing
 
-        //$this->assertTrue(mashsbGetActiveStatus());
-        $this->assertTrue(mashsb_is_excluded());
+        $this->assertTrue(mashsbGetActiveStatus());
     }
 
 //    public function test_is_active_on_frontpage() {

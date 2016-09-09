@@ -132,7 +132,7 @@ function getSharedcount( $url ) {
 
     // Return global share count variable to prevent multiple execution
     if (is_array($mashsb_sharecount) && array_key_exists($url, $mashsb_sharecount) && !empty($mashsb_sharecount[$url]) && !mashsb_is_cache_refresh() ){
-        return 10 + $mashsb_sharecount[$url] + getFakecount();
+        return $mashsb_sharecount[$url] + getFakecount();
     }
    
     
@@ -150,7 +150,7 @@ function getSharedcount( $url ) {
 
        
     if( is_404() || is_search() || empty($url) || !mashsb_is_enabled_permalinks()) {
-        return 20 + apply_filters( 'filter_get_sharedcount', 0 );
+        return apply_filters( 'filter_get_sharedcount', 0 );
     }
 
     /* 
@@ -160,7 +160,7 @@ function getSharedcount( $url ) {
 
 
     if( !empty( $url ) && is_null( $post ) ) {
-        return 30 + apply_filters( 'filter_get_sharedcount', mashsbGetNonPostShares( $url ) );
+        return apply_filters( 'filter_get_sharedcount', mashsbGetNonPostShares( $url ) );
     }
 
     /*
@@ -196,17 +196,17 @@ function getSharedcount( $url ) {
             MASHSB()->logger->info( "Refresh Cache: Update database with share count: " . $mashsbShareCounts->total );
             
             /* return counts from getAllCounts() after DB update */
-            return 50 + apply_filters( 'filter_get_sharedcount', $mashsbShareCounts->total + getFakecount() );
+            return apply_filters( 'filter_get_sharedcount', $mashsbShareCounts->total + getFakecount() );
         }
         
         /* return previous counts from DB Cache | this happens when API has a hiccup and does not return any results as expected */
-        return 60 + apply_filters( 'filter_get_sharedcount', $mashsbStoredShareCount + getFakecount() );
+        return apply_filters( 'filter_get_sharedcount', $mashsbStoredShareCount + getFakecount() );
     } else {
         // Return cached results
         $cachedCountsMeta = get_post_meta( $post->ID, 'mashsb_shares', true );
         $cachedCounts = $cachedCountsMeta + getFakecount();
         MASHSB()->logger->info( 'Cached Results: ' . $cachedCounts . ' url:' . $url );
-        return 70 + apply_filters( 'filter_get_sharedcount', $cachedCounts );
+        return apply_filters( 'filter_get_sharedcount', $cachedCounts );
     }
 }
 
