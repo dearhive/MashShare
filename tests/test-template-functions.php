@@ -49,6 +49,8 @@ class TemplateFunctions extends WP_UnitTestCase {
         $mash = new mashengine($url);
         $shares = $mash->getALLCounts();
         $sharecount = $shares->total;
+        $sharecount = $mash->getALLCounts()->total;
+        
         $this->assertGreaterThan(0, $sharecount);
     }
     
