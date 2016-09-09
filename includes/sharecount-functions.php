@@ -23,6 +23,13 @@ if( !defined( 'ABSPATH' ) ) {
 function mashsb_is_cache_refresh() {
     global $post, $mashsb_options;
     
+    
+    // Debug mode or cache activated
+    if( MASHSB_DEBUG || isset( $mashsb_options['disable_cache'] ) ) {
+        MASHSB()->logger->info( 'mashsb_is_cache_refresh: MASHSB_DEBUG - refresh Cache' );
+        return true;
+    }
+    
     // if it's a crawl deactivate cache
     if( isset( $_SERVER['HTTP_USER_AGENT'] ) && preg_match( '/bot|crawl|slurp|spider/i', $_SERVER['HTTP_USER_AGENT'] ) ) {
         return false;
@@ -41,12 +48,6 @@ function mashsb_is_cache_refresh() {
 
     if( is_404() || is_search() || is_admin() || !mashsb_is_enabled_permalinks() ) {
         return false;
-    }
-
-    // Debug mode or cache activated
-    if( MASHSB_DEBUG || isset( $mashsb_options['disable_cache'] ) ) {
-        MASHSB()->logger->info( 'mashsb_is_cache_refresh: MASHSB_DEBUG - refresh Cache' );
-        return true;
     }
 
     // New cache on singular pages
