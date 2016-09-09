@@ -132,7 +132,7 @@ function getSharedcount( $url ) {
 
     // Return global share count variable to prevent multiple execution
     if (is_array($mashsb_sharecount) && array_key_exists($url, $mashsb_sharecount) && !empty($mashsb_sharecount[$url]) && !mashsb_is_cache_refresh() ){
-        return $mashsb_sharecount[$url] + getFakecount();
+        return 10 + $mashsb_sharecount[$url] + getFakecount();
     }
    
     
@@ -150,7 +150,7 @@ function getSharedcount( $url ) {
 
        
     if( is_404() || is_search() || empty($url) || !mashsb_is_enabled_permalinks()) {
-        return apply_filters( 'filter_get_sharedcount', 0 );
+        return 20 + apply_filters( 'filter_get_sharedcount', 0 );
     }
 
     // if it's a crawl bot only serve non calculated numbers to save load
@@ -165,14 +165,14 @@ function getSharedcount( $url ) {
 
 
     if( !empty( $url ) && is_null( $post ) ) {
-      return apply_filters( 'filter_get_sharedcount', mashsbGetNonPostShares( $url ) );
+        return 30 + apply_filters( 'filter_get_sharedcount', mashsbGetNonPostShares( $url ) );
     }
 
     /*
      * Refresh Cache
      */
     if( mashsb_force_cache_refresh() && is_singular() ) {
-  
+        return 40;
         // free some memory
         unset ( $mashsb_sharecount[$url] );
         

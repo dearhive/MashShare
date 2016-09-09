@@ -57,19 +57,24 @@ class TemplateFunctions extends WP_UnitTestCase {
         $mashsb_options['caching_method'] = 'refresh_loading';
         $mashsb_options['mashsharer_cache'] = 0;
         $mashsb_options['disable_cache'] = 'true';
+        
         $args = array('post_type' => 'post');
         $id = $this->factory->post->create($args);
         $post = get_post($id); // Wee need the post object for testing
         $this->go_to(get_permalink($id));
+        
         $url = 'http://google.com';
         $url2 = 'https://google.com';
+        
         $shares = getSharedcount($url);      
-        $shares2 = getSharedcount($url2);      
+        $shares2 = getSharedcount($url2);  
+        
         $this->assertGreaterThan(1000, $shares);
         $this->assertGreaterThan(1000, $shares2);
     }
     public function test_getSharedcount_async_cache(){
         global $mashsb_options, $post;
+        
         $mashsb_options['fb_access_token'] = 'EAAHag2FMn2UBAJwIjdG2jDB39ZAr3lCriDwXgqhk2hDxk1O1iM5Vk2WvxIXop6ZAUikeKcpBXWUQk2jxG8FXag4cEzXJDBggkWIGuEq9ECc6HAyG1UQrgaDr6w8M0tsT6tlHwBpjVGACyQectEU3CdFAgbX32Q83qGZAgv4cbWH39eb3ejc';
         $mashsb_options['mashsb_sharemethod'] = 'mashengine';
         $mashsb_options['caching_method'] = 'async_cache';
@@ -80,11 +85,13 @@ class TemplateFunctions extends WP_UnitTestCase {
         $id = $this->factory->post->create($args);
         $post = get_post($id); // Wee need the post object for testing
         $this->go_to(get_permalink($id));
-        //$post = get_post($id);
+
         $url = 'http://google.com';
         $url2 = 'https://google.com';
+        
         $shares = getSharedcount($url);      
-        $shares2 = getSharedcount($url2);      
+        $shares2 = getSharedcount($url2); 
+        
         $this->assertGreaterThan(1000, $shares);
         $this->assertGreaterThan(1000, $shares2);
     }
@@ -122,7 +129,7 @@ class TemplateFunctions extends WP_UnitTestCase {
             'post_type' => 'page',
         );
         $id = $this->factory->post->create($args);
-        $post = get_post($id); // Wee need the post object for testing
+        $post = get_post($id); // We need the post object for testing
 
         update_option('show_on_front', 'page');
         update_option('page_on_front', $id);
