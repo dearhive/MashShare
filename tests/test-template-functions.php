@@ -116,22 +116,36 @@ class TemplateFunctions extends WP_UnitTestCase {
     public function test_is_active_on_page() {
         global $post, $mashsb_options;
         
-        $args = array('post_type' => 'page');
-        $id = $this->factory->post->create($args);
-        $post = get_post($id); // Wee need the post object for testing
+        // Prepare test
+        $post_id = $this->factory->post->create( array(
+            'post_title' => 'Hello World',
+            'post_name' => 'hello-world',
+            'post_type' => 'page',
+            'post_status' => 'publish'
+        ) );
+        $this->go_to( get_permalink( $post_id ) );
+        //$id = $this->factory->post->create($args);
+        //$post = get_post($id); // Wee need the post object for testing
         $mashsb_options['post_types'] = array('page');
-        $this->go_to(get_permalink($id));
+        $this->go_to(get_permalink($post_id));
+        
         $this->assertTrue(mashsbGetActiveStatus());
     }
 
     public function test_is_active_on_post() {
         global $post, $mashsb_options;
         
-        $args = array('post_type' => 'post');
-        $id = $this->factory->post->create($args);
-        $post = get_post($id); // Wee need the post object for testing
+        // Prepare test
+        $post_id = $this->factory->post->create( array(
+            'post_title' => 'Hello World',
+            'post_name' => 'hello-world',
+            'post_type' => 'post',
+            'post_status' => 'publish'
+        ) );
+        //$id = $this->factory->post->create($args);
+        //$post = get_post($id); // Wee need the post object for testing
         $mashsb_options['post_types'] = array('post');
-        $this->go_to(get_permalink($id));
+        $this->go_to(get_permalink($post_id));
         $this->assertTrue(mashsbGetActiveStatus());
     }
 
