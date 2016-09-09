@@ -108,6 +108,8 @@ class TemplateFunctions extends WP_UnitTestCase {
 
     public function test_is_active_on_page() {
         global $post, $mashsb_options;
+        
+        $mashsb_options['$loadall'] = 'true';
 
         $args = array('post_type' => 'page');
         $id = $this->factory->post->create($args);
@@ -119,7 +121,7 @@ class TemplateFunctions extends WP_UnitTestCase {
 
     public function test_is_active_on_post() {
         global $post, $mashsb_options;
-
+        $mashsb_options['$loadall'] = 'true';
         $args = array('post_type' => 'post');
         $id = $this->factory->post->create($args);
         $post = get_post($id); // Wee need the post object for testing
@@ -130,6 +132,7 @@ class TemplateFunctions extends WP_UnitTestCase {
 
     public function test_is_active_on_frontpage() {
         global $post, $mashsb_options;
+        $mashsb_options['$loadall'] = 'true';
 
         // create page
         $args = array(
@@ -152,6 +155,7 @@ class TemplateFunctions extends WP_UnitTestCase {
 
     public function test_is_active_on_content_shortcode() {
         global $post, $mashsb_options;
+        $mashsb_options['$loadall'] = 'true';
 
         $args = array(
             'post_name' => 'test page',
