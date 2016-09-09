@@ -150,8 +150,7 @@ class TemplateFunctions extends WP_UnitTestCase {
 
     public function test_is_active_on_post() {
         global $post, $mashsb_options;
-        //$mashsb_options['post_types'] = array('post');
-        $mashsb_options['post_types'] = 'post';
+        $mashsb_options['post_types'] = array('post');
         
         // Prepare test
         $post_id = $this->factory->post->create( array(
@@ -162,7 +161,8 @@ class TemplateFunctions extends WP_UnitTestCase {
         $this->go_to(get_permalink($post_id));
         $post = get_post($post_id); // Wee need the post object for testing
 
-        $this->assertTrue(mashsbGetActiveStatus());
+        //$this->assertTrue(mashsbGetActiveStatus());
+        $this->assertTrue(mashsb_is_excluded());
     }
 
 //    public function test_is_active_on_frontpage() {
