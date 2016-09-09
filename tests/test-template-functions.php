@@ -187,6 +187,29 @@ class TemplateFunctions extends WP_UnitTestCase {
 //
 //        $this->assertTrue(mashsbGetActiveStatus());
 //    }
+    
+    	function test_is_active_on_frontpage() {
+            global $mashsb_options;
+                $mashsb_options['frontpage'] = 'true';
+            
+		$page_on_front = self::factory()->post->create( array(
+			'post_type' => 'page',
+		) );
+		$page_for_posts = self::factory()->post->create( array(
+			'post_type' => 'page',
+		) );
+		update_option( 'show_on_front', 'page' );
+		update_option( 'page_on_front', $page_on_front );
+		update_option( 'page_for_posts', $page_for_posts );
+		$this->go_to( '/' );
+		$this->assertQueryTrue( 'is_front_page', 'is_page', 'is_singular' );
+                $this->assertTrue(mashsbGetActiveStatus());
+		$this->go_to( get_permalink( $page_for_posts ) );
+		$this->assertQueryTrue( 'is_home', 'is_posts_page' );
+		update_option( 'show_on_front', 'posts' );
+		delete_option( 'page_on_front' );
+		delete_option( 'page_for_posts' );
+	}
 
     public function test_is_active_on_content_shortcode() {
         global $post, $mashsb_options;

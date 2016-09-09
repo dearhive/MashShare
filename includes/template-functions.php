@@ -153,11 +153,6 @@ function getSharedcount( $url ) {
         return 20 + apply_filters( 'filter_get_sharedcount', 0 );
     }
 
-    // if it's a crawl bot only serve non calculated numbers to save load
-    /*if( isset( $_SERVER['HTTP_USER_AGENT'] ) && preg_match( '/bot|crawl|slurp|spider/i', $_SERVER['HTTP_USER_AGENT'] ) ) {
-        return apply_filters( 'filter_get_sharedcount', 100 );
-    }*/
-
     /* 
      * Return share count on non singular pages when url is defined
        Possible: Category, blog list pages, non singular() pages. This store the shares in transients with mashsbGetNonPostShares();
