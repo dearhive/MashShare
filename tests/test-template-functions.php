@@ -146,7 +146,7 @@ class TemplateFunctions extends WP_UnitTestCase {
         $mashsb_options['frontpage'] = 'true';
         $this->go_to(home_url());
 
-        //$this->assertTrue(mashsbGetActiveStatus());
+        $this->assertTrue(mashsbGetActiveStatus());
     }
 
     public function test_is_active_on_content_shortcode() {
