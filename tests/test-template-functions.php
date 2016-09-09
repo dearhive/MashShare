@@ -32,6 +32,10 @@ class TemplateFunctions extends WP_UnitTestCase {
         $this->assertTrue( mashsb_is_cache_refresh() );
     }
     
+    public function test_mashsb_force_cache_refresh(){
+        $this->assertTrue( mashsb_force_cache_refresh() );
+    }
+    
     public function test_mashsb_is_enabled_permalinks(){
         $this->assertTrue( mashsb_is_enabled_permalinks() );
     }
