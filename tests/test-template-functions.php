@@ -56,9 +56,10 @@ class TemplateFunctions extends WP_UnitTestCase {
         $mashsb_options['mashsb_sharemethod'] = 'mashengine';
         $mashsb_options['caching_method'] = 'refresh_loading';
         $mashsb_options['mashsharer_cache'] = 0;
-        //$mashsb_options['disable_cache'] = 'true';
+        $mashsb_options['disable_cache'] = 'true';
         $args = array('post_type' => 'post');
         $id = $this->factory->post->create($args);
+        $post = get_post($id); // Wee need the post object for testing
         $this->go_to(get_permalink($id));
         $url = 'http://google.com';
         $url2 = 'https://google.com';
@@ -74,8 +75,10 @@ class TemplateFunctions extends WP_UnitTestCase {
         $mashsb_options['caching_method'] = 'async_cache';
         $mashsb_options['mashsharer_cache'] = 0;
         $mashsb_options['disable_cache'] = 'true';
+        
         $args = array('post_type' => 'post');
         $id = $this->factory->post->create($args);
+        $post = get_post($id); // Wee need the post object for testing
         $this->go_to(get_permalink($id));
         //$post = get_post($id);
         $url = 'http://google.com';
@@ -91,7 +94,7 @@ class TemplateFunctions extends WP_UnitTestCase {
 
         $args = array('post_type' => 'page');
         $id = $this->factory->post->create($args);
-        $post = get_post($id);
+        $post = get_post($id); // Wee need the post object for testing
         $mashsb_options['post_types'] = array('page');
         $this->go_to(get_permalink($id));
         $this->assertTrue(mashsbGetActiveStatus());
@@ -102,7 +105,7 @@ class TemplateFunctions extends WP_UnitTestCase {
 
         $args = array('post_type' => 'post');
         $id = $this->factory->post->create($args);
-        $post = get_post($id);
+        $post = get_post($id); // Wee need the post object for testing
         $mashsb_options['post_types'] = array('post');
         $this->go_to(get_permalink($id));
         $this->assertTrue(mashsbGetActiveStatus());
@@ -120,7 +123,7 @@ class TemplateFunctions extends WP_UnitTestCase {
             //'post_content' => '[mashshare]'
         );
         $id = $this->factory->post->create($args);
-        $post = get_post($id);
+        $post = get_post($id); // Wee need the post object for testing
 
         update_option('show_on_front', 'page');
         update_option('page_on_front', $id);
@@ -142,7 +145,7 @@ class TemplateFunctions extends WP_UnitTestCase {
             'post_content' => '[mashshare]'
         );
         $id = $this->factory->post->create($args);
-        $post = get_post($id);
+        $post = get_post($id); // Wee need the post object for testing
         $this->go_to(get_permalink($id));
 
         $this->assertTrue(mashsbGetActiveStatus());
@@ -158,7 +161,7 @@ class TemplateFunctions extends WP_UnitTestCase {
             'post_type' => 'page',
         );
         $id = $this->factory->post->create($args);
-        $post = get_post($id);
+        $post = get_post($id); // Wee need the post object for testing
 
         $this->assertEquals(0.30, mashsb_get_fake_factor() );
 
@@ -174,7 +177,7 @@ class TemplateFunctions extends WP_UnitTestCase {
             'post_type' => 'page',
         );
         $id = $this->factory->post->create($args);
-        $post = get_post($id);
+        $post = get_post($id); // Wee need the post object for testing
         
         $this->assertEquals(0.60, mashsb_get_fake_factor() );
 
