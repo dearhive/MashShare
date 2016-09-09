@@ -126,7 +126,7 @@ class TemplateFunctions extends WP_UnitTestCase {
         update_option('page_on_front', $id);
 
         $mashsb_options['frontpage'] = true;
-        $this->go_to(home_url());
+        //$this->go_to(home_url());
 
         $this->assertTrue(mashsbGetActiveStatus());
     }
