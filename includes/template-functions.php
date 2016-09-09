@@ -55,7 +55,7 @@ function mashsbGetShareObj( $url ) {
             require_once(MASHSB_PLUGIN_DIR . 'includes/mashengine.php');
         }
 
-        mashdebug()->info( 'mashsbGetShareObj() url: ' . $url );
+        //mashdebug()->info( 'mashsbGetShareObj() url: ' . $url );
         $mashsbSharesObj = new mashengine( $url );
         return $mashsbSharesObj;
 

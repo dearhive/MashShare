@@ -15,6 +15,10 @@ class TemplateFunctions extends WP_UnitTestCase {
     function tearDown() {
         parent::tearDown();
     }
+    
+    public function test_mashsb_is_cache_refresh(){
+        $this->assertTrue( mashsb_is_cache_refresh() );
+    }
 
     public function test_mashengine_FBTW() {
         global $mashsb_options;
