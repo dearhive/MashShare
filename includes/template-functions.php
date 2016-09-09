@@ -172,7 +172,7 @@ function getSharedcount( $url ) {
      * Refresh Cache
      */
     if( mashsb_force_cache_refresh() && is_singular() ) {
-        return 40;
+
         // free some memory
         unset ( $mashsb_sharecount[$url] );
         
