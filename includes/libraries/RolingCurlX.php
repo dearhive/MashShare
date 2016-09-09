@@ -55,7 +55,7 @@ Class RollingCurlX {
                         array $post_data = NULL,
                         //callable $callback = NULL, //individual callback rhe
                         //$callback = NULL, //individual callback
-						array $callback = NULL,
+			array $callback = NULL,
                         $user_data = NULL,
                         array $options = NULL, //individual cURL options
                         array $headers = NULL //individual cURL request headers
