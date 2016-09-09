@@ -10,7 +10,7 @@ class TemplateFunctions extends WP_UnitTestCase {
         global $mashsb_options;
         
         $mashsb_options['disable_cache'] = 'true';
-        $mashsb_options['$loadall'] = 'true';
+
         $mashsb_options['fb_access_token'] = 'EAAHag2FMn2UBAJwIjdG2jDB39ZAr3lCriDwXgqhk2hDxk1O1iM5Vk2WvxIXop6ZAUikeKcpBXWUQk2jxG8FXag4cEzXJDBggkWIGuEq9ECc6HAyG1UQrgaDr6w8M0tsT6tlHwBpjVGACyQectEU3CdFAgbX32Q83qGZAgv4cbWH39eb3ejc';
 
         // enable permalinks
@@ -109,8 +109,6 @@ class TemplateFunctions extends WP_UnitTestCase {
     public function test_is_active_on_page() {
         global $post, $mashsb_options;
         
-        $mashsb_options['$loadall'] = 'true';
-
         $args = array('post_type' => 'page');
         $id = $this->factory->post->create($args);
         $post = get_post($id); // Wee need the post object for testing
@@ -121,7 +119,7 @@ class TemplateFunctions extends WP_UnitTestCase {
 
     public function test_is_active_on_post() {
         global $post, $mashsb_options;
-        $mashsb_options['$loadall'] = 'true';
+        
         $args = array('post_type' => 'post');
         $id = $this->factory->post->create($args);
         $post = get_post($id); // Wee need the post object for testing
@@ -130,28 +128,27 @@ class TemplateFunctions extends WP_UnitTestCase {
         $this->assertTrue(mashsbGetActiveStatus());
     }
 
-    public function test_is_active_on_frontpage() {
-        global $post, $mashsb_options;
-        $mashsb_options['$loadall'] = 'true';
-
-        // create page
-        $args = array(
-            'post_name' => 'test page',
-            'post_title' => 'page title',
-            'post_status' => 'publish',
-            'post_type' => 'page',
-        );
-        $id = $this->factory->post->create($args);
-        $post = get_post($id); // We need the post object for testing
-
-        update_option('show_on_front', 'page');
-        update_option('page_on_front', $id);
-
-        $mashsb_options['frontpage'] = 'true';
-        $this->go_to(home_url());
-
-        $this->assertTrue(mashsbGetActiveStatus());
-    }
+//    public function test_is_active_on_frontpage() {
+//        global $post, $mashsb_options;
+//       
+//        // create page
+//        $args = array(
+//            'post_name' => 'test page',
+//            'post_title' => 'page title',
+//            'post_status' => 'publish',
+//            'post_type' => 'page',
+//        );
+//        $id = $this->factory->post->create($args);
+//        $post = get_post($id); // We need the post object for testing
+//
+//        update_option('show_on_front', 'page');
+//        update_option('page_on_front', $id);
+//
+//        $mashsb_options['frontpage'] = 'true';
+//        $this->go_to(home_url());
+//
+//        $this->assertTrue(mashsbGetActiveStatus());
+//    }
 
     public function test_is_active_on_content_shortcode() {
         global $post, $mashsb_options;
