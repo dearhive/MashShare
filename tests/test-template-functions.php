@@ -48,9 +48,9 @@ class TemplateFunctions extends WP_UnitTestCase {
         $url = 'http://google.com';
         $url2 = 'https://google.com';
         $shares = getSharedcount($url);      
-        $shares2 = getSharedcount($url);      
-        $this->assertGreaterThan(20000, $shares);
-        $this->assertGreaterThan(20000, $shares2);
+        $shares2 = getSharedcount($url2);      
+        $this->assertGreaterThan(1000, $shares);
+        $this->assertGreaterThan(1000, $shares2);
     }
     public function test_getSharedcount_async_cache(){
         global $mashsb_options, $post;
@@ -66,8 +66,8 @@ class TemplateFunctions extends WP_UnitTestCase {
         $url2 = 'https://google.com';
         $shares = getSharedcount($url);      
         $shares2 = getSharedcount($url2);      
-        $this->assertGreaterThan(20000, $shares);
-        $this->assertGreaterThan(20000, $shares2);
+        $this->assertGreaterThan(1000, $shares);
+        $this->assertGreaterThan(1000, $shares2);
     }
 
     public function test_is_active_on_page() {
