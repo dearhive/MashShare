@@ -101,7 +101,7 @@ function mashsb_is_cache_refresh() {
  * @return string numerical 
  */
 function mashsb_ajax_refresh_cache() {
-    if( mashsb_is_cache_refresh ) {
+    if( mashsb_is_cache_refresh() ) {
         wp_die( '1' );
     } else {
         wp_die( '0' );
