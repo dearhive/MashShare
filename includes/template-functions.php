@@ -163,13 +163,7 @@ function getSharedcount( $url ) {
        Possible: Category, blog list pages, non singular() pages. This store the shares in transients with mashsbGetNonPostShares();
      */
 
-//    if( !is_singular() ) {
-//        // global sharecount
-//        $shares = mashsbGetNonPostShares( mashsb_get_main_url() ) + getFakecount();
-//        $mashsb_sharecount = array($url => $shares);
-//        echo "url2: " . $mashsb_sharecount[$url];
-//        return apply_filters( 'filter_get_sharedcount', $shares );
-//    }
+
     if( !empty( $url ) && is_null( $post ) ) {
       return apply_filters( 'filter_get_sharedcount', mashsbGetNonPostShares( $url ) );
     }
@@ -187,7 +181,7 @@ function getSharedcount( $url ) {
      * Refresh Cache
      */
     if( mashsb_force_cache_refresh() && is_singular() ) {
-        
+  
         // free some memory
         unset ( $mashsb_sharecount[$url] );
         
