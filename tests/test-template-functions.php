@@ -55,7 +55,7 @@ class TemplateFunctions extends WP_UnitTestCase {
         $this->go_to(get_permalink($post_id));
         $post = get_post($post_id);
         
-        $this->assertTrue( $post_id);
+        $this->assertTrue( is_singular() );
     }
 
     public function test_mashengine_FBTW() {
