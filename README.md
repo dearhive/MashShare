@@ -1,5 +1,7 @@
 # [Mashshare](https://www.mashshare.net) 
 
+[![Build Status](https://img.shields.io/travis/mashshare/MashShare/master.svg?maxAge=2592000)](https://travis-ci.org/mashshare/MashShare.svg?branch=master)
+
 ### Welcome to the Mashshare GitHub Repository
 
 Social sharing optimization is essential for every website that aims to be succesfull regarding traffic and social interaction.
