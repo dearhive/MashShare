@@ -29,10 +29,14 @@ class TemplateFunctions extends WP_UnitTestCase {
     
     
     public function test_mashsb_is_cache_refresh(){
+        global $mashsb_options;
+        $mashsb_options['disable_cache'] = 'true';
         $this->assertTrue( mashsb_is_cache_refresh() );
     }
     
     public function test_mashsb_force_cache_refresh(){
+        global $mashsb_options;
+        $mashsb_options['disable_cache'] = 'true';
         $this->assertTrue( mashsb_force_cache_refresh() );
     }
     
