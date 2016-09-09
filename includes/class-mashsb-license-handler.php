@@ -13,19 +13,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 if ( ! class_exists( 'MASHSB_License' ) ) :
 
-// uncomment for debugging    
-//add_action( 'http_api_debug', 'viper_http_api_debug', 10, 5 );
- 
-function mashsb_http_api_debug( $response, $type, $class, $args, $url ) {
-    // You can change this from error_log() to var_dump() but it can break AJAX requests
-    error_log( 'Request URL: ' . var_export( $url, true ) );
-    error_log( 'Request Args: ' . var_export( $args, true ) );
-    error_log( 'Request Response : ' . var_export( $response, true ) );
-    var_dump( 'Request URL: ' . var_export( $url, true ) );
-    var_dump( 'Request Args: ' . var_export( $args, true ) );
-    var_dump( 'Request Response : ' . var_export( $response, true ) );
-}
-
 /**
  * MASHSB_License Class
  */
