@@ -24,6 +24,9 @@ function mashsb_do_automatic_upgrades() {
 	$did_upgrade = false;
 	$mashsb_version = preg_replace( '/[^0-9.].*/', '', get_option( 'mashsb_version' ) );
 
+	if( version_compare( $mashsb_version, '3.2.5', '<' ) ) {
+		mashsb_upgrade_v1a();
+	}
 	if( version_compare( $mashsb_version, '3.2.4', '<' ) ) {
 		mashsb_upgrade_v1();
 	}
@@ -45,10 +48,26 @@ function mashsb_do_automatic_upgrades() {
 }
 add_action( 'admin_init', 'mashsb_do_automatic_upgrades' );
 
+
+/**
+ * Store default settings
+ */
+function mashsb_upgrade_v1a() {
+    
+    // Show Rating Div
+    add_option( 'mashsb_RatingDiv', 'no' );
+    // Show facebook access token notice
+    add_option( 'mashsb_update_notice_101', 'yes' ); 
+    
+}
+
+
+
 /**
  * Enable the margin option
  */
 function mashsb_upgrade_v1() {
+    
     // Try to load some settings.
     $settings = get_option( 'mashsb_settings' );
     // Enable the Margin Option. 

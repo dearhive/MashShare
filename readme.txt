@@ -321,7 +321,9 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 = 3.2.5 =
 * Fix: Fix a bug where only for http schemed urls the shares are returned. This happens only when no FB APP secret is used.
+* Fix: Default table options are not stored on plugin update
 * Tweak: Add more unit tests to check shares for http(s)
+* Tweak: Show FB app secret admin notice only on MashShare admin pages
 
 = 3.2.4 = 
 * Fix: Remove box-shadow: none; declaration and fix the shadow button style
