@@ -48,10 +48,10 @@ module.exports = function(grunt) {
         copy: {
             build: {             
                 files: [
-                    {expand: true, src: ['**', '!node_modules/**', '!Gruntfile.js', '!package.json', '!nbproject/**', '!grunt/**','!tests/**', '!bin/**', '.travis.yml', '!phpunit.xml.dist'],                
+                    {expand: true, src: ['**', '!node_modules/**', '!Gruntfile.js', '!package.json', '!nbproject/**', '!grunt/**','!tests/**', '!bin/**', '!.travis.yml', '!phpunit.xml.dist', '!composer.json'],                
                      dest: '<%= paths.base %>'},
                  
-                    {expand: true, src: ['**', '!node_modules/**', '!Gruntfile.js', '!package.json', '!nbproject/**', '!grunt/**','!tests/**', '!bin/**', '.travis.yml', '!phpunit.xml.dist'],
+                    {expand: true, src: ['**', '!node_modules/**', '!Gruntfile.js', '!package.json', '!nbproject/**', '!grunt/**','!tests/**', '!bin/**', '!.travis.yml', '!phpunit.xml.dist', '!composer.json'],
                     dest: '<%= paths.basetrunk %>'},
                 ]                
             },
