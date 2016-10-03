@@ -32,46 +32,46 @@ jQuery(document).ready(function ($) {
     });
     
 
-    $('#mashsb_settings\\[fb_access_token\\]').on("change paste keyup",function(){
-        
-        var two_month = 60 * 60 * 24 * 60 * 1000; // timestamp in miliseconds
-        var expiration_timestamp = (new Date().getTime()) + two_month; // time in miliseconds
-
-        var unixtimestamp = (new Date().getTime() + (60 * 60 * 24 * 60 * 1000)) / 1000; // timestamp in seconds
-                
-        var human_date = new Date(expiration_timestamp);
-
-        if ($('#mashsb_settings\\[fb_access_token\\]').val()){
-            check_access_token();
-            document.getElementById('mashsb_expire_token_status').innerHTML = 'Token needs renewal on ' + human_date + '<br>MashShare will notify you shortly before the access token expires.';
-        }else {
-            document.getElementById('mashsb_expire_token_status').innerHTML = '';
-        }
-    });
+//    $('#mashsb_settings\\[fb_access_token\\]').on("change paste keyup",function(){
+//        
+//        var two_month = 60 * 60 * 24 * 60 * 1000; // timestamp in miliseconds
+//        var expiration_timestamp = (new Date().getTime()) + two_month; // time in miliseconds
+//
+//        var unixtimestamp = (new Date().getTime() + (60 * 60 * 24 * 60 * 1000)) / 1000; // timestamp in seconds
+//                
+//        var human_date = new Date(expiration_timestamp);
+//
+//        if ($('#mashsb_settings\\[fb_access_token\\]').val()){
+//            check_access_token();
+//            document.getElementById('mashsb_expire_token_status').innerHTML = 'Token needs renewal on ' + human_date + '<br>MashShare will notify you shortly before the access token expires.';
+//        }else {
+//            document.getElementById('mashsb_expire_token_status').innerHTML = '';
+//        }
+//    });
     
     
-    function check_access_token()
-    {
-        $.ajax("https://graph.facebook.com/v2.7/?id=http://www.google.de&access_token=" + $('#mashsb_settings\\[fb_access_token\\]').val())
-            .done(function (e) {
-                $('#mashsb_token_notice').html('');
-                console.log(e);
-            })
-            .fail(function (e) {
-                $('#mashsb_token_notice').html('<span style="color:red;"> <strong>Error:</strong> Access Token Invalid!</span>');
-                console.log(e);
-            })
-        }
+//    function check_access_token()
+//    {
+//        $.ajax("https://graph.facebook.com/v2.7/?id=http://www.google.de&access_token=" + $('#mashsb_settings\\[fb_access_token\\]').val())
+//            .done(function (e) {
+//                $('#mashsb_token_notice').html('');
+//                console.log(e);
+//            })
+//            .fail(function (e) {
+//                $('#mashsb_token_notice').html('<span style="color:red;"> <strong>Error:</strong> Access Token Invalid!</span>');
+//                console.log(e);
+//            })
+//    }
         
-    $('#mashsb_fb_auth').click(function (e) {
-        e.preventDefault();
-        winWidth = 520;
-        winHeight = 350;
-        var winTop = (screen.height / 2) - (winHeight / 2);
-        var winLeft = (screen.width / 2) - (winWidth / 2);
-        var url = $(this).attr('href');
-        mashsb_fb_auth = window.open(url, 'mashsb_fb_auth', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight + ',resizable=yes');
-    });
+//    $('#mashsb_fb_auth').click(function (e) {
+//        e.preventDefault();
+//        winWidth = 520;
+//        winHeight = 350;
+//        var winTop = (screen.height / 2) - (winHeight / 2);
+//        var winLeft = (screen.width / 2) - (winWidth / 2);
+//        var url = $(this).attr('href');
+//        mashsb_fb_auth = window.open(url, 'mashsb_fb_auth', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight + ',resizable=yes');
+//    });
     
 //    // Share Color Picker
 //    $('.share_color').colpick({
