@@ -27,7 +27,8 @@ class mashengine {
         //$data = $this->getSharesALL();
         $this->data = $this->getSharesALL();
         //return $data;
-        return $this->data;
+        return $this->{data};
+        //wp_die(var_dump($this->data->total));
     }
 
     /* Collect share count from facebook and twitter */
