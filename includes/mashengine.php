@@ -2,7 +2,7 @@
 
 class mashengine {
 
-    private $data;
+    public $data;
     private $url;
     private $timeout;
     private $http_scheme_url;
