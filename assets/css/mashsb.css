@@ -530,8 +530,8 @@ color:#8A8C8E;
     -webkit-flex: 1 1 auto;
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
-
     min-width: 0;
+    box-shadow: 0 0 0 0;
 }
 
 .mashsb-buttons .mashsb-shadow{
