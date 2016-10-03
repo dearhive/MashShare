@@ -70,7 +70,7 @@ class TemplateFunctions extends WP_UnitTestCase {
     }
 
     public function test_mashengine_all_counts() {
-        global $mashsb_options, $post;
+        global $mashsb_options;
         $mashsb_options['disable_cache'] = 'true';
         $mashsb_options['fb_access_token'] = 'EAAHag2FMn2UBAJwIjdG2jDB39ZAr3lCriDwXgqhk2hDxk1O1iM5Vk2WvxIXop6ZAUikeKcpBXWUQk2jxG8FXag4cEzXJDBggkWIGuEq9ECc6HAyG1UQrgaDr6w8M0tsT6tlHwBpjVGACyQectEU3CdFAgbX32Q83qGZAgv4cbWH39eb3ejc';
         $url = 'http://google.com';

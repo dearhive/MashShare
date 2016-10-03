@@ -320,7 +320,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 == Changelog ==
 
 = 3.2.6 = 
-* Fix: Google and Facebook share count not stores correctly
+* Fix: Google and Facebook share count not calculated correctly
 * Tweak: Remove admin notice for creating Facebook Access Token
 
 = 3.2.5 =
