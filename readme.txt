@@ -321,6 +321,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 = 3.2.6 = 
 * Fix: Google and Facebook share count not calculated correctly
+* Fix: pinit.js converts pinterest button into a pinterest native icon. Needs MashShare Networks 2.3.9 or later!
 * Tweak: Remove admin notice for creating Facebook Access Token
 
 = 3.2.5 =
