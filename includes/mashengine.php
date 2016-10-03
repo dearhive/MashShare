@@ -45,7 +45,7 @@ class mashengine {
     public function getSharesFBTW() {
         global $mashsb_options;
 
-        $fb_mode = isset( $mashsb_options['facebook_count_mode'] ) ? $mashsb_options['facebook_count_mode'] : '';
+        $fb_mode = isset( $mashsb_options['facebook_count_mode'] ) ? $mashsb_options['facebook_count_mode'] : 'shares';
 
         $post_data = null;
         $headers = null;
@@ -133,8 +133,8 @@ class mashengine {
 
     public function getSharesALL() {
         global $mashsb_options;
-        $fb_mode = isset( $mashsb_options['facebook_count_mode'] ) ? $mashsb_options['facebook_count_mode'] : '';
-
+        
+        $fb_mode = isset( $mashsb_options['facebook_count_mode'] ) ? $mashsb_options['facebook_count_mode'] : 'shares';
         $post_data = null;
         $headers = null;
 
@@ -243,7 +243,8 @@ class mashengine {
                     $count = $share_count + $comment_count;
                     break;
                 case "google":
-                    preg_match( '/window\.__SSR = {c: ([\d]+)TEST/', $data, $matches );
+                    //preg_match( '/window\.__SSR = {c: ([\d]+)TEST/', $data, $matches );
+                    preg_match("#window\.__SSR = {c: ([\d]+)#", $data, $matches);
                     if( isset( $matches[0] ) )
                         $count = str_replace( 'window.__SSR = {c: ', '', $matches[0] );
                     break;
@@ -291,9 +292,10 @@ class mashengine {
               $this->data->shares->$service[0] = $count;
              * */
             $this->data->total += $count;
-            //$this->data->$service[0] = $count;
+            $this->data->$service[0] = $count;
             MASHSB()->logger->info( 'MashEngine - URL: ' . $url . ' ' . $service[0] . ': ' . $count );
             mashdebug()->info( 'MashEngine - URL: ' . $url . ' ' . $service[0] . ': ' . $count );
+            echo('MashEngine - URL: ' . $url . ' ' . $service[0] . ': ' . $count);
         }
         return;
     }
