@@ -23,11 +23,11 @@ class mashengine {
 
     public function getALLCounts() {
         $this->data = new stdClass;
-        $this->data->total = 0;
+        //$this->{data->total} = 0;
         //$data = $this->getSharesALL();
         $this->data = $this->getSharesALL();
         //return $data;
-        return $this->{data};
+        return $this->data;
         //wp_die(var_dump($this->data->total));
     }
 
