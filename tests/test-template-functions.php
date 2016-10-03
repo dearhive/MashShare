@@ -65,8 +65,7 @@ class TemplateFunctions extends WP_UnitTestCase {
         
         $mashsbSharesObj = new mashengine($url);
         
-        $shares1 = $mashsbSharesObj->getALLCounts();
-        $shares = $shares1->total;
+        $shares = $mashsbSharesObj->getALLCounts()->total;
 
         $this->assertGreaterThan(1000, (int)$shares);
     }
