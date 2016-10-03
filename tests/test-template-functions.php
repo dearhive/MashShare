@@ -66,7 +66,7 @@ class TemplateFunctions extends WP_UnitTestCase {
         $mashsbSharesObj = new mashengine($url);
         $shares = $mashsbSharesObj->getFBTWCounts()->total;
 
-        $this->assertGreaterThan(1000, intval($shares));
+        $this->assertGreaterThan(1000, (int)$shares);
     }
 
     public function test_mashengine_all_counts() {
@@ -78,7 +78,7 @@ class TemplateFunctions extends WP_UnitTestCase {
         $mash = new mashengine($url);
         $shares = $mash->getALLCounts()->total;
         
-        $this->assertGreaterThan(1000, intval($shares));
+        $this->assertGreaterThan(1000, (int)($shares);
     }
     
     public function test_getSharedcount(){
@@ -100,8 +100,8 @@ class TemplateFunctions extends WP_UnitTestCase {
         $shares = getSharedcount($url);      
         $shares2 = getSharedcount($url2);  
         
-        $this->assertGreaterThan(1000, intval($shares));
-        $this->assertGreaterThan(1000, intval($shares2));
+        $this->assertGreaterThan(1000, (int)$shares );
+        $this->assertGreaterThan(1000, (int)$shares2 );
     }
     public function test_getSharedcount_async_cache(){
         global $mashsb_options, $post;
@@ -124,8 +124,8 @@ class TemplateFunctions extends WP_UnitTestCase {
         $shares = getSharedcount($url);      
         $shares2 = getSharedcount($url2); 
         
-        $this->assertGreaterThan(1000, intval($shares));
-        $this->assertGreaterThan(1000, intval($shares2));
+        $this->assertGreaterThan(1000, (int)$shares);
+        $this->assertGreaterThan(1000, (int)$shares2);
     }
 
     public function test_is_active_on_page() {
