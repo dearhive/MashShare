@@ -64,7 +64,7 @@ class TemplateFunctions extends WP_UnitTestCase {
         $url = 'http://google.com';
         
         $mashsbSharesObj = new mashengine($url);
-        $shares = $mashsbSharesObj->getFBTWCounts()->total;
+        $shares = $mashsbSharesObj->{getALLCounts()}->total;
 
         $this->assertGreaterThan(1000, (int)$shares);
     }
@@ -76,7 +76,7 @@ class TemplateFunctions extends WP_UnitTestCase {
         $url = 'http://google.com';
         
         $mash = new mashengine($url);
-        $shares = $mash->getALLCounts()->total;
+        $shares = $mash->{getALLCounts()}->total;
         
         $this->assertGreaterThan(1000, (int)$shares);
     }

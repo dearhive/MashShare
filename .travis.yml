@@ -1,6 +1,6 @@
 language: php
 
-install: composer install --dev
+#install: composer install --dev
 
 sudo: false
 
