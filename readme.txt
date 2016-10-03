@@ -9,7 +9,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email
 Requires at least: 3.6+
 Tested up to: 4.7
-Stable tag: 3.2.6
+Stable tag: 3.2.7
 
 Social Media Share Buttons for Twitter, Facebook and other social networks. Highly customizable Social Media ecosystem
 
@@ -318,6 +318,9 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 
 == Changelog ==
+
+= 3.2.7 =
+* Tweak: Remove FB access token generator
 
 = 3.2.6 = 
 * Fix: Google and Facebook share count not calculated correctly
