@@ -24,8 +24,10 @@ class mashengine {
     public function getALLCounts() {
         $this->data = new stdClass;
         $this->data->total = 0;
-        $data = $this->getSharesALL();
-        return $data;
+        //$data = $this->getSharesALL();
+        $this->data = $this->getSharesALL();
+        //return $data;
+        return $this->data;
     }
 
     /* Collect share count from facebook and twitter */
