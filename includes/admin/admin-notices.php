@@ -47,7 +47,7 @@ function mashsb_admin_messages() {
         return;
     }
     
-    mashsb_update_notice_101();
+    //mashsb_update_notice_101();
     
     if( mashsb_is_admin_page() && !function_exists( 'curl_init' ) ) {
         echo '<div class="error">';
