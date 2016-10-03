@@ -59,7 +59,6 @@ class TemplateFunctions extends WP_UnitTestCase {
     }
 
     public function test_mashengine_FBTW() {
-        global $mashsb_options;
 
         $url = 'http://google.com';
         
