@@ -106,11 +106,11 @@ module.exports = function(grunt) {
                     archive: '<%= paths.basezip %>/<%= pkg.name %>.zip'
                 },
                 cwd: '<%= paths.base %>',
-                src: ['**/*']
-                //dest: '../../',
-                //expand: true
+                src: ['**/*'],
+                expand: true
             }
         },
+        
         wp_deploy: {
             deploy: { 
                 options: {

@@ -250,9 +250,11 @@ s                    </div>
             <div class="changelog">
                 <div class="feature-section">
                     <div class="feature-section-content">
-                        <h2><?php _e( 'Use Facebook Connect to Skyrocket Share Count', 'mashsb' ); ?></h2>
-                        <p><?php _e( 'MashShare is the first Social Media plugin that uses the brandnew Facebook Connect Integration to bypass the regular facebook API limit which has been introduced recently. <p>It allows you up to 200 API calls per hour to the facebook server. This is more than enough for even huge traffic sites as MashShare is caching all share counts internally. <p>We are convinced that other social media plugins are going to copy our solution soon... and we will be proud of it;) <p> Your site becomes immediately better than the rest because you are the one whose website is running with full social sharing power. Other sites share count still stucks and are delayed and they do not know it;)', 'mashsb' ); ?></p>
-                        <img src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/oauth.png'; ?>"/>
+                        <!--
+                        <h2><?php //_e( 'Use Facebook Connect to Skyrocket Share Count', 'mashsb' ); ?></h2>
+                        <p><?php //_e( 'MashShare is the first Social Media plugin that uses the brandnew Facebook Connect Integration to bypass the regular facebook API limit which has been introduced recently. <p>It allows you up to 200 API calls per hour to the facebook server. This is more than enough for even huge traffic sites as MashShare is caching all share counts internally. <p>We are convinced that other social media plugins are going to copy our solution soon... and we will be proud of it;) <p> Your site becomes immediately better than the rest because you are the one whose website is running with full social sharing power. Other sites share count still stucks and are delayed and they do not know it;)', 'mashsb' ); ?></p>
+                        <img src="<?php //echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/oauth.png'; ?>"/>
+                        //-->
                         <p></p>
                         <h2><?php _e( 'A New Beautiful Sharing Widget', 'mashsb' ); ?></h2>
                         <p><?php _e( 'We have heard your wishes so the new widget contains the long requested post thumbnail and a beautiful css which gives your side bar sharing super power.', 'mashsb' ); ?></p>
