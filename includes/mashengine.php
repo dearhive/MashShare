@@ -184,7 +184,7 @@ class mashengine {
 
     function getCount( $data, $url, $request_info, $service, $time ) {
         $count = 0;
-        echo ($service[0]) . '<br>';
+
         if( $data ) {
             switch ( $service[0] ) {
                 // not used any longer. Keep it here for compatibility reasons and return share count

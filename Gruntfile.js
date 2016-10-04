@@ -62,12 +62,17 @@ module.exports = function(grunt) {
                     files: {
                         '<%= paths.basetrunk %>/mashshare.php' : 'mashshare.php',
                         '<%= paths.base %>/mashshare.php' : 'mashshare.php',
+                        '<%= paths.base %>/readme.txt': 'readme.txt',
+                        '<%= paths.basetrunk %>readme.txt': 'readme.txt',
                     },
                     options: {
                         replacements: [{
                                 pattern: /define\('MASHSB_DEBUG', true\);/g,
                                 replacement: 'define(\'MASHSB_DEBUG\', false);'
-                            }]
+                            },{
+                                pattern: /{{ version }}/g,
+                                replacement: '<%= pkg.version %>'
+                        }]
                     }
                 }
             },
