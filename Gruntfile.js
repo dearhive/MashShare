@@ -40,7 +40,7 @@ module.exports = function(grunt) {
             build: { 
                 files:[
                     {'assets/js/mashsb-admin.min.js' : 'assets/js/mashsb-admin.js'},
-                    {'assets/js/mashsb.min.js' : 'assets/js/mashsb.js'},
+                    {'assets/js/mashsb.min.js' : 'assets/js/mashsb.js'}
                 ]
             }
         },
@@ -52,12 +52,12 @@ module.exports = function(grunt) {
                      dest: '<%= paths.base %>'},
                  
                     {expand: true, src: ['**', '!node_modules/**', '!Gruntfile.js', '!package.json', '!nbproject/**', '!grunt/**','!tests/**', '!bin/**', '!.travis.yml', '!phpunit.xml.dist', '!composer.json'],
-                    dest: '<%= paths.basetrunk %>'},
+                    dest: '<%= paths.basetrunk %>'}
                 ]                
             },
         },
         
-        'string-replace': {
+        string-replace: {
                 build: {
                     files: {
                         '<%= paths.basetrunk %>/mashshare.php' : 'mashshare.php',
@@ -85,7 +85,7 @@ module.exports = function(grunt) {
             build: {
                 files:[
                     {src: ['<%= paths.base %>']},
-                    {src: ['<%= paths.basetrunk %>']},
+                    {src: ['<%= paths.basetrunk %>']}
                 ]
                
             }
@@ -95,7 +95,7 @@ module.exports = function(grunt) {
             build: { 
                 files:[
                     {'assets/css/mashsb-admin.min.css' : 'assets/css/mashsb-admin.css'},
-                    {'assets/css/mashsb.min.css' : 'assets/css/mashsb.min.css'},
+                    {'assets/css/mashsb.min.css' : 'assets/css/mashsb.min.css'}
                 ]
             }
         },
@@ -121,9 +121,9 @@ module.exports = function(grunt) {
                     //assets_dir: '<%= paths.basezip %>', //relative path to your assets directory (optional).
                     tmp_dir: '<%= paths.tmp %>', //relative path tmp assets directory (optional).
                     version: '<%= pkg.version %>'
-                },
+                }
             }
-        },
+        }
 
     });
 
@@ -136,5 +136,5 @@ module.exports = function(grunt) {
     // Build task
     //grunt.registerTask( 'build', [ 'compress:build' ]);
     grunt.registerTask( 'build', [ 'clean:build', 'uglify:build', 'cssmin:build', 'copy:build', 'string-replace:build', 'compress:build' ]);
-    grunt.registerTask( 'deploy', [ 'wp_deploy:deploy' ] )
+    grunt.registerTask( 'deploy', [ 'wp_deploy:deploy' ] );
 };
