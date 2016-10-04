@@ -54,16 +54,16 @@ module.exports = function(grunt) {
                     {expand: true, src: ['**', '!node_modules/**', '!Gruntfile.js', '!package.json', '!nbproject/**', '!grunt/**','!tests/**', '!bin/**', '!.travis.yml', '!phpunit.xml.dist', '!composer.json'],
                     dest: '<%= paths.basetrunk %>'}
                 ]                
-            },
+            }
         },
         
-        string-replace: {
+        'string-replace': {
                 build: {
                     files: {
                         '<%= paths.basetrunk %>/mashshare.php' : 'mashshare.php',
                         '<%= paths.base %>/mashshare.php' : 'mashshare.php',
                         '<%= paths.base %>/readme.txt': 'readme.txt',
-                        '<%= paths.basetrunk %>readme.txt': 'readme.txt',
+                        '<%= paths.basetrunk %>readme.txt': 'readme.txt'
                     },
                     options: {
                         replacements: [{
