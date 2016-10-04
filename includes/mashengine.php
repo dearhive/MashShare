@@ -25,8 +25,8 @@ class mashengine {
         $this->data = new stdClass;
         $this->data->total = 0;
         $data = $this->getSharesALL();
-        //return $data;
-        return $this->data;
+        return $data;
+        //return $this->data;
         //wp_die(var_dump($this->data->total));
     }
 
@@ -124,6 +124,7 @@ class mashengine {
 
         $RollingCurlX = new RollingCurlX( 10 );    // max 10 simultaneous downloads
         $RollingCurlX->setOptions( $options );
+                
         switch ( $fb_mode ) {
             case $fb_mode === 'likes':
 
@@ -136,8 +137,8 @@ class mashengine {
 
                 break;
             case $fb_mode === 'total':
-
                     if( isset( $mashsb_options['cumulate_http_https'] ) ) {
+                        //wp_die("http://graph.facebook.com/?id=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('facebook_total'), $headers );
                         $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('facebook_total'), $headers );
                         $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('facebook_total'), $headers );
                     }else{
@@ -183,6 +184,7 @@ class mashengine {
 
     function getCount( $data, $url, $request_info, $service, $time ) {
         $count = 0;
+        echo ($service[0]) . '<br>';
         if( $data ) {
             switch ( $service[0] ) {
                 // not used any longer. Keep it here for compatibility reasons and return share count
@@ -195,6 +197,7 @@ class mashengine {
                     $count = isset( $data['share']['share_count'] ) || array_key_exists( 'share_count', $data ) ? $data['share']['share_count'] : 0;
                     break;
                 case "facebook_total":
+                    //wp_die($fb_mode . 1);
                     $data = json_decode( $data, true );
                     $share_count = isset( $data['share']['share_count'] ) || array_key_exists( 'share_count', $data ) ? $data['share']['share_count'] : 0;
                     $comment_count = isset( $data['share']['comment_count'] ) || array_key_exists( 'comment_count', $data ) ? $data['share']['comment_count'] : 0;
@@ -251,6 +254,7 @@ class mashengine {
              * */
             $this->data->total += $count;
             $this->data->{$service[0]} = $count;
+            
             MASHSB()->logger->info( 'MashEngine - URL: ' . $url . ' ' . $service[0] . ': ' . $count );
             mashdebug()->info( 'MashEngine - URL: ' . $url . ' ' . $service[0] . ': ' . $count );
             //echo 'MashEngine - URL: ' . $url . ' ' . $service[0] . ': ' . $count;
