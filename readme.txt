@@ -321,6 +321,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 = {{ version }} =
 * New: Better prevent excessive Rate Limit exceeding of the facebook api on high traffic sites which results in 0 facebook share counts
+* New: Create warning notices that appears when caching is disabled or cache is purged permanetely
 
 = 3.2.8 =
 * Fix: Custom field mashsb_jsonshares facebook is empty when old "refresh while loading" share count method is used
