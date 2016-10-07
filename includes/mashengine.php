@@ -221,11 +221,6 @@ class mashengine {
                     $share_count = isset( $data['share']['share_count'] ) || array_key_exists( 'share_count', $data ) ? $data['share']['share_count'] : 0;
                     $comment_count = isset( $data['share']['comment_count'] ) || array_key_exists( 'comment_count', $data ) ? $data['share']['comment_count'] : 0;
                     $count = $share_count + $comment_count;
-//                    if( current_user_can( 'install_plugins' ) && isset( $mashsb_options['debug_mode'] ) ) {
-//                        echo 'test1 - visible only to administrator by mashshare!';
-//                        var_dump( $data );
-//                        echo 'count: ' . $share_count;
-//                    }
                     if( isset( $data['error'] ) ) {
                         // Probably rate limit exceed
                         $this->setRateLimitTransient();
@@ -304,14 +299,10 @@ class mashengine {
     }
 
     public function setRateLimitTransient() {
-        set_transient( 'mash_rate_limit', 'true', 60 );
+        set_transient( 'mash_rate_limit', 'true', 60 * 60 );
 
         MASHSB()->logger->info( 'Error: Probably Facebook Rate Limit hit' );
         $this->debug_notices[] = 'Error: Requests to Facebook probably hit Rate Limit.'  ;
-
-        if( current_user_can( 'install_plugins' ) ) {
-            echo 'rate limit block for 60 sec.';
-        }
     }
     
     public function getRemainingRateLimitTime(){
