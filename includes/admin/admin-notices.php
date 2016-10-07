@@ -47,10 +47,23 @@ function mashsb_admin_messages() {
         return;
     }
     
-    
+    // Rate Limit warning
     if( mashsb_is_admin_page() && mashsb_rate_limit_exceeded() ) {
         echo '<div class="error">';
-        echo '<p>' . sprintf(__('Your website exceeded the Facebook rate limit. Share count requests to Facebook will be delayed for 10min and the Facebook Share Count will not grow during this time. If you see this notice often consider to switch <strong>MashShare Caching Method</strong> to <a href="%s">Refresh while Loading</a> and use a higher cache expiration.', 'mashsb'), admin_url() . 'admin.php?page=mashsb-settings') . '</p>';
+        echo '<p>' . sprintf(__('Your website exceeded the Facebook rate limit. Share count requests to Facebook will be delayed for 60min and the Facebook Share Count will not grow during this time. If you see this notice often consider to change <strong>MashShare Caching Method</strong> to <a href="%s">Refresh while Loading</a> and use a higher cache expiration.', 'mashsb'), admin_url() . 'admin.php?page=mashsb-settings') . '</p>';
+        echo '</div>';
+    }
+    
+    // Cache warning
+    if( mashsb_is_deactivated_cache() ) {
+        echo '<div class="error">';
+        echo '<p>' . sprintf(__('Attention: The Mashshare Cache is deactivated. <a href="%s">Activate it</a> or share count requests to social networks will be rate limited.', 'mashsb'), admin_url() . 'admin.php?page=mashsb-settings#mashsb_settingsdebug_header') . '</p>';
+        echo '</div>';
+    }
+    // Cache warning
+    if( mashsb_is_deleted_cache() ) {
+        echo '<div class="error">';
+        echo '<p>' . sprintf(__('Attention: The Mashshare Cache is permanetely purged. <a href="%s">Disable this</a> or share count requests to social networks will be rate limited.', 'mashsb'), admin_url() . 'admin.php?page=mashsb-settings#mashsb_settingsdebug_header') . '</p>';
         echo '</div>';
     }
     

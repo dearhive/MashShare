@@ -170,14 +170,14 @@ function getSharedcount( $url ) {
      */
 
 
-    if( !empty( $url ) && is_null( $post ) && false === mashsb_rate_limit_exceeded() ) {
+    if( !empty( $url ) && is_null( $post ) ) {
         return apply_filters( 'filter_get_sharedcount', mashsbGetNonPostShares( $url ) );
     }
 
     /*
      * Refresh Cache
      */
-    if( mashsb_force_cache_refresh() && is_singular() && false === mashsb_rate_limit_exceeded() ) {
+    if( mashsb_force_cache_refresh() && is_singular() ) {
 
         // free some memory
         unset ( $mashsb_sharecount[$url] );

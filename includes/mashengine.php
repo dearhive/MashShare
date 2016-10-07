@@ -24,10 +24,13 @@ class mashengine {
     public function getALLCounts() {
         $this->data = new stdClass;
         $this->data->total = 0;
-        $data = $this->getSharesALL();     
-        return $data;
-        //return $this->data;
-        //wp_die(var_dump($this->data->total));
+        
+        if (false === mashsb_rate_limit_exceeded()){
+            $data = $this->getSharesALL();   
+            return $data;
+        }
+        // return 0;
+        return $this->data;
     }
 
     /* Collect share count from facebook and twitter */
@@ -35,8 +38,14 @@ class mashengine {
     public function getFBTWCounts() {
         $this->data = new stdClass;
         $this->data->total = 0;
-        $data = $this->getSharesFBTW();
-        return $data;
+        
+        if (false === mashsb_rate_limit_exceeded()){
+            $data = $this->getSharesFBTW();
+            return $data;
+        }
+        
+        // return 0;
+        return $this->data;
     }
 
     /* Build the multi_curl() crawler for facebook and twitter
@@ -193,7 +202,7 @@ class mashengine {
                     $count = isset( $data['share']['share_count'] ) || array_key_exists( 'share_count', $data ) ? $data['share']['share_count'] : 0;
                     if (isset($data['error'])){
                         // Probably rate limit exceed
-                        set_transient( 'mash_rate_limit', 'true', 60 * 10 );
+                        set_transient( 'mash_rate_limit', 'true', 60 * 60 );
                     }
                     break;
                 case "facebook_shares":
@@ -201,7 +210,7 @@ class mashengine {
                     $count = isset( $data['share']['share_count'] ) || array_key_exists( 'share_count', $data ) ? $data['share']['share_count'] : 0;
                     if (isset($data['error'])){
                         // Probably rate limit exceed
-                        set_transient( 'mash_rate_limit', 'true', 60 * 10 );
+                        set_transient( 'mash_rate_limit', 'true', 60 * 60 );
                     }
                     break;
                 case "facebook_total":
@@ -216,7 +225,10 @@ class mashengine {
 //                    }
                     if (isset($data['error'])){
                         // Probably rate limit exceed
-                        set_transient( 'mash_rate_limit', 'true', 60 * 10 );
+//                        if (current_user_can('install_plugins')){
+//                            echo 'rate limit block for 60 sec.';
+//                        }
+                        set_transient( 'mash_rate_limit', 'true', 60 * 60);
                     }
                     break;
                 case "google":
@@ -273,7 +285,7 @@ class mashengine {
             
             MASHSB()->logger->info( 'MashEngine - URL: ' . $url . ' ' . $service[0] . ': ' . $count );
             mashdebug()->info( 'MashEngine - URL: ' . $url . ' ' . $service[0] . ': ' . $count );
-            //echo 'MashEngine - URL: ' . $url . ' ' . $service[0] . ': ' . $count;
+            //echo 'MashEngine - URL: ' . $url . ' ' . $service[0] . ': ' . $count . '<br>';
         }
         return;
     }

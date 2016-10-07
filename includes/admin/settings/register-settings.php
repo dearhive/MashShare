@@ -1726,7 +1726,8 @@ function mashsb_delete_cache_objects() {
     }
 }
 
-/* returns Cache Status if enabled or disabled
+/* 
+ * Check Cache Status if enabled or disabled
  *
  * @since 2.0.4
  * @return string
@@ -1737,6 +1738,34 @@ function mashsb_cache_status() {
     if( isset( $mashsb_options['disable_cache'] ) ) {
         return ' <strong style="color:red;">' . __( 'Transient Cache disabled! Enable it for performance increase.', 'mashsb' ) . '</strong> ';
     }
+}
+
+/**
+ * Check if cache is deactivated
+ * 
+ * @global $mashsb_options $mashsb_options
+ * @return boolean
+ */
+function mashsb_is_deactivated_cache() {
+    global $mashsb_options;
+    if( isset( $mashsb_options['disable_cache'] ) ) {
+        return true;
+    }
+    return false;
+}
+
+/**
+ * Check if cache gets deleted
+ * 
+ * @global $mashsb_options $mashsb_options
+ * @return boolean
+ */
+function mashsb_is_deleted_cache() {
+    global $mashsb_options;
+    if( isset( $mashsb_options['delete_cache_objects'] ) ) {
+        return true;
+    }
+    return false;
 }
 
 /* Permission check if logfile is writable
