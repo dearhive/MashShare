@@ -50,7 +50,7 @@ function mashsb_admin_messages() {
     // Rate Limit warning
     if( mashsb_is_admin_page() && mashsb_rate_limit_exceeded() ) {
         echo '<div class="error">';
-        echo '<p>' . sprintf(__('Your website exceeded the Facebook rate limit. Share count requests to Facebook will be delayed for 60min and the Facebook Share Count will not grow during this time. If you see this notice often consider to change <strong>MashShare Caching Method</strong> to <a href="%s">Refresh while Loading</a> and use a higher cache expiration.', 'mashsb'), admin_url() . 'admin.php?page=mashsb-settings') . '</p>';
+        echo '<p>' . sprintf(__('Your website exceeded the Facebook rate limit. Share count requests to Facebook will be delayed for 60min and the Facebook Share Count will not grow during this time. If you see this notice often consider to change <strong>MashShare Caching Method</strong> to <a href="%s">Refresh while Loading</a> and use a higher cache expiration. MashShare tries again to request shares in ' . mashsbGetRemainingRateLimitTime() , 'mashsb'), admin_url() . 'admin.php?page=mashsb-settings') . '</p>';
         echo '</div>';
     }
     
@@ -386,3 +386,23 @@ function mashsb_in_plugin_update_message( $args ) {
 }
 
 add_action( 'in_plugin_update_message-mashsharer/mashshare.php', 'mashsb_in_plugin_update_message' );
+
+/**
+ * Get remaining time in seconds of the rate limit transient
+ * @return type
+ */
+function mashsbGetRemainingRateLimitTime() {
+    $trans_time = get_transient( 'timeout_mash_rate_limit' );
+
+    if( false !== $trans_time ) {
+        $rest = time() - $trans_time;
+        
+        if ($rest < 60){
+            return $rest . ' seconds.';
+        } else {
+            $minutes = floor($rest / 60) . ' minutes.';
+            return $minutes;
+        }
+    }
+    return time();
+}

@@ -110,8 +110,7 @@ Class RollingCurlX {
                 $ch = $completed['handle'];
                 $request_info = curl_getinfo($ch);
                 if(curl_errno($ch) !== 0 || intval($request_info['http_code']) !== 200) { //if server responded with http error
-                    $response = json_encode(array('error'=>'error'));
-                    //$response = json_encode(array('error'));
+                    $response = json_encode(array('error'=>curl_multi_getcontent($ch)));
                 } else { //sucessful response
                     $response = curl_multi_getcontent($ch);
                 }

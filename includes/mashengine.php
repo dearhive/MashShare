@@ -7,6 +7,7 @@ class mashengine {
     private $timeout;
     private $http_scheme_url;
     private $https_scheme_url;
+    private $debug_notices;
 
     function __construct( $url, $timeout = 10 ) {
         // remove http and https
@@ -24,11 +25,13 @@ class mashengine {
     public function getALLCounts() {
         $this->data = new stdClass;
         $this->data->total = 0;
-        
-        if (false === mashsb_rate_limit_exceeded()){
-            $data = $this->getSharesALL();   
+
+        if( false === mashsb_rate_limit_exceeded() ) {
+            $data = $this->getSharesALL();
             return $data;
         }
+        $this->debug_notices[] = 'MashShare: Facebook Rate Limit Exceeded. Try again in ' . $this->getRemainingRateLimitTime() . 'seconds' ;
+        add_action( 'wp_footer', array($this, 'outputDebug'), 100 );
         // return 0;
         return $this->data;
     }
@@ -38,12 +41,13 @@ class mashengine {
     public function getFBTWCounts() {
         $this->data = new stdClass;
         $this->data->total = 0;
-        
-        if (false === mashsb_rate_limit_exceeded()){
+
+        if( false === mashsb_rate_limit_exceeded() ) {
             $data = $this->getSharesFBTW();
             return $data;
         }
-        
+        $this->debug_notices[] = 'MashShare: Facebook Rate Limit Exceeded<br>';
+        add_action( 'wp_footer', array($this, 'outputDebug'), 100 );
         // return 0;
         return $this->data;
     }
@@ -72,37 +76,36 @@ class mashengine {
         $RollingCurlX->setOptions( $options );
         switch ( $fb_mode ) {
             case $fb_mode === 'likes':
-                    if( isset( $mashsb_options['cumulate_http_https'] ) ) {
-                        $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('facebook_likes'), $headers );
-                        $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('facebook_likes'), $headers );
-                    }else {
-                        $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->url, $post_data, array($this, 'getCount'), array('facebook_likes'), $headers );
-                    }
-                
+                if( isset( $mashsb_options['cumulate_http_https'] ) ) {
+                    $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('facebook_likes'), $headers );
+                    $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('facebook_likes'), $headers );
+                } else {
+                    $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->url, $post_data, array($this, 'getCount'), array('facebook_likes'), $headers );
+                }
+
                 break;
             case $fb_mode === 'total':
-                    if( isset( $mashsb_options['cumulate_http_https'] ) ) {
-                        $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('facebook_total'), $headers );
-                        $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('facebook_total'), $headers );
-                    }else{
-                        $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->url, $post_data, array($this, 'getCount'), array('facebook_total'), $headers );
-                    }
+                if( isset( $mashsb_options['cumulate_http_https'] ) ) {
+                    $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('facebook_total'), $headers );
+                    $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('facebook_total'), $headers );
+                } else {
+                    $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->url, $post_data, array($this, 'getCount'), array('facebook_total'), $headers );
+                }
 
                 break;
             default:
 
-                    if( isset( $mashsb_options['cumulate_http_https'] ) ) {
-                        $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('facebook_shares'), $headers );
-                        $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('facebook_shares'), $headers );
-                    }else{
-                        $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->url, $post_data, array($this, 'getCount'), array('facebook_shares'), $headers );
-                    }
-
+                if( isset( $mashsb_options['cumulate_http_https'] ) ) {
+                    $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('facebook_shares'), $headers );
+                    $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('facebook_shares'), $headers );
+                } else {
+                    $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->url, $post_data, array($this, 'getCount'), array('facebook_shares'), $headers );
+                }
         }
         if( isset( $mashsb_options['cumulate_http_https'] ) ) {
             $RollingCurlX->addRequest( "http://public.newsharecounts.com/count.json?url=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
             $RollingCurlX->addRequest( "http://public.newsharecounts.com/count.json?url=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
-        }else{
+        } else {
             $RollingCurlX->addRequest( "http://public.newsharecounts.com/count.json?url=" . $this->url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
         }
 
@@ -121,52 +124,51 @@ class mashengine {
 
     public function getSharesALL() {
         global $mashsb_options;
-        
+
         $fb_mode = isset( $mashsb_options['facebook_count_mode'] ) ? $mashsb_options['facebook_count_mode'] : 'shares';
         $post_data = null;
         $headers = null;
 
         $options = array(
             CURLOPT_SSL_VERIFYPEER => FALSE,
-            CURLOPT_SSL_VERIFYHOST => FALSE            
+            CURLOPT_SSL_VERIFYHOST => FALSE
         );
 
         $RollingCurlX = new RollingCurlX( 10 );    // max 10 simultaneous downloads
         $RollingCurlX->setOptions( $options );
-                
+
         switch ( $fb_mode ) {
             case $fb_mode === 'likes':
 
-                    if( isset( $mashsb_options['cumulate_http_https'] ) ) {
-                        $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('facebook_likes'), $headers );
-                        $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('facebook_likes'), $headers );
-                    }else{
-                        $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->url, $post_data, array($this, 'getCount'), array('facebook_likes'), $headers );
-                    }
+                if( isset( $mashsb_options['cumulate_http_https'] ) ) {
+                    $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('facebook_likes'), $headers );
+                    $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('facebook_likes'), $headers );
+                } else {
+                    $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->url, $post_data, array($this, 'getCount'), array('facebook_likes'), $headers );
+                }
 
                 break;
             case $fb_mode === 'total':
-                    if( isset( $mashsb_options['cumulate_http_https'] ) ) {
-                        $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('facebook_total'), $headers );
-                        $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('facebook_total'), $headers );
-                    }else{
-                        $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->url, $post_data, array($this, 'getCount'), array('facebook_total'), $headers );
-                    }
+                if( isset( $mashsb_options['cumulate_http_https'] ) ) {
+                    $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('facebook_total'), $headers );
+                    $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('facebook_total'), $headers );
+                } else {
+                    $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->url, $post_data, array($this, 'getCount'), array('facebook_total'), $headers );
+                }
 
                 break;
             default:
-                    if( isset( $mashsb_options['cumulate_http_https'] ) ) {
-                        $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('facebook_shares'), $headers );
-                        $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('facebook_shares'), $headers );
-                    }else{
-                        $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->url, $post_data, array($this, 'getCount'), array('facebook_shares'), $headers );
-                    }
-
+                if( isset( $mashsb_options['cumulate_http_https'] ) ) {
+                    $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('facebook_shares'), $headers );
+                    $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('facebook_shares'), $headers );
+                } else {
+                    $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->url, $post_data, array($this, 'getCount'), array('facebook_shares'), $headers );
+                }
         }
         if( isset( $mashsb_options['cumulate_http_https'] ) ) {
             $RollingCurlX->addRequest( "http://public.newsharecounts.com/count.json?url=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
             $RollingCurlX->addRequest( "http://public.newsharecounts.com/count.json?url=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
-        }else{
+        } else {
             $RollingCurlX->addRequest( "http://public.newsharecounts.com/count.json?url=" . $this->url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
         }
         $RollingCurlX->addRequest( "https://www.linkedin.com/countserv/count/share?format=json&url=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('linkedin'), $headers );
@@ -191,26 +193,27 @@ class mashengine {
      */
 
     function getCount( $data, $url, $request_info, $service, $time ) {
+        global $mashsb_options;
         $count = 0;
 
-        
+
         if( $data ) {
             switch ( $service[0] ) {
                 // not used any longer. Keep it here for compatibility reasons and return share count
                 case "facebook_likes":
                     $data = json_decode( $data, true );
                     $count = isset( $data['share']['share_count'] ) || array_key_exists( 'share_count', $data ) ? $data['share']['share_count'] : 0;
-                    if (isset($data['error'])){
+                    if( isset( $data['error'] ) ) {
                         // Probably rate limit exceed
-                        set_transient( 'mash_rate_limit', 'true', 60 * 60 );
+                        $this->setRateLimitTransient();
                     }
                     break;
                 case "facebook_shares":
                     $data = json_decode( $data, true ); // return assoc array
                     $count = isset( $data['share']['share_count'] ) || array_key_exists( 'share_count', $data ) ? $data['share']['share_count'] : 0;
-                    if (isset($data['error'])){
+                    if( isset( $data['error'] ) ) {
                         // Probably rate limit exceed
-                        set_transient( 'mash_rate_limit', 'true', 60 * 60 );
+                        $this->setRateLimitTransient();
                     }
                     break;
                 case "facebook_total":
@@ -218,22 +221,19 @@ class mashengine {
                     $share_count = isset( $data['share']['share_count'] ) || array_key_exists( 'share_count', $data ) ? $data['share']['share_count'] : 0;
                     $comment_count = isset( $data['share']['comment_count'] ) || array_key_exists( 'comment_count', $data ) ? $data['share']['comment_count'] : 0;
                     $count = $share_count + $comment_count;
-//                    if (current_user_can('install_plugins')){
-//                         echo 'test1 - visible only to administrator by mashshare!';
-//                         var_dump($data);
-//                         echo 'count: ' . $share_count;
+//                    if( current_user_can( 'install_plugins' ) && isset( $mashsb_options['debug_mode'] ) ) {
+//                        echo 'test1 - visible only to administrator by mashshare!';
+//                        var_dump( $data );
+//                        echo 'count: ' . $share_count;
 //                    }
-                    if (isset($data['error'])){
+                    if( isset( $data['error'] ) ) {
                         // Probably rate limit exceed
-//                        if (current_user_can('install_plugins')){
-//                            echo 'rate limit block for 60 sec.';
-//                        }
-                        set_transient( 'mash_rate_limit', 'true', 60 * 60);
+                        $this->setRateLimitTransient();
                     }
                     break;
                 case "google":
                     //preg_match( '/window\.__SSR = {c: ([\d]+)TEST/', $data, $matches );
-                    preg_match("#window\.__SSR = {c: ([\d]+)#", $data, $matches);
+                    preg_match( "#window\.__SSR = {c: ([\d]+)#", $data, $matches );
                     if( isset( $matches[0] ) )
                         $count = str_replace( 'window.__SSR = {c: ', '', $matches[0] );
                     break;
@@ -282,12 +282,45 @@ class mashengine {
              * */
             $this->data->total += $count;
             $this->data->{$service[0]} = $count;
-            
+
             MASHSB()->logger->info( 'MashEngine - URL: ' . $url . ' ' . $service[0] . ': ' . $count );
             mashdebug()->info( 'MashEngine - URL: ' . $url . ' ' . $service[0] . ': ' . $count );
             //echo 'MashEngine - URL: ' . $url . ' ' . $service[0] . ': ' . $count . '<br>';
+            $this->debug_notices[] = 'MashEngine - URL: ' . $url . ' ' . $service[0] . ': ' . $count . '<br>';
+
+            add_action( 'wp_footer', array($this, 'outputDebug'), 100 );
         }
         return;
+    }
+
+    public function outputDebug() {
+        global $mashsb_options;
+
+        if( current_user_can( 'install_plugins' ) && isset( $mashsb_options['debug_mode'] ) ) {
+            echo '<div class="mash-debug" style="display:block;z-index:250000;font-size:11px;text-align:center;">';
+                    var_dump($this->debug_notices);
+            echo '</div>';
+        }
+    }
+
+    public function setRateLimitTransient() {
+        set_transient( 'mash_rate_limit', 'true', 60 );
+
+        MASHSB()->logger->info( 'Error: Probably Facebook Rate Limit hit' );
+        $this->debug_notices[] = 'Error: Requests to Facebook probably hit Rate Limit.'  ;
+
+        if( current_user_can( 'install_plugins' ) ) {
+            echo 'rate limit block for 60 sec.';
+        }
+    }
+    
+    public function getRemainingRateLimitTime(){
+        $trans_time = get_transient('timeout_mash_rate_limit');
+
+        if (false !== $trans_time){
+            return time() - $trans_time;
+        }
+        return time();
     }
 
 }
