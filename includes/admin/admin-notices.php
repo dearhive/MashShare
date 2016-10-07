@@ -47,6 +47,13 @@ function mashsb_admin_messages() {
         return;
     }
     
+    
+    if( mashsb_is_admin_page() && mashsb_rate_limit_exceeded() ) {
+        echo '<div class="error">';
+        echo '<p>' . sprintf(__('Your website exceeded the Facebook rate limit. Share count requests to Facebook will be delayed for 10min and the Facebook Share Count will not grow during this time. If you see this notice often consider to switch <strong>MashShare Caching Method</strong> to <a href="%s">Refresh while Loading</a> and use a higher cache expiration.', 'mashsb'), admin_url() . 'admin.php?page=mashsb-settings') . '</p>';
+        echo '</div>';
+    }
+    
     //mashsb_update_notice_101();
     
     if( mashsb_is_admin_page() && !function_exists( 'curl_init' ) ) {
@@ -162,7 +169,6 @@ function mashsb_admin_messages() {
     //mashsb_update_notices();
 }
 add_action( 'admin_notices', 'mashsb_admin_messages' );
-
 
 /**
  * Check if sharebar add-on version is fully supported

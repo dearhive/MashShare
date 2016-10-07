@@ -120,6 +120,17 @@ function mashsbGetNonPostShares( $url ) {
     }
 }
 
+/**
+ * Check if the facebook rate limit has been exceeded
+ * @return boolean
+ */
+function mashsb_rate_limit_exceeded(){
+    if (false === get_transient('mash_rate_limit')){
+        return false;
+    }
+    return true;
+}
+
 /*
  * Return the share count
  * 
@@ -159,14 +170,14 @@ function getSharedcount( $url ) {
      */
 
 
-    if( !empty( $url ) && is_null( $post ) ) {
+    if( !empty( $url ) && is_null( $post ) && false === mashsb_rate_limit_exceeded() ) {
         return apply_filters( 'filter_get_sharedcount', mashsbGetNonPostShares( $url ) );
     }
 
     /*
      * Refresh Cache
      */
-    if( mashsb_force_cache_refresh() && is_singular() ) {
+    if( mashsb_force_cache_refresh() && is_singular() && false === mashsb_rate_limit_exceeded() ) {
 
         // free some memory
         unset ( $mashsb_sharecount[$url] );
@@ -189,6 +200,8 @@ function getSharedcount( $url ) {
          * Update post_meta only when API is requested and
          * API share count is greater than real fresh requested share count ->
          */
+        
+
 
         if( $mashsbShareCounts->total >= $mashsbStoredShareCount ) {
             update_post_meta( $post->ID, 'mashsb_shares', $mashsbShareCounts->total );

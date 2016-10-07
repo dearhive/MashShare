@@ -24,7 +24,7 @@ class mashengine {
     public function getALLCounts() {
         $this->data = new stdClass;
         $this->data->total = 0;
-        $data = $this->getSharesALL();
+        $data = $this->getSharesALL();     
         return $data;
         //return $this->data;
         //wp_die(var_dump($this->data->total));
@@ -119,7 +119,7 @@ class mashengine {
 
         $options = array(
             CURLOPT_SSL_VERIFYPEER => FALSE,
-            CURLOPT_SSL_VERIFYHOST => FALSE,
+            CURLOPT_SSL_VERIFYHOST => FALSE            
         );
 
         $RollingCurlX = new RollingCurlX( 10 );    // max 10 simultaneous downloads
@@ -138,7 +138,6 @@ class mashengine {
                 break;
             case $fb_mode === 'total':
                     if( isset( $mashsb_options['cumulate_http_https'] ) ) {
-                        //wp_die("http://graph.facebook.com/?id=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('facebook_total'), $headers );
                         $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('facebook_total'), $headers );
                         $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('facebook_total'), $headers );
                     }else{
@@ -185,23 +184,40 @@ class mashengine {
     function getCount( $data, $url, $request_info, $service, $time ) {
         $count = 0;
 
+        
         if( $data ) {
             switch ( $service[0] ) {
                 // not used any longer. Keep it here for compatibility reasons and return share count
                 case "facebook_likes":
                     $data = json_decode( $data, true );
                     $count = isset( $data['share']['share_count'] ) || array_key_exists( 'share_count', $data ) ? $data['share']['share_count'] : 0;
+                    if (isset($data['error'])){
+                        // Probably rate limit exceed
+                        set_transient( 'mash_rate_limit', 'true', 60 * 10 );
+                    }
                     break;
                 case "facebook_shares":
                     $data = json_decode( $data, true ); // return assoc array
                     $count = isset( $data['share']['share_count'] ) || array_key_exists( 'share_count', $data ) ? $data['share']['share_count'] : 0;
+                    if (isset($data['error'])){
+                        // Probably rate limit exceed
+                        set_transient( 'mash_rate_limit', 'true', 60 * 10 );
+                    }
                     break;
                 case "facebook_total":
-                    //wp_die($fb_mode . 1);
                     $data = json_decode( $data, true );
                     $share_count = isset( $data['share']['share_count'] ) || array_key_exists( 'share_count', $data ) ? $data['share']['share_count'] : 0;
                     $comment_count = isset( $data['share']['comment_count'] ) || array_key_exists( 'comment_count', $data ) ? $data['share']['comment_count'] : 0;
                     $count = $share_count + $comment_count;
+//                    if (current_user_can('install_plugins')){
+//                         echo 'test1 - visible only to administrator by mashshare!';
+//                         var_dump($data);
+//                         echo 'count: ' . $share_count;
+//                    }
+                    if (isset($data['error'])){
+                        // Probably rate limit exceed
+                        set_transient( 'mash_rate_limit', 'true', 60 * 10 );
+                    }
                     break;
                 case "google":
                     //preg_match( '/window\.__SSR = {c: ([\d]+)TEST/', $data, $matches );
