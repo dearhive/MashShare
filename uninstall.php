@@ -37,5 +37,9 @@ if( mashsb_get_option( 'uninstall_on_delete' ) ) {
         delete_post_meta_by_key( 'mashsb_shares' );
         delete_post_meta_by_key( 'mashsb_jsonshares' );
         
+        //delete transients
+        delete_transient('mashsb_rate_limit');
+        delete_transient('mashsb_limit_req');
+        
         wp_clear_scheduled_hook('mashsharer_transients_cron');
 }
