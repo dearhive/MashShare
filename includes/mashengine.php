@@ -25,6 +25,7 @@ class mashengine {
     public function getALLCounts() {
         $this->data = new stdClass;
         $this->data->total = 0;
+        $this->data->error = '';
 
         if (false === mashsb_rate_limit_exceeded() ) {
             $data = $this->getSharesALL();
@@ -40,6 +41,7 @@ class mashengine {
     public function getFBTWCounts() {
         $this->data = new stdClass;
         $this->data->total = 0;
+        $this->data->error = '';
 
         if (false === mashsb_rate_limit_exceeded() ) {
             $data = $this->getSharesFBTW();
@@ -192,8 +194,9 @@ class mashengine {
 
     function getCount($data, $url, $request_info, $service, $time) {
         global $mashsb_options;
+        
         $count = 0;
-
+        $error = '';
 
         if ($data) {
             switch ($service[0]) {
@@ -201,9 +204,7 @@ class mashengine {
                 case "facebook_likes":
                     $data = json_decode($data, true);
                     $count = isset($data['share']['share_count']) || array_key_exists('share_count', $data) ? $data['share']['share_count'] : 0;
-                    if (isset($data['error'])) {
-                        $count = 'rateLimit';
-                        // Probably rate limit exceed
+                    if (isset($data['error'])) {                        // Probably rate limit exceed
                         $this->setRateLimitTransient();
                     }
                     break;
@@ -222,6 +223,7 @@ class mashengine {
                     $count = $share_count + $comment_count;
                     if (isset($data['error'])) {
                         // Probably rate limit exceed
+                        $error = array('facebook_error' => $data['error']);
                         $this->setRateLimitTransient();
                     }
                     break;
@@ -274,6 +276,7 @@ class mashengine {
             /* $this->data->shares->total += $count;
               $this->data->shares->$service[0] = $count;
              * */
+            $this->data->error = $error;
             $this->data->total += $count;
             $this->data->{$service[0]} = $count;
 
