@@ -25,7 +25,7 @@ class mashengine {
     public function getALLCounts() {
         $this->data = new stdClass;
         $this->data->total = 0;
-        $this->data->error = 'test';
+        $this->data->error = '';
 
         if (false === mashsb_rate_limit_exceeded() ) {
             $data = $this->getSharesALL();
@@ -195,7 +195,7 @@ class mashengine {
     function getCount($data, $url, $request_info, $service, $time) {
         global $mashsb_error;
         $count = 0;
-        $error = 'ssdsd';
+        $error = '';
 
         if ($data) {
             switch ($service[0]) {
@@ -221,7 +221,6 @@ class mashengine {
                     $comment_count = isset($data['share']['comment_count']) || array_key_exists('comment_count', $data) ? $data['share']['comment_count'] : 0;
                     $count = $share_count + $comment_count;
                     if (isset($data['error'])) {
-
                         // Probably rate limit exceed
                         $error = array('facebook_error' => $data['error']);
                         $this->setRateLimitTransient();
