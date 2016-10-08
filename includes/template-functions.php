@@ -98,8 +98,6 @@ function mashsbGetNonPostShares( $url ) {
         
         // Its request limited
         if ( mashsb_is_req_limited() ){
-//            $mashsb_error[] = 'MashShare: Facebook Temp Rate Limit Exceeded';
-//            MASHSB()->logger->info('MashShare: Facebook Temp Rate Limit Exceeded'); 
             $shares = get_transient( 'mashcount_' . md5( $url_clean ) );
             if( isset( $shares ) && is_numeric( $shares ) ) {
                 MASHSB()->logger->info( 'mashsbGetNonPostShares() get shares from get_transient. URL: ' . $url_clean . ' SHARES: ' . $shares );
@@ -194,7 +192,7 @@ function getSharedcount( $url ) {
         
         // Its request limited
         if ( mashsb_is_req_limited() ){ 
-            return get_post_meta( $post->ID, 'mashsb_shares', true );
+            return get_post_meta( $post->ID, 'mashsb_shares', true ) + getFakecount();
         }
 
         // free some memory
@@ -219,7 +217,7 @@ function getSharedcount( $url ) {
          * API share count is greater than real fresh requested share count ->
          */
         
-
+        //wp_die('error' . $mashsbShareCounts->error);
 
         if( $mashsbShareCounts->total >= $mashsbStoredShareCount ) {
             update_post_meta( $post->ID, 'mashsb_shares', $mashsbShareCounts->total );

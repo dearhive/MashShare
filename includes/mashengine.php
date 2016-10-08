@@ -25,7 +25,7 @@ class mashengine {
     public function getALLCounts() {
         $this->data = new stdClass;
         $this->data->total = 0;
-        $this->data->error = '';
+        $this->data->error = 'test';
 
         if (false === mashsb_rate_limit_exceeded() ) {
             $data = $this->getSharesALL();
@@ -193,10 +193,9 @@ class mashengine {
      */
 
     function getCount($data, $url, $request_info, $service, $time) {
-        global $mashsb_options;
-        
+        global $mashsb_error;
         $count = 0;
-        $error = '';
+        $error = 'ssdsd';
 
         if ($data) {
             switch ($service[0]) {
@@ -222,6 +221,7 @@ class mashengine {
                     $comment_count = isset($data['share']['comment_count']) || array_key_exists('comment_count', $data) ? $data['share']['comment_count'] : 0;
                     $count = $share_count + $comment_count;
                     if (isset($data['error'])) {
+
                         // Probably rate limit exceed
                         $error = array('facebook_error' => $data['error']);
                         $this->setRateLimitTransient();
@@ -284,6 +284,7 @@ class mashengine {
             mashdebug()->info('MashEngine - URL: ' . $url . ' ' . $service[0] . ': ' . $count);
             //echo 'MashEngine - URL: ' . $url . ' ' . $service[0] . ': ' . $count . '<br>';
             $this->debug_notices[] = 'MashEngine - URL: ' . $url . ' ' . $service[0] . ': ' . $count . '<br>';
+            $mashsb_error[] = 'MashEngine - URL: ' . $url . ' ' . $service[0] . ': ' . $count;
 
             add_action('wp_footer', array($this, 'outputDebug'), 100);
         }
