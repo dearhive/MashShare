@@ -301,7 +301,7 @@ class mashengine {
     }
 
     public function setRateLimitTransient() {
-        set_transient('mashsb_limit_req', 'true', 60 * 60);
+        set_transient('mashsb_rate_limit', 'true', 60 * 60);
 
         MASHSB()->logger->info('Error: Probably Facebook Rate Limit hit');
         $this->debug_notices[] = 'Error: Requests to Facebook probably hit Rate Limit.';
@@ -322,7 +322,7 @@ class mashengine {
     }
 
     public function getRemainingRateLimitTime() {
-        $trans_time = get_transient('timeout_mash_rate_limit');
+        $trans_time = get_transient('timeout_mashsb_rate_limit');
 
         if (false !== $trans_time) {
             return time() - $trans_time;

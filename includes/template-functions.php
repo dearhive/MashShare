@@ -125,7 +125,7 @@ function mashsbGetNonPostShares( $url ) {
  * @return boolean
  */
 function mashsb_rate_limit_exceeded(){
-    if (false === get_transient('mash_rate_limit')){
+    if (false === get_transient('mashsb_rate_limit')){
         return false;
     }
     return true;
