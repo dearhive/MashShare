@@ -123,7 +123,7 @@ class mashengine {
     public function getSharesALL() {
         global $mashsb_options;
 
-        $fb_mode = isset($mashsb_options['facebook_count_mode']) ? $mashsb_options['facebook_count_mode'] : 'shares';
+        $fb_mode = isset($mashsb_options['facebook_count_mode']) ? $mashsb_options['facebook_count_mode'] : 'total';
         $post_data = null;
         $headers = null;
 
@@ -202,6 +202,7 @@ class mashengine {
                     $data = json_decode($data, true);
                     $count = isset($data['share']['share_count']) || array_key_exists('share_count', $data) ? $data['share']['share_count'] : 0;
                     if (isset($data['error'])) {
+                        $count = 'rateLimit';
                         // Probably rate limit exceed
                         $this->setRateLimitTransient();
                     }
