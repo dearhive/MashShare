@@ -86,7 +86,7 @@ function mashsbGetShareMethod( $mashsbSharesObj ) {
  * @returns integer $shares
  */
 function mashsbGetNonPostShares( $url ) {
-    global $mashsb_options;
+    global $mashsb_error;
     // Expiration
     $expiration = mashsb_get_expiration();
     
@@ -95,6 +95,19 @@ function mashsbGetNonPostShares( $url ) {
 
     // Get any existing copy of our transient data and fill the cache
     if( mashsb_force_cache_refresh() ) {
+        
+        // Its request limited
+        if ( mashsb_is_req_limited() ){
+//            $mashsb_error[] = 'MashShare: Facebook Temp Rate Limit Exceeded';
+//            MASHSB()->logger->info('MashShare: Facebook Temp Rate Limit Exceeded'); 
+            $shares = get_transient( 'mashcount_' . md5( $url_clean ) );
+            if( isset( $shares ) && is_numeric( $shares ) ) {
+                MASHSB()->logger->info( 'mashsbGetNonPostShares() get shares from get_transient. URL: ' . $url_clean . ' SHARES: ' . $shares );
+                return $shares + getFakecount();
+            } else {
+                return 0 + getFakecount(); // we need a result
+            }
+        }
 
         // Regenerate the data and save the transient
         // Get the share Object
@@ -139,8 +152,8 @@ function mashsb_rate_limit_exceeded(){
  */
 
 function getSharedcount( $url ) {
-    global $mashsb_options, $post, $mashsb_sharecount; // todo test a global share count var if it reduces the amount of requests
-
+    global $post, $mashsb_sharecount, $mashsb_error; // todo test a global share count var if it reduces the amount of requests
+        
     // Return global share count variable to prevent multiple execution
     if (is_array($mashsb_sharecount) && array_key_exists($url, $mashsb_sharecount) && !empty($mashsb_sharecount[$url]) && !mashsb_is_cache_refresh() ){
         return $mashsb_sharecount[$url] + getFakecount();
@@ -178,6 +191,11 @@ function getSharedcount( $url ) {
      * Refresh Cache
      */
     if( mashsb_force_cache_refresh() && is_singular() ) {
+        
+        // Its request limited
+        if ( mashsb_is_req_limited() ){ 
+            return get_post_meta( $post->ID, 'mashsb_shares', true );
+        }
 
         // free some memory
         unset ( $mashsb_sharecount[$url] );

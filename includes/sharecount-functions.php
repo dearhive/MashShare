@@ -14,6 +14,24 @@ if( !defined( 'ABSPATH' ) ) {
     exit;
 }
 
+    /**
+     * Make sure that requests do not exceed 1req / 5second
+     * @return boolean
+     */
+    function mashsb_is_req_limited() {
+        global $mashsb_error;
+        $rate_limit = get_transient('mashsb_limit_req');
+        
+        if (false === $rate_limit) {
+            set_transient('mashsb_limit_req', '1', 5);
+            return false;
+        }
+            $mashsb_error[] = 'MashShare: Facebook Temp Rate Limit Exceeded';
+            MASHSB()->logger->info('MashShare: Facebook Temp Rate Limit Exceeded');
+        return true;
+        
+    }
+
 /**
  * Check if cache time is expired and post must be refreshed
  * 
@@ -213,15 +231,14 @@ function mashsb_get_expiration() {
 //    );
 //}
 
-
 /**
  * Check if permalinks are enabled
  * 
  * @return boolean true when enabled
  */
 function mashsb_is_enabled_permalinks() {
-    $permalinks = get_option( 'permalink_structure' );
-    if( !empty( $permalinks ) ) {
+    $permalinks = get_option('permalink_structure');
+    if (!empty($permalinks)) {
         return true;
     }
     return false;

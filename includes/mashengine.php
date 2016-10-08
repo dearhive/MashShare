@@ -26,13 +26,11 @@ class mashengine {
         $this->data = new stdClass;
         $this->data->total = 0;
 
-        if (false === mashsb_rate_limit_exceeded() && false === $this->mashsb_is_req_limited() ) {
+        if (false === mashsb_rate_limit_exceeded() ) {
             $data = $this->getSharesALL();
             return $data;
         }
-        $this->debug_notices[] = 'MashShare: Facebook Rate Limit Exceeded. Try again in ' . $this->getRemainingRateLimitTime() . 'seconds';
-        add_action('wp_footer', array($this, 'outputDebug'), 100);
-        MASHSB()->logger->info('MashShare: Facebook Rate Limit Exceeded');
+
         // return 0;
         return $this->data;
     }
@@ -43,13 +41,11 @@ class mashengine {
         $this->data = new stdClass;
         $this->data->total = 0;
 
-        if (false === mashsb_rate_limit_exceeded() && false === $this->mashsb_is_req_limited() ) {
+        if (false === mashsb_rate_limit_exceeded() ) {
             $data = $this->getSharesFBTW();
             return $data;
         }
-        $this->debug_notices[] = 'MashShare: Facebook Rate Limit Exceeded<br>';
-        add_action('wp_footer', array($this, 'outputDebug'), 100);
-        MASHSB()->logger->info('MashShare: Facebook Rate Limit Exceeded');
+
         // return 0;
         return $this->data;
     }
@@ -305,21 +301,11 @@ class mashengine {
 
         MASHSB()->logger->info('Error: Probably Facebook Rate Limit hit');
         $this->debug_notices[] = 'Error: Requests to Facebook probably hit Rate Limit.';
+        add_action('wp_footer', array($this, 'outputDebug'), 100);
+
     }
 
-    /**
-     * Make sure that requests do not exceed 1req / 5second
-     * @return boolean
-     */
-    public function mashsb_is_req_limited() {
-        $rate_limit = get_transient('mashsb_limit_req');
-        
-        if (false === $rate_limit) {
-            set_transient('mashsb_limit_req', '1', 5);
-            return false;
-        }
-        return true;
-    }
+
 
     public function getRemainingRateLimitTime() {
         $trans_time = get_transient('timeout_mashsb_rate_limit');

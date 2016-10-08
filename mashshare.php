@@ -199,6 +199,7 @@ if( !class_exists( 'mashshare' ) ) :
             require_once MASHSB_PLUGIN_DIR . 'includes/libraries/class-google-shorturl.php';
             require_once MASHSB_PLUGIN_DIR . 'includes/libraries/class-bitly-shorturl.php';
             require_once MASHSB_PLUGIN_DIR . 'includes/admin/tracking.php'; // Ensure cron is loading even on frontpage
+            require_once MASHSB_PLUGIN_DIR . 'includes/debug/debug.php';
 
             if( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
                 require_once MASHSB_PLUGIN_DIR . 'includes/install.php';
