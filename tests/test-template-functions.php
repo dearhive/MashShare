@@ -141,7 +141,6 @@ class TemplateFunctions extends WP_UnitTestCase {
         $encode_data = json_encode($mashsbShareCounts);
 
         $decode_data = json_decode($encode_data, true);
-
         $this->assertArrayHasKey('facebook_shares', $decode_data);
 
         $facebook_shares = $mashsbShareCounts->facebook_shares;
