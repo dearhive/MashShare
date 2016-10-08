@@ -320,6 +320,9 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 == Changelog ==
 
 = {{ version }} =
+* New: Integrate Facebook Rate Limiter to prevent hitting facebook api request limits and rate limit errors resulting in zero facebook share counts
+
+= 3.2.9 =
 * New: Better prevent excessive Rate Limit exceeding of the facebook api on high traffic sites which results in 0 facebook share counts
 * New: Create warning notices that appears when caching is disabled or cache is purged permanetely
 * New: Debug mode writes debug notices into footer of the site available only for administrators
