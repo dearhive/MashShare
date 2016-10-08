@@ -392,10 +392,10 @@ add_action( 'in_plugin_update_message-mashsharer/mashshare.php', 'mashsb_in_plug
  * @return type
  */
 function mashsbGetRemainingRateLimitTime() {
-    $trans_time = get_transient( 'timeout_mashsb_limit_req' );
+    $trans_time = get_transient( 'timeout_mashsb_rate_limit' );
 
     if( false !== $trans_time ) {
-        $rest = time() - $trans_time;
+        $rest = abs(time() - $trans_time);
         
         if ($rest < 60){
             return $rest . ' seconds.';
@@ -404,5 +404,5 @@ function mashsbGetRemainingRateLimitTime() {
             return $minutes;
         }
     }
-    return time();
+    return 0 . 'seconds';
 }
