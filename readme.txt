@@ -264,9 +264,6 @@ No, there is no personal data send to Facebook, Twitter, Google and other servic
 The big advantage of using this Mashare Share buttons is the independance in comparision to other plugins which creates steady connections to Facebook and Co. 
 So there is no IP based data send to the social networks or to sharedcount. 
 
-<h4>How is sharedcount able to get the total number of shares?</h4>
-Sharedcount is using public available API services of the social networks which deliver only the number of shares for a specific webpage. Sharedcount is not able to see who shared anything, only how often.
-
 <h4>Do i have to do manual changes in Javascript or HTML Code?</h4>
 There is no need for you to make any manual changes. The plugin does everything for you. But if you are an experienced web-developer you are free to use the php function mashsharer(); in your templates.
 
@@ -277,7 +274,7 @@ Use the shortcode [mashshare] to embed the Share Buttons in pages or posts.
 Most times this is a result of some php server limits. Check your logfiles to see which values must be increased.
 I can also assist you with such problems, but keep in mind that they are mostly not caused by this plugin.
 
-<h4>When i click on the share buttons, nothing happens and no popup window</h4>
+<h4>When i click on the Social Media share buttons, nothing happens and no popup window</h4>
 Mostly that is because you are using any third party and outdated theme which is not coded very well by the author and is not using the Wordpress API for embeding external plugin script.
 For MashSharer make sure your website source contains the script /mashsharer/assets/mashsharer.js
 
@@ -303,7 +300,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 == Screenshots ==
 
-1. Subscribe form with Facebook button and mail subscribe
+1. Subscribe form with Social Media Facebook button and mail subscribe
 2. Default share buttons with separate available responsive Add-On
 3. Sortable Total Share Dashboard
 4. Default Sharebuttons with separate available responsive Add-On
@@ -320,7 +317,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 == Changelog ==
 
 = {{ version }} =
-* New: Integrate Facebook Rate Limiter to prevent hitting facebook api request limits and rate limit errors resulting in zero facebook share counts
+* New: Integrate Facebook Social Media Rate Limiter to prevent hitting facebook api request limits and rate limit errors resulting in zero facebook share counts
 
 
 = 3.2.9 =
