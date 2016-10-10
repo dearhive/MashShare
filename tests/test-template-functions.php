@@ -9,7 +9,7 @@ class TemplateFunctions extends WP_UnitTestCase {
         parent::setUp();
         global $mashsb_options;
         $mashsb_options['disable_cache'] = 'true';
-        $mashsb_options['fb_access_token'] = 'EAAHag2FMn2UBAAU6ceKGLZCN6PAJ5cWFQ9ZAVoG32qqTRCG0UrosOsOZB8JwsjAJU8RiSuD4gTxWpNwvvc9SRLrVOHcSMkMpnosLvxR3VZCZCEHBmTVKcrJAoRZB6hjrhZCeYxGQwiyoClx7Y0igevbEfcwfwltKkUgfzoCzscqHyaOq2Nwn26k';
+        //$mashsb_options['fb_access_token'] = 'EAAHag2FMn2UBAAU6ceKGLZCN6PAJ5cWFQ9ZAVoG32qqTRCG0UrosOsOZB8JwsjAJU8RiSuD4gTxWpNwvvc9SRLrVOHcSMkMpnosLvxR3VZCZCEHBmTVKcrJAoRZB6hjrhZCeYxGQwiyoClx7Y0igevbEfcwfwltKkUgfzoCzscqHyaOq2Nwn26k';
         $mashsb_options['mashsb_sharemethod'] = 'mashengine';
         $mashsb_options['caching_method'] = 'refresh_loading';
         $mashsb_options['mashsharer_cache'] = 0;
@@ -37,7 +37,6 @@ class TemplateFunctions extends WP_UnitTestCase {
         //delete transients
         delete_transient( 'mashsb_rate_limit' );
         delete_transient( 'mashsb_limit_req' );
-        //sleep(0);
     }
 
     public function test_mashsb_is_cache_refresh() {
@@ -70,6 +69,9 @@ class TemplateFunctions extends WP_UnitTestCase {
 //        $this->assertQueryTrue( 'is_single', 'is_singular' );
 //    }
     public function test_mashengine_FBTW() {
+        
+                sleep(5);
+                
         $url = 'http://google.com';
         $mashsbSharesObj = new mashengine( $url );
         $shares = $mashsbSharesObj->getALLCounts()->total;
@@ -78,6 +80,9 @@ class TemplateFunctions extends WP_UnitTestCase {
 
     public function test_mashengine_all_counts() {
         global $mashsb_options;
+        
+                sleep(5);
+                
         $url = 'http://google.com';
         $mash = new mashengine( $url );
         $shares = $mash->getALLCounts()->total;
@@ -86,6 +91,9 @@ class TemplateFunctions extends WP_UnitTestCase {
 
     public function test_getSharedcount() {
         global $mashsb_options, $post;
+        
+                sleep(5);
+        
         //global $mashsb_options;
 
         $id = $this->factory->post->create(array(
@@ -109,6 +117,8 @@ class TemplateFunctions extends WP_UnitTestCase {
 
     public function test_getSharedcountJson() {
         global $mashsb_options, $post;
+        
+                sleep(5);
 
         //$mashsb_options['fb_access_token'] = 'EAAHag2FMn2UBAAU6ceKGLZCN6PAJ5cWFQ9ZAVoG32qqTRCG0UrosOsOZB8JwsjAJU8RiSuD4gTxWpNwvvc9SRLrVOHcSMkMpnosLvxR3VZCZCEHBmTVKcrJAoRZB6hjrhZCeYxGQwiyoClx7Y0igevbEfcwfwltKkUgfzoCzscqHyaOq2Nwn26k';
         $mashsb_options['mashsb_sharemethod'] = 'mashengine';
@@ -160,6 +170,8 @@ class TemplateFunctions extends WP_UnitTestCase {
 
     public function test_getSharedcount_async_cache() {
         global $mashsb_options, $post;
+        
+                sleep(5);
 
         $mashsb_options['caching_method'] = 'async_cache';
         
