@@ -111,7 +111,7 @@ class TemplateFunctions extends WP_UnitTestCase {
         $post = get_post($id); // We need the post object for testing
         
         // Delete previous shares
-        delete_post_meta($id, 'mashsb_jsonshares');
+        //delete_post_meta($id, 'mashsb_jsonshares');
 
         
         $url = 'http://google.com';
