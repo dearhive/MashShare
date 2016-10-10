@@ -100,6 +100,7 @@ class TemplateFunctions extends WP_UnitTestCase {
         delete_transient('mashsb_rate_limit');
         delete_transient('mashsb_limit_req');
         
+        $mashsb_options['fb_access_token'] = 'EAAHag2FMn2UBAAU6ceKGLZCN6PAJ5cWFQ9ZAVoG32qqTRCG0UrosOsOZB8JwsjAJU8RiSuD4gTxWpNwvvc9SRLrVOHcSMkMpnosLvxR3VZCZCEHBmTVKcrJAoRZB6hjrhZCeYxGQwiyoClx7Y0igevbEfcwfwltKkUgfzoCzscqHyaOq2Nwn26k';     
         $mashsb_options['mashsb_sharemethod'] = 'mashengine';
         $mashsb_options['caching_method'] = 'refresh_loading';
         $mashsb_options['mashsharer_cache'] = 0;
@@ -118,7 +119,7 @@ class TemplateFunctions extends WP_UnitTestCase {
         $mashsbSharesObj = mashsbGetShareObj($url);
         // Get the share count Method
         $mashsbShareCounts = mashsbGetShareMethod($mashsbSharesObj);
-        $this->assertTrue($mashsbShareCounts);
+        $this->assertEquals('', $mashsbShareCounts->error);
 
         
         $encode_data = json_encode($mashsbShareCounts);
