@@ -42,10 +42,12 @@ class TemplateFunctions extends WP_UnitTestCase {
             'post_status' => 'publish'
                 ));
         $this->go_to(get_permalink($post_id));
-        $post = get_post($post_id);
-        $this->assertTrue(is_singular());
+        //$post = get_post($post_id);
+        //$this->assertTrue(is_singular());
+        $this->assertQueryTrue( 'is_singular' );
     }
     public function test_mashengine_FBTW() {
+        loop(5);
         //delete transients
         delete_transient('mashsb_rate_limit');
         delete_transient('mashsb_limit_req');
@@ -55,6 +57,7 @@ class TemplateFunctions extends WP_UnitTestCase {
         $this->assertGreaterThan(1000, (int) $shares);
     }
     public function test_mashengine_all_counts() {
+        loop(5);
         //delete transients
         delete_transient('mashsb_rate_limit');
         delete_transient('mashsb_limit_req');
@@ -67,6 +70,7 @@ class TemplateFunctions extends WP_UnitTestCase {
         $this->assertGreaterThan(1000, (int) $shares);
     }
     public function test_getSharedcount() {
+        loop(5);
         global $mashsb_options, $post;
         //delete transients
         delete_transient('mashsb_rate_limit');
@@ -88,6 +92,8 @@ class TemplateFunctions extends WP_UnitTestCase {
         $this->assertGreaterThan(1000, (int) $shares2);
     }
     public function test_getSharedcountJson() {
+        loop(5);
+
         global $mashsb_options, $post;
         //delete transients
         delete_transient('mashsb_rate_limit');
@@ -112,6 +118,7 @@ class TemplateFunctions extends WP_UnitTestCase {
         $this->assertGreaterThan(1000, $facebook_shares);
     }
     public function test_getSharedcount_async_cache() {
+        loop(5);
         global $mashsb_options, $post;
         //delete transients
         delete_transient('mashsb_rate_limit');
