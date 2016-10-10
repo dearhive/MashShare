@@ -144,7 +144,6 @@ function getSharedcount( $url ) {
         
     // Return global share count variable to prevent multiple execution
     if (is_array($mashsb_sharecount) && array_key_exists($url, $mashsb_sharecount) && !empty($mashsb_sharecount[$url]) && !mashsb_is_cache_refresh() ){
-return 'test0';
         return $mashsb_sharecount[$url] + getFakecount();
     }
    
@@ -163,7 +162,6 @@ return 'test0';
 
        
     if( is_404() || is_search() || empty($url) || !mashsb_is_enabled_permalinks()) {
-return 'test1';
         return apply_filters( 'filter_get_sharedcount', 0 );
     }
 
@@ -174,7 +172,6 @@ return 'test1';
 
 
     if( !empty( $url ) && is_null( $post ) ) {
-return 'test2';
         return apply_filters( 'filter_get_sharedcount', mashsbGetNonPostShares( $url ) );
     }
 
@@ -185,7 +182,6 @@ return 'test2';
         
         // Its request limited
         if ( mashsb_is_req_limited() ){ 
-return 'test3';
             return get_post_meta( $post->ID, 'mashsb_shares', true ) + getFakecount();
         }
 
@@ -212,21 +208,18 @@ return 'test3';
          */
         
         //wp_die('error' . $mashsbShareCounts->error);
-return 'test6';
         if( $mashsbShareCounts->total >= $mashsbStoredShareCount ) {
             update_post_meta( $post->ID, 'mashsb_shares', $mashsbShareCounts->total );
             update_post_meta( $post->ID, 'mashsb_jsonshares', json_encode( $mashsbShareCounts ) );
             MASHSB()->logger->info( "Refresh Cache: Update database with share count: " . $mashsbShareCounts->total );
             
             /* return counts from getAllCounts() after DB update */
-            return 'test4';
             return apply_filters( 'filter_get_sharedcount', $mashsbShareCounts->total + getFakecount() );
         }
         
         /* return previous counts from DB Cache | this happens when API has a hiccup and does not return any results as expected */
         return apply_filters( 'filter_get_sharedcount', $mashsbStoredShareCount + getFakecount() );
     } else {
-return 'test5';
         // Return cached results
         $cachedCountsMeta = get_post_meta( $post->ID, 'mashsb_shares', true );
         $cachedCounts = $cachedCountsMeta + getFakecount();
