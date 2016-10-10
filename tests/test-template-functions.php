@@ -102,7 +102,7 @@ class TemplateFunctions extends WP_UnitTestCase {
         $shares = getSharedcount( $url );
         $shares2 = getSharedcount( $url2 );
 
-        $this->assertGreaterThan( 1000, is_singular() );
+        //$this->assertGreaterThan( 1000, is_singular() );
         $this->assertGreaterThan( 1000, $shares );
         $this->assertGreaterThan( 1000, $shares2 );
     }
@@ -120,7 +120,7 @@ class TemplateFunctions extends WP_UnitTestCase {
         $this->go_to( get_permalink( $id ) );
         $post = get_post( $id ); // We need the post object for testing
         // Delete previous shares
-        //delete_post_meta($id, 'mashsb_jsonshares');
+        delete_post_meta($id, 'mashsb_jsonshares');
 
 
         $url = 'http://google.com';
@@ -128,7 +128,7 @@ class TemplateFunctions extends WP_UnitTestCase {
         $mashsbSharesObj = mashsbGetShareObj( $url );
         // Get the share count Method
         $mashsbShareCounts = mashsbGetShareMethod( $mashsbSharesObj );
-        //$this->assertTrue($mashsbShareCounts);
+        $this->assertTrue($mashsbShareCounts);
 
 
         $encode_data = json_encode( $mashsbShareCounts );
