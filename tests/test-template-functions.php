@@ -124,10 +124,23 @@ class TemplateFunctions extends WP_UnitTestCase {
         $this->assertGreaterThan(1000, $facebook_shares);
     }
     
-    public function test_rate_limit(){        
-        $this->assertTrue(mashsb_ratelimit_callback());
+    public function test_rate_limit() {
+        $url = 'http://graph.facebook.com/?id=http://www.google.com';
+
+        $curl_handle = curl_init();
+        curl_setopt( $curl_handle, CURLOPT_URL, $url );
+        curl_setopt( $curl_handle, CURLOPT_CONNECTTIMEOUT, 2 );
+        curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, 1 );
+        $buffer = curl_exec( $curl_handle );
+        curl_close( $curl_handle );
+        if( empty( $buffer ) ) {
+            $return = "Nothing returned from url.<p>";
+        } else {
+            $return = $buffer;
+        }
+        $this->assertTrue( $return );
     }
-    
+
     public function test_getSharedcount_async_cache() {
         sleep(1);
         global $mashsb_options, $post;
