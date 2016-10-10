@@ -60,7 +60,7 @@ class TemplateFunctions extends WP_UnitTestCase {
 //        $this->assertQueryTrue( 'is_single', 'is_singular' );
 //    }
     public function test_mashengine_FBTW() {
-        sleep( 5 );
+        sleep( 1 );
         //delete transients
         delete_transient( 'mashsb_rate_limit' );
         delete_transient( 'mashsb_limit_req' );
@@ -71,7 +71,7 @@ class TemplateFunctions extends WP_UnitTestCase {
     }
 
     public function test_mashengine_all_counts() {
-        sleep( 0 );
+        sleep( 1 );
         //delete transients
         delete_transient( 'mashsb_rate_limit' );
         delete_transient( 'mashsb_limit_req' );
@@ -85,9 +85,9 @@ class TemplateFunctions extends WP_UnitTestCase {
     }
 
     public function test_getSharedcount() {
-        sleep( 0 );
-        global $mashsb_options, $post, $wp_query;
-        $wp_query = new WP_Query();
+        sleep( 1 );
+        global $mashsb_options, $post;
+        $post = null;
         //delete transients
         delete_transient( 'mashsb_rate_limit' );
         delete_transient( 'mashsb_limit_req' );
@@ -114,7 +114,7 @@ class TemplateFunctions extends WP_UnitTestCase {
     }
 
     public function test_getSharedcountJson() {
-        sleep( 0 );
+        sleep( 1 );
 
         global $mashsb_options, $post;
 
@@ -173,6 +173,7 @@ class TemplateFunctions extends WP_UnitTestCase {
     public function test_getSharedcount_async_cache() {
         sleep( 0 );
         global $mashsb_options, $post;
+
         //delete transients
         delete_transient( 'mashsb_rate_limit' );
         delete_transient( 'mashsb_limit_req' );
