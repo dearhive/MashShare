@@ -95,9 +95,11 @@ class TemplateFunctions extends WP_UnitTestCase {
         sleep(1);
 
         global $mashsb_options, $post;
+        
         //delete transients
         delete_transient('mashsb_rate_limit');
         delete_transient('mashsb_limit_req');
+        
         $mashsb_options['mashsb_sharemethod'] = 'mashengine';
         $mashsb_options['caching_method'] = 'refresh_loading';
         $mashsb_options['mashsharer_cache'] = 0;
@@ -114,11 +116,12 @@ class TemplateFunctions extends WP_UnitTestCase {
         // Get the share count Method
         $mashsbShareCounts = mashsbGetShareMethod($mashsbSharesObj);
         $encode_data = json_encode($mashsbShareCounts);
+        
         $decode_data = json_decode($encode_data, true);
         $this->assertArrayHasKey('facebook_shares', $decode_data);  
         
         $error = $mashsbShareCounts->error;
-        $this->assertGreaterThan(1000, $error);
+        $this->assertTrue($error);
         
         $facebook_shares = $mashsbShareCounts->facebook_shares;
         $this->assertGreaterThan(1000, $facebook_shares);
