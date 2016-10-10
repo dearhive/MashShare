@@ -28,6 +28,11 @@ class TemplateFunctions extends WP_UnitTestCase {
         $wp_query = new WP_Query();
         $post = null;
         remove_filter( 'query', array($this, '_create_temporary_tables') );
+        
+        //delete transients
+        delete_transient( 'mashsb_rate_limit' );
+        delete_transient( 'mashsb_limit_req' );
+        sleep(5);
     }
 
     public function test_mashsb_is_cache_refresh() {
@@ -60,10 +65,6 @@ class TemplateFunctions extends WP_UnitTestCase {
 //        $this->assertQueryTrue( 'is_single', 'is_singular' );
 //    }
     public function test_mashengine_FBTW() {
-        sleep( 1 );
-        //delete transients
-        delete_transient( 'mashsb_rate_limit' );
-        delete_transient( 'mashsb_limit_req' );
         $url = 'http://google.com';
         $mashsbSharesObj = new mashengine( $url );
         $shares = $mashsbSharesObj->getALLCounts()->total;
@@ -71,10 +72,6 @@ class TemplateFunctions extends WP_UnitTestCase {
     }
 
     public function test_mashengine_all_counts() {
-        sleep( 1 );
-        //delete transients
-        delete_transient( 'mashsb_rate_limit' );
-        delete_transient( 'mashsb_limit_req' );
         global $mashsb_options;
         $mashsb_options['disable_cache'] = 'true';
         //$mashsb_options['fb_access_token'] = 'EAAHag2FMn2UBAAU6ceKGLZCN6PAJ5cWFQ9ZAVoG32qqTRCG0UrosOsOZB8JwsjAJU8RiSuD4gTxWpNwvvc9SRLrVOHcSMkMpnosLvxR3VZCZCEHBmTVKcrJAoRZB6hjrhZCeYxGQwiyoClx7Y0igevbEfcwfwltKkUgfzoCzscqHyaOq2Nwn26k';
@@ -85,13 +82,7 @@ class TemplateFunctions extends WP_UnitTestCase {
     }
 
     public function test_getSharedcount() {
-        sleep( 1 );
-        global $mashsb_options, $post, $wp_query;
-        $wp_query = new WP_Query();
-        $post = null;
-        //delete transients
-        delete_transient( 'mashsb_rate_limit' );
-        delete_transient( 'mashsb_limit_req' );
+        global $mashsb_options, $post;
 
         //$mashsb_options['fb_access_token'] = 'EAAHag2FMn2UBAAU6ceKGLZCN6PAJ5cWFQ9ZAVoG32qqTRCG0UrosOsOZB8JwsjAJU8RiSuD4gTxWpNwvvc9SRLrVOHcSMkMpnosLvxR3VZCZCEHBmTVKcrJAoRZB6hjrhZCeYxGQwiyoClx7Y0igevbEfcwfwltKkUgfzoCzscqHyaOq2Nwn26k';
         $mashsb_options['mashsb_sharemethod'] = 'mashengine';
@@ -115,13 +106,7 @@ class TemplateFunctions extends WP_UnitTestCase {
     }
 
     public function test_getSharedcountJson() {
-        sleep( 1 );
-
         global $mashsb_options, $post;
-
-        //delete transients
-        delete_transient( 'mashsb_rate_limit' );
-        delete_transient( 'mashsb_limit_req' );
 
         //$mashsb_options['fb_access_token'] = 'EAAHag2FMn2UBAAU6ceKGLZCN6PAJ5cWFQ9ZAVoG32qqTRCG0UrosOsOZB8JwsjAJU8RiSuD4gTxWpNwvvc9SRLrVOHcSMkMpnosLvxR3VZCZCEHBmTVKcrJAoRZB6hjrhZCeYxGQwiyoClx7Y0igevbEfcwfwltKkUgfzoCzscqHyaOq2Nwn26k';
         $mashsb_options['mashsb_sharemethod'] = 'mashengine';
@@ -172,7 +157,6 @@ class TemplateFunctions extends WP_UnitTestCase {
     }
 
     public function test_getSharedcount_async_cache() {
-        sleep( 0 );
         global $mashsb_options, $post;
 
         //delete transients
