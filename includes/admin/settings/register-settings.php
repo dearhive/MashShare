@@ -269,20 +269,20 @@ function mashsb_get_registered_settings() {
                     'type' => 'text',
                     'size' => 'medium'
                 ),
-//                array(
-//                    'id' => 'fb_app_secret',
-//                    'name' => __( 'Facebook App Secret', 'mashsb' ),
-//                    'desc' => sprintf( __( 'Required for getting accurate facebook share numbers. Where do i find the facebook APP Secret?', 'mashsb' ), 'https://developers.facebook.com/docs/apps/register' ),
-//                    'type' => 'text',
-//                    'size' => 'medium'
-//                ),
-//                array(
-//                    'id' => 'fb_access_token',
-//                    'name' => __( 'Facebook Access Token', 'mashsb' ),
-//                    'desc' => __( 'Required for getting accurate facebook share numbers! Connecting with facebook increases the facebook API call rate limit to 200 calls per hour. This is enough for even huge websites with a lot of traffic as MashShare is caching the calls.', 'mashsb' ),
-//                    'type' => 'fboauth',
-//                    'size' => 'medium'
-//                ),
+                array(
+                    'id' => 'fb_app_secret',
+                    'name' => __( 'Facebook App Secret', 'mashsb' ),
+                    'desc' => sprintf( __( 'Required for getting accurate facebook share numbers. Where do i find the facebook APP Secret?', 'mashsb' ), 'https://developers.facebook.com/docs/apps/register' ),
+                    'type' => 'text',
+                    'size' => 'medium'
+                ),
+                array(
+                    'id' => 'fb_access_token',
+                    'name' => __( 'Facebook Access Token', 'mashsb' ),
+                    'desc' => __( 'Required for getting accurate facebook share numbers! Connecting with facebook increases the facebook API call rate limit to 200 calls per hour. This is enough for even huge websites with a lot of traffic as MashShare is caching the calls.', 'mashsb' ),
+                    'type' => 'fboauth',
+                    'size' => 'medium'
+                ),
                 'mashsharer_hashtag' => array(
                     'id' => 'mashsharer_hashtag',
                     'name' => __( 'Twitter Username', 'mashsb' ),
@@ -681,6 +681,12 @@ So the MashShare open graph data will be containing the same social meta data th
                     'name' => __( 'Debug mode', 'mashsb' ),
                     'desc' => __( '<strong>Note: </strong> Check this box before you get in contact with our support team. This allows us to check publically hidden debug messages on your website. Do not forget to disable it thereafter! Enable this also to write daily sorted log files of requested share counts to folder <strong>/wp-content/plugins/mashsharer/logs</strong>. Please send us this files when you notice a wrong share count.' . mashsb_log_permissions(), 'mashsb' ),
                     'type' => 'checkbox'
+                ),
+                'fb_debug' => array(
+                    'id' => 'fb_debug',
+                    'name' => __( '', 'mashsb' ),
+                    'desc' => '',
+                    'type' => 'ratelimit'
                 ),
             )
         ),
@@ -1874,4 +1880,28 @@ function mashsb_fboauth_callback( $args ) {
     
 echo $html;
     
+}
+
+function mashsb_ratelimit_callback(){
+    global $mashsb_options;
+    
+    
+    if (!mashsb_is_admin_page() || !isset($mashsb_options['debug_mode']) || !function_exists('curl_init')){
+        return '';
+    }
+    $url = 'http://graph.facebook.com/?id=http://www.google.com';
+    //$url = 'http://graph.facebook.com/';
+    
+      $curl_handle=curl_init();
+  curl_setopt($curl_handle,CURLOPT_URL,$url);
+  curl_setopt($curl_handle,CURLOPT_CONNECTTIMEOUT,2);
+  curl_setopt($curl_handle,CURLOPT_RETURNTRANSFER,1);
+  $buffer = curl_exec($curl_handle);
+  curl_close($curl_handle);
+  if (empty($buffer)){
+      print "Nothing returned from url.<p>";
+  }
+  else{
+      print '<div style="max-width:200px;">'.$buffer . '</div>';
+  }
 }

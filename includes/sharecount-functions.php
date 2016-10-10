@@ -14,6 +14,19 @@ if( !defined( 'ABSPATH' ) ) {
     exit;
 }
 
+
+/**
+ * Check if the facebook rate limit has been exceeded
+ * @return boolean
+ */
+function mashsb_rate_limit_exceeded(){
+    return false; // rhe Deactivate this for testing
+    if (false === get_transient('mashsb_rate_limit')){
+        return false;
+    }
+    return true;
+}
+
     /**
      * Make sure that requests do not exceed 1req / 5second
      * @return boolean

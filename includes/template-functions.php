@@ -131,17 +131,6 @@ function mashsbGetNonPostShares( $url ) {
     }
 }
 
-/**
- * Check if the facebook rate limit has been exceeded
- * @return boolean
- */
-function mashsb_rate_limit_exceeded(){
-    return true; // rhe
-    if (false === get_transient('mashsb_rate_limit')){
-        return false;
-    }
-    return true;
-}
 
 /*
  * Return the share count
