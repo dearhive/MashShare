@@ -16,7 +16,8 @@ class TemplateFunctions extends WP_UnitTestCase {
         $mashsb_options['disable_cache'] = 'true';
         $mashsb_options['facebook_count_mode'] = 'total';
         // enable permalinks
-        update_option( 'permalink_structure', '/%postname%/' );
+        //update_option( 'permalink_structure', '/%postname%/' );
+        $this->set_permalink_structure( '/%year%/%monthnum%/%day%/%postname%/' );
         require_once MASHSB_PLUGIN_DIR . 'includes/libraries/RolingCurlX.php';
         require_once(MASHSB_PLUGIN_DIR . 'includes/mashengine.php');
     }
@@ -90,7 +91,7 @@ class TemplateFunctions extends WP_UnitTestCase {
         $id = $this->factory->post->create(array(
             'post_title' => 'Hello World',
             'post_name' => 'hello-world',
-            'post_type' => 'post',
+            'post_type' => 'page',
             'post_status' => 'publish'
                 ));
         $this->go_to( get_permalink( $id ) );
