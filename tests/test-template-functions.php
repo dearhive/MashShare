@@ -32,7 +32,7 @@ class TemplateFunctions extends WP_UnitTestCase {
         //delete transients
         delete_transient( 'mashsb_rate_limit' );
         delete_transient( 'mashsb_limit_req' );
-        sleep(5);
+        //sleep(0);
     }
 
     public function test_mashsb_is_cache_refresh() {
@@ -100,7 +100,7 @@ class TemplateFunctions extends WP_UnitTestCase {
         $shares = getSharedcount( $url );
         $shares2 = getSharedcount( $url2 );
 
-        //$this->assertGreaterThan( 1000, get_permalink( $id ) );
+        $this->assertGreaterThan( 1000, is_singular() );
         $this->assertGreaterThan( 1000, $shares );
         $this->assertGreaterThan( 1000, $shares2 );
     }
