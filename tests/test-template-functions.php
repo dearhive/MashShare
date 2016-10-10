@@ -35,7 +35,7 @@ class TemplateFunctions extends WP_UnitTestCase {
     public function test_is_singular() {
         global $post;
         // Prepare test
-        $post_id = self::factory()->post->create(array(
+        $post_id = $this->factory->post->create(array(
             'post_title' => 'Hello World',
             'post_name' => 'hello-world',
             'post_type' => 'post',
