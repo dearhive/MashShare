@@ -44,6 +44,7 @@ jQuery(document).ready(function ($) {
         if ($('#mashsb_settings\\[fb_access_token\\]').val()){
             check_access_token();
             document.getElementById('mashsb_expire_token_status').innerHTML = 'Token needs renewal on ' + human_date + '<br>MashShare will notify you shortly before the access token expires.';
+            $('#mashsb_settings\\[expire_fb_access_token\\]').val(unixtimestamp.toFixed(0));
         }else {
             document.getElementById('mashsb_expire_token_status').innerHTML = '';
         }

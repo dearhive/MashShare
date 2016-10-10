@@ -26,6 +26,22 @@ function mashsb_rate_limit_exceeded(){
     }
     return true;
 }
+/**
+ * Check if the facebook access token has been expired
+ * @return boolean
+ */
+function mashsb_is_access_token_expired(){
+    global $mashsb_options;
+    
+    if (empty($mashsb_options['expire_fb_access_token'])){
+        return false;
+    }
+    
+    if (time()>= $mashsb_options['expire_fb_access_token']){
+        return true;
+    }
+    return false;
+}
 
     /**
      * Make sure that requests do not exceed 1req / 5second

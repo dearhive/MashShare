@@ -321,6 +321,8 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 = {{ version }} =
 * New: Integrate Facebook Rate Limiter to prevent hitting facebook api request limits and rate limit errors resulting in zero facebook share counts
+* New: Add admin notice when facebook access token is expired
+* New: Create again facebook access token
 
 = 3.2.9 =
 * New: Better prevent excessive Rate Limit exceeding of the facebook api on high traffic sites which results in 0 facebook share counts
