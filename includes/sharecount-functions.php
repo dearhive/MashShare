@@ -23,7 +23,7 @@ if( !defined( 'ABSPATH' ) ) {
         $rate_limit = get_transient('mashsb_limit_req');
         
         if (false === $rate_limit) {
-            set_transient('mashsb_limit_req', '1', 5);
+            set_transient('mashsb_limit_req', '1', 20);
             return false;
         }
             $mashsb_error[] = 'MashShare: Facebook Temp Rate Limit Exceeded';
