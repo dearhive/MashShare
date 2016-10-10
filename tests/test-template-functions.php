@@ -84,12 +84,17 @@ class TemplateFunctions extends WP_UnitTestCase {
     }
 
     public function test_getSharedcount() {
-        //global $mashsb_options, $post;
-        global $mashsb_options;
+        global $mashsb_options, $post;
+        //global $mashsb_options;
 
-        $id = $this->factory->post->create( array('post_type' => 'post') );
+        $id = $this->factory->post->create(array(
+            'post_title' => 'Hello World',
+            'post_name' => 'hello-world',
+            'post_type' => 'post',
+            'post_status' => 'publish'
+                ));
         $this->go_to( get_permalink( $id ) );
-        //$post = get_post( $id ); // We need the post object for testing
+        $post = get_post( $id ); // We need the post object for testing
 
         $url = 'http://google.com';
         $url2 = 'https://google.com';
