@@ -220,8 +220,10 @@ class TemplateFunctions extends WP_UnitTestCase {
         //$id = $this->factory->post->create($args);
         $this->go_to( get_permalink( $post_id ) );
         $post = get_post( $post_id ); // We need the post object for testing
-        $this->assertTrue( var_dump($post) );
+        //$this->assertTrue( var_dump($post) );
         $this->assertTrue( mashsbGetActiveStatus() );
+        $this->assertEquals('post', get_post_type() );
+
     }
 
     function test_is_active_on_frontpage() {
