@@ -119,7 +119,7 @@ class TemplateFunctions extends WP_UnitTestCase {
         $mashsbSharesObj = mashsbGetShareObj($url);
         // Get the share count Method
         $mashsbShareCounts = mashsbGetShareMethod($mashsbSharesObj);
-        $this->assertTrue($mashsbShareCounts->error);
+        $this->assertTrue($mashsbShareCounts);
 
         
         $encode_data = json_encode($mashsbShareCounts);
