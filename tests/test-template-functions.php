@@ -16,8 +16,8 @@ class TemplateFunctions extends WP_UnitTestCase {
         $mashsb_options['disable_cache'] = 'true';
         $mashsb_options['facebook_count_mode'] = 'total';
         // enable permalinks
-        //update_option( 'permalink_structure', '/%postname%/' );
-        $this->set_permalink_structure( '/%year%/%monthnum%/%day%/%postname%/' );
+        update_option( 'permalink_structure', '/%postname%/' );
+        //$this->set_permalink_structure( '/%year%/%monthnum%/%day%/%postname%/' );
         require_once MASHSB_PLUGIN_DIR . 'includes/libraries/RolingCurlX.php';
         require_once(MASHSB_PLUGIN_DIR . 'includes/mashengine.php');
     }
@@ -116,7 +116,7 @@ class TemplateFunctions extends WP_UnitTestCase {
         $mashsb_options['mashsharer_cache'] = 0;
         $mashsb_options['disable_cache'] = 'true';
 
-        $id = $this->factory->post->create( array('post_type' => 'post') );
+        $id = $this->factory->post->create( array('post_type' => 'page') );
         $this->go_to( get_permalink( $id ) );
         $post = get_post( $id ); // We need the post object for testing
         // Delete previous shares
@@ -170,7 +170,7 @@ class TemplateFunctions extends WP_UnitTestCase {
         $mashsb_options['caching_method'] = 'async_cache';
         $mashsb_options['mashsharer_cache'] = 0;
         $mashsb_options['disable_cache'] = 'true';
-        $args = array('post_type' => 'post');
+        $args = array('post_type' => 'page');
         $id = $this->factory->post->create( $args );
         $this->go_to( get_permalink( $id ) );
         $post = get_post( $id ); // Wee need the post object for testing
