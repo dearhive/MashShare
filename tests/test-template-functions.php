@@ -161,23 +161,19 @@ class TemplateFunctions extends WP_UnitTestCase {
     public function test_getSharedcount_async_cache() {
         global $mashsb_options, $post;
 
-        //delete transients
-        delete_transient( 'mashsb_rate_limit' );
-        delete_transient( 'mashsb_limit_req' );
-        $mashsb_options['fb_access_token'] = 'EAAHag2FMn2UBAAU6ceKGLZCN6PAJ5cWFQ9ZAVoG32qqTRCG0UrosOsOZB8JwsjAJU8RiSuD4gTxWpNwvvc9SRLrVOHcSMkMpnosLvxR3VZCZCEHBmTVKcrJAoRZB6hjrhZCeYxGQwiyoClx7Y0igevbEfcwfwltKkUgfzoCzscqHyaOq2Nwn26k';
-
-        $mashsb_options['mashsb_sharemethod'] = 'mashengine';
         $mashsb_options['caching_method'] = 'async_cache';
-        $mashsb_options['mashsharer_cache'] = 0;
-        $mashsb_options['disable_cache'] = 'true';
+        
         $args = array('post_type' => 'page');
         $id = $this->factory->post->create( $args );
         $this->go_to( get_permalink( $id ) );
         $post = get_post( $id ); // Wee need the post object for testing
+        
         $url = 'http://google.com';
         $url2 = 'https://google.com';
+        
         $shares = getSharedcount( $url );
         $shares2 = getSharedcount( $url2 );
+        
         $this->assertGreaterThan( 1000, ( int ) $shares );
         $this->assertGreaterThan( 1000, ( int ) $shares2 );
     }

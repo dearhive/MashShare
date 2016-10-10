@@ -262,27 +262,27 @@ function mashsb_get_registered_settings() {
                     'type' => 'text',
                     'size' => 'large'
                 ),
-                array(
-                    'id' => 'fb_app_id',
-                    'name' => __( 'Facebook App ID', 'mashsb' ),
-                    'desc' => sprintf( __( 'Optional and not needed for basic share buttons. But required by some MashShare Add-Ons. <a href="%1s" target="_blank">Create a App ID now</a>.', 'mashsb' ), 'https://developers.facebook.com/docs/apps/register' ),
-                    'type' => 'text',
-                    'size' => 'medium'
-                ),
-                array(
-                    'id' => 'fb_app_secret',
-                    'name' => __( 'Facebook App Secret', 'mashsb' ),
-                    'desc' => sprintf( __( 'Required for getting accurate facebook share numbers. Where do i find the facebook APP Secret?', 'mashsb' ), 'https://developers.facebook.com/docs/apps/register' ),
-                    'type' => 'text',
-                    'size' => 'medium'
-                ),
-                array(
-                    'id' => 'fb_access_token',
-                    'name' => __( 'Facebook Access Token', 'mashsb' ),
-                    'desc' => __( 'Required for getting accurate facebook share numbers! Connecting with facebook increases the facebook API call rate limit to 200 calls per hour. This is enough for even huge websites with a lot of traffic as MashShare is caching the calls.', 'mashsb' ),
-                    'type' => 'fboauth',
-                    'size' => 'medium'
-                ),
+//                array(
+//                    'id' => 'fb_app_id',
+//                    'name' => __( 'Facebook App ID', 'mashsb' ),
+//                    'desc' => sprintf( __( 'Optional and not needed for basic share buttons. But required by some MashShare Add-Ons. <a href="%1s" target="_blank">Create a App ID now</a>.', 'mashsb' ), 'https://developers.facebook.com/docs/apps/register' ),
+//                    'type' => 'text',
+//                    'size' => 'medium'
+//                ),
+//                array(
+//                    'id' => 'fb_app_secret',
+//                    'name' => __( 'Facebook App Secret', 'mashsb' ),
+//                    'desc' => sprintf( __( 'Required for getting accurate facebook share numbers. Where do i find the facebook APP Secret?', 'mashsb' ), 'https://developers.facebook.com/docs/apps/register' ),
+//                    'type' => 'text',
+//                    'size' => 'medium'
+//                ),
+//                array(
+//                    'id' => 'fb_access_token',
+//                    'name' => __( 'Facebook Access Token', 'mashsb' ),
+//                    'desc' => __( 'Required for getting accurate facebook share numbers! Connecting with facebook increases the facebook API call rate limit to 200 calls per hour. This is enough for even huge websites with a lot of traffic as MashShare is caching the calls.', 'mashsb' ),
+//                    'type' => 'fboauth',
+//                    'size' => 'medium'
+//                ),
                 'mashsharer_hashtag' => array(
                     'id' => 'mashsharer_hashtag',
                     'name' => __( 'Twitter Username', 'mashsb' ),

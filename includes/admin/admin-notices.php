@@ -53,12 +53,12 @@ function mashsb_admin_messages() {
         echo '<p>' . sprintf(__('Your website exceeded the Facebook rate limit. Share count requests to Facebook will be delayed for 60min and the Facebook Share Count will not grow during this time. If you see this notice often consider to change <strong>MashShare Caching Method</strong> to <a href="%s">Refresh while Loading</a> and use a higher cache expiration. MashShare tries again to request shares in ' . mashsbGetRemainingRateLimitTime() , 'mashsb'), admin_url() . 'admin.php?page=mashsb-settings') . '</p>';
         echo '</div>';
     }
-    // Access Token expired
-    if( mashsb_is_access_token_expired() ) {
-        echo '<div class="error">';
-        echo '<p>' . sprintf(__('Your Facebook Access Token has been expired. You need to <a href="%s">generate a new one</a> or your MashShare Facebook Shares will not be refreshed', 'mashsb'), admin_url() . 'admin.php?page=mashsb-settings') . '</p>';
-        echo '</div>';
-    }
+//    // Access Token expired
+//    if( mashsb_is_access_token_expired() ) {
+//        echo '<div class="error">';
+//        echo '<p>' . sprintf(__('Your Facebook Access Token has been expired. You need to <a href="%s">generate a new one</a> or your MashShare Facebook Shares will not be refreshed', 'mashsb'), admin_url() . 'admin.php?page=mashsb-settings') . '</p>';
+//        echo '</div>';
+//    }
     
     // Cache warning
     if( mashsb_is_deactivated_cache() ) {
