@@ -47,7 +47,7 @@ class TemplateFunctions extends WP_UnitTestCase {
 //        $this->assertQueryTrue( 'is_single', 'is_singular' );
 //    }
     public function test_mashengine_FBTW() {
-        sleep(5);
+        sleep(1);
         //delete transients
         delete_transient('mashsb_rate_limit');
         delete_transient('mashsb_limit_req');
@@ -57,7 +57,7 @@ class TemplateFunctions extends WP_UnitTestCase {
         $this->assertGreaterThan(1000, (int) $shares);
     }
     public function test_mashengine_all_counts() {
-        sleep(5);
+        sleep(1);
         //delete transients
         delete_transient('mashsb_rate_limit');
         delete_transient('mashsb_limit_req');
@@ -70,7 +70,7 @@ class TemplateFunctions extends WP_UnitTestCase {
         $this->assertGreaterThan(1000, (int) $shares);
     }
     public function test_getSharedcount() {
-        sleep(5);
+        sleep(1);
         global $mashsb_options, $post;
         //delete transients
         delete_transient('mashsb_rate_limit');
@@ -92,7 +92,7 @@ class TemplateFunctions extends WP_UnitTestCase {
         $this->assertGreaterThan(1000, (int) $shares2);
     }
     public function test_getSharedcountJson() {
-        sleep(5);
+        sleep(1);
 
         global $mashsb_options, $post;
         //delete transients
@@ -102,10 +102,12 @@ class TemplateFunctions extends WP_UnitTestCase {
         $mashsb_options['caching_method'] = 'refresh_loading';
         $mashsb_options['mashsharer_cache'] = 0;
         $mashsb_options['disable_cache'] = 'true';
+        
         $args = array('post_type' => 'post');
         $id = $this->factory->post->create($args);
         $this->go_to(get_permalink($id));
-        $post = get_post($id); // We need the post object for testing
+        //$post = get_post($id); // We need the post object for testing
+        
         $url = 'http://google.com';
         // Get the share Object
         $mashsbSharesObj = mashsbGetShareObj($url);
@@ -114,11 +116,20 @@ class TemplateFunctions extends WP_UnitTestCase {
         $encode_data = json_encode($mashsbShareCounts);
         $decode_data = json_decode($encode_data, true);
         $this->assertArrayHasKey('facebook_shares', $decode_data);  
+        
+        $error = $mashsbShareCounts->error;
+        $this->assertGreaterThan(1000, $error);
+        
         $facebook_shares = $mashsbShareCounts->facebook_shares;
         $this->assertGreaterThan(1000, $facebook_shares);
     }
+    
+    public function test_rate_limit(){        
+        $this->assertTrue(mashsb_ratelimit_callback());
+    }
+    
     public function test_getSharedcount_async_cache() {
-        sleep(5);
+        sleep(1);
         global $mashsb_options, $post;
         //delete transients
         delete_transient('mashsb_rate_limit');
