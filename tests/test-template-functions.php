@@ -86,7 +86,8 @@ class TemplateFunctions extends WP_UnitTestCase {
 
     public function test_getSharedcount() {
         sleep( 1 );
-        global $mashsb_options, $post;
+        global $mashsb_options, $post, $wp_query;
+        $wp_query = new WP_Query();
         $post = null;
         //delete transients
         delete_transient( 'mashsb_rate_limit' );
