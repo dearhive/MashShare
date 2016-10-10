@@ -10,7 +10,11 @@ class TemplateFunctions extends WP_UnitTestCase {
         global $mashsb_options;
         $mashsb_options['disable_cache'] = 'true';
         $mashsb_options['fb_access_token'] = 'EAAHag2FMn2UBAAU6ceKGLZCN6PAJ5cWFQ9ZAVoG32qqTRCG0UrosOsOZB8JwsjAJU8RiSuD4gTxWpNwvvc9SRLrVOHcSMkMpnosLvxR3VZCZCEHBmTVKcrJAoRZB6hjrhZCeYxGQwiyoClx7Y0igevbEfcwfwltKkUgfzoCzscqHyaOq2Nwn26k';
-
+        $mashsb_options['mashsb_sharemethod'] = 'mashengine';
+        $mashsb_options['caching_method'] = 'refresh_loading';
+        $mashsb_options['mashsharer_cache'] = 0;
+        $mashsb_options['disable_cache'] = 'true';
+        $mashsb_options['facebook_count_mode'] = 'total';
         // enable permalinks
         update_option( 'permalink_structure', '/%postname%/' );
         require_once MASHSB_PLUGIN_DIR . 'includes/libraries/RolingCurlX.php';
@@ -73,8 +77,6 @@ class TemplateFunctions extends WP_UnitTestCase {
 
     public function test_mashengine_all_counts() {
         global $mashsb_options;
-        $mashsb_options['disable_cache'] = 'true';
-        //$mashsb_options['fb_access_token'] = 'EAAHag2FMn2UBAAU6ceKGLZCN6PAJ5cWFQ9ZAVoG32qqTRCG0UrosOsOZB8JwsjAJU8RiSuD4gTxWpNwvvc9SRLrVOHcSMkMpnosLvxR3VZCZCEHBmTVKcrJAoRZB6hjrhZCeYxGQwiyoClx7Y0igevbEfcwfwltKkUgfzoCzscqHyaOq2Nwn26k';
         $url = 'http://google.com';
         $mash = new mashengine( $url );
         $shares = $mash->getALLCounts()->total;
@@ -82,18 +84,12 @@ class TemplateFunctions extends WP_UnitTestCase {
     }
 
     public function test_getSharedcount() {
-        global $mashsb_options, $post;
-
-        //$mashsb_options['fb_access_token'] = 'EAAHag2FMn2UBAAU6ceKGLZCN6PAJ5cWFQ9ZAVoG32qqTRCG0UrosOsOZB8JwsjAJU8RiSuD4gTxWpNwvvc9SRLrVOHcSMkMpnosLvxR3VZCZCEHBmTVKcrJAoRZB6hjrhZCeYxGQwiyoClx7Y0igevbEfcwfwltKkUgfzoCzscqHyaOq2Nwn26k';
-        $mashsb_options['mashsb_sharemethod'] = 'mashengine';
-        $mashsb_options['caching_method'] = 'refresh_loading';
-        $mashsb_options['mashsharer_cache'] = 0;
-        $mashsb_options['disable_cache'] = 'true';
-        $mashsb_options['facebook_count_mode'] = 'total';
+        //global $mashsb_options, $post;
+        global $mashsb_options;
 
         $id = $this->factory->post->create( array('post_type' => 'post') );
         $this->go_to( get_permalink( $id ) );
-        $post = get_post( $id ); // We need the post object for testing
+        //$post = get_post( $id ); // We need the post object for testing
 
         $url = 'http://google.com';
         $url2 = 'https://google.com';
