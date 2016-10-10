@@ -50,7 +50,7 @@ class mashengine {
     public function getSharesFBTW() {
         global $mashsb_options;
 
-        $fb_mode = isset( $mashsb_options['facebook_count_mode'] ) ? $mashsb_options['facebook_count_mode'] : 'shares';
+        $fb_mode = isset( $mashsb_options['facebook_count_mode'] ) ? $mashsb_options['facebook_count_mode'] : 'total';
 
         $post_data = null;
         $headers = null;
