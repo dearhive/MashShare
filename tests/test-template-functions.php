@@ -208,7 +208,7 @@ class TemplateFunctions extends WP_UnitTestCase {
     }
 
     public function test_is_active_on_post() {
-        global $post, $mashsb_options;
+        global $post, $mashsb_options, $wp_post_types;
         $mashsb_options['post_types'] = array('post');
         // Prepare test
         $post_id = $this->factory->post->create( array(
