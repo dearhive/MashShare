@@ -219,12 +219,14 @@ function getSharedcount( $url ) {
             MASHSB()->logger->info( "Refresh Cache: Update database with share count: " . $mashsbShareCounts->total );
             
             /* return counts from getAllCounts() after DB update */
+            return 'test4';
             return apply_filters( 'filter_get_sharedcount', $mashsbShareCounts->total + getFakecount() );
         }
         
         /* return previous counts from DB Cache | this happens when API has a hiccup and does not return any results as expected */
         return apply_filters( 'filter_get_sharedcount', $mashsbStoredShareCount + getFakecount() );
     } else {
+        return 'test5';
         // Return cached results
         $cachedCountsMeta = get_post_meta( $post->ID, 'mashsb_shares', true );
         $cachedCounts = $cachedCountsMeta + getFakecount();
