@@ -212,7 +212,7 @@ function getSharedcount( $url ) {
          */
         
         //wp_die('error' . $mashsbShareCounts->error);
-
+return 'test6';
         if( $mashsbShareCounts->total >= $mashsbStoredShareCount ) {
             update_post_meta( $post->ID, 'mashsb_shares', $mashsbShareCounts->total );
             update_post_meta( $post->ID, 'mashsb_jsonshares', json_encode( $mashsbShareCounts ) );
