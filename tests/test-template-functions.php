@@ -47,7 +47,7 @@ class TemplateFunctions extends WP_UnitTestCase {
 //        $this->assertQueryTrue( 'is_single', 'is_singular' );
 //    }
     public function test_mashengine_FBTW() {
-        sleep(1);
+        sleep(5);
         //delete transients
         delete_transient('mashsb_rate_limit');
         delete_transient('mashsb_limit_req');
@@ -57,7 +57,7 @@ class TemplateFunctions extends WP_UnitTestCase {
         $this->assertGreaterThan(1000, (int) $shares);
     }
     public function test_mashengine_all_counts() {
-        sleep(1);
+        sleep(5);
         //delete transients
         delete_transient('mashsb_rate_limit');
         delete_transient('mashsb_limit_req');
@@ -70,29 +70,34 @@ class TemplateFunctions extends WP_UnitTestCase {
         $this->assertGreaterThan(1000, (int) $shares);
     }
     public function test_getSharedcount() {
-        sleep(1);
+        sleep(5);
         global $mashsb_options, $post;
         //delete transients
         delete_transient('mashsb_rate_limit');
         delete_transient('mashsb_limit_req');
+        
         $mashsb_options['fb_access_token'] = 'EAAHag2FMn2UBAAU6ceKGLZCN6PAJ5cWFQ9ZAVoG32qqTRCG0UrosOsOZB8JwsjAJU8RiSuD4gTxWpNwvvc9SRLrVOHcSMkMpnosLvxR3VZCZCEHBmTVKcrJAoRZB6hjrhZCeYxGQwiyoClx7Y0igevbEfcwfwltKkUgfzoCzscqHyaOq2Nwn26k';
         $mashsb_options['mashsb_sharemethod'] = 'mashengine';
         $mashsb_options['caching_method'] = 'refresh_loading';
         $mashsb_options['mashsharer_cache'] = 0;
         $mashsb_options['disable_cache'] = 'true';
+        $mashsb_options['facebook_count_mode'] = 'total';
+        
         $args = array('post_type' => 'post');
         $id = $this->factory->post->create($args);
         $this->go_to(get_permalink($id));
         $post = get_post($id); // We need the post object for testing
+        
         $url = 'http://google.com';
         $url2 = 'https://google.com';
         $shares = getSharedcount($url);
         $shares2 = getSharedcount($url2);
-        $this->assertGreaterThan(1000, (int) $shares);
-        $this->assertGreaterThan(1000, (int) $shares2);
+        
+        $this->assertGreaterThan(1000, $shares);
+        $this->assertGreaterThan(1000, $shares2);
     }
     public function test_getSharedcountJson() {
-        sleep(1);
+        sleep(5);
 
         global $mashsb_options, $post;
         
@@ -151,7 +156,7 @@ class TemplateFunctions extends WP_UnitTestCase {
     }
 
     public function test_getSharedcount_async_cache() {
-        sleep(1);
+        sleep(5);
         global $mashsb_options, $post;
         //delete transients
         delete_transient('mashsb_rate_limit');
