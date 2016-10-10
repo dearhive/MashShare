@@ -104,11 +104,14 @@ class TemplateFunctions extends WP_UnitTestCase {
         $mashsb_options['caching_method'] = 'refresh_loading';
         $mashsb_options['mashsharer_cache'] = 0;
         $mashsb_options['disable_cache'] = 'true';
-        
-        $args = array('post_type' => 'post');
-        $id = $this->factory->post->create($args);
+
+        $id = $this->factory->post->create(array('post_type' => 'post'));
         $this->go_to(get_permalink($id));
-        //$post = get_post($id); // We need the post object for testing
+        $post = get_post($id); // We need the post object for testing
+        
+        // Delete previous shares
+        delete_post_meta($id, 'mashsb_jsonshares');
+
         
         $url = 'http://google.com';
         // Get the share Object
