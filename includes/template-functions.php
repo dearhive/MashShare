@@ -144,6 +144,7 @@ function getSharedcount( $url ) {
         
     // Return global share count variable to prevent multiple execution
     if (is_array($mashsb_sharecount) && array_key_exists($url, $mashsb_sharecount) && !empty($mashsb_sharecount[$url]) && !mashsb_is_cache_refresh() ){
+                return 'test0';
         return $mashsb_sharecount[$url] + getFakecount();
     }
    
@@ -162,6 +163,7 @@ function getSharedcount( $url ) {
 
        
     if( is_404() || is_search() || empty($url) || !mashsb_is_enabled_permalinks()) {
+        return 'test1';
         return apply_filters( 'filter_get_sharedcount', 0 );
     }
 
@@ -172,6 +174,7 @@ function getSharedcount( $url ) {
 
 
     if( !empty( $url ) && is_null( $post ) ) {
+                return 'test2';
         return apply_filters( 'filter_get_sharedcount', mashsbGetNonPostShares( $url ) );
     }
 
@@ -182,6 +185,7 @@ function getSharedcount( $url ) {
         
         // Its request limited
         if ( mashsb_is_req_limited() ){ 
+                    return 'test3';
             return get_post_meta( $post->ID, 'mashsb_shares', true ) + getFakecount();
         }
 
