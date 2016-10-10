@@ -35,7 +35,7 @@ class TemplateFunctions extends WP_UnitTestCase {
     public function test_is_singular() {
         global $post;
         // Prepare test
-        $post_id = $this->factory->post->create(array(
+        $post_id = self::factory()->post->create(array(
             'post_title' => 'Hello World',
             'post_name' => 'hello-world',
             'post_type' => 'post',
@@ -44,7 +44,7 @@ class TemplateFunctions extends WP_UnitTestCase {
         $this->go_to(get_permalink($post_id));
         //$post = get_post($post_id);
         //$this->assertTrue(is_singular());
-        $this->assertQueryTrue( 'is_singular' );
+        $this->assertQueryTrue( 'is_single', 'is_singular' );
     }
     public function test_mashengine_FBTW() {
         sleep(5);
