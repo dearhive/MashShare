@@ -162,8 +162,8 @@ class MASHSB_HEADER_META_TAGS {
      * @return string
      */
     public function get_title() {
-        return mashsb_get_document_title();
-        //return $this->replace_quote_characters( htmlspecialchars_decode( mashsb_get_document_title() ) );
+        //return mashsb_get_document_title();
+        return $this->replace_quote_characters( htmlspecialchars_decode( mashsb_get_document_title() ) );
     }
 
     /**
@@ -500,6 +500,8 @@ class MASHSB_HEADER_META_TAGS {
         $string = str_replace( '&#8217;', '\'', $string );
         $string = str_replace( '&#8220;', '\'', $string );
         $string = str_replace( '&#8221;', '\'', $string );
+        $string = str_replace( '“', '&quot;', $string );
+        $string = str_replace( '”', '&quot;', $string );
         return $string;
     }
 

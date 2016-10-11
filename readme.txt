@@ -317,6 +317,9 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 == Changelog ==
 
 = {{ version }} =
+* Fix: Convert Quote characters in open graph title to html entities.
+
+= 3.3.1 =
 * Fix: Remove old unused access token endpoint. Please install this update if you were using the FB access token previously or if your share count stucks
 
 = 3.3.0 =
