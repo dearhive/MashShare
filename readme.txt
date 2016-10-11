@@ -317,6 +317,9 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 == Changelog ==
 
 = {{ version }} =
+* Fix: Remove old unused access token endpoint. Please install this update if you were using the FB access token previously or if your share count stucks
+
+= 3.3.0 =
 * New: Integrate Facebook Social Media Rate Limiter to prevent hitting facebook api request limits and rate limit errors resulting in zero facebook share counts
 
 
