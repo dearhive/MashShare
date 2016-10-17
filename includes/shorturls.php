@@ -87,6 +87,7 @@ function mashsb_get_shorturl_singular( $url ) {
     if( isset( $mashsb_options['mashsu_methods'] ) && $mashsb_options['mashsu_methods'] === 'wpshortlinks' && empty($mashsb_custom_url) ) {
         return wp_get_shortlink();
     }
+
     
     $shorturl = "";
 

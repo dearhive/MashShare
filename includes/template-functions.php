@@ -565,7 +565,7 @@ function mashsb_render_sharecounts( $customurl = '', $align = 'left' ) {
  */
 
 function mashshareShortcodeShow( $args ) {
-    global $mashsb_options, $mashsb_custom_url, $mashsb_custom_text;
+    global $mashsb_custom_url, $mashsb_custom_text;
 
     $sharecount = '';
 
@@ -583,19 +583,20 @@ function mashshareShortcodeShow( $args ) {
                     ), $args ) );
     
     // Visible services
-    //$services = !empty( $mashsb_options['visible_services'] ) ? $mashsb_options['visible_services'] : 0;
-    //$visible_services = ($services === 'all') ? 'all' : ($services + 1); // plus 1 to get networks correct counted (array's starting counting from zero)
     $count_services = !empty($services) ? $services : 0;
     
-    
     // Define custom url var to share
-    $mashsb_custom_url = empty( $url ) ? mashsb_get_url() : $url;
+    //$mashsb_custom_url = empty( $url ) ? mashsb_get_url() : $url;
+    // The global available custom url to share
+    $mashsb_custom_url = !empty( $url ) ? $url : '';
+    // local url
+    $mashsb_url = empty( $url ) ? mashsb_get_url() : $url;
 
     // Define custom text to share
     $mashsb_custom_text = !empty( $text ) ? $text : false;
 
     if( $shares != 'false' ) {
-        $sharecount = mashsb_render_sharecounts( $mashsb_custom_url, $align );
+        $sharecount = mashsb_render_sharecounts( $mashsb_url, $align );
         // shortcode [mashshare shares="true" buttons="false"] 
         if( $shares === "true" && $buttons === 'false' ) {
             return $sharecount;
@@ -1034,8 +1035,8 @@ function mashsb_get_twitter_title() {
  */
 
 function mashsb_get_url() {
-    global $wp, $post;
-
+    global $post;
+    
     if( isset($post->ID )) {
         // The permalink for singular pages!
         // Do not check here for is_singular() (like e.g. the sharebar addon does.)
