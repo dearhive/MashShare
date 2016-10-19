@@ -317,7 +317,9 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 == Changelog ==
 
 = {{ version }} =
-* TEST IT Fix: Convert Quote characters in open graph title to html entities.
+* Fix: Convert Quote characters in open graph title to html entities.
+* Fix: Pinterest button not working on AMP pages
+* Fix: Hackernews and  Flipboard button not working on AMP pages
 
 = 3.3.1 =
 * Fix: Remove old unused access token endpoint. Please install this update if you were using the FB access token previously or if your share count stucks

@@ -110,6 +110,8 @@ color:#ffffff;
 .mashicon-frype .icon:before { content: '\e81c'; } /* '' */
 .mashicon-skype .icon:before { content: '\e81d'; } /* '' */
 .mashicon-telegram .icon:before { content: '\e81f'; } /* '' */
+.mashicon-hackernews .icon:before { content: '\e820'; } /* '' */
+.mashicon-flipboard .icon:before { content: '\e821'; } /* '' */
 
 .mashicon-share:before { content: '\e81E'; } /* '' */
 
@@ -236,6 +238,13 @@ background: #00afef;
 
 .mashicon-telegram{
 background: #1d94d3;
+}
+
+.mashicon-hackernews{
+background: #ff6600;
+}
+.mashicon-flipboard{
+background: #b31f17;
 }
 
 .mashicon-buffer .text, mashicon-buffer .icon{
