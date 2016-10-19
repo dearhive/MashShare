@@ -52,7 +52,7 @@ function mashsb_is_access_token_expired(){
         $rate_limit = get_transient('mashsb_limit_req');
         
         if (false === $rate_limit) {
-            set_transient('mashsb_limit_req', '1', 20);
+            set_transient('mashsb_limit_req', '1', 25);
             return false;
         }
             $mashsb_error[] = 'MashShare: Facebook Temp Rate Limit Exceeded';

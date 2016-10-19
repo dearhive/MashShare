@@ -320,6 +320,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 * Fix: Convert Quote characters in open graph title to html entities.
 * Fix: Pinterest button not working on AMP pages
 * Fix: Hackernews and  Flipboard button not working on AMP pages
+* Tweak: Lower rate limit to reduce request per second to facebook network
 
 = 3.3.1 =
 * Fix: Remove old unused access token endpoint. Please install this update if you were using the FB access token previously or if your share count stucks
