@@ -73,7 +73,8 @@ class TemplateFunctions extends WP_UnitTestCase {
                 sleep(5);
                 
         $url = 'http://google.com';
-        $mashsbSharesObj = new mashengine( $url );
+        //$mashsbSharesObj = new mashengine( $url );
+        $mashsbSharesObj = mashsbGetShareObj($url);
         $shares = $mashsbSharesObj->getALLCounts()->total;
         $this->assertGreaterThan( 1000, ( int ) $shares );
     }
@@ -84,7 +85,8 @@ class TemplateFunctions extends WP_UnitTestCase {
                 sleep(5);
                 
         $url = 'http://google.com';
-        $mash = new mashengine( $url );
+        //$mash = new mashengine( $url );
+        $mash = mashsbGetShareObj($url);
         $shares = $mash->getALLCounts()->total;
         $this->assertGreaterThan( 1000, ( int ) $shares );
     }
