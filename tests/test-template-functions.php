@@ -82,7 +82,7 @@ class TemplateFunctions extends WP_UnitTestCase {
     public function test_mashengine_all_counts() {
         global $mashsb_options;
         
-                sleep(5);
+                sleep(7);
                 
         $url = 'http://google.com';
         //$mash = new mashengine( $url );
@@ -94,7 +94,7 @@ class TemplateFunctions extends WP_UnitTestCase {
     public function test_getSharedcount() {
         global $mashsb_options, $post;
         
-                sleep(5);
+                sleep(7);
         
         //global $mashsb_options;
 
@@ -120,7 +120,7 @@ class TemplateFunctions extends WP_UnitTestCase {
     public function test_getSharedcountJson() {
         global $mashsb_options, $post;
         
-                sleep(5);
+                sleep(7);
 
         //$mashsb_options['fb_access_token'] = 'EAAHag2FMn2UBAAU6ceKGLZCN6PAJ5cWFQ9ZAVoG32qqTRCG0UrosOsOZB8JwsjAJU8RiSuD4gTxWpNwvvc9SRLrVOHcSMkMpnosLvxR3VZCZCEHBmTVKcrJAoRZB6hjrhZCeYxGQwiyoClx7Y0igevbEfcwfwltKkUgfzoCzscqHyaOq2Nwn26k';
         $mashsb_options['mashsb_sharemethod'] = 'mashengine';
@@ -173,7 +173,7 @@ class TemplateFunctions extends WP_UnitTestCase {
     public function test_getSharedcount_async_cache() {
         global $mashsb_options, $post;
         
-                sleep(5);
+                sleep(7);
 
         $mashsb_options['caching_method'] = 'async_cache';
         
