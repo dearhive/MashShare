@@ -565,7 +565,7 @@ function mashsb_render_sharecounts( $customurl = '', $align = 'left' ) {
  */
 
 function mashshareShortcodeShow( $args ) {
-    global $mashsb_custom_url, $mashsb_custom_text;
+    global $mashsb_options, $mashsb_custom_url, $mashsb_custom_text;
 
     $sharecount = '';
 
@@ -602,8 +602,10 @@ function mashshareShortcodeShow( $args ) {
             return $sharecount;
         }
     }
+    
+    $class_stretched = isset($mashsb_options['responsive_buttons']) ? 'mashsb-stretched' : '';
 
-    $return = '<aside class="mashsb-container mashsb-main">'
+    $return = '<aside class="mashsb-container mashsb-main ' . $class_stretched . '">'
             . mashsb_content_above() .
             '<div class="mashsb-box">'
             . $sharecount .

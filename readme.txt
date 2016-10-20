@@ -318,6 +318,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 = {{ version }} =
 * Fix: css not minified properly
+* New: Use full size buttons for shortcode buttons
 
 = 3.3.2 =
 * Fix: Convert Quote characters in open graph title to html entities.
