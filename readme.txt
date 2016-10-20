@@ -318,6 +318,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 = {{ version }} =
 * Fix: css not minified properly
+* Fix: Rewrite some code to be PHP 7 compatible
 * New: Use full size buttons for shortcode buttons
 
 = 3.3.2 =

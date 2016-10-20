@@ -216,16 +216,31 @@
 		public $PLATFORM_ANDROID = 'Android';
 
 		public $OPERATING_SYSTEM_UNKNOWN = 'unknown';
+                
+                // PHP 7 compatible constructor
+                public function __construct($useragent="") {
+                    $this->reset();
+                    if( $useragent != "" ) {
+                            $this->setUserAgent($useragent);
+                    }
+                    else {
+                            $this->determine();
+                    }
+                }
+                // PHP 4 compatible constructor
+                public function Browser(){
+                    self::__construct();
+                }
 
-		function Browser($useragent="") {
-			$this->reset();
-			if( $useragent != "" ) {
-				$this->setUserAgent($useragent);
-			}
-			else {
-				$this->determine();
-			}
-		}
+//		function Browser($useragent="") {
+//			$this->reset();
+//			if( $useragent != "" ) {
+//				$this->setUserAgent($useragent);
+//			}
+//			else {
+//				$this->determine();
+//			}
+//		}
 
 		/**
 		* Reset all properties

@@ -153,7 +153,8 @@ function mashsb_tools_import_export_process_export() {
 
 	ignore_user_abort( true );
 
-	if ( ! mashsb_is_func_disabled( 'set_time_limit' ) && ! ini_get( 'safe_mode' ) )
+	//if ( ! mashsb_is_func_disabled( 'set_time_limit' ) && ! ini_get( 'safe_mode' ) )
+	if ( ! mashsb_is_func_disabled( 'set_time_limit' ) )
 		set_time_limit( 0 );
 
 	nocache_headers();
