@@ -317,6 +317,9 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 == Changelog ==
 
 = {{ version }} =
+* Fix: css not minified properly
+
+= 3.3.2 =
 * Fix: Convert Quote characters in open graph title to html entities.
 * Fix: Pinterest button not working on AMP pages
 * Fix: Hackernews and  Flipboard button not working on AMP pages
