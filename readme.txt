@@ -317,6 +317,9 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 == Changelog ==
 
 = {{ version }} =
+* Fix: Disabling share count still makes requests to facebook and co. Important fix to resolve facebook rate limit issues which result in stuck share count
+
+= 3.3.3 =
 * Fix: css not minified properly
 * Fix: Rewrite some code to be PHP 7 compatible
 * New: Use full size buttons for shortcode buttons
