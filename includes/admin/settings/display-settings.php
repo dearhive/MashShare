@@ -171,7 +171,7 @@ function mashsb_options_page() {
         </h2>
         <div id="mashsb_container" class="mashsb_container">
                     <?php getTabHeader( 'mashsb_settings_' . $active_tab, 'mashsb_settings_' . $active_tab ); ?>   
-            <div class="panel-container"> <!-- new //-->
+            <div class="mashsb-panel-container"> <!-- new //-->
                 <form method="post" action="options.php">
                     <?php
                     settings_fields( 'mashsb_settings' );

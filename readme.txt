@@ -318,6 +318,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 = {{ version }} =
 * Fix: Do not remove backslash from custom css
+* Fix: Change general admin class panel-container to a more unique one
 
 = {3.3.4 =
 * Fix: Disabling share count still makes requests to facebook and co. Important fix to resolve facebook rate limit issues which result in stuck share count
