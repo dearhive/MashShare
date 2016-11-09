@@ -319,7 +319,12 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 = {{ version }} =
 * Fix: Do not remove backslash from custom css
 * Fix: Change general admin class panel-container to a more unique one
-* Fix: Check if image exists before detecting image size for twitter image 
+* Fix: Check if image exists before detecting image size for twitter image
+* New: Add French language
+* New: Add Arabic language
+* New: Add Dutch language
+* New: Add Brazil language
+* New: Add Indonesia language
 
 = {3.3.4 =
 * Fix: Disabling share count still makes requests to facebook and co. Important fix to resolve facebook rate limit issues which result in stuck share count
