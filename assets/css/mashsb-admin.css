@@ -764,7 +764,7 @@ font-weight: bold;
 /* Layout of admin table and rows
 */
 
-#mashsb_container .panel-container {
+#mashsb_container .mashsb-panel-container {
 background: #FFF;
 padding:20px;
 padding-top:0px;
@@ -1097,7 +1097,7 @@ text-align: right;
 margin:0px;
 }
 
-.mashsb_admin .panel-container{
+.mashsb_admin .mashsb-panel-container{
     float:left;
 }
 

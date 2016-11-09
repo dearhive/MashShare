@@ -39,8 +39,8 @@ module.exports = function(grunt) {
         uglify: {
             build: { 
                 files:[
-                    {'assets/js/mashsb-admin.min.js' : 'assets/js/mashsb-admin.js'},
-                    {'assets/js/mashsb.min.js' : 'assets/js/mashsb.js'}
+                    {'<%= paths.base %>/assets/js/mashsb-admin.min.js' : 'assets/js/mashsb-admin.js'},
+                    {'<%= paths.base %>/assets/js/mashsb.min.js' : 'assets/js/mashsb.js'}
                 ]
             }
         },
@@ -94,8 +94,8 @@ module.exports = function(grunt) {
         cssmin: {
             build: { 
                 files:[
-                    {'assets/css/mashsb-admin.min.css' : 'assets/css/mashsb-admin.css'},
-                    {'assets/css/mashsb.min.css' : 'assets/css/mashsb.min.css'}
+                    {'<%= paths.base %>/assets/css/mashsb-admin.min.css' : 'assets/css/mashsb-admin.css'},
+                    {'<%= paths.base %>/assets/css/mashsb.min.css' : 'assets/css/mashsb.min.css'}
                 ]
             }
         },
@@ -135,6 +135,6 @@ module.exports = function(grunt) {
 
     // Build task
     //grunt.registerTask( 'build', [ 'compress:build' ]);
-    grunt.registerTask( 'build', [ 'clean:build', 'uglify:build', 'cssmin:build', 'copy:build', 'string-replace:build', 'compress:build' ]);
+    grunt.registerTask( 'build', [ 'clean:build', 'copy:build', 'uglify:build', 'cssmin:build', 'string-replace:build', 'compress:build' ]);
     grunt.registerTask( 'deploy', [ 'wp_deploy:deploy' ] );
 };

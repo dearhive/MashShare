@@ -267,7 +267,9 @@ class MASHSB_HEADER_META_TAGS {
         
         $upload_dir = wp_upload_dir();
         $img_src = str_replace( $upload_dir['baseurl'], $upload_dir['basedir'], $this->get_og_image() );
-        $imagesize = getimagesize( $img_src );
+        
+        $imagesize = is_readable($img_src) ? getimagesize( $img_src ) : '';
+
         if(!empty($imagesize)){
             return $imagesize;
         }
@@ -297,9 +299,6 @@ class MASHSB_HEADER_META_TAGS {
      * @return mixed string | boolean false on failure or no featured image available
      */
     public function get_featured_image() {
-        // Return post thumbnail
-        // rawurlencode() Must be tested for images with non lating characters
-        //return rawurlencode( wp_get_attachment_url( get_post_thumbnail_id( $this->postID ) ) );
         return wp_get_attachment_url( get_post_thumbnail_id( $this->postID ) );
     }
 
@@ -323,6 +322,7 @@ class MASHSB_HEADER_META_TAGS {
      */
     public function get_pinterest_image_url() {
         $image = get_post_meta( $this->postID, 'mashsb_pinterest_image', true );
+
         if( $image ) {
             //return rawurlencode( wp_get_attachment_url( $og_image ) );
             return wp_get_attachment_url( $image );

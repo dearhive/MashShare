@@ -87,6 +87,8 @@ function mashsbGetShareMethod( $mashsbSharesObj ) {
  */
 function mashsbGetNonPostShares( $url ) {
     global $mashsb_error;
+    
+    
     // Expiration
     $expiration = mashsb_get_expiration();
     
@@ -140,7 +142,7 @@ function mashsbGetNonPostShares( $url ) {
  */
 
 function getSharedcount( $url ) {
-    global $post, $mashsb_sharecount, $mashsb_error; // todo test a global share count var if it reduces the amount of requests
+    global $mashsb_options, $post, $mashsb_sharecount, $mashsb_error; // todo test a global share count var if it reduces the amount of requests
         
     // Return global share count variable to prevent multiple execution
     if (is_array($mashsb_sharecount) && array_key_exists($url, $mashsb_sharecount) && !empty($mashsb_sharecount[$url]) && !mashsb_is_cache_refresh() ){
@@ -157,11 +159,12 @@ function getSharedcount( $url ) {
      * - search page
      * - empty url
      * - disabled permalinks
+     * - disabled share count setting
      * - deprecated: admin pages (we need to remove this for themes which are using a bad infinite scroll implementation where is_admin() is always true)
      */
 
        
-    if( is_404() || is_search() || empty($url) || !mashsb_is_enabled_permalinks()) {
+    if( is_404() || is_search() || empty($url) || !mashsb_is_enabled_permalinks() || isset($mashsb_options['disable_sharecount']) ) {
         return apply_filters( 'filter_get_sharedcount', 0 );
     }
 

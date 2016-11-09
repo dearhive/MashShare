@@ -1,0 +1,1711 @@
+# Copyright (C) 2016 Mashshare Share Buttons
+# This file is distributed under the same license as the Mashshare Share Buttons package.
+# Translators:
+# Marcelo Ghelman <marcelo.ghelman@gmail.com>, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: Mashshare\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/mashsharer\n"
+"POT-Creation-Date: 2016-06-23 15:40:58+00:00\n"
+"PO-Revision-Date: 2016-11-09 11:26+0100\n"
+"Last-Translator: Rene Hermenau <info@mashshare.net>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/renehermenau/"
+"mashshare/language/pt_BR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.5.6\n"
+
+msgid ""
+"Social Media Share Buttons for Twitter, Facebook and other social networks. "
+"Highly customizable Social Media ecosystem"
+msgstr ""
+
+#: includes/MASHSB_SL_Plugin_Updater.php:177
+msgid ""
+"There is a new version of %1$s available. <a target=\"_blank\" class="
+"\"thickbox\" href=\"%2$s\">View version %3$s details</a>."
+msgstr ""
+
+#: includes/MASHSB_SL_Plugin_Updater.php:184
+msgid ""
+"There is a new version of %1$s available. <a target=\"_blank\" class="
+"\"thickbox\" href=\"%2$s\">View version %3$s details</a> or <a href=\"%4$s"
+"\">update now</a>."
+msgstr ""
+
+#: includes/MASHSB_SL_Plugin_Updater.php:324
+msgid "You do not have permission to install plugin updates"
+msgstr ""
+
+#: includes/MASHSB_SL_Plugin_Updater.php:324
+#: includes/class-mashsb-license-handler.php:319
+msgid "Error"
+msgstr ""
+
+#: includes/admin/add-ons.php:27
+msgid "Add Ons for Mashshare"
+msgstr "Complementos para Mashshare"
+
+#: includes/admin/add-ons.php:28
+msgid "Visit Website"
+msgstr "Visitar site"
+
+#: includes/admin/add-ons.php:28
+msgid "See Details"
+msgstr "Ver detalhes"
+
+#: includes/admin/add-ons.php:30
+msgid "These add-ons extend the functionality of Mashshare."
+msgstr "Estes complementos estendem a funcionalidade do Mashshare."
+
+#: includes/admin/add-ons.php:54
+msgid ""
+"There was an error retrieving the Mashshare addon list from the server. "
+"Please try again later."
+msgstr ""
+"Houve um erro ao obter a lista de complementos para Mashshare a partir do "
+"servidor. Tente novamente mais tarde."
+
+#: includes/admin/admin-footer.php:24
+msgid ""
+"Thank you for using <a href=\"%1$s\" target=\"_blank\">Mashshare</a>! Please "
+"<a href=\"%2$s\" target=\"_blank\">rate us</a> on <a href=\"%2$s\" target="
+"\"_blank\">WordPress.org</a> and help to support this project.<br>Something "
+"not working as expected or need help? Read our <a href=\"%3$s\" target="
+"\"blank\">Documentation</a>"
+msgstr ""
+
+#: includes/admin/admin-notices.php:51
+msgid ""
+"MashShare needs the PHP extension cURL which is not installed on your "
+"server. Please <a href=\"%s\" target=\"_blank\">install and activate</a> it "
+"to be able to collect share count of your posts."
+msgstr ""
+
+#: includes/admin/admin-notices.php:58
+msgid ""
+"No Social Networks enabled. Go to <a href=\"%s\"> Mashshare->Settings-"
+">Social Networks</a> and enable at least one Social Network."
+msgstr ""
+
+#: includes/admin/admin-notices.php:64
+msgid ""
+"Your Sharebar Add-On version is not using new short url mechanism of "
+"MashShare 3.X. Please <a href=\"%s\" target=\"blank\"> update the Sharebar "
+"Add-On</a> to at least version 1.2.5. if you want to make sure that twitter "
+"short urls will not stop working in one of the next updates. This requires a "
+"valid license of the Sharebar Add-On"
+msgstr ""
+
+#: includes/admin/admin-notices.php:70
+msgid ""
+"Your Floating Sidebar Add-On version is not using new short url mechanism of "
+"MashShare 3.X. Please <a href=\"%s\" target=\"blank\"> update the Floating "
+"Sidebar Add-On</a> to at least version 1.2.6. if you want to make sure that "
+"twitter short urls will not stop working in one of the next updates. This "
+"requires a valid license of the Floating Sidebar Add-On"
+msgstr ""
+
+#: includes/admin/admin-notices.php:76
+msgid ""
+"Google API key is invalid. Go to <a href=\"%s\"><i>Mashshare->Settings-"
+">Short URL Integration</i></a> and check the Google API key."
+msgstr ""
+
+#: includes/admin/admin-notices.php:82
+msgid ""
+"Bitly Access Token is invalid or bitly.com endpoint can not be reached. Go "
+"to <a href=\"%s\"><i>Mashshare->Settings->Short URL Integration</i></a> and "
+"check the Bitly API key."
+msgstr ""
+
+#: includes/admin/admin-notices.php:88
+msgid ""
+"<strong>Important:</strong> Deactivate the MashShare Open Graph Add-On. It "
+"is not longer needed and having it activated leads to duplicate open graph "
+"tags on your site. Go to <a href=\"%s\"> Plugin Settings</a> "
+msgstr ""
+
+#: includes/admin/admin-notices.php:94
+msgid ""
+"<strong>Important:</strong> Deactivate the MashShare Shorturls Add-On. It is "
+"not longer needed and already built in MashShare. Deactivate it from <a href="
+"\"%s\"> Plugin Settings</a> "
+msgstr ""
+
+#: includes/admin/admin-notices.php:100
+msgid ""
+"<strong>No Share Count aggregation possible!</strong> <a href=\"%s"
+"\">Permalinks</a> must be enabled to count shares. Share count is "
+"deactivated until you have fixed this."
+msgstr ""
+
+#: includes/admin/admin-notices.php:258
+msgid ""
+"There seems to be an issue with the server. Please try again in a few "
+"minutes."
+msgstr ""
+"Parece haver um problema com o servidor. Tente novamente em alguns minutos."
+
+#: includes/admin/admin-pages.php:31
+msgid "MashShare"
+msgstr ""
+
+#: includes/admin/admin-pages.php:32
+msgid "MashShare Settings"
+msgstr ""
+
+#: includes/admin/admin-pages.php:32
+#: includes/admin/settings/register-settings.php:744
+msgid "Settings"
+msgstr "Configurações"
+
+#: includes/admin/admin-pages.php:33
+msgid "MashShare Add Ons"
+msgstr ""
+
+#: includes/admin/admin-pages.php:33
+msgid "Get Add Ons"
+msgstr ""
+
+#: includes/admin/admin-pages.php:34
+msgid "MashShare Tools"
+msgstr ""
+
+#: includes/admin/admin-pages.php:34
+msgid "Im/Export & System"
+msgstr ""
+
+#: includes/admin/meta-box/inc/core.php:40
+msgid "Documentation"
+msgstr ""
+
+#: includes/admin/meta-box/inc/core.php:41
+msgid "Extensions"
+msgstr "Extensões"
+
+#: includes/admin/meta-box/inc/field.php:196
+msgid "+ Add more"
+msgstr ""
+
+#: includes/admin/meta-box/inc/fields/autocomplete.php:14
+#: includes/admin/meta-box/inc/fields/autocomplete.php:77
+#: includes/admin/meta-box/inc/fields/autocomplete.php:94
+msgid "Delete"
+msgstr ""
+
+#: includes/admin/meta-box/inc/fields/button.php:29
+msgid "Click me"
+msgstr ""
+
+#: includes/admin/meta-box/inc/fields/checkbox.php:85
+msgid "Yes"
+msgstr ""
+
+#: includes/admin/meta-box/inc/fields/checkbox.php:85
+msgid "No"
+msgstr ""
+
+#: includes/admin/meta-box/inc/fields/file-input.php:18
+msgid "Select File"
+msgstr ""
+
+#: includes/admin/meta-box/inc/fields/file-input.php:41
+#: includes/admin/meta-box/inc/fields/select.php:91
+msgid "Select"
+msgstr ""
+
+#: includes/admin/meta-box/inc/fields/file-input.php:43
+msgid "Remove"
+msgstr ""
+
+#: includes/admin/meta-box/inc/fields/file.php:15
+msgid "You may only upload maximum %d file"
+msgstr ""
+
+#: includes/admin/meta-box/inc/fields/file.php:16
+msgid "You may only upload maximum %d files"
+msgstr ""
+
+#: includes/admin/meta-box/inc/fields/file.php:83
+msgid "Error: Cannot delete file"
+msgstr ""
+
+#: includes/admin/meta-box/inc/fields/file.php:96
+msgctxt "file upload"
+msgid "Upload Files"
+msgstr ""
+
+#: includes/admin/meta-box/inc/fields/file.php:97
+msgctxt "file upload"
+msgid "+ Add new file"
+msgstr ""
+
+#: includes/admin/meta-box/inc/fields/file.php:153
+msgctxt "file upload"
+msgid "Delete"
+msgstr ""
+
+#: includes/admin/meta-box/inc/fields/file.php:154
+msgctxt "file upload"
+msgid "Edit"
+msgstr ""
+
+#: includes/admin/meta-box/inc/fields/image.php:61
+#: includes/admin/meta-box/inc/fields/thickbox-image.php:53
+msgctxt "image upload"
+msgid "Upload Images"
+msgstr ""
+
+#: includes/admin/meta-box/inc/fields/image.php:62
+msgctxt "image upload"
+msgid "+ Add new image"
+msgstr ""
+
+#: includes/admin/meta-box/inc/fields/image.php:124
+msgctxt "image upload"
+msgid "Delete"
+msgstr ""
+
+#: includes/admin/meta-box/inc/fields/image.php:125
+msgctxt "image upload"
+msgid "Edit"
+msgstr ""
+
+#: includes/admin/meta-box/inc/fields/key-value.php:19
+msgid "Key"
+msgstr ""
+
+#: includes/admin/meta-box/inc/fields/key-value.php:25
+msgid "Value"
+msgstr ""
+
+#: includes/admin/meta-box/inc/fields/map.php:49
+msgid "Find Address"
+msgstr ""
+
+#: includes/admin/meta-box/inc/fields/media.php:18
+msgctxt "media"
+msgid "Add Image"
+msgstr ""
+
+#: includes/admin/meta-box/inc/fields/media.php:19
+msgctxt "media"
+msgid " file"
+msgstr ""
+
+#: includes/admin/meta-box/inc/fields/media.php:20
+msgctxt "media"
+msgid " files"
+msgstr ""
+
+#: includes/admin/meta-box/inc/fields/media.php:21
+msgctxt "media"
+msgid "Remove"
+msgstr ""
+
+#: includes/admin/meta-box/inc/fields/media.php:22
+msgctxt "media"
+msgid "Edit"
+msgstr ""
+
+#: includes/admin/meta-box/inc/fields/media.php:23
+msgctxt "media"
+msgid "View"
+msgstr ""
+
+#: includes/admin/meta-box/inc/fields/media.php:24
+msgctxt "media"
+msgid "No Title"
+msgstr ""
+
+#: includes/admin/meta-box/inc/fields/media.php:27
+msgctxt "media"
+msgid "Select Files"
+msgstr ""
+
+#: includes/admin/meta-box/inc/fields/media.php:28
+msgctxt "media"
+msgid "Drop files here to upload"
+msgstr ""
+
+#: includes/admin/meta-box/inc/fields/oembed.php:65
+msgid "Embed HTML not available."
+msgstr ""
+
+#: includes/admin/meta-box/inc/fields/oembed.php:84
+msgid "Preview"
+msgstr ""
+
+#: includes/admin/meta-box/inc/fields/post.php:34
+msgid "Select a post"
+msgstr ""
+
+#: includes/admin/meta-box/inc/fields/post.php:38
+#: includes/admin/meta-box/inc/fields/taxonomy.php:51
+msgid "Select a %s"
+msgstr ""
+
+#: includes/admin/meta-box/inc/fields/select.php:91
+msgid "All"
+msgstr "Todos"
+
+#: includes/admin/meta-box/inc/fields/select.php:91
+msgid "None"
+msgstr "Nenhum"
+
+#: includes/admin/meta-box/inc/fields/taxonomy.php:47
+msgid "Select a term"
+msgstr ""
+
+#: includes/admin/meta-box/inc/fields/user.php:34
+msgid "Select an user"
+msgstr ""
+
+#: includes/admin/meta-box/inc/validation.php:42
+msgid "Please correct the errors highlighted below and try again."
+msgstr ""
+
+#: includes/admin/plugins.php:27
+msgid "General Settings"
+msgstr "Configurações gerais"
+
+#: includes/admin/plugins.php:50 includes/admin/welcome.php:329
+msgid "Getting Started"
+msgstr "Primeiros passos"
+
+#: includes/admin/plugins.php:51
+msgid "Add Ons"
+msgstr "Complementos"
+
+#: includes/admin/settings/contextual-help.php:29
+msgid "For more information:"
+msgstr "Para mais informações:"
+
+#: includes/admin/settings/contextual-help.php:30
+msgid "Visit the <a href=\"%s\">documentation</a> on the Mashshare website."
+msgstr "Consulte a <a href=\"%s\">documentação</a> no site do Mashshare."
+
+#: includes/admin/settings/contextual-help.php:32
+msgid ""
+"<a href=\"%s\">Post an issue</a> on <a href=\"%s\">Mashshare</a>. View <a "
+"href=\"%s\">extensions</a>."
+msgstr ""
+"<a href=\"%s\">Informe um problema</a> no <a href=\"%s\">Mashshare</a>. Veja "
+"<a href=\"%s\">extensões</a>."
+
+#: includes/admin/settings/contextual-help.php:41
+msgid "General"
+msgstr "Geral"
+
+#: includes/admin/settings/contextual-help.php:42
+msgid "This screen provides the most basic settings for configuring Mashshare."
+msgstr ""
+"Esta tela fornece as definições mais básicas para configurar o Mashshare."
+
+#: includes/admin/settings/display-settings.php:133
+msgid "MashShare "
+msgstr ""
+
+#: includes/admin/settings/metabox-settings.php:102
+msgid "Social Media Image"
+msgstr ""
+
+#: includes/admin/settings/metabox-settings.php:103
+msgid ""
+"Optimal size for post shared images on Facebook, Google+ and LinkedIn is "
+"1200px x 630px. Aspect ratio 1.9:1"
+msgstr ""
+
+#: includes/admin/settings/metabox-settings.php:112
+msgid "Social Media Title"
+msgstr ""
+
+#: includes/admin/settings/metabox-settings.php:113
+msgid ""
+"This title is used by the open graph meta tag og:title and will be used when "
+"users share your content on Facebook, LinkedIn, or Google+. Leave this blank "
+"to use "
+msgstr ""
+
+#: includes/admin/settings/metabox-settings.php:113
+msgid "Yoast Facebook / SEO title"
+msgstr ""
+
+#: includes/admin/settings/metabox-settings.php:121
+msgid "Social Media Description"
+msgstr ""
+
+#: includes/admin/settings/metabox-settings.php:122
+msgid ""
+"This description is used by the open graph meta tag og:description and will "
+"be used when users share your content on Facebook, LinkedIn, and Google "
+"Plus. Leave this blank to use "
+msgstr ""
+
+#: includes/admin/settings/metabox-settings.php:122
+msgid "Yoast Facebook open graph description or the post excerpt."
+msgstr ""
+
+#: includes/admin/settings/metabox-settings.php:135
+msgid "Pinterest Image"
+msgstr ""
+
+#: includes/admin/settings/metabox-settings.php:135
+#: includes/admin/settings/metabox-settings.php:145
+msgid ""
+"Get the <a href=\"%s\" target=\"_blank\">Network Add-On</a> to make use of "
+"the Pinterest Features"
+msgstr ""
+
+#: includes/admin/settings/metabox-settings.php:136
+msgid ""
+"Pinned images need to be more vertical than horizontal in orientation. Use "
+"an aspect ratio of 2:3 to 1:3.5 and a minimum width of 600 pixels. So an "
+"image that is 600 pixels wide should be between 900 and 2100 pixels tall."
+msgstr ""
+
+#: includes/admin/settings/metabox-settings.php:145
+msgid "Pinterest Description"
+msgstr ""
+
+#: includes/admin/settings/metabox-settings.php:146
+msgid ""
+"Place a customized message that will be used when this post is shared on "
+"Pinterest. Leave this blank to use the "
+msgstr ""
+
+#: includes/admin/settings/metabox-settings.php:146
+msgid "Yoast SEO title"
+msgstr ""
+
+#: includes/admin/settings/metabox-settings.php:146
+msgid "the post title"
+msgstr ""
+
+#: includes/admin/settings/metabox-settings.php:154
+msgid "Custom Tweet"
+msgstr ""
+
+#: includes/admin/settings/metabox-settings.php:176
+msgid ""
+"Publish the post and validate if the open graph meta tags on your site are "
+"correct! Incorrect data can result in wrong share description, title or "
+"images and should be fixed! In the facebook debugger click the link \"Fetch "
+"new scrape information\" to purge the facebook cache."
+msgstr ""
+
+#: includes/admin/settings/metabox-settings.php:206
+msgid "Based on your username @"
+msgstr ""
+
+#: includes/admin/settings/metabox-settings.php:206
+msgid " ,the shortened post url and the current content above"
+msgstr ""
+
+#: includes/admin/settings/metabox-settings.php:208
+msgid "Based on the shortened post url and the current content above"
+msgstr ""
+
+#: includes/admin/settings/metabox-settings.php:210
+msgid " your tweet has a maximum of 140 characters. "
+msgstr ""
+
+#: includes/admin/settings/metabox-settings.php:212
+msgid "If this is left blank the post title will be used. "
+msgstr ""
+
+#: includes/admin/settings/metabox-settings.php:214
+msgid ""
+"If this is left blank the Yoast Twitter Title or post title will be used. "
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:120
+msgid "General settings"
+msgstr "Configurações gerais"
+
+#: includes/admin/settings/register-settings.php:126
+msgid "Share counts"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:127
+msgid ""
+"<i>MashEngine</i> collects shares by direct request to social networks. "
+"<br><br><i>Sharedcount.com</i> needs an API key and is limited (No twitter "
+"shares) <p></p>Shares are collected for Facebook, Twitter, LinkedIn, Google"
+"+, Pinterest, Stumbleupon, Buffer, VK. <p></p>Twitter count is aggreagated "
+"via <a href=\"http://newsharecounts.com\" target=\"_blank\" rel=\"external "
+"nofollow\">newsharecounts.com</a>. Sign up with your Twitter account for "
+"this free service to get the twitter share count. Visit the newsharecount "
+"site, fill in your website domain and click on <i>Sign in with Twitter</i>. "
+"Thats it!"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:136
+msgid "Sharedcount.com API Key"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:137
+msgid ""
+"Get it at <a href=\"https://www.sharedcount.com\" target=\"_blank"
+"\">SharedCount.com</a> for 10.000 free daily requests."
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:143
+msgid "Sharedcount.com endpint"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:144
+msgid ""
+"The SharedCount Domain your API key is configured to query. For example, "
+"free.sharedcount.com. This may update automatically if configured "
+"incorrectly."
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:151
+msgid "Caching Method"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:152
+msgid ""
+"The <i>Async Cache Refresh</i> method never adds additonal load time for a "
+"visitor and refreshes the cache asyncronously in the background. New posts "
+"are updated at each hour. Older posts are updated from 4 hours to 12 hours "
+"for very old ones. <br><br> <i>Refresh while loading</i> rebuilds expired "
+"cache while page is loading and adds a little extra time during inital page "
+"load. <br><br><strong>If shares are not updating</strong> or site is heavy "
+"cached try <i>Refresh while loading!</i> That's the default method MashShare "
+"was using before version 3.0"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:161
+msgid "Cache expiration"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:162
+msgid ""
+"Shares are counted for posts after a certain time and counts are not updated "
+"immediately. Sharedcount.com uses his own cache (30 - 60min). "
+"<p><strong>Default: </strong>5 min. <strong>Recommended: </strong>30min and "
+"more"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:168
+msgid "Facebook Count"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:169
+msgid ""
+"Get the Facebook total count including \"likes\" and \"shares\" or get only "
+"the pure share count"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:179
+msgid "Fake Share counts"
+msgstr "Contagens falsas de compartilhamentos"
+
+#: includes/admin/settings/register-settings.php:180
+msgid ""
+"This number will be aggregated to all your share counts and is multiplied "
+"with a post specific factor. (Number of post title words divided with 10)."
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:186
+msgid "Disable Sharecount"
+msgstr "Desabilitar o Sharecount"
+
+#: includes/admin/settings/register-settings.php:187
+msgid ""
+"Use this when curl() is not supported on your server or share counts should "
+"not counted. This mode does not call the database and no SQL queries are "
+"generated. (Only less performance benefit. All db requests are cached) "
+"Default: false"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:192
+msgid "Hide Sharecount"
+msgstr "Ocultar o Sharecount"
+
+#: includes/admin/settings/register-settings.php:193
+msgid ""
+"<strong>Optional:</strong> If you fill in any number here, the shares for a "
+"specific post are not shown until the share count of this number is reached."
+msgstr ""
+"<strong>Opcional:</strong> Se você inserir qualquer número aqui, os "
+"compartilhamentos de uma postagem específica não são exibidos até que a "
+"contagem de compartilhamentos alcance este número."
+
+#: includes/admin/settings/register-settings.php:199
+msgid "Execution Order"
+msgstr "Ordem de execução"
+
+#: includes/admin/settings/register-settings.php:200
+msgid ""
+"If you use other content plugins you can define here the execution order. "
+"Lower numbers mean earlier execution. E.g. Say \"0\" and Mashshare is "
+"executed before any other plugin (When the other plugin is not overwriting "
+"our execution order). Default is \"1000\""
+msgstr ""
+"Se você usa outros plugins de conteúdo, você pode definir aqui a ordem de "
+"execução. Números menores significam execução mais cedo. Por exemplo, "
+"colocando \"0\" o Mashshare é executado antes de qualquer outro plugin (se "
+"outro plugin não estiver sobrescrevendo nossa ordem de execução). O valor "
+"padrão é \"1000\""
+
+#: includes/admin/settings/register-settings.php:207
+msgid "JavaScript in Footer"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:208
+msgid ""
+"Enable this to load all *.js files into footer. Make sure your theme uses "
+"the wp_footer() template tag in the appropriate place. Default: Disabled"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:213
+msgid "JS & CSS Everywhere"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:214
+msgid ""
+"Enable this option if you are using </br> <strong>&lt;?php echo do_shortcode"
+"(\"[mashshare]\"); ?&gt;</strong> to make sure that all css and js files are "
+"loaded. If Top or Bottom automatic position is used you can deactivate this "
+"option to allow conditional loading so MashShare's JS and CSS files are "
+"loaded only on pages where MashShare is used."
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:220
+msgid "Twitter Popup disabled"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:221
+msgid ""
+"Check this box if your twitter popup is openening twice. This happens "
+"sometimes when you are using any third party twitter plugin or the twitter "
+"SDK on your website."
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:227
+msgid "Remove Data on Uninstall?"
+msgstr "Remover dados ao desinstalar?"
+
+#: includes/admin/settings/register-settings.php:228
+msgid ""
+"Check this box if you would like Mashshare to completely remove all of its "
+"data when the plugin is deleted."
+msgstr ""
+"Marque esta opção se quiser que o Mashshare remova completamente todos os "
+"seus dados quando o plugin for apagado."
+
+#: includes/admin/settings/register-settings.php:233
+msgid "Allow Usage Tracking"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:234
+#: includes/admin/tracking.php:265
+msgid ""
+"Allow Mashshare to track plugin usage? Opt-in to tracking and our newsletter "
+"and immediately be emailed a <strong>20%% discount to the Mashshare shop</"
+"strong>, valid towards the <a href=\"%s\" target=\"_blank\">purchase of Add-"
+"Ons</a>. No sensitive data is tracked."
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:239
+msgid "User Roles Options Visibility"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:240
+msgid ""
+"Select user roles which can see page and post MashShare Social Sharing Meta "
+"Box Options"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:243
+msgid "Select User Roles"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:244
+msgid "All Roles"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:248
+#: includes/admin/settings/register-settings.php:294
+#: includes/admin/settings/register-settings.php:751
+msgid "Social Networks"
+msgstr "Redes sociais"
+
+#: includes/admin/settings/register-settings.php:254
+msgid "Facebook page url"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:255
+msgid "Optional: The url of the main facebook account connected with this site"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:261
+msgid "Facebook App ID"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:262
+msgid ""
+"Optional but recommended. <a href=\"%s\" target=\"_blank\">Create an App ID</"
+"a>"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:268
+#: includes/admin/settings/user-profiles.php:19
+msgid "Twitter Username"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:269
+msgid ""
+"<strong>Optional:</strong> Using your twitter username results in via "
+"@username"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:275
+msgid "Twitter Card"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:276
+msgid ""
+"Enable Twitter card meta tags. If you are using the Yoast SEO or Jetpack "
+"plugin their meta tags will be removed and MashShare will use existing meta "
+"data from these plugins. Default: On"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:281
+msgid "Open Graph Meta Tags"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:282
+msgid ""
+"Enable MashShare Open Graph meta tags. If you are using the Yoast SEO or "
+"Jetpack plugin their meta tags will be removed and MashShare will use "
+"existing meta data from these plugins."
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:287
+msgid "Large Buttons"
+msgstr "Botões grandes"
+
+#: includes/admin/settings/register-settings.php:288
+msgid ""
+"Specify how many services and social networks are visible before the \"Plus"
+"\" Button is shown. This buttons turn into large prominent buttons."
+msgstr ""
+"Especifica quantos serviços e redes sociais ficam visíveis antes que o botão "
+"\"Mais\" seja exibido. Estes botões se tornam maiores e proeminentes."
+
+#: includes/admin/settings/register-settings.php:295
+msgid ""
+"Drag and drop the Social Networks Buttons to sort them and enable the ones "
+"that should be visible. <br>Activate more networks than number of \"Large "
+"Share Buttons\" and the [+] PLUS button<br> will be added automatically."
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:321
+msgid "Short URL Integration"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:328
+msgid "Bitly access token"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:329
+msgid ""
+"If you like to use bitly.com shortener get a free bitly access token <a href="
+"\"%s\" target=\"_blank\">here</a>. This turn urls into a format: http://bit."
+"ly/cXnjsh. "
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:335
+msgid "Google API Key (goo.gl)"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:342
+msgid "Shorturl method"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:343
+msgid ""
+"Bitly generated shortlinks will be converted to the url format: <i>http://"
+"bit.ly/1PPg9D9</i><br><br>Goo.gl generated urls look like: <br><i>http://goo."
+"gl/vSJwUV</i><br><br>Using WP Shortlinks converts twitter links into:<br> <i>"
+"%s ?p=101</i>"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:354
+msgid "Important: Read this!"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:355
+msgid ""
+"<strong>The post short url is NOT generated immediatly after first page load!"
+"</strong>  Background processing can take up to 1 hour for new posts and 4 - "
+"12 hours for old posts."
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:374
+msgid "Customization"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:380
+msgid "Round up Shares"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:381
+msgid ""
+"Share counts greater than 1.000 will be shown as 1k. Greater than 1 Million "
+"as 1M"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:386
+msgid "Animate Shares"
+msgstr "Animar compartilhamentos"
+
+#: includes/admin/settings/register-settings.php:387
+msgid ""
+"Count up the shares on page loading with a nice looking animation effect. "
+"This only works on singular pages and not with shortcodes generated buttons."
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:392
+#: includes/class-mashsb-shared-posts-widget.php:53
+msgid "Share Count Label"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:393
+msgid ""
+"Change the text of the Share count title. <strong>Default:</strong> SHARES"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:408
+msgid "Share Count Color"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:409
+msgid "Choose color of the share number in hex format, e.g. #7FC04C: "
+msgstr ""
+"Escolha a cor do número de compartilhamentos em formato hexa, por exemplo "
+"#7FC04C: "
+
+#: includes/admin/settings/register-settings.php:416
+msgid "Border Radius"
+msgstr "Raio da borda"
+
+#: includes/admin/settings/register-settings.php:417
+msgid ""
+"Specify the border radius of all buttons in pixel. A border radius of 20px "
+"results in circle buttons. Default value is zero."
+msgstr ""
+"Especifique o raio da borda de todos os botões em pixels. Um raio de borda "
+"de 20px resulta em botões circulares. O valor padrão é zero."
+
+#: includes/admin/settings/register-settings.php:447
+msgid "Button Width"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:448
+msgid "Minimum with of the large share buttons in pixels"
+msgstr "Largura mínima dos botões de compartilhamento grandes, em pixels"
+
+#: includes/admin/settings/register-settings.php:455
+msgid "Share Button Style"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:456
+msgid "Change visual appearance of the share buttons."
+msgstr "Muda a aparência visual dos botões de compartilhamento."
+
+#: includes/admin/settings/register-settings.php:467
+msgid "Small Share Buttons"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:468
+msgid ""
+"All buttons will be shown as pure small icons without any text on desktop "
+"and mobile devices all the time.<br><strong>Note:</strong> Disable this when "
+"you use the <a href=\"https://www.mashshare.net/downloads/mashshare-"
+"responsive/\" target=\"_blank\">responsive Add-On</a>"
+msgstr ""
+"Todos os botões serão exibidos como ícones pequenos puros, sem nenhum texto, "
+"em dispositivos móveis e de mesa, todo o tempo.<br><strong>Nota:</strong> "
+"Desabilite isso quando usar o <a href=\"https://www.mashshare.net/downloads/"
+"mashshare-responsive/\" target=\"_blank\">complemento Responsive</a>"
+
+#: includes/admin/settings/register-settings.php:479
+msgid "Subscribe Button"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:480
+msgid ""
+"Specify if the subscribe button is opening a content box below the button or "
+"if the button is linked to the \"subscribe url\" below."
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:490
+msgid "Subscribe URL"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:491
+msgid ""
+"Link the Subscribe button to this URL. This can be the url to your subscribe "
+"page, facebook fanpage, RSS feed etc. e.g. http://yoursite.com/subscribe"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:498
+msgid "Additional Content"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:504
+msgid "Content Above"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:505
+msgid ""
+"Content appearing above share buttons. Use HTML, formulars, like button, "
+"links or any other text. Shortcodes are supported, e.g.: [contact-form-7]"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:512
+msgid "Content Below"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:513
+msgid ""
+"Content appearing below share buttons.  Use HTML, formulars, like button, "
+"links or any other text. Shortcodes are supported, e.g.: [contact-form-7]"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:520
+msgid "Subscribe content"
+msgstr "Conteúdo da inscrição"
+
+#: includes/admin/settings/register-settings.php:521
+msgid ""
+"Define the content of the opening toggle subscribe window here. Use "
+"formulars, like button, links or any other text. Shortcodes are supported, e."
+"g.: [contact-form-7]"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:530
+msgid "Custom Styles"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:536
+msgid "General CSS"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:537
+msgid ""
+"This css is loaded on all pages where the Mashshare buttons are enabled and "
+"it's loaded as an additonal inline css on your site"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:544
+msgid "AMP CSS"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:545
+msgid ""
+"This CSS is loaded only on AMP Project pages like yourwebsite.com/amp. "
+"<strong>Note: </strong> You need the WordPress <a href=\"%s\" target=\"_blank"
+"\">AMP Plugin</a> installed."
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:562
+msgid "Location & Position"
+msgstr "Local & Posição"
+
+#: includes/admin/settings/register-settings.php:568
+msgid "Position"
+msgstr "Posição"
+
+#: includes/admin/settings/register-settings.php:569
+msgid ""
+"Position of Share Buttons. If this is set to <i>manual</i> use the shortcode "
+"function [mashshare] or use php code <br>&lt;?php echo do_shortcode"
+"(\"[mashshare]\"); ?&gt; in template files. </p>You must activate the option "
+"\"<strong>Load JS and CSS all over</strong>\" if you experience issues with "
+"do_shortcode() and the buttons are not shown as expected. See all <a href="
+"\"https://www.mashshare.net/faq/#Shortcodes\" target=\"_blank\">available "
+"shortcodes</a>."
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:572
+msgid "Top"
+msgstr "Topo"
+
+#: includes/admin/settings/register-settings.php:573
+msgid "Bottom"
+msgstr "Base"
+
+#: includes/admin/settings/register-settings.php:574
+msgid "Top and Bottom"
+msgstr "Topo e base"
+
+#: includes/admin/settings/register-settings.php:575
+msgid "Manual"
+msgstr "Manual"
+
+#: includes/admin/settings/register-settings.php:580
+msgid "Post Types"
+msgstr "Tipos de postagem"
+
+#: includes/admin/settings/register-settings.php:581
+msgid ""
+"Select on which post_types the share buttons appear. These values will be "
+"ignored when \"manual\" position is selected."
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:586
+msgid "Exclude from post id"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:587
+msgid ""
+"Exclude share buttons from a list of post ids. Put in the post id separated "
+"by a comma, e.g. 23, 63, 114 "
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:593
+msgid "Categories"
+msgstr "Categorias"
+
+#: includes/admin/settings/register-settings.php:594
+msgid ""
+"Enable this checkbox to enable Mashshare on categories with multiple "
+"blogposts. <br><strong>Note: </strong> Post_types: \"Post\" must be enabled."
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:600
+msgid "Frontpage"
+msgstr "Frontpage"
+
+#: includes/admin/settings/register-settings.php:601
+msgid "Enable share buttons on frontpage"
+msgstr "Habilitar botões de compartilhamento no frontpage"
+
+#: includes/admin/settings/register-settings.php:606
+msgid "Debug"
+msgstr "Debug"
+
+#: includes/admin/settings/register-settings.php:612
+msgid "Disable Cache"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:618
+msgid "Attention: Purge DB Cache"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:624
+msgid "Debug mode"
+msgstr "Modo debug"
+
+#: includes/admin/settings/register-settings.php:633
+msgid "Activate your Add-Ons"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:634
+msgid ""
+"Activate your license key to get important security and feature updates for "
+"your Add-On!"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:634
+msgid ""
+"No Add-Ons are active or installed! <a href=\"%s\" target=\"blank\">See all "
+"Add-Ons</a>"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:714
+msgid "Settings updated."
+msgstr "Configurações atualizadas."
+
+#: includes/admin/settings/register-settings.php:747
+msgid "Visual"
+msgstr "Visual"
+
+#: includes/admin/settings/register-settings.php:755
+msgid "Add-On Settings"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:759
+msgid "Licenses"
+msgstr "Licenças"
+
+#: includes/admin/settings/register-settings.php:761
+msgid "Get More Add-Ons"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:1012
+msgid ""
+"The callback function used for the <strong>%s</strong> setting is missing."
+msgstr ""
+"A função callback usada para a definição <strong>%s</strong> está faltando."
+
+#: includes/admin/settings/register-settings.php:1152
+msgid "Upload File"
+msgstr "Enviar arquivo"
+
+#: includes/admin/settings/register-settings.php:1255
+msgid ""
+"Your license key expired on %s. Please <a href=\"%s\" target=\"_blank\" "
+"title=\"Renew your license key\">renew your license key</a>."
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:1268
+msgid ""
+"Invalid license. Please <a href=\"%s\" target=\"_blank\" title=\"Visit "
+"account page\">visit your account page</a> and verify it."
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:1281
+msgid ""
+"Your %s is not active for this URL. Please <a href=\"%s\" target=\"_blank\" "
+"title=\"Visit account page\">visit your account page</a> to manage your "
+"license key URLs."
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:1293
+msgid "This is not a %s."
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:1302
+msgid ""
+"Your license key has reached its activation limit. <a href=\"%s\">View "
+"possible upgrades</a> now."
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:1324
+msgid "License key never expires."
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:1331
+msgid ""
+"Your license key expires soon! It expires on %s. <a href=\"%s\" target="
+"\"_blank\" title=\"Renew license\">Renew your license key</a>."
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:1341
+msgid "Your license key expires on %s."
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:1363
+msgid "Deactivate License"
+msgstr "Desativar licença"
+
+#: includes/admin/settings/register-settings.php:1427
+msgid "Social Network"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:1428
+msgid "Status"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:1429
+msgid "Custom Label"
+msgstr ""
+
+#: includes/admin/settings/register-settings.php:1497
+msgid "Select Image"
+msgstr "Selecionar imagem"
+
+#: includes/admin/settings/register-settings.php:1636
+msgid "All Services"
+msgstr "Todos os serviços"
+
+#: includes/admin/settings/register-settings.php:1653
+msgid ""
+"DB cache deleted! Do not forget to uncheck this box for performance increase "
+"after doing the job."
+msgstr ""
+"Cache de banco de dados excluído! Não esqueça de desmarcar esta caixa para "
+"melhorar o desempenho depois de completar a tarefa."
+
+#: includes/admin/settings/register-settings.php:1666
+msgid "Transient Cache disabled! Enable it for performance increase."
+msgstr ""
+"Cache transiente está desabilitado! Habilite para melhoria no desempenho."
+
+#: includes/admin/settings/register-settings.php:1679
+msgid ""
+"Log file directory not writable! Set FTP permission to 755 or 777 for /wp-"
+"content/plugins/mashsharer/logs/"
+msgstr ""
+
+#: includes/admin/settings/user-profiles.php:16
+msgid "MashShare Social Media Integration"
+msgstr ""
+
+#: includes/admin/settings/user-profiles.php:22
+msgid "Your Twitter username (without the @ symbol)"
+msgstr ""
+
+#: includes/admin/settings/user-profiles.php:24
+msgid "Facebook Author URL"
+msgstr ""
+
+#: includes/admin/settings/user-profiles.php:27
+msgid "URL to your Facebok profile."
+msgstr ""
+
+#: includes/admin/tools.php:68
+msgid "Import/Export"
+msgstr ""
+
+#: includes/admin/tools.php:69
+msgid "System Info"
+msgstr ""
+
+#: includes/admin/tools.php:91
+msgid "Export Settings"
+msgstr ""
+
+#: includes/admin/tools.php:93
+msgid ""
+"Export the Mashshare settings for this site as a .json file. This allows you "
+"to easily import the configuration into another site."
+msgstr ""
+
+#: includes/admin/tools.php:99
+msgid "Export"
+msgstr ""
+
+#: includes/admin/tools.php:106
+msgid "Import Settings"
+msgstr ""
+
+#: includes/admin/tools.php:108
+msgid ""
+"Import the Mashshare settings from a .json file. This file can be obtained "
+"by exporting the settings on another site using the form above."
+msgstr ""
+
+#: includes/admin/tools.php:116
+msgid "Import"
+msgstr ""
+
+#: includes/admin/tools.php:218
+msgid "Please upload a valid .json file"
+msgstr ""
+
+#: includes/admin/tools.php:224
+msgid "Please upload a file to import"
+msgstr ""
+
+#: includes/admin/tracking.php:266
+msgid "Allow"
+msgstr ""
+
+#: includes/admin/tracking.php:267
+msgid "Do not allow"
+msgstr ""
+
+#: includes/admin/welcome.php:51
+msgid "Welcome to MashShare"
+msgstr ""
+
+#: includes/admin/welcome.php:56
+msgid "MashShare Changelog"
+msgstr ""
+
+#: includes/admin/welcome.php:61
+msgid "Quickstart"
+msgstr ""
+
+#: includes/admin/welcome.php:66
+msgid "The people that build MashShare"
+msgstr ""
+
+#: includes/admin/welcome.php:128
+msgid ""
+"Facebook and Twitter Share Buttons are successfully enabled on all your "
+"posts! <br> Now you can use the steps  below to customize MashShare to your "
+"needs."
+msgstr ""
+
+#: includes/admin/welcome.php:131
+msgid "Create Your First Social Sharing Button"
+msgstr ""
+
+#: includes/admin/welcome.php:137
+msgid "Settings &rarr; Social Networks"
+msgstr ""
+
+#: includes/admin/welcome.php:138
+msgid ""
+"The Social Network menu is your general access point for activating the "
+"desired share buttons and for customizing the share button label"
+msgstr ""
+
+#: includes/admin/welcome.php:139
+msgid "Settings &rarr; Location & Position"
+msgstr ""
+
+#: includes/admin/welcome.php:140
+msgid ""
+"Select the location and exact position of the share buttons within your "
+"content"
+msgstr ""
+
+#: includes/admin/welcome.php:141
+msgid "You are done! Easy, isn't it?"
+msgstr ""
+
+#: includes/admin/welcome.php:149
+msgid "Display a Most Shared Post Widget"
+msgstr ""
+
+#: includes/admin/welcome.php:155
+msgid "Appearance &rarr; Widgets"
+msgstr ""
+
+#: includes/admin/welcome.php:157
+msgid ""
+"Drag and drop the widget </br> \"<i>MashShare - Most Shared Posts</i>\" </"
+"br>into the desired widget location and save it"
+msgstr ""
+
+#: includes/admin/welcome.php:165
+msgid "Content Shortcodes"
+msgstr ""
+
+#: includes/admin/welcome.php:172
+msgid ""
+"Add Share buttons manually with using the shortcode <i style=\"font-weight:"
+"bold;\">[mashshare]</i>."
+msgstr ""
+
+#: includes/admin/welcome.php:174
+msgid ""
+"Paste the shortcode in content of your posts or pages with the post editor "
+"at the place you want the share buttons appear"
+msgstr ""
+
+#: includes/admin/welcome.php:176 includes/admin/welcome.php:192
+msgid ""
+"There are various parameters you can use for the mashshare shortcode. Find a "
+"list of all available shortcode parameters <a href=\"%s\" target=\"blank"
+"\">here</a>"
+msgstr ""
+
+#: includes/admin/welcome.php:182
+msgid "PHP Template Shortcode"
+msgstr ""
+
+#: includes/admin/welcome.php:188
+msgid ""
+"Add MashShare directly into your theme template files with using the PHP "
+"code <i style=\"font-weight:bold;\">&lt;?php do_shortcode('[mashshare]'); ?"
+"&gt;</i>"
+msgstr ""
+
+#: includes/admin/welcome.php:199
+msgid "Need Help?"
+msgstr ""
+
+#: includes/admin/welcome.php:202
+msgid "Great Support"
+msgstr ""
+
+#: includes/admin/welcome.php:203
+msgid ""
+"We do our best to provide the best support we can. If you encounter a "
+"problem or have a question, simply open a ticket using our <a href=\"https://"
+"www.mashshare.net/contact-developer/\" target=\"blank\">support form</a>."
+msgstr ""
+
+#: includes/admin/welcome.php:227
+msgid "Welcome to MashShare %s"
+msgstr ""
+
+#: includes/admin/welcome.php:229
+msgid ""
+"Thank you for updating to the latest version! MashShare is installed and "
+"ready to grow your traffic from social networks!"
+msgstr ""
+
+#: includes/admin/welcome.php:252
+msgid "1. Asyncronous Share Count Aggregation"
+msgstr ""
+
+#: includes/admin/welcome.php:256
+msgid ""
+"With MashShare version 3.0 you get the advantage of our biggest performance "
+"update. Use the new <i>Async Cache Refresh</i> method and your share counts "
+"will be aggregated only after page loading and never while page loads. This "
+"is a huge performance update."
+msgstr ""
+
+#: includes/admin/welcome.php:259
+msgid "2. Open Graph and Twitter Card Integration"
+msgstr ""
+
+#: includes/admin/welcome.php:260
+msgid ""
+"Use open graph and twitter card to specify the content you like to share. If "
+"you are using Yoast, MashShare will use the Yoast open graph data instead "
+"and extend it with custom data to get the maximum out of your valuable "
+"content."
+msgstr ""
+
+#: includes/admin/welcome.php:267
+msgid "3. Responsive Buttons per default"
+msgstr ""
+
+#: includes/admin/welcome.php:268
+msgid ""
+"MashShare 3.0 arrives you with basic responsive button support. So the "
+"buttons look great on mobile and desktop devices."
+msgstr ""
+
+#: includes/admin/welcome.php:270
+msgid "4. Share Count Dashboard"
+msgstr ""
+
+#: includes/admin/welcome.php:271
+msgid "See the shares of your posts at a glance on the admin posts listing:"
+msgstr ""
+
+#: includes/admin/welcome.php:275
+msgid "5. A much cleaner user interface"
+msgstr ""
+
+#: includes/admin/welcome.php:276
+msgid ""
+"We spent a lot of time to make useful first time settings and improved the "
+"user interface for an easier experience."
+msgstr ""
+
+#: includes/admin/welcome.php:284
+msgid "Additional Updates"
+msgstr ""
+
+#: includes/admin/welcome.php:287
+msgid "Developer Friendly"
+msgstr ""
+
+#: includes/admin/welcome.php:288
+msgid ""
+"Are you a theme developer and want to use MashShare as your build in share "
+"count aggregator? Read the <a href=\"%s\" target=\"blank\">developer "
+"instructions.</a>"
+msgstr ""
+
+#: includes/admin/welcome.php:291
+msgid "Check Open Graph Settings"
+msgstr ""
+
+#: includes/admin/welcome.php:292
+msgid ""
+"Use the <i>Validate Open Graph Data</i> button and check if the open graph "
+"data on your site is working as expected or conflicts with other open graph "
+"data."
+msgstr ""
+
+#: includes/admin/welcome.php:295
+msgid "Use Yoast SEO Title"
+msgstr ""
+
+#: includes/admin/welcome.php:296
+msgid "MashShare will use the YOAST SEO title if it is defined."
+msgstr ""
+
+#: includes/admin/welcome.php:302 includes/admin/welcome.php:477
+msgid "Go to MashShare Settings"
+msgstr ""
+
+#: includes/admin/welcome.php:303
+msgid "View the Full Changelog"
+msgstr ""
+
+#: includes/admin/welcome.php:326
+msgid "What's New"
+msgstr ""
+
+#: includes/admin/welcome.php:332
+msgid "Credits"
+msgstr ""
+
+#: includes/admin/welcome.php:353
+msgid ""
+"Mashshare is created by a René Hermenau and developers all over the world "
+"who aim to provide the #1 ecosystem for growing social media traffic through "
+"WordPress."
+msgstr ""
+
+#: includes/admin/welcome.php:356
+msgid ""
+" If you want to be credited here participate on the development and  make "
+"your pull request on <a href=\"%s\" target=\"_blank\">github</a>"
+msgstr ""
+
+#: includes/admin/welcome.php:381
+msgid "View %s"
+msgstr ""
+
+#: includes/admin/welcome.php:436
+msgid "No valid changelog was found."
+msgstr ""
+
+#: includes/admin/welcome.php:469
+msgid "Full Changelog"
+msgstr ""
+
+#: includes/class-mashsb-html-elements.php:43
+msgctxt "all dropdown items"
+msgid "All"
+msgstr "Todos"
+
+#: includes/class-mashsb-html-elements.php:44
+msgctxt "no dropdown items"
+msgid "None"
+msgstr "Nenhum"
+
+#: includes/class-mashsb-html-elements.php:232
+msgid "Enter username"
+msgstr "Digite o nome de usuário"
+
+#: includes/class-mashsb-license-handler.php:177
+msgid "%1$s License Key"
+msgstr "Chave de licença %1$s"
+
+#: includes/class-mashsb-license-handler.php:210
+msgid ""
+"Enter your extension license keys here to receive updates for purchased "
+"extensions. If your license key has expired, please <a href=\"%s\" target="
+"\"_blank\" title=\"License renewal FAQ\">renew your license</a>."
+msgstr ""
+
+#: includes/class-mashsb-license-handler.php:319
+msgid "Nonce verification failed"
+msgstr ""
+
+#: includes/class-mashsb-license-handler.php:436
+msgid ""
+"You have invalid or expired license keys for MashShare. Please go to the <a "
+"href=\"%s\" title=\"Go to Licenses page\">Licenses page</a> to correct this "
+"issue."
+msgstr ""
+
+#: includes/class-mashsb-license-handler.php:475
+msgid "Enter valid license key for automatic updates."
+msgstr ""
+
+#: includes/class-mashsb-shared-posts-widget.php:13
+msgid "Mashshare - Most Shared Posts"
+msgstr ""
+
+#: includes/class-mashsb-shared-posts-widget.php:37
+msgid "Widget Title"
+msgstr ""
+
+#: includes/class-mashsb-shared-posts-widget.php:42
+msgid "How many posts to display?"
+msgstr ""
+
+#: includes/class-mashsb-shared-posts-widget.php:46
+msgid "Show Shares? Say \"No\" when using fake shares!"
+msgstr ""
+
+#: includes/class-mashsb-shared-posts-widget.php:61
+msgid "Show shares below post title"
+msgstr ""
+
+#: includes/class-mashsb-shared-posts-widget.php:68
+msgid "Time period and age of posts"
+msgstr ""
+
+#: includes/template-functions.php:249
+msgid "Subscribe"
+msgstr "Inscrever"
+
+#: includes/template-functions.php:517
+msgid "SHARES"
+msgstr "COMPARTILHAMENTOS"
+
+#: includes/template-functions.php:1114
+msgid "Page not found"
+msgstr ""
+
+#. translators: %s: search phrase
+#: includes/template-functions.php:1119
+msgid "Search Results for &#8220;%s&#8221;"
+msgstr ""
+
+#: includes/template-functions.php:1152
+msgctxt "yearly archives date format"
+msgid "Y"
+msgstr ""
+
+#: includes/template-functions.php:1154
+msgctxt "monthly archives date format"
+msgid "F Y"
+msgstr ""
+
+#: mashshare.php:124 mashshare.php:136
+msgid "Cheatin&#8217; huh?"
+msgstr "Trapaceando, hein?"
+
+#: templates/sidebar.php:17
+msgid "Increase your Shares and Social Traffic"
+msgstr ""
+
+#: templates/sidebar.php:20
+msgid "Get 20% Off!"
+msgstr ""
+
+#: templates/sidebar.php:25
+msgid ""
+"Submit your name and email and we'll send you a coupon for 20% off your "
+"upgrade to the pro version."
+msgstr ""
+
+#: templates/sidebar.php:29
+msgid "Your Email"
+msgstr ""
+
+#: templates/sidebar.php:33
+msgid "First Name"
+msgstr ""
+
+#: templates/sidebar.php:37
+msgid "Last Name"
+msgstr ""
+
+#: templates/sidebar.php:44
+msgid "Send me the coupon"
+msgstr ""
+
+#: templates/sidebar.php:48
+msgid ""
+"Your email will not be used for anything else and you can unsubscribe with 1-"
+"click anytime."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Mashshare Share Buttons"
+msgstr ""
+
+#. #-#-#-#-#  plugin.pot (Mashshare Share Buttons 3.1.3)  #-#-#-#-#
+#. Plugin URI of the plugin/theme
+#. #-#-#-#-#  plugin.pot (Mashshare Share Buttons 3.1.3)  #-#-#-#-#
+#. Author URI of the plugin/theme
+msgid "https://www.mashshare.net"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Mashshare is a Share functionality inspired by the the great website "
+"Mashable for Facebook and Twitter. More networks available."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "René Hermenau"
+msgstr ""
