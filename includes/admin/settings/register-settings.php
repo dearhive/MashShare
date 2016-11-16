@@ -782,7 +782,6 @@ function mashsb_settings_sanitize( $input = array() ) {
 function mashsb_sanitize_text_field( $input ) {
     return trim( $input );
 }
-
 add_filter( 'mashsb_settings_sanitize_text', 'mashsb_sanitize_text_field' );
 
 /**
@@ -813,8 +812,10 @@ function mashsb_get_settings_tabs() {
     if( !empty( $settings['licenses'] ) ) {
         $tabs['licenses'] = __( 'Licenses', 'mashsb' );
     }
+    if (false === mashsb_hide_addons()){
     $tabs['addons'] = __( 'Get More Add-Ons', 'mashsb' );
-
+    }
+    
     //$tabs['misc']      = __( 'Misc', 'mashsb' );
 
     return apply_filters( 'mashsb_settings_tabs', $tabs );
@@ -1864,8 +1865,10 @@ function mashsb_get_user_roles() {
     return $roles;
 }
 
-/*
- * 
+/**
+ * Render Button for oauth authentication and access token generation
+ * @global $mashsb_options $mashsb_options
+ * @param type $args
  */
 function mashsb_fboauth_callback( $args ) {
     global $mashsb_options;
@@ -1898,7 +1901,12 @@ function mashsb_fboauth_callback( $args ) {
 echo $html;
     
 }
-
+/**
+ * Test facebook api and check if site is rate limited
+ * 
+ * @global array $mashsb_options
+ * @return string
+ */
 function mashsb_ratelimit_callback(){
     global $mashsb_options;
     
@@ -1907,7 +1915,6 @@ function mashsb_ratelimit_callback(){
         return '';
     }
     $url = 'http://graph.facebook.com/?id=http://www.google.com';
-    //$url = 'http://graph.facebook.com/';
     
       $curl_handle=curl_init();
   curl_setopt($curl_handle,CURLOPT_URL,$url);
@@ -1921,4 +1928,13 @@ function mashsb_ratelimit_callback(){
   else{
       print '<div style="max-width:200px;">'.$buffer . '</div>';
   }
+}
+
+/**
+ * Helper function to determine if adverts and add-on ressources are hidden
+ * 
+ * @return bool
+ */
+function mashsb_hide_addons(){
+    return apply_filters('mashsb_hide_addons', false);
 }
