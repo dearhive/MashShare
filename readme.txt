@@ -320,6 +320,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 * Fix: Do not remove backslash from custom css
 * Fix: Change general admin class panel-container to a more unique one
 * Fix: Check if image exists before detecting image size for twitter image
+* Fix: Twitter shortcode custom url value is ignored
 * New: Add French language
 * New: Add Arabic language
 * New: Add Dutch language

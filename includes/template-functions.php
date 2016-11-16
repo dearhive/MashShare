@@ -210,7 +210,6 @@ function getSharedcount( $url ) {
          * API share count is greater than real fresh requested share count ->
          */
         
-        //wp_die('error' . $mashsbShareCounts->error);
         if( $mashsbShareCounts->total >= $mashsbStoredShareCount ) {
             update_post_meta( $post->ID, 'mashsb_shares', $mashsbShareCounts->total );
             update_post_meta( $post->ID, 'mashsb_jsonshares', json_encode( $mashsbShareCounts ) );
@@ -393,9 +392,11 @@ function arrNetworks( $name, $is_shortcode ) {
 function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
     global $mashsb_options, $mashsb_custom_url, $enablednetworks, $mashsb_twitter_url;
     
+    
     // define globals
     if( $is_shortcode ) {
         $mashsb_twitter_url = !empty( $mashsb_custom_url ) ? mashsb_get_shorturl( $mashsb_custom_url ) : mashsb_get_twitter_url();
+
     }else{
         $mashsb_twitter_url = mashsb_get_twitter_url();
     }

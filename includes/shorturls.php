@@ -111,7 +111,7 @@ function mashsb_get_shorturl_singular( $url ) {
         $shorturl = get_post_meta( $post->ID, 'mashsb_shorturl', true );
     }
 
-    if( !empty( $shorturl ) ) {
+    if( !empty( $shorturl ) && empty($mashsb_custom_url)) {
         return $shorturl;
     } else {
         return $url;
