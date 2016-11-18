@@ -725,12 +725,11 @@ function mashshare_filter_content( $content ) {
     $excluded = isset( $mashsb_options['excluded_from'] ) ? $mashsb_options['excluded_from'] : null;
     $singular = isset( $mashsb_options['singular'] ) ? $singular = true : $singular = false;
 
-    /*
-     * Deprecated because of Ticket# https://github.com/mashshare/Mashshare/issues/24
-     * if( !is_main_query() ) {
+    
+    if( $mashsb_options['is_main_query'] && !is_main_query() ) {
         return $content;
-    }*/
-
+    }
+     
     if( mashsb_is_excluded() ){
         return $content;
     }

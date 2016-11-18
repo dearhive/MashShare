@@ -322,6 +322,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 * Fix: Check if image exists before detecting image size for twitter image
 * Fix: Twitter shortcode custom url value is ignored
 * New: Add filter 'mashsb_hide_addons' to hide add-on related sections
+* New: Add new option to hide buttons when they appear in widgets or not in main query (is_main_query conditions)
 * New: Add French language
 * New: Add Arabic language
 * New: Add Dutch language
