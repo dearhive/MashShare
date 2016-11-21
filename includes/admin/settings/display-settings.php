@@ -189,7 +189,11 @@ function mashsb_options_page() {
             </div> <!-- new //-->
         </div><!-- #tab_container-->
         <div  class="mashsb-sidebar">
-            <?php  echo MASHSB()->template->get_template('sidebar') ?>
+            <?php  
+                if (false === mashsb_hide_addons()){
+                echo MASHSB()->template->get_template('sidebar'); 
+                }
+            ?>
         </div> <!-- #sidebar-->
     </div><!-- .mashsb_admin -->
     <?php

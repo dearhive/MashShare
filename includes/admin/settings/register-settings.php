@@ -240,9 +240,15 @@ function mashsb_get_registered_settings() {
                     'desc' => sprintf( __( 'Allow Mashshare to track plugin usage? Opt-in to tracking and our newsletter and immediately be emailed a <strong>20%% discount to the Mashshare shop</strong>, valid towards the <a href="%s" target="_blank">purchase of Add-Ons</a>. No sensitive data is tracked.', 'mashsb' ), 'https://www.mashshare.net/add-ons/?utm_source=' . substr( md5( get_bloginfo( 'name' ) ), 0, 10 ) . '&utm_medium=admin&utm_term=setting&utm_campaign=MASHSBUsageTracking' ),
                     'type' => 'checkbox'
                 ),
+                'is_main_query' => array(
+                    'id' => 'is_main_query',
+                    'name' => __( 'Hide Buttons in Widgets (is_main_query)', 'mashsb' ),
+                    'desc' => __( 'If Share Buttons are shown in widgets enable this option. For devs: This uses the is_main_query condition. ' ) ,
+                    'type' => 'checkbox'
+                ),
                 "user_roles_for_sharing_options" => array(
                     "id"            => "user_roles_for_sharing_options",
-                    "name"          => __("Meta Box Permission", "mashsb"),
+                    "name"          => __("Show Share Options Meta Box", "mashsb"),
                     "desc"          => __("Select user roles which can only see MashShare Social Sharing Meta Box Options on posts and pages edit screen and User Meta Box on user profiles. If nothing is set meta boxes are shown for all user roles", "mashsb"),
                     "type"          => "multiselect",
                     "options"       => mashsb_get_user_roles(),
@@ -666,7 +672,7 @@ So the MashShare open graph data will be containing the same social meta data th
                 'delete_cache_objects' => array(
                     'id' => 'delete_cache_objects',
                     'name' => __( 'Attention: Purge DB Cache', 'mashsb' ),
-                    'desc' => __( '<strong>Note: </strong>Use this with caution only when you think your share counts are totally wrong. <strong>This will delete all your twitter counts. They can not be restored!</strong> Checking this and using the save button will delete all stored mashshare post_meta objects.<br>' . mashsb_delete_cache_objects(), 'mashsb' ),
+                    'desc' => __( '<strong>Note: </strong>Use this with caution. <strong>This will delete all your twitter counts. They can not be restored!</strong> Checking this and using the save button will delete all stored mashshare post_meta objects.<br>' . mashsb_delete_cache_objects(), 'mashsb' ),
                     'type' => 'checkbox'
                 ),
                 'debug_mode' => array(
@@ -782,7 +788,6 @@ function mashsb_settings_sanitize( $input = array() ) {
 function mashsb_sanitize_text_field( $input ) {
     return trim( $input );
 }
-
 add_filter( 'mashsb_settings_sanitize_text', 'mashsb_sanitize_text_field' );
 
 /**
@@ -813,8 +818,10 @@ function mashsb_get_settings_tabs() {
     if( !empty( $settings['licenses'] ) ) {
         $tabs['licenses'] = __( 'Licenses', 'mashsb' );
     }
+    if (false === mashsb_hide_addons()){
     $tabs['addons'] = __( 'Get More Add-Ons', 'mashsb' );
-
+    }
+    
     //$tabs['misc']      = __( 'Misc', 'mashsb' );
 
     return apply_filters( 'mashsb_settings_tabs', $tabs );
@@ -1864,8 +1871,10 @@ function mashsb_get_user_roles() {
     return $roles;
 }
 
-/*
- * 
+/**
+ * Render Button for oauth authentication and access token generation
+ * @global $mashsb_options $mashsb_options
+ * @param type $args
  */
 function mashsb_fboauth_callback( $args ) {
     global $mashsb_options;
@@ -1898,7 +1907,12 @@ function mashsb_fboauth_callback( $args ) {
 echo $html;
     
 }
-
+/**
+ * Test facebook api and check if site is rate limited
+ * 
+ * @global array $mashsb_options
+ * @return string
+ */
 function mashsb_ratelimit_callback(){
     global $mashsb_options;
     
@@ -1907,7 +1921,6 @@ function mashsb_ratelimit_callback(){
         return '';
     }
     $url = 'http://graph.facebook.com/?id=http://www.google.com';
-    //$url = 'http://graph.facebook.com/';
     
       $curl_handle=curl_init();
   curl_setopt($curl_handle,CURLOPT_URL,$url);
@@ -1921,4 +1934,13 @@ function mashsb_ratelimit_callback(){
   else{
       print '<div style="max-width:200px;">'.$buffer . '</div>';
   }
+}
+
+/**
+ * Helper function to determine if adverts and add-on ressources are hidden
+ * 
+ * @return bool
+ */
+function mashsb_hide_addons(){
+    return apply_filters('mashsb_hide_addons', false);
 }
