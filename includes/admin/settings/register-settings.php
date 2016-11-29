@@ -264,7 +264,7 @@ function mashsb_get_registered_settings() {
                 array(
                 'id' => 'fb_access_token_new',
                 'name' => __( 'Facebook User Access Token', 'mashsb' ),
-                'desc' => sprintf( __( 'Required if your website hits the facebook rate limit of 200 calls per hour. <a href="%s" target="_blank">Read here</a> how to get the access token.', 'mashsb' ), 'https://www.slickremix.com/facebook-60-day-user-access-token-generator/' ),
+                'desc' => sprintf( __( 'Required if your website hits the facebook rate limit of 200 calls per hour. <a href="%s" target="_blank">Read here</a> how to get the access token.', 'mashsb' ), 'http://docs.mashshare.net/article/132-how-to-create-a-facebook-access-token' ),
                 'type' => 'fboauth',
                 'size' => 'large'
                 ),
