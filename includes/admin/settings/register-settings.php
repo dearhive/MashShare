@@ -262,6 +262,13 @@ function mashsb_get_registered_settings() {
                     'type' => 'header'
                 ),
                 array(
+                'id' => 'fb_access_token_new',
+                'name' => __( 'Facebook User Access Token', 'mashsb' ),
+                'desc' => sprintf( __( 'Required if your website hits the facebook rate limit of 200 calls per hour. <a href="%s" target="_blank">Read here</a> how to get the access token.', 'mashsb' ), 'https://www.slickremix.com/facebook-60-day-user-access-token-generator/' ),
+                'type' => 'fboauth',
+                'size' => 'large'
+                ),
+                array(
                     'id' => 'fb_publisher_url',
                     'name' => __( 'Facebook page url', 'mashsb' ),
                     'desc' => __( 'Optional: The url of the main facebook account connected with this site', 'mashsb' ),
@@ -280,13 +287,6 @@ function mashsb_get_registered_settings() {
 //                    'name' => __( 'Facebook App Secret', 'mashsb' ),
 //                    'desc' => sprintf( __( 'Required for getting accurate facebook share numbers. Where do i find the facebook APP Secret?', 'mashsb' ), 'https://developers.facebook.com/docs/apps/register' ),
 //                    'type' => 'text',
-//                    'size' => 'medium'
-//                ),
-//                array(
-//                    'id' => 'fb_access_token',
-//                    'name' => __( 'Facebook Access Token', 'mashsb' ),
-//                    'desc' => __( 'Required for getting accurate facebook share numbers! Connecting with facebook increases the facebook API call rate limit to 200 calls per hour. This is enough for even huge websites with a lot of traffic as MashShare is caching the calls.', 'mashsb' ),
-//                    'type' => 'fboauth',
 //                    'size' => 'medium'
 //                ),
                 'mashsharer_hashtag' => array(
@@ -672,7 +672,7 @@ So the MashShare open graph data will be containing the same social meta data th
                 'delete_cache_objects' => array(
                     'id' => 'delete_cache_objects',
                     'name' => __( 'Attention: Purge DB Cache', 'mashsb' ),
-                    'desc' => __( '<strong>Note: </strong>Use this with caution. <strong>This will delete all your twitter counts. They can not be restored!</strong> Checking this and using the save button will delete all stored mashshare post_meta objects.<br>' . mashsb_delete_cache_objects(), 'mashsb' ),
+                    'desc' => __( '<strong>Note: </strong>Use this with caution. <strong>This will delete all your twitter counts. They can not be restored!</strong> Activating this option will delete all stored mashshare post_meta objects.<br>' . mashsb_delete_cache_objects(), 'mashsb' ),
                     'type' => 'checkbox'
                 ),
                 'debug_mode' => array(
@@ -1891,13 +1891,10 @@ function mashsb_fboauth_callback( $args ) {
         $expire = '';
     }
     
-    $button_label = empty($mashsb_options[$args['id']]) ? __('Get Access Token | Facebook Login', 'mashsb') : __('Renew Access Token', 'mashsb');
+    $button_label = __('Verify Access Token', 'mashsb');
 
-    $auth_url = 'https://www.mashshare.net/oauth/login.html'; // production
-
-    $html = '<a href="'.$auth_url.'" id="mashsb_fb_auth" class="button button-primary">'.$button_label.'</a>';
-    //$html .= empty($mashsb_options[$args['id']]) ? $verify_button : '';
-    $html .= '&nbsp; <input type="text" class="medium-text" id="mashsb_settings[' . $args['id'] . ']" name="mashsb_settings[' . $args['id'] . ']" value="' . esc_attr( stripslashes( $value ) ) . '"/>';
+    $html = '<a href="#" id="mashsb_verify_fbtoken" class="button button-primary">'.$button_label.'</a>';
+    $html .= '&nbsp; <input type="text" class="medium-text" style="width:333px;" id="mashsb_settings[' . $args['id'] . ']" name="mashsb_settings[' . $args['id'] . ']" value="' . esc_attr( stripslashes( $value ) ) . '"/>';
     $html .= '&nbsp; <input type="hidden" class="medium-text" id="mashsb_settings[expire_' . $args['id'] . ']" name="mashsb_settings[expire_' . $args['id'] . ']" value="' . esc_attr( stripslashes( $expire ) ) . '"/>';
     $html .= '<div class="token_status">'
             . '<span id="mashsb_expire_token_status"></span>'
@@ -1907,36 +1904,85 @@ function mashsb_fboauth_callback( $args ) {
 echo $html;
     
 }
+//function mashsb_fboauth_callback( $args ) {
+//    global $mashsb_options;
+//    
+//    if( isset( $mashsb_options[$args['id']] ) ){
+//        $value = $mashsb_options[$args['id']];
+//    }else{        
+//        $value = isset( $args['std'] ) ? $args['std'] : '';
+//    }
+//    // Change expiration date
+//    if( isset( $mashsb_options['expire_'.$args['id']] ) ){
+//        $expire = $mashsb_options['expire_'.$args['id']];
+//    }else{        
+//        $expire = '';
+//    }
+//    
+//    $button_label = empty($mashsb_options[$args['id']]) ? __('Get Access Token | Facebook Login', 'mashsb') : __('Renew Access Token', 'mashsb');
+//
+//    $auth_url = 'https://www.mashshare.net/oauth/login.html'; // production
+//
+//    $html = '<a href="'.$auth_url.'" id="mashsb_fb_auth" class="button button-primary">'.$button_label.'</a>';
+//    //$html .= empty($mashsb_options[$args['id']]) ? $verify_button : '';
+//    $html .= '&nbsp; <input type="text" class="medium-text" id="mashsb_settings[' . $args['id'] . ']" name="mashsb_settings[' . $args['id'] . ']" value="' . esc_attr( stripslashes( $value ) ) . '"/>';
+//    $html .= '&nbsp; <input type="hidden" class="medium-text" id="mashsb_settings[expire_' . $args['id'] . ']" name="mashsb_settings[expire_' . $args['id'] . ']" value="' . esc_attr( stripslashes( $expire ) ) . '"/>';
+//    $html .= '<div class="token_status">'
+//            . '<span id="mashsb_expire_token_status"></span>'
+//            . '<span id="mashsb_token_notice"></span>'
+//            . '</div>';
+//    
+//echo $html;
+//    
+//}
+
 /**
  * Test facebook api and check if site is rate limited
  * 
  * @global array $mashsb_options
  * @return string
  */
-function mashsb_ratelimit_callback(){
-    global $mashsb_options;
-    
-    
-    if (!mashsb_is_admin_page() || !isset($mashsb_options['debug_mode']) || !function_exists('curl_init')){
-        return '';
-    }
-    $url = 'http://graph.facebook.com/?id=http://www.google.com';
-    
-      $curl_handle=curl_init();
-  curl_setopt($curl_handle,CURLOPT_URL,$url);
-  curl_setopt($curl_handle,CURLOPT_CONNECTTIMEOUT,2);
-  curl_setopt($curl_handle,CURLOPT_RETURNTRANSFER,1);
-  $buffer = curl_exec($curl_handle);
-  curl_close($curl_handle);
-  if (empty($buffer)){
-      print "Nothing returned from url.<p>";
-  }
-  else{
-      print '<div style="max-width:200px;">'.$buffer . '</div>';
-  }
-}
+function mashsb_ratelimit_callback() {
+        global $mashsb_options;
 
-/**
+
+        if( !mashsb_is_admin_page() || !isset( $mashsb_options['debug_mode'] ) || !function_exists( 'curl_init' ) ) {
+            return '';
+        }
+        // Test open facebook api endpoint
+        $url = 'http://graph.facebook.com/?id=http://www.google.com';
+        $curl_handle = curl_init();
+        curl_setopt( $curl_handle, CURLOPT_URL, $url );
+        curl_setopt( $curl_handle, CURLOPT_CONNECTTIMEOUT, 2 );
+        curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, 1 );
+        $buffer = curl_exec( $curl_handle );
+        curl_close( $curl_handle );
+        echo '<div style="min-width:500px;"><strong>Testing facebook public API <br><br>Result for google.com: </strong></div>';
+        if( empty( $buffer ) ) {
+            print "Nothing returned from url.<p>";
+        } else {
+            print '<div style="max-width:200px;">' . $buffer . '</div>';
+        }
+        
+        // Test facebook api with access token
+        $url = 'https://graph.facebook.com/v2.7/?id=http://www.google.com&access_token=' . $mashsb_options['fb_access_token_new'];
+        $curl_handle = curl_init();
+        curl_setopt( $curl_handle, CURLOPT_URL, $url );
+        curl_setopt( $curl_handle, CURLOPT_CONNECTTIMEOUT, 2 );
+        curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, 1 );
+        $buffer = curl_exec( $curl_handle );
+        curl_close( $curl_handle );
+        echo '<br><strong>Testing facebook API <br>with access token<br><br>Result for google.com: </strong>';
+        if( empty( $buffer ) ) {
+            print "Nothing returned from url.<p>";
+        } else {
+            print '<div style="max-width:200px;">' . $buffer . '</div>';
+        }
+        
+        
+    }
+
+    /**
  * Helper function to determine if adverts and add-on ressources are hidden
  * 
  * @return bool

@@ -32,30 +32,24 @@ jQuery(document).ready(function ($) {
     });
     
 
-    $('#mashsb_settings\\[fb_access_token\\]').on("change paste keyup",function(){
-        
-        var two_month = 60 * 60 * 24 * 60 * 1000; // timestamp in miliseconds
-        var expiration_timestamp = (new Date().getTime()) + two_month; // time in miliseconds
-
-        var unixtimestamp = (new Date().getTime() + (60 * 60 * 24 * 60 * 1000)) / 1000; // timestamp in seconds
-                
-        var human_date = new Date(expiration_timestamp);
-
-        if ($('#mashsb_settings\\[fb_access_token\\]').val()){
+    $('#mashsb_verify_fbtoken').on("click",function(e){
+        e.preventDefault();
+        console.log('test');
+        if ($('#mashsb_settings\\[fb_access_token_new\\]').val()){
             check_access_token();
-            document.getElementById('mashsb_expire_token_status').innerHTML = 'Token needs renewal on ' + human_date + '<br>MashShare will notify you shortly before the access token expires.';
-            $('#mashsb_settings\\[expire_fb_access_token\\]').val(unixtimestamp.toFixed(0));
-        }else {
-            document.getElementById('mashsb_expire_token_status').innerHTML = '';
         }
     });
     
-    
+    /**
+     * Check if access token is valid and api returns a valid result
+     * 
+     * @returns {undefined}
+     */
     function check_access_token()
     {
-        $.ajax("https://graph.facebook.com/v2.7/?id=http://www.google.de&access_token=" + $('#mashsb_settings\\[fb_access_token\\]').val())
+        $.ajax("https://graph.facebook.com/v2.7/?id=http://www.google.com&access_token=" + $('#mashsb_settings\\[fb_access_token_new\\]').val())
             .done(function (e) {
-                $('#mashsb_token_notice').html('');
+                $('#mashsb_token_notice').html('<strong>Token valid:</strong> Facebook share count for http://google.com: ' + e.share.share_count );
                 console.log(e);
             })
             .fail(function (e) {
