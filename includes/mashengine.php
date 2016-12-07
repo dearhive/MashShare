@@ -337,8 +337,8 @@ class mashengine {
     public function setRateLimitTransient() {
         set_transient( 'mashsb_rate_limit', 'true', 60 * 60 );
 
-        MASHSB()->logger->info( 'Error: Probably Facebook Rate Limit hit' );
-        $this->debug_notices[] = 'Error: Requests to Facebook probably hit Rate Limit.';
+        MASHSB()->logger->info( 'Error: Facebook Rate Limit hit' );
+        $this->debug_notices[] = 'Error: Requests to Facebook hit Rate Limit.';
         add_action( 'wp_footer', array($this, 'outputDebug'), 100 );
     }
 

@@ -20,7 +20,7 @@ if( !defined( 'ABSPATH' ) ) {
  * @return boolean
  */
 function mashsb_rate_limit_exceeded(){
-    return false; // rhe Deactivate this for testing
+    //return true; // Uncomment this for testing
     if (false === get_transient('mashsb_rate_limit')){
         return false;
     }
@@ -44,19 +44,19 @@ function mashsb_is_access_token_expired(){
 }
 
     /**
-     * Make sure that requests do not exceed 1req / 5second
+     * Make sure that requests do not exceed 1req / 25second
      * @return boolean
      */
     function mashsb_is_req_limited() {
         global $mashsb_error;
-        $rate_limit = get_transient('mashsb_limit_req');
         
-        if (false === $rate_limit) {
+        if (false === get_transient('mashsb_limit_req')) {
             set_transient('mashsb_limit_req', '1', 25);
+            $mashsb_error[] = 'MashShare: Temp Rate Limit not exceeded';
             return false;
         }
-            $mashsb_error[] = 'MashShare: Facebook Temp Rate Limit Exceeded';
-            MASHSB()->logger->info('MashShare: Facebook Temp Rate Limit Exceeded');
+            $mashsb_error[] = 'MashShare: Temp Rate Limit Exceeded';
+            MASHSB()->logger->info('MashShare: Temp Rate Limit Exceeded');
         return true;
         
     }

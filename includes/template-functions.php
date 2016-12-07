@@ -143,6 +143,8 @@ function mashsbGetNonPostShares( $url ) {
 
 function getSharedcount( $url ) {
     global $mashsb_options, $post, $mashsb_sharecount, $mashsb_error; // todo test a global share count var if it reduces the amount of requests
+    
+    $mashsb_error[] = 'MashShare: Trying to get share count';
         
     // Return global share count variable to prevent multiple execution
     if (is_array($mashsb_sharecount) && array_key_exists($url, $mashsb_sharecount) && !empty($mashsb_sharecount[$url]) && !mashsb_is_cache_refresh() ){
@@ -165,6 +167,7 @@ function getSharedcount( $url ) {
 
        
     if( is_404() || is_search() || empty($url) || !mashsb_is_enabled_permalinks() || isset($mashsb_options['disable_sharecount']) ) {
+        $mashsb_error[] = 'MashShare: Trying to get share count deactivated';
         return apply_filters( 'filter_get_sharedcount', 0 );
     }
 
@@ -175,6 +178,7 @@ function getSharedcount( $url ) {
 
 
     if( !empty( $url ) && is_null( $post ) ) {
+        $mashsb_error[] = 'MashShare: URL or POST is empty. Return share count with mashsbGetNonPostShares';
         return apply_filters( 'filter_get_sharedcount', mashsbGetNonPostShares( $url ) );
     }
 
@@ -183,8 +187,11 @@ function getSharedcount( $url ) {
      */
     if( mashsb_force_cache_refresh() && is_singular() ) {
         
+        $mashsb_error[] = 'MashShare: Force Cache Refresh on singular()';
+        
         // Its request limited
         if ( mashsb_is_req_limited() ){ 
+            $mashsb_error[] = 'MashShare: rate limit reached. Return Share from custom meta option';
             return get_post_meta( $post->ID, 'mashsb_shares', true ) + getFakecount();
         }
 
@@ -726,7 +733,7 @@ function mashshare_filter_content( $content ) {
     $singular = isset( $mashsb_options['singular'] ) ? $singular = true : $singular = false;
 
     
-    if( $mashsb_options['is_main_query'] && !is_main_query() ) {
+    if( isset($mashsb_options['is_main_query']) && !is_main_query() ) {
         return $content;
     }
      
