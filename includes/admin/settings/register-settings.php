@@ -555,10 +555,10 @@ So the MashShare open graph data will be containing the same social meta data th
                     'type' => 'add_content',
                     'options' => array(
                         'box1' => array(
-                            'id' => 'textarea',
+                            'id' => 'custom_css',
                             'name' => __( 'General CSS', 'mashsb' ),
                             'desc' => __( 'This css is loaded on all pages where the Mashshare buttons are enabled and it\'s loaded as an additonal inline css on your site', 'mashsb' ),
-                            'type' => 'customcss',
+                            'type' => 'textarea',
                             'textarea_rows' => '3',
                             'size' => 15
                         ),
@@ -1053,22 +1053,23 @@ function mashsb_textarea_callback( $args ) {
  * @since 1.0
  * @param array $args Arguments passed by the setting
  * @global $mashsb_options Array of all the MASHSB Options
+ * @deprecated 3.3.6
  * @return void
  */
-function mashsb_customcss1_callback( $args ) {
-    global $mashsb_options;
-
-    if( isset( $mashsb_options[$args['id']] ) )
-        $value = $mashsb_options[$args['id']];
-    else
-        $value = isset( $args['std'] ) ? $args['std'] : '';
-
-    $size = ( isset( $args['size'] ) && !is_null( $args['size'] ) ) ? $args['size'] : '40';
-    $html = '<textarea class="large-text mashsb-textarea" cols="50" rows="' . $size . '" id="mashsb_settings[' . $args['id'] . ']" name="mashsb_settings[' . $args['id'] . ']">' . esc_textarea( $value ) . '</textarea>';
-    $html .= '<label class="mashsb_hidden" for="mashsb_settings[' . $args['id'] . ']"> ' . $args['desc'] . '</label>';
-
-    echo $html;
-}
+//function mashsb_customcss_callback( $args ) {
+//    global $mashsb_options;
+//
+//    if( isset( $mashsb_options[$args['id']] ) )
+//        $value = $mashsb_options[$args['id']];
+//    else
+//        $value = isset( $args['std'] ) ? $args['std'] : '';
+//
+//    $size = ( isset( $args['size'] ) && !is_null( $args['size'] ) ) ? $args['size'] : '40';
+//    $html = '<textarea class="large-text mashsb-textarea" cols="50" rows="' . $size . '" id="mashsb_settings[' . $args['id'] . ']" name="mashsb_settings[' . $args['id'] . ']">' . esc_textarea( $value ) . '</textarea>';
+//    $html .= '<label class="mashsb_hidden" for="mashsb_settings[' . $args['id'] . ']"> ' . $args['desc'] . '</label>';
+//
+//    echo $html;
+//}
 
 /**
  * Password Callback

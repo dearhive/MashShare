@@ -317,6 +317,10 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 == Changelog ==
 
 = {{ version }} =
+* Fix: Custom CSS field not working since 3.3.5
+
+
+= 3.3.5 =
 
 * New: Add new Facebook Access Token to bypass the rate limit issue
 * New: Add filter 'mashsb_hide_addons' to hide add-on related sections

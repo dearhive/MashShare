@@ -1,4 +1,4 @@
-# [Mashshare](https://www.mashshare.net) 
+# [MashShare](https://www.mashshare.net) 
 
 
 ![Plugin Version](https://img.shields.io/wordpress/plugin/v/mashsharer.svg?maxAge=2592000) 
@@ -18,8 +18,8 @@ More information can be found at [mashshare.net](https://www.mashshare.net/).
 
 ## Note ##
 
-This is the latest developer version of Mashshare. 
-if you just want to use Mashshare install the productive version which you get at [wordpress.org](http://wordpress.org/plugins/mashsharer/)
+This is the latest developer version of MashShare. 
+if you just want to use MashShare install the productive version which you get at [wordpress.org](http://wordpress.org/plugins/mashsharer/)
 
 ## Installation ##
 
@@ -34,11 +34,11 @@ This will download the latest developer copy of Mashshare.
 If you find an issue, let us know [here](https://github.com/mashshare/Mashshare/issues?state=open)!
 
 ## Support ##
-This is a developer's portal for Mashshare and should _not_ be used for support. 
+This is a developer's portal for MashShare and should _not_ be used for support. 
 Please visit the [support forums](https://www.mashshare.net/support).
 
 ## Contributions ##
-Anyone is welcome to contribute to Mashshare. Please read the [guidelines for contributing](https://github.com/mashshare/Mashshare/blob/master/CONTRIBUTING.md) to this repository.
+Anyone is welcome to contribute to MashShare. Please read the [guidelines for contributing](https://github.com/mashshare/Mashshare/blob/master/CONTRIBUTING.md) to this repository.
 
 There are various ways you can contribute:
 

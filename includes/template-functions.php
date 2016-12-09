@@ -56,6 +56,7 @@ function mashsbGetShareObj( $url ) {
         }
 
         //mashdebug()->info( 'mashsbGetShareObj() url: ' . $url );
+        MASHSB()->logger->info( 'mashsbGetShareObj() url: ' . $url );
         $mashsbSharesObj = new mashengine( $url );
         return $mashsbSharesObj;
 
@@ -144,7 +145,7 @@ function mashsbGetNonPostShares( $url ) {
 function getSharedcount( $url ) {
     global $mashsb_options, $post, $mashsb_sharecount, $mashsb_error; // todo test a global share count var if it reduces the amount of requests
     
-    $mashsb_error[] = 'MashShare: Trying to get share count';
+    $mashsb_error[] = 'MashShare: Trying to get share count!';
         
     // Return global share count variable to prevent multiple execution
     if (is_array($mashsb_sharecount) && array_key_exists($url, $mashsb_sharecount) && !empty($mashsb_sharecount[$url]) && !mashsb_is_cache_refresh() ){
@@ -201,8 +202,8 @@ function getSharedcount( $url ) {
         // Write timestamp (Use this on top of this condition. If this is not on top following return statements will be skipped and ignored - possible bug?)
         update_post_meta( $post->ID, 'mashsb_timestamp', time() );
 
-        MASHSB()->logger->info( 'Refresh Cache: Update Timestamp: ' . time() );
-
+        MASHSB()->logger->info( 'Code:4 Refresh Cache: Update Timestamp: ' . time() );
+        $mashsb_error[] = 'Code:4 Refresh Cache: Update Timestamp: ' . time();
         // Get the share Object
         $mashsbSharesObj = mashsbGetShareObj( $url );
         // Get the share count Method
@@ -212,6 +213,9 @@ function getSharedcount( $url ) {
 
         // Create global sharecount
         $mashsb_sharecount = array($url => $mashsbShareCounts->total);
+        
+        $mashsb_error[] = 'Code: 5 Get Share count for URL: ' . $url . ' Shares: ' . $mashsbShareCounts->total;
+        MASHSB()->logger->info( 'Code: 5 Get Share count for URL: ' . $url . ' Shares: ' . $mashsbShareCounts->total );
         /*
          * Update post_meta only when API is requested and
          * API share count is greater than real fresh requested share count ->
@@ -232,6 +236,7 @@ function getSharedcount( $url ) {
         // Return cached results
         $cachedCountsMeta = get_post_meta( $post->ID, 'mashsb_shares', true );
         $cachedCounts = $cachedCountsMeta + getFakecount();
+        $mashsb_error[] = 'Cached Results: ' . $cachedCounts . ' url:' . $url;
         MASHSB()->logger->info( 'Cached Results: ' . $cachedCounts . ' url:' . $url );
         return apply_filters( 'filter_get_sharedcount', $cachedCounts );
     }
