@@ -234,8 +234,7 @@ function getSharedcount( $url ) {
         return apply_filters( 'filter_get_sharedcount', $mashsbStoredShareCount + getFakecount() );
     } else {
         // Return cached results
-        $cachedCountsMeta = is_numeric($var = get_post_meta( $post->ID, 'mashsb_shares', true )) ? $var : 0;
-        
+        $cachedCountsMeta = is_numeric($var = get_post_meta( $post->ID, 'mashsb_shares', true )) ? (int)$var : 0;
         $cachedCounts = $cachedCountsMeta + getFakecount();
         $mashsb_error[] = 'Cached Results: ' . $cachedCounts . ' url:' . $url;
         MASHSB()->logger->info( 'Cached Results: ' . $cachedCounts . ' url:' . $url );
