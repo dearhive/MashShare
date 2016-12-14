@@ -317,6 +317,9 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 == Changelog ==
 
 = {{ version }} =
+* Fix: PHP Warning: A non-numeric value encountered in 
+
+= 3.3.6 =
 * Fix: Custom CSS field not working since 3.3.5
 
 
