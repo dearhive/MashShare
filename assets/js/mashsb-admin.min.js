@@ -49,7 +49,7 @@ jQuery(document).ready(function ($) {
     {
         $.ajax("https://graph.facebook.com/v2.7/?id=http://www.google.com&access_token=" + $('#mashsb_settings\\[fb_access_token_new\\]').val())
             .done(function (e) {
-                $('#mashsb_token_notice').html('<strong>Token valid:</strong> Facebook share count for http://google.com: ' + e.share.share_count );
+                $('#mashsb_token_notice').html('<strong>Token seems to be valid:</strong> For a test the share count is checked for http://google.com: ' + e.share.share_count);
                 console.log(e);
             })
             .fail(function (e) {
