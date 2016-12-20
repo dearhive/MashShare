@@ -318,6 +318,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 = {{ version }} =
 * Fix: PHP Warning: A non-numeric value encountered in 
+* Tweak: Admin helper notice to create an access token
 
 = 3.3.6 =
 * Fix: Custom CSS field not working since 3.3.5
