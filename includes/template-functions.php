@@ -312,7 +312,7 @@ function onOffSwitch() {
     $class_size = isset($mashsb_options['buttons_size']) ? ' ' . $mashsb_options['buttons_size'] : '';
     
     // Get class names for button style
-    $class_style = isset($mashsb_options['mash_style']) && $mashsb_options['mash_style'] === 'shadow' ? ' mashsb-shadow' : '';
+    $class_style = isset($mashsb_options['mash_style']) && $mashsb_options['mash_style'] === 'shadow' ? ' mashsb-shadow' : ' mashsb-noshadow';
     
     $output = '<div class="onoffswitch' . $class_size . $class_style . '"></div>';
     return apply_filters( 'mashsh_onoffswitch', $output );
