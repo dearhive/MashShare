@@ -540,11 +540,11 @@ color:#8A8C8E;
     box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.51);
 }
 
-.mashsb-buttons .mashsb-noshadow{
+.mashsb-main .mashsb-buttons .mashsb-noshadow{
     box-shadow: none;
-    webkit-box-shadow: none;
+    -webkit-box-shadow: none;
 }
-.mashsb-buttons .mashsb-noshadow:hover{
+.mashsb-main .mashsb-buttons .mashsb-noshadow:hover{
     box-shadow: none;
-    webkit-box-shadow: none;
+    -webkit-box-shadow: none;
 }
