@@ -333,7 +333,7 @@ function onOffSwitch2() {
     $class_size = isset($mashsb_options['buttons_size']) ? ' ' . $mashsb_options['buttons_size'] : '';
     
     // Get class names for button style
-    $class_style = isset($mashsb_options['mash_style']) && $mashsb_options['mash_style'] === 'shadow' ? ' mashsb-shadow' : '';
+    $class_style = isset($mashsb_options['mash_style']) && $mashsb_options['mash_style'] === 'shadow' ? ' mashsb-shadow' : 'mashsb-noshadow';
     
     $output = '<div class="onoffswitch2' .$class_size . $class_style . '" style="display:none;"></div>';
     return apply_filters( 'mashsh_onoffswitch2', $output );
@@ -423,7 +423,7 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
     $class_center = isset($mashsb_options['text_align_center']) ? ' mash-center' : '';
     
     // Get class names for button style
-    $class_style = isset($mashsb_options['mash_style']) && $mashsb_options['mash_style'] === 'shadow' ? ' mashsb-shadow' : '';
+    $class_style = isset($mashsb_options['mash_style']) && $mashsb_options['mash_style'] === 'shadow' ? ' mashsb-shadow' : 'mashsb-noshadow';
 
     $output = '';
     $startsecondaryshares = '';
