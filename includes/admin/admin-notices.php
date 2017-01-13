@@ -50,15 +50,15 @@ function mashsb_admin_messages() {
     // Rate Limit warning
     if( mashsb_is_admin_page() && mashsb_rate_limit_exceeded() ) {
         echo '<div class="error">';
-        echo '<p>' . sprintf(__('Your website exceeded the Facebook rate limit. Share count requests to Facebook and other networks will be delayed for 60min and the Share Count will not grow during this time. If you see this notice often consider to change <strong>MashShare Caching Method</strong> to <a href="%s">Refresh while Loading</a> and use a higher cache expiration. Also create an facebook access token and add it in <a href="%s">Settings->Facebook User Access Token</a> MashShare tries again to request shares in ' . mashsbGetRemainingRateLimitTime() , 'mashsb'), admin_url() . 'admin.php?page=mashsb-settings#mashsb_settingsgeneral_header', admin_url() . 'admin.php?page=mashsb-settings#mashsb_settingsservices_header') . '</p>';
+        echo '<p>' . sprintf(__('Your website exceeded the Facebook rate limit. Share count requests to Facebook and other networks will be delayed for 30min and the Share Count will not grow during this time. If you see this notice often consider to change <strong>MashShare Caching Method</strong> to <a href="%s">Refresh while Loading</a> and use a higher cache expiration. Also create an facebook access token and add it in <a href="%s">Settings->Facebook User Access Token</a> MashShare tries again to request shares in ' . mashsbGetRemainingRateLimitTime() , 'mashsb'), admin_url() . 'admin.php?page=mashsb-settings#mashsb_settingsgeneral_header', admin_url() . 'admin.php?page=mashsb-settings#mashsb_settingsservices_header') . '</p>';
         echo '</div>';
     }
-//    // Access Token expired
-//    if( mashsb_is_access_token_expired() ) {
-//        echo '<div class="error">';
-//        echo '<p>' . sprintf(__('Your Facebook Access Token has been expired. You need to <a href="%s">generate a new one</a> or your MashShare Facebook Shares will not be refreshed', 'mashsb'), admin_url() . 'admin.php?page=mashsb-settings') . '</p>';
-//        echo '</div>';
-//    }
+    // Access Token expired
+    if( mashsb_is_invalid_fb_api_key() ) {
+        echo '<div class="error">';
+        echo '<p>' . sprintf(__('<strong>Error: </strong>'.mashsb_is_invalid_fb_api_key().' <br> Your <strong>Facebook Access Token</strong> has been expired or is invalid. Remove the invalid access token from <a href="%s">MashShare->Settings->Networks</a> or generate a new one. Your MashShare Facebook Shares will not be refreshed any longer. <a href="%s" target="_blank">Read here</a> how to renew the Facebook access token. Fix it and press the button: | <a href="%s" class="button">CHECK AGAIN</a>', 'mashsb'), admin_url() . 'admin.php?page=mashsb-settings#mashsb_settingsservices_header', 'http://docs.mashshare.net/article/132-how-to-create-a-facebook-access-token', admin_url() . 'admin.php?mashsb_action=check_access_token&page=mashsb-settings') . '</p>';
+        echo '</div>';
+    }
     
     // Cache warning
     if( mashsb_is_deactivated_cache() ) {
@@ -69,15 +69,15 @@ function mashsb_admin_messages() {
     // Cache warning
     if( mashsb_is_deleted_cache() ) {
         echo '<div class="error">';
-        echo '<p>' . sprintf(__('Attention: The Mashshare Cache is permanetely purged. <a href="%s">Disable this</a> or share count requests to social networks will be rate limited.', 'mashsb'), admin_url() . 'admin.php?page=mashsb-settings#mashsb_settingsdebug_header') . '</p>';
+        echo '<p>' . sprintf(__('Attention: The Mashshare Cache is permanetely purged. <a href="%s">Fix this</a> or share count requests to social networks will be rate limited.', 'mashsb'), admin_url() . 'admin.php?page=mashsb-settings#mashsb_settingsdebug_header') . '</p>';
         echo '</div>';
     }
     
     //mashsb_update_notice_101();
     
-    if( mashsb_is_admin_page() && !function_exists( 'curl_init' ) ) {
+    if( mashsb_is_admin_page() && !mashsb_curl_installed() ) {
         echo '<div class="error">';
-        echo '<p>' . sprintf(__('MashShare needs the PHP extension cURL which is not installed on your server. Please <a href="%s" target="_blank">install and activate</a> it to be able to collect share count of your posts.', 'mashsb'), 'https://www.google.com/search?btnG=1&pws=0&q=enable+curl+on+php') . '</p>';
+        echo '<p>' . sprintf(__('MashShare needs the PHP extension cURL and curl_multi_init() which is not installed on your server. Please <a href="%s" target="_blank">install and activate</a> it to be able to collect share count of your posts.', 'mashsb'), 'https://www.google.com/search?btnG=1&pws=0&q=enable+curl+on+php') . '</p>';
         echo '</div>';
     }
 
@@ -411,4 +411,21 @@ function mashsbGetRemainingRateLimitTime() {
         }
     }
     return 0 . 'seconds';
+}
+
+/**
+ * Get the status of the FB api key
+ * @global array $mashsb_options
+ * @return mixed boolean | string false if fb api key is valid. String if api key is invalid
+ */
+function mashsb_is_invalid_fb_api_key(){
+    global $mashsb_options;
+    
+    $status = get_option('mashsb_valid_fb_api_key');
+    
+    if (false === $status || 'success' === $status){
+        return false;
+    } else {
+        return $status;
+    }
 }

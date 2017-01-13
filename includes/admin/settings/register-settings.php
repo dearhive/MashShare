@@ -1947,7 +1947,7 @@ function mashsb_ratelimit_callback() {
         global $mashsb_options;
 
 
-        if( !mashsb_is_admin_page() || !isset( $mashsb_options['debug_mode'] ) || !function_exists( 'curl_init' ) ) {
+        if( !mashsb_is_admin_page() || !isset( $mashsb_options['debug_mode'] ) || !mashsb_curl_installed() ) {
             return '';
         }
         // Test open facebook api endpoint

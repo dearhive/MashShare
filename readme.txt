@@ -317,9 +317,11 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 == Changelog ==
 
 = {{ version }} =
+* New: notice when facebook access token is expired
 * Fix: PHP Warning: A non-numeric value encountered in
 * Fix: Flat styled buttons are shadowed on a few themes
 * Tweak: Admin helper notice to create an access token
+* Tweak: Check if curl_multi_init() is installed
 
 = 3.3.6 =
 * Fix: Custom CSS field not working since 3.3.5

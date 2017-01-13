@@ -135,6 +135,11 @@ function mashsb_install() {
 
     // Add the transient to redirect / not for multisites
     set_transient( '_mashsb_activation_redirect', true, 120 );
+    
+    // Create daily cron event
+    if (! wp_next_scheduled ( 'mashsb_cron_daily' )) {
+	wp_schedule_event(time(), 'daily', 'mashsb_cron_daily');
+    }
 }
 
 /**

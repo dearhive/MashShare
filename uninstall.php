@@ -30,6 +30,7 @@ if( mashsb_get_option( 'uninstall_on_delete' ) ) {
         delete_option( 'widget_mashsb_mostshared_posts_widget');
         delete_option( 'mashsb_tracking_last_send');
         delete_option( 'mashsb_update_notice_101');
+        delete_option( 'mashsb_valid_fb_api_key');
         
 
         /* Delete all post meta options */
@@ -42,4 +43,5 @@ if( mashsb_get_option( 'uninstall_on_delete' ) ) {
         delete_transient('mashsb_limit_req');
         
         wp_clear_scheduled_hook('mashsharer_transients_cron');
+        wp_clear_scheduled_hook('mashsb_cron_daily');
 }
