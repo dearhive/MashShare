@@ -1,7 +1,7 @@
 <?php 
 $reasons = array(
     		1 => '<li><label><input type="radio" name="mashsb_disable_reason" value="temporary"/>' . __('It is only temporary', 'mashsb') . '</label></li>',
-		2 => '<li><label><input type="radio" name="mashsb_disable_reason" value="stopped showing ads"/>' . __('I stopped showing ads on my site', 'mashsb') . '</label></li>',
+		2 => '<li><label><input type="radio" name="mashsb_disable_reason" value="stopped showing ads"/>' . __('I stopped showing Social Buttons on my site', 'mashsb') . '</label></li>',
 		3 => '<li><label><input type="radio" name="mashsb_disable_reason" value="missing feature"/>' . __('I miss a feature', 'mashsb') . '</label></li>
 		<li><input type="text" name="mashsb_disable_text[]" value="" placeholder="Please describe the feature"/></li>',
 		4 => '<li><label><input type="radio" name="mashsb_disable_reason" value="technical issue"/>' . __('Technical Issue', 'mashsb') . '</label></li>
