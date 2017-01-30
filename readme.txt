@@ -8,7 +8,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email
 Requires at least: 3.6+
-Tested up to: 4.7
+Tested up to: 4.7.2
 Stable tag: {{ version }}
 
 Social Media Share Buttons for Twitter, Facebook and other social networks. Highly customizable Social Media ecosystem
@@ -318,10 +318,10 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 = {{ version }} =
 * New: Check once a day if facebook access token is expired and throw a message
-* Fix: PHP Warning: A non-numeric value encountered in
-* Fix: Flat styled buttons are shadowed on a few themes
-* Tweak: Admin helper notice to create an access token
-* Tweak: Check if curl_multi_init() is installed
+* Fix: PHP Warning: A non-numeric value encountered in share count fake count option
+* Fix: Flat styled social media buttons are shadowed on a few themes
+* Tweak: Admin helper notice to create a facebook access token
+* Tweak: Check if curl_multi_init() is installed for getting social media share counts
 
 = 3.3.6 =
 * Fix: Custom CSS field not working since 3.3.5

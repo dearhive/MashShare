@@ -898,13 +898,15 @@ function mashsb_get_fake_factor() {
  */
 
 function getFakecount() {
-    global $mashsb_options, $wp;
-    $fakecountoption = 0;
-    if( isset( $mashsb_options['fake_count'] ) ) {
-        $fakecountoption = $mashsb_options['fake_count'];
-    }
-    $fakecount = round( $fakecountoption * mashsb_get_fake_factor(), 0 );
+    global $mashsb_options;
+
+    
+    $fakecount = isset($mashsb_options['fake_count']) && is_numeric ($mashsb_options['fake_count']) ? 
+            round( $mashsb_options['fake_count'] * mashsb_get_fake_factor(), 0 ) : 
+            0;
+    
     return $fakecount;
+
 }
 
 /*
