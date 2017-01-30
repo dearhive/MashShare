@@ -318,10 +318,14 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 = {{ version }} =
 * New: Check once a day if facebook access token is expired and throw a message
+* New: Add feedback form if user is deactivating MashShare
+
 * Fix: PHP Warning: A non-numeric value encountered in share count fake count option
 * Fix: Flat styled social media buttons are shadowed on a few themes
+
 * Tweak: Admin helper notice to create a facebook access token
 * Tweak: Check if curl_multi_init() is installed for getting social media share counts
+* Tweak: Remove mashshare css on non mashshare admin pages
 
 = 3.3.6 =
 * Fix: Custom CSS field not working since 3.3.5

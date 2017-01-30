@@ -17,6 +17,7 @@ add_action( 'admin_enqueue_scripts', 'mashsb_load_admin_scripts', 100 );
 add_action( 'wp_enqueue_scripts', 'mashsb_load_scripts', 10 );
 add_action( 'wp_enqueue_scripts', 'mashsb_register_styles', 10 );
 add_action( 'wp_enqueue_scripts', 'mashsb_load_inline_styles', 10 );
+add_action( 'admin_enqueue_scripts', 'mashsb_load_plugins_admin_scripts', 10 );
 //add_action( 'amp_post_template_css', 'mashsb_amp_load_css', 10 );
 
 /**
@@ -146,6 +147,32 @@ function mashsb_load_admin_scripts( $hook ) {
 
     wp_register_script( 'jquery-chosen', $js_dir . 'chosen.jquery' . $suffix . '.js', array('jquery'), MASHSB_VERSION );
     wp_enqueue_script( 'jquery-chosen' );
+}
+
+
+/**
+ * Load Admin Scripts available on plugins page 
+ *
+ * Enqueues the required admin scripts.
+ *
+ * @since 1.0
+ * @global $post
+ * @param string $hook Page hook
+ * @return void
+ */
+function mashsb_load_plugins_admin_scripts( $hook ) {
+    if( !apply_filters( 'mashsb_load_plugins_admin_scripts', mashsb_is_plugins_page(), $hook ) ) {
+        return;
+    }
+
+    $js_dir = MASHSB_PLUGIN_URL . 'assets/js/';
+    $css_dir = MASHSB_PLUGIN_URL . 'assets/css/';
+
+    // Use minified libraries if SCRIPT_DEBUG is turned off
+    $suffix = ( mashsbIsDebugMode() ) ? '' : '.min';
+
+    wp_enqueue_script( 'mashsb-plugins-admin-scripts', $js_dir . 'mashsb-plugins-admin' . $suffix . '.js', array('jquery'), MASHSB_VERSION, false );
+    wp_enqueue_style( 'mashsb-plugins-admin', $css_dir . 'mashsb-plugins-admin' . $suffix . '.css', MASHSB_VERSION );   
 }
 
 /**

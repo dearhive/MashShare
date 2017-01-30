@@ -102,6 +102,7 @@ if( !class_exists( 'mashshare' ) ) :
                 self::$instance->setup_constants();
                 self::$instance->includes();
                 self::$instance->load_textdomain();
+                self::$instance->load_hooks();
                 self::$instance->html = new MASHSB_HTML_Elements();
                 self::$instance->logger = new mashsbLogger( "mashlog_" . date( "Y-m-d" ) . ".log", mashsbLogger::INFO );
                 self::$instance->template = new mashsbBuildTemplates();
@@ -217,7 +218,14 @@ if( !class_exists( 'mashshare' ) ) :
                 require_once MASHSB_PLUGIN_DIR . 'includes/admin/settings/user-profiles.php';
                 require_once MASHSB_PLUGIN_DIR . 'includes/admin/tools.php';
                 require_once MASHSB_PLUGIN_DIR . 'includes/admin/dashboard.php';
+                require_once MASHSB_PLUGIN_DIR . 'includes/admin/feedback.php';
                 require_once MASHSB_PLUGIN_DIR . 'includes/admin/upgrades/upgrade-functions.php';
+            }
+        }
+        
+        public static function load_hooks() {
+            if( is_admin() && mashsb_is_plugins_page() ) {
+                add_filter( 'admin_footer', 'mashsb_add_deactivation_feedback_modal' );
             }
         }
 

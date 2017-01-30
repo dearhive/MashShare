@@ -79,6 +79,9 @@ class MASHSB_Welcome {
         remove_submenu_page( 'index.php', 'mashsb-changelog' );
         remove_submenu_page( 'index.php', 'mashsb-getting-started' );
         remove_submenu_page( 'index.php', 'mashsb-credits' );
+        if ( !mashsb_is_admin_page() ){
+            return false;
+        }
         ?>
         
         <style type="text/css" media="screen">
