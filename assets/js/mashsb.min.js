@@ -51,6 +51,12 @@ var strict;
 jQuery(document).ready(function ($) {
 
     mashsb_check_cache();
+    
+    // Fix for the inline post plugin which removes the zero share count
+    if ($('.mashsbcount').text() == ''){
+        console.log('test');
+       $('.mashsbcount').text(0); 
+    }
 
     /**
      * Check Cache

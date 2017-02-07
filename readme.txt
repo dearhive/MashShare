@@ -317,6 +317,9 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 == Changelog ==
 
 = {{ version }} =
+* Fix: Zero shares are not shown with the use of the inline post plugin
+
+= 3.3.7 =
 * New: Check once a day if facebook access token is expired and throw a message
 * New: Add feedback form if user is deactivating MashShare
 
