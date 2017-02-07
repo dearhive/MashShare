@@ -238,7 +238,6 @@ function getSharedcount( $url ) {
         $cachedCounts = $cachedCountsMeta + getFakecount();
         $mashsb_error[] = 'Cached Results: ' . $cachedCounts . ' url:' . $url;
         MASHSB()->logger->info( 'Cached Results: ' . $cachedCounts . ' url:' . $url );
-        return '';
         return apply_filters( 'filter_get_sharedcount', $cachedCounts );
     }
 }
