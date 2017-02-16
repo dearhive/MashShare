@@ -318,6 +318,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 = {{ version }} =
 * Fix: Zero shares are not shown with the use of the inline post plugin
+* Fix: jQuery nearest library not detected with older jQuery versions
 
 = 3.3.7 =
 * New: Check once a day if facebook access token is expired and throw a message
