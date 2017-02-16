@@ -187,19 +187,19 @@ jQuery(document).ready(function ($) {
 
     if (typeof mashsb !== 'undefined' && mashsb.subscribe === 'content') {
         /* Toogle container display:none */
-        jQuery('.mashicon-subscribe').not('.trigger_active').nearest('.mashsb-toggle-container').hide();
-        jQuery('.mashicon-subscribe').click(function () {
-            var trig = jQuery(this);
+        $('.mashicon-subscribe').not('.trigger_active').nearest('.mashsb-toggle-container').hide();
+        $('.mashicon-subscribe').click(function () {
+            var trig = $(this);
             if (trig.hasClass('trigger_active')) {
-                jQuery(trig).nearest('.mashsb-toggle-container').slideToggle('fast');
+                $(trig).nearest('.mashsb-toggle-container').slideToggle('fast');
                 trig.removeClass('trigger_active');
-                //jQuery(".mashicon-subscribe").css({"padding-bottom":"10px"});
+                //$(".mashicon-subscribe").css({"padding-bottom":"10px"});
             } else {
-                jQuery('.trigger_active').nearest('.mashsb-toggle-container').slideToggle('slow');
-                jQuery('.trigger_active').removeClass('trigger_active');
-                jQuery(trig).nearest('.mashsb-toggle-container').slideToggle('fast');
+                $('.trigger_active').nearest('.mashsb-toggle-container').slideToggle('slow');
+                $('.trigger_active').removeClass('trigger_active');
+                $(trig).nearest('.mashsb-toggle-container').slideToggle('fast');
                 trig.addClass('trigger_active');
-                //jQuery(".mashicon-subscribe").css({"padding-bottom":"13px"});
+                //$(".mashicon-subscribe").css({"padding-bottom":"13px"});
             }
             ;
             return false;
@@ -337,7 +337,7 @@ jQuery(document).ready(function ($) {
                 ajaxListener.action = getAction(ajaxListener.data);
             }
 
-            // jQuery overwrites onstatechange (darn you jQuery!),
+            // $ overwrites onstatechange (darn you jQuery!),
             // we need to monitor readyState and the status
             var pointer     = this;
             interval[ajaxListener.action] = window.setInterval(ajaxListener.callback, 100, pointer);
