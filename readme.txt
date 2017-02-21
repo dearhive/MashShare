@@ -317,6 +317,9 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 == Changelog ==
 
 = {{ version }} =
+* Fix: Sporadic connection issues in post editor
+
+= 3.3.8 =
 * Fix: Zero shares are not shown with the use of the inline post plugin
 * Fix: jQuery nearest library not detected with older jQuery versions
 
