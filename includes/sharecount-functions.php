@@ -155,13 +155,13 @@ function mashsb_get_expiration_method_async() {
 
     if( isset( $post_age ) && $post_age > 5184000 ) {
         // Post older than 60 days - expire cache after 12 hours
-        $seconds = 43200;
-    } else if( isset( $post_age ) && $post_age > 75600 ) {
+        $seconds = apply_filters('mashsb_refresh_60_days', 43200);
+    } else if( isset( $post_age ) && $post_age > 1814400 ) {
         // Post older than 21 days - expire cache after 4 hours.
-        $seconds = 14400;
+        $seconds = apply_filters('mashsb_refresh_21_days', 14400);
     } else {
         // expire cache after one hour
-        $seconds = 3600;
+        $seconds = apply_filters('mashsb_refresh_1_hour', 3600);;
     }
 
     return $seconds;

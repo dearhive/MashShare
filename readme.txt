@@ -317,6 +317,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 == Changelog ==
 
 = {{ version }} =
+* New: Create filters to allow customizing the refresh times
 * Fix: Sporadic connection issues in post editor
 
 = 3.3.8 =
