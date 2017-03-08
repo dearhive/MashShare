@@ -8,7 +8,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email
 Requires at least: 3.6+
-Tested up to: 4.7.2
+Tested up to: 4.7.3
 Stable tag: {{ version }}
 
 Social Media Share Buttons for Twitter, Facebook and other social networks. Highly customizable Social Media ecosystem
@@ -319,6 +319,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 = {{ version }} =
 * New: Create filters to allow customizing the refresh times
 * Fix: Sporadic connection issues in post editor
+* Fix: Pinterest and google share count not correct for https websites
 
 = 3.3.8 =
 * Fix: Zero shares are not shown with the use of the inline post plugin

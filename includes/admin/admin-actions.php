@@ -84,9 +84,16 @@ add_action ('wp_ajax_mashsb_update_order', 'mashsb_save_order');
 function mashsb_purge_cache(){
     global $post;
     
+        
+    // Stop WP from update data on autosave
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE){
+        return;
+    }
+    
     if (!isset($post)){
         return;
     }
+
     
     update_post_meta($post->ID, 'mashsb_timestamp', '');
 }

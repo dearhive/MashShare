@@ -207,12 +207,12 @@ class mashengine {
         } else {
             $RollingCurlX->addRequest( "http://public.newsharecounts.com/count.json?url=" . $this->url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
         }
-        $RollingCurlX->addRequest( "https://www.linkedin.com/countserv/count/share?format=json&url=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('linkedin'), $headers );
-        $RollingCurlX->addRequest( "http://www.stumbleupon.com/services/1.01/badge.getinfo?url=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('stumbleupon'), $headers );
-        $RollingCurlX->addRequest( "https://plusone.google.com/_/+1/fastbutton?url=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('google'), $headers );
-        $RollingCurlX->addRequest( "http://api.pinterest.com/v1/urls/count.json?url=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('pinterest'), $headers );
-        $RollingCurlX->addRequest( "https://api.bufferapp.com/1/links/shares.json?url=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('buffer'), $headers );
-        $RollingCurlX->addRequest( "https://vk.com/share.php?act=count&index=1&url=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('vk'), $headers );
+        $RollingCurlX->addRequest( "https://www.linkedin.com/countserv/count/share?format=json&url=" . $this->url, $post_data, array($this, 'getCount'), array('linkedin'), $headers );
+        $RollingCurlX->addRequest( "http://www.stumbleupon.com/services/1.01/badge.getinfo?url=" . $this->url, $post_data, array($this, 'getCount'), array('stumbleupon'), $headers );
+        $RollingCurlX->addRequest( "https://plusone.google.com/_/+1/fastbutton?url=" . $this->url, $post_data, array($this, 'getCount'), array('google'), $headers );
+        $RollingCurlX->addRequest( "http://api.pinterest.com/v1/urls/count.json?url=" . $this->url, $post_data, array($this, 'getCount'), array('pinterest'), $headers );
+        $RollingCurlX->addRequest( "https://api.bufferapp.com/1/links/shares.json?url=" . $this->url, $post_data, array($this, 'getCount'), array('buffer'), $headers );
+        $RollingCurlX->addRequest( "https://vk.com/share.php?act=count&index=1&url=" . $this->url, $post_data, array($this, 'getCount'), array('vk'), $headers );
 
         $RollingCurlX->execute();
 
