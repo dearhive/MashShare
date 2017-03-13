@@ -320,6 +320,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 * New: Create filters to allow customizing the refresh times
 * Fix: Sporadic connection issues in post editor
 * Fix: Pinterest and google share count not correct for https websites
+* Fix: Remove inline css on AMP site
 
 = 3.3.8 =
 * Fix: Zero shares are not shown with the use of the inline post plugin
