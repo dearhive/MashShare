@@ -317,8 +317,9 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 == Changelog ==
 
 = {{ version }} =
+* Fix: Pinterest and google plus share counts are not cummulated together with http/https option
 
-= 3.4.0 =
+= 3.3.9 =
 * New: Create filters to allow customizing the refresh times
 * Fix: Sporadic connection issues in post editor
 * Fix: Pinterest and google share count not correct for https websites
