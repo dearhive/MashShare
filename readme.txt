@@ -317,6 +317,8 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 == Changelog ==
 
 = {{ version }} =
+
+= 3.4.0 =
 * New: Create filters to allow customizing the refresh times
 * Fix: Sporadic connection issues in post editor
 * Fix: Pinterest and google share count not correct for https websites
