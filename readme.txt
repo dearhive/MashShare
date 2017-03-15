@@ -318,6 +318,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 
 = {{ version }} =
 * Fix: Pinterest and google plus share counts are not cummulated together with http/https option
+* Fix: Remove admin notice if Facebook access token is empty
 
 = 3.3.9 =
 * New: Create filters to allow customizing the refresh times

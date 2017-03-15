@@ -421,8 +421,11 @@ function mashsbGetRemainingRateLimitTime() {
 function mashsb_is_invalid_fb_api_key(){
     global $mashsb_options;
     
-    $status = get_option('mashsb_valid_fb_api_key');
+    if (empty($mashsb_options['fb_access_token_new'])){
+        return false;
+    }
     
+    $status = get_option('mashsb_valid_fb_api_key');
     if (false === $status || 'success' === $status){
         return false;
     } else {
