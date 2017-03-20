@@ -54,7 +54,6 @@ jQuery(document).ready(function ($) {
     
     // Fix for the inline post plugin which removes the zero share count
     if ($('.mashsbcount').text() == ''){
-        console.log('test');
        $('.mashsbcount').text(0); 
     }
 
@@ -66,7 +65,6 @@ jQuery(document).ready(function ($) {
         setTimeout(function () {
             if (typeof(mashsb) && mashsb.refresh == "1") {
                 mashsb_update_cache();
-                //console.log('Cache will be updated');
             }
 
         }, 6000);
@@ -133,7 +131,6 @@ jQuery(document).ready(function ($) {
         }
         var xhr = new XMLHttpRequest();
         xhr.open("GET", mashsb_url, true);
-        //console.log('Update Cache');
         xhr.send();
     }
 
@@ -249,14 +246,12 @@ jQuery(document).ready(function ($) {
         var listenerContainer = $(".mashsb-container.mashsb-main .mashsb-count");
         if (listenerContainer.length){
             new ResizeSensor(listenerContainer, function () {
-                console.log('go calc shares');
                 calculate();
             });
         }
         var listenerViews = $(".mashsb-container.mashsb-main .mashpv .count");
         if (listenerViews.length){
             new ResizeSensor(listenerViews, function () {
-                console.log('go calc views');
                 calculate();
             });
         }
@@ -284,10 +279,8 @@ jQuery(document).ready(function ($) {
 
             // Re-calculate the width of the buttons on Get View ajax call
             if (action === "mashpv_get_views") {
-                console.log("Get views is called");
                 // Adjust for animation
                 setTimeout(function() {
-                    console.log("calling calculate");
                     //calculate();
                 }, 1100);
             }
@@ -503,7 +496,6 @@ jQuery(document).ready(function ($) {
             // We need to get precise width of the container, jQuery's width() is rounding up the numbers
             averageWidth = ($container[0].getBoundingClientRect().width - totalUsedWidth) / primaryButtons.length;
             if (isNaN(averageWidth)) {
-                console.log("Couldn't calculate average width");
                 return;
             }
 
