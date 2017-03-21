@@ -17,7 +17,7 @@ function mashecho($string){
  * @return boolean true when it is installed
  */
 function mashsb_curl_installed(){
-    if(function_exists('curl_init') && function_exists('curl_multi_init')){
+    if(function_exists('curl_init') && function_exists('curl_multi_init') && function_exists('curl_multi_exec') ){
         return true;
     }
     
