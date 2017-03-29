@@ -34,7 +34,6 @@ jQuery(document).ready(function ($) {
 
     $('#mashsb_verify_fbtoken').on("click",function(e){
         e.preventDefault();
-        console.log('test');
         if ($('#mashsb_settings\\[fb_access_token_new\\]').val()){
             check_access_token();
         }
