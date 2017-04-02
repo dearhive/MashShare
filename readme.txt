@@ -317,6 +317,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 == Changelog ==
 
 = {{ version }} =
+* New: Google Analytics add-on allows to append utm_source tracking params for traffic tracking with google Analytics
 * Fix: Pinterest and google plus share counts are not cummulated together with http/https option
 * Fix: Remove admin notice if Facebook access token is empty
 * Fix: Remove console.log test notice

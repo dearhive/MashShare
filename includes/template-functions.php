@@ -376,10 +376,10 @@ function arrNetworks( $name, $is_shortcode ) {
     $via = mashsb_get_twitter_username() ? '&via=' . mashsb_get_twitter_username() : '';
     
     $networks_arr = array(
-        'facebook' => 'http://www.facebook.com/sharer.php?u=' . $url,
+        'facebook' => 'http://www.facebook.com/sharer.php?u=' . mashsb_append_tracking_param($url, 'facebook'),
         'twitter' => 'https://twitter.com/intent/tweet?text=' . $twitter_title . '&url=' . $mashsb_twitter_url . $via,
         'subscribe' => '#',
-        'url' => $url,
+        'url' => mashsb_append_tracking_param($url),
         'title' => $title
     );
     
@@ -1203,4 +1203,20 @@ function mashsb_get_document_title() {
 
     $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
     return $title;
+}
+
+/**
+ * Append tracking parameter to shared url
+ * 
+ * @param string $url
+ * @return string
+ */
+function mashsb_append_tracking_param($url, $network = 'mashshare'){
+    global $mashsb_options;
+    
+    if (!isset($mashsb_options['tracking_params'])){
+        return $url;
+    }
+  
+    return $url . urlencode('?utm_source=sharebuttons&utm_medium='.$network.'&utm_campaign=mashshare');
 }
