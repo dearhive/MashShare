@@ -376,7 +376,7 @@ function arrNetworks( $name, $is_shortcode ) {
     $via = mashsb_get_twitter_username() ? '&via=' . mashsb_get_twitter_username() : '';
     
     $networks_arr = array(
-        'facebook' => 'http://www.facebook.com/sharer.php?u=' . mashsb_append_tracking_param($url, 'facebook'),
+        'facebook' => 'https://www.facebook.com/sharer.php?u=' . mashsb_append_tracking_param($url, 'facebook'),
         'twitter' => 'https://twitter.com/intent/tweet?text=' . $twitter_title . '&url=' . $mashsb_twitter_url . $via,
         'subscribe' => '#',
         'url' => mashsb_append_tracking_param($url),

@@ -322,6 +322,7 @@ Read here more FAQ: [https://www.mashshare.net/faq/](https://www.mashshare.net/f
 * Fix: Remove admin notice if Facebook access token is empty
 * Fix: Remove console.log test notice
 * Fix: Check if multi_curl_exec is allowed
+* Tweak: Use https endpoint for facebook sharing url
 
 = 3.3.9 =
 * New: Create filters to allow customizing the refresh times
