@@ -41,8 +41,7 @@ function mashsb_rate_limit_exceeded(){
         //if (false === get_transient('mashsb_limit_req')) {
         
         if (false === $data_timeout || empty($data_timeout) || $data_timeout < time() ){
-            //set_transient('mashsb_limit_req', '1', 25);
-            set_transient('mashsb_limit_req', '1', '');
+            set_transient('mashsb_limit_req', '1', 25);
             $mashsb_error[] = 'MashShare: Temp Rate Limit not exceeded';
             return false;
         }
