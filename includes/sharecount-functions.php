@@ -35,13 +35,18 @@ function mashsb_rate_limit_exceeded(){
     function mashsb_is_req_limited() {
         global $mashsb_error;
         
-        if (false === get_transient('mashsb_limit_req')) {
-            set_transient('mashsb_limit_req', '1', 25);
+        $data_timeout = get_option('_transient_timeout_mashsb_limit_req');
+        
+        // Rewrite this because wordpress sometimes does not store the expiration value so we need to check this value first
+        //if (false === get_transient('mashsb_limit_req')) {
+        
+        if (false === $data_timeout || empty($data_timeout) || $data_timeout < time() ){
+            //set_transient('mashsb_limit_req', '1', 25);
+            set_transient('mashsb_limit_req', '1', '');
             $mashsb_error[] = 'MashShare: Temp Rate Limit not exceeded';
             return false;
         }
             $mashsb_error[] = 'MashShare: Temp Rate Limit Exceeded';
-            MASHSB()->logger->info('MashShare: Temp Rate Limit Exceeded');
         return true;
         
     }
