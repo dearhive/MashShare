@@ -15,48 +15,47 @@ Social Media Share Buttons for Twitter, Facebook and other social networks. High
 
 == Description == 
 
-> #### MashShare - The Social Media Ecosystem (Twitter counts supported)
-> A free Social Media Plugin, professional and highly customizable<br />
-> ecosystem for social media sharing and optimizing of your valuable content.<br /> 
-> 
-> <strong>Stop slowing down your website and prevent ranking loose.</strong>
-> Other social buttons are often using external scripts which are increasing loading times.
-> MashShare is using NO external script dependencies. All code is loaded directly from your website and <strong>MashShare ensures yours and your visitors privacy!</strong>  <br /> 
->
-> * <strong>New: </strong> Most Shared Posts Widget
-> * <strong>New: </strong> Async share count aggregation
-> * <strong>New: </strong> Dashboard for total share count on posts screen
-> * <strong>New: </strong> Short URL integration
-> * <strong>New: </strong> Support for Accelerated Mobile Pages (AMP) when using the [official WordPress AMP plugin](https://wordpress.org/plugins/amp/)
+#### MashShare - The Social Media Ecosystem (Twitter counts supported)
+A free Social Media Plugin, professional and highly customizable<br />
+ecosystem for social media sharing and optimizing of your valuable content.<br /> 
+ 
+<strong>Stop slowing down your website and prevent ranking loose.</strong>
+Other social buttons are often using external scripts which are increasing loading times.
+MashShare is using NO external script dependencies. All code is loaded directly from your website and <strong>MashShare ensures yours and your visitors privacy!</strong>  <br /> 
+
+* <strong>New: </strong> Most Shared Posts Widget
+* <strong>New: </strong> Async share count aggregation
+* <strong>New: </strong> Dashboard for total share count on posts screen
+* <strong>New: </strong> Short URL integration
+* <strong>New: </strong> Support for Accelerated Mobile Pages (AMP) when using the [official WordPress AMP plugin](https://wordpress.org/plugins/amp/)
 
 <strong>Installation</strong>
 [youtube https://www.youtube.com/watch?v=vRSE-pQJTBQ]
 
-> It gives you per default a large total share counter beside three large 
-> prominent Share Buttons for your Twitter tweets, Facebook share and the option<br /> 
-> to place a prominent subscribe button for your news feed and mailing list. 
-> This services are free per default including great support. 
-> There is no need to create an account! <br /> 
->
-> We also offer free Add-Ons for specifing social sharing image, title, description and twitter hashtags and think this is satisfying for most website owners who need a free and effective working social sharing solution.<br /> 
->
-> If you need services like Whatsapp, Pinterest, Mail,<br />
-> Print, Linkedin, Odnoklassniki etc., you get them on the Add-On Marketplace.<br />
-> 
-> MashShare can also be used in conjunction with other third-party share buttons vendor!
->
->
-> Free and paid Add-Ons available for:
-> 
-> - More Social Share Buttons<br /> 
-> - YouTube Video Share Popup<br />
-> - Share Button Responsive<br /> 
-> - Sticky Share bar<br /> 
-> - Social Sharing Optimization<br /> 
-> - Google Analytics<br /> 
-> - and more...<br /> 
->
-> [Demo](https://www.mashshare.net?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-info-link) | [More Add-Ons >>](https://www.mashshare.net/downloads?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=get-addons)
+It gives you per default a large total share counter beside three large 
+prominent Share Buttons for your Twitter tweets, Facebook share and the option<br /> 
+to place a prominent subscribe button for your news feed and mailing list. 
+This services are free per default including great support. 
+There is no need to create an account! <br /> 
+
+We also offer free Add-Ons for specifing social sharing image, title, description and twitter hashtags and think this is satisfying for most website owners who need a free and effective working social sharing solution.<br /> 
+
+If you need services like Whatsapp, Pinterest, Mail,<br />
+Print, Linkedin, Odnoklassniki etc., you get them on the Add-On Marketplace.<br />
+ 
+MashShare can also be used in conjunction with other third-party share buttons vendor!
+
+Free and paid Add-Ons available for:
+ 
+- More Social Share Buttons<br /> 
+- YouTube Video Share Popup<br />
+- Share Button Responsive<br /> 
+- Sticky Share bar<br /> 
+- Social Sharing Optimization<br /> 
+- Google Analytics<br /> 
+- and more...<br /> 
+
+[Demo](https://www.mashshare.net?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-info-link) | [More Add-Ons >>](https://www.mashshare.net/downloads?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=get-addons)
 
  
 <h4> Social Media Share Buttons</h4>
@@ -90,7 +89,7 @@ This Social Media share buttons plugin in active development and will be updated
 * Multi language capable, *.po files
 * Change color of share counts via setting
 * Count up animation for share buttons counts (Does not work for shortcodes and on blog pages)
-* HTML5 Tag <aside> wrapped around to tell search engines that the share buttons are not part of the content
+* HTML5 Tag < aside > wrapped around to tell search engines that the share buttons are not part of the content
 * Plus button moves to end of share buttons when activated and does not stay longer in place.
 * Drag and drop sort order of share buttons services.
 * Enable desired Social Media share buttons Icons with one click
@@ -131,7 +130,6 @@ This Social Media share buttons plugin in active development and will be updated
 MashShare Social Media ecosystem is *coded well and developed for high performance*. It´s making full use of available persistant and non persistant caching techniques.
 MashShare loads only the Javascript and php object classes it needs at the moment of execution, making it small and fast and easy extensible by third party developer.
 
-<blockquote>
 <h4>How fast is MashShare?</h4>
 
 We published benchmarks of using MashShare compared with other plugins here:
