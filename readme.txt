@@ -247,6 +247,9 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 == Changelog ==
 
 = {{ version }} =
+* New: Support for PHPunit 6
+
+= 3.4.1 =
 * Cleaning up readme.txt. MashShare plugin has been disabled on wordpress.org for using too many keywords and a few other issues with its readme.txt
 
 = 3.4.0 =
