@@ -32,8 +32,8 @@ class MASHSB_Welcome {
      * @since 1.0.1
      */
     public function __construct() {
-        add_action( 'admin_menu', array($this, 'admin_menus') );
-        add_action( 'admin_head', array($this, 'admin_head') );
+        add_action( 'admin_menu', array($this, 'add_admin_menus') );
+        add_action( 'admin_head', array($this, 'admin_head'), 1000 );
         add_action( 'admin_init', array($this, 'welcome') );
     }
 
@@ -45,25 +45,45 @@ class MASHSB_Welcome {
      * @since 1.4
      * @return void
      */
-    public function admin_menus() {
-        // About Page
-        add_dashboard_page(
-                __( 'Welcome to MashShare', 'mashsb' ), __( 'Welcome to MashShare', 'mashsb' ), $this->minimum_capability, 'mashsb-about', array($this, 'about_screen')
-        );
-
-        // Changelog Page
-        $mashsb_about = add_dashboard_page(
-                __( 'MashShare Changelog', 'mashsb' ), __( 'MashShare Changelog', 'mashsb' ), $this->minimum_capability, 'mashsb-changelog', array($this, 'changelog_screen')
-        );
-
+    public function add_admin_menus() {
+//        // About Page
+//        add_dashboard_page(
+//                __( 'Welcome to MashShare', 'mashsb' ), __( 'Welcome to MashShare', 'mashsb' ), $this->minimum_capability, 'mashsb-about', array($this, 'about_screen')
+//        );
+//
+//        // Changelog Page
+//        $mashsb_about = add_dashboard_page(
+//                __( 'MashShare Changelog', 'mashsb' ), __( 'MashShare Changelog', 'mashsb' ), $this->minimum_capability, 'mashsb-changelog', array($this, 'changelog_screen')
+//        );
+//
+//        // Getting Started Page
+//        $mashsb_quickstart = add_submenu_page(
+//                'mashsb-settings', __( 'Quickstart', 'mashsb' ), __( 'Quickstart', 'mashsb' ), $this->minimum_capability, 'mashsb-getting-started', array($this, 'getting_started_screen')
+//        );
+//
+//        // Credits Page
+//        $mashsb_credits = add_dashboard_page(
+//                __( 'The people that build MashShare', 'mashsb' ), __( 'The people that build MashShare', 'mashsb' ), $this->minimum_capability, 'mashsb-credits', array($this, 'credits_screen')
+//        );
+//      
         // Getting Started Page
         $mashsb_quickstart = add_submenu_page(
                 'mashsb-settings', __( 'Quickstart', 'mashsb' ), __( 'Quickstart', 'mashsb' ), $this->minimum_capability, 'mashsb-getting-started', array($this, 'getting_started_screen')
         );
+        // About Page
+        add_submenu_page(
+                'mashsb-settings', __( 'Welcome to MashShare', 'mashsb' ), __( 'Welcome to MashShare', 'mashsb' ), $this->minimum_capability, 'mashsb-about', array($this, 'about_screen')
+        );
+
+        // Changelog Page
+        $mashsb_about = add_submenu_page(
+                'mashsb-settings',__( 'MashShare Changelog', 'mashsb' ), __( 'MashShare Changelog', 'mashsb' ), $this->minimum_capability, 'mashsb-changelog', array($this, 'changelog_screen')
+        );
+
 
         // Credits Page
-        $mashsb_credits = add_dashboard_page(
-                __( 'The people that build MashShare', 'mashsb' ), __( 'The people that build MashShare', 'mashsb' ), $this->minimum_capability, 'mashsb-credits', array($this, 'credits_screen')
+        $mashsb_credits = add_submenu_page(
+                'mashsb-settings',__( 'The people that build MashShare', 'mashsb' ), __( 'The people that build MashShare', 'mashsb' ), $this->minimum_capability, 'mashsb-credits', array($this, 'credits_screen')
         );
     }
 
@@ -75,10 +95,11 @@ class MASHSB_Welcome {
      * @return void
      */
     public function admin_head() {
-        remove_submenu_page( 'index.php', 'mashsb-about' );
-        remove_submenu_page( 'index.php', 'mashsb-changelog' );
-        remove_submenu_page( 'index.php', 'mashsb-getting-started' );
-        remove_submenu_page( 'index.php', 'mashsb-credits' );
+        remove_submenu_page( 'mashsb-settings', 'mashsb-about' );
+        remove_submenu_page( 'mashsb-settings', 'mashsb-changelog' );
+        remove_submenu_page( 'mashsb-settings', 'mashsb-getting-started' );
+        remove_submenu_page( 'mashsb-settings', 'mashsb-credits' );
+        
         if ( !mashsb_is_admin_page() ){
             return false;
         }
@@ -121,7 +142,7 @@ class MASHSB_Welcome {
     public function getting_started_screen() {
         global $mashsb_redirect;
         ?>
-        <div class="wrap about-wrap mashsb-about-wrap">
+        <div class="wrap mashsb-about-wrap">
             <?php
             // load welcome message and content tabs
             $this->welcome_message();
@@ -131,7 +152,7 @@ class MASHSB_Welcome {
             <p class="about-description mashsb-notice notice-success"><?php _e( 'Facebook and Twitter Share Buttons are successfully enabled on all your posts! <br> Now you can use the steps  below to customize MashShare to your needs.', 'mashsb' ); ?></p>
             <?php } ?>
             <div class="changelog">
-                <h2><?php _e( 'Create Your First Social Sharing Button', 'mashsb' ); ?></h2>
+                <h1><?php _e( 'Create Your First Social Sharing Button', 'mashsb' ); ?></h1>
                 <div class="feature-section">
                     <div class="feature-section-media">
                         <img style="display:none;" src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/social-networks-settings.png'; ?>" class="mashsb-welcome-screenshots"/>
@@ -141,7 +162,7 @@ class MASHSB_Welcome {
                         <p><?php _e( 'The Social Network menu is your general access point for activating the desired share buttons and for customizing the share button label', 'mashsb' ); ?></p>
                         <h4>Step 2: Go to <a href="<?php echo admin_url( 'admin.php?page=mashsb-settings#mashsb_settingslocation_header' ) ?>" target="blank"><?php _e( 'Settings &rarr; Position', 'mashsb' ); ?></a></h4>
                         <p><?php _e( 'Select the location and exact position of the share buttons within your content', 'mashsb' ); ?></p>
-                        <h3><?php _e('You are done! Easy, isn\'t it?', 'mashsb'); ?></h3>
+                        <h4><?php _e('You are done! Easy, isn\'t it?', 'mashsb'); ?></h4>
                         <p></p>
                             
                     </div>
@@ -149,15 +170,12 @@ class MASHSB_Welcome {
             </div>
 
             <div class="changelog">
-                <h2><?php _e( 'Display a Most Shared Post Widget', 'mashsb' ); ?></h2>
+                <h1><?php _e( 'Create Most Shared Posts Widget', 'mashsb' ); ?></h1>
                 <div class="feature-section">
-                    <div class="feature-section-media">
-                        &nbsp;
-                    </div>
                     <div class="feature-section-content">
-                        <h4><a href="<?php echo admin_url( 'widgets.php' ) ?>" target="blank"><?php _e( 'Appearance &rarr; Widgets', 'mashsb' ); ?></a></h4>
+                        <h4>Go to <a href="<?php echo admin_url( 'widgets.php' ) ?>" target="blank"><?php _e( 'Appearance &rarr; Widgets', 'mashsb' ); ?></a></h4>
 
-                        <p><?php _e( 'Drag and drop the widget </br> "<i>MashShare - Most Shared Posts</i>" </br>into the desired widget location and save it', 'mashsb' ); ?></p>
+                        <p><?php _e( 'Drag and drop the widget labeled "<i>MashShare - Most Shared Posts</i>" into the desired widget location and save it.', 'mashsb' ); ?></p>
                         <img style="display:none;" src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/most-shared-posts.png'; ?>"/>
 
                     </div>
@@ -165,44 +183,40 @@ class MASHSB_Welcome {
             </div>
 
             <div class="changelog">
-                <h2><?php _e( 'Content Shortcodes', 'mashsb' ); ?></h2>
+                <h1><?php _e( 'Content Shortcodes', 'mashsb' ); ?></h1>
                 <div class="feature-section">
                     <div class="feature-section-media">
                         <img style="display:none;" src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/shortcodes.png'; ?>"/>
                     </div>
                     <div class="feature-section-content">
                         <p>
-                            <?php _e( 'Add Share buttons manually with using the shortcode <i style="font-weight:bold;">[mashshare]</i>.', 'mashsb' ); ?>
+                            <?php _e( 'Add Share buttons manually with using shortcode <i style="font-weight:bold;">[mashshare]</i>.', 'mashsb' ); ?>
                         </p>
                         <?php _e( 'Paste the shortcode in content of your posts or pages with the post editor at the place you want the share buttons appear', 'mashsb' ); ?>
                         <p>
-                            <?php echo sprintf(__( 'There are various parameters you can use for the mashshare shortcode. Find a list of all available shortcode parameters <a href="%s" target="blank">here</a>', 'mashsb'), 'http://docs.mashshare.net/article/67-shortcodes'); ?><br>
+                            <?php echo sprintf(__( 'There are several parameters you can use for the shortcode. Get a  <a href="%s" target="blank">list of all available shortcode parameters</a>', 'mashsb'), 'http://docs.mashshare.net/article/67-shortcodes'); ?><br>
                         </p>
                     </div>
                 </div>
             </div>
             <div class="changelog">
-                <h2><?php _e( 'PHP Template Shortcode', 'mashsb' ); ?></h2>
+                <h1><?php _e( 'PHP Template Shortcode', 'mashsb' ); ?></h1>
                 <div class="feature-section">
                     <div class="feature-section-media">
-s                    </div>
+                    </div>
                     <div class="feature-section-content">
                         <p>
                             <?php _e( 'Add MashShare directly into your theme template files with using the PHP code <i style="font-weight:bold;">&lt;?php do_shortcode(\'[mashshare]\'); ?&gt;</i>', 'mashsb' ); ?>
-                        </p>
-                            
-                        <p>
-                            <?php echo sprintf(__( 'There are various parameters you can use for the mashshare shortcode. Find a list of all available shortcode parameters <a href="%s" target="blank">here</a>', 'mashsb'), 'https://www.mashshare.net/documentation/shortcodes/'); ?><br>
                         </p>
                     </div>
                 </div>
             </div>
 
             <div class="changelog">
-                <h2><?php _e( 'Need Help?', 'mashsb' ); ?></h2>
+                <h1><?php _e( 'Need Help?', 'mashsb' ); ?></h1>
                 <div class="feature-section two-col">
                     <div>
-                        <h3><?php _e( 'Great Support', 'mashsb' ); ?></h3>
+                        <h4><?php _e( 'Great Support', 'mashsb' ); ?></h4>
                         <p><?php _e( 'We do our best to provide the best support we can. If you encounter a problem or have a question, simply open a ticket using our <a href="https://www.mashshare.net/contact-developer/" target="blank">support form</a>.', 'mashsb' ); ?></p>
                         <ul id="mash-social-admin-head">
                             <?php echo mashsb_share_buttons(); ?>
@@ -254,38 +268,38 @@ s                    </div>
                 <div class="feature-section">
                     <div class="feature-section-content">
                         <!--
-                        <h2><?php //_e( 'Use Facebook Connect to Skyrocket Share Count', 'mashsb' ); ?></h2>
+                        <h1><?php //_e( 'Use Facebook Connect to Skyrocket Share Count', 'mashsb' ); ?></h1>
                         <p><?php //_e( 'MashShare is the first Social Media plugin that uses the brandnew Facebook Connect Integration to bypass the regular facebook API limit which has been introduced recently. <p>It allows you up to 200 API calls per hour to the facebook server. This is more than enough for even huge traffic sites as MashShare is caching all share counts internally. <p>We are convinced that other social media plugins are going to copy our solution soon... and we will be proud of it;) <p> Your site becomes immediately better than the rest because you are the one whose website is running with full social sharing power. Other sites share count still stucks and are delayed and they do not know it;)', 'mashsb' ); ?></p>
                         <img src="<?php //echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/oauth.png'; ?>"/>
                         //-->
                         <p></p>
-                        <h2><?php _e( 'A New Beautiful Sharing Widget', 'mashsb' ); ?></h2>
+                        <h1><?php _e( 'A New Beautiful Sharing Widget', 'mashsb' ); ?></h1>
                         <p><?php _e( 'We have heard your wishes so the new widget contains the long requested post thumbnail and a beautiful css which gives your side bar sharing super power.', 'mashsb' ); ?></p>
                         <img src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/widget.png'; ?>"/>
                         <p></p>
-                        <h2><?php _e( 'Better Customization Options', 'mashsb' ); ?></h2>
+                        <h1><?php _e( 'Better Customization Options', 'mashsb' ); ?></h1>
                         <p><?php _e( 'Select from 3 ready to use sizes to make sure that MashShare is looking great on your site. No matter if you prefer small, medium or large buttons.', 'mashsb' ); ?></p>
                         <img src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/different_sizes.gif'; ?>"/>
                         <p></p>
-                        <h2><?php _e( 'Asyncronous Share Count Aggregation', 'mashsb' ); ?></h2>
+                        <h1><?php _e( 'Asyncronous Share Count Aggregation', 'mashsb' ); ?></h1>
                         <p><?php _e( 'With MashShare you get our biggest performance update. Use the new <i>Async Cache Refresh</i> method and your share counts will be aggregated only after page loading and never while page loads. This is a huge performance update.', 'mashsb' ); ?></p>
                         <img src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/async_cache_refresh.png'; ?>"/>
                         <p></p>
-                        <h2><?php _e( 'Open Graph and Twitter Card Integration', 'mashsb' ); ?></h2>
+                        <h1><?php _e( 'Open Graph and Twitter Card Integration', 'mashsb' ); ?></h1>
                         <p><?php _e( 'Use open graph and twitter card to specify the content you like to share. If you are using Yoast, MashShare will use the Yoast open graph data instead and extend it with custom data to get the maximum out of your valuable content.', 'mashsb' ); ?></p>
                         <p></p>
                         
                         <img src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/social_sharing_settings.png'; ?>"/>
                         <p></p>
-                        <h2><?php _e( 'Great Responsive Buttons', 'mashsb' ); ?></h2>
+                        <h1><?php _e( 'Great Responsive Buttons', 'mashsb' ); ?></h1>
                         <p><?php _e( 'MashShare arrives you with excellent responsive support. So the buttons look great on mobile and desktop devices. If you want more customization options for mobile devices you can purchase the responsive Add-On', 'mashsb' ); ?></p>
                         <p></p>
-                        <h2><?php _e( 'Share Count Dashboard', 'mashsb' ); ?></h2>
+                        <h1><?php _e( 'Share Count Dashboard', 'mashsb' ); ?></h1>
                         <p><?php _e( 'See the shares of your posts at a glance on the admin posts listing:', 'mashsb' ); ?></p>
                         <p></p>
                         <img alt="Share count dashboard" title="Share count dashboard" src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/dashboard.png'; ?>"/>
                         <p></p>
-                        <h2><?php _e( 'A much cleaner user interface', 'mashsb' ); ?></h2>
+                        <h1><?php _e( 'A much cleaner user interface', 'mashsb' ); ?></h1>
                         <p><?php _e( 'We spent a lot of time to make useful first time settings and improved the user interface for an easier experience.', 'mashsb' ); ?></p>
                         <p></p>
                     </div>
@@ -294,7 +308,7 @@ s                    </div>
 
 
             <div class="changelog">
-                <h2><?php _e( 'Additional Updates', 'mashsb' ); ?></h2>
+                <h1><?php _e( 'Additional Updates', 'mashsb' ); ?></h1>
                 <div class="feature-section three-col">
                     <div class="col">
                         <h4><?php _e( 'Developer Friendly', 'mashsb' ); ?></h4>
@@ -479,7 +493,7 @@ s                    </div>
             $this->tabs();
             ?>
             <div class="changelog">
-                <h3><?php _e( 'Full Changelog', 'mashsb' ); ?></h3>
+                <h4><?php _e( 'Full Changelog', 'mashsb' ); ?></h4>
 
                 <div class="feature-section">
                     <?php echo $this->parse_readme(); ?>

@@ -247,7 +247,8 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 == Changelog ==
 
 = {{ version }} =
-* New: Support for PHPunit 6
+* New: Support for PHPUnit 6
+* Fix: Move invisible sub menus from dashboard to MashShare menu section to prevent confusion if a plugin like Menu Editor Pro is active which makes even invisible menu entries visible
 
 = 3.4.1 =
 * Cleaning up readme.txt. MashShare plugin has been disabled on wordpress.org for using too many keywords and a few other issues with its readme.txt
