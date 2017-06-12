@@ -672,7 +672,7 @@ So the MashShare open graph data will be containing the same social meta data th
                 'delete_cache_objects' => array(
                     'id' => 'delete_cache_objects',
                     'name' => __( 'Attention: Purge DB Cache', 'mashsb' ),
-                    'desc' => __( '<strong>Note: </strong>Use this with caution. <strong>This will delete all your twitter counts. They can not be restored!</strong> Activating this option will delete all stored mashshare post_meta objects.<br>' . mashsb_delete_cache_objects(), 'mashsb' ),
+                    'desc' => __( '<strong>Caution </strong>Use this as last resort. This will delete all your share counts stored in mashshare post_meta objects and it takes hours to get them back. Usually this option is not needed! <br>' . mashsb_delete_cache_objects(), 'mashsb' ),
                     'type' => 'checkbox'
                 ),
                 'debug_mode' => array(

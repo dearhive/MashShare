@@ -8,7 +8,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email
 Requires at least: 3.6+
-Tested up to: 4.7.3
+Tested up to: 4.8
 Stable tag: {{ version }}
 
 Social Media Share Buttons for Twitter, Facebook and other social networks. Highly customizable Social Media ecosystem
@@ -247,6 +247,10 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 == Changelog ==
 
 = {{ version }} =
+* Tweak: Better admin descriptions
+* New: Tested up to WP 4.8
+
+= 3.4.1 =
 * New: Support for PHPUnit 6
 * Fix: Move invisible sub menus from dashboard to MashShare menu section to prevent confusion if a plugin like Menu Editor Pro is active which makes even invisible menu entries visible
 
