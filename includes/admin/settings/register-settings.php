@@ -1991,3 +1991,12 @@ function mashsb_ratelimit_callback() {
 function mashsb_hide_addons(){
     return apply_filters('mashsb_hide_addons', false);
 }
+
+function mashsb_get_debug_settings(){
+   global $mashsb_options;
+   if(isset($mashsb_options['debug_mode'])){
+      echo '<div style="clear:both;">';
+      var_dump($mashsb_options);
+      echo '</div>';
+   }
+}

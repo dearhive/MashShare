@@ -185,7 +185,7 @@ function mashsb_options_page() {
                         submit_button();
                     ?>
                 </form>
-                                    <div><?php echo mashsb_admin_rate_us(); ?></div>
+                  <div><?php echo mashsb_admin_rate_us(); ?></div>
             </div> <!-- new //-->
         </div><!-- #tab_container-->
         <div  class="mashsb-sidebar">
@@ -195,6 +195,8 @@ function mashsb_options_page() {
                 }
             ?>
         </div> <!-- #sidebar-->
+                        <?php echo mashsb_get_debug_settings(); ?>
+
     </div><!-- .mashsb_admin -->
     <?php
     echo ob_get_clean();

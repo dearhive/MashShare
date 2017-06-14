@@ -247,6 +247,9 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 == Changelog ==
 
 = {{ version }} =
+* Fix: Facebook and twitter buttons missing on multisite activations when bimber theme is used
+
+= 3.4.2 =
 * Tweak: Better admin descriptions
 * New: Tested up to WP 4.8
 
