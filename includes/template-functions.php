@@ -445,8 +445,8 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
     /* our list of available services, includes the disabled ones! 
      * We have to clean this array first!
      */
-    $getnetworks = isset( $mashsb_options['networks'] ) ? $mashsb_options['networks'] : '';
-    //echo '<pre>'.var_dump($getnetworks) . '</pre>';
+    //$getnetworks = isset( $mashsb_options['networks'] ) ? $mashsb_options['networks'] : '';
+    $getnetworks = isset( $mashsb_options['networks'] ) ? apply_filters('mashsb_filter_networks', $mashsb_options['networks'])  : apply_filters('mashsb_filter_networks', '');
 
     /* Delete disabled services from array. Use callback function here. Do this only once because array_filter is slow! 
      * Use the newly created array and bypass the callback function
@@ -483,7 +483,7 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
                     $endsecondaryshares = '';
                 }
             }
-            //if( $enablednetworks[$key]['name'] != '' ) {
+
             if( isset($enablednetworks[$key]['name']) && !empty($enablednetworks[$key]['name']) ) {
                 /* replace all spaces with $nbsp; This prevents error in css style content: text-intend */
                 $name = preg_replace( '/\040{1,}/', '&nbsp;', $enablednetworks[$key]['name'] ); // The custom share label

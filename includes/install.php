@@ -70,6 +70,9 @@ function mashsb_install() {
     // Try to load some settings. If there are no ones we write some default settings:
     $settings = get_option( 'mashsb_settings' );
     
+    // Check if default networks are existing
+    
+    
     // Write default settings. Check first if there are no settings
     if( !$settings || count( $settings ) === 0 ) {
         $settings_default = array(
@@ -141,6 +144,10 @@ function mashsb_install() {
 	wp_schedule_event(time(), 'daily', 'mashsb_cron_daily');
     }
 }
+
+//function mashsb_is_default_networks($settings){
+//   if 
+//}
 
 /**
  * Post-installation

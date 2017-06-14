@@ -1992,11 +1992,17 @@ function mashsb_hide_addons(){
     return apply_filters('mashsb_hide_addons', false);
 }
 
+/**
+ * outout debug vars
+ * @global array $mashsb_options
+ */
 function mashsb_get_debug_settings(){
    global $mashsb_options;
    if(isset($mashsb_options['debug_mode'])){
       echo '<div style="clear:both;">';
       var_dump($mashsb_options);
+      echo 'Installed Networks:<br>';
+      var_dump(get_option('mashsb_networks'));
       echo '</div>';
    }
 }
