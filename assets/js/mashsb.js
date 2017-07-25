@@ -49,6 +49,11 @@ var strict;
 }(jQuery, document));
 
 jQuery(document).ready(function ($) {
+    
+   /* Show Whatsapp button on mobile devices iPhones and Android only */
+    if(navigator.userAgent.match(/(iPhone)/i) || navigator.userAgent.match(/(Android)/i)){
+        $('.mashicon-whatsapp').show(); 
+    }
 
     mashsb_check_cache();
     

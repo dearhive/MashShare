@@ -37,13 +37,13 @@ function mashsb_check_fb_api_key() {
         $data = json_decode( $buffer );
 
         if( empty( $buffer ) ) {
-            update_option( 'mashsb_valid_fb_api_key', 'Unknown Error' );
+            update_option( 'mashsb_valid_fb_api_key', 'The access token is not working because facebook is returning unknown error. Delete the token or create a new one.' );
         } else if( is_object($data) && !empty( $data->error->message ) ) {
             update_option( 'mashsb_valid_fb_api_key', $data->error->message );
         } else if( is_object($data) && isset( $data->share->share_count ) ) {
             update_option( 'mashsb_valid_fb_api_key', 'success' );
         } else {
-            update_option( 'mashsb_valid_fb_api_key', 'Unknown Error' );
+            update_option( 'mashsb_valid_fb_api_key', 'The access token is not working because faceboook is returning unknown error. Delete the token or create a new one.' );
         }
     }
     return false;

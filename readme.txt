@@ -248,6 +248,8 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 = {{ version }} =
 * Fix: Facebook and twitter buttons missing on multisite activations when bimber theme is used
+* Fix: Whatsapp button not shown on sticky sharebar add-on when network add-on is not installed
+* Tweak: Return a more clear error notice when access token is not valid.
 
 = 3.4.2 =
 * Tweak: Better admin descriptions
