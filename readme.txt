@@ -248,6 +248,8 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 = {{ version }} =
 * Fix: undefined var title
+* Fix: Pinterest popup not opening when network add-on is not installed
+* Fix: Remove deprecated code and make mashsb.js smaller
 
 = 3.4.4 =
 * Fix: Check fb access token not working properly

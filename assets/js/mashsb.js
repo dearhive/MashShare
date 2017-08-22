@@ -1,60 +1,97 @@
 var strict;
 
-/*!------------------------------------------------------
- * jQuery nearest v1.0.3
- * http://github.com/jjenzz/jQuery.nearest
- * ------------------------------------------------------
- * Copyright (c) 2012 J. Smith (@jjenzz)
- * Dual licensed under the MIT and GPL licenses:
- * http://www.opensource.org/licenses/mit-license.php
- * http://www.gnu.org/licenses/gpl.html
- */
-(function ($, d) {
-    $.fn.nearest = function (selector) {
-        var self, nearest, el, s, p,
-            hasQsa = d.querySelectorAll;
-
-        function update(el) {
-            nearest = nearest ? nearest.add(el) : $(el);
-        }
-
-        this.each(function () {
-            self = this;
-
-            $.each(selector.split(','), function () {
-                s = $.trim(this);
-
-                if (!s.indexOf('#')) {
-                    // selector starts with an ID
-                    update((hasQsa ? d.querySelectorAll(s) : $(s)));
-                } else {
-                    // is a class or tag selector
-                    // so need to traverse
-                    p = self.parentNode;
-                    while (p) {
-                        el = hasQsa ? p.querySelectorAll(s) : $(p).find(s);
-                        if (el.length) {
-                            update(el);
-                            break;
-                        }
-                        p = p.parentNode;
-                    }
-                }
-            });
-
-        });
-
-        return nearest || $();
-    };
-}(jQuery, document));
-
 jQuery(document).ready(function ($) {
     
    /* Show Whatsapp button on mobile devices iPhones and Android only */
     if(navigator.userAgent.match(/(iPhone)/i) || navigator.userAgent.match(/(Android)/i)){
         $('.mashicon-whatsapp').show(); 
     }
+    
+    // pinterest button logic
+        $('body')
+                .off('click', '.mashicon-pinterest')
+                .on('click', '.mashicon-pinterest', function (e) {
+                    e.preventDefault();
+                    console.log('preventDefault:' + e);
+                    winWidth = 520;
+                    winHeight = 350;
+                    var winTop = (screen.height / 2) - (winHeight / 2);
+                    var winLeft = (screen.width / 2) - (winWidth / 2);
+                    var url = $(this).attr('data-mashsb-url');
 
+                    window.open(url, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight + ',resizable=yes');
+
+                });
+                
+        /* Load Pinterest Popup window
+         * 
+         * @param string html container
+         * @returns void
+         */
+        function load_pinterest(html) {
+
+            mashnet_load_pinterest_body();
+
+            jQuery('.mashnet_pinterest_header').fadeIn(500);
+            jQuery('.mashnet_pinterest_inner').html(html);
+
+            /* Close Pinterest popup*/
+            jQuery('.mashnet_pinterest_close').click(function (e) {
+                e.preventDefault();
+                jQuery('.mashnet_pinterest_header').hide();
+            });
+        }
+
+        /**
+         * Load pinterest wrapper
+         * 
+         * @returns voids
+         */
+        function load_pinterest_body() {
+            var winWidth = window.innerWidth;
+            var popupWidth = 350;
+            var popupHeight = 310;
+
+            /* Load Pinterest popup into body of page */
+            if (winWidth <= 330)
+                var popupWidth = 310;
+            if (winWidth > 400)
+                var popupWidth = 390;
+            if (winWidth > 500)
+                var popupWidth = 490;
+
+            var winTop = (window.innerHeight / 2) - (popupHeight / 2);
+            var winLeft = (window.innerWidth / 2) - (popupWidth / 2);
+            var struct = '<div class="mashnet_pinterest_header" style="position:fixed;z-index:999999;max-width:' + popupWidth + 'px; margin-left:' + winLeft + 'px;top:' + winTop + 'px;">\n\
+                        <div class="mashnet_pinit_wrapper" style="background-color:white;"><span class="mashnet_pin_it">Pin it! </span><span class="mashnet_pinicon"></span> \n\
+<div class="mashnet_pinterest_close" style="float:right;"><a href="#">X</a></div></div>\n\
+<div class="mashnet_pinterest_inner"></div>\n\
+                </div>\n\
+                ';
+
+            jQuery('body').append(struct);
+        }
+
+        /* Get all images on site 
+         * 
+         * @return html
+         * */
+        function get_images(url) {
+
+            var allImages = jQuery('img').not("[nopin='nopin']");
+            var html = '';
+            var url = '';
+
+            var largeImages = allImages.filter(function () {
+                return (jQuery(this).width() > 70) || (jQuery(this).height() > 70)
+            })
+            for (i = 0; i < largeImages.length; i++) {
+                html += '<li><a target="_blank" id="mashnetPinterestPopup" href="https://pinterest.com/pin/create/button/?url=' + encodeURIComponent(window.location.href) + '%2F&media=' + largeImages[i].src + '&description=' + largeImages[i].alt + '"><img src="' + largeImages[i].src + '"></a></li>';
+            }
+        }
+          
+
+    // check the sharecount caching method
     mashsb_check_cache();
     
     // Fix for the inline post plugin which removes the zero share count
@@ -73,58 +110,6 @@ jQuery(document).ready(function ($) {
             }
 
         }, 6000);
-    }
-
-    /**
-     *
-     * Deprecated
-     */
-    /*if (typeof('mashsb') && mashsb.restapi == "1"){
-     mashsb_restapi_check_cache();
-     }
-     else if (typeof('mashsb') && mashsb.restapi == "0"){
-     mashsb_check_cache_ajax();
-     }*/
-    /**
-     * Check Cache via ajax endpoint
-     *
-     */
-    function mashsb_check_cache_ajax() {
-
-        setTimeout(function () {
-
-            var data = {
-                action: 'mashsb_refresh_cache',
-            };
-            $.post(ajaxurl, data, function (resp, status, xhr) {
-                if (resp == "1") {
-                    mashsb_update_cache();
-                    //console.log('cache must be updated ' + + xhr.status + ' ' + xhr.statusText + xhr.statusText);
-                }
-            }).fail(function (xhr) {
-                console.log('Fatal Error:' + xhr.status + ' ' + xhr.statusText + xhr.statusText);
-            });
-        }, 4000);
-    }
-    /**
-     * Check Cache via rest api
-     *
-     */
-    function mashsb_restapi_check_cache() {
-
-        setTimeout(function () {
-
-            var data = {};
-            var mash_rest_url = 'http://src.wordpress-develop.dev/wp-json/mashshare/v1/verifycache/';
-            $.get(mash_rest_url, data, function (resp, status, xhr) {
-                if (resp == "1") {
-                    mashsb_update_cache();
-                    //console.log('cache must be updated ');
-                }
-            }).fail(function (xhr) {
-                console.log('Fatal Error:' + xhr.status + ' ' + xhr.statusText + xhr.statusText);
-            });
-        }, 4000);
     }
 
     function mashsb_update_cache() {
@@ -239,284 +224,6 @@ jQuery(document).ready(function ($) {
         return value.toFixed(0);
     }
 
-    /**
-     * Responsive Buttons
-     */
-    function responsiveButtons()
-    {
-        // Responsive buttons are not in use
-        if (mashsb.dynamic_buttons != 1) return;
-        
-        // Start our Listener
-        var listenerContainer = $(".mashsb-container.mashsb-main .mashsb-count");
-        if (listenerContainer.length){
-            new ResizeSensor(listenerContainer, function () {
-                calculate();
-            });
-        }
-        var listenerViews = $(".mashsb-container.mashsb-main .mashpv .count");
-        if (listenerViews.length){
-            new ResizeSensor(listenerViews, function () {
-                calculate();
-            });
-        }
-
-        // Ajax Listener
-        var ajaxListener                        = {},
-            interval                            = {};
-        //$primaryButtons                     = $("aside.mashsb-container.mashsb-main > .mashsb-box > .mashsb-buttons > a[class^='mashicon-']:visible:not(.secondary-shares a)"),
-        //$secondaryShareButtonsContainer     = $("aside.mashsb-container .secondary-shares");
-
-        // Added listener so in case if somehow the ajax request is being made, the buttons will resize again.
-        // This is useful for good reasons for example;
-        // 1. No need to include responsiveButtons() in case if anything changes or ajax request needs to be added
-        // or modified.
-        // 2. If the ajax request is done outside of MashShare work such as theme customisations
-        ajaxListener.open       = XMLHttpRequest.prototype.open;
-        ajaxListener.send       = XMLHttpRequest.prototype.send;
-        ajaxListener.callback   = function (pointer) {
-            // Request is not completed yet
-            if (pointer.readyState != 4 || pointer.status != 200) {
-                return;
-            }
-
-            var action = getAction(pointer.responseURL);
-
-            // Re-calculate the width of the buttons on Get View ajax call
-            if (action === "mashpv_get_views") {
-                // Adjust for animation
-                setTimeout(function() {
-                    //calculate();
-                }, 1100);
-            }
-
-            //console.log(interval);
-            // Clear the interval for it
-            clearInterval(interval[action]);
-        };
-
-        // Executes 5 min later to clear IF any interval that's left
-        setTimeout(function() {
-            var key;
-            for (key in interval) {
-                if (interval.hasOwnProperty(key)) {
-                    clearInterval(interval[key]);
-                }
-            }
-
-        }, 5 * (60 * 1000));
-
-        // When an ajax requests is opened
-        XMLHttpRequest.prototype.open = function(method, url) {
-            // In case if they are not defined
-            if (!method) method = '';
-            if (!url) url = '';
-
-            // Attach values
-            ajaxListener.open.apply(this, arguments);
-            ajaxListener.method = method;
-            ajaxListener.url = url;
-
-            // If that's the get method, attach data to our listener
-            if (method.toLowerCase() === "get") {
-                ajaxListener.data   = url.split('?');
-                ajaxListener.data   = ajaxListener.data[1];
-                ajaxListener.action = getAction(ajaxListener.data);
-            }
-        };
-
-        // When an ajax request is sent
-        XMLHttpRequest.prototype.send = function(data, params) {
-            ajaxListener.send.apply(this, arguments);
-
-            // If that's the post method, attach data to our listener
-            if (ajaxListener.method.toLowerCase() === "post") {
-                ajaxListener.data   = data;
-                ajaxListener.action = getAction(ajaxListener.data);
-            }
-
-            // $ overwrites onstatechange (darn you jQuery!),
-            // we need to monitor readyState and the status
-            var pointer     = this;
-            interval[ajaxListener.action] = window.setInterval(ajaxListener.callback, 100, pointer);
-        };
-
-        // Recalculate width of the buttons when plus / minus button is clicked
-        $("body")
-            .on("click", ".onoffswitch", function() {
-                //$secondaryShareButtonsContainer.css("display","block");
-                setTimeout(function() {calculate();}, 200);
-            })
-            .on("click", ".onoffswitch2", function() {
-                calculate();
-            });
-
-        // Window resize
-        $(window).resize(function() {
-            calculate();
-        });
-
-        // When there is no ajax call, this one is required to be here!
-        // No worries though, once ajax call is done, it will adjust
-        // Adjustment for animation
-        if (mashsb.animate_shares == 1) {
-            setTimeout(function() {
-                calculate();
-            }, 500);
-        }
-        // No need animation adjusting
-        else calculate();
-
-        /**
-         * Calculation for buttons
-         */
-        function calculate()
-        {
-            var $container = $("aside.mashsb-container.mashsb-main");
-
-            if ($container.length > 0) {
-                $container.each(function() {
-                    var $this           = $(this),
-                        $primaryButtons = $this.find(".mashsb-box > .mashsb-buttons > .mashsb-primary-shares > a[class^='mashicon-']:visible");
-
-                    //$this.find(".mashsb-box > .mashsb-buttons > .secondary-shares").css("clear", "both");
-
-                    // Variables
-                    var averageWidth = getAverageWidth($primaryButtons);
-
-                    // Do the styling...
-                    $primaryButtons.css({
-                        //"width"             : averageWidth + "px", // Need to de-activate this for long labels
-                        "min-width"         : averageWidth + "px",
-                        // Below this part is just to ensure the stability...
-                        // Not all themes are apparently adding these rules
-                        // thus messing up the whole width of the elements
-                        "box-sizing"        : "border-box",
-                        "-moz-box-sizing"   : "border-box",
-                        "-webkit-box-sizing": "border-box"
-                    });
-                });
-            }
-        }
-
-        /**
-         * Get action from URL string
-         * @param data
-         * @returns {*}
-         */
-        function getAction(data)
-        {
-            // Split data
-            data = data.split('&');
-
-            // Let's work our magic here
-            // Split data
-            var dataLength  = data.length,
-                i;
-
-            if (dataLength == 1) return data[0];
-
-            // Get the action
-            for (i = 0; i < dataLength; i++) {
-                if (data[i].startsWith("action=")) {
-                    return data[i].replace("action=", '');
-                }
-            }
-
-            return '';
-        }
-
-        /**
-         * Floors / rounds down given number to its closest with allowed decimal points
-         * @param number
-         * @param decimals
-         * @returns {number}
-         */
-        function floorDown(number, decimals)
-        {
-            decimals = decimals || 0;
-            return ( Math.floor( number * Math.pow(10, decimals) ) / Math.pow(10, decimals) );
-        }
-
-        /**
-         * Rounds up given number to is closest with allowed decimal points
-         * @param number
-         * @param decimals
-         * @returns {number}
-         */
-        function round(number, decimals)
-        {
-            return Math.round(number * Math.pow(10, decimals)) / Math.pow(10, decimals);
-        }
-
-        /**
-         * Gets average widht of each primary button
-         * @returns {number|*}
-         */
-        function getAverageWidth(primaryButtons)
-        {
-            // Variables
-            var $mashShareContainer             = primaryButtons.parents("aside.mashsb-container.mashsb-main"),
-                $container                      = $mashShareContainer.find(".mashsb-buttons > .mashsb-primary-shares"),
-                $shareCountContainer            = $mashShareContainer.find(".mashsb-box > .mashsb-count:not(.mashpv)"),
-                isShareCountContainerVisible    = ($shareCountContainer.length > 0 && $shareCountContainer.is(":visible")),
-                $viewCounterContainer           = $mashShareContainer.find(".mashsb-box > .mashpv.mashsb-count"),
-                isViewCounterContainerVisible   = $viewCounterContainer.is(":visible"),
-                $plusButton                     = $container.find(".onoffswitch"),
-                isPlusButtonVisible             = $plusButton.is(":visible"),
-                totalUsedWidth                  = 0,
-                averageWidth;
-
-            $plusButton.css("margin-right", 0);
-
-            // Share counter is visible
-            if (isShareCountContainerVisible === true) {
-                var shareCountContainerWidth = parseFloat($shareCountContainer.css("margin-right"));
-                if (isNaN(shareCountContainerWidth)) shareCountContainerWidth = 0;
-                shareCountContainerWidth = shareCountContainerWidth + $shareCountContainer[0].getBoundingClientRect().width;
-                shareCountContainerWidth = round(shareCountContainerWidth, 2);
-
-                totalUsedWidth += shareCountContainerWidth;
-            }
-
-            // View counter is visible
-            if (isViewCounterContainerVisible === true) {
-                var viewCountContainerWidth = parseFloat($viewCounterContainer.css("margin-right"));
-                if (isNaN(viewCountContainerWidth)) viewCountContainerWidth = 0;
-                viewCountContainerWidth = viewCountContainerWidth + $viewCounterContainer[0].getBoundingClientRect().width;
-                viewCountContainerWidth = round(viewCountContainerWidth, 2);
-
-                totalUsedWidth += viewCountContainerWidth;
-            }
-
-            // Plus button is visible
-            if (isPlusButtonVisible === true) {
-                var extraWidth = 5; // we use this to have some extra power in case weird layout is used
-                totalUsedWidth += $plusButton[0].getBoundingClientRect().width + extraWidth;
-            }
-
-            //var tempWidth = $container[0].getBoundingClientRect().width;
-
-            // Calculate average width of each button (including their margins)
-            // We need to get precise width of the container, jQuery's width() is rounding up the numbers
-            averageWidth = ($container[0].getBoundingClientRect().width - totalUsedWidth) / primaryButtons.length;
-            if (isNaN(averageWidth)) {
-                return;
-            }
-
-            // We're only interested in positive numbers
-            if (averageWidth < 0) averageWidth = Math.abs(averageWidth);
-
-            // Now get the right width without the margin
-            averageWidth = averageWidth - (primaryButtons.first().outerWidth(true) - primaryButtons.first().outerWidth());
-            // Floor it down
-            averageWidth = floorDown(averageWidth, 2);
-
-            return averageWidth;
-        }
-    }
-    // Deactivate it for now and check if we can reach the same but better with CSS Flex boxes
-    //responsiveButtons();
 
 
     /* Count up script jquery-countTo
@@ -616,223 +323,51 @@ jQuery(document).ready(function ($) {
     }
 });
 
-/**
- * Copyright Marc J. Schmidt. See the LICENSE file at the top-level
- * directory of this distribution and at
- * https://github.com/marcj/css-element-queries/blob/master/LICENSE.
+
+/*!------------------------------------------------------
+ * jQuery nearest v1.0.3
+ * http://github.com/jjenzz/jQuery.nearest
+ * ------------------------------------------------------
+ * Copyright (c) 2012 J. Smith (@jjenzz)
+ * Dual licensed under the MIT and GPL licenses:
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.gnu.org/licenses/gpl.html
  */
-;
-(function (root, factory) {
-    if (typeof define === "function" && define.amd) {
-        define(factory);
-    } else if (typeof exports === "object") {
-        module.exports = factory();
-    } else {
-        root.ResizeSensor = factory();
-    }
-}(this, function () {
+(function ($, d) {
+    $.fn.nearest = function (selector) {
+        var self, nearest, el, s, p,
+            hasQsa = d.querySelectorAll;
 
-    // Only used for the dirty checking, so the event callback count is limted to max 1 call per fps per sensor.
-    // In combination with the event based resize sensor this saves cpu time, because the sensor is too fast and
-    // would generate too many unnecessary events.
-    var requestAnimationFrame = window.requestAnimationFrame ||
-        window.mozRequestAnimationFrame ||
-        window.webkitRequestAnimationFrame ||
-        function (fn) {
-            return window.setTimeout(fn, 20);
-        };
-
-    /**
-     * Iterate over each of the provided element(s).
-     *
-     * @param {HTMLElement|HTMLElement[]} elements
-     * @param {Function}                  callback
-     */
-    function forEachElement(elements, callback){
-        var elementsType = Object.prototype.toString.call(elements);
-        var isCollectionTyped = ('[object Array]' === elementsType
-            || ('[object NodeList]' === elementsType)
-            || ('[object HTMLCollection]' === elementsType)
-            || ('undefined' !== typeof jQuery && elements instanceof jQuery) //jquery
-            || ('undefined' !== typeof Elements && elements instanceof Elements) //mootools
-        );
-        var i = 0, j = elements.length;
-        if (isCollectionTyped) {
-            for (; i < j; i++) {
-                callback(elements[i]);
-            }
-        } else {
-            callback(elements);
-        }
-    }
-
-    /**
-     * Class for dimension change detection.
-     *
-     * @param {Element|Element[]|Elements|jQuery} element
-     * @param {Function} callback
-     *
-     * @constructor
-     */
-    var ResizeSensor = function(element, callback) {
-        /**
-         *
-         * @constructor
-         */
-        function EventQueue() {
-            var q = [];
-            this.add = function(ev) {
-                q.push(ev);
-            };
-
-            var i, j;
-            this.call = function() {
-                for (i = 0, j = q.length; i < j; i++) {
-                    q[i].call();
-                }
-            };
-
-            this.remove = function(ev) {
-                var newQueue = [];
-                for(i = 0, j = q.length; i < j; i++) {
-                    if(q[i] !== ev) newQueue.push(q[i]);
-                }
-                q = newQueue;
-            }
-
-            this.length = function() {
-                return q.length;
-            }
+        function update(el) {
+            nearest = nearest ? nearest.add(el) : $(el);
         }
 
-        /**
-         * @param {HTMLElement} element
-         * @param {String}      prop
-         * @returns {String|Number}
-         */
-        function getComputedStyle(element, prop) {
-            if (element.currentStyle) {
-                return element.currentStyle[prop];
-            } else if (window.getComputedStyle) {
-                return window.getComputedStyle(element, null).getPropertyValue(prop);
-            } else {
-                return element.style[prop];
-            }
-        }
+        this.each(function () {
+            self = this;
 
-        /**
-         *
-         * @param {HTMLElement} element
-         * @param {Function}    resized
-         */
-        function attachResizeEvent(element, resized) {
-            if (!element.resizedAttached) {
-                element.resizedAttached = new EventQueue();
-                element.resizedAttached.add(resized);
-            } else if (element.resizedAttached) {
-                element.resizedAttached.add(resized);
-                return;
-            }
+            $.each(selector.split(','), function () {
+                s = $.trim(this);
 
-            element.resizeSensor = document.createElement('div');
-            element.resizeSensor.className = 'resize-sensor';
-            var style = 'position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; z-index: -1; visibility: hidden;';
-            var styleChild = 'position: absolute; left: 0; top: 0; transition: 0s;';
-
-            element.resizeSensor.style.cssText = style;
-            element.resizeSensor.innerHTML =
-                '<div class="resize-sensor-expand" style="' + style + '">' +
-                    '<div style="' + styleChild + '"></div>' +
-                '</div>' +
-                '<div class="resize-sensor-shrink" style="' + style + '">' +
-                    '<div style="' + styleChild + ' width: 200%; height: 200%"></div>' +
-                '</div>';
-            element.appendChild(element.resizeSensor);
-
-            if (getComputedStyle(element, 'position') == 'static') {
-                element.style.position = 'relative';
-            }
-
-            var expand = element.resizeSensor.childNodes[0];
-            var expandChild = expand.childNodes[0];
-            var shrink = element.resizeSensor.childNodes[1];
-
-            var reset = function() {
-                expandChild.style.width  = 100000 + 'px';
-                expandChild.style.height = 100000 + 'px';
-
-                expand.scrollLeft = 100000;
-                expand.scrollTop = 100000;
-
-                shrink.scrollLeft = 100000;
-                shrink.scrollTop = 100000;
-            };
-
-            reset();
-            var dirty = false;
-
-            var dirtyChecking = function() {
-                if (!element.resizedAttached) return;
-
-                if (dirty) {
-                    element.resizedAttached.call();
-                    dirty = false;
-                }
-
-                requestAnimationFrame(dirtyChecking);
-            };
-
-            requestAnimationFrame(dirtyChecking);
-            var lastWidth, lastHeight;
-            var cachedWidth, cachedHeight; //useful to not query offsetWidth twice
-
-            var onScroll = function() {
-              if ((cachedWidth = element.offsetWidth) != lastWidth || (cachedHeight = element.offsetHeight) != lastHeight) {
-                  dirty = true;
-
-                  lastWidth = cachedWidth;
-                  lastHeight = cachedHeight;
-              }
-              reset();
-            };
-
-            var addEvent = function(el, name, cb) {
-                if (el.attachEvent) {
-                    el.attachEvent('on' + name, cb);
+                if (!s.indexOf('#')) {
+                    // selector starts with an ID
+                    update((hasQsa ? d.querySelectorAll(s) : $(s)));
                 } else {
-                    el.addEventListener(name, cb);
+                    // is a class or tag selector
+                    // so need to traverse
+                    p = self.parentNode;
+                    while (p) {
+                        el = hasQsa ? p.querySelectorAll(s) : $(p).find(s);
+                        if (el.length) {
+                            update(el);
+                            break;
+                        }
+                        p = p.parentNode;
+                    }
                 }
-            };
+            });
 
-            addEvent(expand, 'scroll', onScroll);
-            addEvent(shrink, 'scroll', onScroll);
-        }
-
-        forEachElement(element, function(elem){
-            attachResizeEvent(elem, callback);
         });
 
-        this.detach = function(ev) {
-            ResizeSensor.detach(element, ev);
-        };
+        return nearest || $();
     };
-
-    ResizeSensor.detach = function(element, ev) {
-        forEachElement(element, function(elem){
-            if(elem.resizedAttached && typeof ev == "function"){
-                elem.resizedAttached.remove(ev);
-                if(elem.resizedAttached.length()) return;
-            }
-            if (elem.resizeSensor) {
-                if (elem.contains(elem.resizeSensor)) {
-                    elem.removeChild(elem.resizeSensor);
-                }
-                delete elem.resizeSensor;
-                delete elem.resizedAttached;
-            }
-        });
-    };
-
-    return ResizeSensor;
-
-}));
+}(jQuery, document));
