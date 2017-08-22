@@ -1154,6 +1154,8 @@ function mashsb_get_document_title() {
      *
      * @param string $title The document title. Default empty string.
      */
+   
+   $title = '';
 
     // If it's a 404 page, use a "Page not found" title.
     if( is_404() ) {
