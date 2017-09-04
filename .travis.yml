@@ -67,7 +67,7 @@ before_script:
     fi
 
 script:
-- phpenv config-rm xdebug.ini
+#- phpenv config-rm xdebug.ini
 - phpunit
 #- if [[ $TRAVIS_PHP_VERSION != 'hhvm' && ( $TRAVIS_PHP_VERSION != '5.5'|| $WP_VERSION != 'latest'
 #  || $WP_MULTISITE != '0' ) ]]; then phpenv config-rm xdebug.ini; fi
