@@ -264,7 +264,7 @@ function mashsb_get_registered_settings() {
                 array(
                 'id' => 'fb_access_token_new',
                 'name' => __( 'Facebook User Access Token', 'mashsb' ),
-                'desc' => sprintf( __( 'Required if your website hits the facebook rate limit of 200 calls per hour. <a href="%s" target="_blank">Read here</a> how to get the access token.', 'mashsb' ), 'http://docs.mashshare.net/article/132-how-to-create-a-facebook-access-token' ),
+                'desc' => sprintf( __( 'Try this to be able to make up to 200 calls per hour to facebook api. <a href="%s" target="_blank">Read here</a> how to get the access token. If your access token is not working just leave this field empty. Shares are counted, though.', 'mashsb' ), 'http://docs.mashshare.net/article/132-how-to-create-a-facebook-access-token' ),
                 'type' => 'fboauth',
                 'size' => 'large'
                 ),

@@ -47,18 +47,27 @@ jQuery(document).ready(function ($) {
     function check_access_token()
     {
         $.ajax("https://graph.facebook.com/v2.7/?id=http://www.google.com&access_token=" + $('#mashsb_settings\\[fb_access_token_new\\]').val())
-            .done(function (e) {
-                console.log(e.share.share_count);
-                if ("undefined" === typeof (e.share.share_count)){
-                    $('#mashsb_token_notice').html('<span style="color:red;"> <strong>Error:</strong> Access Token Invalid!</span>');
-                } else {
-                    $('#mashsb_token_notice').html('<strong>Token valid:</strong> Facebook share count for http://google.com: ' + e.share.share_count );
-                    //console.log(e);
-                }
-            })
-            .fail(function (e) {
-                $('#mashsb_token_notice').html('<span style="color:red;"> <strong>Error:</strong> Access Token Invalid!</span>');
-                //console.log(e);
+            .done(function (e) {  
+                
+                try {
+                    if (e.share.share_count) {
+                        $('#mashsb_token_notice').html('<strong>Token valid:</strong> Facebook share count for http://google.com: ' + e.share.share_count )
+                    }
+                } catch(e) {
+                        $('#mashsb_token_notice').html('<span style="color:red;"> <strong>Error:</strong> Access Token Invalid!</span>');
+                }    
+//                
+//                console.log(e);
+//                if (e.share.share_count && "undefined" !== typeof (e.share.share_count)){
+//                    $('#mashsb_token_notice').html('<strong>Token valid:</strong> Facebook share count for http://google.com: ' + e.share.share_count );
+//                } else {
+//                    $('#mashsb_token_notice').html('<span style="color:red;"> <strong>Error:</strong> Access Token Invalid!</span>');
+//                    //console.log(e);
+//                }
+//            })
+//            .fail(function (e) {
+//                $('#mashsb_token_notice').html('<span style="color:red;"> <strong>Error:</strong> Access Token Invalid!</span>');
+//                //console.log(e);
             })
     }
         
