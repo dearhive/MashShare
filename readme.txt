@@ -247,6 +247,7 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 == Changelog ==
 
 = {{ version }} =
+* New: Create custom values for open graph meta tag og:type, e.g video, product
 * Fix: undefined var title
 * Fix: Pinterest popup not opening when network add-on is not installed
 * Fix: Remove deprecated code and make mashsb.js smaller

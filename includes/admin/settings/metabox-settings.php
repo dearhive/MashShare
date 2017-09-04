@@ -146,13 +146,25 @@ function mashsb_meta_boxes( $meta_boxes ) {
                     'both' => __('Above & Below Content','mashsb'),
                     )
             ),
+            // Setup the og:type
+            array(
+                'name' => '<span class="mashicon mashicon-share"> </span> ' . __( 'Open Graph Type', 'mashsb' ),
+                'desc' => __( 'This is used by the open graph meta tag og:type. Leave this blank to use the default value "article".  ', 'mashsb' ),
+                'id' => $prefix . 'og_type',
+                'type' => 'text',
+                'clone' => false,
+                'class' => 'mashsb-og-type',
+                'before' => '<div style="max-width:250px;float:left;">',
+                'after' => '</div>',
+            ),
             array(
                 'helper'=> '<a class="mashsb-helper" href="#" style="margin-left:-4px;"></a><div class="mashsb-message" style="display: none;">'.__('Validate open graph meta tags on your site. Incorrect data can result in wrong share description, title or images and should be fixed! In the facebook debugger click the link "Fetch new scrape information" to purge the facebook cache.','mashsb').'</div>',
                 'id' => $prefix . 'validate_og',
-                'before' => '<div style="max-width:250px;float:left;margin-top:45px;">',
+                'before' => '<div style="max-width:250px;margin-top:45px;">',
                 'after' => '</div>',
                 'type' => 'validate_og'
             ),
+            
             array(
                 'name' => 'divider',
                 'id' => 'divider',
