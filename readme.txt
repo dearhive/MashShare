@@ -247,6 +247,15 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 == Changelog ==
 
 = {{ version }} =
+* Fix: undefined var title
+* Fix: Pinterest popup not opening when network add-on is not installed
+* Fix: Remove deprecated code and make mashsb.js smaller
+* Fix: Facebook access token validation function not working
+
+= 3.4.4 =
+* Fix: Check fb access token not working properly
+
+= 3.4.3 =
 * Fix: Facebook and twitter buttons missing on multisite activations when bimber theme is used
 * Fix: Whatsapp button not shown on sticky sharebar add-on when network add-on is not installed
 * Tweak: Return a more clear error notice when access token is not valid.
@@ -276,5 +285,5 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 3.1.9 =
-3.1.9  <strong>IMPORTANT UPDATE - Update explictely recommended to get accurate share count because of latest changes in facebook API. </strong> <a href="https://wordpress.org/plugins/mashsharer/changelog/" style="color:white;text-decoration: underline;">Read Changelog.</a>
+= 3.4.4 =
+3.1.9 * Fix: Check fb access token not working properly
