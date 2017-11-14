@@ -265,6 +265,23 @@ if( !class_exists( 'mashshare' ) ) :
 
     endif; // End if class_exists check
 
+// Autoloader
+if (!class_exists('Mashshare\Service\Network\ShareCount'))
+{
+    $autoloader = require('autoloader.php');
+
+    $autoloader('Mashshare\\', __DIR__ . '/src/');
+
+    $fb = new Mashshare\Service\Network\Facebook\ShareCount();
+
+    $client = \Mashshare\Service\Http\Client::getProvider();
+
+    $fb->setClient($client);
+
+    $fb->setUrl('https://google.com');
+    $fb->sendRequest();
+}
+
 /**
  * The main function responsible for returning the one true Mashshare
  * Instance to functions everywhere.
