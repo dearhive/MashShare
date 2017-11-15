@@ -8,7 +8,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email
 Requires at least: 3.6+
-Tested up to: 4.8
+Tested up to: 4.9
 Stable tag: {{ version }}
 
 Social Media Share Buttons for Twitter, Facebook and other social networks. Highly customizable Social Media ecosystem
@@ -246,7 +246,11 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
-= {{ version }} =
+= 3.4.6 =
+* New: Make use of Twitter character limit of 280 characters. 
+* Tweak: Compatible up to WordPress 4.9
+
+= 3.4.5 =
 * New: Create custom values for open graph meta tag og:type, e.g video, product
 * Fix: undefined var title
 * Fix: Pinterest popup not opening when network add-on is not installed
@@ -286,5 +290,5 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 3.4.4 =
-3.1.9 * Fix: Check fb access token not working properly
+= 3.4.6 =
+3.4.6 * New: Make use of Twitter character limit of 280 characters. Compatible up to WordPress 4.9

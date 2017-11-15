@@ -358,9 +358,9 @@ jQuery(function ($) {
         var shortened_post_url = 23; // Twitter is shortening all urls to 23 characters
 
         if (handle !== 'undefined' && handle.length > 0) {
-            var remaining = 140 - mashsb_get_tweet_length(tweet) - handle.length - shortened_post_url;
+            var remaining = 280 - mashsb_get_tweet_length(tweet) - handle.length - shortened_post_url;
         } else {
-            var remaining = 140 - mashsb_get_tweet_length(tweet) - shortened_post_url;
+            var remaining = 280 - mashsb_get_tweet_length(tweet) - shortened_post_url;
         }
         if (tweet.length > 0 && remaining >= 0) {
             $('#mashsb_meta .mashsb-custom-tweet .mashsb_counter').removeClass('mashsb_exceeded');
