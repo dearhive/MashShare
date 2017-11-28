@@ -48,17 +48,17 @@ class mashsb_bitly_shorturl {
      */
     public function bitly_oauth_access_token($code, $redirect, $client_id, $client_secret) {
         $results = array();
-        $this->url = $this->bitly_oauth_access_token . "access_token";
-        $this->params = array();
-        $this->params['client_id'] = $client_id;
-        $this->params['client_secret'] = $client_secret;
-        $this->params['code'] = $ode;
-        $this->params['redirect_uri'] = $redirect;
-        $this->output = $this->bitly_post_curl($this->url, $params);
-        $this->parts = explode('&', $this->output);
-        foreach ($this->parts as $this->part) {
-            $this->bits = explode('=', $part);
-            $this->results[$this->$bits[0]] = $this->$bits[1];
+        $url = $this->bitly_oauth_access_token() . "access_token";
+        $params = array();
+        $params['client_id'] = $client_id;
+        $params['client_secret'] = $client_secret;
+        $params['code'] = $code;
+        $params['redirect_uri'] = $redirect;
+        $output = bitly_post_curl($url, $params);
+        $parts = explode('&', $output);
+        foreach ($parts as $part) {
+          $bits = explode('=', $part);
+          $results[$bits[0]] = $bits[1];
         }
         return $results;
     }

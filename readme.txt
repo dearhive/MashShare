@@ -246,6 +246,9 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
+= 3.4.7 =
+* Fix: 100% PHP7 compatibility! No more warnings with php7 compatibility checker
+
 = 3.4.6 =
 * New: Make use of Twitter character limit of 280 characters. 
 * Tweak: Compatible up to WordPress 4.9
@@ -290,5 +293,5 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 3.4.6 =
-3.4.6 * New: Make use of Twitter character limit of 280 characters. Compatible up to WordPress 4.9
+= 3.4.7 =
+3.4.7 * 100% php7 compatibility! Make use of Twitter character limit of 280 characters. Compatible up to WordPress 4.9

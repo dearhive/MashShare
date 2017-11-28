@@ -1,3 +1,5 @@
+<?php
+?>
 <script id="tmpl-mashsb-rwmb-upload-area" type="text/html">
   <div class="mashsb-rwmb-upload-inside">
     <h3>{{{ i18nRwmbMedia.uploadInstructions }}}</h3>

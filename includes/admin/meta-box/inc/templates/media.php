@@ -1,3 +1,5 @@
+<?php
+?>
 <script id="tmpl-mashsb-rwmb-media-item" type="text/html">
   <input type="hidden" name="{{{ data.fieldName }}}" value="{{{ data.id }}}" class="mashsb-rwmb-media-input">
   <div class="mashsb-rwmb-media-preview">
