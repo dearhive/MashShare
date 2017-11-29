@@ -272,9 +272,7 @@ if (!class_exists('Mashshare\Service\Network\ShareCount'))
 
     $autoloader('Mashshare\\', __DIR__ . '/app/');
 
-    $updater = new \Mashshare\WP\Update();
-
-    register_activation_hook(__FILE__, 'mashshare_update');
+    register_activation_hook(__FILE__, 'mashshare_update_database');
 
     $obj = new Mashshare\Service\Network\VK\ShareCount();
 
@@ -288,7 +286,7 @@ if (!class_exists('Mashshare\Service\Network\ShareCount'))
     $response = $obj->getShares();
 }
 
-function mashshare_update()
+function mashshare_update_database()
 {
     $updater = new \Mashshare\WP\Update();
 
