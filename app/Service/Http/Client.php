@@ -2,8 +2,7 @@
 
 namespace Mashshare\Service\Http;
 use Mashshare\Service\Http\Exception\ProviderException;
-use Mashshare\Service\Http\Provider\Curl;
-use Mashshare\Service\Http\Provider\Stream;
+use Mashshare\Service\Http\Provider\Curl\Curl;
 
 /**
  * Class Client
@@ -16,12 +15,9 @@ class Client
 
     public static function getProvider()
     {
-        if (Curl::isAvailable()) {
+        if (Curl::isAvailable())
+        {
             return new Curl();
-        }
-
-        if (Stream::isAvailable()) {
-            return new Stream();
         }
 
         throw new ProviderException('There isn\'t any available provider');

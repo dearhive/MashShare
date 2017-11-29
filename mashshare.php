@@ -270,16 +270,29 @@ if (!class_exists('Mashshare\Service\Network\ShareCount'))
 {
     $autoloader = require('autoloader.php');
 
-    $autoloader('Mashshare\\', __DIR__ . '/src/');
+    $autoloader('Mashshare\\', __DIR__ . '/app/');
 
-    $fb = new Mashshare\Service\Network\Facebook\ShareCount();
+    $updater = new \Mashshare\WP\Update();
+
+    register_activation_hook(__FILE__, 'mashshare_update');
+
+    $obj = new Mashshare\Service\Network\VK\ShareCount();
 
     $client = \Mashshare\Service\Http\Client::getProvider();
 
-    $fb->setClient($client);
+    $obj->setClient($client)
+        ->setUrl('https://www.google.com')
+        ->sendRequest()
+    ;
 
-    $fb->setUrl('https://google.com');
-    $fb->sendRequest();
+    $response = $obj->getShares();
+}
+
+function mashshare_update()
+{
+    $updater = new \Mashshare\WP\Update();
+
+    $updater->update();
 }
 
 /**

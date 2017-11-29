@@ -1,8 +1,9 @@
 <?php
 
-namespace Mashshare\Service\Http\Provider;
+namespace Mashshare\Service\Http\Provider\Curl;
 
 use Mashshare\Service\Http\Exception\HttpException;
+use Mashshare\Service\Http\Provider\ProviderInterface;
 
 /**
  * Class Curl
@@ -19,11 +20,6 @@ class Curl implements ProviderInterface
      * @var resource
      */
     private $handle;
-
-    /**
-     * @var string
-     */
-    private $response;
 
     public function __construct()
     {
@@ -88,19 +84,19 @@ class Curl implements ProviderInterface
     }
 
     /**
-     * @return string
+     * @return Response
      * @throws HttpException
      */
     private function send()
     {
-        $this->response = curl_exec($this->handle);
+        $response = curl_exec($this->handle);
 
         if ($errorNo = curl_errno($this->handle))
         {
             throw new HttpException(curl_error($this->handle), $errorNo);
         }
 
-        return $this->response;
+        return new Response($this->handle, $response);
     }
 
     /**
