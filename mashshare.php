@@ -266,24 +266,13 @@ if( !class_exists( 'mashshare' ) ) :
     endif; // End if class_exists check
 
 // Autoloader
-if (!class_exists('Mashshare\Service\Network\ShareCount'))
+if (!class_exists('Mashshare\Mashshare'))
 {
     $autoloader = require('autoloader.php');
 
-    $autoloader('Mashshare\\', __DIR__ . '/app/');
+    $autoloader('Mashshare\\', __DIR__ . '/src/');
 
     register_activation_hook(__FILE__, 'mashshare_update_database');
-
-    $obj = new Mashshare\Service\Network\VK\ShareCount();
-
-    $client = \Mashshare\Service\Http\Client::getProvider();
-
-    $obj->setClient($client)
-        ->setUrl('https://www.google.com')
-        ->sendRequest()
-    ;
-
-    $response = $obj->getShares();
 }
 
 function mashshare_update_database()
