@@ -110,7 +110,7 @@ FROM ' . $this->getTableName() . ' WHERE posts_id=:posts_id LIMIT 1';
         $date = new DateTime();
 
         $sql = 'SELECT id, posts_id, priority, is_requested, last_update_at, next_update_at 
-FROM ' . $this->getTableName() . ' WHERE next_update_at:startDate LIMIT 200';
+FROM ' . $this->getTableName() . ' WHERE is_requested = 0 AND next_update_at <= :startDate LIMIT 200';
 
         $prepare = $this->getWpDB()->prepare(
             $sql,

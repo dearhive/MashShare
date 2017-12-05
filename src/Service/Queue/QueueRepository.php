@@ -13,6 +13,21 @@ class QueueRepository
 {
 
     /**
+     * @var array
+     */
+    private $types = array();
+
+    public function __construct()
+    {
+        $settings = get_option('mashsb_settings');
+
+        if (isset($settings['post_types']) && is_array($settings['post_types']) && !empty($settings['post_types']))
+        {
+            $this->setTypes(array_keys($settings['post_types']));
+        }
+    }
+
+    /**
      * @param int $postId
      *
      * @return Queue|null
@@ -26,10 +41,47 @@ class QueueRepository
 
     /**
      * @param int $postId
+     *
+     * @return bool
+     */
+    private function isValidPost($postId)
+    {
+        if (wp_is_post_revision($postId) || wp_is_post_autosave($postId))
+        {
+            return false;
+        }
+
+        $post = get_post($postId);
+
+        return ($post && in_array($post->post_type, $this->getTypes()));
+    }
+
+    /**
+     * @return array
+     */
+    public function getTypes()
+    {
+        return $this->types;
+    }
+
+    /**
+     * @param array $types
+     *
+     * @return $this
+     */
+    public function setTypes($types)
+    {
+        $this->types = $types;
+
+        return $this;
+    }
+
+    /**
+     * @param int $postId
      */
     public function addToQueue($postId)
     {
-        if (wp_is_post_revision($postId) || wp_is_post_autosave($postId))
+        if (!$this->isValidPost($postId))
         {
             return;
         }
