@@ -2,6 +2,7 @@
 
 namespace Mashshare\Service\Network;
 use Mashshare\Service\Http\Client;
+use Mashshare\Service\Http\Exception\ProviderException;
 use Mashshare\Service\Network\Interfaces\InterfaceShareCount;
 
 /**
@@ -62,6 +63,27 @@ class ShareCount
         {
             $this->setFacebookAccessToken($settings['fb_access_token']);
         }
+    }
+
+    /**
+     * @param InterfaceShareCount $service
+     * @param string $network
+     *
+     * @return string
+     */
+    private function getNetworkDataName($service, $network)
+    {
+        if ($service instanceof \Mashshare\Service\Network\Facebook\ShareCount)
+        {
+            return $network . '_' . $service->getType();
+        }
+
+        if ($service instanceof \Mashshare\Service\Network\GooglePlus\ShareCount)
+        {
+            return 'Google';
+        }
+
+        return $network;
     }
 
     /**
@@ -160,9 +182,17 @@ class ShareCount
             return $this;
         }
 
-        $client = Client::getProvider();
+        try
+        {
+            $client = Client::getProvider();
+        }
+        catch (ProviderException $e)
+        {
+            return $this;
+        }
 
         $totalShares = 0;
+
         foreach ($this->networks as $network)
         {
             $class = '\\Mashshare\\Service\\Network\\' . $network . '\\ShareCount';
@@ -182,19 +212,23 @@ class ShareCount
 
             $response = $service->getShares();
 
+            $networkName = $this->getNetworkDataName($service, $network);
+
             if (is_int($response))
             {
                 $totalShares += $response;
 
-                $this->shares[$network] = $response;
+                $this->shares[$networkName] = $response;
             }
             else
             {
-                $this->shares[$network] = 0;
-                $this->errors[$network] = $response;
+                $this->shares[$networkName] = 0;
+                $this->errors[$networkName] = $response;
             }
         }
 
         $this->shares['total'] = $totalShares;
+
+        return $this;
     }
 }

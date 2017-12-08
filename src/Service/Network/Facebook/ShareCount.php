@@ -19,7 +19,7 @@ class ShareCount extends AbstractShareCountBase
 
     const TYPE_COMMENTS = 'comments';
 
-    const TYPE_BOTH = 'both';
+    const TYPE_TOTAL = 'total';
 
     /**
      * @var string
@@ -125,7 +125,7 @@ class ShareCount extends AbstractShareCountBase
             case self::TYPE_SHARES:
                 $shares = (int) $objShares->share->share_count;
                 break;
-            case self::TYPE_BOTH:
+            case self::TYPE_TOTAL:
             default:
                 $shares = (int) $objShares->share->share_count + (int) $objShares->share->comment_count;
         }

@@ -5,6 +5,7 @@ namespace Mashshare\Service\Cron;
 use Mashshare\Model\Queue;
 use Mashshare\Model\QueueQuery;
 use Mashshare\Service\Network\ShareCount as ShareCountService;
+use Mashshare\WP\PostMeta\ShareCount as PostMetaShareCount;
 
 /**
  * Class ShareCount
@@ -13,7 +14,8 @@ use Mashshare\Service\Network\ShareCount as ShareCountService;
 class ShareCount
 {
 
-    const CRON_NAME = 'mashsb_cron_share_counts';
+    const CRON_SETTINGS_VALUE   = 'cron';
+    const CRON_NAME             = 'mashsb_cron_share_counts';
 
     public function __construct()
     {
@@ -28,9 +30,15 @@ class ShareCount
 
     public function scheduleCron()
     {
-        $cronSchedule = wp_next_scheduled(self::CRON_NAME);
 
-        if (false !== $cronSchedule)
+        $settings       = get_option('mashsb_settings');
+        $cronSchedule   = wp_next_scheduled(self::CRON_NAME);
+
+        if ($cronSchedule && self::CRON_SETTINGS_VALUE !== $settings['caching_method'])
+        {
+            wp_unschedule_event($cronSchedule, self::CRON_NAME);
+        }
+        elseif (false === $cronSchedule && self::CRON_SETTINGS_VALUE !== $settings['caching_method'])
         {
             return;
         }
@@ -49,7 +57,9 @@ class ShareCount
             return;
         }
 
-        $serviceShareCount = new ShareCountService;
+        $serviceShareCount  = new ShareCountService;
+
+        $postMetaShareCount = new PostMetaShareCount();
 
         /** @var Queue $content */
         foreach ($queue as $content)
@@ -60,7 +70,11 @@ class ShareCount
                 ->getShares()
             ;
 
-
+            $postMetaShareCount->setPostId($content->getPostsId())
+                ->setShares($shares)
+                ->setErrors($serviceShareCount->getErrors())
+                ->update()
+            ;
         }
     }
 }
