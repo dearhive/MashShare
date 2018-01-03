@@ -46,7 +46,7 @@ jQuery(document).ready(function ($) {
      */
     function check_access_token()
     {
-        $.ajax("https://graph.facebook.com/v2.7/?id=http://www.google.com&access_token=" + $('#mashsb_settings\\[fb_access_token_new\\]').val())
+        $.ajax("https://graph.facebook.com/v2.11/?id=http://www.google.com&access_token=" + $('#mashsb_settings\\[fb_access_token_new\\]').val())
             .done(function (e) {  
                 
                 try {

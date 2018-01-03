@@ -112,19 +112,19 @@ class MASHSB_Welcome {
         .mashsb-about-wrap #mashsb-header { margin-bottom: 15px; }
         .mashsb-about-wrap #mashsb-header h1 { margin-bottom: 15px !important; }
         .mashsb-about-wrap .about-text { margin: 0 0 15px; max-width: 670px; }
-        .mashsb-about-wrap .feature-section { margin-top: 20px; }
-        .mashsb-about-wrap .feature-section-content,
-        .mashsb-about-wrap .feature-section-media { width: 50%; box-sizing: border-box; }
-        .mashsb-about-wrap .feature-section-content { float: left; padding-right: 50px; }
-        .mashsb-about-wrap .feature-section-content h4 { margin: 0 0 1em; }
-        .mashsb-about-wrap .feature-section-media { float: right; text-align: right; margin-bottom: 20px; }
-        .mashsb-about-wrap .feature-section-media img { border: 1px solid #ddd; }
-        .mashsb-about-wrap .feature-section:not(.under-the-hood) .col { margin-top: 0; }
+        .mashsb-about-wrap .mash-feature-section { margin-top: 20px; }
+        .mashsb-about-wrap .mash-feature-section-content,
+        .mashsb-about-wrap .mash-feature-section-media { width: 50%; box-sizing: border-box; }
+        .mashsb-about-wrap .mash-feature-section-content { float: left; padding-right: 50px; }
+        .mashsb-about-wrap .mash-feature-section-content h4 { margin: 0 0 1em; }
+        .mashsb-about-wrap .mash-feature-section-media { float: right; text-align: right; margin-bottom: 20px; }
+        .mashsb-about-wrap .mash-feature-section-media img { border: 1px solid #ddd; }
+        .mashsb-about-wrap .mash-feature-section:not(.under-the-hood) .col { margin-top: 0; }
         /* responsive */
         @media all and ( max-width: 782px ) {
-            .mashsb-about-wrap .feature-section-content,
-            .mashsb-about-wrap .feature-section-media { float: none; padding-right: 0; width: 100%; text-align: left; }
-            .mashsb-about-wrap .feature-section-media img { float: none; margin: 0 0 20px; }
+            .mashsb-about-wrap .mash-feature-section-content,
+            .mashsb-about-wrap .mash-feature-section-media { float: none; padding-right: 0; width: 100%; text-align: left; }
+            .mashsb-about-wrap .mash-feature-section-media img { float: none; margin: 0 0 20px; }
         }
         /*]]>*/
         </style>
@@ -151,13 +151,13 @@ class MASHSB_Welcome {
             <?php if (isset($_GET['redirect'])) {?>
             <p class="about-description mashsb-notice notice-success"><?php _e( 'Facebook and Twitter Share Buttons are successfully enabled on all your posts! <br> Now you can use the steps  below to customize MashShare to your needs.', 'mashsb' ); ?></p>
             <?php } ?>
-            <div class="changelog">
+            <div class="changelog clear">
                 <h1><?php _e( 'Create Your First Social Sharing Button', 'mashsb' ); ?></h1>
-                <div class="feature-section">
-                    <div class="feature-section-media">
+                <div class="mash-feature-section">
+                    <div class="mash-feature-section-media">
                         <img style="display:none;" src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/social-networks-settings.png'; ?>" class="mashsb-welcome-screenshots"/>
                     </div>
-                    <div class="feature-section-content">
+                    <div class="mash-feature-section-content">
                         <h4>Step 1: Go to <a href="<?php echo admin_url( 'admin.php?page=mashsb-settings#mashsb_settingsservices_header' ) ?>" target="blank"><?php _e( 'Settings &rarr; Networks', 'mashsb' ); ?></a></h4>
                         <p><?php _e( 'The Social Network menu is your general access point for activating the desired share buttons and for customizing the share button label', 'mashsb' ); ?></p>
                         <h4>Step 2: Go to <a href="<?php echo admin_url( 'admin.php?page=mashsb-settings#mashsb_settingslocation_header' ) ?>" target="blank"><?php _e( 'Settings &rarr; Position', 'mashsb' ); ?></a></h4>
@@ -169,10 +169,10 @@ class MASHSB_Welcome {
                 </div>
             </div>
 
-            <div class="changelog">
+            <div class="changelog clear">
                 <h1><?php _e( 'Create Most Shared Posts Widget', 'mashsb' ); ?></h1>
-                <div class="feature-section">
-                    <div class="feature-section-content">
+                <div class="mash-feature-section">
+                    <div class="mash-feature-section-content">
                         <h4>Go to <a href="<?php echo admin_url( 'widgets.php' ) ?>" target="blank"><?php _e( 'Appearance &rarr; Widgets', 'mashsb' ); ?></a></h4>
 
                         <p><?php _e( 'Drag and drop the widget labeled "<i>MashShare - Most Shared Posts</i>" into the desired widget location and save it.', 'mashsb' ); ?></p>
@@ -182,13 +182,13 @@ class MASHSB_Welcome {
                 </div>
             </div>
 
-            <div class="changelog">
+            <div class="changelog clear">
                 <h1><?php _e( 'Content Shortcodes', 'mashsb' ); ?></h1>
-                <div class="feature-section">
-                    <div class="feature-section-media">
+                <div class="mash-feature-section">
+                    <div class="mash-feature-section-media">
                         <img style="display:none;" src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/shortcodes.png'; ?>"/>
                     </div>
-                    <div class="feature-section-content">
+                    <div class="mash-feature-section-content">
                         <p>
                             <?php _e( 'Add Share buttons manually with using shortcode <i style="font-weight:bold;">[mashshare]</i>.', 'mashsb' ); ?>
                         </p>
@@ -199,12 +199,12 @@ class MASHSB_Welcome {
                     </div>
                 </div>
             </div>
-            <div class="changelog">
+            <div class="changelog clear">
                 <h1><?php _e( 'PHP Template Shortcode', 'mashsb' ); ?></h1>
-                <div class="feature-section">
-                    <div class="feature-section-media">
+                <div class="mash-feature-section">
+                    <div class="mash-feature-section-media">
                     </div>
-                    <div class="feature-section-content">
+                    <div class="mash-feature-section-content">
                         <p>
                             <?php _e( 'Add MashShare directly into your theme template files with using the PHP code <i style="font-weight:bold;">&lt;?php do_shortcode(\'[mashshare]\'); ?&gt;</i>', 'mashsb' ); ?>
                         </p>
@@ -212,12 +212,12 @@ class MASHSB_Welcome {
                 </div>
             </div>
 
-            <div class="changelog">
+            <div class="changelog clear">
                 <h1><?php _e( 'Need Help?', 'mashsb' ); ?></h1>
-                <div class="feature-section two-col">
+                <div class="mash-feature-section two-col">
                     <div>
                         <h4><?php _e( 'Great Support', 'mashsb' ); ?></h4>
-                        <p><?php _e( 'We do our best to provide the best support we can. If you encounter a problem or have a question, simply open a ticket using our <a href="https://www.mashshare.net/contact-developer/" target="blank">support form</a>.', 'mashsb' ); ?></p>
+                        <p><?php _e( 'We do our best to provide the best support we can. If you encounter a problem or have a question, simply <a href="https://www.mashshare.net/contact-developer/" target="blank">open a ticket</a>.', 'mashsb' ); ?></p>
                         <ul id="mash-social-admin-head">
                             <?php echo mashsb_share_buttons(); ?>
                         </ul>
@@ -258,15 +258,15 @@ class MASHSB_Welcome {
      */
     public function about_screen() {
         ?>
-        <div class="wrap about-wrap mashsb-about-wrap">
+        <div class="wrap mashsb-about-wrap">
             <?php
             // load welcome message and content tabs
             $this->welcome_message();
             $this->tabs();
             ?>
             <div class="changelog">
-                <div class="feature-section">
-                    <div class="feature-section-content">
+                <div class="mash-feature-section">
+                    <div class="mash-feature-section-content">
                         <!--
                         <h1><?php //_e( 'Use Facebook Connect to Skyrocket Share Count', 'mashsb' ); ?></h1>
                         <p><?php //_e( 'MashShare is the first Social Media plugin that uses the brandnew Facebook Connect Integration to bypass the regular facebook API limit which has been introduced recently. <p>It allows you up to 200 API calls per hour to the facebook server. This is more than enough for even huge traffic sites as MashShare is caching all share counts internally. <p>We are convinced that other social media plugins are going to copy our solution soon... and we will be proud of it;) <p> Your site becomes immediately better than the rest because you are the one whose website is running with full social sharing power. Other sites share count still stucks and are delayed and they do not know it;)', 'mashsb' ); ?></p>
@@ -309,7 +309,7 @@ class MASHSB_Welcome {
 
             <div class="changelog">
                 <h1><?php _e( 'Additional Updates', 'mashsb' ); ?></h1>
-                <div class="feature-section three-col">
+                <div class="mash-feature-section three-col">
                     <div class="col">
                         <h4><?php _e( 'Developer Friendly', 'mashsb' ); ?></h4>
                         <p><?php echo sprintf(__( 'Are you a theme developer and want to use MashShare as your build in share count aggregator? Read the <a href="%s" target="blank">developer instructions.</a>', 'mashsb' ), 'https://www.mashshare.net/documentation/developer-instruction-for-commercial-theme-integration/'); ?></p>
@@ -371,13 +371,13 @@ class MASHSB_Welcome {
      */
     public function credits_screen() {
         ?>
-        <div class="wrap about-wrap mashsb-about-wrap">
+        <div class="wrap mashsb-about-wrap">
             <?php
             // load welcome message and content tabs
             $this->welcome_message();
             $this->tabs();
             ?>
-            <p class="about-description"><?php _e( 'Mashshare is created by a René Hermenau and developers all over the world who aim to provide the #1 ecosystem for growing social media traffic through WordPress.', 'mashsb' ); ?></p>
+            <h1 class="about-description"><?php _e( 'Mashshare is created by developers all over the world who aim to provide the #1 ecosystem for growing social media traffic through WordPress.', 'mashsb' ); ?></h1>
 
             <?php echo $this->contributors(); ?>
             <p class="small"><?php echo sprintf(__(' If you want to be credited here participate on the development and  make your pull request on <a href="%s" target="_blank">github</a>',' mashsb'), 'https://github.com/mashshare/Mashshare')?></p>
@@ -405,7 +405,7 @@ class MASHSB_Welcome {
 
         foreach ( $contributors as $contributor ) {
             $contributor_list .= '<li class="wp-person">';
-            $contributor_list .= sprintf( '<a href="%s" title="%s">', esc_url( 'https://github.com/' . $contributor->login ), esc_html( sprintf( __( 'View %s', 'mashsb' ), $contributor->login ) )
+            $contributor_list .= sprintf( '<a href="%s" style="margin-right:8px;" title="%s">', esc_url( 'https://github.com/' . $contributor->login ), esc_html( sprintf( __( 'View %s', 'mashsb' ), $contributor->login ) )
             );
             $contributor_list .= sprintf( '<img src="%s" width="64" height="64" class="gravatar" alt="%s" />', esc_url( $contributor->avatar_url ), esc_html( $contributor->login ) );
             $contributor_list .= '</a>';
@@ -486,7 +486,7 @@ class MASHSB_Welcome {
      */
     public function changelog_screen() {
         ?>
-        <div class="wrap about-wrap mashsb-about-wrap">
+        <div class="wrap mashsb-about-wrap">
             <?php
             // load welcome message and content tabs
             $this->welcome_message();
@@ -495,7 +495,7 @@ class MASHSB_Welcome {
             <div class="changelog">
                 <h4><?php _e( 'Full Changelog', 'mashsb' ); ?></h4>
 
-                <div class="feature-section">
+                <div class="mash-feature-section">
                     <?php echo $this->parse_readme(); ?>
                 </div>
             </div>

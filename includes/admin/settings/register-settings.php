@@ -261,13 +261,13 @@ function mashsb_get_registered_settings() {
                     'desc' => '',
                     'type' => 'header'
                 ),
-                array(
-                'id' => 'fb_access_token_new',
-                'name' => __( 'Facebook User Access Token', 'mashsb' ),
-                'desc' => sprintf( __( 'Try this to be able to make up to 200 calls per hour to facebook api. <a href="%s" target="_blank">Read here</a> how to get the access token. If your access token is not working just leave this field empty. Shares are counted, though.', 'mashsb' ), 'http://docs.mashshare.net/article/132-how-to-create-a-facebook-access-token' ),
-                'type' => 'fboauth',
-                'size' => 'large'
-                ),
+//                array(
+//                'id' => 'fb_access_token_new',
+//                'name' => __( 'Facebook User Access Token', 'mashsb' ),
+//                'desc' => sprintf( __( 'Optional: Use this to make up to 200 calls per hour to facebook api. <a href="%s" target="_blank">Read here</a> how to get the access token. If your access token is not working just leave this field empty. Shares are still counted.', 'mashsb' ), 'http://docs.mashshare.net/article/132-how-to-create-a-facebook-access-token' ),
+//                'type' => 'fboauth',
+//                'size' => 'large'
+//                ),
                 array(
                     'id' => 'fb_publisher_url',
                     'name' => __( 'Facebook page url', 'mashsb' ),

@@ -246,6 +246,11 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
+= 3.4.8 =
+* Tweak: Remove Facebook Access Token. Will be replaced by queue processing soon to prevent exceeding facebook api limits
+* Fix: Welcome page
+* Fix: Tweet button
+
 = 3.4.7 =
 * Fix: 100% PHP7 compatibility! No more warnings with php7 compatibility checker
 
