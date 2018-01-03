@@ -26,7 +26,7 @@ function mashsb_check_fb_api_key() {
     if( $fb_token && mashsb_curl_installed() ) {
 
         // Test facebook api with access token
-        $url = 'https://graph.facebook.com/v2.7/?id=http://www.google.com&access_token=' . $mashsb_options['fb_access_token_new'];
+        $url = 'https://graph.facebook.com/v2.11/?id=http://www.google.com&access_token=' . $mashsb_options['fb_access_token_new'];
         $curl_handle = curl_init();
         curl_setopt( $curl_handle, CURLOPT_URL, $url );
         curl_setopt( $curl_handle, CURLOPT_CONNECTTIMEOUT, 2 );
