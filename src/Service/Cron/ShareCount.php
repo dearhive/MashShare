@@ -24,8 +24,24 @@ class ShareCount
 
     private function defineHooks()
     {
+        add_filter('cron_schedules', array($this, 'addNewSchedule'));
         add_action('init', array($this, 'scheduleCron'));
         add_action(self::CRON_NAME, array($this, 'updateShareCounts'));
+    }
+
+    /**
+     * @param array $schedules
+     *
+     * @return array
+     */
+    public function addNewSchedule($schedules)
+    {
+        $schedules['sixMin'] = array(
+            'interval'  => 360,
+            'display'   => 'Six Minutes',
+        );
+
+        return $schedules;
     }
 
     public function scheduleCron()
@@ -43,7 +59,7 @@ class ShareCount
             return;
         }
 
-        wp_schedule_event(current_time('timestamp'), '6min', self::CRON_NAME);
+        wp_schedule_event(current_time('timestamp'), 'sixMin', self::CRON_NAME);
     }
 
     public function updateShareCounts()

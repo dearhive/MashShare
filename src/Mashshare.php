@@ -28,7 +28,8 @@ final class Mashshare
         add_action('save_post', array($queueRepository, 'saveQueue'));
         add_action('deleteFromQueue', array($queueRepository, 'deleteFromQueue'), 10);
 
-        // CronJobs
+        // CronJobs - Share Count
         new ShareCount;
+        // CronJobs - Add Content
     }
 }

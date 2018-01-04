@@ -273,15 +273,6 @@ if (!class_exists('Mashshare\Mashshare'))
     $autoloader('Mashshare\\', __DIR__ . '/src/');
 
     $shareCount = new \Mashshare\Service\Network\ShareCount();
-
-    register_activation_hook(__FILE__, 'mashshare_update_database');
-}
-
-function mashshare_update_database()
-{
-    $updater = new \Mashshare\WP\Update();
-
-    $updater->update();
 }
 
 /**

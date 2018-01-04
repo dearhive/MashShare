@@ -45,6 +45,11 @@ function mashsb_do_automatic_upgrades() {
 
 	}
 
+    // New update / upgrade
+    $updater = new \Mashshare\WP\Update();
+
+    $updater->update();
+
 }
 add_action( 'admin_init', 'mashsb_do_automatic_upgrades' );
 
