@@ -54,14 +54,12 @@ class NextUpdate
         global $wpdb;
 
         $sql = 'SELECT count(1) as `total`  FROM `'. $wpdb->prefix . 'mashshare_queue` 
-        WHERE is_requested = 0 AND next_update_at <= :nextUpdateAt';
+        WHERE is_requested = 0 AND next_update_at <= %s';
 
         $total = (int) $wpdb->get_var(
             $wpdb->prepare(
                 $sql,
-                array(
-                    ':nextUpdateAt'   => $nextUpdateDate->format('Y-m-d H:00:00'),
-                )
+                $nextUpdateDate->format('Y-m-d H:00:00')
             )
         );
 

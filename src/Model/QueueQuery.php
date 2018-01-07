@@ -85,10 +85,9 @@ FROM ' . $this->getTableName() . ' WHERE id=:id LIMIT 1';
 
         $postsId = (int) $postsId;
 
-        $sql = 'SELECT id, posts_id, priority, is_requested, last_update_at, next_update_at 
-FROM ' . $this->getTableName() . ' WHERE posts_id=:posts_id LIMIT 1';
+        $sql = 'SELECT id, posts_id, priority, is_requested, last_update_at, next_update_at FROM ' . $this->getTableName() . ' WHERE posts_id=%d LIMIT 1';
 
-        $prepare = $this->getWpDB()->prepare($sql, array('posts_id' => $postsId));
+        $prepare = $this->getWpDB()->prepare($sql, $postsId);
 
         $records = $this->getWpDB()->get_row($prepare);
 

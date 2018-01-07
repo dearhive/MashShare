@@ -16,6 +16,7 @@ class ShareCount
 
     const CRON_SETTINGS_VALUE   = 'cron';
     const CRON_NAME             = 'mashsb_cron_share_counts';
+    const CRON_TIMER_KEY        = 'shareCount';
 
     public function __construct()
     {
@@ -36,9 +37,9 @@ class ShareCount
      */
     public function addNewSchedule($schedules)
     {
-        $schedules['sixMin'] = array(
+        $schedules[self::CRON_TIMER_KEY] = array(
             'interval'  => 360,
-            'display'   => 'Six Minutes',
+            'display'   => 'Mashshare - Share Count',
         );
 
         return $schedules;
@@ -59,7 +60,7 @@ class ShareCount
             return;
         }
 
-        wp_schedule_event(current_time('timestamp'), 'sixMin', self::CRON_NAME);
+        wp_schedule_event(current_time('timestamp'), self::CRON_TIMER_KEY, self::CRON_NAME);
     }
 
     public function updateShareCounts()

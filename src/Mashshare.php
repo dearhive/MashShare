@@ -3,6 +3,7 @@
 namespace Mashshare;
 
 use Mashshare\Service\Cron\ShareCount;
+use Mashshare\Service\Cron\TransferContents;
 use Mashshare\Service\Queue\QueueRepository;
 
 /**
@@ -31,5 +32,6 @@ final class Mashshare
         // CronJobs - Share Count
         new ShareCount;
         // CronJobs - Add Content
+        new TransferContents;
     }
 }

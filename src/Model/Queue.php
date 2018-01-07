@@ -285,8 +285,7 @@ class Queue
                 'posts_id'          => $this->getPostsId(),
                 'priority'          => 1,
                 'is_requested'      => 0,
-                'last_update_at'    => $this->getLastUpdateAt()
-                                            ->format('Y-m-d H:i:s'),
+                'last_update_at'    => '1970-01-01 00:00:00',
                 'next_update_at'    => $this->getNextUpdateAt()
                                             ->format('Y-m-d H:00:00'),
             ),
