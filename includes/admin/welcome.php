@@ -243,7 +243,7 @@ class MASHSB_Welcome {
             <!--<img class="mashsb-badge" src="<?php //echo  . 'assets/images/mashsb-logo.svg';  ?>" alt="<?php //_e( 'MashShare', 'mashsb' );  ?>" / >//-->
             <h1><?php printf( __( 'Welcome to MashShare %s', 'mashsb' ), $display_version ); ?></h1>
             <h2 class="about-text">
-                <?php _e( 'Thank you for installing latest version.<br>MashShare is activated and ready to grow your social media traffic!', 'mashsb' ); ?>
+                <?php _e( 'Congrats for installing MashShare<br>MashShare is activated and ready to grow your social media traffic!', 'mashsb' ); ?>
             </h2>
         </div>
         <?php
