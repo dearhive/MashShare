@@ -1965,6 +1965,10 @@ function mashsb_ratelimit_callback() {
             print '<div style="max-width:200px;">' . $buffer . '</div>';
         }
         
+        if(empty($mashsb_options['fb_access_token_new'])){
+            return;
+        }
+        
         // Test facebook api with access token
         $url = 'https://graph.facebook.com/v2.7/?id=http://www.google.com&access_token=' . $mashsb_options['fb_access_token_new'];
         $curl_handle = curl_init();
