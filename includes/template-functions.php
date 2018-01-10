@@ -305,11 +305,14 @@ function roundshares( $totalshares ) {
  * @return string
  */
 
-function onOffSwitch() {
+function onOffSwitch($size = false) {
     global $mashsb_options;
     
     // Get class names for buttons size
     $class_size = isset($mashsb_options['buttons_size']) ? ' ' . $mashsb_options['buttons_size'] : '';
+    
+    // Override size with shortcode argument
+    $class_size = $size ? ' mash-'.$size : $class_size;
     
     // Get class names for button style
     $class_style = isset($mashsb_options['mash_style']) && $mashsb_options['mash_style'] === 'shadow' ? ' mashsb-shadow' : ' mashsb-noshadow';
@@ -326,11 +329,14 @@ function onOffSwitch() {
  * @return string
  */
 
-function onOffSwitch2() {
+function onOffSwitch2( $size = false) {
     global $mashsb_options;
     
     // Get class names for buttons size
     $class_size = isset($mashsb_options['buttons_size']) ? ' ' . $mashsb_options['buttons_size'] : '';
+    
+    // Override size with shortcode argument
+    $class_size = $size ? ' mash-'.$size : $class_size;
     
     // Get class names for button style
     $class_style = isset($mashsb_options['mash_style']) && $mashsb_options['mash_style'] === 'shadow' ? ' mashsb-shadow' : ' mashsb-noshadow';
@@ -479,7 +485,7 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0, $networks = f
                 
             if( $maxcounter !== 'all' && $maxcounter < count( $enablednetworks ) ) { // $maxcounter + 1 for correct comparision with count()
                 if( $startcounter == $maxcounter ) {
-                    $onoffswitch = onOffSwitch(); // Start More Button
+                    $onoffswitch = onOffSwitch($size); // Start More Button
                     //$startsecondaryshares = '</div>'; // End Primary Buttons
                     $startsecondaryshares .= '<div class="secondary-shares" style="display:none;">'; // Start secondary-shares
                 } else {
@@ -514,7 +520,7 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0, $networks = f
 
             $startcounter++;
         endforeach;
-        $output .= onOffSwitch2();
+        $output .= onOffSwitch2($size);
         $output .= $endsecondaryshares;
     }
 
