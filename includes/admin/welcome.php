@@ -149,7 +149,7 @@ class MASHSB_Welcome {
             $this->tabs();
             ?>
             <?php if (isset($_GET['redirect'])) {?>
-            <p class="about-description mashsb-notice notice-success"><?php _e( 'Facebook and Twitter Share Buttons are successfully enabled on all your posts! <br> Now you can use the steps  below to customize MashShare to your needs.', 'mashsb' ); ?></p>
+            <p class="about-description mashsb-notice" style="background-color:#00abed;color:white;padding:20px;margin-top:20px;"><?php _e( 'Facebook and Twitter Share Buttons successfully enabled on all your posts! <br> Use the steps below to customize MashShare.', 'mashsb' ); ?></p>
             <?php } ?>
             <div class="changelog clear">
                 <h1><?php _e( 'Create Your First Social Sharing Button', 'mashsb' ); ?></h1>
@@ -206,7 +206,7 @@ class MASHSB_Welcome {
                     </div>
                     <div class="mash-feature-section-content">
                         <p>
-                            <?php _e( 'Add MashShare directly into your theme template files with using the PHP code <i style="font-weight:bold;">&lt;?php do_shortcode(\'[mashshare]\'); ?&gt;</i>', 'mashsb' ); ?>
+                            <?php _e( 'Add MashShare directly into your theme template files with using the PHP code<br> <pre><i style="font-weight:bold;">&lt;?php do_shortcode(\'[mashshare]\'); ?&gt;</i></pre>', 'mashsb' ); ?>
                         </p>
                     </div>
                 </div>
@@ -242,9 +242,9 @@ class MASHSB_Welcome {
         <div id="mashsb-header">
             <!--<img class="mashsb-badge" src="<?php //echo  . 'assets/images/mashsb-logo.svg';  ?>" alt="<?php //_e( 'MashShare', 'mashsb' );  ?>" / >//-->
             <h1><?php printf( __( 'Welcome to MashShare %s', 'mashsb' ), $display_version ); ?></h1>
-            <p class="about-text">
-                <?php _e( 'Thank you for updating to the latest version! MashShare is installed and ready to grow your traffic from social networks!', 'mashsb' ); ?>
-            </p>
+            <h2 class="about-text">
+                <?php _e( 'Thank you for installing latest version.<br>MashShare is activated and ready to grow your social media traffic!', 'mashsb' ); ?>
+            </h2>
         </div>
         <?php
     }

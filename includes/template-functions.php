@@ -87,7 +87,7 @@ function mashsbGetShareMethod( $mashsbSharesObj ) {
  * @returns integer $shares
  */
 function mashsbGetNonPostShares( $url ) {
-    global $mashsb_error;
+    global $mashsb_debug;
     
     
     // Expiration
@@ -143,9 +143,9 @@ function mashsbGetNonPostShares( $url ) {
  */
 
 function getSharedcount( $url ) {
-    global $mashsb_options, $post, $mashsb_sharecount, $mashsb_error; // todo test a global share count var if it reduces the amount of requests
+    global $mashsb_options, $post, $mashsb_sharecount, $mashsb_debug; // todo test a global share count var if it reduces the amount of requests
     
-    $mashsb_error[] = 'MashShare: Trying to get share count!';
+    $mashsb_debug[] = 'Trying to get share count!';
         
     // Return global share count variable to prevent multiple execution
     if (is_array($mashsb_sharecount) && array_key_exists($url, $mashsb_sharecount) && !empty($mashsb_sharecount[$url]) && !mashsb_is_cache_refresh() ){
@@ -168,7 +168,7 @@ function getSharedcount( $url ) {
 
        
     if( is_404() || is_search() || empty($url) || !mashsb_is_enabled_permalinks() || isset($mashsb_options['disable_sharecount']) ) {
-        $mashsb_error[] = 'MashShare: Trying to get share count deactivated';
+        $mashsb_debug[] = 'MashShare: Trying to get share count deactivated';
         return apply_filters( 'filter_get_sharedcount', 0 );
     }
 
@@ -179,7 +179,7 @@ function getSharedcount( $url ) {
 
 
     if( !empty( $url ) && is_null( $post ) ) {
-        $mashsb_error[] = 'MashShare: URL or POST is empty. Return share count with mashsbGetNonPostShares';
+        $mashsb_debug[] = '$url or $post is empty. Return share count with mashsbGetNonPostShares';
         return apply_filters( 'filter_get_sharedcount', mashsbGetNonPostShares( $url ) );
     }
 
@@ -188,11 +188,11 @@ function getSharedcount( $url ) {
      */
     if( mashsb_force_cache_refresh() && is_singular() ) {
         
-        $mashsb_error[] = 'MashShare: Force Cache Refresh on singular()';
+        $mashsb_debug[] = 'Force Cache Refresh for page type singular()';
         
         // Its request limited
         if ( mashsb_is_req_limited() ){ 
-            $mashsb_error[] = 'MashShare: rate limit reached. Return Share from custom meta option';
+            $mashsb_debug[] = 'Rate limit reached. Return Share from custom meta option';
             return get_post_meta( $post->ID, 'mashsb_shares', true ) + getFakecount();
         }
 
@@ -202,8 +202,8 @@ function getSharedcount( $url ) {
         // Write timestamp (Use this on top of this condition. If this is not on top following return statements will be skipped and ignored - possible bug?)
         update_post_meta( $post->ID, 'mashsb_timestamp', time() );
 
-        MASHSB()->logger->info( 'Code:4 Refresh Cache: Update Timestamp: ' . time() );
-        $mashsb_error[] = 'Code:4 Refresh Cache: Update Timestamp: ' . time();
+        MASHSB()->logger->info( 'Refresh Cache: Update Timestamp: ' . time() );
+        $mashsb_debug[] = 'Refresh Cache: Update Timestamp: ' . time();
         // Get the share Object
         $mashsbSharesObj = mashsbGetShareObj( $url );
         // Get the share count Method
@@ -214,8 +214,8 @@ function getSharedcount( $url ) {
         // Create global sharecount
         $mashsb_sharecount = array($url => $mashsbShareCounts->total);
         
-        $mashsb_error[] = 'Code: 5 Get Share count for URL: ' . $url . ' Shares: ' . $mashsbShareCounts->total;
-        MASHSB()->logger->info( 'Code: 5 Get Share count for URL: ' . $url . ' Shares: ' . $mashsbShareCounts->total );
+        $mashsb_debug[] = 'Get Share count for URL: ' . $url . ' Shares: ' . $mashsbShareCounts->total;
+        MASHSB()->logger->info( 'Get Share count for URL: ' . $url . ' Shares: ' . $mashsbShareCounts->total );
         /*
          * Update post_meta only when API is requested and
          * API share count is greater than real fresh requested share count ->
@@ -236,7 +236,7 @@ function getSharedcount( $url ) {
         // Return cached results
         $cachedCountsMeta = is_numeric($var = get_post_meta( $post->ID, 'mashsb_shares', true )) ? (int)$var : 0;
         $cachedCounts = $cachedCountsMeta + getFakecount();
-        $mashsb_error[] = 'Cached Results: ' . $cachedCounts . ' url:' . $url;
+        $mashsb_debug[] = 'Cached Results: ' . $cachedCounts . ' url:' . $url;
         MASHSB()->logger->info( 'Cached Results: ' . $cachedCounts . ' url:' . $url );
         return apply_filters( 'filter_get_sharedcount', $cachedCounts );
     }
@@ -329,7 +329,7 @@ function onOffSwitch() {
 function onOffSwitch2() {
     global $mashsb_options;
     
-// Get class names for buttons size
+    // Get class names for buttons size
     $class_size = isset($mashsb_options['buttons_size']) ? ' ' . $mashsb_options['buttons_size'] : '';
     
     // Get class names for button style
@@ -397,11 +397,13 @@ function arrNetworks( $name, $is_shortcode ) {
  * 
  * @since 2.0
  * @param bool true when used from shortcode [mashshare]
- * @param int number of visible networks
+ * @param int number of visible networks (used for shortcodes)
+ * @param array activated networks (used for shortcodes)
+ * @param string button size (used for shortcodes)
  * @return string html
  */
 
-function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
+function mashsb_getNetworks( $is_shortcode = false, $services = 0, $networks = false, $size = false ) {
     global $mashsb_options, $mashsb_custom_url, $enablednetworks, $mashsb_twitter_url;
     
     
@@ -415,6 +417,9 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
     
     // Get class names for buttons size
     $class_size = isset($mashsb_options['buttons_size']) ? ' ' . $mashsb_options['buttons_size'] : '';
+    
+    // Override size with shortcode argument
+    $class_size = $size ? ' mash-'.$size : $class_size;
     
     // Get class names for buttons margin
     $class_margin = isset($mashsb_options['button_margin']) ? '' : ' mash-nomargin';
@@ -442,10 +447,10 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
     /* Overwrite maxcounter with shortcode attribute */
     $maxcounter = ($services === 0) ? $maxcounter : $services;
 
-    /* our list of available services, includes the disabled ones! 
+    /* 
+     * Our list of available services, includes the disabled ones! 
      * We have to clean this array first!
      */
-    //$getnetworks = isset( $mashsb_options['networks'] ) ? $mashsb_options['networks'] : '';
     $getnetworks = isset( $mashsb_options['networks'] ) ? apply_filters('mashsb_filter_networks', $mashsb_options['networks'])  : apply_filters('mashsb_filter_networks', '');
 
     /* Delete disabled services from array. Use callback function here. Do this only once because array_filter is slow! 
@@ -460,6 +465,11 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
     } else {
         $enablednetworks = $getnetworks;
     }
+    
+    // Use custom networks if available
+    $enablednetworks = $networks ? $networks : $enablednetworks;
+    
+    var_dump($enablednetworks);
     
     // Start Primary Buttons
     //$output .= '<div class="mashsb-primary-shares">';
@@ -547,7 +557,7 @@ function mashshareShow() {
  * @param string alignment default left
  * @return string html
  */
-function mashsb_render_sharecounts( $customurl = '', $align = 'left' ) {
+function mashsb_render_sharecounts( $customurl = '', $align = 'left', $size = false ) {
     global $mashsb_options;
 
     if( isset( $mashsb_options['disable_sharecount'] ) || !mashsb_curl_installed() || !mashsb_is_enabled_permalinks() ) {
@@ -567,6 +577,9 @@ function mashsb_render_sharecounts( $customurl = '', $align = 'left' ) {
     
     // Get class names for buttons size
     $class_size = isset($mashsb_options['buttons_size']) ? ' ' . $mashsb_options['buttons_size'] : '';
+    
+    // Override size with shortcode argument
+    $class_size = $size ? ' mash-'.$size : $class_size;
     
     // No inline style if it's amp
     $style = !mashsb_is_amp_page() ? 'style="float:' . $align . ';"' : '';
@@ -598,11 +611,29 @@ function mashshareShortcodeShow( $args ) {
         'services' => '0', //default is by admin option - plus 1 because array starts counting from zero
         'align' => 'left',
         'text' => '', // $text
-        'url' => '' // $url
-                    ), $args ) );
+        'url' => '', // $url
+        'networks' => '', // List of networks separated by comma
+        'size' => '' // small, medium, large button size
+        ), $args ) );
     
     // Visible services
     $count_services = !empty($services) ? $services : 0;
+    
+    // Enable specific networks
+    $networks = !empty($networks) ? explode(",", $networks) : false;
+    
+    // Convert into appropriate array structure
+    if ($networks) {
+        $new = array();
+        foreach ($networks as $key => $value) {
+            $new[$key]['id'] = $value;
+            $new[$key]['status'] = '1';
+            $new[$key]['name'] = $value;
+        }
+        $networks = $new;
+    }
+    
+    //var_dump( $new );
     
     // Define custom url var to share
     //$mashsb_custom_url = empty( $url ) ? mashsb_get_url() : $url;
@@ -615,7 +646,7 @@ function mashshareShortcodeShow( $args ) {
     $mashsb_custom_text = !empty( $text ) ? $text : false;
 
     if( $shares != 'false' ) {
-        $sharecount = mashsb_render_sharecounts( $mashsb_url, $align );
+        $sharecount = mashsb_render_sharecounts( $mashsb_url, $align, $size );
         // shortcode [mashshare shares="true" buttons="false"] 
         if( $shares === "true" && $buttons === 'false' ) {
             return $sharecount;
@@ -629,7 +660,7 @@ function mashshareShortcodeShow( $args ) {
             '<div class="mashsb-box">'
             . $sharecount .
             '<div class="mashsb-buttons">'
-            . mashsb_getNetworks( true, $count_services ) .
+            . mashsb_getNetworks( true, $count_services, $networks, $size ) .
             '</div></div>
                     <div style="clear:both;"></div>'
             . mashsb_subscribe_content()
@@ -639,6 +670,7 @@ function mashshareShortcodeShow( $args ) {
 
     return apply_filters( 'mashsb_output_buttons', $return );
 }
+
 
 /* Returns active status of Mashshare.
  * Used for scripts.php $hook

@@ -233,7 +233,7 @@ class mashengine {
      */
 
     function getCount( $data, $url, $request_info, $service, $time ) {
-        global $mashsb_error;
+        global $mashsb_debug;
         $count = 0;
         $error = '';
 
@@ -323,7 +323,7 @@ class mashengine {
             mashdebug()->info( 'MashEngine - URL: ' . $url . ' ' . $service[0] . ': ' . $count );
             //echo 'MashEngine - URL: ' . $url . ' ' . $service[0] . ': ' . $count . '<br>';
             $this->debug_notices[] = 'MashEngine - URL: ' . $url . ' ' . $service[0] . ': ' . $count . '<br>';
-            $mashsb_error[] = 'MashEngine - URL: ' . $url . ' ' . $service[0] . ': ' . $count;
+            $mashsb_debug[] = 'MashEngine - URL: ' . $url . ' ' . $service[0] . ': ' . $count;
 
             add_action( 'wp_footer', array($this, 'outputDebug'), 100 );
         }
