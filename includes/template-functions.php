@@ -469,7 +469,7 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0, $networks = f
     // Use custom networks if available
     $enablednetworks = $networks ? $networks : $enablednetworks;
     
-    var_dump($enablednetworks);
+    //var_dump($enablednetworks);
     
     // Start Primary Buttons
     //$output .= '<div class="mashsb-primary-shares">';
