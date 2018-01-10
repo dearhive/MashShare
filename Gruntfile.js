@@ -11,12 +11,12 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON( 'package.json' ),
         paths : {
             // Base destination dir
-            base: '../../../../plugin/svn/tags/<%= pkg.version %>',
-            basetrunk: '../../../../plugin/svn/trunk/',
-            basetags: '../../../../plugin/svn/tags/',
-            basezip: '../../../../plugin/svn/',
-            baseassets: '../../../../plugin/svn/assets',
-            tmp: '../../../../plugin/svn/tmp'
+            base: '../../../plugin/svn/tags/<%= pkg.version %>',
+            basetrunk: '../../../plugin/svn/trunk/',
+            basetags: '../../../plugin/svn/tags/',
+            basezip: '../../../plugin/svn/',
+            baseassets: '../../../plugin/svn/assets',
+            tmp: '../../../plugin/svn/tmp'
         },
 
         // Tasks here

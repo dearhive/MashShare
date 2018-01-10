@@ -409,8 +409,138 @@ function arrNetworks( $name, $is_shortcode ) {
  * @return string html
  */
 
-function mashsb_getNetworks( $is_shortcode = false, $services = 0, $networks = false, $size = false ) {
+function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
     global $mashsb_options, $mashsb_custom_url, $enablednetworks, $mashsb_twitter_url;
+    
+    
+    // define globals
+    if( $is_shortcode ) {
+        $mashsb_twitter_url = !empty( $mashsb_custom_url ) ? mashsb_get_shorturl( $mashsb_custom_url ) : mashsb_get_twitter_url();
+
+    }else{
+        $mashsb_twitter_url = mashsb_get_twitter_url();
+    }
+    
+    // Get class names for buttons size
+    $class_size = isset($mashsb_options['buttons_size']) ? ' ' . $mashsb_options['buttons_size'] : '';
+    
+    // Override size with shortcode argument
+    //$class_size = $size ? ' mash-'.$size : $class_size;
+    
+    // Get class names for buttons margin
+    $class_margin = isset($mashsb_options['button_margin']) ? '' : ' mash-nomargin';
+
+    // Get class names for center align
+    $class_center = isset($mashsb_options['text_align_center']) ? ' mash-center' : '';
+    
+    // Get class names for button style
+    $class_style = isset($mashsb_options['mash_style']) && $mashsb_options['mash_style'] === 'shadow' ? ' mashsb-shadow' : ' mashsb-noshadow';
+
+    $output = '';
+    $startsecondaryshares = '';
+    $endsecondaryshares = '';
+
+    /* content of 'more services' button */
+    $onoffswitch = '';
+
+    /* counter for 'Visible Services' */
+    $startcounter = 1;
+
+    $maxcounter = isset( $mashsb_options['visible_services'] ) ? $mashsb_options['visible_services'] : 0;
+    $maxcounter = ($maxcounter === 'all') ? 'all' : ($maxcounter + 1); // plus 1 to get networks correct counted (array's starting counting from zero)
+    $maxcounter = apply_filters( 'mashsb_visible_services', $maxcounter );
+
+    /* Overwrite maxcounter with shortcode attribute */
+    $maxcounter = ($services === 0) ? $maxcounter : $services;
+
+    /* 
+     * Our list of available services, includes the disabled ones! 
+     * We have to clean this array first!
+     */
+    $getnetworks = isset( $mashsb_options['networks'] ) ? apply_filters('mashsb_filter_networks', $mashsb_options['networks'])  : apply_filters('mashsb_filter_networks', '');
+    
+    
+    /* Delete disabled services from array. Use callback function here. Do this only once because array_filter is slow! 
+     * Use the newly created array and bypass the callback function
+     */
+    if( is_array( $getnetworks ) ) {
+        if( !is_array( $enablednetworks ) ) {
+            $enablednetworks = array_filter( $getnetworks, 'isStatus' );
+        } else {
+            $enablednetworks = $enablednetworks;
+        }
+    } else {
+        $enablednetworks = $getnetworks;
+    }
+
+    
+    // Use custom networks if available and override default networks
+    //$enablednetworks = $networks ? $networks : $enablednetworks;
+    
+    var_dump($enablednetworks);
+    
+    // Start Primary Buttons
+    
+    if( !empty( $enablednetworks ) ) {
+        foreach ( $enablednetworks as $key => $network ):
+                
+            if( $maxcounter !== 'all' && $maxcounter < count( $enablednetworks ) ) { // $maxcounter + 1 for correct comparision with count()
+                if( $startcounter == $maxcounter ) {
+                    $onoffswitch = onOffSwitch(); // Start More Button
+                    //$startsecondaryshares = '</div>'; // End Primary Buttons
+                    $startsecondaryshares .= '<div class="secondary-shares" style="display:none;">'; // Start secondary-shares
+                } else {
+                    $onoffswitch = '';
+                    $onoffswitch2 = '';
+                    $startsecondaryshares = '';
+                }
+                if( $startcounter === (count( $enablednetworks )) ) {
+                    $endsecondaryshares = '</div>';
+                } else {
+                    $endsecondaryshares = '';
+                }
+            }
+
+            if( isset($enablednetworks[$key]['name']) && !empty($enablednetworks[$key]['name']) ) {
+                /* replace all spaces with $nbsp; This prevents error in css style content: text-intend */
+                $name = preg_replace( '/\040{1,}/', '&nbsp;', $enablednetworks[$key]['name'] ); // The custom share label
+            } else {
+                $name = ucfirst( $enablednetworks[$key]['id'] ); // Use the id as share label. Capitalize it!
+            }
+            
+            $enablednetworks[$key]['id'] == 'whatsapp' ? $display = 'style="display:none;"' : $display = ''; // Whatsapp button is made visible via js when opened on mobile devices
+
+            // Lets use the data attribute to prevent that pininit.js is overwriting our pinterest button - PR: https://secure.helpscout.net/conversation/257066283/954/?folderId=924740
+            if ('pinterest' === $enablednetworks[$key]['id'] && !mashsb_is_amp_page() ) {
+                $output .= '<a ' . $display . ' class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . $class_margin . $class_center . $class_style . '" href="#" data-mashsb-url="'. arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="nofollow"><span class="icon"></span><span class="text">' . $name . '</span></a>';
+            } else {
+                $output .= '<a ' . $display . ' class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . $class_margin . $class_center . $class_style . '" href="' . arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="nofollow"><span class="icon"></span><span class="text">' . $name . '</span></a>';
+            }
+            $output .= $onoffswitch;
+            $output .= $startsecondaryshares;
+
+            $startcounter++;
+        endforeach;
+        $output .= onOffSwitch2();
+        $output .= $endsecondaryshares;
+    }
+
+    return apply_filters( 'return_networks', $output );
+}
+/* 
+ * Return all available networks for Shortcode generated buttons
+ * 
+ * @since 2.0
+ * @param bool true when used from shortcode [mashshare]
+ * @param int number of visible networks (used for shortcodes)
+ * @param array activated networks (used for shortcodes)
+ * @param string button size (used for shortcodes)
+ * @return string html
+ */
+
+function mashsb_getNetworksShortcode( $is_shortcode = false, $services = 0, $networks = false, $size = false ) {
+    //global $mashsb_options, $mashsb_custom_url, $enablednetworks, $mashsb_twitter_url;
+    global $mashsb_options, $mashsb_custom_url, $mashsb_twitter_url;
     
     
     // define globals
@@ -459,11 +589,12 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0, $networks = f
      */
     $getnetworks = isset( $mashsb_options['networks'] ) ? apply_filters('mashsb_filter_networks', $mashsb_options['networks'])  : apply_filters('mashsb_filter_networks', '');
 
-    /* Delete disabled services from array. Use callback function here. Do this only once because array_filter is slow! 
+    /* 
+     * Delete disabled services from array. Use callback function here. Do this only once because array_filter is slow! 
      * Use the newly created array and bypass the callback function
      */
     if( is_array( $getnetworks ) ) {
-        if( !is_array( $enablednetworks ) ) {
+        if( !isset($enablednetworks) || !is_array( $enablednetworks ) ) {
             $enablednetworks = array_filter( $getnetworks, 'isStatus' );
         } else {
             $enablednetworks = $enablednetworks;
@@ -471,14 +602,14 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0, $networks = f
     } else {
         $enablednetworks = $getnetworks;
     }
+
     
-    // Use custom networks if available
+    // Use custom networks if available and override default networks
     $enablednetworks = $networks ? $networks : $enablednetworks;
     
     //var_dump($enablednetworks);
     
     // Start Primary Buttons
-    //$output .= '<div class="mashsb-primary-shares">';
     
     if( !empty( $enablednetworks ) ) {
         foreach ( $enablednetworks as $key => $network ):
@@ -666,7 +797,7 @@ function mashshareShortcodeShow( $args ) {
             '<div class="mashsb-box">'
             . $sharecount .
             '<div class="mashsb-buttons">'
-            . mashsb_getNetworks( true, $count_services, $networks, $size ) .
+            . mashsb_getNetworksShortcode( true, $count_services, $networks, $size ) .
             '</div></div>
                     <div style="clear:both;"></div>'
             . mashsb_subscribe_content()
