@@ -477,7 +477,7 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
     // Use custom networks if available and override default networks
     //$enablednetworks = $networks ? $networks : $enablednetworks;
     
-    var_dump($enablednetworks);
+    //var_dump($enablednetworks);
     
     // Start Primary Buttons
     
