@@ -111,7 +111,8 @@ class MASHSB_Welcome {
         .mashsb-about-wrap .mashsb-badge { float: right; border-radius: 4px; margin: 0 0 15px 15px; max-width: 100px; }
         .mashsb-about-wrap #mashsb-header { margin-bottom: 15px; }
         .mashsb-about-wrap #mashsb-header h1 { margin-bottom: 15px !important; }
-        .mashsb-about-wrap .about-text { margin: 0 0 15px; max-width: 670px; }
+        //.mashsb-about-wrap .about-text { margin: 0 0 15px; max-width: 670px; }
+        .mashsb-about-wrap .about-text { margin: 0 0 15px; }
         .mashsb-about-wrap .mash-feature-section { margin-top: 20px; }
         .mashsb-about-wrap .mash-feature-section-content,
         .mashsb-about-wrap .mash-feature-section-media { width: 50%; box-sizing: border-box; }
@@ -149,7 +150,7 @@ class MASHSB_Welcome {
             $this->tabs();
             ?>
             <?php if (isset($_GET['redirect'])) {?>
-            <p class="about-description mashsb-notice" style="background-color:#00abed;color:white;padding:20px;margin-top:20px;"><?php _e( 'Facebook and Twitter Share Buttons successfully enabled on all your posts! <br> Use the steps below to customize MashShare.', 'mashsb' ); ?></p>
+            <p class="about-description mashsb-notice" style="background-color:#00abed;color:white;padding:20px;margin-top:20px;"><?php _e( 'Facebook and Twitter Share Buttons successfully enabled on all your posts! <br> You can use the steps below to customize MashShare:', 'mashsb' ); ?></p>
             <?php } ?>
             <div class="changelog clear">
                 <h1><?php _e( 'Create Your First Social Sharing Button', 'mashsb' ); ?></h1>
@@ -242,9 +243,9 @@ class MASHSB_Welcome {
         <div id="mashsb-header">
             <!--<img class="mashsb-badge" src="<?php //echo  . 'assets/images/mashsb-logo.svg';  ?>" alt="<?php //_e( 'MashShare', 'mashsb' );  ?>" / >//-->
             <h1><?php printf( __( 'Welcome to MashShare %s', 'mashsb' ), $display_version ); ?></h1>
-            <h2 class="about-text">
+            <h1 class="about-text">
                 <?php _e( 'Congrats for installing MashShare<br>MashShare is activated and ready to grow your social media traffic!', 'mashsb' ); ?>
-            </h2>
+            </h1>
         </div>
         <?php
     }

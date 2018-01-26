@@ -16,13 +16,13 @@ $user = wp_get_current_user();
 
 	<a class="mashsb-banner" target="_blank" href="https://www.mashshare.net/pricing/?utm_source=insideplugin&utm_medium=userwebsite&utm_content=sidebar&utm_campaign=freeplugin"><img src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/upgrade_to_pro.png'; ?>" width="300" height="250" alt="<?php _e( 'Increase your Shares and Social Traffic', 'mashsb' ); ?>" /></a>
 
-	<form method="post" action="<?php echo $post; ?>" target="_blank" class="subscribe block" style="display:none;">
-		<h2><?php _e( 'Get More Traffic', 'mashsb' ); ?></h2>
+	<form method="post" action="<?php echo $post; ?>" target="_blank" class="subscribe block">
+		<h2><?php _e( 'Get 20% Off!', 'mashsb' ); ?></h2>
 
 		<?php $user = wp_get_current_user(); ?>
 
 		<p class="interesting">
-			<?php echo wptexturize( __( "Submit your name and email and we'll send you tips and tricks how to get more traffic by using MashShare", 'mashsb' ) ); ?>
+			<?php echo wptexturize( __( "Submit your name and email and we'll send you a coupon for 20% off your upgrade to the pro version.", 'mashsb' ) ); ?>
 		</p>
 
 		<div class="field">
@@ -41,7 +41,7 @@ $user = wp_get_current_user();
 		<input type="hidden" name="source" value="8" />
 
 		<div class="field submit-button">
-			<input type="submit" class="button" value="<?php _e( 'Send me the free stuff', 'mashsb' ); ?>"/>
+			<input type="submit" class="button" value="<?php _e( 'Send me the coupon', 'mashsb' ); ?>"/>
 		</div>
 
 		<p class="promise">

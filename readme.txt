@@ -251,6 +251,7 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 * Tweak: Remove Facebook Access Token. Will be replaced by queue processing soon to prevent exceeding facebook api limits
 * Tweak: Clean up debug mode
 * Tweak: Clean up Welcome page
+* Tweak: Clean up sidebar
 * Fix: Tweet button
 
 = 3.4.7 =
