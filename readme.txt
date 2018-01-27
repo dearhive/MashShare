@@ -301,5 +301,5 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 3.4.7 =
-3.4.7 * 100% php7 compatibility! Make use of Twitter character limit of 280 characters. Compatible up to WordPress 4.9
+= 3.4.8 =
+3.4.8 * New shortcode options. Preparations for new MashShare count queue processing. Compatible up to WordPress 4.9.2
