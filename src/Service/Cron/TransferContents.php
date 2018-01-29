@@ -11,7 +11,6 @@ use WP_Query;
  */
 class TransferContents
 {
-
     const CRON_OPTION_NAME      = 'mashsb_transfer_contents';
     const CRON_NAME             = 'mashsb_cron_transfer_contents';
     const CRON_TIMER_KEY        = 'transferContents';
@@ -29,6 +28,7 @@ class TransferContents
 
     public function __construct()
     {
+
         $this->defineHooks();
     }
 

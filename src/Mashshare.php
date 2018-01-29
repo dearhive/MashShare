@@ -19,6 +19,7 @@ final class Mashshare
 
     public function __construct()
     {
+        //wp_die('hook');
         $this->defineHooks();
     }
 

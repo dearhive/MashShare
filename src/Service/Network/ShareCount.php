@@ -52,6 +52,7 @@ class ShareCount
 
     public function __construct()
     {
+
         $settings = get_option('mashsb_settings');
 
         if (isset($settings['facebook_count_mode']))

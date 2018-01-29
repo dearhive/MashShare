@@ -273,6 +273,8 @@ if (!class_exists('Mashshare\Mashshare'))
     $autoloader('Mashshare\\', __DIR__ . '/src/');
 
     $shareCount = new \Mashshare\Service\Network\ShareCount();
+    
+    //$init = new \Mashshare\Mashshare();
 }
 
 /**
