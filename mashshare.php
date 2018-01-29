@@ -265,6 +265,16 @@ if( !class_exists( 'mashshare' ) ) :
 
     endif; // End if class_exists check
 
+// Autoloader
+if (!class_exists('Mashshare\Mashshare'))
+{
+    $autoloader = require('autoloader.php');
+
+    $autoloader('Mashshare\\', __DIR__ . '/src/');
+
+    $shareCount = new \Mashshare\Service\Network\ShareCount();
+}
+
 /**
  * The main function responsible for returning the one true Mashshare
  * Instance to functions everywhere.
