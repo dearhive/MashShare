@@ -1003,7 +1003,7 @@ function mashsb_get_image( $postID ) {
 
     if( has_post_thumbnail( $post->ID ) ) {
         $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' );
-        return $image[0];
+        return isset($image[0]) ? $image[0] : '';
     }
 }
 
@@ -1037,6 +1037,7 @@ function mashsb_get_excerpt_by_id( $post_id ) {
     }
 
     $the_excerpt = $the_post->post_content; //Gets post_content to be used as a basis for the excerpt
+    // Strip all shortcodes
     $excerpt_length = 35; //Sets excerpt length by word count
     $the_excerpt = strip_tags( strip_shortcodes( $the_excerpt ) ); //Strips tags and images
     $words = explode( ' ', $the_excerpt, $excerpt_length + 1 );
