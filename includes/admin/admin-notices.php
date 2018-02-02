@@ -48,18 +48,18 @@ function mashsb_admin_messages() {
     }
     
     // Rate Limit warning
-    if( mashsb_is_admin_page() && mashsb_rate_limit_exceeded() ) {
-        echo '<div class="error">';
-        //echo '<p>' . sprintf(__('Your website exceeded the Facebook rate limit. Share count requests to Facebook and other networks will be delayed for 30min and the Share Count will not grow during this time. If you see this notice often consider to change <strong>MashShare Caching Method</strong> to <a href="%s">Refresh while Loading</a> and use a higher cache expiration. Also create an facebook access token and add it in <a href="%s">Settings->Facebook User Access Token</a> MashShare tries again to request shares in ' . mashsbGetRemainingRateLimitTime() , 'mashsb'), admin_url() . 'admin.php?page=mashsb-settings#mashsb_settingsgeneral_header', admin_url() . 'admin.php?page=mashsb-settings#mashsb_settingsservices_header') . '</p>';
-        echo '<p>' . sprintf(__('Your website exceeded the Facebook rate limit. Share count requests to Facebook and other networks will be delayed for 30min and the Share Count will not grow during this time. If you see this notice often consider to change <strong>MashShare Caching Method</strong> to <a href="%s">Refresh while Loading</a> and use a higher cache expiration. MashShare tries again to get shares in ' . mashsbGetRemainingRateLimitTime() , 'mashsb'), admin_url() . 'admin.php?page=mashsb-settings#mashsb_settingsgeneral_header', admin_url() . 'admin.php?page=mashsb-settings#mashsb_settingsservices_header') . '</p>';
-        echo '</div>';
-    }
+//    if( mashsb_is_admin_page() && mashsb_rate_limit_exceeded() ) {
+//        echo '<div class="error">';
+//        //echo '<p>' . sprintf(__('Your website exceeded the Facebook rate limit. Share count requests to Facebook and other networks will be delayed for 30min and the Share Count will not grow during this time. If you see this notice often consider to change <strong>MashShare Caching Method</strong> to <a href="%s">Refresh while Loading</a> and use a higher cache expiration. Also create an facebook access token and add it in <a href="%s">Settings->Facebook User Access Token</a> MashShare tries again to request shares in ' . mashsbGetRemainingRateLimitTime() , 'mashsb'), admin_url() . 'admin.php?page=mashsb-settings#mashsb_settingsgeneral_header', admin_url() . 'admin.php?page=mashsb-settings#mashsb_settingsservices_header') . '</p>';
+//        echo '<p>' . sprintf(__('Your website exceeded the Facebook rate limit. Share count requests to Facebook and other networks will be delayed for 30min and the Share Count will not grow during this time. If you see this notice often consider to change <strong>MashShare Caching Method</strong> to <a href="%s">Refresh while Loading</a> and use a higher cache expiration. MashShare tries again to get shares in ' . mashsbGetRemainingRateLimitTime() , 'mashsb'), admin_url() . 'admin.php?page=mashsb-settings#mashsb_settingsgeneral_header', admin_url() . 'admin.php?page=mashsb-settings#mashsb_settingsservices_header') . '</p>';
+//        echo '</div>';
+//    }
     // Access Token expired
-    if( mashsb_is_invalid_fb_api_key() ) {
-        echo '<div class="error">';
-        echo '<p>' . sprintf(__('<strong>Error: </strong>'.mashsb_is_invalid_fb_api_key().' <br> Your <strong>Facebook Access Token</strong> has been expired or is invalid. Remove the invalid access token from <a href="%s">MashShare->Settings->Networks</a> or generate a new one. Your MashShare Facebook Shares will not be refreshed any longer. <a href="%s" target="_blank">Read here</a> how to renew the Facebook access token. Fix it and press the button: | <a href="%s" class="button">CHECK AGAIN</a>', 'mashsb'), admin_url() . 'admin.php?page=mashsb-settings#mashsb_settingsservices_header', 'http://docs.mashshare.net/article/132-how-to-create-a-facebook-access-token', admin_url() . 'admin.php?mashsb_action=check_access_token&page=mashsb-settings') . '</p>';
-        echo '</div>';
-    }
+//    if( mashsb_is_invalid_fb_api_key() ) {
+//        echo '<div class="error">';
+//        echo '<p>' . sprintf(__('<strong>Error: </strong>'.mashsb_is_invalid_fb_api_key().' <br> Your <strong>Facebook Access Token</strong> has been expired or is invalid. Remove the invalid access token from <a href="%s">MashShare->Settings->Networks</a> or generate a new one. Your MashShare Facebook Shares will not be refreshed any longer. <a href="%s" target="_blank">Read here</a> how to renew the Facebook access token. Fix it and press the button: | <a href="%s" class="button">CHECK AGAIN</a>', 'mashsb'), admin_url() . 'admin.php?page=mashsb-settings#mashsb_settingsservices_header', 'http://docs.mashshare.net/article/132-how-to-create-a-facebook-access-token', admin_url() . 'admin.php?mashsb_action=check_access_token&page=mashsb-settings') . '</p>';
+//        echo '</div>';
+//    }
     
     // Cache warning
     if( mashsb_is_deactivated_cache() ) {

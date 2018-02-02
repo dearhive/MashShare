@@ -246,6 +246,10 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
+= 3.4.9 =
+* New: Add new short code parameter [mashshare icons=1] allows to show icon buttons only
+* Fix: Remove access token notice
+
 = 3.4.8 =
 * New: Extend shortcode and allow selection of certain networks and button size [mashshare networks="facebook,twitter,linkedin" services="3" size="small"]
 * Tweak: Remove Facebook Access Token. Will be replaced by queue processing soon to prevent exceeding facebook api limits

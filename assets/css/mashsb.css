@@ -548,3 +548,12 @@ color:#8A8C8E;
     box-shadow: none;
     -webkit-box-shadow: none;
 }
+
+.mashsb-main .mashsb-buttons .mashsb-pure-icons {
+    min-width:0;
+    flex:none;
+    -webkit-flex:none;
+}
+.mashsb-main .mashsb-buttons .mashsb-pure-icons .icon:before {
+    margin-right:0px;
+}
