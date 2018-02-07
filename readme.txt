@@ -246,6 +246,10 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
+= 3.5.0 =
+* New: Tested up to WordPress 4.9.3
+* Tweak: Remove opt-in notice
+
 = 3.4.9 =
 * New: Add new short code parameter [mashshare icons=1] allows to show icon buttons only
 * Fix: Remove access token notice
