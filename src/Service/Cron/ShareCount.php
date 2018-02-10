@@ -55,7 +55,10 @@ class ShareCount
         {
             wp_unschedule_event($cronSchedule, self::CRON_NAME);
         }
-        elseif (false === $cronSchedule && self::CRON_SETTINGS_VALUE !== $settings['caching_method'])
+        elseif (
+            (false === $cronSchedule && ShareCount::CRON_SETTINGS_VALUE !== $settings['caching_method']) ||
+            ($cronSchedule && ShareCount::CRON_SETTINGS_VALUE === $settings['caching_method'])
+        )
         {
             return;
         }
@@ -91,6 +94,21 @@ class ShareCount
                 ->setShares($shares)
                 ->setErrors($serviceShareCount->getErrors())
                 ->update()
+            ;
+
+            $now    = new DateTime();
+            $minute = $content->getLastUpdateAt()->format('i');
+
+            $increment = 1;
+
+            if ($minute > 1)
+            {
+                $increment = 2;
+            }
+
+            $content->setLastUpdateAt($now)
+                    ->setNextUpdateAt($content->getLastUpdateAt()->modify('+' . $increment .  ' hour'))
+                    ->save()
             ;
         }
     }

@@ -9,7 +9,7 @@
  * Version: {{ version }}
  * Text Domain: mashsb
  * Domain Path: /languages
- * Credits: Thanks go to Pippin Williamson and the edd team. When we started with Mashshare we decided to use the EDD code base and 
+ * Credits: Thanks go to Pippin Williamson and the edd team. When we started with Mashshare we decided to use the EDD code base and
  * essential parts of the EDD framework because its very reliable and robust. Check out more by pippin on https://pippinsplugins.com/
 
  *
@@ -272,7 +272,7 @@ if (!class_exists('Mashshare\Mashshare'))
 
     $autoloader('Mashshare\\', __DIR__ . '/src/');
 
-    $shareCount = new \Mashshare\Service\Network\ShareCount();
+    new \Mashshare\Mashshare();
 }
 
 /**
