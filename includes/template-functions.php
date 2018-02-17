@@ -538,7 +538,7 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
  * @return string html
  */
 
-function mashsb_getNetworksShortcode( $is_shortcode = false, $services = 0, $networks = false, $size = false ) {
+function mashsb_getNetworksShortcode( $is_shortcode = false, $services = 0, $networks = false, $size = false, $icons = false ) {
     //global $mashsb_options, $mashsb_custom_url, $enablednetworks, $mashsb_twitter_url;
     global $mashsb_options, $mashsb_custom_url, $mashsb_twitter_url;
     
@@ -565,6 +565,10 @@ function mashsb_getNetworksShortcode( $is_shortcode = false, $services = 0, $net
     
     // Get class names for button style
     $class_style = isset($mashsb_options['mash_style']) && $mashsb_options['mash_style'] === 'shadow' ? ' mashsb-shadow' : ' mashsb-noshadow';
+    
+    $class_icons = $icons ? ' mashsb-pure-icons' : ''; 
+    
+    //$style = $fullwidth ? '' : 'style="min-width:0;flex:none;-webkit-flex:none;"';
 
     $output = '';
     $startsecondaryshares = '';
@@ -633,18 +637,18 @@ function mashsb_getNetworksShortcode( $is_shortcode = false, $services = 0, $net
 
             if( isset($enablednetworks[$key]['name']) && !empty($enablednetworks[$key]['name']) ) {
                 /* replace all spaces with $nbsp; This prevents error in css style content: text-intend */
-                $name = preg_replace( '/\040{1,}/', '&nbsp;', $enablednetworks[$key]['name'] ); // The custom share label
+                $name = !$icons ? preg_replace( '/\040{1,}/', '&nbsp;', $enablednetworks[$key]['name'] ) : ''; // The custom share label
             } else {
-                $name = ucfirst( $enablednetworks[$key]['id'] ); // Use the id as share label. Capitalize it!
+                $name = !$icons ? ucfirst( $enablednetworks[$key]['id'] ) : ''; // Use the id as share label. Capitalize it!
             }
             
             $enablednetworks[$key]['id'] == 'whatsapp' ? $display = 'style="display:none;"' : $display = ''; // Whatsapp button is made visible via js when opened on mobile devices
 
             // Lets use the data attribute to prevent that pininit.js is overwriting our pinterest button - PR: https://secure.helpscout.net/conversation/257066283/954/?folderId=924740
             if ('pinterest' === $enablednetworks[$key]['id'] && !mashsb_is_amp_page() ) {
-                $output .= '<a ' . $display . ' class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . $class_margin . $class_center . $class_style . '" href="#" data-mashsb-url="'. arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="nofollow"><span class="icon"></span><span class="text">' . $name . '</span></a>';
+                $output .= '<a ' . $display . ' class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . $class_margin . $class_center . $class_style . $class_icons . '" href="#" data-mashsb-url="'. arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="nofollow"><span class="icon"></span><span class="text">' . $name . '</span></a>';
             } else {
-                $output .= '<a ' . $display . ' class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . $class_margin . $class_center . $class_style . '" href="' . arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="nofollow"><span class="icon"></span><span class="text">' . $name . '</span></a>';
+                $output .= '<a ' . $display . ' class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . $class_margin . $class_center . $class_style . $class_icons . '" href="' . arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="nofollow"><span class="icon"></span><span class="text">' . $name . '</span></a>';
             }
             $output .= $onoffswitch;
             $output .= $startsecondaryshares;
@@ -750,7 +754,8 @@ function mashshareShortcodeShow( $args ) {
         'text' => '', // $text
         'url' => '', // $url
         'networks' => '', // List of networks separated by comma
-        'size' => '' // small, medium, large button size
+        'size' => '', // small, medium, large button size
+        'icons' => '0' // 1 
         ), $args ) );
     
     // Visible services
@@ -797,7 +802,7 @@ function mashshareShortcodeShow( $args ) {
             '<div class="mashsb-box">'
             . $sharecount .
             '<div class="mashsb-buttons">'
-            . mashsb_getNetworksShortcode( true, $count_services, $networks, $size ) .
+            . mashsb_getNetworksShortcode( true, $count_services, $networks, $size, $icons ) .
             '</div></div>
                     <div style="clear:both;"></div>'
             . mashsb_subscribe_content()
@@ -998,7 +1003,7 @@ function mashsb_get_image( $postID ) {
 
     if( has_post_thumbnail( $post->ID ) ) {
         $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' );
-        return $image[0];
+        return isset($image[0]) ? $image[0] : '';
     }
 }
 
@@ -1032,6 +1037,7 @@ function mashsb_get_excerpt_by_id( $post_id ) {
     }
 
     $the_excerpt = $the_post->post_content; //Gets post_content to be used as a basis for the excerpt
+    // Strip all shortcodes
     $excerpt_length = 35; //Sets excerpt length by word count
     $the_excerpt = strip_tags( strip_shortcodes( $the_excerpt ) ); //Strips tags and images
     $words = explode( ' ', $the_excerpt, $excerpt_length + 1 );

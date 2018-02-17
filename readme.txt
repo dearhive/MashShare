@@ -249,6 +249,11 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 = 4.0.0 =
 * New: Use async queue batch processing for collecting share count
 
+= 3.4.9 =
+* New: Add new short code parameter [mashshare icons=1] allows to show icon buttons only
+* Fix: Remove access token notice
+* Tweak: Lower request break to 5min if facebook api req/hours limits are reached
+
 = 3.4.8 =
 * New: Extend shortcode and allow selection of certain networks and button size [mashshare networks="facebook,twitter,linkedin" services="3" size="small"]
 * Tweak: Remove Facebook Access Token. Will be replaced by queue processing soon to prevent exceeding facebook api limits
