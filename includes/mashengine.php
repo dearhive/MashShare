@@ -322,7 +322,7 @@ class mashengine {
             MASHSB()->logger->info( 'MashEngine - URL: ' . $url . ' ' . $service[0] . ': ' . $count );
             mashdebug()->info( 'MashEngine - URL: ' . $url . ' ' . $service[0] . ': ' . $count );
             //echo 'MashEngine - URL: ' . $url . ' ' . $service[0] . ': ' . $count . '<br>';
-            $this->debug_notices[] = 'MashEngine - URL: ' . $url . ' ' . $service[0] . ': ' . $count . '<br>';
+            $this->debug_notices[] = 'MashEngine - URL: ' . $url . ' ' . $service[0] . ': ' . $count;
             $mashsb_debug[] = 'MashEngine - URL: ' . $url . ' ' . $service[0] . ': ' . $count;
 
             add_action( 'wp_footer', array($this, 'outputDebug'), 100 );
@@ -335,16 +335,18 @@ class mashengine {
 
         if( current_user_can( 'install_plugins' ) && isset( $mashsb_options['debug_mode'] ) ) {
             echo '<div class="mash-debug" style="display:block;z-index:250000;font-size:11px;text-align:center;">';
+            $this->debug_notices[] = (false === get_transient( 'timeout_mashsb_rate_limit' ) ? '' : 'FB rate limit active. Shares will be collected again in ' . getRemainingRateLimitTime() . 'min.');
+            //$this->debug_notices[] = 'MashShare Cache will be refreshed in ' . $time. 'min';
             var_dump( $this->debug_notices );
             echo '</div>';
         }
     }
 
     public function setRateLimitTransient() {
-        set_transient( 'mashsb_rate_limit', 'true', 5 * 60 );
+        set_transient( 'mashsb_rate_limit', 'true', 30 * 60 );
 
         MASHSB()->logger->info( 'Error: Facebook Rate Limit hit' );
-        $this->debug_notices[] = 'Error: Requests to Facebook hit Rate Limit.';
+        $this->debug_notices[] = 'Error: Requests to Facebook hit Rate Limit. Delaying requests for 30min';
         add_action( 'wp_footer', array($this, 'outputDebug'), 100 );
     }
 
