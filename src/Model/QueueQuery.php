@@ -109,13 +109,11 @@ FROM ' . $this->getTableName() . ' WHERE id=:id LIMIT 1';
         $date = new DateTime();
 
         $sql = 'SELECT id, posts_id, priority, is_requested, last_update_at, next_update_at 
-FROM ' . $this->getTableName() . ' WHERE is_requested = 0 AND next_update_at <= :startDate LIMIT 200';
+FROM ' . $this->getTableName() . ' WHERE is_requested = 0 AND next_update_at <= %s LIMIT 200';
 
         $prepare = $this->getWpDB()->prepare(
             $sql,
-            array(
-                'startDate' => $date->format('Y-m-d H:00:00'),
-            )
+            $date->format('Y-m-d H:00:00')
         );
 
         $records = $this->getWpDB()->get_results($prepare);

@@ -101,7 +101,7 @@ class QueueCollection implements Iterator, Countable
      */
     public function current()
     {
-        $this->_data[$this->_index];
+        return $this->_data[$this->_index];
     }
 
     /**

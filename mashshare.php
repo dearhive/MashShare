@@ -199,7 +199,7 @@ if( !class_exists( 'mashshare' ) ) :
             require_once MASHSB_PLUGIN_DIR . 'includes/shorturls.php';
             require_once MASHSB_PLUGIN_DIR . 'includes/libraries/class-google-shorturl.php';
             require_once MASHSB_PLUGIN_DIR . 'includes/libraries/class-bitly-shorturl.php';
-            require_once MASHSB_PLUGIN_DIR . 'includes/admin/tracking.php'; // Ensure cron is loading even on frontpage
+            //require_once MASHSB_PLUGIN_DIR . 'includes/admin/tracking.php'; // Ensure cron is loading even on frontpage
             require_once MASHSB_PLUGIN_DIR . 'includes/debug/debug.php';
             require_once MASHSB_PLUGIN_DIR . 'includes/amp.php';
             require_once MASHSB_PLUGIN_DIR . 'includes/cron.php';
@@ -272,9 +272,8 @@ if (!class_exists('Mashshare\Mashshare'))
 
     $autoloader('Mashshare\\', __DIR__ . '/src/');
 
-    $shareCount = new \Mashshare\Service\Network\ShareCount();
+    $shareCount = new \Mashshare\Mashshare();
     
-    //$init = new \Mashshare\Mashshare();
 }
 
 /**

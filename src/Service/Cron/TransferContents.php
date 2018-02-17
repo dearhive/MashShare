@@ -109,12 +109,15 @@ class TransferContents
         {
             wp_unschedule_event($cronSchedule, self::CRON_NAME);
         }
-        elseif (false === $cronSchedule && ShareCount::CRON_SETTINGS_VALUE !== $settings['caching_method'])
+        elseif (
+             (false === $cronSchedule && ShareCount::CRON_SETTINGS_VALUE !== $settings['caching_method']) ||
+             ($cronSchedule && ShareCount::CRON_SETTINGS_VALUE === $settings['caching_method'])
+        )
         {
             return;
         }
 
-        wp_schedule_event(current_time('timestamp'), 'sixMin', self::CRON_NAME);
+        wp_schedule_event(current_time('timestamp'), self::CRON_TIMER_KEY, self::CRON_NAME);
     }
 
     public function addContents()
