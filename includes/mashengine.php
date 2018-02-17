@@ -332,9 +332,9 @@ class mashengine {
 
     public function outputDebug() {
         global $mashsb_options;
-
         if( current_user_can( 'install_plugins' ) && isset( $mashsb_options['debug_mode'] ) ) {
             echo '<div class="mash-debug" style="display:block;z-index:250000;font-size:11px;text-align:center;">';
+            $this->debug_notices[] = (false === get_transient( 'timeout_mashsb_rate_limit' ) ? '' : 'FB rate limit active. Shares will be collected again in ' . getRemainingRateLimitTime() . 'min.');
             var_dump( $this->debug_notices );
             echo '</div>';
         }
