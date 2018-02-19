@@ -95,8 +95,8 @@ class ShareCount
                 ->setErrors($serviceShareCount->getErrors())
                 ->update()
             ;
-            +
-             $now    = new DateTime();
+            
+             $now    = new \DateTime();
              $minute = $content->getLastUpdateAt()->format('i');
  
              $increment = 1;
@@ -105,7 +105,7 @@ class ShareCount
              {
                  $increment = 2;
              }
- 
+              
              $content->setLastUpdateAt($now)
                      ->setNextUpdateAt($content->getLastUpdateAt()->modify('+' . $increment .  ' hour'))
                      ->save()

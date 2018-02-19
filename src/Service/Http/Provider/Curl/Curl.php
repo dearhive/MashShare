@@ -48,6 +48,7 @@ class Curl implements ProviderInterface
     {
         $this->setOptions(array(
             CURLOPT_RETURNTRANSFER  => true,
+            CURLOPT_VERBOSE         => false,
             CURLOPT_AUTOREFERER     => true,
             CURLOPT_FOLLOWLOCATION  => true,
             CURLOPT_MAXREDIRS       => 10,
@@ -57,7 +58,7 @@ class Curl implements ProviderInterface
             CURLOPT_USERAGENT       => 'MASHSHARE 4.0.0 (Curl)',
             CURLOPT_CONNECTTIMEOUT  => 30,
             CURLOPT_TIMEOUT         => 30
-        ));
+            ));
     }
 
     /**

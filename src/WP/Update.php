@@ -37,8 +37,9 @@ class Update
 
         $version = get_option(Mashshare::OPTION_NAME, '1.0');
 
-        if ($version && version_compare($version, '4.0.0') < 1)
+        if ($version && version_compare($version, '4.0.0', '>') )
         {
+           //wp_die($version);
             return;
         }
 

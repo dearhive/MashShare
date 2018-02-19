@@ -38,7 +38,7 @@ class ShareCount
     /**
      * @var string
      */
-    private $facebookAccessToken;
+    //private $facebookAccessToken;
 
     /**
      * @var array
@@ -60,10 +60,10 @@ class ShareCount
             $this->setFacebookCountType($settings['facebook_count_mode']);
         }
 
-        if (isset($settings['fb_access_token']) && !empty($settings['fb_access_token']))
-        {
-            $this->setFacebookAccessToken($settings['fb_access_token']);
-        }
+//        if (isset($settings['fb_access_token']) && !empty($settings['fb_access_token']))
+//        {
+//            $this->setFacebookAccessToken($settings['fb_access_token']);
+//        }
     }
 
     /**
@@ -130,22 +130,22 @@ class ShareCount
     /**
      * @return string
      */
-    public function getFacebookAccessToken()
-    {
-        return $this->facebookAccessToken;
-    }
+//    public function getFacebookAccessToken()
+//    {
+//        return $this->facebookAccessToken;
+//    }
 
     /**
      * @param string $facebookAccessToken
      *
      * @return $this
      */
-    public function setFacebookAccessToken($facebookAccessToken)
-    {
-        $this->facebookAccessToken = $facebookAccessToken;
-
-        return $this;
-    }
+//    public function setFacebookAccessToken($facebookAccessToken)
+//    {
+//        $this->facebookAccessToken = $facebookAccessToken;
+//
+//        return $this;
+//    }
 
     /**
      * @return array
@@ -206,7 +206,7 @@ class ShareCount
             if ($service instanceof \Mashshare\Service\Network\Facebook\ShareCount)
             {
                 $service->setType($this->getFacebookCountType());
-                $service->setToken($this->getFacebookAccessToken() ? :null);
+                //$service->setToken($this->getFacebookAccessToken() ? :null);
             }
 
             $service->sendRequest();

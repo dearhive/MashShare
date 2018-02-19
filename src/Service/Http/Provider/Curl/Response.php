@@ -69,7 +69,7 @@ class Response implements ResponseInterface
 
         $headers = array();
 
-        foreach (explode("\r\n", $headersText) as $i => $line)
+        foreach (explode("\r\n", $headersText) as $key => $line)
         {
             list ($key, $value) = explode(': ', $line);
 

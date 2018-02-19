@@ -36,7 +36,8 @@ class ShareCount extends AbstractShareCountBase
      */
     protected function getApiUri()
     {
-        return $this->getToken() ? self::API_OAUTH_URI : self::API_URI;
+        //return $this->getToken() ? self::API_OAUTH_URI : self::API_URI;
+        return self::API_URI;
     }
 
     /**
@@ -48,10 +49,10 @@ class ShareCount extends AbstractShareCountBase
             'id' => $this->getUrl(),
         );
 
-        if ($this->getToken())
-        {
-            $options['access_token'] = $this->getToken();
-        }
+//        if ($this->getToken())
+//        {
+//            $options['access_token'] = $this->getToken();
+//        }
 
         return $options;
     }

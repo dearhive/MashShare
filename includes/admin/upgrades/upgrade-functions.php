@@ -47,7 +47,6 @@ function mashsb_do_automatic_upgrades() {
 
     // New update / upgrade
     $updater = new \Mashshare\WP\Update();
-
     $updater->update();
 
 }
