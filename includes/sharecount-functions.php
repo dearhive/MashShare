@@ -29,7 +29,7 @@ function mashsb_rate_limit_exceeded(){
 
 
     /**
-     * Make sure that requests do not exceed 1req / 25second
+     * Make sure that requests do not exceed 1req / 60second
      * @return boolean
      */
     function mashsb_is_req_limited() {
@@ -38,7 +38,7 @@ function mashsb_rate_limit_exceeded(){
         $data_timeout = get_option('_transient_timeout_mashsb_limit_req');
         
         if (false === $data_timeout || empty($data_timeout) || $data_timeout < time() ){
-            set_transient('mashsb_limit_req', '1', 25);
+            set_transient('mashsb_limit_req', '1', 60);
             $mashsb_debug[] = 'Temp Rate Limit not exceeded';
             return false;
         }

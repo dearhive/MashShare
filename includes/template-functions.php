@@ -89,6 +89,23 @@ function mashsbGetShareMethod( $mashsbSharesObj ) {
 function mashsbGetNonPostShares( $url ) {
     global $mashsb_debug;
     
+    /*
+     * Deactivate share count on:
+     * - 404 pages
+     * - search page
+     * - empty url
+     * - disabled permalinks
+     * - disabled share count setting
+     * - rate limit exceeded
+     * - deprecated: admin pages (we need to remove this for themes which are using a bad infinite scroll implementation where is_admin() is always true)
+     */
+
+       
+    if( is_404() || is_search() || empty($url) || !mashsb_is_enabled_permalinks() || isset($mashsb_options['disable_sharecount']) || mashsb_rate_limit_exceeded() ) {
+        $mashsb_debug[] = 'MashShare: Share count deactivated';
+        return apply_filters( 'filter_get_sharedcount', 0 );
+    }
+    
     
     // Expiration
     $expiration = mashsb_get_expiration();
@@ -101,13 +118,7 @@ function mashsbGetNonPostShares( $url ) {
         
         // Its request limited
         if ( mashsb_is_req_limited() ){
-            $shares = get_transient( 'mashcount_' . md5( $url_clean ) );
-            if( isset( $shares ) && is_numeric( $shares ) ) {
-                MASHSB()->logger->info( 'mashsbGetNonPostShares() get shares from get_transient. URL: ' . $url_clean . ' SHARES: ' . $shares );
-                return $shares + getFakecount();
-            } else {
-                return 0 + getFakecount(); // we need a result
-            }
+            mashsbGetShareCountFromTransient($url_clean);
         }
 
         // Regenerate the data and save the transient
@@ -121,17 +132,22 @@ function mashsbGetNonPostShares( $url ) {
         MASHSB()->logger->info( 'mashsbGetNonPostShares set_transient - shares:' . $mashsbShareCounts->total . ' url: ' . $url_clean );
         return $mashsbShareCounts->total + getFakecount();
     } else {
-        // Get shares from transient cache
-        
-        $shares = get_transient( 'mashcount_' . md5( $url_clean ) );
-
+         mashsbGetShareCountFromTransient($url_clean);
+    }
+}
+/**
+ * get share count from transient
+ * @param type string
+ * @return int
+ */
+function mashsbGetShareCountFromTransient($url){
+        $shares = get_transient( 'mashcount_' . md5( $url ) );
         if( isset( $shares ) && is_numeric( $shares ) ) {
-            MASHSB()->logger->info( 'mashsbGetNonPostShares() get shares from get_transient. URL: ' . $url_clean . ' SHARES: ' . $shares );
+            MASHSB()->logger->info( 'mashsbGetNonPostShares() get shares from get_transient. URL: ' . $url . ' SHARES: ' . $shares );
             return $shares + getFakecount();
         } else {
             return 0 + getFakecount(); // we need a result
         }
-    }
 }
 
 
@@ -145,6 +161,23 @@ function mashsbGetNonPostShares( $url ) {
 function getSharedcount( $url ) {
     global $mashsb_options, $post, $mashsb_sharecount, $mashsb_debug; // todo test a global share count var if it reduces the amount of requests
     
+    /*
+     * Deactivate share count on:
+     * - 404 pages
+     * - search page
+     * - empty url
+     * - disabled permalinks
+     * - disabled share count setting
+     * - rate limit exceeded
+     * - deprecated: admin pages (we need to remove this for themes which are using a bad infinite scroll implementation where is_admin() is always true)
+     */
+
+       
+    if( is_404() || is_search() || empty($url) || !mashsb_is_enabled_permalinks() || isset($mashsb_options['disable_sharecount']) || mashsb_rate_limit_exceeded() ) {
+        $mashsb_debug[] = 'MashShare: Share count deactivated';
+        return apply_filters( 'filter_get_sharedcount', 0 );
+    }
+    
     $mashsb_debug[] = 'Trying to get share count!';
         
     // Return global share count variable to prevent multiple execution
@@ -156,21 +189,6 @@ function getSharedcount( $url ) {
     // Remove mashsb-refresh query parameter
     $url = mashsb_sanitize_url($url);
     
-    /*
-     * Deactivate share count on:
-     * - 404 pages
-     * - search page
-     * - empty url
-     * - disabled permalinks
-     * - disabled share count setting
-     * - deprecated: admin pages (we need to remove this for themes which are using a bad infinite scroll implementation where is_admin() is always true)
-     */
-
-       
-    if( is_404() || is_search() || empty($url) || !mashsb_is_enabled_permalinks() || isset($mashsb_options['disable_sharecount']) ) {
-        $mashsb_debug[] = 'MashShare: Trying to get share count deactivated';
-        return apply_filters( 'filter_get_sharedcount', 0 );
-    }
 
     /* 
      * Return share count on non singular pages when url is defined
