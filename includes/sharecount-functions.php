@@ -14,6 +14,155 @@ if( !defined( 'ABSPATH' ) ) {
     exit;
 }
 
+/**
+ * Save fb share count asnycronically via ajax
+ */
+function mashsb_set_fb_sharecount() {
+   global $mashsb_options;
+
+   $postId = isset( $_POST['postid'] ) ? $_POST['postid'] : false;
+   
+   // Ajax result
+   $result = isset( $_POST['shares'] ) ? $_POST['shares'] : false;
+   $comment_count = isset( $result['comment_count'] ) ? $result['comment_count'] : 0;
+   $share_count = isset( $result['share_count'] ) ? $result['share_count'] : 0;
+   $url = isset( $result['share_url'] ) ? $result['share_url'] : '';
+   
+   if( !$postId || empty($postId) ){
+      wp_die(mashsb_set_fb_shares_transient( $url, $comment_count, $share_count) );
+   }
+
+   // Cache results
+   $cacheJsonShares = mashsb_get_jsonshares_post_meta( $postId );
+   $cacheTotalShares = mashsb_get_total_shares_post_meta( $postId );
+   
+   // New shares
+   $cacheJsonShares['facebook_total'] = $share_count + $comment_count;
+   $cacheJsonShares['facebook_likes'] = $share_count;
+   $cacheJsonShares['facebook_comments'] = $comment_count;
+
+   // Update shares but only if new shares are larger than cached values
+   // Performance reasons AND to ensure that shares does not get lost if page permalink is changed
+   update_post_meta( $postId, 'mashsb_jsonshares', json_encode($cacheJsonShares) );
+   
+   $newTotalShares = mashsb_get_total_shares($postId);
+   if ($newTotalShares > $cacheTotalShares){
+      update_post_meta( $postId, 'mashsb_shares', $newTotalShares );
+   }
+   wp_die( json_encode( $cacheJsonShares ) );
+}
+
+add_action( 'wp_ajax_mashsb_set_fb_shares', 'mashsb_set_fb_sharecount' );
+add_action( 'wp_ajax_nopriv_mashsb_set_fb_shares', 'mashsb_set_fb_sharecount' );
+
+/**
+ * 
+ * @param string $url
+ * @param int $comment_count
+ * @param int $share_count
+ * @return int
+ */
+function mashsb_set_fb_shares_transient( $url, $comment_count = 0, $share_count = 0) {
+   if (empty($url)){
+      return 0;
+   } 
+   
+   $mode = isset( $mashsb_options['facebook_count_mode'] ) ? $mashsb_options['facebook_count_mode'] : 'total';
+
+   // Expiration
+   $expiration = mashsb_get_expiration();
+
+   // Remove variables, parameters and trailingslash
+   $url_clean = mashsb_sanitize_url( $url );
+   
+   // Get existing share count
+   $current_shares = mashsbGetShareCountFromTransient( $url_clean );
+
+
+      // It's request limited
+      if( mashsb_is_req_limited() ) {
+         return mashsbGetShareCountFromTransient( $url_clean );
+      }
+
+      // Regenerate the data and save the transient
+
+      // Get the share counts
+      if( $mode === 'total' ) {
+         $shares = $current_shares + $comment_count + $share_count;
+      }
+      if( $mode === 'shares' ) {
+         $shares = $current_shares + $share_count;
+      }
+      // Update shares only if resulted shares are more than stored shares
+      if ($shares > $current_shares){
+         // Set the transient and return shares
+         set_transient( 'mashcount_' . md5( $url_clean ), $shares, $expiration );
+         MASHSB()->logger->info( 'mashsb_set_fb_shares_transient set_transient - shares:' . $shares . ' url: ' . $url_clean );
+      }
+      return $shares + getFakecount();
+   
+}
+
+/**
+ * Get post meta mashsb_jsonshares
+ * @param bool $postId
+ * @return array
+ */
+function mashsb_get_jsonshares_post_meta( $postId = false ) {
+   $result = array();
+
+   if( $postId === false )
+      return $result;
+
+   $result = json_decode(get_post_meta( $postId, 'mashsb_jsonshares', true ), true);
+
+   return $result;
+}
+
+/**
+ * Get total shares
+ * @param int  $postId
+ * @return int
+ */
+function mashsb_get_total_shares($postId){
+      $mode = isset( $mashsb_options['facebook_count_mode'] ) ? $mashsb_options['facebook_count_mode'] : 'total';
+   
+      $result = json_decode(get_post_meta( $postId, 'mashsb_jsonshares', true ), true);
+      
+      $fbtotal = isset($result['facebook_total']) ? $result['facebook_total'] : 0;
+      $fbshares = isset($result['facebook_likes']) ? $result['facebook_likes'] : 0;
+      $fbcomments = isset($result['facebook_comments']) ? $result['facebook_comments'] : 0;
+      $twitter = isset($result['twitter']) ? $result['twitter'] : 0;
+      $google = isset($result['google']) ? $result['google'] : 0;
+      $pinterest = isset($result['pinterest']) ? $result['pinterest'] : 0;
+      $linkedin = isset($result['linkedin']) ? $result['linkedin'] : 0;
+      $stumbleupon = isset($result['stumbleupon']) ? $result['stumbleupon'] : 0;
+      
+      
+   if( $mode === 'total' ) {
+      $shares = $fbtotal + $twitter + $google + $pinterest + $linkedin + $stumbleupon;
+   }
+   if( $mode === 'shares' ) {
+      $shares = $fbshares + $twitter + $google + $pinterest + $linkedin + $stumbleupon;
+   }
+   
+   return (int)$shares;
+
+}
+
+/**
+ * Get post meta mashsb_shares
+ * @param bool $postId
+ * @return mixed string|boolean
+ */
+function mashsb_get_total_shares_post_meta($postId = false){
+   if ($postId === false)
+      return false;
+   
+   $result = get_post_meta( $postId, 'mashsb_shares', true );
+   
+   return $result;        
+}
 
 /**
  * Check if the facebook rate limit has been exceeded
@@ -38,7 +187,7 @@ function mashsb_rate_limit_exceeded(){
         $data_timeout = get_option('_transient_timeout_mashsb_limit_req');
         
         if (false === $data_timeout || empty($data_timeout) || $data_timeout < time() ){
-            set_transient('mashsb_limit_req', '1', 60);
+            set_transient('mashsb_limit_req', '1', 5);
             $mashsb_debug[] = 'Temp Rate Limit not exceeded';
             return false;
         }
@@ -78,53 +227,87 @@ function mashsb_is_cache_refresh() {
      * 
         Exit here to save cpu time
      */
-
-    if( is_404() || is_search() || is_admin() || !mashsb_is_enabled_permalinks() ) {
-        return false;
+    
+    if( is_admin() || is_404() || is_search() || !mashsb_is_enabled_permalinks() ) {
+         return false;
     }
+    
+    /* 
+     * Refreshing cache on multiple blog posts like categories will lead 
+     * to high load and multiple API requests so we only check
+     * the main url
+    */
+   if( !is_singular() || !isset($post->ID) ) {
+      return false;
+    }
+      $last_updated = 0;
+      $last_updated = get_post_meta( $post->ID, 'mashsb_timestamp', true );
+
+//    else {
+//        $url = mashsb_get_main_url();
+//        if (empty($url))
+//           return false;
+//        $transient = '_transient_timeout_mashcount_' . md5( $url );
+//        $last_updated = get_option( $transient ) - mashsb_get_expiration();      
+//    }
+    
+    // No timestamp! So let's create cache for the first time
+    if( empty( $last_updated ) || $last_updated < 0 ) {
+        return true;
+    }
+    
+    // The caching expiration
+    $expiration = mashsb_get_expiration();
+    $next_update = $last_updated + $expiration;
+    
+    // Refresh Cache when last update plus expiration time is older than current time
+    if( ($last_updated + $expiration) <= time() ) {
+        return true;
+    }
+    
 
     // New cache on singular pages
     // 
     // Refreshing cache on blog posts like categories will lead 
     // to high load and multiple API requests so we only check 
     // the main url on these other pages
-    if( is_singular() ) {
-        // last updated timestamp 
-        $last_updated = get_post_meta( $post->ID, 'mashsb_timestamp', true );
-        if( !empty( $last_updated ) ) {
-            MASHSB()->logger->info( 'mashsb_is_cache_refresh - is_singular() url: ' . get_permalink($post->ID) . ' : last updated:' . date( 'Y-m-d H:i:s', $last_updated ) );
-        }
-    } else if( mashsb_get_main_url() ) {
-
-        // Get transient timeout and calculate last update time
-        $url = mashsb_get_main_url();
-        $transient = '_transient_timeout_mashcount_' . md5( mashsb_get_main_url() );
-        $last_updated = get_option( $transient ) - mashsb_get_expiration();
-        if( !empty( $last_updated ) ) {
-            MASHSB()->logger->info( 'mashsb_is_cache_refresh() mashsb_get_main_url() url: ' . $url . ' last updated:' . date( 'Y-m-d H:i:s', $last_updated ) );
-        }
-    } else {
-        // No valid URL so do not refresh cache
-        MASHSB()->logger->info( 'mashsb_is_cache_refresh: No valid URL - do not refresh cache' );
-        return false;
-    }
-
-    // No timestamp so let's create cache for the first time
-    if( empty( $last_updated ) ) {
-        MASHSB()->logger->info( 'mashsb_is_cache_refresh: No Timestamp. Refresh Cache' );
-        return true;
-    }
-
-    // The caching expiration
-    $expiration = mashsb_get_expiration();
-    $next_update = $last_updated + $expiration;
-    MASHSB()->logger->info( 'mashsb_is_cache_refresh. Next update ' . date( 'Y-m-d H:i:s', $next_update ) . ' current time: ' . date( 'Y-m-d H:i:s', time() ) );
-
-    // Refresh Cache when last update plus expiration is older than current time
-    if( ($last_updated + $expiration) <= time() ) {
-        MASHSB()->logger->info( 'mashsb_is_cache_refresh: Refresh Cache!' );
-        return true;
-    }
+//    if( is_singular() && isset($post->ID) ) {
+//        // last updated timestamp 
+//        $last_updated = get_post_meta( $post->ID, 'mashsb_timestamp', true );
+//        if( !empty( $last_updated ) ) {
+//            MASHSB()->logger->info( 'mashsb_is_cache_refresh - is_singular() url: ' . get_permalink($post->ID) . ' : last updated:' . date( 'Y-m-d H:i:s', $last_updated ) );
+//        }
+//    } else if( mashsb_get_main_url() ) {
+//
+//        // Get transient timeout and calculate last update time
+//        $url = mashsb_get_main_url();
+//        $transient = '_transient_timeout_mashcount_' . md5( $url );
+//        $last_updated = get_option( $transient ) - mashsb_get_expiration();
+//        if( !empty( $last_updated ) ) {
+//            MASHSB()->logger->info( 'mashsb_is_cache_refresh() mashsb_get_main_url() url: ' . $url . ' last updated:' . date( 'Y-m-d H:i:s', $last_updated ) );
+//        }
+//    } else {
+//        // No valid URL so do not refresh cache
+//        MASHSB()->logger->info( 'mashsb_is_cache_refresh: No valid URL - do not refresh cache' );
+//        return false;
+//    }
+//
+//    // No timestamp so let's create cache for the first time
+//    if( empty( $last_updated ) ) {
+//        MASHSB()->logger->info( 'mashsb_is_cache_refresh: No Timestamp. Refresh Cache' );
+//        return true;
+//    }
+//
+//    // The caching expiration
+//    $expiration = mashsb_get_expiration();
+//    $next_update = $last_updated + $expiration;
+//    MASHSB()->logger->info( 'mashsb_is_cache_refresh. Next update ' . date( 'Y-m-d H:i:s', $next_update ) . ' current time: ' . date( 'Y-m-d H:i:s', time() ) );
+//
+//    // Refresh Cache when last update plus expiration time is older than current time
+//    if( ($last_updated + $expiration) <= time() ) {
+//        MASHSB()->logger->info( 'mashsb_is_cache_refresh: Refresh Cache!' );
+//        return true;
+//    }
 }
 
 /**
@@ -195,6 +378,8 @@ function mashsb_get_expiration() {
     global $mashsb_options;
     $expiration = (isset( $mashsb_options['caching_method'] ) && $mashsb_options['caching_method'] == 'async_cache') ? mashsb_get_expiration_method_async() : mashsb_get_expiration_method_loading();
 
+    $expiration = 10;
+    
     // Set expiration time to zero if debug mode is enabled or cache deactivated
     if( MASHSB_DEBUG || isset( $mashsb_options['disable_cache'] ) ) {
         $expiration = 0;
@@ -202,53 +387,6 @@ function mashsb_get_expiration() {
 
     return ( int ) $expiration;
 }
-
-/**
- * Check if we can use the REST API
- * 
- * @deprecated not used
- * @return boolean true
- */
-//function mashsb_allow_rest_api() {
-//    if( version_compare( get_bloginfo( 'version' ), '4.4.0', '>=' ) ) {
-//        return true;
-//    }
-//}
-
-/**
- * Check via REST API if cache should be updated
- * 
- * @since 3.0.0
- * @deprecated not used
- * @return string numerical 
- */
-//function mashsb_restapi_refresh_cache( $request ) {
-//    if( mashsb_is_cache_refresh() ) {
-//        return '1';
-//    } else {
-//        return '0';
-//    }
-//}
-
-/**
- * Register the API route
- * Used in WP 4.4 and later The WP REST API got a better performance than native ajax endpoints
- * Endpoint: /wp-json/mashshare/v1/verifycache/
- * 
- * @since 3.0.0
- * @deprecated not used
- * */
-//if( mashsb_allow_rest_api() ) {
-//    add_action( 'rest_api_init', 'mashsb_rest_routes' );
-//}
-//
-//function mashsb_rest_routes() {
-//    register_rest_route( 'mashshare/v1', '/verifycache/', array(
-//        'methods' => \WP_REST_Server::READABLE,
-//        'callback' => 'mashsb_restapi_refresh_cache'
-//            )
-//    );
-//}
 
 /**
  * Check if permalinks are enabled
@@ -274,6 +412,8 @@ function mashsb_get_main_url() {
     $url = home_url( add_query_arg( array(), $wp->request ) );
     if( !empty( $url ) ) {
         return mashsb_sanitize_url( $url );
+    } else {
+       return '';
     }
 }
 

@@ -57,25 +57,6 @@ function mashsb_save_order(){
 add_action ('wp_ajax_mashsb_update_order', 'mashsb_save_order');
 
 /**
- * Force Facebook to rescrape site content after saving post
- * 
- * @todo check if blocking=>false is working as expected
- * @global array $post
- * 
- * @removed for testing
- */
-//function mashsb_rescrape_fb_debugger(){
-//    global $post;
-//    if (!isset($post)){
-//        return;
-//    }
-//    $url = get_permalink($post->ID);
-//    $args = array('timeout' => 5, 'blocking' => false);
-//    $body = wp_remote_retrieve_body( wp_remote_get('https://graph.facebook.com/?id=' . $url, $args) );
-//}
-//add_action('save_post', 'mashsb_rescrape_fb_debugger' );
-
-/**
  * Purge the MashShare Cache
  * 
  * @global array $post

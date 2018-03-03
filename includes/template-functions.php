@@ -102,7 +102,7 @@ function mashsbGetNonPostShares( $url ) {
 
        
     if( is_404() || is_search() || empty($url) || !mashsb_is_enabled_permalinks() || isset($mashsb_options['disable_sharecount']) || mashsb_rate_limit_exceeded() ) {
-        $mashsb_debug[] = 'MashShare: Share count deactivated';
+        $mashsb_debug[] = 'MashShare: Share count (temporary) disabled';
         return apply_filters( 'filter_get_sharedcount', 0 );
     }
     
@@ -172,9 +172,10 @@ function getSharedcount( $url ) {
      * - deprecated: admin pages (we need to remove this for themes which are using a bad infinite scroll implementation where is_admin() is always true)
      */
 
+    //|| mashsb_rate_limit_exceeded()
        
-    if( is_404() || is_search() || empty($url) || !mashsb_is_enabled_permalinks() || isset($mashsb_options['disable_sharecount']) || mashsb_rate_limit_exceeded() ) {
-        $mashsb_debug[] = 'MashShare: Share count deactivated';
+    if( is_404() || is_search() || empty($url) || !mashsb_is_enabled_permalinks() || isset($mashsb_options['disable_sharecount']) ) {
+        $mashsb_debug[] = 'MashShare: Share count (temporary) disabled';
         return apply_filters( 'filter_get_sharedcount', 0 );
     }
     

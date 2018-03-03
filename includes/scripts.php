@@ -37,7 +37,8 @@ function mashsb_load_scripts( $hook ) {
         return;
     }
 
-    $url = mashsb_get_url();
+    //$url = mashsb_get_url();
+    $url = mashsb_get_main_url();
     $title = urlencode( html_entity_decode( the_title_attribute( 'echo=0' ), ENT_COMPAT, 'UTF-8' ) );
     $title = str_replace( '#', '%23', $title );
     $titleclean = esc_html( $title );
@@ -63,9 +64,12 @@ function mashsb_load_scripts( $hook ) {
     wp_enqueue_script( 'mashsb', $js_dir . 'mashsb' . $suffix . '.js', array('jquery'), MASHSB_VERSION, $in_footer );
     //wp_enqueue_script( 'element-queries', $js_dir . 'ElementQueries' . '.js', array('jquery'), MASHSB_VERSION, $in_footer );
     
-    !isset( $mashsb_options['disable_sharecount'] ) ? $shareresult = getSharedcount( $url ) : $shareresult = 0;
+    //!isset( $mashsb_options['disable_sharecount'] ) ? $shareresult = getSharedcount( $url ) : $shareresult = 0;
+    
+    $refresh = mashsb_is_cache_refresh() ? 1 : 0;
+    
     wp_localize_script( 'mashsb', 'mashsb', array(
-        'shares' => $shareresult,
+        'shares' => isset($post->ID) ? mashsb_get_total_shares_post_meta($post->ID) : false,
         'round_shares' => isset( $mashsb_options['mashsharer_round'] ),
         /* Do not animate shares on blog posts. The share count would be wrong there and performance bad */
         'animate_shares' => isset( $mashsb_options['animate_shares'] ) && is_singular() ? 1 : 0,
@@ -81,8 +85,12 @@ function mashsb_load_scripts( $hook ) {
         'singular' => is_singular() ? 1 : 0,
         'twitter_popup' => isset( $mashsb_options['twitter_popup'] ) ? 0 : 1,
         //'restapi' => $restapi
-        'refresh' => mashsb_is_cache_refresh() ? 1 : 0
+        'refresh' => $refresh,
+        'nonce' => wp_create_nonce( "mashsb-nonce" ),
+        'postid' => isset($post->ID) && is_singular() ? $post->ID : false,
+        'servertime' => time()
     ) );
+    
 }
 
 /**

@@ -10,6 +10,7 @@ class mashengine {
     private $debug_notices;
 
     function __construct( $url, $timeout = 10 ) {
+        //$url = 'https://mashshare.net';
         // remove http and https
         $url_host_path = preg_replace( "(^https?://)", "", $url );
         // build new urls
@@ -17,6 +18,7 @@ class mashengine {
         $this->https_scheme_url = rawurlencode( 'https://' . $url_host_path );
 
         $this->timeout = $timeout;
+        //$this->url = rawurlencode( $url ); // Original URL
         $this->url = rawurlencode( $url ); // Original URL
     }
 
@@ -207,12 +209,12 @@ class mashengine {
             $RollingCurlX->addRequest( "http://public.newsharecounts.com/count.json?url=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
             $RollingCurlX->addRequest( "https://plusone.google.com/_/+1/fastbutton?url=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('google'), $headers );
             $RollingCurlX->addRequest( "https://plusone.google.com/_/+1/fastbutton?url=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('google'), $headers );
-            $RollingCurlX->addRequest( "http://api.pinterest.com/v1/urls/count.json?url=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('pinterest'), $headers );
-            $RollingCurlX->addRequest( "http://api.pinterest.com/v1/urls/count.json?url=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('pinterest'), $headers );
+            $RollingCurlX->addRequest( "https://api.pinterest.com/v1/urls/count.json?url=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('pinterest'), $headers );
+            $RollingCurlX->addRequest( "https://api.pinterest.com/v1/urls/count.json?url=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('pinterest'), $headers );
         } else {
             $RollingCurlX->addRequest( "http://public.newsharecounts.com/count.json?url=" . $this->url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
             $RollingCurlX->addRequest( "https://plusone.google.com/_/+1/fastbutton?url=" . $this->url, $post_data, array($this, 'getCount'), array('google'), $headers );
-            $RollingCurlX->addRequest( "http://api.pinterest.com/v1/urls/count.json?url=" . $this->url, $post_data, array($this, 'getCount'), array('pinterest'), $headers );
+            $RollingCurlX->addRequest( "https://api.pinterest.com/v1/urls/count.json?url=" . $this->url, $post_data, array($this, 'getCount'), array('pinterest'), $headers );
         }
         
         $RollingCurlX->addRequest( "https://www.linkedin.com/countserv/count/share?format=json&url=" . $this->url, $post_data, array($this, 'getCount'), array('linkedin'), $headers );
@@ -267,7 +269,6 @@ class mashengine {
                     }
                     break;
                 case "google":
-                    //preg_match( '/window\.__SSR = {c: ([\d]+)TEST/', $data, $matches );
                     preg_match( "#window\.__SSR = {c: ([\d]+)#", $data, $matches );
                     if( isset( $matches[0] ) )
                         $count = str_replace( 'window.__SSR = {c: ', '', $matches[0] );
@@ -335,7 +336,7 @@ class mashengine {
 
         if( current_user_can( 'install_plugins' ) && isset( $mashsb_options['debug_mode'] ) ) {
             echo '<div class="mash-debug" style="display:block;z-index:250000;font-size:11px;text-align:center;">';
-            $this->debug_notices[] = (false === get_transient( 'timeout_mashsb_rate_limit' ) ? '' : 'FB rate limit active. Shares will be collected again in ' . getRemainingRateLimitTime() . 'min.');
+            $this->debug_notices[] = (false === get_transient( 'timeout_mashsb_rate_limit' ) ? '' : 'FB rate limit active. Shares will be collected again in ' . $this->getRemainingRateLimitTime() . 'min.');
             //$this->debug_notices[] = 'MashShare Cache will be refreshed in ' . $time. 'min';
             var_dump( $this->debug_notices );
             echo '</div>';
