@@ -378,7 +378,7 @@ function mashsb_get_expiration() {
     global $mashsb_options;
     $expiration = (isset( $mashsb_options['caching_method'] ) && $mashsb_options['caching_method'] == 'async_cache') ? mashsb_get_expiration_method_async() : mashsb_get_expiration_method_loading();
 
-    $expiration = 10;
+    //$expiration = 10;
     
     // Set expiration time to zero if debug mode is enabled or cache deactivated
     if( MASHSB_DEBUG || isset( $mashsb_options['disable_cache'] ) ) {

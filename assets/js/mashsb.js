@@ -26,7 +26,7 @@ jQuery(document).ready(function ($) {
             return false;
         }
         
-        mashsb.share_url = 'https://www.google.de';
+        //mashsb.share_url = 'https://www.google.de';
 
         var facebookGraphURL = 'https://graph.facebook.com/?id=' + mashsb.share_url;
         $.ajax({
