@@ -205,6 +205,10 @@ function mashsb_rate_limit_exceeded(){
 function mashsb_is_cache_refresh() {
     global $post, $mashsb_options;
     
+    // Force Cache Reload
+    if( isset( $_GET['mashsb-refresh'] ) ) {
+        return true;
+    }
     
     // Debug mode or cache activated
     if( MASHSB_DEBUG || isset( $mashsb_options['disable_cache'] ) ) {
