@@ -18,7 +18,6 @@ if( !defined( 'ABSPATH' ) ) {
  * Save fb share count asnycronically via ajax
  */
 function mashsb_set_fb_sharecount() {
-   global $mashsb_options;
 
    $postId = isset( $_POST['postid'] ) ? $_POST['postid'] : false;
    
@@ -26,10 +25,11 @@ function mashsb_set_fb_sharecount() {
    $result = isset( $_POST['shares'] ) ? $_POST['shares'] : false;
    $comment_count = isset( $result['comment_count'] ) ? $result['comment_count'] : 0;
    $share_count = isset( $result['share_count'] ) ? $result['share_count'] : 0;
-   $url = isset( $result['share_url'] ) ? $result['share_url'] : '';
+   //$url = isset( $result['share_url'] ) ? $result['share_url'] : '';
    
    if( !$postId || empty($postId) ){
-      wp_die(mashsb_set_fb_shares_transient( $url, $comment_count, $share_count) );
+      wp_die('no post id');
+      //wp_die(mashsb_set_fb_shares_transient( $url, $comment_count, $share_count) );
    }
 
    // Cache results
@@ -62,46 +62,46 @@ add_action( 'wp_ajax_nopriv_mashsb_set_fb_shares', 'mashsb_set_fb_sharecount' );
  * @param int $share_count
  * @return int
  */
-function mashsb_set_fb_shares_transient( $url, $comment_count = 0, $share_count = 0) {
-   if (empty($url)){
-      return 0;
-   } 
-   
-   $mode = isset( $mashsb_options['facebook_count_mode'] ) ? $mashsb_options['facebook_count_mode'] : 'total';
-
-   // Expiration
-   $expiration = mashsb_get_expiration();
-
-   // Remove variables, parameters and trailingslash
-   $url_clean = mashsb_sanitize_url( $url );
-   
-   // Get existing share count
-   $current_shares = mashsbGetShareCountFromTransient( $url_clean );
-
-
-      // It's request limited
-      if( mashsb_is_req_limited() ) {
-         return mashsbGetShareCountFromTransient( $url_clean );
-      }
-
-      // Regenerate the data and save the transient
-
-      // Get the share counts
-      if( $mode === 'total' ) {
-         $shares = $current_shares + $comment_count + $share_count;
-      }
-      if( $mode === 'shares' ) {
-         $shares = $current_shares + $share_count;
-      }
-      // Update shares only if resulted shares are more than stored shares
-      if ($shares > $current_shares){
-         // Set the transient and return shares
-         set_transient( 'mashcount_' . md5( $url_clean ), $shares, $expiration );
-         MASHSB()->logger->info( 'mashsb_set_fb_shares_transient set_transient - shares:' . $shares . ' url: ' . $url_clean );
-      }
-      return $shares + getFakecount();
-   
-}
+//function mashsb_set_fb_shares_transient( $url, $comment_count = 0, $share_count = 0) {
+//   if (empty($url)){
+//      return 0;
+//   } 
+//   
+//   $mode = isset( $mashsb_options['facebook_count_mode'] ) ? $mashsb_options['facebook_count_mode'] : 'total';
+//
+//   // Expiration
+//   $expiration = mashsb_get_expiration();
+//
+//   // Remove variables, parameters and trailingslash
+//   $url_clean = mashsb_sanitize_url( $url );
+//   
+//   // Get existing share count
+//   $current_shares = mashsbGetShareCountFromTransient( $url_clean );
+//
+//
+//      // It's request limited
+//      if( mashsb_is_req_limited() ) {
+//         return mashsbGetShareCountFromTransient( $url_clean );
+//      }
+//
+//      // Regenerate the data and save the transient
+//
+//      // Get the share counts
+//      if( $mode === 'total' ) {
+//         $shares = $current_shares + $comment_count + $share_count;
+//      }
+//      if( $mode === 'shares' ) {
+//         $shares = $current_shares + $share_count;
+//      }
+//      // Update shares only if resulted shares are more than stored shares
+//      if ($shares > $current_shares){
+//         // Set the transient and return shares
+//         set_transient( 'mashcount_' . md5( $url_clean ), $shares, $expiration );
+//         MASHSB()->logger->info( 'mashsb_set_fb_shares_transient set_transient - shares:' . $shares . ' url: ' . $url_clean );
+//      }
+//      return $shares + getFakecount();
+//   
+//}
 
 /**
  * Get post meta mashsb_jsonshares

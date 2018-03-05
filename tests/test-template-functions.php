@@ -82,7 +82,7 @@ class TemplateFunctions extends WP_UnitTestCase {
     public function test_mashengine_all_counts() {
         global $mashsb_options;
         
-                sleep(7);
+                sleep(3);
                 
         $url = 'http://google.com';
         //$mash = new mashengine( $url );
@@ -94,7 +94,7 @@ class TemplateFunctions extends WP_UnitTestCase {
     public function test_getSharedcount() {
         global $mashsb_options, $post;
         
-                sleep(7);
+                sleep(3);
         
         //global $mashsb_options;
 
@@ -120,7 +120,7 @@ class TemplateFunctions extends WP_UnitTestCase {
     public function test_getSharedcountJson() {
         global $mashsb_options, $post;
         
-                sleep(7);
+                sleep(3);
 
         //$mashsb_options['fb_access_token'] = 'EAAHag2FMn2UBAAU6ceKGLZCN6PAJ5cWFQ9ZAVoG32qqTRCG0UrosOsOZB8JwsjAJU8RiSuD4gTxWpNwvvc9SRLrVOHcSMkMpnosLvxR3VZCZCEHBmTVKcrJAoRZB6hjrhZCeYxGQwiyoClx7Y0igevbEfcwfwltKkUgfzoCzscqHyaOq2Nwn26k';
         $mashsb_options['mashsb_sharemethod'] = 'mashengine';
@@ -153,41 +153,41 @@ class TemplateFunctions extends WP_UnitTestCase {
         $this->assertGreaterThan( 1000, $facebook_shares );
     }
     
-    public function test_getSharedcountJson_access_token() {
-        global $mashsb_options, $post;
-        
-                sleep(5);
-
-        $mashsb_options['fb_access_token'] = 'EAAHag2FMn2UBAEODVyz8jDC8KDM7rYZAOUbAtzD61BNXiNhO2WQmkj5KvXAsjm2VHcZBRIEjR5uUdORYMTzahnxZBTqt8N6iG58lRyHjz62gqFGIIUlQeR02ZAnT6ZCh8SjfoxaQsYKDNHqltI7D9SRADgZAlS6sMZD';
-        $mashsb_options['mashsb_sharemethod'] = 'mashengine';
-        $mashsb_options['caching_method'] = 'refresh_loading';
-        $mashsb_options['mashsharer_cache'] = 0;
-        $mashsb_options['disable_cache'] = 'true';
-
-        $id = $this->factory->post->create( array('post_type' => 'page') );
-        $this->go_to( get_permalink( $id ) );
-        $post = get_post( $id ); // We need the post object for testing
-        // Delete previous shares
-        delete_post_meta($id, 'mashsb_jsonshares');
-
-
-        $url = 'http://google.com';
-        // Get the share Object
-        $mashsbSharesObj = mashsbGetShareObj( $url );
-        // Get the share count Method
-        $mashsbShareCounts = mashsbGetShareMethod( $mashsbSharesObj );
-        //$this->assertTrue($mashsbShareCounts);
-
-
-        $encode_data = json_encode( $mashsbShareCounts );
-
-        $decode_data = json_decode( $encode_data, true );
-        $this->assertArrayHasKey( 'facebook_total', $decode_data );
-
-
-        $facebook_shares = $mashsbShareCounts->facebook_total;
-        $this->assertGreaterThan( 1000, $facebook_shares );
-    }
+//    public function test_getSharedcountJson_access_token() {
+//        global $mashsb_options, $post;
+//        
+//                sleep(3);
+//
+//        $mashsb_options['fb_access_token'] = 'EAAHag2FMn2UBAEODVyz8jDC8KDM7rYZAOUbAtzD61BNXiNhO2WQmkj5KvXAsjm2VHcZBRIEjR5uUdORYMTzahnxZBTqt8N6iG58lRyHjz62gqFGIIUlQeR02ZAnT6ZCh8SjfoxaQsYKDNHqltI7D9SRADgZAlS6sMZD';
+//        $mashsb_options['mashsb_sharemethod'] = 'mashengine';
+//        $mashsb_options['caching_method'] = 'refresh_loading';
+//        $mashsb_options['mashsharer_cache'] = 0;
+//        $mashsb_options['disable_cache'] = 'true';
+//
+//        $id = $this->factory->post->create( array('post_type' => 'page') );
+//        $this->go_to( get_permalink( $id ) );
+//        $post = get_post( $id ); // We need the post object for testing
+//        // Delete previous shares
+//        delete_post_meta($id, 'mashsb_jsonshares');
+//
+//
+//        $url = 'http://google.com';
+//        // Get the share Object
+//        $mashsbSharesObj = mashsbGetShareObj( $url );
+//        // Get the share count Method
+//        $mashsbShareCounts = mashsbGetShareMethod( $mashsbSharesObj );
+//        //$this->assertTrue($mashsbShareCounts);
+//
+//
+//        $encode_data = json_encode( $mashsbShareCounts );
+//
+//        $decode_data = json_decode( $encode_data, true );
+//        $this->assertArrayHasKey( 'facebook_total', $decode_data );
+//
+//
+//        $facebook_shares = $mashsbShareCounts->facebook_total;
+//        $this->assertGreaterThan( 1000, $facebook_shares );
+//    }
 
     public function test_rate_limit() {
         $url = 'http://graph.facebook.com/?id=http://www.google.com';
@@ -209,7 +209,7 @@ class TemplateFunctions extends WP_UnitTestCase {
     public function test_getSharedcount_async_cache() {
         global $mashsb_options, $post;
         
-                sleep(7);
+                sleep(3);
 
         $mashsb_options['caching_method'] = 'async_cache';
         
