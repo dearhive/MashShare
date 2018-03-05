@@ -18,7 +18,6 @@ add_action( 'wp_enqueue_scripts', 'mashsb_load_scripts', 10 );
 add_action( 'wp_enqueue_scripts', 'mashsb_register_styles', 10 );
 add_action( 'wp_enqueue_scripts', 'mashsb_load_inline_styles', 10 );
 add_action( 'admin_enqueue_scripts', 'mashsb_load_plugins_admin_scripts', 10 );
-//add_action( 'amp_post_template_css', 'mashsb_amp_load_css', 10 );
 
 /**
  * Load Scripts
@@ -38,7 +37,8 @@ function mashsb_load_scripts( $hook ) {
         return;
     }
 
-    $url = mashsb_get_url();
+    //$url = mashsb_get_url();
+    $url = mashsb_get_main_url();
     $title = urlencode( html_entity_decode( the_title_attribute( 'echo=0' ), ENT_COMPAT, 'UTF-8' ) );
     $title = str_replace( '#', '%23', $title );
     $titleclean = esc_html( $title );
@@ -64,9 +64,12 @@ function mashsb_load_scripts( $hook ) {
     wp_enqueue_script( 'mashsb', $js_dir . 'mashsb' . $suffix . '.js', array('jquery'), MASHSB_VERSION, $in_footer );
     //wp_enqueue_script( 'element-queries', $js_dir . 'ElementQueries' . '.js', array('jquery'), MASHSB_VERSION, $in_footer );
     
-    !isset( $mashsb_options['disable_sharecount'] ) ? $shareresult = getSharedcount( $url ) : $shareresult = 0;
+    //!isset( $mashsb_options['disable_sharecount'] ) ? $shareresult = getSharedcount( $url ) : $shareresult = 0;
+    
+    $refresh = mashsb_is_cache_refresh() ? 1 : 0;
+    
     wp_localize_script( 'mashsb', 'mashsb', array(
-        'shares' => $shareresult,
+        'shares' => isset($post->ID) ? mashsb_get_total_shares_post_meta($post->ID) : false,
         'round_shares' => isset( $mashsb_options['mashsharer_round'] ),
         /* Do not animate shares on blog posts. The share count would be wrong there and performance bad */
         'animate_shares' => isset( $mashsb_options['animate_shares'] ) && is_singular() ? 1 : 0,
@@ -82,8 +85,12 @@ function mashsb_load_scripts( $hook ) {
         'singular' => is_singular() ? 1 : 0,
         'twitter_popup' => isset( $mashsb_options['twitter_popup'] ) ? 0 : 1,
         //'restapi' => $restapi
-        'refresh' => mashsb_is_cache_refresh() ? 1 : 0
+        'refresh' => $refresh,
+        'nonce' => wp_create_nonce( "mashsb-nonce" ),
+        'postid' => isset($post->ID) && is_singular() ? $post->ID : false,
+        'servertime' => time()
     ) );
+    
 }
 
 /**
@@ -272,112 +279,6 @@ function mashsb_load_inline_styles() {
 
     wp_add_inline_style( 'mashsb-styles', $mashsb_custom_css );
 }
-
-/**
- * Load AMP (Accelerated Mobile Pages) CSS
- * 
- * @return string css
- */
-//function mashsb_amp_load_css() {
-//    global $mashsb_options;
-//
-//    $share_color = !empty( $mashsb_options['share_color'] ) ? '.mashsb-count {color:' . $mashsb_options['share_color'] . '}' : '';
-//    $custom_css = isset( $mashsb_options['custom_css'] ) ? $mashsb_options['custom_css'] : '';
-//    $amp_css = isset( $mashsb_options['amp_css'] ) ? $mashsb_options['amp_css'] : '';
-//    
-//    $css = "@font-face {
-//  font-family: 'mashsb-font';
-//  src: url('" . MASHSB_PLUGIN_URL . "/assets/css/fonts/mashsb-font.eot?29924580');
-//  src: url('" . MASHSB_PLUGIN_URL . "/assets/css/fonts/mashsb-font.eot?29924580#iefix') format('embedded-opentype'),
-//       url('" . MASHSB_PLUGIN_URL . "/assets/css/fonts/mashsb-font.woff2?29924580') format('woff2'),
-//       url('" . MASHSB_PLUGIN_URL . "/assets/css/fonts/mashsb-font.woff?29924580') format('woff'),
-//       url('" . MASHSB_PLUGIN_URL . "/assets/css/fonts/mashsb-font.ttf?29924580') format('truetype'),
-//       url('" . MASHSB_PLUGIN_URL . "/assets/css/fonts/mashsb-font.svg?29924580#mashsb-font') format('svg');
-//  font-weight: normal;
-//  font-style: normal;
-//}";
-//    
-//    // Get default css file
-//    $css .= file_get_contents( MASHSB_PLUGIN_DIR . '/assets/css/mashsb-amp.css' );
-//    
-//
-//    // add custom css
-//    $css .= $custom_css;
-//
-//    // add AMP custom css
-//    $css .= $amp_css;
-//
-//    // STYLES
-//    $css .= $share_color;
-//
-//    if( !empty( $mashsb_options['border_radius'] ) && $mashsb_options['border_radius'] != 'default' ) {
-//        $css .= '
-//        [class^="mashicon-"], .onoffswitch-label, .onoffswitch2-label {
-//            border-radius: ' . $mashsb_options['border_radius'] . 'px;
-//        }';
-//    }
-//    if( !empty( $mashsb_options['mash_style'] ) && $mashsb_options['mash_style'] == 'gradiant' ) {
-//        $css .= '
-//    .mashsb-buttons a {
-//        background-image: -webkit-linear-gradient(bottom,rgba(0, 0, 0, 0.17) 0%,rgba(255, 255, 255, 0.17) 100%);
-//        background-image: -moz-linear-gradient(bottom,rgba(0, 0, 0, 0.17) 0%,rgba(255, 255, 255, 0.17) 100%);
-//        background-image: linear-gradient(bottom,rgba(0,0,0,.17) 0%,rgba(255,255,255,.17) 100%);}';
-//    }
-//    // Get css for small buttons
-//    $css .= '[class^="mashicon-"] .text, [class*=" mashicon-"] .text{
-//        text-indent: -9999px;
-//        line-height: 0px;
-//        display: block;
-//        } 
-//    [class^="mashicon-"] .text:after, [class*=" mashicon-"] .text:after {
-//        content: "";
-//        text-indent: 0;
-//        font-size:13px;
-//        display: block;
-//    }
-//    [class^="mashicon-"], [class*=" mashicon-"] {
-//        width:25%;
-//        text-align: center;
-//    }
-//    [class^="mashicon-"] .icon:before, [class*=" mashicon-"] .icon:before {
-//        float:none;
-//        margin-right: 0;
-//    }
-//    .mashsb-buttons a{
-//       margin-right: 3px;
-//       margin-bottom:3px;
-//       min-width: 0px;
-//       width: 41px;
-//    }
-//
-//    .onoffswitch, 
-//    .onoffswitch-inner:before, 
-//    .onoffswitch-inner:after 
-//    .onoffswitch2,
-//    .onoffswitch2-inner:before, 
-//    .onoffswitch2-inner:after  {
-//        margin-right: 0px;
-//        width: 41px;
-//        line-height: 41px;
-//    }';
-//    // hide plus and subscribe button 
-//    // on AMP we disable js
-//    $css .= '.onoffswitch2, .onoffswitch{display:none}';
-//
-//    // Hide subscribe button when it's not a link
-//    $css .= isset( $mashsb_options['subscribe_behavior'] ) && $mashsb_options['subscribe_behavior'] === 'content' ? '.mashicon-subscribe{display:none;}' : '';
-//
-//    // Make sure the share buttons are not moving under the share count when decreasing width
-//    $css .= '.mashsb-buttons{display:table;}';
-//
-//    // Float the second shares box
-//    $css .= '.secondary-shares{float:left;}';
-//
-//    // Hide the view count
-//    $css .= '.mashpv{display:none;}';
-//
-//    echo $css;
-//}
 
 /*
  * Check if debug mode is enabled

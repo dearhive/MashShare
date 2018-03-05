@@ -6,6 +6,106 @@ jQuery(document).ready(function ($) {
     if(navigator.userAgent.match(/(iPhone)/i) || navigator.userAgent.match(/(Android)/i)){
         $('.mashicon-whatsapp').show(); 
     }
+
+    /**
+     * Get facebook share count vi js client request
+     * 
+     * @returns {undefined}
+     */
+    var mashsb_get_fb_shares = function()
+    {
+        if('undefined' !== typeof(mashsb.refresh) && mashsb.refresh === '0'){
+            return false;
+        }
+        
+        if('undefined' === typeof(mashsb.share_url) && mashsb.share_url !== ''){
+            return false;
+        }
+        
+        if('undefined' === typeof(mashsb.postid) && mashsb.postid !== ''){
+            return false;
+        }
+        
+        if (mashsb_is_rate_limit()){
+            return false;
+        }
+        
+        //mashsb.share_url = 'https://www.google.de';
+
+        var facebookGraphURL = 'https://graph.facebook.com/?id=' + mashsb.share_url;
+        $.ajax({
+            type: 'GET',
+            url: facebookGraphURL,
+            dataType: 'json',
+            success: function (data) {
+                mashsb_set_fb_sharecount(data);
+                console.log(data);
+            },
+            error: function (e) {
+                console.log(e)
+            }
+        })
+
+
+    }
+    // Make sure page has been loaded completely before requesting any shares via ajax
+    // This also prevents hitting the server too often
+    setTimeout(mashsb_get_fb_shares, 3000);
+
+    /**
+     * If page is older than 30 second it's cached. So do not call FB API again 
+     * @returns {Boolean}
+     */
+    function mashsb_is_rate_limit(){
+        
+        if ("undefined" === typeof (mashsb.servertime)){
+            return true;
+        }
+        
+        var serverTime = Number(mashsb.servertime);        
+        var clientTime = Math.floor(Date.now() / 1000);
+
+        if (clientTime > (serverTime + 30)){
+            console.log('rate limited: ' + (serverTime + 30));
+            return true;
+        } else {
+            console.log('not rate limited: ' + (serverTime + 30));
+            return false;
+        }
+    }
+    
+    /**
+     * Store FB return data in mashshare cache vi js client request
+     * @returns {undefined}
+     */
+    function mashsb_set_fb_sharecount(result) {
+        
+        if ('undefined' === typeof(result.share)) {
+           console.log('No valid result' + result);
+           return false;
+        }
+        
+        var data = {
+            action: 'mashsb_set_fb_shares',
+            shares: result.share,
+            postid: mashsb.postid,
+            url: mashsb.share_url,
+            nonce: mashsb.nonce
+        }
+            
+        $.ajax({
+            type:"post",
+            url: ajaxurl,
+            data: data,
+            success: function (res) {
+                console.log('Save fb results: ' + res);
+            },
+            error: function (e) {
+                console.log('Unknown error ' + e)
+            }
+        })
+    }
+
     
     // pinterest button logic
         $('body')
@@ -92,7 +192,7 @@ jQuery(document).ready(function ($) {
           
 
     // check the sharecount caching method
-    mashsb_check_cache();
+    //mashsb_check_cache();
     
     // Fix for the inline post plugin which removes the zero share count
     if ($('.mashsbcount').text() == ''){
@@ -315,7 +415,8 @@ jQuery(document).ready(function ($) {
 
     }(jQuery));
 
-    /* Start the counter
+    /* 
+     * Start the counter
      * 
      */
     if (typeof mashsb !== 'undefined' && mashsb.animate_shares == 1 && $('.mashsbcount').length) {

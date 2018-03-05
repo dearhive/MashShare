@@ -70,6 +70,7 @@ jQuery(document).ready(function ($) {
 //                //console.log(e);
             })
     }
+
         
     $('#mashsb_fb_auth').click(function (e) {
         e.preventDefault();
