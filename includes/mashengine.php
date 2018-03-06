@@ -18,7 +18,6 @@ class mashengine {
         $this->https_scheme_url = rawurlencode( 'https://' . $url_host_path );
 
         $this->timeout = $timeout;
-        //$this->url = rawurlencode( $url ); // Original URL
         $this->url = rawurlencode( $url ); // Original URL
     }
 
