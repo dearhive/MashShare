@@ -95,7 +95,7 @@ jQuery(document).ready(function ($) {
             
         $.ajax({
             type:"post",
-            url: ajaxurl,
+            url: mashsb.ajaxurl,
             data: data,
             success: function (res) {
                 console.log('Save fb results: ' + res);
