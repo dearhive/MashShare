@@ -88,7 +88,8 @@ function mashsb_load_scripts( $hook ) {
         'refresh' => $refresh,
         'nonce' => wp_create_nonce( "mashsb-nonce" ),
         'postid' => isset($post->ID) && is_singular() ? $post->ID : false,
-        'servertime' => time()
+        'servertime' => time(),
+        'ajaxurl' => admin_url('admin-ajax.php')
     ) );
     
 }

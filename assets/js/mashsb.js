@@ -22,7 +22,7 @@ jQuery(document).ready(function ($) {
             return false;
         }
         
-        if('undefined' === typeof(mashsb.postid) && mashsb.postid !== ''){
+        if ('undefined' === typeof (mashsb.postid) && mashsb.postid !== '') {
             return false;
         }
         
@@ -95,7 +95,7 @@ jQuery(document).ready(function ($) {
             
         $.ajax({
             type:"post",
-            url: ajaxurl,
+            url: mashsb.ajaxurl,
             data: data,
             success: function (res) {
                 console.log('Save fb results: ' + res);
