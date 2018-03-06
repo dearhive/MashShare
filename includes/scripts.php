@@ -38,7 +38,8 @@ function mashsb_load_scripts( $hook ) {
     }
 
     //$url = mashsb_get_url();
-    $url = mashsb_get_main_url();
+    //$url = mashsb_get_main_url();
+    $url = get_permalink();
     $title = urlencode( html_entity_decode( the_title_attribute( 'echo=0' ), ENT_COMPAT, 'UTF-8' ) );
     $title = str_replace( '#', '%23', $title );
     $titleclean = esc_html( $title );
@@ -62,7 +63,6 @@ function mashsb_load_scripts( $hook ) {
     isset( $mashsb_options['load_scripts_footer'] ) ? $in_footer = true : $in_footer = false;
     
     wp_enqueue_script( 'mashsb', $js_dir . 'mashsb' . $suffix . '.js', array('jquery'), MASHSB_VERSION, $in_footer );
-    //wp_enqueue_script( 'element-queries', $js_dir . 'ElementQueries' . '.js', array('jquery'), MASHSB_VERSION, $in_footer );
     
     //!isset( $mashsb_options['disable_sharecount'] ) ? $shareresult = getSharedcount( $url ) : $shareresult = 0;
     
