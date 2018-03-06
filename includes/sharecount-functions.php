@@ -257,6 +257,7 @@ function mashsb_is_cache_refresh() {
     
     // No timestamp! So let's create cache for the first time
     if( empty( $last_updated ) || $last_updated < 0 ) {
+        // Write timestamp (Use this on top of this condition. If this is not on top following return statements will be skipped and ignored - possible bug?)
         return true;
     }
     
@@ -266,8 +267,11 @@ function mashsb_is_cache_refresh() {
     
     // Refresh Cache when last update plus expiration time is older than current time
     if( ($last_updated + $expiration) <= time() ) {
+        // Write timestamp (Use this on top of this condition. If this is not on top following return statements will be skipped and ignored - possible bug?)
         return true;
     }
+    
+    return false;
     
 
     // New cache on singular pages

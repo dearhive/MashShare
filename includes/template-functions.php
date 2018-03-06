@@ -681,6 +681,7 @@ function mashsb_getNetworksShortcode( $is_shortcode = false, $services = 0, $net
     return apply_filters( 'return_networks', $output );
 }
 
+
 /*
  * Render template
  * Returns share buttons and share count
@@ -691,7 +692,7 @@ function mashsb_getNetworksShortcode( $is_shortcode = false, $services = 0, $net
 
 function mashshareShow() {
     global $mashsb_options;
-    
+        
     $class_stretched = isset($mashsb_options['responsive_buttons']) ? 'mashsb-stretched' : '';
 
     $return = '<aside class="mashsb-container mashsb-main ' . $class_stretched . '">'
@@ -917,7 +918,7 @@ function mashsb_get_post_meta_position() {
  */
 
 function mashshare_filter_content( $content ) {
-    global $mashsb_options, $post, $wp_current_filter, $wp;
+    global $mashsb_options, $wp_current_filter;
     
     // Default position
     $position = !empty( $mashsb_options['mashsharer_position'] ) ? $mashsb_options['mashsharer_position'] : '';

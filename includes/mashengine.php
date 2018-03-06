@@ -325,7 +325,7 @@ class mashengine {
             $this->debug_notices[] = 'MashEngine - URL: ' . $url . ' ' . $service[0] . ': ' . $count;
             $mashsb_debug[] = 'MashEngine - URL: ' . $url . ' ' . $service[0] . ': ' . $count;
 
-            add_action( 'wp_footer', array($this, 'outputDebug'), 100 );
+            add_action( 'wp_footer', array($this, 'outputDebug'), 1000 );
         }
         return;
     }
@@ -347,7 +347,7 @@ class mashengine {
 
         MASHSB()->logger->info( 'Error: Facebook Rate Limit hit' );
         $this->debug_notices[] = 'Error: Requests to Facebook hit Rate Limit. Delaying requests for 60min';
-        add_action( 'wp_footer', array($this, 'outputDebug'), 100 );
+        add_action( 'wp_footer', array($this, 'outputDebug'), 1000 );
     }
 
     public function getRemainingRateLimitTime() {
