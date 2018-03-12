@@ -531,9 +531,9 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
 
             // Lets use the data attribute to prevent that pininit.js is overwriting our pinterest button - PR: https://secure.helpscout.net/conversation/257066283/954/?folderId=924740
             if ('pinterest' === $enablednetworks[$key]['id'] && !mashsb_is_amp_page() ) {
-                $output .= '<a ' . $display . ' class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . $class_margin . $class_center . $class_style . '" href="#" data-mashsb-url="'. arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="nofollow"><span class="icon"></span><span class="text">' . $name . '</span></a>';
+                $output .= '<a ' . $display . ' class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . $class_margin . $class_center . $class_style . '" href="#" data-mashsb-url="'. arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="noopener nofollow"><span class="icon"></span><span class="text">' . $name . '</span></a>';
             } else {
-                $output .= '<a ' . $display . ' class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . $class_margin . $class_center . $class_style . '" href="' . arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="nofollow"><span class="icon"></span><span class="text">' . $name . '</span></a>';
+                $output .= '<a ' . $display . ' class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . $class_margin . $class_center . $class_style . '" href="' . arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="noopener nofollow"><span class="icon"></span><span class="text">' . $name . '</span></a>';
             }
             $output .= $onoffswitch;
             $output .= $startsecondaryshares;
@@ -665,9 +665,9 @@ function mashsb_getNetworksShortcode( $is_shortcode = false, $services = 0, $net
 
             // Lets use the data attribute to prevent that pininit.js is overwriting our pinterest button - PR: https://secure.helpscout.net/conversation/257066283/954/?folderId=924740
             if ('pinterest' === $enablednetworks[$key]['id'] && !mashsb_is_amp_page() ) {
-                $output .= '<a ' . $display . ' class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . $class_margin . $class_center . $class_style . $class_icons . '" href="#" data-mashsb-url="'. arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="nofollow"><span class="icon"></span><span class="text">' . $name . '</span></a>';
+                $output .= '<a ' . $display . ' class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . $class_margin . $class_center . $class_style . $class_icons . '" href="#" data-mashsb-url="'. arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="noopener nofollow"><span class="icon"></span><span class="text">' . $name . '</span></a>';
             } else {
-                $output .= '<a ' . $display . ' class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . $class_margin . $class_center . $class_style . $class_icons . '" href="' . arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="nofollow"><span class="icon"></span><span class="text">' . $name . '</span></a>';
+                $output .= '<a ' . $display . ' class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . $class_margin . $class_center . $class_style . $class_icons . '" href="' . arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="noopener nofollow"><span class="icon"></span><span class="text">' . $name . '</span></a>';
             }
             $output .= $onoffswitch;
             $output .= $startsecondaryshares;

@@ -127,7 +127,7 @@ class MASHSB_RWMB_Image_Field extends MASHSB_RWMB_File_Field
 			<li id="item_%s">
 				<img src="%s" />
 				<div class="mashsb-rwmb-image-bar">
-					<a title="%s" class="mashsb-rwmb-edit-file" href="%s" target="_blank">%s</a> |
+					<a title="%s" class="mashsb-rwmb-edit-file" href="%s" target="_blank" rel="noopener">%s</a> |
 					<a title="%s" class="mashsb-rwmb-delete-file" href="#" data-attachment_id="%s">&times;</a>
 				</div>
 			</li>

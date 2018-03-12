@@ -77,7 +77,7 @@ function mashsb_admin_messages() {
     
     if( mashsb_is_admin_page() && !mashsb_curl_installed() ) {
         echo '<div class="error">';
-        echo '<p>' . sprintf(__('MashShare needs the PHP extension cURL and curl_multi_init() which is not installed on your server. Please <a href="%s" target="_blank">install and activate</a> it to be able to collect share count of your posts.', 'mashsb'), 'https://www.google.com/search?btnG=1&pws=0&q=enable+curl+on+php') . '</p>';
+        echo '<p>' . sprintf(__('MashShare needs the PHP extension cURL and curl_multi_init() which is not installed on your server. Please <a href="%s" target="_blank" rel="noopener">install and activate</a> it to be able to collect share count of your posts.', 'mashsb'), 'https://www.google.com/search?btnG=1&pws=0&q=enable+curl+on+php') . '</p>';
         echo '</div>';
     }
 

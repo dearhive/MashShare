@@ -34,7 +34,7 @@ class MASHSB_RWMB_Validate_Og_Field extends MASHSB_RWMB_Field {
         //var_dump( $post );
         if( isset( $post ) && $post->post_status == "publish" ) {
             $url = get_permalink( $post->ID );
-            return '<a href="https://developers.facebook.com/tools/debug/og/object?q=' . $url . '" target="_blank" class="button-small"> Validate Open Graph data </a>' . $field['helper'];
+            return '<a href="https://developers.facebook.com/tools/debug/og/object?q=' . $url . '" target="_blank" rel="noopener" class="button-small"> Validate Open Graph data </a>' . $field['helper'];
         } else {
             return '';
         }

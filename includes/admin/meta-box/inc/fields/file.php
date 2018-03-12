@@ -156,7 +156,7 @@ class MASHSB_RWMB_File_Field extends MASHSB_RWMB_Field
 		<li id="item_%s">
 			<div class="mashsb-rwmb-icon">%s</div>
 			<div class="mashsb-rwmb-info">
-				<a href="%s" target="_blank">%s</a>
+				<a href="%s" target="_blank" rel="noopener">%s</a>
 				<p>%s</p>
 				<a title="%s" href="%s" target="_blank">%s</a> |
 				<a title="%s" class="mashsb-rwmb-delete-file" href="#" data-attachment_id="%s">%s</a>
