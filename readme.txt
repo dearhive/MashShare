@@ -252,8 +252,9 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 = 3.5.0 =
 * New: Tested up to WordPress 4.9.3
 * New: Improved share count aggregation
-* New: Add rel="noopener" to all links which contains _blank attribute
+* New: Add rel="noopener" to all network buttons and remove the target="_blank" attribute
 * Tweak: Remove opt-in notice
+* Tweak: Remove rate limit notice
 * Fix: Calls to networks api are still made when sharecount is disabled
 
 = 3.4.9 =

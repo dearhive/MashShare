@@ -27,7 +27,7 @@ function mashsb_add_ons_page() {
 			<?php _e( 'Add Ons for Mashshare', 'mashsb' ); ?>
 			&nbsp;&mdash;&nbsp;<a href="https://www.mashshare.net" class="button-primary" title="<?php _e( 'Visit Website', 'mashsb' ); ?>" target="_blank" rel="noopener"><?php _e( 'See Details', 'mashsb' ); ?></a>
 		</h2>
-		<p><?php _e( 'These add-ons extend the functionality of Mashshare.', 'mashsb' ); ?></p>
+		<p><?php _e( 'These add-ons extend the functionality of MashShare.', 'mashsb' ); ?></p>
 		<?php echo mashsb_add_ons_get_feed(); ?>
 	</div>
 	<?php
