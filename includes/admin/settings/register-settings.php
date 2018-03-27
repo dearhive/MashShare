@@ -1987,7 +1987,7 @@ function mashsb_ratelimit_callback() {
         
     }
 
-    /**
+/**
  * Helper function to determine if adverts and add-on ressources are hidden
  * 
  * @return bool

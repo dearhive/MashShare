@@ -27,8 +27,8 @@ function mashsb_set_fb_sharecount() {
    $share_count = isset( $result['share_count'] ) ? $result['share_count'] : 0;
    //$url = isset( $result['share_url'] ) ? $result['share_url'] : '';
    
-   if( !$postId || empty($postId) ){
-      wp_die('no post id');
+   if( !$postId || empty($postId) ) {
+      wp_die('MashShare: do not collect shares');
       //wp_die(mashsb_set_fb_shares_transient( $url, $comment_count, $share_count) );
    }
 
@@ -209,6 +209,12 @@ function mashsb_is_cache_refresh() {
     if( isset( $_GET['mashsb-refresh'] ) ) {
         return true;
     }
+    
+    // Preview Mode
+    if( isset($_GET['preview_id'] ) ) {
+        return false;
+    }
+    
     
     // Debug mode or cache activated
     if( MASHSB_DEBUG || isset( $mashsb_options['disable_cache'] ) ) {

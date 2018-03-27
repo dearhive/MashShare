@@ -174,7 +174,7 @@ function getSharedcount( $url ) {
 
     //|| mashsb_rate_limit_exceeded()
        
-    if( is_404() || is_search() || empty($url) || !mashsb_is_enabled_permalinks() || isset($mashsb_options['disable_sharecount']) ) {
+    if( is_404() || is_search() || empty($url) || !mashsb_is_enabled_permalinks() || isset($mashsb_options['disable_sharecount']) || isset($_GET['preview_id']) ) {
         $mashsb_debug[] = 'MashShare: Share count (temporary) disabled';
         return apply_filters( 'filter_get_sharedcount', 0 );
     }

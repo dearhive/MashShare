@@ -249,10 +249,14 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
+= 3.5.1 =
+* Fix: Fake shares not added after latest update
+* Fix: Do not collect shares if page is previewed. Fixes an issue where shares from a post are collected from the main page, resulting in wrong share counts
+
 = 3.5.0 =
-* New: Tested up to WordPress 4.9.3
+* New: Tested up to WordPress 4.9.5
 * New: Improved share count aggregation
-* New: Add rel="noopener" to all network buttons and remove the target="_blank" attribute
+* New: Add rel="noopener" to all network buttons
 * Tweak: Remove opt-in notice
 * Tweak: Remove rate limit notice
 * Fix: Calls to networks api are still made when sharecount is disabled
