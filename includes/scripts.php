@@ -38,7 +38,8 @@ function mashsb_load_scripts( $hook ) {
     }
 
     //$url = mashsb_get_url();
-    $url = mashsb_get_main_url();
+    //$url = mashsb_get_main_url();
+    $url = get_permalink();
     $title = urlencode( html_entity_decode( the_title_attribute( 'echo=0' ), ENT_COMPAT, 'UTF-8' ) );
     $title = str_replace( '#', '%23', $title );
     $titleclean = esc_html( $title );
@@ -62,14 +63,15 @@ function mashsb_load_scripts( $hook ) {
     isset( $mashsb_options['load_scripts_footer'] ) ? $in_footer = true : $in_footer = false;
     
     wp_enqueue_script( 'mashsb', $js_dir . 'mashsb' . $suffix . '.js', array('jquery'), MASHSB_VERSION, $in_footer );
-    //wp_enqueue_script( 'element-queries', $js_dir . 'ElementQueries' . '.js', array('jquery'), MASHSB_VERSION, $in_footer );
+    
+    $status = apply_filters('mashsbStatus', false);
     
     //!isset( $mashsb_options['disable_sharecount'] ) ? $shareresult = getSharedcount( $url ) : $shareresult = 0;
     
     $refresh = mashsb_is_cache_refresh() ? 1 : 0;
     
     wp_localize_script( 'mashsb', 'mashsb', array(
-        'shares' => isset($post->ID) ? mashsb_get_total_shares_post_meta($post->ID) : false,
+        'shares' => isset($post->ID) ? mashsb_get_total_shares_post_meta($post->ID) + getFakecount() : false,
         'round_shares' => isset( $mashsb_options['mashsharer_round'] ),
         /* Do not animate shares on blog posts. The share count would be wrong there and performance bad */
         'animate_shares' => isset( $mashsb_options['animate_shares'] ) && is_singular() ? 1 : 0,
@@ -90,9 +92,10 @@ function mashsb_load_scripts( $hook ) {
         'postid' => isset($post->ID) && is_singular() ? $post->ID : false,
         'servertime' => time(),
         'ajaxurl' => admin_url('admin-ajax.php')
-    ) );
+        ) );
     
 }
+
 
 /**
  * Register CSS Styles
@@ -307,3 +310,4 @@ function mashsb_is_active_responsive_addon() {
     }
     return false;
 }
+

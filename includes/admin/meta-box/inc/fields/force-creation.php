@@ -32,7 +32,7 @@ class MASHSB_RWMB_Force_Creation_Field extends MASHSB_RWMB_Field {
         //var_dump( $post );
         if( isset( $post ) && $post->post_status == "publish" ) {
             $url = get_permalink( $post->ID );
-            return '<a href="' . $url . '?mashsb-refresh" target="_blank" class="button-small"> Get Shares & Shortlinks </a>' . $field['helper'];
+            return '<a href="' . $url . '?mashsb-refresh" target="_blank" rel="noopener" class="button-small"> Get Shares & Shortlinks </a>' . $field['helper'];
         } else {
             return '';
         }

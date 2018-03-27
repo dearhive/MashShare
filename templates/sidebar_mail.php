@@ -14,7 +14,7 @@ $user = wp_get_current_user();
 
 <div id="mashsb-sidebar">
 
-	<a class="mashsb-banner" target="_blank" href="https://www.mashshare.net/pricing/?utm_source=insideplugin&utm_medium=userwebsite&utm_content=sidebar&utm_campaign=freeplugin"><img src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/upgrade_to_pro.png'; ?>" width="300" height="250" alt="<?php _e( 'Increase your Shares and Social Traffic', 'mashsb' ); ?>" /></a>
+	<a class="mashsb-banner" target="_blank" rel="noopener" href="https://www.mashshare.net/pricing/?utm_source=insideplugin&utm_medium=userwebsite&utm_content=sidebar&utm_campaign=freeplugin"><img src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/upgrade_to_pro.png'; ?>" width="300" height="250" alt="<?php _e( 'Increase your Shares and Social Traffic', 'mashsb' ); ?>" /></a>
 
 	<form method="post" action="<?php echo $post; ?>" target="_blank" class="subscribe block">
 		<h2><?php _e( 'Get 20% Off!', 'mashsb' ); ?></h2>

@@ -18,7 +18,6 @@ class mashengine {
         $this->https_scheme_url = rawurlencode( 'https://' . $url_host_path );
 
         $this->timeout = $timeout;
-        //$this->url = rawurlencode( $url ); // Original URL
         $this->url = rawurlencode( $url ); // Original URL
     }
 
@@ -207,17 +206,17 @@ class mashengine {
         if( isset( $mashsb_options['cumulate_http_https'] ) ) {
             $RollingCurlX->addRequest( "http://public.newsharecounts.com/count.json?url=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
             $RollingCurlX->addRequest( "http://public.newsharecounts.com/count.json?url=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
-            $RollingCurlX->addRequest( "https://plusone.google.com/_/+1/fastbutton?url=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('google'), $headers );
-            $RollingCurlX->addRequest( "https://plusone.google.com/_/+1/fastbutton?url=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('google'), $headers );
+            //$RollingCurlX->addRequest( "https://plusone.google.com/_/+1/fastbutton?url=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('google'), $headers );
+            //$RollingCurlX->addRequest( "https://plusone.google.com/_/+1/fastbutton?url=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('google'), $headers );
             $RollingCurlX->addRequest( "https://api.pinterest.com/v1/urls/count.json?url=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('pinterest'), $headers );
             $RollingCurlX->addRequest( "https://api.pinterest.com/v1/urls/count.json?url=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('pinterest'), $headers );
         } else {
             $RollingCurlX->addRequest( "http://public.newsharecounts.com/count.json?url=" . $this->url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
-            $RollingCurlX->addRequest( "https://plusone.google.com/_/+1/fastbutton?url=" . $this->url, $post_data, array($this, 'getCount'), array('google'), $headers );
+            //$RollingCurlX->addRequest( "https://plusone.google.com/_/+1/fastbutton?url=" . $this->url, $post_data, array($this, 'getCount'), array('google'), $headers );
             $RollingCurlX->addRequest( "https://api.pinterest.com/v1/urls/count.json?url=" . $this->url, $post_data, array($this, 'getCount'), array('pinterest'), $headers );
         }
         
-        $RollingCurlX->addRequest( "https://www.linkedin.com/countserv/count/share?format=json&url=" . $this->url, $post_data, array($this, 'getCount'), array('linkedin'), $headers );
+        //$RollingCurlX->addRequest( "https://www.linkedin.com/countserv/count/share?format=json&url=" . $this->url, $post_data, array($this, 'getCount'), array('linkedin'), $headers );
         $RollingCurlX->addRequest( "http://www.stumbleupon.com/services/1.01/badge.getinfo?url=" . $this->url, $post_data, array($this, 'getCount'), array('stumbleupon'), $headers );
         $RollingCurlX->addRequest( "https://api.bufferapp.com/1/links/shares.json?url=" . $this->url, $post_data, array($this, 'getCount'), array('buffer'), $headers );
         $RollingCurlX->addRequest( "https://vk.com/share.php?act=count&index=1&url=" . $this->url, $post_data, array($this, 'getCount'), array('vk'), $headers );
@@ -313,9 +312,7 @@ class mashengine {
             }
 
             $count = ( int ) $count;
-            /* $this->data->shares->total += $count;
-              $this->data->shares->$service[0] = $count;
-             * */
+
             $this->data->error = $error;
             $this->data->total += $count;
             $this->data->{$service[0]} = $count;
@@ -326,7 +323,7 @@ class mashengine {
             $this->debug_notices[] = 'MashEngine - URL: ' . $url . ' ' . $service[0] . ': ' . $count;
             $mashsb_debug[] = 'MashEngine - URL: ' . $url . ' ' . $service[0] . ': ' . $count;
 
-            add_action( 'wp_footer', array($this, 'outputDebug'), 100 );
+            add_action( 'wp_footer', array($this, 'outputDebug'), 1000 );
         }
         return;
     }
@@ -348,7 +345,7 @@ class mashengine {
 
         MASHSB()->logger->info( 'Error: Facebook Rate Limit hit' );
         $this->debug_notices[] = 'Error: Requests to Facebook hit Rate Limit. Delaying requests for 60min';
-        add_action( 'wp_footer', array($this, 'outputDebug'), 100 );
+        add_action( 'wp_footer', array($this, 'outputDebug'), 1000 );
     }
 
     public function getRemainingRateLimitTime() {

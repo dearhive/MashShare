@@ -175,14 +175,14 @@ class MASHSB_SL_Plugin_Updater {
 
 			if ( empty( $version_info->download_link ) ) {
 				printf(
-					__( 'There is a new version of %1$s available. <a target="_blank" class="thickbox" href="%2$s">View version %3$s details</a>.', 'edd' ),
+					__( 'There is a new version of %1$s available. <a target="_blank" rel="noopener" class="thickbox" href="%2$s">View version %3$s details</a>.', 'edd' ),
 					esc_html( $version_info->name ),
 					esc_url( $changelog_link ),
 					esc_html( $version_info->new_version )
 				);
 			} else {
 				printf(
-					__( 'There is a new version of %1$s available. <a target="_blank" class="thickbox" href="%2$s">View version %3$s details</a> or <a href="%4$s">update now</a>.', 'edd' ),
+					__( 'There is a new version of %1$s available. <a target="_blank" rel="noopener" class="thickbox" href="%2$s">View version %3$s details</a> or <a href="%4$s">update now</a>.', 'edd' ),
 					esc_html( $version_info->name ),
 					esc_url( $changelog_link ),
 					esc_html( $version_info->new_version ),

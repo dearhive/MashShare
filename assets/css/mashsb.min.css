@@ -45,7 +45,8 @@ opacity: 0.8;
 }
 /* Icon Color */
 [class^="mashicon-"] .icon, [class*=" mashicon-"] {
-color:#ffffff;
+    display:initial;
+    color:#ffffff;
 }
 /* Font color */
 [class^="mashicon-"] .text, [class*=" mashicon-"] .text {
@@ -75,7 +76,7 @@ color:#ffffff;
   /* For safety - reset parent styles, that can break glyph codes*/
   font-variant: normal;
   text-transform: none; 
- 
+  
   /* Reset margin-top for twitter bootstrap */
   margin-top:0px;
   /* For IE 8 Important */

@@ -106,7 +106,7 @@ function mashsb_meta_boxes( $meta_boxes ) {
             ),
             // Setup the pinterest optimized image
             array(
-                'name' => '<span class="mashicon mashicon-pinterest"></span> ' . __( 'Pinterest Image', 'mashsb' ) . '<a class="mashsb-helper" href="#"></a><div class="mashsb-message" style="display: none;">'.sprintf(__('Get the <a href="%s" target="_blank">Network Add-On</a> to make use of the Pinterest Features','mashsb'),'https://www.mashshare.net/pricing/?utm_source=meta_box&utm_medium=core_plugin&utm_campaign=pinterest_helper').'</div>',
+                'name' => '<span class="mashicon mashicon-pinterest"></span> ' . __( 'Pinterest Image', 'mashsb' ) . '<a class="mashsb-helper" href="#"></a><div class="mashsb-message" style="display: none;">'.sprintf(__('Get the <a href="%s" target="_blank" rel="noopener">Network Add-On</a> to make use of the Pinterest Features','mashsb'),'https://www.mashshare.net/pricing/?utm_source=meta_box&utm_medium=core_plugin&utm_campaign=pinterest_helper').'</div>',
                 'desc' => __( 'Pinned images need to be more vertical than horizontal in orientation. Use an aspect ratio of 2:3 to 1:3.5 and a minimum width of 600 pixels. So an image that is 600 pixels wide should be between 900 and 2100 pixels tall.', 'mashsb' ),
                 'id' => $prefix . 'pinterest_image',
                 'type' => 'image_advanced',
@@ -116,7 +116,7 @@ function mashsb_meta_boxes( $meta_boxes ) {
             ),
             // Setup the pinterest description
             array(
-                'name' => '<span class="mashicon mashicon-pinterest"></span> ' . __('Pinterest Description', 'mashsb' ) . '<a class="mashsb-helper" href="#"></a><div class="mashsb-message" style="display: none;">'.sprintf(__('Get the <a href="%s" target="_blank">Network Add-On</a> to make use of the Pinterest Features','mashsb'),'https://www.mashshare.net/pricing/?utm_source=meta_box&utm_medium=core_plugin&utm_campaign=pinterest_helper').'</div>',
+                'name' => '<span class="mashicon mashicon-pinterest"></span> ' . __('Pinterest Description', 'mashsb' ) . '<a class="mashsb-helper" href="#"></a><div class="mashsb-message" style="display: none;">'.sprintf(__('Get the <a href="%s" target="_blank" rel="noopener">Network Add-On</a> to make use of the Pinterest Features','mashsb'),'https://www.mashshare.net/pricing/?utm_source=meta_box&utm_medium=core_plugin&utm_campaign=pinterest_helper').'</div>',
                 'desc' => __( 'Place a customized message that will be used when this post is shared on Pinterest. Leave this blank to use the ', 'mashsb' ) . (mashsb_yoast_active() ? __( 'Yoast SEO title', 'mashsb' ) : __( 'the post title', 'mashsb' )),
                 'id' => $prefix . 'pinterest_description',
                 'type' => 'textarea',

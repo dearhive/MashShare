@@ -6,7 +6,7 @@ Contributors: ReneHermi, WP-Staging, ilgityildirim
 Donate link: https://www.mashshare.net
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email
+Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email, dsgvo
 Requires at least: 3.6+
 Tested up to: 4.9
 Stable tag: {{ version }}
@@ -18,6 +18,9 @@ Social Media Share Buttons for Twitter, Facebook and other social networks. High
 #### MashShare - The Social Media Ecosystem (Twitter counts supported)
 A free Social Media Plugin, professional and highly customizable<br />
 ecosystem for social media sharing and optimizing of your valuable content.<br /> 
+
+<strong>Important for EU users: MashShare is DSGVO compliant!<br />
+No IP data or any other personal data is send to third parties or collected at all.</strong><br>
  
 <strong>Stop slowing down your website and prevent ranking loose.</strong>
 Other social buttons are often using external scripts which are increasing loading times.
@@ -246,10 +249,16 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
+= 3.5.1 =
+* Fix: Fake shares not added after latest update
+* Fix: Do not collect shares if page is previewed. Fixes an issue where shares from a post are collected from the main page, resulting in wrong share counts
+
 = 3.5.0 =
-* New: Tested up to WordPress 4.9.3
+* New: Tested up to WordPress 4.9.5
 * New: Improved share count aggregation
+* New: Add rel="noopener" to all network buttons
 * Tweak: Remove opt-in notice
+* Tweak: Remove rate limit notice
 * Fix: Calls to networks api are still made when sharecount is disabled
 
 = 3.4.9 =

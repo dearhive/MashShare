@@ -25,9 +25,9 @@ function mashsb_add_ons_page() {
 	<div class="wrap" id="mashsb-add-ons">
 		<h2>
 			<?php _e( 'Add Ons for Mashshare', 'mashsb' ); ?>
-			&nbsp;&mdash;&nbsp;<a href="https://www.mashshare.net" class="button-primary" title="<?php _e( 'Visit Website', 'mashsb' ); ?>" target="_blank"><?php _e( 'See Details', 'mashsb' ); ?></a>
+			&nbsp;&mdash;&nbsp;<a href="https://www.mashshare.net" class="button-primary" title="<?php _e( 'Visit Website', 'mashsb' ); ?>" target="_blank" rel="noopener"><?php _e( 'See Details', 'mashsb' ); ?></a>
 		</h2>
-		<p><?php _e( 'These add-ons extend the functionality of Mashshare.', 'mashsb' ); ?></p>
+		<p><?php _e( 'These add-ons extend the functionality of MashShare.', 'mashsb' ); ?></p>
 		<?php echo mashsb_add_ons_get_feed(); ?>
 	</div>
 	<?php
@@ -52,7 +52,7 @@ function mashsb_add_ons_get_feed() {
 			}
 		} else {
 			$cache = '<div class="error"><p>' . __( 'There was an error retrieving the Mashshare addon list from the server. Please try again later.', 'mashsb' ) . '
-                                   <br>Visit instead the Mashshare Addon Website <a href="https://www.mashshare.net" class="button-primary" title="Mashshare Add ons" target="_blank"> Get Add-Ons  </a></div>';
+                                   <br>Visit instead the Mashshare Addon Website <a href="https://www.mashshare.net" class="button-primary" title="Mashshare Add ons" target="_blank" rel="noopener"> Get Add-Ons  </a></div>';
 		}
 	}
 	return $cache;

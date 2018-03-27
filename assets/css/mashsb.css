@@ -45,7 +45,8 @@ opacity: 0.8;
 }
 /* Icon Color */
 [class^="mashicon-"] .icon, [class*=" mashicon-"] {
-color:#ffffff;
+    display:initial;
+    color:#ffffff;
 }
 /* Font color */
 [class^="mashicon-"] .text, [class*=" mashicon-"] .text {

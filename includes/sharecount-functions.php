@@ -27,8 +27,8 @@ function mashsb_set_fb_sharecount() {
    $share_count = isset( $result['share_count'] ) ? $result['share_count'] : 0;
    //$url = isset( $result['share_url'] ) ? $result['share_url'] : '';
    
-   if( !$postId || empty($postId) ){
-      wp_die('no post id');
+   if( !$postId || empty($postId) ) {
+      wp_die('MashShare: do not collect shares');
       //wp_die(mashsb_set_fb_shares_transient( $url, $comment_count, $share_count) );
    }
 
@@ -210,6 +210,12 @@ function mashsb_is_cache_refresh() {
         return true;
     }
     
+    // Preview Mode
+    if( isset($_GET['preview_id'] ) ) {
+        return false;
+    }
+    
+    
     // Debug mode or cache activated
     if( MASHSB_DEBUG || isset( $mashsb_options['disable_cache'] ) ) {
         MASHSB()->logger->info( 'mashsb_is_cache_refresh: MASHSB_DEBUG - refresh Cache' );
@@ -257,6 +263,7 @@ function mashsb_is_cache_refresh() {
     
     // No timestamp! So let's create cache for the first time
     if( empty( $last_updated ) || $last_updated < 0 ) {
+        // Write timestamp (Use this on top of this condition. If this is not on top following return statements will be skipped and ignored - possible bug?)
         return true;
     }
     
@@ -266,8 +273,11 @@ function mashsb_is_cache_refresh() {
     
     // Refresh Cache when last update plus expiration time is older than current time
     if( ($last_updated + $expiration) <= time() ) {
+        // Write timestamp (Use this on top of this condition. If this is not on top following return statements will be skipped and ignored - possible bug?)
         return true;
     }
+    
+    return false;
     
 
     // New cache on singular pages

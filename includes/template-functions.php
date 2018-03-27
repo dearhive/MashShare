@@ -174,7 +174,7 @@ function getSharedcount( $url ) {
 
     //|| mashsb_rate_limit_exceeded()
        
-    if( is_404() || is_search() || empty($url) || !mashsb_is_enabled_permalinks() || isset($mashsb_options['disable_sharecount']) ) {
+    if( is_404() || is_search() || empty($url) || !mashsb_is_enabled_permalinks() || isset($mashsb_options['disable_sharecount']) || isset($_GET['preview_id']) ) {
         $mashsb_debug[] = 'MashShare: Share count (temporary) disabled';
         return apply_filters( 'filter_get_sharedcount', 0 );
     }
@@ -531,9 +531,9 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
 
             // Lets use the data attribute to prevent that pininit.js is overwriting our pinterest button - PR: https://secure.helpscout.net/conversation/257066283/954/?folderId=924740
             if ('pinterest' === $enablednetworks[$key]['id'] && !mashsb_is_amp_page() ) {
-                $output .= '<a ' . $display . ' class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . $class_margin . $class_center . $class_style . '" href="#" data-mashsb-url="'. arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="nofollow"><span class="icon"></span><span class="text">' . $name . '</span></a>';
+                $output .= '<a ' . $display . ' class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . $class_margin . $class_center . $class_style . '" href="#" data-mashsb-url="'. arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="noopener nofollow"><span class="icon"></span><span class="text">' . $name . '</span></a>';
             } else {
-                $output .= '<a ' . $display . ' class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . $class_margin . $class_center . $class_style . '" href="' . arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="nofollow"><span class="icon"></span><span class="text">' . $name . '</span></a>';
+                $output .= '<a ' . $display . ' class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . $class_margin . $class_center . $class_style . '" href="' . arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="noopener nofollow"><span class="icon"></span><span class="text">' . $name . '</span></a>';
             }
             $output .= $onoffswitch;
             $output .= $startsecondaryshares;
@@ -665,9 +665,9 @@ function mashsb_getNetworksShortcode( $is_shortcode = false, $services = 0, $net
 
             // Lets use the data attribute to prevent that pininit.js is overwriting our pinterest button - PR: https://secure.helpscout.net/conversation/257066283/954/?folderId=924740
             if ('pinterest' === $enablednetworks[$key]['id'] && !mashsb_is_amp_page() ) {
-                $output .= '<a ' . $display . ' class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . $class_margin . $class_center . $class_style . $class_icons . '" href="#" data-mashsb-url="'. arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="nofollow"><span class="icon"></span><span class="text">' . $name . '</span></a>';
+                $output .= '<a ' . $display . ' class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . $class_margin . $class_center . $class_style . $class_icons . '" href="#" data-mashsb-url="'. arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="noopener nofollow"><span class="icon"></span><span class="text">' . $name . '</span></a>';
             } else {
-                $output .= '<a ' . $display . ' class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . $class_margin . $class_center . $class_style . $class_icons . '" href="' . arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="nofollow"><span class="icon"></span><span class="text">' . $name . '</span></a>';
+                $output .= '<a ' . $display . ' class="mashicon-' . $enablednetworks[$key]['id'] . $class_size . $class_margin . $class_center . $class_style . $class_icons . '" href="' . arrNetworks( $enablednetworks[$key]['id'], $is_shortcode ) . '" target="_blank" rel="noopener nofollow"><span class="icon"></span><span class="text">' . $name . '</span></a>';
             }
             $output .= $onoffswitch;
             $output .= $startsecondaryshares;
@@ -681,6 +681,7 @@ function mashsb_getNetworksShortcode( $is_shortcode = false, $services = 0, $net
     return apply_filters( 'return_networks', $output );
 }
 
+
 /*
  * Render template
  * Returns share buttons and share count
@@ -691,7 +692,7 @@ function mashsb_getNetworksShortcode( $is_shortcode = false, $services = 0, $net
 
 function mashshareShow() {
     global $mashsb_options;
-    
+        
     $class_stretched = isset($mashsb_options['responsive_buttons']) ? 'mashsb-stretched' : '';
 
     $return = '<aside class="mashsb-container mashsb-main ' . $class_stretched . '">'
@@ -917,7 +918,7 @@ function mashsb_get_post_meta_position() {
  */
 
 function mashshare_filter_content( $content ) {
-    global $mashsb_options, $post, $wp_current_filter, $wp;
+    global $mashsb_options, $wp_current_filter;
     
     // Default position
     $position = !empty( $mashsb_options['mashsharer_position'] ) ? $mashsb_options['mashsharer_position'] : '';

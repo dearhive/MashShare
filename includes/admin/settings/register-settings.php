@@ -237,7 +237,7 @@ function mashsb_get_registered_settings() {
                 'allow_tracking' => array(
                     'id' => 'allow_tracking',
                     'name' => __( 'Allow Usage Tracking', 'mashsb' ),
-                    'desc' => sprintf( __( 'Allow Mashshare to track plugin usage? Opt-in to tracking and our newsletter and immediately be emailed a <strong>20%% discount to the Mashshare shop</strong>, valid towards the <a href="%s" target="_blank">purchase of Add-Ons</a>. No sensitive data is tracked.', 'mashsb' ), 'https://www.mashshare.net/add-ons/?utm_source=' . substr( md5( get_bloginfo( 'name' ) ), 0, 10 ) . '&utm_medium=admin&utm_term=setting&utm_campaign=MASHSBUsageTracking' ),
+                    'desc' => sprintf( __( 'Allow Mashshare to track plugin usage? Opt-in to tracking and our newsletter and immediately be emailed a <strong>20%% discount to the Mashshare shop</strong>, valid towards the <a href="%s" target="_blank" rel="noopener">purchase of Add-Ons</a>. No sensitive data is tracked.', 'mashsb' ), 'https://www.mashshare.net/add-ons/?utm_source=' . substr( md5( get_bloginfo( 'name' ) ), 0, 10 ) . '&utm_medium=admin&utm_term=setting&utm_campaign=MASHSBUsageTracking' ),
                     'type' => 'checkbox'
                 ),
                 'is_main_query' => array(
@@ -1987,7 +1987,7 @@ function mashsb_ratelimit_callback() {
         
     }
 
-    /**
+/**
  * Helper function to determine if adverts and add-on ressources are hidden
  * 
  * @return bool
