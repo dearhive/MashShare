@@ -161,7 +161,7 @@ function mashsb_get_total_shares_post_meta($postId = false){
    
    $result = get_post_meta( $postId, 'mashsb_shares', true );
    
-   return $result;        
+   return (int)$result;        
 }
 
 /**

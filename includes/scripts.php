@@ -71,7 +71,7 @@ function mashsb_load_scripts( $hook ) {
     $refresh = mashsb_is_cache_refresh() ? 1 : 0;
     
     wp_localize_script( 'mashsb', 'mashsb', array(
-        'shares' => isset($post->ID) ? mashsb_get_total_shares_post_meta($post->ID) + getFakecount() : false,
+        'shares' => isset($post->ID) ? mashsb_get_total_shares_post_meta($post->ID) + (int)getFakecount() : false,
         'round_shares' => isset( $mashsb_options['mashsharer_round'] ),
         /* Do not animate shares on blog posts. The share count would be wrong there and performance bad */
         'animate_shares' => isset( $mashsb_options['animate_shares'] ) && is_singular() ? 1 : 0,
