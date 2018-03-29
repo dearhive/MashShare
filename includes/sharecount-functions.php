@@ -46,7 +46,7 @@ function mashsb_set_fb_sharecount() {
    update_post_meta( $postId, 'mashsb_jsonshares', json_encode($cacheJsonShares) );
    
    $newTotalShares = mashsb_get_total_shares($postId);
-   if ($newTotalShares > $cacheTotalShares){
+   if ($newTotalShares > $cacheTotalShares && is_numeric($newTotalShares) ){
       update_post_meta( $postId, 'mashsb_shares', $newTotalShares );
    }
    wp_die( json_encode( $cacheJsonShares ) );

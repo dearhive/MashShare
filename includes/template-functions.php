@@ -240,7 +240,7 @@ function getSharedcount( $url ) {
          * API share count is greater than real fresh requested share count ->
          */
         
-        if( $mashsbShareCounts->total >= $mashsbStoredShareCount ) {
+        if( is_numeric($mashsbShareCounts->total) && $mashsbShareCounts->total >= $mashsbStoredShareCount ) {
             update_post_meta( $post->ID, 'mashsb_shares', $mashsbShareCounts->total );
             update_post_meta( $post->ID, 'mashsb_jsonshares', json_encode( $mashsbShareCounts ) );
             MASHSB()->logger->info( "Refresh Cache: Update database with share count: " . $mashsbShareCounts->total );
@@ -1102,7 +1102,7 @@ function getFakecount() {
     $fakecount = isset($mashsb_options['fake_count']) && is_numeric ($mashsb_options['fake_count']) ? 
             round( $mashsb_options['fake_count'] * mashsb_get_fake_factor(), 0 ) : 0;
     
-    return $fakecount;
+    return (int)$fakecount;
 
 }
 

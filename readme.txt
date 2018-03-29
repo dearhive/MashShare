@@ -249,6 +249,9 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
+= 3.5.2 =
+* Fix: Warning A non-numeric value encountered
+
 = 3.5.1 =
 * Fix: Fake shares not added after latest update
 * Fix: Do not collect shares if page is previewed. Fixes an issue where shares from a post are collected from the main page, resulting in wrong share counts
