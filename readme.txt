@@ -324,5 +324,5 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 3.4.8 =
-3.4.8 * New shortcode options. Preparations for new MashShare count queue processing. Compatible up to WordPress 4.9.2
+= 3.5.2 =
+3.5.2 * Fix minor issues. Compatible up to WordPress 4.9.5
