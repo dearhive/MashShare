@@ -101,6 +101,7 @@ function mashsb_install() {
             'button_margin' => '1',
             'text_align_center' => '1',
             'mashsharer_round' => '1',
+            'disable_sharecount' => '1'
         );
         update_option( 'mashsb_settings', $settings_default );
     }

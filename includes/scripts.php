@@ -31,6 +31,12 @@ add_action( 'admin_enqueue_scripts', 'mashsb_load_plugins_admin_scripts', 10 );
  * @param string $hook Page hook
  */
 function mashsb_load_scripts( $hook ) {
+   
+   if (is_admin()){
+      return false;
+   }
+   
+   
     global $mashsb_options, $post, $mashsb_sharecount;
     if( !apply_filters( 'mashsb_load_scripts', mashsbGetActiveStatus(), $hook ) ) {
         mashdebug()->info( "mashsb_load_script not active" );

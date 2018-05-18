@@ -205,6 +205,10 @@ function mashsb_rate_limit_exceeded(){
 function mashsb_is_cache_refresh() {
     global $post, $mashsb_options;
     
+    if (isset($mashsb_options['disable_sharecount'])){
+       return false;
+    }
+    
     // Force Cache Reload
     if( isset( $_GET['mashsb-refresh'] ) ) {
         return true;

@@ -46,26 +46,7 @@ class MASHSB_Welcome {
      * @return void
      */
     public function add_admin_menus() {
-//        // About Page
-//        add_dashboard_page(
-//                __( 'Welcome to MashShare', 'mashsb' ), __( 'Welcome to MashShare', 'mashsb' ), $this->minimum_capability, 'mashsb-about', array($this, 'about_screen')
-//        );
-//
-//        // Changelog Page
-//        $mashsb_about = add_dashboard_page(
-//                __( 'MashShare Changelog', 'mashsb' ), __( 'MashShare Changelog', 'mashsb' ), $this->minimum_capability, 'mashsb-changelog', array($this, 'changelog_screen')
-//        );
-//
-//        // Getting Started Page
-//        $mashsb_quickstart = add_submenu_page(
-//                'mashsb-settings', __( 'Quickstart', 'mashsb' ), __( 'Quickstart', 'mashsb' ), $this->minimum_capability, 'mashsb-getting-started', array($this, 'getting_started_screen')
-//        );
-//
-//        // Credits Page
-//        $mashsb_credits = add_dashboard_page(
-//                __( 'The people that build MashShare', 'mashsb' ), __( 'The people that build MashShare', 'mashsb' ), $this->minimum_capability, 'mashsb-credits', array($this, 'credits_screen')
-//        );
-//      
+
         // Getting Started Page
         $mashsb_quickstart = add_submenu_page(
                 'mashsb-settings', __( 'Quickstart', 'mashsb' ), __( 'Quickstart', 'mashsb' ), $this->minimum_capability, 'mashsb-getting-started', array($this, 'getting_started_screen')
@@ -150,7 +131,7 @@ class MASHSB_Welcome {
             $this->tabs();
             ?>
             <?php if (isset($_GET['redirect'])) {?>
-            <p class="about-description mashsb-notice" style="background-color:#00abed;color:white;padding:20px;margin-top:20px;border:3px solid white;"><?php _e( '<strong>Facebook</strong> and <strong>Twitter Share Buttons</strong> successfully enabled on all your posts! <br> You can use the steps below to customize MashShare.', 'mashsb' ); ?></p>
+            <p class="about-description mashsb-notice" style="background-color:#00abed;color:white;padding:20px;margin-top:20px;border:3px solid white;"><?php _e( '<strong>Facebook</strong> and <strong>Twitter Share Buttons</strong> have been enabled on all your posts! <br>Use the instructions below to customize MashShare.<br><br><strong>GDPR / DSGVO:</strong> If you like to enable share count beside share buttons go to <a href="'.admin_url().'admin.php?page=mashsb-settings" style="color:white;">MashShare > Settings > Disable Sharecount</a><br>Enable the share count aggregation is not GDPR / GSDVO compliant and is not recommended if your website must be GDPR conform.', 'mashsb' ); ?></p>
             <?php } ?>
             <div class="changelog clear">
                 <h1><?php _e( 'Create Your First Social Sharing Button', 'mashsb' ); ?></h1>
