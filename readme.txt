@@ -249,6 +249,15 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
+= 3.5.3 =
+* New: Disable share count for new installations as default setting
+* New: Admin notice to recommend to disable the share count agregation to be complicant with upcoming GDPR
+* New: Compatible with WordPress 4.9.6
+* Tweak: Google short urls are not longer supported and removed
+
+= 3.5.2 =
+* Fix: Warning A non-numeric value encountered
+
 = 3.5.1 =
 * Fix: Fake shares not added after latest update
 * Fix: Do not collect shares if page is previewed. Fixes an issue where shares from a post are collected from the main page, resulting in wrong share counts
@@ -321,5 +330,5 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 3.4.8 =
-3.4.8 * New shortcode options. Preparations for new MashShare count queue processing. Compatible up to WordPress 4.9.2
+= 3.5.3 =
+* Important changes for upcoming GDPR compliance

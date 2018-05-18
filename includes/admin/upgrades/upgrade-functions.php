@@ -30,6 +30,10 @@ function mashsb_do_automatic_upgrades() {
 	if( version_compare( $mashsb_version, '3.2.4', '<' ) ) {
 		mashsb_upgrade_v1();
 	}
+       
+//	if( version_compare( $mashsb_version, '3.5.3', '<' ) ) {
+//		mashsb_upgrade_3_5_3();
+//	}
         // Check if version number in DB is lower than version number in current plugin
 	if( version_compare( $mashsb_version, MASHSB_VERSION, '<' ) ) {
 

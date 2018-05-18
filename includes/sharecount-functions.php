@@ -46,7 +46,7 @@ function mashsb_set_fb_sharecount() {
    update_post_meta( $postId, 'mashsb_jsonshares', json_encode($cacheJsonShares) );
    
    $newTotalShares = mashsb_get_total_shares($postId);
-   if ($newTotalShares > $cacheTotalShares){
+   if ($newTotalShares > $cacheTotalShares && is_numeric($newTotalShares) ){
       update_post_meta( $postId, 'mashsb_shares', $newTotalShares );
    }
    wp_die( json_encode( $cacheJsonShares ) );
@@ -161,7 +161,7 @@ function mashsb_get_total_shares_post_meta($postId = false){
    
    $result = get_post_meta( $postId, 'mashsb_shares', true );
    
-   return $result;        
+   return (int)$result;        
 }
 
 /**
@@ -204,6 +204,10 @@ function mashsb_rate_limit_exceeded(){
  */
 function mashsb_is_cache_refresh() {
     global $post, $mashsb_options;
+    
+    if (isset($mashsb_options['disable_sharecount'])){
+       return false;
+    }
     
     // Force Cache Reload
     if( isset( $_GET['mashsb-refresh'] ) ) {

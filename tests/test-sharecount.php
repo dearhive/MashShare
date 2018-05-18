@@ -76,7 +76,7 @@ class sharecount extends WP_UnitTestCase {
       update_post_meta( $postId, 'mashsb_jsonshares', json_encode( $cacheJsonShares ) );
 
       $newTotalShares = mashsb_get_total_shares( $postId );
-      if( $newTotalShares > $cacheTotalShares ) {
+      if( is_numeric($newTotalShares) && $newTotalShares > $cacheTotalShares ) {
          update_post_meta( $postId, 'mashsb_shares', $newTotalShares );
       }
 

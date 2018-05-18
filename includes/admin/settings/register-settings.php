@@ -189,8 +189,8 @@ function mashsb_get_registered_settings() {
                 ),
                 'disable_sharecount' => array(
                     'id' => 'disable_sharecount',
-                    'name' => __( 'Disable Sharecount', 'mashsb' ),
-                    'desc' => __( 'Use this when curl() is not supported on your server or share counts should not counted. This mode does not call the database and no SQL queries are generated. (Only less performance benefit. All db requests are cached) Default: false', 'mashsb' ),
+                    'name' => __( 'Disable Sharecount GDPR / DSGVO', 'mashsb' ),
+                    'desc' => __( 'Use this if share counts should not be counted. You need to disable share counts if you want to be GDPR compliant, because the share count agregation is collecting shares from third party social networks. Default: false', 'mashsb' ),
                     'type' => 'checkbox'
                 ),
                 'hide_sharecount' => array(
@@ -631,13 +631,13 @@ So the MashShare open graph data will be containing the same social meta data th
                     'type' => 'text',
                     'size' => 'large'
                 ),
-                array(
-                    'id' => 'google_app_id',
-                    'name' => __( 'Google API Key (goo.gl)', 'mashsb' ),
-                    'desc' => sprintf(__( 'If you like to use goo.gl shortener get a free Google API key <a href="%s" target="_blank">here</a>. This turn urls into a format: http://goo.gl/cXnjsh. ' . mashsb_check_google_apikey(), 'mashsb' ),'https://console.developers.google.com/'),
-                    'type' => 'text',
-                    'size' => 'large'
-                ),
+//                array(
+//                    'id' => 'google_app_id',
+//                    'name' => __( 'Google API Key (goo.gl)', 'mashsb' ),
+//                    'desc' => sprintf(__( 'If you like to use goo.gl shortener get a free Google API key <a href="%s" target="_blank">here</a>. This turn urls into a format: http://goo.gl/cXnjsh. ' . mashsb_check_google_apikey(), 'mashsb' ),'https://console.developers.google.com/'),
+//                    'type' => 'text',
+//                    'size' => 'large'
+//                ),
                 array(
                     'id' => 'mashsu_methods',
                     'name' => __( 'Shorturl method', 'mashsb' ),
@@ -646,7 +646,6 @@ So the MashShare open graph data will be containing the same social meta data th
                     'options' => array(
                         'wpshortlinks' => 'WP Short links',
                         'bitly' => 'Bitly',
-                        'google' => 'Goo.gl',
                         'disabled' => 'Short URLs Disabled',
                     )
                 ),

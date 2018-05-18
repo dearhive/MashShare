@@ -19,6 +19,7 @@ if( !defined( 'ABSPATH' ) ) {
  * 
  * @since 3.0.0
  * @return string
+ * @deprecated since 3.5.3
  */
 
 function mashsb_check_google_apikey() {
@@ -158,9 +159,9 @@ function mashsb_get_shortened_url( $url ) {
         }
 
         // Google shortlink
-        if( isset( $mashsb_options['mashsu_methods'] ) && $mashsb_options['mashsu_methods'] === 'google' ) {
-            $shorturl = mashsb_get_google_link( $url );
-        }
+//        if( isset( $mashsb_options['mashsu_methods'] ) && $mashsb_options['mashsu_methods'] === 'google' ) {
+//            $shorturl = mashsb_get_google_link( $url );
+//        }
 
         // Get expiration time
         $expiration = mashsb_get_expiration();
@@ -181,6 +182,7 @@ function mashsb_get_shortened_url( $url ) {
  * 
  * @param string $url
  * @return string
+ * @deprecated since 3.5.3
  */
 function mashsb_get_google_link( $url ) {
     global $mashsb_options;
