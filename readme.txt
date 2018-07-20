@@ -249,6 +249,10 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
+= 3.5.4 =
+* New: Support for Yoast custom variables e.g. %%title%%
+* Add sharedcount.com 10.000 free daily api requests
+
 = 3.5.3 =
 * New: Disable share count for new installations as default setting
 * New: Admin notice to recommend to disable the share count agregation to be complicant with upcoming GDPR
