@@ -124,10 +124,10 @@ function mashsb_get_registered_settings() {
                 'mashsb_sharemethod' => array(
                     'id' => 'mashsb_sharemethod',
                     'name' => __( 'Share counts', 'mashsb' ),
-                    'desc' => __( '<i>MashEngine</i> collects shares by direct request to social networks. <br><br>Shares are collected for Facebook, Twitter, Pinterest, Stumbleupon <p></p>Twitter count is aggreagated via <a href="http://newsharecounts.com" target="_blank" rel="external nofollow">newsharecounts.com</a>. You must sign up with your Twitter account for this free service to get the twitter share count. Visit the site newsharecount.com, fill in your website domain and click on <i>Sign in with Twitter</i>. Thats it!', 'mashsb' ),
+                    'desc' => __( '<i>MashEngine</i> collects shares by direct request to social networks. <br><br><i>SharedCount.com</i> is a third party service free for up to 10.000 daily requests. <br><br>Shares are collected for Facebook, Twitter, Pinterest, Stumbleupon <p></p>Twitter count is aggreagated via <a href="https://opensharecount.com" target="_blank" rel="external nofollow">https://opensharecount.com</a>. You must sign up with your Twitter account for this free service to get the twitter share count. Visit the site http://opensharecount.com, fill in your website domain and click on <i>Sign up</i>. Thats it!', 'mashsb' ),
                     'type' => 'select',
                     'options' => array(
-                        //'mashengine' => 'MashEngine (including twitter count)',
+                        'mashengine' => 'MashEngine',
                         'sharedcount' => 'Sharedcount.com'
                     )
                 ),
@@ -138,14 +138,14 @@ function mashsb_get_registered_settings() {
                     'type' => 'text',
                     'size' => 'medium'
                 ),
-                'mashsharer_sharecount_domain' => array(
-                    'id' => 'mashsharer_sharecount_domain',
-                    'name' => __( 'Sharedcount.com endpint', 'mashsb' ),
-                    'desc' => __( 'The SharedCount Domain your API key is configured to query. For example, free.sharedcount.com. This may update automatically if configured incorrectly.', 'mashsb' ),
-                    'type' => 'text',
-                    'size' => 'medium',
-                    'std' => 'free.sharedcount.com'
-                ),
+//                'mashsharer_sharecount_domain' => array(
+//                    'id' => 'mashsharer_sharecount_domain',
+//                    'name' => __( 'Sharedcount.com endpint', 'mashsb' ),
+//                    'desc' => __( 'The SharedCount Domain your API key is configured to query. For example, free.sharedcount.com. This may update automatically if configured incorrectly.', 'mashsb' ),
+//                    'type' => 'text',
+//                    'size' => 'medium',
+//                    'std' => 'https://api.sharedcount.com'
+//                ),
                 'caching_method' => array(
                     'id' => 'caching_method',
                     'name' => __( 'Caching Method', 'mashsb' ),
