@@ -40,11 +40,7 @@ class MASHSB_HEADER_META_TAGS {
     protected $yoast_twitter_creator;
     // yoast social settings
     protected $yoast = array();
-
-    // open-graph add-on data - outdated - only for compatibility
-    //protected $addon_og_title;
-    //protected $addon_og_description;
-    //protected $addon_twitter_title;
+    protected $post;
 
     public function __construct() {
         global $post;
@@ -58,6 +54,7 @@ class MASHSB_HEADER_META_TAGS {
             return false;
         }
 
+        $this->post = $post;
         $this->postID = get_the_ID();
         $this->post_title = $this->get_title();
         $this->post_featured_image = $this->get_featured_image();
@@ -94,17 +91,6 @@ class MASHSB_HEADER_META_TAGS {
         return htmlspecialchars(preg_replace( "/\r|\n/", " ", $string ));
     }
 
-    /**
-     * Get open graph add-on data
-     * 
-     * @deprecated
-     * @return void
-     */
-    /* public function get_og_add_on_data() {
-      $this->addon_og_title = htmlspecialchars( get_post_meta( $this->postID, '_og_title', true ) );
-      $this->addon_og_description = htmlspecialchars( get_post_meta( $this->postID, '_og_description', true ) );
-      $this->addon_twitter_title = htmlspecialchars( get_post_meta( $this->postID, 'mashog_tw_title', true ) );
-      } */
 
     /**
      * Get Yoast open graph and social data
@@ -118,20 +104,33 @@ class MASHSB_HEADER_META_TAGS {
         }
 
         global $wpseo_og;
-        if( has_action( 'wpseo_head', array($wpseo_og, 'opengraph') ) ) {
+        if( has_action( 'wpseo_head', array($wpseo_og, 'opengraph') ) && function_exists('wpseo_replace_vars') ) {
             // Yoast open graph tags
             $this->yoast_og_title = get_post_meta( $this->postID, '_yoast_wpseo_opengraph-title', true );
             $this->yoast_og_description = get_post_meta( $this->postID, '_yoast_wpseo_opengraph-description', true );
             $this->yoast_og_image = get_post_meta( $this->postID, '_yoast_wpseo_opengraph-image', true );
+            
+            $this->yoast_og_title = wpseo_replace_vars($this->yoast_og_title, $this->post);
+            $this->yoast_og_description = wpseo_replace_vars($this->yoast_og_description, $this->post);
+            $this->yoast_og_image = wpseo_replace_vars($this->yoast_og_image, $this->post);
+            
+            
 
             // Yoast twitter card data
             $this->yoast_twitter_title = get_post_meta( $this->postID, '_yoast_wpseo_twitter-title', true );
             $this->yoast_twitter_description = get_post_meta( $this->postID, '_yoast_wpseo_twitter-description', true );
             $this->yoast_twitter_image = get_post_meta( $this->postID, '_yoast_wpseo_twitter-image', true );
+            
+            $this->yoast_twitter_title = wpseo_replace_vars( $this->yoast_twitter_title, $this->post );
+            $this->yoast_twitter_description = wpseo_replace_vars( $this->yoast_twitter_description, $this->post );
+            $this->yoast_twitter_image = wpseo_replace_vars( $this->yoast_twitter_image, $this->post );
 
             // Yoast SEO title and description
             $this->yoast_seo_title = get_post_meta( $this->postID, '_yoast_wpseo_title', true );
             $this->yoast_seo_description = get_post_meta( $this->postID, '_yoast_wpseo_metadesc', true );
+            
+            $this->yoast_seo_title = wpseo_replace_vars($this->yoast_seo_title, $this->post);
+            $this->yoast_seo_description =  wpseo_replace_vars($this->yoast_seo_description, $this->post);
 
             // Remove Yoast open graph and twitter cards data from head of site
             if( $this->is_open_graph() ) {
