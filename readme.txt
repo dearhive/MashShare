@@ -335,5 +335,7 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 3.5.3 =
-* Important changes for upcoming GDPR compliance
+= 3.5.4 =
+* New: Support for Yoast custom variables e.g. %%title%%
+* New: Add sharedcount.com 10.000 free daily api requests
+* New: Switch from newsharecount to opensharecount.com to collect twitter shares

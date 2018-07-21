@@ -47,7 +47,7 @@ function mashsb_admin_messages() {
         return;
     }
     
-    mashsb_show_update_notice_gdpr();
+    //mashsb_show_update_notice_gdpr();
     
     // Rate Limit warning
 //    if( mashsb_is_admin_page() && mashsb_rate_limit_exceeded() ) {
