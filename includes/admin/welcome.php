@@ -225,7 +225,7 @@ class MASHSB_Welcome {
             <!--<img class="mashsb-badge" src="<?php //echo  . 'assets/images/mashsb-logo.svg';  ?>" alt="<?php //_e( 'MashShare', 'mashsb' );  ?>" / >//-->
             <h1><?php printf( __( 'Welcome to MashShare %s', 'mashsb' ), $display_version ); ?></h1>
             <h1 class="about-text">
-                <?php _e( 'Congrats for installing MashShare<br>MashShare is activated and ready to grow your social media traffic!', 'mashsb' ); ?>
+                <?php _e( 'Congrats for Choosing MashShare<br>MashShare is Activated and Ready to Increase Your Social Media Traffic!', 'mashsb' ); ?>
             </h1>
         </div>
         <?php
@@ -294,7 +294,7 @@ class MASHSB_Welcome {
                 <div class="mash-feature-section three-col">
                     <div class="col">
                         <h4><?php _e( 'Developer Friendly', 'mashsb' ); ?></h4>
-                        <p><?php echo sprintf(__( 'Are you a theme developer and want to use MashShare as your build in share count aggregator? Read the <a href="%s" target="blank">developer instructions.</a>', 'mashsb' ), 'https://www.mashshare.net/documentation/developer-instruction-for-commercial-theme-integration/'); ?></p>
+                        <p><?php echo sprintf(__( 'Are you a theme developer and want to use MashShare as your build in share count aggregator? Read the <a href="%s" target="blank">developer instructions.</a>', 'mashsb' ), 'https://docs.mashshare.net/category/38-sample-functions'); ?></p>
                     </div>
                     <div class="col">
                         <h4><?php _e( 'Check Open Graph Settings', 'mashsb' ); ?></h4>
