@@ -10,12 +10,13 @@ Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe,
 Requires at least: 3.6+
 Tested up to: 4.9
 Stable tag: {{ version }}
+Requires PHP: 5.2
 
 Social Media Share Buttons for Twitter, Facebook and other social networks. Highly customizable Social Media ecosystem
 
 == Description == 
 
-#### MashShare - The Social Media Ecosystem (Twitter counts supported)
+#### MashShare - The Social Media Ecosystem (Twitter count supported with [Social Network Add-On](https://mashshare.net/downloads/mashshare-social-networks-addon/))
 A free Social Media Plugin, professional and highly customizable<br />
 ecosystem for social media sharing and optimizing of your valuable content.<br /> 
 
@@ -253,6 +254,7 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 * New: Support for Yoast custom variables e.g. %%title%%
 * New: Add sharedcount.com 10.000 free daily api requests
 * New: Switch from newsharecount to opensharecount.com to collect twitter shares
+* New: Collect twitter shares with social network add-on
 
 = 3.5.3 =
 * New: Disable share count for new installations as default setting
@@ -339,3 +341,5 @@ https://www.mashshare.net/changelog/
 * New: Support for Yoast custom variables e.g. %%title%%
 * New: Add sharedcount.com 10.000 free daily api requests
 * New: Switch from newsharecount to opensharecount.com to collect twitter shares
+* New: Collect twitter shares with social network add-on
+

@@ -32,6 +32,7 @@ if( mashsb_get_option( 'uninstall_on_delete' ) ) {
         delete_option( 'mashsb_update_notice_101');
         delete_option( 'mashsb_valid_fb_api_key');
         delete_option( 'mashsb_show_update_notice_gdpr');
+        delete_option( 'mashsb_show_update_notice_gdpr1');
         
 
         /* Delete all post meta options */

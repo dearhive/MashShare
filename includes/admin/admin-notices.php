@@ -47,7 +47,7 @@ function mashsb_admin_messages() {
         return;
     }
     
-    //mashsb_show_update_notice_gdpr();
+    mashsb_show_update_notice_gdpr();
     
     // Rate Limit warning
 //    if( mashsb_is_admin_page() && mashsb_rate_limit_exceeded() ) {
@@ -444,12 +444,12 @@ function mashsb_show_update_notice_gdpr() {
     
     
     $message = sprintf(__( '<h2 style="color:white;">MashShare GDPR Compliance</h2>'
-            . 'MashShare share count should be disabled due to european GDPR requirements. <br>If you still like to enable share count beside share buttons go to <a href="'.admin_url().'admin.php?page=mashsb-settings" style="color:white;">MashShare > Settings > Disable Sharecount</a><br><br>Enabling the share count aggregation is not GDPR compliant and is not recommended if your website must be GDPR conform.'
+            . 'MashShare uses new sharedcount.com integration to be GDPR compliant. <br>Register for sharedcount.com at <a href="'.admin_url().'admin.php?page=mashsb-settings" style="color:white;">MashShare > Settings > Share Count</a><br><br>For collecting Twitter shares get the <a href="https://mashshare.net/downloads/mashshare-social-networks-addon/?utm_source=wp-admin&utm_medium=gdpr-notice&utm_campaign=gdpr-notice" target="_blank">Social Network Add-On</a>'
             , 'mashsb' ), 
             admin_url() . 'admin.php?page=mashsb-settings'
             );
       
-        if( get_option( 'mashsb_show_update_notice_gdpr' ) === 'no' ) {
+        if( get_option( 'mashsb_show_update_notice_gdpr1' ) === 'no' ) {
            return false;
         }
   
@@ -469,6 +469,6 @@ function mashsb_show_update_notice_gdpr() {
 function mashsb_hide_gdpr_notice(){
         global $mashsb_options;
         // Get all settings
-        update_option( 'mashsb_show_update_notice_gdpr', 'no' );
+        update_option( 'mashsb_show_update_notice_gdpr1', 'no' );
 }
 add_action ('mashsb_hide_gdpr_notice', 'mashsb_hide_gdpr_notice');

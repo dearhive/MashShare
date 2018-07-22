@@ -123,8 +123,8 @@ function mashsb_get_registered_settings() {
                 ),
                 'mashsb_sharemethod' => array(
                     'id' => 'mashsb_sharemethod',
-                    'name' => __( 'Share counts', 'mashsb' ),
-                    'desc' => __( '<i>MashEngine</i> collects shares by direct request to social networks. <br><br><i>SharedCount.com</i> is a third party service free for up to 10.000 daily requests. <br><br>Shares are collected for Facebook, Twitter, Pinterest, Stumbleupon <p></p>Twitter count is aggreagated via <a href="https://opensharecount.com" target="_blank" rel="external nofollow">https://opensharecount.com</a>. You must sign up with your Twitter account for this free service to get the twitter share count. Visit the site http://opensharecount.com, fill in your website domain and click on <i>Sign up</i>. Thats it!', 'mashsb' ),
+                    'name' => __( 'Share Count', 'mashsb' ),
+                    'desc' => __( '<i>MashEngine</i> collects shares by direct request to social networks.<br><br><i>SharedCount.com</i> is a third party service free for up to 10.000 daily requests. For GDPR compliance you should select the sharedcount.com service.<br><br>Shares are collected for Facebook, Twitter (Social Network Add-On needed), Pinterest, Stumbleupon <p></p>Twitter count is aggreagated via <a href="https://opensharecount.com" target="_blank" rel="external nofollow">https://opensharecount.com</a>. You must sign up with your Twitter account for this free service to get the twitter share count. Visit the site http://opensharecount.com, fill in your website domain and click on <i>Sign up</i>. <br><br><strong>Note: You need <a href="https://mashshare.net/downloads/mashshare-social-networks-addon/" target="_blank">MashShare Social Network Add-On</a> for enabling Twitter count.</strong>', 'mashsb' ),
                     'type' => 'select',
                     'options' => array(
                         'mashengine' => 'MashEngine',
