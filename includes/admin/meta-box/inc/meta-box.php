@@ -98,7 +98,7 @@ class MASHSB_RW_Meta_Box
 		if ( ! $this->is_edit_screen() )
 			return;
 
-		wp_enqueue_style( 'rwmb', MASHSB_RWMB_CSS_URL . 'style.css', array(), MASHSB_RWMB_VER );
+		wp_enqueue_style( 'mashsb-rwmb', MASHSB_RWMB_CSS_URL . 'style.css', array(), MASHSB_RWMB_VER );
 		if( is_rtl() )
 			wp_enqueue_style( 'mashsb-rwmb-rtl', MASHSB_RWMB_CSS_URL . 'style-rtl.css', array(), MASHSB_RWMB_VER );
 

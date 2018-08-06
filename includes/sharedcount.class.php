@@ -143,6 +143,7 @@ class mashsbSharedcount {
       }
 
       try {
+         $counts = array();
          //$counts = $this->_curl( 'http://' . $domain . "/?url=" . $this->url . "&apikey=" . $this->apikey );
          $counts = $this->_curl( 'https://api.sharedcount.com/v1.0/?url=' . $this->url . "&apikey=" . $this->apikey );
          if( isset( $counts["Error"] ) && isset( $counts['Domain'] ) && $counts["Type"] === "domain_apikey_mismatch" ) {
