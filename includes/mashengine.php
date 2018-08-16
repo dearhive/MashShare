@@ -10,7 +10,6 @@ class mashengine {
    private $debug_notices;
 
    function __construct( $url, $timeout = 10 ) {
-      //$url = 'https://mashshare.net';
       // remove http and https
       $url_host_path = preg_replace( "(^https?://)", "", $url );
       // build new urls
@@ -19,6 +18,7 @@ class mashengine {
 
       $this->timeout = $timeout;
       $this->url = rawurlencode( $url ); // Original URL
+      //$this->url ='https://google.com';
    }
 
    /* Collect share count from all available networks */
@@ -118,10 +118,14 @@ class mashengine {
 //                }
       }
       if( isset( $mashsb_options['cumulate_http_https'] ) ) {
-         $RollingCurlX->addRequest( "http://opensharecount.com/count.json?url=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
-         $RollingCurlX->addRequest( "http://opensharecount.com/count.json?url=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
+         if( class_exists( 'mashnetTwitter' ) ) {
+            $RollingCurlX->addRequest( "http://opensharecount.com/count.json?url=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
+            $RollingCurlX->addRequest( "http://opensharecount.com/count.json?url=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
+         }
       } else {
-         $RollingCurlX->addRequest( "http://opensharecount.com/count.json?url=" . $this->url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
+         if( class_exists( 'mashnetTwitter' ) ) {
+            $RollingCurlX->addRequest( "http://opensharecount.com/count.json?url=" . $this->url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
+         }
       }
 
       // Fire and forget
@@ -204,12 +208,16 @@ class mashengine {
 //                }
       }
       if( isset( $mashsb_options['cumulate_http_https'] ) ) {
-         $RollingCurlX->addRequest( "http://opensharecount.com/count.json?url=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
-         $RollingCurlX->addRequest( "http://opensharecount.com/count.json?url=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
+         if( class_exists( 'mashnetTwitter' ) ) {
+            $RollingCurlX->addRequest( "http://opensharecount.com/count.json?url=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
+            $RollingCurlX->addRequest( "http://opensharecount.com/count.json?url=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
+         }
          $RollingCurlX->addRequest( "https://api.pinterest.com/v1/urls/count.json?url=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('pinterest'), $headers );
          $RollingCurlX->addRequest( "https://api.pinterest.com/v1/urls/count.json?url=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('pinterest'), $headers );
       } else {
-         $RollingCurlX->addRequest( "http://opensharecount.com/count.json?url=" . $this->url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
+         if( class_exists( 'mashnetTwitter' ) ) {
+            $RollingCurlX->addRequest( "http://opensharecount.com/count.json?url=" . $this->url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
+         }
          $RollingCurlX->addRequest( "https://api.pinterest.com/v1/urls/count.json?url=" . $this->url, $post_data, array($this, 'getCount'), array('pinterest'), $headers );
       }
 
@@ -353,6 +361,16 @@ class mashengine {
       return time();
    }
 
-
+   /**
+    * Get twitter tweet count if social network add-on is installed
+    * @return int
+    */
+   private function getTwitterShares() {
+      if( class_exists( 'mashnetTwitter' ) ) {
+         $twitter = new mashnetTwitter( $this->url );
+         return $twitter->getTwitterShares();
+      }
+      return 0;
+   }
 
 }

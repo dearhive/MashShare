@@ -131,7 +131,8 @@ class MASHSB_Welcome {
             $this->tabs();
             ?>
             <?php if (isset($_GET['redirect'])) {?>
-            <p class="about-description mashsb-notice" style="background-color:#00abed;color:white;padding:20px;margin-top:20px;border:3px solid white;"><?php _e( '<strong>Facebook</strong> and <strong>Twitter Share Buttons</strong> have been enabled on all your posts! <br>Use the instructions below to customize MashShare.<br><br><strong>GDPR / DSGVO:</strong> If you like to enable share count beside share buttons go to <a href="'.admin_url().'admin.php?page=mashsb-settings" style="color:white;">MashShare > Settings > Disable Sharecount</a><br>Enable the share count aggregation is not GDPR / GSDVO compliant and is not recommended if your website must be GDPR conform.', 'mashsb' ); ?></p>
+            <p class="about-description mashsb-notice" style="background-color:#00abed;color:white;padding:20px;margin-top:20px;border:3px solid white;"><?php _e( '<strong>Facebook</strong> and <strong>Twitter Share Buttons</strong> have been enabled on all your posts! <br>Use the instructions below to customize MashShare.<br><br>:</strong>MashShare uses new sharedcount.com integration to be GDPR compliant. 
+Register for sharedcount.com at <a href="'.admin_url().'admin.php?page=mashsb-settings" style="color:white;">MashShare > Settings > Sharecount</a>', 'mashsb' ); ?></p>
             <?php } ?>
             <div class="changelog clear">
                 <h1><?php _e( 'Create Your First Social Sharing Button', 'mashsb' ); ?></h1>
@@ -225,7 +226,7 @@ class MASHSB_Welcome {
             <!--<img class="mashsb-badge" src="<?php //echo  . 'assets/images/mashsb-logo.svg';  ?>" alt="<?php //_e( 'MashShare', 'mashsb' );  ?>" / >//-->
             <h1><?php printf( __( 'Welcome to MashShare %s', 'mashsb' ), $display_version ); ?></h1>
             <h1 class="about-text">
-                <?php _e( 'Congrats for installing MashShare<br>MashShare is activated and ready to grow your social media traffic!', 'mashsb' ); ?>
+                <?php _e( 'Congrats for Choosing MashShare<br>MashShare has been Activated And is Ready to Increase Your Social Media Traffic!', 'mashsb' ); ?>
             </h1>
         </div>
         <?php
@@ -294,7 +295,7 @@ class MASHSB_Welcome {
                 <div class="mash-feature-section three-col">
                     <div class="col">
                         <h4><?php _e( 'Developer Friendly', 'mashsb' ); ?></h4>
-                        <p><?php echo sprintf(__( 'Are you a theme developer and want to use MashShare as your build in share count aggregator? Read the <a href="%s" target="blank">developer instructions.</a>', 'mashsb' ), 'https://www.mashshare.net/documentation/developer-instruction-for-commercial-theme-integration/'); ?></p>
+                        <p><?php echo sprintf(__( 'Are you a theme developer and want to use MashShare as your build in share count aggregator? Read the <a href="%s" target="blank">developer instructions.</a>', 'mashsb' ), 'https://docs.mashshare.net/category/38-sample-functions'); ?></p>
                     </div>
                     <div class="col">
                         <h4><?php _e( 'Check Open Graph Settings', 'mashsb' ); ?></h4>

@@ -50,8 +50,9 @@ function getExecutionOrder() {
 function mashsbGetShareObj( $url ) {
    global $mashsb_options;
 
-   $sharedcount = isset( $mashsb_options['mashsb_sharemethod'] ) && $mashsb_options['mashsb_sharemethod'] === 'sharedcount' ? true : false;
-   if( $sharedcount ) {
+   // Sharedcount.com is default option
+   $mashengine = isset( $mashsb_options['mashsb_sharemethod'] ) && $mashsb_options['mashsb_sharemethod'] === 'mashengine' ? true : false;
+   if( !$mashengine ) {
       require_once(MASHSB_PLUGIN_DIR . 'includes/sharedcount.class.php');
       $apikey = isset( $mashsb_options['mashsharer_apikey'] ) ? $mashsb_options['mashsharer_apikey'] : '';
       $mashsbSharesObj = new mashsbSharedcount( $url, 10, $apikey );

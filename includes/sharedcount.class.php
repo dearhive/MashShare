@@ -129,7 +129,7 @@ class mashsbSharedcount {
       return json_decode( $curl_results, true );
    }
 
-   function get_sharedcount() {
+   function get_sharedcount() { 
       mashdebug()->info( "Share URL: " . $this->url );
       global $mashsb_options;
       if( empty( $this->apikey ) ) {
@@ -143,6 +143,7 @@ class mashsbSharedcount {
       }
 
       try {
+         $counts = array();
          //$counts = $this->_curl( 'http://' . $domain . "/?url=" . $this->url . "&apikey=" . $this->apikey );
          $counts = $this->_curl( 'https://api.sharedcount.com/v1.0/?url=' . $this->url . "&apikey=" . $this->apikey );
          if( isset( $counts["Error"] ) && isset( $counts['Domain'] ) && $counts["Type"] === "domain_apikey_mismatch" ) {
@@ -154,7 +155,7 @@ class mashsbSharedcount {
          }
 
          mashdebug()->error( "Facebook total count: " . $counts['Facebook']['total_count'] );
-         MASHSB()->logger->info( "URL: " . urldecode( $this->url ) . " API Key:" . $this->apikey . " sharedcount.com FB total_count: " . $counts['Facebook']['total_count'] . " FB share_count:" . $counts['Facebook']['share_count'] . " TW: " . $counts['Twitter'] . " G+:" . $counts['GooglePlusOne'] . " Linkedin:" . $counts['LinkedIn'] . " Stumble: " . $counts['StumbleUpon'] . " Pinterest: " . $counts['Pinterest'] );
+         MASHSB()->logger->info( "URL: " . urldecode( $this->url ) . " API Key:" . $this->apikey . " sharedcount.com FB total_count: " . $counts['Facebook']['total_count'] . " FB share_count:" . $counts['Facebook']['share_count'] . " G+:" . $counts['GooglePlusOne'] . " Linkedin:" . $counts['LinkedIn'] . " Stumble: " . $counts['StumbleUpon'] . " Pinterest: " . $counts['Pinterest'] );
 
          $return = array_merge($counts, array('Twitter' => $this->getTwitterShares()));
          return $return;
@@ -168,34 +169,47 @@ class mashsbSharedcount {
       return 0;
    }
    
-      /**
-    * Get Twitter shares via opensharecount.com
-    * @global type $mashsb_options
+   /**
+    * Get twitter tweet count if social network add-on is installed
     * @return int
     */
    private function getTwitterShares(){
-      mashdebug()->info( "Get Twitter Shares: " . $this->url );
-      global $mashsb_options;
-
-      try {
-         $counts = $this->_curl( 'http://opensharecount.com/count.json?url=' . $this->url );
-
-         if( isset( $counts["Error"] )  ) {
-            return 0;
-         }
-
-         mashdebug()->error( "Twitter total count: " . $counts['count'] );
-         MASHSB()->logger->info( "URL: " . urldecode( $this->url ) . " http://opensharecount.com Twitter total_count: " . $counts['count'] );
-         return $counts['count'];
-      } catch ( Exception $e ) {
-         mashdebug()->error( "error: " . $counts );
-         MASHSB()->logger->info( 'ERROR: Curl()' . $counts );
-         return 0;
+      if (  class_exists( 'mashnetTwitter')){
+         $twitter = new mashnetTwitter($this->url);
+         return $twitter->getTwitterShares();
       }
-      mashdebug()->error( "error2: " . $counts );
-      MASHSB()->logger->info( 'ERROR 2: Curl()' . $counts );
       return 0;
    }
+
+   
+//      /**
+//    * Get Twitter shares via opensharecount.com
+//    * @global type $mashsb_options
+//    * @return int
+//    */
+//   private function getTwitterShares(){
+//      mashdebug()->info( "Get Twitter Shares: " . $this->url );
+//      global $mashsb_options;
+//
+//      try {
+//         $counts = $this->_curl( 'http://opensharecount.com/count.json?url=' . $this->url );
+//
+//         if( isset( $counts["Error"] )  ) {
+//            return 0;
+//         }
+//
+//         mashdebug()->error( "Twitter total count: " . $counts['count'] );
+//         MASHSB()->logger->info( "URL: " . urldecode( $this->url ) . " http://opensharecount.com Twitter total_count: " . $counts['count'] );
+//         return $counts['count'];
+//      } catch ( Exception $e ) {
+//         mashdebug()->error( "error: " . $counts );
+//         MASHSB()->logger->info( 'ERROR: Curl()' . $counts );
+//         return 0;
+//      }
+//      mashdebug()->error( "error2: " . $counts );
+//      MASHSB()->logger->info( 'ERROR 2: Curl()' . $counts );
+//      return 0;
+//   }
 
 }
 
