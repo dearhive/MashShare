@@ -516,7 +516,8 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
                 if( $startcounter == $maxcounter ) {
                     $onoffswitch = onOffSwitch(); // Start More Button
                     //$startsecondaryshares = '</div>'; // End Primary Buttons
-                    $startsecondaryshares .= '<div class="secondary-shares" style="display:none;">'; // Start secondary-shares
+                    $visibility = mashsb_is_amp_page() ? '' : 'display:none;';
+                    $startsecondaryshares .= '<div class="secondary-shares" style="'.$visibility.'">'; // Start secondary-shares
                 } else {
                     $onoffswitch = '';
                     $onoffswitch2 = '';
@@ -536,7 +537,7 @@ function mashsb_getNetworks( $is_shortcode = false, $services = 0 ) {
                 $name = ucfirst( $enablednetworks[$key]['id'] ); // Use the id as share label. Capitalize it!
             }
             
-            $enablednetworks[$key]['id'] == 'whatsapp' ? $display = 'style="display:none;"' : $display = ''; // Whatsapp button is made visible via js when opened on mobile devices
+            $enablednetworks[$key]['id'] == 'whatsapp' && !mashsb_is_amp_page() ? $display = 'style="display:none;"' : $display = ''; // Whatsapp button is made visible via js when opened on mobile devices
 
             // Lets use the data attribute to prevent that pininit.js is overwriting our pinterest button - PR: https://secure.helpscout.net/conversation/257066283/954/?folderId=924740
             if ('pinterest' === $enablednetworks[$key]['id'] && !mashsb_is_amp_page() ) {

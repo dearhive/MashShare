@@ -254,6 +254,7 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 * Tweak: Explain better sharedcount and opensharecount integration
 * Fix: Error array_merge is not an array
 * Fix: MashShare social media meta box not shown if another plugin is using the same meta-box library
+* Fix: Whatsapp Button not visible on AMP pages
 * Tweak: Change welcome message
 
 = 3.5.4 =
