@@ -213,8 +213,8 @@ class MASHSB_RW_Meta_Box
 		// Allow users to add custom code before meta box content
 		// 1st action applies to all meta boxes
 		// 2nd action applies to only current meta box
-		do_action( 'rwmb_before', $this );
-		do_action( "rwmb_before_{$this->meta_box['id']}", $this );
+		do_action( 'mashsb_rwmb_before', $this );
+		do_action( "mashsb_rwmb_before_{$this->meta_box['id']}", $this );
 
 		foreach ( $this->fields as $field )
 		{
@@ -261,8 +261,8 @@ class MASHSB_RW_Meta_Box
 			$post_id = $the_post;
 
 		// Before save action
-		do_action( 'rwmb_before_save_post', $post_id );
-		do_action( "rwmb_{$this->meta_box['id']}_before_save_post", $post_id );
+		do_action( 'mashsb_rwmb_before_save_post', $post_id );
+		do_action( "mashsb_rwmb_{$this->meta_box['id']}_before_save_post", $post_id );
 
 		foreach ( $this->fields as $field )
 		{
