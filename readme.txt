@@ -9,7 +9,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email, dsgvo
 Requires at least: 3.6+
 Tested up to: 4.9
-Stable tag: {{ version }}
+Stable tag: {{ version }} 
 Requires PHP: 5.2
 
 Social Media Share Buttons for Twitter, Facebook and other social networks. Highly customizable Social Media ecosystem
