@@ -247,7 +247,7 @@ jQuery(document).ready(function ($) {
     /* Network sharer scripts */
     /* deactivate FB sharer when likeaftershare is enabled */
     if (typeof lashare_fb == "undefined" && typeof mashsb !== 'undefined') {
-        $('.mashicon-facebook').click(function (mashfb) {
+        $('.mashicon-facebook').click(function () {
 
             winWidth = 520;
             winHeight = 550;
@@ -256,7 +256,7 @@ jQuery(document).ready(function ($) {
             var url = $(this).attr('href');
 
             window.open(url, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
-            mashfb.preventDefault(mashfb);
+            e.preventDefault();
             return false;
         });
     }

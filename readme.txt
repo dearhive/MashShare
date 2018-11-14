@@ -250,6 +250,9 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
+= 3.5.6 =
+* Fix: Security fix to prevent XSS attacks
+
 = 3.5.5 =
 * Tweak: Explain better sharedcount and opensharecount integration
 * Fix: Error array_merge is not an array
@@ -345,9 +348,6 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 3.5.5 =
-* New: Support for Yoast custom variables e.g. %%title%%
-* New: Add sharedcount.com 10.000 free daily api requests
-* New: Switch from newsharecount to opensharecount.com to collect twitter shares
-* New: Collect twitter shares with social network add-on
+= 3.5.6 =
+* New: Security Fix
 
