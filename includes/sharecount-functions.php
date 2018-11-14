@@ -23,13 +23,11 @@ function mashsb_set_fb_sharecount() {
    
    // Ajax result
    $result = isset( $_POST['shares'] ) ? $_POST['shares'] : false;
-   $comment_count = isset( $result['comment_count'] ) ? $result['comment_count'] : 0;
-   $share_count = isset( $result['share_count'] ) ? $result['share_count'] : 0;
-   //$url = isset( $result['share_url'] ) ? $result['share_url'] : '';
+   $comment_count = isset( $result['comment_count'] ) ? (int)$result['comment_count'] : 0;
+   $share_count = isset( $result['share_count'] ) ? (int)$result['share_count'] : 0;
    
    if( !$postId || empty($postId) ) {
       wp_die('MashShare: do not collect shares');
-      //wp_die(mashsb_set_fb_shares_transient( $url, $comment_count, $share_count) );
    }
 
    // Cache results
