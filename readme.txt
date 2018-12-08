@@ -250,6 +250,9 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
+= 3.5.7 =
+* New: Compatible up to WordPress 5.0 Gutenberg
+
 = 3.5.6 =
 * Fix: Security fix to prevent XSS attacks
 
