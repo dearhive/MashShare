@@ -19,6 +19,11 @@
 function mashsb_show_meta_box(){
     global $mashsb_options, $wp_roles;
     
+    $visibility = !empty( $mashsb_options['user_roles_for_sharing_options']) ? $mashsb_options['user_roles_for_sharing_options'] : false;
+        if($visibility && in_array('disable', $visibility)){
+        return false;
+    }
+    
     // Show meta boxes per default in any case when user roles are not defined
     if(!empty($mashsb_options) && !isset($mashsb_options['user_roles_for_sharing_options'])){
         return true;

@@ -8,7 +8,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email, dsgvo
 Requires at least: 3.6+
-Tested up to: 4.9
+Tested up to: 5.0
 Stable tag: {{ version }} 
 Requires PHP: 5.2
 
@@ -252,6 +252,7 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 = 3.5.7 =
 * New: Compatible up to WordPress 5.0 Gutenberg
+* New: Option to hide MashShare share options editor meta box completely
 
 = 3.5.6 =
 * Fix: Security fix to prevent XSS attacks

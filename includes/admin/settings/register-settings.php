@@ -248,10 +248,10 @@ function mashsb_get_registered_settings() {
                 ),
                 "user_roles_for_sharing_options" => array(
                     "id"            => "user_roles_for_sharing_options",
-                    "name"          => __("Show Share Options Meta Box", "mashsb"),
-                    "desc"          => __("Select user roles which can only see MashShare Social Sharing Meta Box Options on posts and pages edit screen and User Meta Box on user profiles. If nothing is set meta boxes are shown for all user roles", "mashsb"),
+                    "name"          => __("Show Share Options Meta Box User Roles", "mashsb"),
+                    "desc"          => __("Show the MashShare Share Options Meta Box on the page editor for certain user roles only. If nothing is set meta box is shown to all user roles.", "mashsb"),
                     "type"          => "multiselect",
-                    "options"       => mashsb_get_user_roles(),
+                    "options"       => array_merge(array('disable' => 'Disable Share Options Meta Box') , mashsb_get_user_roles()),
                     "placeholder"   => __("Select User Roles", "mashsb"),
                     "std"           => __("All Roles", "mashsb"),
                 ),
