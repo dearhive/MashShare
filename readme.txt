@@ -251,7 +251,7 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 == Changelog ==
 
 = 3.5.7 =
-* New: Compatible up to WordPress 5.0 Gutenberg
+* New: Compatible up to WordPress 5.0.1 Gutenberg
 * New: Option to hide MashShare share options editor meta box completely
 
 = 3.5.6 =
