@@ -179,7 +179,7 @@ class mashsb_bitly_shorturl {
             curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 2);
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 0);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+            //curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
             $output = curl_exec($ch);
         } catch (Exception $e) {
             
@@ -216,7 +216,7 @@ class mashsb_bitly_shorturl {
             curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 2);
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 0);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+            //curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
             $output = curl_exec($ch);
         } catch (Exception $e) {
             

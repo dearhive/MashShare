@@ -56,10 +56,12 @@ class mashengine {
       $post_data = null;
       $headers = null;
 
-      $options = array(
-          CURLOPT_SSL_VERIFYPEER => FALSE,
-          CURLOPT_SSL_VERIFYHOST => FALSE
-      );
+//      $options = array(
+//          CURLOPT_SSL_VERIFYPEER => FALSE,
+//          CURLOPT_SSL_VERIFYHOST => FALSE
+//      );
+      
+      $options = array();
 
       $RollingCurlX = new RollingCurlX( 4 );    // max 10 simultaneous downloads
       $RollingCurlX->setOptions( $options );
@@ -148,10 +150,12 @@ class mashengine {
       $post_data = null;
       $headers = null;
 
-      $options = array(
-          CURLOPT_SSL_VERIFYPEER => FALSE,
-          CURLOPT_SSL_VERIFYHOST => FALSE
-      );
+//      $options = array(
+//          CURLOPT_SSL_VERIFYPEER => FALSE,
+//          CURLOPT_SSL_VERIFYHOST => FALSE
+//      );
+      
+      $options = array();
 
       $RollingCurlX = new RollingCurlX( 10 );    // max 10 simultaneous downloads
       $RollingCurlX->setOptions( $options );

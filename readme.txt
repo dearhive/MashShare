@@ -250,6 +250,11 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
+= 3.5.8 =
+* New: Compatible up to WordPress 5.0.3
+* Fix: Make sure to not disable TLS while using native curl implementation
+
+
 = 3.5.7 =
 * New: Compatible up to WordPress 5.0.1 Gutenberg
 * New: Option to hide MashShare share options editor meta box completely
@@ -352,6 +357,6 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 3.5.6 =
+= 3.5.8 =
 * New: Security Fix
 
