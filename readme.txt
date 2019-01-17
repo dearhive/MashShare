@@ -250,6 +250,10 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
+= 3.5.9 =
+* Fix: Better wording for gdpr complicance in its settings
+* Fix: Do not output any open graph tags if share options meta box is disabled
+
 = 3.5.8 =
 * New: Compatible up to WordPress 5.0.3
 * Fix: Make sure to not disable TLS while using native curl implementation
