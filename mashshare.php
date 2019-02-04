@@ -9,8 +9,6 @@
  * Version: {{ version }}
  * Text Domain: mashsb
  * Domain Path: /languages
- * Credits: Thanks go to Pippin Williamson and the edd team. When we started with Mashshare we decided to use the EDD code base and 
- * essential parts of the EDD framework because its very reliable and robust. Check out more by pippin on https://pippinsplugins.com/
 
  *
  * Mashshare Share Buttons is free software: you can redistribute it and/or modify
