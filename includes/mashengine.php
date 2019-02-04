@@ -121,12 +121,12 @@ class mashengine {
       }
       if( isset( $mashsb_options['cumulate_http_https'] ) ) {
          if( class_exists( 'mashnetTwitter' ) ) {
-            $RollingCurlX->addRequest( "http://opensharecount.com/count.json?url=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
-            $RollingCurlX->addRequest( "http://opensharecount.com/count.json?url=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
+            $RollingCurlX->addRequest( "https://counts.twitcount.com/counts.php?url=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
+            $RollingCurlX->addRequest( "https://counts.twitcount.com/counts.php?url=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
          }
       } else {
          if( class_exists( 'mashnetTwitter' ) ) {
-            $RollingCurlX->addRequest( "http://opensharecount.com/count.json?url=" . $this->url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
+            $RollingCurlX->addRequest( "https://counts.twitcount.com/counts.php?url=" . $this->url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
          }
       }
 
@@ -213,14 +213,14 @@ class mashengine {
       }
       if( isset( $mashsb_options['cumulate_http_https'] ) ) {
          if( class_exists( 'mashnetTwitter' ) ) {
-            $RollingCurlX->addRequest( "http://opensharecount.com/count.json?url=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
-            $RollingCurlX->addRequest( "http://opensharecount.com/count.json?url=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
+            $RollingCurlX->addRequest( "https://counts.twitcount.com/counts.php?url=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
+            $RollingCurlX->addRequest( "https://counts.twitcount.com/counts.php?url=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
          }
          $RollingCurlX->addRequest( "https://api.pinterest.com/v1/urls/count.json?url=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('pinterest'), $headers );
          $RollingCurlX->addRequest( "https://api.pinterest.com/v1/urls/count.json?url=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('pinterest'), $headers );
       } else {
          if( class_exists( 'mashnetTwitter' ) ) {
-            $RollingCurlX->addRequest( "http://opensharecount.com/count.json?url=" . $this->url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
+            $RollingCurlX->addRequest( "https://counts.twitcount.com/counts.php?url=" . $this->url, $post_data, array($this, 'getCount'), array('twitter'), $headers );
          }
          $RollingCurlX->addRequest( "https://api.pinterest.com/v1/urls/count.json?url=" . $this->url, $post_data, array($this, 'getCount'), array('pinterest'), $headers );
       }

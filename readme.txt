@@ -253,6 +253,8 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 = 3.5.9 =
 * Fix: Better wording for gdpr complicance in its settings
 * Fix: Do not output any open graph tags if share options meta box is disabled
+* Fix: Prevent facebook popup opening twice and causing chrome blocker
+* New: Integration of twitcount.com to get twitter shares back
 
 = 3.5.8 =
 * New: Compatible up to WordPress 5.0.3
@@ -361,6 +363,6 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 3.5.8 =
-* New: Security Fix
+= 3.5.9 =
+* New: Support for twitcount.com
 
