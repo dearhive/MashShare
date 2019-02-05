@@ -247,8 +247,7 @@ jQuery(document).ready(function ($) {
     /* Network sharer scripts */
     /* deactivate FB sharer when likeaftershare is enabled */
     if (typeof lashare_fb == "undefined" && typeof mashsb !== 'undefined') {
-        $('.mashicon-facebook').click(function () {
-
+        $('.mashicon-facebook').click(function (e) {
             winWidth = 520;
             winHeight = 550;
             var winTop = (screen.height / 2) - (winHeight / 2);

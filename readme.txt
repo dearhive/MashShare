@@ -8,7 +8,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email, dsgvo
 Requires at least: 3.6+
-Tested up to: 4.9
+Tested up to: 5.0
 Stable tag: {{ version }} 
 Requires PHP: 5.2
 
@@ -250,6 +250,21 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
+= 3.5.9 =
+* Fix: Better wording for gdpr complicance in its settings
+* Fix: Do not output any open graph tags if share options meta box is disabled
+* Fix: Prevent facebook popup opening twice and causing chrome blocker
+* New: Integration of twitcount.com to get twitter shares back
+
+= 3.5.8 =
+* New: Compatible up to WordPress 5.0.3
+* Fix: Make sure to not disable TLS while using native curl implementation
+
+
+= 3.5.7 =
+* New: Compatible up to WordPress 5.0.1 Gutenberg
+* New: Option to hide MashShare share options editor meta box completely
+
 = 3.5.6 =
 * Fix: Security fix to prevent XSS attacks
 
@@ -273,81 +288,11 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 * New: Compatible with WordPress 4.9.6
 * Tweak: Google short urls are not longer supported and removed
 
-= 3.5.2 =
-* Fix: Warning A non-numeric value encountered
-
-= 3.5.1 =
-* Fix: Fake shares not added after latest update
-* Fix: Do not collect shares if page is previewed. Fixes an issue where shares from a post are collected from the main page, resulting in wrong share counts
-
-= 3.5.0 =
-* New: Tested up to WordPress 4.9.5
-* New: Improved share count aggregation
-* New: Add rel="noopener" to all network buttons
-* Tweak: Remove opt-in notice
-* Tweak: Remove rate limit notice
-* Fix: Calls to networks api are still made when sharecount is disabled
-
-= 3.4.9 =
-* New: Add new short code parameter [mashshare icons=1] allows to show icon buttons only
-* Fix: Remove access token notice
-* Tweak: Lower request break to 5min if facebook api req/hours limits are reached
-
-= 3.4.8 =
-* New: Extend shortcode and allow selection of certain networks and button size [mashshare networks="facebook,twitter,linkedin" services="3" size="small"]
-* Tweak: Remove Facebook Access Token. Will be replaced by queue processing soon to prevent exceeding facebook api limits
-* Tweak: Clean up debug mode
-* Tweak: Clean up Welcome page
-* Tweak: Clean up sidebar
-* Fix: Tweet button
-
-= 3.4.7 =
-* Fix: 100% PHP7 compatibility! No more warnings with php7 compatibility checker
-
-= 3.4.6 =
-* New: Make use of Twitter character limit of 280 characters. 
-* Tweak: Compatible up to WordPress 4.9
-
-= 3.4.5 =
-* New: Create custom values for open graph meta tag og:type, e.g video, product
-* Fix: undefined var title
-* Fix: Pinterest popup not opening when network add-on is not installed
-* Fix: Remove deprecated code and make mashsb.js smaller
-* Fix: Facebook access token validation function not working
-
-= 3.4.4 =
-* Fix: Check fb access token not working properly
-
-= 3.4.3 =
-* Fix: Facebook and twitter buttons missing on multisite activations when bimber theme is used
-* Fix: Whatsapp button not shown on sticky sharebar add-on when network add-on is not installed
-* Tweak: Return a more clear error notice when access token is not valid.
-
-= 3.4.2 =
-* Tweak: Better admin descriptions
-* New: Tested up to WP 4.8
-
-= 3.4.1 =
-* New: Support for PHPUnit 6
-* Fix: Move invisible sub menus from dashboard to MashShare menu section to prevent confusion if a plugin like Menu Editor Pro is active which makes even invisible menu entries visible
-
-= 3.4.1 =
-* Cleaning up readme.txt. MashShare plugin has been disabled on wordpress.org for using too many keywords and a few other issues with its readme.txt
-
-= 3.4.0 =
-* New: Google Analytics add-on allows to append utm_source tracking params for traffic tracking with google Analytics
-* Fix: Pinterest and google plus share counts are not cummulated together with http/https option
-* Fix: Remove admin notice if Facebook access token is empty
-* Fix: Remove console.log test notice
-* Fix: Check if multi_curl_exec is allowed
-* Fix: Share count not incrementing if transient mashsb_limit_req expiration is not set. (Caused by Possible WP Bug or custom theme transient filter)
-* Tweak: Use https endpoint for facebook sharing url
-
 See release notes and complete changelog at:
 https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 3.5.6 =
-* New: Security Fix
+= 3.5.9 =
+* Fix: Prevent facebook popup opening twice and causing chrome blocker. Several fixes and improvements
 

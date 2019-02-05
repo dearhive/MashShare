@@ -211,7 +211,7 @@ Class RollingCurlX {
     private function stopTimer(array &$request) {
         $start_time = $request['timer'];
         $end_time = microtime(true);
-        $elapsed_time = rtrim(sprintf('%.20F', ($end_time - $start_time)), '0') . 'secs'; //convert float to string
+        $elapsed_time = rtrim(sprintf('%.20F', ($end_time - $start_time)), '0'); //convert float to string
         $request['time'] = $elapsed_time*1000; //
         unset($request['timer']);
     }

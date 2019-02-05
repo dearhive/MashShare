@@ -124,7 +124,7 @@ function mashsb_get_registered_settings() {
                 'mashsb_sharemethod' => array(
                     'id' => 'mashsb_sharemethod',
                     'name' => __( 'Share Count', 'mashsb' ),
-                    'desc' => __( '- <i>MashEngine</i> collects shares by direct request to social networks.<br><br><i>SharedCount.com</i> is a third party service free for up to 10.000 daily requests. It collects shares for Facebook, Pinterest, Stumbleupon. (For GDPR compliance you should select the sharedcount.com service.)<br><br>Twitter count is aggreagated via <a href="https://opensharecount.com" target="_blank" rel="external nofollow">https://opensharecount.com</a>. You must sign up with your Twitter account for this free service to get the twitter share count. Visit the site http://opensharecount.com, fill in your website domain and click on <i>Sign up</i>. <br><br><strong>Note: You need <a href="https://mashshare.net/downloads/mashshare-social-networks-addon/" target="_blank">MashShare Social Network Add-On</a> for enabling Twitter count.</strong>', 'mashsb' ),
+                    'desc' => __( '- <i>MashEngine</i> collects shares by direct request to social networks.<br><br><i>SharedCount.com</i> is a third party service free for up to 10.000 daily requests. It collects shares for Facebook, Pinterest, Stumbleupon. (For GDPR compliance you should select the sharedcount.com service.)<br><br>Twitter count is aggreagated via <a href="https://twitcount.com" target="_blank" rel="external nofollow">https://twitcount.com</a>. You must sign up with your Twitter account for this free service to get the twitter share count. Visit the site http://twitcount.com, fill in your website domain and click on <i>Sign up</i>. <br><br><strong>Note: You need <a href="https://mashshare.net/downloads/mashshare-social-networks-addon/" target="_blank">MashShare Social Network Add-On</a> for enabling Twitter count.</strong>', 'mashsb' ),
                     'type' => 'select',
                     'options' => array(
                         'mashengine' => 'MashEngine',
@@ -189,7 +189,7 @@ function mashsb_get_registered_settings() {
                 ),
                 'disable_sharecount' => array(
                     'id' => 'disable_sharecount',
-                    'name' => __( 'Disable Sharecount GDPR / DSGVO', 'mashsb' ),
+                    'name' => __( 'Activate GDPR/DSGVO compliance', 'mashsb' ),
                     'desc' => __( 'Use this if share counts should not be counted. You need to disable share counts if you want to be GDPR compliant, because the share count agregation is collecting shares from third party social networks. Default: false', 'mashsb' ),
                     'type' => 'checkbox'
                 ),
@@ -248,10 +248,10 @@ function mashsb_get_registered_settings() {
                 ),
                 "user_roles_for_sharing_options" => array(
                     "id"            => "user_roles_for_sharing_options",
-                    "name"          => __("Show Share Options Meta Box", "mashsb"),
-                    "desc"          => __("Select user roles which can only see MashShare Social Sharing Meta Box Options on posts and pages edit screen and User Meta Box on user profiles. If nothing is set meta boxes are shown for all user roles", "mashsb"),
+                    "name"          => __("Show Share Options Meta Box User Roles", "mashsb"),
+                    "desc"          => __("Show the MashShare Share Options Meta Box on the page editor for certain user roles only. If nothing is set meta box is shown to all user roles.", "mashsb"),
                     "type"          => "multiselect",
-                    "options"       => mashsb_get_user_roles(),
+                    "options"       => array_merge(array('disable' => 'Disable Share Options Meta Box') , mashsb_get_user_roles()),
                     "placeholder"   => __("Select User Roles", "mashsb"),
                     "std"           => __("All Roles", "mashsb"),
                 ),

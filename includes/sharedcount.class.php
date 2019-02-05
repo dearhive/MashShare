@@ -181,36 +181,6 @@ class mashsbSharedcount {
       return 0;
    }
 
-   
-//      /**
-//    * Get Twitter shares via opensharecount.com
-//    * @global type $mashsb_options
-//    * @return int
-//    */
-//   private function getTwitterShares(){
-//      mashdebug()->info( "Get Twitter Shares: " . $this->url );
-//      global $mashsb_options;
-//
-//      try {
-//         $counts = $this->_curl( 'http://opensharecount.com/count.json?url=' . $this->url );
-//
-//         if( isset( $counts["Error"] )  ) {
-//            return 0;
-//         }
-//
-//         mashdebug()->error( "Twitter total count: " . $counts['count'] );
-//         MASHSB()->logger->info( "URL: " . urldecode( $this->url ) . " http://opensharecount.com Twitter total_count: " . $counts['count'] );
-//         return $counts['count'];
-//      } catch ( Exception $e ) {
-//         mashdebug()->error( "error: " . $counts );
-//         MASHSB()->logger->info( 'ERROR: Curl()' . $counts );
-//         return 0;
-//      }
-//      mashdebug()->error( "error2: " . $counts );
-//      MASHSB()->logger->info( 'ERROR 2: Curl()' . $counts );
-//      return 0;
-//   }
-
 }
 
 ?>

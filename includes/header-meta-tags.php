@@ -658,7 +658,12 @@ class MASHSB_HEADER_META_TAGS {
  * @return object
  */
 function mashsb_meta_tags_init() {
-    global $mashsb_meta_tags;
+    global $mashsb_meta_tags, $mashsb_options;
+    
+    // Do not show meta boxes
+    if(isset($mashsb_options['user_roles_for_sharing_options']) && in_array('disable', $mashsb_options['user_roles_for_sharing_options'])){
+        return;
+    }
 
     if( !is_null( $mashsb_meta_tags ) ) {
         return $mashsb_meta_tags;
@@ -670,6 +675,6 @@ function mashsb_meta_tags_init() {
 
 add_action( 'wp_head', 'mashsb_meta_tags_init', 1 );
 
-// Remove Social Warfare tags open graph tags (Soory Social Warfare guys - You do a great job)
+// Remove Social Warfare tags open graph tags (Sorry Social Warfare guys - You do a great job)
 add_filter( 'sw_meta_tags', '__return_false', 99 );
 
