@@ -25,7 +25,7 @@ function mashsb_show_meta_box(){
     }
     
     // Show meta boxes per default in any case when user roles are not defined
-    if(!empty($mashsb_options) && !isset($mashsb_options['user_roles_for_sharing_options'])){
+    if(empty($mashsb_options) || !isset($mashsb_options['user_roles_for_sharing_options'])){
         return true;
     }
     

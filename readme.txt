@@ -250,6 +250,9 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
+= 3.6.0 =
+* Fix: Social Sharing Meta Box not shown with update 3.5.9
+
 = 3.5.9 =
 * Fix: Better wording for gdpr complicance in its settings
 * Fix: Do not output any open graph tags if share options meta box is disabled
