@@ -8,7 +8,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email, dsgvo
 Requires at least: 3.6+
-Tested up to: 5.0
+Tested up to: 5.1
 Stable tag: {{ version }} 
 Requires PHP: 5.2
 
@@ -252,6 +252,7 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 = 3.6.1 =
 * Fix: Whatsapp and mail button not opening any longer after recent chrom update when noopener attribute is used.
+* New: Support WordPress 5.1
 
 = 3.6.0 =
 * Fix: Social Sharing Meta Box not shown with update 3.5.9
