@@ -250,6 +250,9 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
+= 3.6.1 =
+* Fix: Whatsapp and mail button not opening any longer after recent chrom update when noopener attribute is used.
+
 = 3.6.0 =
 * Fix: Social Sharing Meta Box not shown with update 3.5.9
 
@@ -296,6 +299,7 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 3.5.9 =
-* Fix: Prevent facebook popup opening twice and causing chrome blocker. Several fixes and improvements
+= 3.6.1 =
+* Fix: Whatsapp and mail button not opening any longer after recent chrom update
+
 

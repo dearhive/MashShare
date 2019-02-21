@@ -192,7 +192,7 @@ jQuery(document).ready(function ($) {
             return (jQuery(this).width() > 70) || (jQuery(this).height() > 70)
         })
         for (i = 0; i < largeImages.length; i++) {
-            html += '<li><a target="_blank" rel="noopener" id="mashnetPinterestPopup" href="https://pinterest.com/pin/create/button/?url=' + encodeURIComponent(window.location.href) + '%2F&media=' + largeImages[i].src + '&description=' + largeImages[i].alt + '"><img src="' + largeImages[i].src + '"></a></li>';
+            html += '<li><a target="_blank" rel="" id="mashnetPinterestPopup" href="https://pinterest.com/pin/create/button/?url=' + encodeURIComponent(window.location.href) + '%2F&media=' + largeImages[i].src + '&description=' + largeImages[i].alt + '"><img src="' + largeImages[i].src + '"></a></li>';
         }
     }
 
