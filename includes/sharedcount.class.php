@@ -146,6 +146,7 @@ class mashsbSharedcount {
          $counts = array();
          //$counts = $this->_curl( 'http://' . $domain . "/?url=" . $this->url . "&apikey=" . $this->apikey );
          $counts = $this->_curl( 'https://api.sharedcount.com/v1.0/?url=' . $this->url . "&apikey=" . $this->apikey );
+         
          if( isset( $counts["Error"] ) && isset( $counts['Domain'] ) && $counts["Type"] === "domain_apikey_mismatch" ) {
             $this->update_sharedcount_domain( $counts['Domain'] );
             return 0;
@@ -157,7 +158,9 @@ class mashsbSharedcount {
          mashdebug()->error( "Facebook total count: " . $counts['Facebook']['total_count'] );
          MASHSB()->logger->info( "URL: " . urldecode( $this->url ) . " API Key:" . $this->apikey . " sharedcount.com FB total_count: " . $counts['Facebook']['total_count'] . " FB share_count:" . $counts['Facebook']['share_count'] . " G+:" . $counts['GooglePlusOne'] . " Linkedin:" . $counts['LinkedIn'] . " Stumble: " . $counts['StumbleUpon'] . " Pinterest: " . $counts['Pinterest'] );
 
-         $return = array_merge($counts, array('Twitter' => $this->getTwitterShares()));
+         $return = is_array($counts) ? array_merge($counts, array('Twitter' => $this->getTwitterShares())) : array('Twitter' => $this->getTwitterShares());
+         
+         
          return $return;
       } catch ( Exception $e ) {
          mashdebug()->error( "error: " . $counts );
@@ -176,7 +179,7 @@ class mashsbSharedcount {
    private function getTwitterShares(){
       if (  class_exists( 'mashnetTwitter')){
          $twitter = new mashnetTwitter($this->url);
-         return $twitter->getTwitterShares();
+         return empty($twitter->getTwitterShares()) ? 0 : $twitter->getTwitterShares();
       }
       return 0;
    }

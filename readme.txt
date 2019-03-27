@@ -252,6 +252,7 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 = 3.6.1 =
 * Fix: Whatsapp and mail button not opening any longer after recent chrom update when noopener attribute is used.
+* Fix: Undefined Var
 * New: Support WordPress 5.1
 
 = 3.6.0 =
