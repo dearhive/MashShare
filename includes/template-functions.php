@@ -220,8 +220,8 @@ function getSharedcount( $url ) {
         
         // Its request limited
         if ( mashsb_is_req_limited() ){ 
-            $mashsb_debug[] = 'Rate limit reached: Return Share from custom meta field.';
-            return get_post_meta( $post->ID, 'mashsb_shares', true ) + getFakecount();
+            $mashsb_debug[] = 'Rate limit reached: Return Share from custom meta field.';            
+            return (int)get_post_meta( $post->ID, 'mashsb_shares', true ) + getFakecount();
         }
 
         // free some memory
