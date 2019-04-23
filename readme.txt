@@ -251,6 +251,7 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 == Changelog ==
 
 = 3.6.2 =
+* New: Adding new Facebook API
 
 = 3.6.1 =
 * Fix: Whatsapp and mail button not opening any longer after recent chrom update when noopener attribute is used.

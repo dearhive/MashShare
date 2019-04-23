@@ -49,6 +49,8 @@ function mashsb_admin_messages() {
     
     mashsb_show_update_notice_gdpr();
     
+    mashsb_show_new_fb_api();
+    
     // Rate Limit warning
 //    if( mashsb_is_admin_page() && mashsb_rate_limit_exceeded() ) {
 //        echo '<div class="error">';
@@ -472,3 +474,44 @@ function mashsb_hide_gdpr_notice(){
         update_option( 'mashsb_show_update_notice_gdpr1', 'no' );
 }
 add_action ('mashsb_hide_gdpr_notice', 'mashsb_hide_gdpr_notice');
+
+
+
+/**
+ * Show notice for new FB API
+ * @since 3.5.3.0
+ */
+function mashsb_show_new_fb_api() {
+    
+    
+    $message = sprintf(__( '<h2 style="color:white;">MashShare: Facebook API Changes</h2>'
+            . 'Facebook shut down its old API endpoint so you need to switch over to sharedcount.com integration to get the latest Facebook share count. <br>Register for sharedcount.com at <a href="'.admin_url().'admin.php?page=mashsb-settings" style="color:white;">MashShare > Settings > Share Count</a><br>'
+            , 'mashsb' ), 
+            admin_url() . 'admin.php?page=mashsb-settings'
+            );
+      
+        if( get_option( 'mashsb_show_new_fb_api' ) === 'no' ) {
+           return false;
+        }
+  
+        // admin notice after updating Mashshare
+        echo '<div class="mashsb-notice-gdpr mashsb_update_notice_gdpr update-nag" style="background-color: red;color: white;padding: 20px;margin-top: 20px;border: 3px solid white;">' . $message . 
+        '<p><a href="'.admin_url().'admin.php?page=mashsb-settings&mashsb-action=hide_fb_api_notice" class="mashsb_hide_fb_api" title="I got it" style="text-decoration:none;color:white;">- I Understand! Do Not Show This Message Again -</a></a>'.
+            '</div>';
+       
+    
+}
+
+/**
+ * Hide FB API notice
+ * 
+ * @global array $mashsb_options
+ */
+function mashsb_hide_fb_api_notice(){
+        global $mashsb_options;
+        // Get all settings
+        update_option( 'mashsb_show_new_fb_api', 'no' );
+}
+add_action ('mashsb_hide_fb_api_notice', 'mashsb_hide_fb_api_notice');
+
+

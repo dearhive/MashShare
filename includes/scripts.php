@@ -71,9 +71,7 @@ function mashsb_load_scripts( $hook ) {
     wp_enqueue_script( 'mashsb', $js_dir . 'mashsb' . $suffix . '.js', array('jquery'), MASHSB_VERSION, $in_footer );
     
     $status = apply_filters('mashsbStatus', false);
-    
-    //!isset( $mashsb_options['disable_sharecount'] ) ? $shareresult = getSharedcount( $url ) : $shareresult = 0;
-    
+        
     $refresh = mashsb_is_cache_refresh() ? 1 : 0;
     
     wp_localize_script( 'mashsb', 'mashsb', array(
