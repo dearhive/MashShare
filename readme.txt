@@ -251,7 +251,10 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 == Changelog ==
 
 = 3.6.2 =
-* New: Adding new Facebook API
+* New: Necessary change because of new facebook API
+* New: Remove mashengine
+* New: Remove GDPR option. Not needed any longer as all shares are collected via sharedcount.com
+* New: Add admin notice notifying user of new facebook API.
 
 = 3.6.1 =
 * Fix: Whatsapp and mail button not opening any longer after recent chrom update when noopener attribute is used.
@@ -304,7 +307,10 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 3.6.1 =
-* Fix: Whatsapp and mail button not opening any longer after recent chrom update
+= 3.6.2 =
+* New: Necessary change because of new facebook API
+* New: Remove mashengine
+* New: Remove GDPR option. Not needed any longer as all shares are collected via sharedcount.com
+* New: Add admin notice notifying user of new facebook API.
 
 
