@@ -446,7 +446,7 @@ function mashsb_show_update_notice_gdpr() {
     
     
     $message = sprintf(__( '<h2 style="color:white;">MashShare GDPR Compliance</h2>'
-            . 'MashShare uses new sharedcount.com integration to be GDPR compliant. <br>Register for sharedcount.com at <a href="'.admin_url().'admin.php?page=mashsb-settings" style="color:white;">MashShare > Settings > Share Count</a><br><br>For collecting Twitter shares get the <a href="https://mashshare.net/downloads/mashshare-social-networks-addon/?utm_source=wp-admin&utm_medium=gdpr-notice&utm_campaign=gdpr-notice" target="_blank">Social Network Add-On</a>'
+            . 'MashShare uses new sharedcount.com integration to be GDPR compliant. <br>Activate sharedcount.com at <a href="'.admin_url().'admin.php?page=mashsb-settings#mashsb_settingsgeneral_header" style="color:white;">MashShare > Settings > General > Share Count</a><br><br>For collecting Twitter shares get the <a href="https://mashshare.net/downloads/mashshare-social-networks-addon/?utm_source=wp-admin&utm_medium=gdpr-notice&utm_campaign=gdpr-notice" target="_blank">Social Network Add-On</a>'
             , 'mashsb' ), 
             admin_url() . 'admin.php?page=mashsb-settings'
             );
@@ -485,7 +485,7 @@ function mashsb_show_new_fb_api() {
     
     
     $message = sprintf(__( '<h2 style="color:white;">MashShare: Facebook API Changes</h2>'
-            . 'Facebook shut down its old API endpoint so you need to switch over to sharedcount.com integration to get the latest Facebook share count. <br>Register for sharedcount.com at <a href="'.admin_url().'admin.php?page=mashsb-settings" style="color:white;">MashShare > Settings > Share Count</a><br>'
+            . 'Facebook shut down its old API endpoint so you need to switch over to sharedcount.com integration to get the latest Facebook share count. <br>Add sharedcount.com API key at <a href="'.admin_url().'admin.php?page=mashsb-settings#mashsb_settingsgeneral_header" style="color:white;">MashShare > Settings > General > Share Count</a><br>'
             , 'mashsb' ), 
             admin_url() . 'admin.php?page=mashsb-settings'
             );
