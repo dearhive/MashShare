@@ -188,12 +188,12 @@ function mashsb_get_registered_settings() {
                     'type' => 'text',
                     'size' => 'medium'
                 ),
-//                'disable_sharecount' => array(
-//                    'id' => 'disable_sharecount',
-//                    'name' => __( 'Activate GDPR/DSGVO compliance', 'mashsb' ),
-//                    'desc' => __( 'Use this if share counts should not be counted. You need to disable share counts if you want to be GDPR compliant, because the share count agregation is collecting shares from third party social networks. Default: false', 'mashsb' ),
-//                    'type' => 'checkbox'
-//                ),
+                'disable_sharecount' => array(
+                    'id' => 'disable_sharecount',
+                    'name' => __( 'Disable Sharecount', 'mashsb' ),
+                    'desc' => __( 'Use this if share should not be counted. Default: false', 'mashsb' ),
+                    'type' => 'checkbox'
+                ),
                 'hide_sharecount' => array(
                     'id' => 'hide_sharecount',
                     'name' => __( 'Hide Sharecount', 'mashsb' ),

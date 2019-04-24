@@ -250,6 +250,9 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
+= 3.6.3 =
+* Fix: Option Cumulate Http(s) Shares not working for sharedcount.com API endpoint
+
 = 3.6.2 =
 * New: Necessary change because of new facebook API
 * New: Remove mashengine
@@ -307,10 +310,7 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 3.6.2 =
-* New: Necessary change because of new facebook API
-* New: Remove mashengine
-* New: Remove GDPR option. Not needed any longer as all shares are collected via sharedcount.com
-* New: Add admin notice notifying user of new facebook API.
+= 3.6.3 =
+* Fix: Option Cumulate Http(s) Shares not working for sharedcount.com API endpoint
 
 
