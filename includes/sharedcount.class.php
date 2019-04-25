@@ -19,8 +19,6 @@ class mashsbSharedcount {
     function __construct( $url, $timeout = 10, $apikey = '' ) {
         global $mashsb_options;
 
-        $url = 'http://google.com';
-
         // remove http and https
         $url_host_path = preg_replace( "(^https?://)", "", $url );
 
