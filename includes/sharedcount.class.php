@@ -18,6 +18,9 @@ class mashsbSharedcount {
 
     function __construct( $url, $timeout = 10, $apikey = '' ) {
         global $mashsb_options;
+        
+        // Uncomment for testing
+        //$url = 'https://google.com';
 
         // remove http and https
         $url_host_path = preg_replace( "(^https?://)", "", $url );
@@ -51,18 +54,19 @@ class mashsbSharedcount {
         $counts = array('shares' => array(), 'total' => 0);
         switch ( $fb_mode ) {
             case $fb_mode === 'likes':
-                $counts['shares']['fb']          = $sharecounts['Facebook']['like_count'];
+                $counts['shares']['fb']       = $sharecounts['Facebook']['like_count'];
                 $counts['shares']['fb_https'] = $sharecounts['https']['Facebook']['like_count'];
 
                 break;
             case $fb_mode === 'total':
-                $counts['shares']['fb']          = $sharecounts['Facebook']['total_count'];
+                $counts['shares']['fb']       = $sharecounts['Facebook']['total_count'];
                 $counts['shares']['fb_https'] = $sharecounts['https']['Facebook']['total_count'];
                 break;
             default:
-                $counts['shares']['fb']          = $sharecounts['Facebook']['share_count'];
+                $counts['shares']['fb']       = $sharecounts['Facebook']['share_count'];
                 $counts['shares']['fb_https'] = $sharecounts['https']['Facebook']['share_count'];
         }
+        $counts['shares']['tw'] = $sharecounts['Twitter'];
 
 
 
@@ -95,22 +99,22 @@ class mashsbSharedcount {
         $counts = array('shares' => array(), 'total' => 0);
         switch ( $fb_mode ) {
             case $fb_mode === 'likes':
-                $counts['shares']['fb']          = $sharecounts['Facebook']['like_count'];
+                $counts['shares']['fb']       = $sharecounts['Facebook']['like_count'];
                 $counts['shares']['fb_https'] = $sharecounts['https']['Facebook']['like_count'];
                 break;
             case $fb_mode === 'total':
-                $counts['shares']['fb']          = $sharecounts['Facebook']['total_count'];
+                $counts['shares']['fb']       = $sharecounts['Facebook']['total_count'];
                 $counts['shares']['fb_https'] = $sharecounts['https']['Facebook']['total_count'];
                 break;
             default:
-                $counts['shares']['fb']          = $sharecounts['Facebook']['share_count'];
+                $counts['shares']['fb']       = $sharecounts['Facebook']['share_count'];
                 $counts['shares']['fb_https'] = $sharecounts['https']['Facebook']['share_count'];
         }
-        isset( $sharecounts['Twitter'] ) ? $counts['shares']['tw']           = $sharecounts['Twitter'] : $counts['shares']['tw']           = 0;
-        isset( $sharecounts['GooglePlusOne'] ) ? $counts['shares']['gp']           = $sharecounts['GooglePlusOne'] : $counts['shares']['gp']           = 0;
-        isset( $sharecounts['LinkedIn'] ) ? $counts['shares']['li']           = $sharecounts['LinkedIn'] : $counts['shares']['li']           = 0;
-        isset( $sharecounts['StumbleUpon'] ) ? $counts['shares']['st']           = $sharecounts['StumbleUpon'] : $counts['shares']['st']           = 0;
-        isset( $sharecounts['Pinterest'] ) ? $counts['shares']['pin']          = $sharecounts['Pinterest'] : $counts['shares']['pin']          = 0;
+        isset( $sharecounts['Twitter'] ) ? $counts['shares']['tw']        = $sharecounts['Twitter'] : $counts['shares']['tw']        = 0;
+        isset( $sharecounts['GooglePlusOne'] ) ? $counts['shares']['gp']        = $sharecounts['GooglePlusOne'] : $counts['shares']['gp']        = 0;
+        isset( $sharecounts['LinkedIn'] ) ? $counts['shares']['li']        = $sharecounts['LinkedIn'] : $counts['shares']['li']        = 0;
+        isset( $sharecounts['StumbleUpon'] ) ? $counts['shares']['st']        = $sharecounts['StumbleUpon'] : $counts['shares']['st']        = 0;
+        isset( $sharecounts['Pinterest'] ) ? $counts['shares']['pin']       = $sharecounts['Pinterest'] : $counts['shares']['pin']       = 0;
         isset( $sharecounts['https']['Pinterest'] ) ? $counts['shares']['pin_https'] = $sharecounts['https']['Pinterest'] : $counts['shares']['pin_https'] = 0;
 
 
@@ -188,6 +192,9 @@ class mashsbSharedcount {
                 return 0;
             }
 
+            $tweets = $this->getTwitterShares();
+            
+            $counts = is_array( $counts ) ? array_merge( $counts, array('Twitter' => $tweets) ) : array('Twitter' => $tweets);
 
             $counts['https'] = $httpsShares;
 
@@ -206,16 +213,18 @@ class mashsbSharedcount {
      * Get twitter tweet count if social network add-on is installed
      * @return int
      */
-//    private function getTwitterShares() {
-//        // exit here, because twitter does not support tweet count any longer
-//        return 0;
-//        
-//        if( class_exists( 'mashnetTwitter' ) ) {
-//            $twitter = new mashnetTwitter( $this->url );
-//            return empty( $twitter->getTwitterShares() ) ? 0 : $twitter->getTwitterShares();
-//        }
-//        return 0;
-//    }
+    private function getTwitterShares() {
+
+        if( class_exists( 'mashnetTwitter' ) ) {
+            $twitter = new mashnetTwitter( $this->url );
+            
+            $tweets = $twitter->getTwitterShares();
+            
+            return empty( $tweets ) ? 0 : $tweets;
+        }
+        return 0;
+    }
+
 }
 
 ?>
