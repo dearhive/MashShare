@@ -96,7 +96,6 @@ class mashsbSharedcount {
         }
 
         $counts = array('shares' => array(), 'total' => 0);
-        $counts = array('shares' => array(), 'total' => 0);
         switch ( $fb_mode ) {
             case $fb_mode === 'likes':
                 $counts['shares']['fb']       = $sharecounts['Facebook']['like_count'];
@@ -135,21 +134,21 @@ class mashsbSharedcount {
      * @param type $domain
      * @return int
      */
-    function update_sharedcount_domain( $domain = false ) {
-        global $mashsb_options;
-        if( !$domain ) {
-            try {
-                $domain_obj = $this->_curl( 'http://' . $mashsb_options["mashsharer_sharecount_domain"] . "/account?apikey=" . $this->apikey );
-                $domain     = $domain_obj["domain"];
-            } catch ( Exception $e ) {
-                mashdebug()->error( "error: " . $domain_obj );
-                return 0;
-            }
-        }
-        $mashsb_options["mashsharer_sharecount_domain"] = $domain;
-        update_option( 'mashsb_settings', $mashsb_options );
-        return 1;
-    }
+//    function update_sharedcount_domain( $domain = false ) {
+//        global $mashsb_options;
+//        if( !$domain ) {
+//            try {
+//                $domain_obj = $this->_curl( 'http://' . $mashsb_options["mashsharer_sharecount_domain"] . "/account?apikey=" . $this->apikey );
+//                $domain     = $domain_obj["domain"];
+//            } catch ( Exception $e ) {
+//                mashdebug()->error( "error: " . $domain_obj );
+//                return 0;
+//            }
+//        }
+//        $mashsb_options["mashsharer_sharecount_domain"] = $domain;
+//        update_option( 'mashsb_settings', $mashsb_options );
+//        return 1;
+//    }
 
     private function _curl( $url ) {
         $curl         = curl_init();

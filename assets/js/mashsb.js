@@ -197,19 +197,26 @@ jQuery(document).ready(function ($) {
     }
 
 
-    // check the sharecount caching method
-    //mashsb_check_cache();
+
 
     // Fix for the inline post plugin which removes the zero share count
     if ($('.mashsbcount').text() == '') {
         $('.mashsbcount').text(0);
     }
 
+    // check the sharecount caching method
+    mashsb_check_cache();
+
     /**
      * Check Cache
      *
      */
     function mashsb_check_cache() {
+        
+        if (mashsb_is_rate_limit()) {
+            return false;
+        }
+        
         setTimeout(function () {
             if (typeof (mashsb) && mashsb.refresh == "1") {
                 mashsb_update_cache();

@@ -280,50 +280,6 @@ function mashsb_is_cache_refresh() {
     }
     
     return false;
-    
-
-    // New cache on singular pages
-    // 
-    // Refreshing cache on blog posts like categories will lead 
-    // to high load and multiple API requests so we only check 
-    // the main url on these other pages
-//    if( is_singular() && isset($post->ID) ) {
-//        // last updated timestamp 
-//        $last_updated = get_post_meta( $post->ID, 'mashsb_timestamp', true );
-//        if( !empty( $last_updated ) ) {
-//            MASHSB()->logger->info( 'mashsb_is_cache_refresh - is_singular() url: ' . get_permalink($post->ID) . ' : last updated:' . date( 'Y-m-d H:i:s', $last_updated ) );
-//        }
-//    } else if( mashsb_get_main_url() ) {
-//
-//        // Get transient timeout and calculate last update time
-//        $url = mashsb_get_main_url();
-//        $transient = '_transient_timeout_mashcount_' . md5( $url );
-//        $last_updated = get_option( $transient ) - mashsb_get_expiration();
-//        if( !empty( $last_updated ) ) {
-//            MASHSB()->logger->info( 'mashsb_is_cache_refresh() mashsb_get_main_url() url: ' . $url . ' last updated:' . date( 'Y-m-d H:i:s', $last_updated ) );
-//        }
-//    } else {
-//        // No valid URL so do not refresh cache
-//        MASHSB()->logger->info( 'mashsb_is_cache_refresh: No valid URL - do not refresh cache' );
-//        return false;
-//    }
-//
-//    // No timestamp so let's create cache for the first time
-//    if( empty( $last_updated ) ) {
-//        MASHSB()->logger->info( 'mashsb_is_cache_refresh: No Timestamp. Refresh Cache' );
-//        return true;
-//    }
-//
-//    // The caching expiration
-//    $expiration = mashsb_get_expiration();
-//    $next_update = $last_updated + $expiration;
-//    MASHSB()->logger->info( 'mashsb_is_cache_refresh. Next update ' . date( 'Y-m-d H:i:s', $next_update ) . ' current time: ' . date( 'Y-m-d H:i:s', time() ) );
-//
-//    // Refresh Cache when last update plus expiration time is older than current time
-//    if( ($last_updated + $expiration) <= time() ) {
-//        MASHSB()->logger->info( 'mashsb_is_cache_refresh: Refresh Cache!' );
-//        return true;
-//    }
 }
 
 /**

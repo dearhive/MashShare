@@ -253,7 +253,9 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 = 3.6.3 =
 * Fix: Option Cumulate Http(s) Shares not working for sharedcount.com API endpoint
 * Fix: Tweets can be requested via opensharecount.com
+* Fix: Async cache refresh not fired
 * New: Performance Improvements in collecting sharecount
+* New: Switch default share method to refresh while loading
 
 = 3.6.2 =
 * New: Necessary change because of new facebook API
