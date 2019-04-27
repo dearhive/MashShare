@@ -10,7 +10,7 @@ if( !defined( 'ABSPATH' ) )
 
 class MASHSB_HEADER_META_TAGS {
 
-    protected $postID = 0;
+    protected $postID   = 0;
     protected $imageURL;
     protected $post_title;
     protected $post_featured_image;
@@ -39,7 +39,7 @@ class MASHSB_HEADER_META_TAGS {
     protected $yoast_twitter_image;
     protected $yoast_twitter_creator;
     // yoast social settings
-    protected $yoast = array();
+    protected $yoast    = array();
     protected $post;
 
     public function __construct() {
@@ -54,12 +54,12 @@ class MASHSB_HEADER_META_TAGS {
             return false;
         }
 
-        $this->post = $post;
-        $this->postID = get_the_ID();
-        $this->post_title = $this->get_title();
-        $this->post_featured_image = $this->get_featured_image();
-        $this->post_description = $this->sanitize_data( $this->get_excerpt_by_id( $this->postID ) );
-        $this->pinterest_image = $this->get_pinterest_image_url();
+        $this->post                  = $post;
+        $this->postID                = get_the_ID();
+        $this->post_title            = $this->get_title();
+        $this->post_featured_image   = $this->get_featured_image();
+        $this->post_description      = $this->sanitize_data( $this->get_excerpt_by_id( $this->postID ) );
+        $this->pinterest_image       = $this->get_pinterest_image_url();
         $this->pinterest_description = $this->get_pinterest_description();
 
         $this->get_og_data();
@@ -77,20 +77,18 @@ class MASHSB_HEADER_META_TAGS {
      * @return void
      */
     public function get_og_data() {
-        $this->og_title = $this->sanitize_data( get_post_meta( $this->postID, 'mashsb_og_title', true ) );
-        $this->og_description = $this->sanitize_data( get_post_meta( $this->postID, 'mashsb_og_description', true ) );
-        $this->og_image = $this->get_image_url();
-        $this->og_type = $this->sanitize_data( get_post_meta( $this->postID, 'mashsb_og_type', true ) );
-        $this->twitter_title = $this->sanitize_data( get_post_meta( $this->postID, 'mashsb_custom_tweet', true ) );
+        $this->og_title        = $this->sanitize_data( get_post_meta( $this->postID, 'mashsb_og_title', true ) );
+        $this->og_description  = $this->sanitize_data( get_post_meta( $this->postID, 'mashsb_og_description', true ) );
+        $this->og_image        = $this->get_image_url();
+        $this->og_type         = $this->sanitize_data( get_post_meta( $this->postID, 'mashsb_og_type', true ) );
+        $this->twitter_title   = $this->sanitize_data( get_post_meta( $this->postID, 'mashsb_custom_tweet', true ) );
         $this->twitter_creator = $this->get_twitter_creator();
-        $this->twitter_site = mashsb_get_twitter_username();
-    }
-    
-    public function sanitize_data($string){
-        //return $string;
-        return htmlspecialchars(preg_replace( "/\r|\n/", " ", $string ));
+        $this->twitter_site    = mashsb_get_twitter_username();
     }
 
+    public function sanitize_data( $string ) {
+        return htmlspecialchars( preg_replace( "/\r|\n/", " ", $string ) );
+    }
 
     /**
      * Get Yoast open graph and social data
@@ -104,33 +102,33 @@ class MASHSB_HEADER_META_TAGS {
         }
 
         global $wpseo_og;
-        if( has_action( 'wpseo_head', array($wpseo_og, 'opengraph') ) && function_exists('wpseo_replace_vars') ) {
+        if( has_action( 'wpseo_head', array($wpseo_og, 'opengraph') ) && function_exists( 'wpseo_replace_vars' ) ) {
             // Yoast open graph tags
-            $this->yoast_og_title = get_post_meta( $this->postID, '_yoast_wpseo_opengraph-title', true );
+            $this->yoast_og_title       = get_post_meta( $this->postID, '_yoast_wpseo_opengraph-title', true );
             $this->yoast_og_description = get_post_meta( $this->postID, '_yoast_wpseo_opengraph-description', true );
-            $this->yoast_og_image = get_post_meta( $this->postID, '_yoast_wpseo_opengraph-image', true );
-            
-            $this->yoast_og_title = wpseo_replace_vars($this->yoast_og_title, $this->post);
-            $this->yoast_og_description = wpseo_replace_vars($this->yoast_og_description, $this->post);
-            $this->yoast_og_image = wpseo_replace_vars($this->yoast_og_image, $this->post);
-            
-            
+            $this->yoast_og_image       = get_post_meta( $this->postID, '_yoast_wpseo_opengraph-image', true );
+
+            $this->yoast_og_title       = wpseo_replace_vars( $this->yoast_og_title, $this->post );
+            $this->yoast_og_description = wpseo_replace_vars( $this->yoast_og_description, $this->post );
+            $this->yoast_og_image       = wpseo_replace_vars( $this->yoast_og_image, $this->post );
+
+
 
             // Yoast twitter card data
-            $this->yoast_twitter_title = get_post_meta( $this->postID, '_yoast_wpseo_twitter-title', true );
+            $this->yoast_twitter_title       = get_post_meta( $this->postID, '_yoast_wpseo_twitter-title', true );
             $this->yoast_twitter_description = get_post_meta( $this->postID, '_yoast_wpseo_twitter-description', true );
-            $this->yoast_twitter_image = get_post_meta( $this->postID, '_yoast_wpseo_twitter-image', true );
-            
-            $this->yoast_twitter_title = wpseo_replace_vars( $this->yoast_twitter_title, $this->post );
+            $this->yoast_twitter_image       = get_post_meta( $this->postID, '_yoast_wpseo_twitter-image', true );
+
+            $this->yoast_twitter_title       = wpseo_replace_vars( $this->yoast_twitter_title, $this->post );
             $this->yoast_twitter_description = wpseo_replace_vars( $this->yoast_twitter_description, $this->post );
-            $this->yoast_twitter_image = wpseo_replace_vars( $this->yoast_twitter_image, $this->post );
+            $this->yoast_twitter_image       = wpseo_replace_vars( $this->yoast_twitter_image, $this->post );
 
             // Yoast SEO title and description
-            $this->yoast_seo_title = get_post_meta( $this->postID, '_yoast_wpseo_title', true );
+            $this->yoast_seo_title       = get_post_meta( $this->postID, '_yoast_wpseo_title', true );
             $this->yoast_seo_description = get_post_meta( $this->postID, '_yoast_wpseo_metadesc', true );
-            
-            $this->yoast_seo_title = wpseo_replace_vars($this->yoast_seo_title, $this->post);
-            $this->yoast_seo_description =  wpseo_replace_vars($this->yoast_seo_description, $this->post);
+
+            $this->yoast_seo_title       = wpseo_replace_vars( $this->yoast_seo_title, $this->post );
+            $this->yoast_seo_description = wpseo_replace_vars( $this->yoast_seo_description, $this->post );
 
             // Remove Yoast open graph and twitter cards data from head of site
             if( $this->is_open_graph() ) {
@@ -188,6 +186,7 @@ class MASHSB_HEADER_META_TAGS {
         // Default return value
         return $this->post_title;
     }
+
     /**
      * Get the og type
      * 
@@ -237,11 +236,11 @@ class MASHSB_HEADER_META_TAGS {
             return trim( get_the_excerpt() );
         }
 
-        $the_post = get_post( $post_id ); //Gets post ID
-        $the_excerpt = $the_post->post_content; //Gets post_content to be used as a basis for the excerpt
+        $the_post       = get_post( $post_id ); //Gets post ID
+        $the_excerpt    = $the_post->post_content; //Gets post_content to be used as a basis for the excerpt
         $excerpt_length = 35; //Sets excerpt length by words
-        $the_excerpt = strip_tags( strip_shortcodes( $the_excerpt ) ); //Strips tags and images
-        $words = explode( ' ', $the_excerpt, $excerpt_length + 1 );
+        $the_excerpt    = strip_tags( strip_shortcodes( $the_excerpt ) ); //Strips tags and images
+        $words          = explode( ' ', $the_excerpt, $excerpt_length + 1 );
         if( count( $words ) > $excerpt_length ) {
             array_pop( $words );
             $the_excerpt = implode( ' ', $words );
@@ -279,13 +278,13 @@ class MASHSB_HEADER_META_TAGS {
         if( empty( $og_image ) ) {
             return;
         }
-        
-        $upload_dir = wp_upload_dir();
-        $img_src = str_replace( $upload_dir['baseurl'], $upload_dir['basedir'], $this->get_og_image() );
-        
-        $imagesize = is_readable($img_src) ? getimagesize( $img_src ) : '';
 
-        if(!empty($imagesize)){
+        $upload_dir = wp_upload_dir();
+        $img_src    = str_replace( $upload_dir['baseurl'], $upload_dir['basedir'], $this->get_og_image() );
+
+        $imagesize = is_readable( $img_src ) ? getimagesize( $img_src ) : '';
+
+        if( !empty( $imagesize ) ) {
             return $imagesize;
         }
     }
@@ -455,10 +454,7 @@ class MASHSB_HEADER_META_TAGS {
      * @return string
      */
     public function get_twitter_title() {
-        if( !empty( $this->twitter_title ) ) {
-            return $this->twitter_title;
-        }
-
+        // Return Yoast twitter title
         if( defined( 'WPSEO_VERSION' ) ) {
             if( !empty( $this->yoast_twitter_title ) ) {
                 return $this->yoast_twitter_title;
@@ -466,6 +462,11 @@ class MASHSB_HEADER_META_TAGS {
             if( !empty( $this->yoast_seo_title ) ) {
                 return $this->yoast_seo_title;
             }
+        }
+
+        // Return MashShare Twitter title
+        if( !empty( $this->twitter_title ) ) {
+            return $this->twitter_title;
         }
         // Default return value
         return $this->post_title;
@@ -492,7 +493,7 @@ class MASHSB_HEADER_META_TAGS {
      * @global array $ob_wp_simplepodcastpress
      */
     public function remove_simple_podcast_press_og() {
-        if(!$this->is_open_graph()){
+        if( !$this->is_open_graph() ) {
             return;
         }
         include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
@@ -552,14 +553,14 @@ class MASHSB_HEADER_META_TAGS {
      * @return string HTML
      */
     public function render_open_graph_meta() {
-        
+
         if( !$this->is_open_graph() ) {
             $html = '';
             return $html;
         }
 
         $opengraph = PHP_EOL . '<!-- Open Graph Meta Tags generated by MashShare ' . MASHSB_VERSION . ' - https://mashshare.net -->';
-        $opengraph .= PHP_EOL . '<meta property="og:type" content="'.$this->get_og_type().'" /> ';
+        $opengraph .= PHP_EOL . '<meta property="og:type" content="' . $this->get_og_type() . '" /> ';
         if( $this->get_og_title() ) {
             $opengraph .= PHP_EOL . '<meta property="og:title" content="' . $this->get_og_title() . '" />';
         }
@@ -584,7 +585,7 @@ class MASHSB_HEADER_META_TAGS {
         $opengraph .= PHP_EOL . '<meta property="article:modified_time" content="' . get_post_modified_time( 'c' ) . '" />';
         $opengraph .= PHP_EOL . '<meta property="og:updated_time" content="' . get_post_modified_time( 'c' ) . '" />';
         $opengraph .= PHP_EOL . '<!-- Open Graph Meta Tags generated by MashShare ' . MASHSB_VERSION . ' - https://www.mashshare.net -->';
-        
+
         return $opengraph;
     }
 
@@ -601,9 +602,9 @@ class MASHSB_HEADER_META_TAGS {
         }
 
         $twittercard = PHP_EOL . '<!-- Twitter Card generated by MashShare ' . MASHSB_VERSION . ' - https://www.mashshare.net -->';
-        
+
         $imagesize = $this->get_og_image_size();
-        if( is_array( $imagesize ) && isset($imagesize[0]) && isset($imagesize[1])  ) {
+        if( is_array( $imagesize ) && isset( $imagesize[0] ) && isset( $imagesize[1] ) ) {
             $twittercard .= PHP_EOL . '<meta property="og:image:width" content="' . $imagesize[0] . '" />';
             $twittercard .= PHP_EOL . '<meta property="og:image:height" content="' . $imagesize[1] . '" />';
         }
@@ -659,9 +660,9 @@ class MASHSB_HEADER_META_TAGS {
  */
 function mashsb_meta_tags_init() {
     global $mashsb_meta_tags, $mashsb_options;
-    
+
     // Do not show meta boxes
-    if(isset($mashsb_options['user_roles_for_sharing_options']) && in_array('disable', $mashsb_options['user_roles_for_sharing_options'])){
+    if( isset( $mashsb_options['user_roles_for_sharing_options'] ) && in_array( 'disable', $mashsb_options['user_roles_for_sharing_options'] ) ) {
         return;
     }
 

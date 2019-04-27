@@ -256,6 +256,7 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 * Fix: Async cache refresh not fired
 * New: Performance Improvements in collecting sharecount
 * New: Switch default share method to refresh while loading
+* New: If yoast twitter title and description is populated the mashshare generated twitter card will use this settings but still allows to define a custom tweet text.
 
 = 3.6.2 =
 * New: Necessary change because of new facebook API
