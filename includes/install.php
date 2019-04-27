@@ -95,7 +95,7 @@ function mashsb_install() {
             'twitter_card' => '1',
             'open_graph' => '1',
             'mashsb_sharemethod' => 'mashengine',
-            'caching_method' => 'async_cache',
+            'caching_method' => 'refresh_loading',
             'mashsu_methods' => 'disabled',
             'responsive_buttons' => '1',
             'button_margin' => '1',
