@@ -11,6 +11,8 @@ jQuery(document).ready(function ($) {
      * Get facebook share count vi js client request
      * 
      * @returns {undefined}
+     * 
+     * not used any longer
      */
     var mashsb_get_fb_shares = function ()
     {
@@ -56,7 +58,7 @@ jQuery(document).ready(function ($) {
     }
     // Make sure page has been loaded completely before requesting any shares via ajax
     // This also prevents hitting the server too often
-    setTimeout(mashsb_get_fb_shares, 3000);
+    //setTimeout(mashsb_get_fb_shares, 3000);
 
     /**
      * If page is older than 30 second it's cached. So do not call FB API again 

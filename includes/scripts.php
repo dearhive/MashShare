@@ -72,7 +72,8 @@ function mashsb_load_scripts( $hook ) {
     
     $status = apply_filters('mashsbStatus', false);
         
-    $refresh = mashsb_is_cache_refresh() ? 1 : 0;
+    //$refresh = mashsb_is_cache_refresh() ? 1 : 0;
+    $refresh = 0;
     
     wp_localize_script( 'mashsb', 'mashsb', array(
         'shares' => isset($post->ID) ? mashsb_get_total_shares_post_meta($post->ID) + (int)getFakecount() : false,
