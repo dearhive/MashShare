@@ -123,7 +123,9 @@ function mashsb_install() {
      * Setup the default network options
      * Store our initial social networks in separate option row.
      */
-    if( is_plugin_inactive( 'mashshare-networks/mashshare-networks.php' ) ) {
+    
+    $networks = get_option('mashsb_networks');
+    if( is_plugin_inactive( 'mashshare-networks/mashshare-networks.php' ) || false === $networks || empty($networks) ) {
         $networks = array(
             'Facebook',
             'Twitter',

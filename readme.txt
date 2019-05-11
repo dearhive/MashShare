@@ -8,7 +8,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email, dsgvo
 Requires at least: 3.6+
-Tested up to: 5.1
+Tested up to: 5.2
 Stable tag: {{ version }} 
 Requires PHP: 5.2
 
@@ -251,7 +251,9 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 == Changelog ==
 
 = 3.6.4 =
+* New: Compatible up to WordPress 5.2
 * Fix: Do not call the facebook api directly any longer
+* Fix: Undefined variable notice after uninstallation and deleting all MashShare settings an installation again
 
 = 3.6.3 =
 * Fix: Option Cumulate Http(s) Shares not working for sharedcount.com API endpoint
