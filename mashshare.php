@@ -44,7 +44,7 @@ if( !defined( 'MASHSB_DEBUG' ) ) {
 }
 
 
-if( !class_exists( 'mashshare' ) ) :
+if( !class_exists( 'Mashshare' ) ) :
 
     /**
      * Main mashsb Class

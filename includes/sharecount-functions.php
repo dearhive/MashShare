@@ -281,6 +281,91 @@ function mashsb_is_cache_refresh() {
     
     return false;
 }
+/**
+ * Check if cache time is expired and post must be refreshed
+ * This is used for the caching method async only
+ * 
+ * @global array $post
+ * @return boolean 
+ */
+function mashsb_is_async_cache_refresh() {
+    global $post, $mashsb_options;
+    
+    // Never
+    if (isset($mashsb_options['refresh_loading'])){
+       return false;
+    }
+    
+    if (isset($mashsb_options['disable_sharecount'])){
+       return false;
+    }
+    
+    // Force Cache Reload
+    if( isset( $_GET['mashsb-refresh'] ) ) {
+        return true;
+    }
+    
+    // Preview Mode
+    if( isset($_GET['preview_id'] ) ) {
+        return false;
+    }
+    
+    
+    // Debug mode or cache activated
+    if( MASHSB_DEBUG || isset( $mashsb_options['disable_cache'] ) ) {
+        MASHSB()->logger->info( 'mashsb_is_cache_refresh: MASHSB_DEBUG - refresh Cache' );
+        return true;
+    }
+    
+    // if it's a crawl deactivate cache
+    if( isset( $_SERVER['HTTP_USER_AGENT'] ) && preg_match( '/bot|crawl|slurp|spider/i', $_SERVER['HTTP_USER_AGENT'] ) ) {
+        return false;
+    }
+    
+    /*
+     * Deactivate share count on:
+     * - 404 pages
+     * - search page
+     * - empty url
+     * - disabled permalinks
+     * - admin pages
+     * 
+        Exit here to save cpu time
+     */
+    
+    if( is_admin() || is_404() || is_search() || !mashsb_is_enabled_permalinks() ) {
+         return false;
+    }
+    
+    /* 
+     * Refreshing cache on multiple blog posts like categories will lead 
+     * to high load and multiple API requests so we only check
+     * the main url
+    */
+   if( !is_singular() || !isset($post->ID) ) {
+      return false;
+    }
+      $last_updated = 0;
+      $last_updated = get_post_meta( $post->ID, 'mashsb_timestamp', true );
+    
+    // No timestamp! So let's create cache for the first time
+    if( empty( $last_updated ) || $last_updated < 0 ) {
+        // Write timestamp (Use this on top of this condition. If this is not on top following return statements will be skipped and ignored - possible bug?)
+        return true;
+    }
+    
+    // The caching expiration
+    $expiration = mashsb_get_expiration();
+    $next_update = $last_updated + $expiration;
+    
+    // Refresh Cache when last update plus expiration time is older than current time
+    if( ($last_updated + $expiration) <= time() ) {
+        // Write timestamp (Use this on top of this condition. If this is not on top following return statements will be skipped and ignored - possible bug?)
+        return true;
+    }
+    
+    return false;
+}
 
 /**
  * Check via ajax if cache should be updated
@@ -321,7 +406,7 @@ function mashsb_get_expiration_method_async() {
         $seconds = apply_filters('mashsb_refresh_21_days', 14400);
     } else {
         // expire cache after one hour
-        $seconds = apply_filters('mashsb_refresh_1_hour', 3600);;
+        $seconds = apply_filters('mashsb_refresh_1_hour', 3600);
     }
 
     return $seconds;

@@ -250,7 +250,10 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
-= 3.6.4 =
+= 3.6.5 =
+* Fix: Share count not collected with async caching method
+
+= 3.6.5 =
 * New: Compatible up to WordPress 5.2
 * Fix: Do not call the facebook api directly any longer
 * Fix: Undefined variable notice after uninstallation and deleting all MashShare settings an installation again
@@ -320,7 +323,7 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 3.6.3 =
-* Fix: Option Cumulate Http(s) Shares not working for sharedcount.com API endpoint
+= 3.6.5 =
+* Fix: Share count not collected with async caching method
 
 

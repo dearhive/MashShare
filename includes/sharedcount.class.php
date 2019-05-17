@@ -107,7 +107,7 @@ class mashsbSharedcount {
                 break;
             default:
                 $counts['shares']['fb']       = $sharecounts['Facebook']['share_count'];
-                $counts['shares']['fb_https'] = $sharecounts['https']['Facebook']['share_count'];
+                $counts['shares']['fb_https'] = isset($sharecounts['https']['Facebook']['share_count']) ? $sharecounts['https']['Facebook']['share_count'] : '';
         }
         isset( $sharecounts['Twitter'] ) ? $counts['shares']['tw']        = $sharecounts['Twitter'] : $counts['shares']['tw']        = 0;
         isset( $sharecounts['GooglePlusOne'] ) ? $counts['shares']['gp']        = $sharecounts['GooglePlusOne'] : $counts['shares']['gp']        = 0;
