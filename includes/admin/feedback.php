@@ -75,6 +75,11 @@ function mashsb_send_feedback() {
     $subject = isset( $form['mashsb_disable_reason'] ) ? $form['mashsb_disable_reason'] : '(no reason given)';
 
     $success = wp_mail( 'makebetter@mashshare.net', $subject, $text, $headers );
+    
+    if ($success){
+        wp_die(1);
+    }
+    wp_die(0);
 
     //error_log(print_r($success, true));
     //error_log($from . $subject . var_dump($form));
