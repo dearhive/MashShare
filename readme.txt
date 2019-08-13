@@ -250,6 +250,9 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
+= 3.6.7 =
+* Fix: Whatsapp sharing does not work
+
 = 3.6.6 =
 * Tweak: Added an extra check for HTTP_HOST to make it more compliant with cron jobs and/or API workers
 
@@ -326,7 +329,7 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 3.6.6 =
-* Tweak: Added an extra check for HTTP_HOST to make it more compliant with cron jobs and/or API workers
+= 3.6.7 =
+* Fix: Whatsapp sharing does not work
 
 
