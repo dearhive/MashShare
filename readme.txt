@@ -250,6 +250,10 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
+= 3.6.8 =
+* New: Add new filter mashsb_allowed_post_types for allowing or disabling share counts on particular posts types to lower the api requests to sharedcount.com
+* Tweak: sharedcount.com lowered their free api limit to 500 daily requests. Change description in MashShare! 
+
 = 3.6.7 =
 * Fix: Whatsapp sharing does not work
 
@@ -314,7 +318,7 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 = 3.5.4 =
 * New: Support for Yoast custom variables e.g. %%title%%
-* New: Add sharedcount.com 10.000 free daily api requests
+* New: Add sharedcount.com 500 free daily api requests
 * New: Switch from newsharecount to opensharecount.com to collect twitter shares
 * New: Collect twitter shares with social network add-on
 

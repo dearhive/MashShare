@@ -135,7 +135,7 @@ msgstr ""
 #: includes/admin/settings/register-settings.php:138
 msgid ""
 "Get it FREE at <a href=\"https://admin.sharedcount.com/admin/signup.php\" "
-"target=\"_blank\">SharedCount.com</a> for 10.000 free daily requests. It´s "
+"target=\"_blank\">SharedCount.com</a> for 500 free daily requests. It´s "
 "essential for accurate function of this plugin. Make sure Curl is working on "
 "your server."
 msgstr ""

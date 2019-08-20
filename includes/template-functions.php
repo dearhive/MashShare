@@ -159,6 +159,27 @@ function mashsbGetShareCountFromTransient($url){
         }
 }
 
+/**
+ * Allow or disable share counts for particular posts types to lower the api requests to sharedcount.com
+ * @return boolean
+ */
+function mashsbIsPostTypeAllowed(){    
+    $postType = get_post_type();
+    
+    $allowedPostTypes = apply_filters('mashsb_allowed_post_types', array() );
+    
+    // If $allowedPostTypes is not defined all post types are allowed
+    if(empty($allowedPostTypes) ){
+        return true;
+    }
+    
+    // If filter is used check if current post type is in array of allowed ones
+    if (in_array($postType, $allowedPostTypes)){
+        return true;
+    }
+    return false;
+}
+
 
 /*
  * Return the share count
@@ -167,9 +188,10 @@ function mashsbGetShareCountFromTransient($url){
  * @returns int
  */
 
+
 function getSharedcount( $url ) {
     global $mashsb_options, $post, $mashsb_sharecount, $mashsb_debug; // todo test a global share count var if it reduces the amount of requests
-    
+
     /*
      * Deactivate share count on:
      * - 404 pages
@@ -730,9 +752,14 @@ function mashshareShow() {
  */
 function mashsb_render_sharecounts( $customurl = '', $align = 'left', $size = false ) {
     global $mashsb_options;
+      
+    // Share count disabled
+    if (false === mashsbIsPostTypeAllowed()){
+        return '';
+    }
 
     if( isset( $mashsb_options['disable_sharecount'] ) || !mashsb_curl_installed() || !mashsb_is_enabled_permalinks() ) {
-        return;
+        return '';
     }
 
     $url = empty( $customurl ) ? mashsb_get_url() : $customurl;

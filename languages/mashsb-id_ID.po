@@ -552,7 +552,7 @@ msgstr ""
 #: includes/admin/settings/register-settings.php:137
 msgid ""
 "Get it at <a href=\"https://www.sharedcount.com\" target=\"_blank"
-"\">SharedCount.com</a> for 10.000 free daily requests."
+"\">SharedCount.com</a> for 500 free daily requests."
 msgstr ""
 
 #: includes/admin/settings/register-settings.php:143

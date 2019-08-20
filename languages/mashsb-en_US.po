@@ -175,7 +175,7 @@ msgid ""
 "<i>MashEngine</i> collects shares by calling social networks directly from "
 "your server. All shares are cached and stored in your database. <p> If you "
 "notice performance issues choose the classical <i>Sharedcount.com</i>. This "
-"needs an API key and is limited to 10.000 free requests daily but it is a "
+"needs an API key and is limited to 500 free requests daily but it is a "
 "little bit faster on requesting. After caching there is no performance "
 "benefit compared to MashEngine! Only mashEngine is able to collect twitter "
 "tweets.<p> <strong>MashEngine collects: </strong> Facebook, Twitter, "
@@ -195,7 +195,7 @@ msgstr ""
 #: includes/admin/settings/register-settings.php:149
 msgid ""
 "Get it at <a href=\"https://www.sharedcount.com\" target=\"_blank"
-"\">SharedCount.com</a> for 10.000 free daily requests."
+"\">SharedCount.com</a> for 500 free daily requests."
 msgstr ""
 
 #: includes/admin/settings/register-settings.php:155
