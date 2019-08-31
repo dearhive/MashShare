@@ -141,6 +141,11 @@ class MASHSB_RW_Meta_Box
 	static function get_fields( $fields )
 	{
 		$all_fields = array();
+                
+                if (empty($fields)){
+                    return $all_fields;
+                }
+                
 		foreach ( $fields as $field )
 		{
 			$all_fields[] = $field;
