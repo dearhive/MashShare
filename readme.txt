@@ -253,6 +253,7 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 = 3.6.8 =
 * New: Add new filter mashsb_allowed_post_types for allowing or disabling share counts on particular posts types to lower the api requests to sharedcount.com
 * Tweak: sharedcount.com lowered their free api limit to 500 daily requests. Change description in MashShare! 
+* Fix: Changed register link for sharedcount.com
 
 = 3.6.7 =
 * Fix: Whatsapp sharing does not work

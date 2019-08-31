@@ -135,7 +135,7 @@ function mashsb_get_registered_settings() {
                 'mashsharer_apikey' => array(
                     'id' => 'mashsharer_apikey',
                     'name' => __( 'Sharedcount.com API Key', 'mashsb' ),
-                    'desc' => __( 'This is needed to use the sharedcount.com Share Count method. Get it at <a href="https://admin.sharedcount.com/admin/signup.php?utm_campaign=settings&utm_medium=plugin&utm_source=mashshare" target="_blank">SharedCount.com</a> for 500 free daily requests.', 'mashsb' ),
+                    'desc' => __( 'This is needed to use the sharedcount.com Share Count method. Get it at <a href="https://www.sharedcount.com/" target="_blank">SharedCount.com</a> for 500 free daily requests.', 'mashsb' ),
                     'type' => 'text',
                     'size' => 'medium'
                 ),
