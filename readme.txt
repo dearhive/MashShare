@@ -250,6 +250,11 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
+= 3.7.0 =
+* Fix: PHP Warning: Invalid argument supplied for foreach() in meta-box.php
+* Fix: Set the share count query rate limit to 1req/5min
+* New: Compatible up to WordPress 5.2.4
+
 = 3.6.8 =
 * New: Add new filter mashsb_allowed_post_types for allowing or disabling share counts on particular posts types to lower the api requests to sharedcount.com
 * Tweak: sharedcount.com lowered their free api limit to 500 daily requests. Change description in MashShare! 
@@ -310,32 +315,14 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 = 3.5.6 =
 * Fix: Security fix to prevent XSS attacks
 
-= 3.5.5 =
-* Tweak: Explain better sharedcount and opensharecount integration
-* Fix: Error array_merge is not an array
-* Fix: MashShare social media meta box not shown if another plugin is using the same meta-box library
-* Fix: Incompatibility with meta-box add-ons
-* Fix: Whatsapp Button not visible on AMP pages
-* Tweak: Change welcome message
-
-= 3.5.4 =
-* New: Support for Yoast custom variables e.g. %%title%%
-* New: Add sharedcount.com 500 free daily api requests
-* New: Switch from newsharecount to opensharecount.com to collect twitter shares
-* New: Collect twitter shares with social network add-on
-
-= 3.5.3 =
-* New: Disable share count for new installations as default setting
-* New: Admin notice to recommend to disable the share count agregation to be complicant with upcoming GDPR
-* New: Compatible with WordPress 4.9.6
-* Tweak: Google short urls are not longer supported and removed
-
 See release notes and complete changelog at:
 https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 3.6.7 =
-* Fix: Whatsapp sharing does not work
+= 3.7.0 =
+* Fix: PHP Warning: Invalid argument supplied for foreach() in meta-box.php
+* Fix: Set the share count query rate limit to 1req/5min
+* New: Compatible up to WordPress 5.2.4
 
 
