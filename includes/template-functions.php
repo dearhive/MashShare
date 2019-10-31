@@ -203,8 +203,14 @@ function getSharedcount( $url ) {
      * - deprecated: admin pages (we need to remove this for themes which are using a bad infinite scroll implementation where is_admin() is always true)
      */
 
-    //|| mashsb_rate_limit_exceeded()
-       
+
+    // Request is rate limited
+    if (mashsb_is_req_limited()) {
+        $mashsb_debug[] = 'Rate limit reached: Return Share from custom meta field.';
+        return (int) get_post_meta($post->ID, 'mashsb_shares', true) + getFakecount();
+    }
+
+
     if( is_404() || is_search() || empty($url) || !mashsb_is_enabled_permalinks() || isset($mashsb_options['disable_sharecount']) || isset($_GET['preview_id']) ) {
         $mashsb_debug[] = 'MashShare: Share count (temporary) disabled';
         return apply_filters( 'filter_get_sharedcount', 0 );

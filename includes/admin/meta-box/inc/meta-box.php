@@ -343,6 +343,10 @@ class MASHSB_RW_Meta_Box
 	 */
 	static function normalize_fields( $fields )
 	{
+            
+            if (empty($fields)){
+                return array();
+            }
 		foreach ( $fields as $k => $field )
 		{
 			$class = self::get_class_name( $field );
