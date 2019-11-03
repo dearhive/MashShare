@@ -181,17 +181,17 @@ function mashsb_rate_limit_exceeded(){
      */
     function mashsb_is_req_limited() {
         global $mashsb_debug;
-        
+
         $data_timeout = get_transient('mashsb_limit_req');
-        
+
         if (false === $data_timeout || empty($data_timeout)  ){
-            set_transient('mashsb_limit_req', '1', 300);
+            set_transient('mashsb_limit_req', '1', 60);
             $mashsb_debug[] = 'Temp Rate Limit not exceeded';
             return false;
         }
             $mashsb_debug[] = 'Temp Rate Limit Exceeded';
         return true;
-        
+
     }
 
 /**

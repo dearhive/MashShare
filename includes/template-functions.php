@@ -205,10 +205,10 @@ function getSharedcount( $url ) {
 
 
     // Request is rate limited
-    if (mashsb_is_req_limited()) {
-        $mashsb_debug[] = 'Rate limit reached: Return Share from custom meta field.';
-        return (int) get_post_meta($post->ID, 'mashsb_shares', true) + getFakecount();
-    }
+//    if (mashsb_is_req_limited()) {
+//        $mashsb_debug[] = 'Rate limit reached: Return Share from custom meta field.';
+//        return (int) get_post_meta($post->ID, 'mashsb_shares', true) + getFakecount();
+//    }
 
 
     if( is_404() || is_search() || empty($url) || !mashsb_is_enabled_permalinks() || isset($mashsb_options['disable_sharecount']) || isset($_GET['preview_id']) ) {

@@ -250,6 +250,9 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
+= 3.7.1 =
+* Fix: Shares are not updated as intended
+
 = 3.7.0 =
 * Fix: PHP Warning: Invalid argument supplied for foreach() in meta-box.php
 * Fix: Set the share count query rate limit to 1req/5min
