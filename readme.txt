@@ -250,6 +250,9 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
+= 3.7.2 =
+* New: Compatible to WordPress 5.3.0
+
 = 3.7.1 =
 * Fix: Shares are not updated as intended
 
