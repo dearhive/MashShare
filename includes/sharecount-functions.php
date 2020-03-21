@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Helper functions for retriviving the share counts from social networks
+ * Helper functions for retriving the share counts from social networks
  *
  * @package     MASHSB
  * @subpackage  Functions/sharecount
@@ -15,7 +15,7 @@ if( !defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Save fb share count asnycronically via ajax
+ * Save fb share count asycronically via ajax
  */
 function mashsb_set_fb_sharecount() {
 
@@ -53,53 +53,6 @@ function mashsb_set_fb_sharecount() {
 add_action( 'wp_ajax_mashsb_set_fb_shares', 'mashsb_set_fb_sharecount' );
 add_action( 'wp_ajax_nopriv_mashsb_set_fb_shares', 'mashsb_set_fb_sharecount' );
 
-/**
- * 
- * @param string $url
- * @param int $comment_count
- * @param int $share_count
- * @return int
- */
-//function mashsb_set_fb_shares_transient( $url, $comment_count = 0, $share_count = 0) {
-//   if (empty($url)){
-//      return 0;
-//   } 
-//   
-//   $mode = isset( $mashsb_options['facebook_count_mode'] ) ? $mashsb_options['facebook_count_mode'] : 'total';
-//
-//   // Expiration
-//   $expiration = mashsb_get_expiration();
-//
-//   // Remove variables, parameters and trailingslash
-//   $url_clean = mashsb_sanitize_url( $url );
-//   
-//   // Get existing share count
-//   $current_shares = mashsbGetShareCountFromTransient( $url_clean );
-//
-//
-//      // It's request limited
-//      if( mashsb_is_req_limited() ) {
-//         return mashsbGetShareCountFromTransient( $url_clean );
-//      }
-//
-//      // Regenerate the data and save the transient
-//
-//      // Get the share counts
-//      if( $mode === 'total' ) {
-//         $shares = $current_shares + $comment_count + $share_count;
-//      }
-//      if( $mode === 'shares' ) {
-//         $shares = $current_shares + $share_count;
-//      }
-//      // Update shares only if resulted shares are more than stored shares
-//      if ($shares > $current_shares){
-//         // Set the transient and return shares
-//         set_transient( 'mashcount_' . md5( $url_clean ), $shares, $expiration );
-//         MASHSB()->logger->info( 'mashsb_set_fb_shares_transient set_transient - shares:' . $shares . ' url: ' . $url_clean );
-//      }
-//      return $shares + getFakecount();
-//   
-//}
 
 /**
  * Get post meta mashsb_jsonshares
@@ -255,13 +208,6 @@ function mashsb_is_cache_refresh() {
       $last_updated = 0;
       $last_updated = get_post_meta( $post->ID, 'mashsb_timestamp', true );
 
-//    else {
-//        $url = mashsb_get_main_url();
-//        if (empty($url))
-//           return false;
-//        $transient = '_transient_timeout_mashcount_' . md5( $url );
-//        $last_updated = get_option( $transient ) - mashsb_get_expiration();      
-//    }
     
     // No timestamp! So let's create cache for the first time
     if( empty( $last_updated ) || $last_updated < 0 ) {
@@ -356,7 +302,6 @@ function mashsb_is_async_cache_refresh() {
     
     // The caching expiration
     $expiration = mashsb_get_expiration();
-    $next_update = $last_updated + $expiration;
     
     // Refresh Cache when last update plus expiration time is older than current time
     if( ($last_updated + $expiration) <= time() ) {
@@ -434,8 +379,6 @@ function mashsb_get_expiration_method_loading() {
 function mashsb_get_expiration() {
     global $mashsb_options;
     $expiration = (isset( $mashsb_options['caching_method'] ) && $mashsb_options['caching_method'] == 'async_cache') ? mashsb_get_expiration_method_async() : mashsb_get_expiration_method_loading();
-
-    //$expiration = 10;
     
     // Set expiration time to zero if debug mode is enabled or cache deactivated
     if( MASHSB_DEBUG || isset( $mashsb_options['disable_cache'] ) ) {

@@ -1905,37 +1905,7 @@ function mashsb_fboauth_callback( $args ) {
 echo $html;
     
 }
-//function mashsb_fboauth_callback( $args ) {
-//    global $mashsb_options;
-//    
-//    if( isset( $mashsb_options[$args['id']] ) ){
-//        $value = $mashsb_options[$args['id']];
-//    }else{        
-//        $value = isset( $args['std'] ) ? $args['std'] : '';
-//    }
-//    // Change expiration date
-//    if( isset( $mashsb_options['expire_'.$args['id']] ) ){
-//        $expire = $mashsb_options['expire_'.$args['id']];
-//    }else{        
-//        $expire = '';
-//    }
-//    
-//    $button_label = empty($mashsb_options[$args['id']]) ? __('Get Access Token | Facebook Login', 'mashsb') : __('Renew Access Token', 'mashsb');
-//
-//    $auth_url = 'https://www.mashshare.net/oauth/login.html'; // production
-//
-//    $html = '<a href="'.$auth_url.'" id="mashsb_fb_auth" class="button button-primary">'.$button_label.'</a>';
-//    //$html .= empty($mashsb_options[$args['id']]) ? $verify_button : '';
-//    $html .= '&nbsp; <input type="text" class="medium-text" id="mashsb_settings[' . $args['id'] . ']" name="mashsb_settings[' . $args['id'] . ']" value="' . esc_attr( stripslashes( $value ) ) . '"/>';
-//    $html .= '&nbsp; <input type="hidden" class="medium-text" id="mashsb_settings[expire_' . $args['id'] . ']" name="mashsb_settings[expire_' . $args['id'] . ']" value="' . esc_attr( stripslashes( $expire ) ) . '"/>';
-//    $html .= '<div class="token_status">'
-//            . '<span id="mashsb_expire_token_status"></span>'
-//            . '<span id="mashsb_token_notice"></span>'
-//            . '</div>';
-//    
-//echo $html;
-//    
-//}
+
 
 /**
  * Test facebook api and check if site is rate limited
@@ -1950,19 +1920,27 @@ function mashsb_ratelimit_callback() {
         if( !mashsb_is_admin_page() || !isset( $mashsb_options['debug_mode'] ) || !mashsb_curl_installed() ) {
             return '';
         }
+
+    require_once(MASHSB_PLUGIN_DIR . 'includes/sharedcount.class.php');
+    $apikey = isset( $mashsb_options['mashsharer_apikey'] ) ? $mashsb_options['mashsharer_apikey'] : '';
+    $shares = new mashsbSharedcount( 'http://www.google.com', 10, $apikey );
+    $sharecount = $shares->getAllCounts();
+
+
         // Test open facebook api endpoint
-        $url = 'http://graph.facebook.com/?id=http://www.google.com';
+        /*$url = 'http://graph.facebook.com/?id=http://www.google.com';
         $curl_handle = curl_init();
         curl_setopt( $curl_handle, CURLOPT_URL, $url );
         curl_setopt( $curl_handle, CURLOPT_CONNECTTIMEOUT, 2 );
         curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, 1 );
         $buffer = curl_exec( $curl_handle );
         curl_close( $curl_handle );
-        echo '<div style="min-width:500px;"><strong>Testing facebook public API <br><br>Result for google.com: </strong></div>';
-        if( empty( $buffer ) ) {
-            print "Nothing returned from url.<p>";
+        */
+        echo '<div style="min-width:500px;"><strong>Test sharedcount.com integration <br><br>Results for google.com: </strong></div>';
+        if( !isset($sharecount->total) || empty( $sharecount->total ) ) {
+            print "Can not get share count. Make sure sharedcount api key is correct.<p>";
         } else {
-            print '<div style="max-width:200px;">' . $buffer . '</div>';
+            print '<div style="max-width:200px;">' . $sharecount->total . ' total shares</div>';
         }
         
         if(empty($mashsb_options['fb_access_token_new'])){
