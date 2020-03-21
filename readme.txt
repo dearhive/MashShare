@@ -8,7 +8,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email, dsgvo
 Requires at least: 3.6+
-Tested up to: 5.3
+Tested up to: 5.4
 Stable tag: {{ version }} 
 Requires PHP: 5.2
 
@@ -250,6 +250,11 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
+= 3.7.3 =
+* New: Support for whatsapp web.  Social network add-on needed https://mashshare.net/downloads/mashshare-social-networks-addon/
+* New: Supports up to WordPress 5.4
+* Fix: Show correct results if debug mode is active and sharedcount.com integration works.
+
 = 3.7.2 =
 * New: Compatible to WordPress 5.3.0
 
@@ -295,40 +300,13 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 * New: Remove GDPR option. Not needed any longer as all shares are collected via sharedcount.com
 * New: Add admin notice notifying user of new facebook API.
 
-= 3.6.1 =
-* Fix: Whatsapp and mail button not opening any longer after recent chrom update when noopener attribute is used.
-* Fix: PHP Warning: A non-numeric value encountered...
-* New: Support WordPress 5.1
-
-= 3.6.0 =
-* Fix: Social Sharing Meta Box not shown with update 3.5.9
-
-= 3.5.9 =
-* Fix: Better wording for gdpr complicance in its settings
-* Fix: Do not output any open graph tags if share options meta box is disabled
-* Fix: Prevent facebook popup opening twice and causing chrome blocker
-* New: Integration of twitcount.com to get twitter shares back
-
-= 3.5.8 =
-* New: Compatible up to WordPress 5.0.3
-* Fix: Make sure to not disable TLS while using native curl implementation
-
-
-= 3.5.7 =
-* New: Compatible up to WordPress 5.0.1 Gutenberg
-* New: Option to hide MashShare share options editor meta box completely
-
-= 3.5.6 =
-* Fix: Security fix to prevent XSS attacks
-
 See release notes and complete changelog at:
 https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 3.7.0 =
-* Fix: PHP Warning: Invalid argument supplied for foreach() in meta-box.php
-* Fix: Set the share count query rate limit to 1req/5min
-* New: Compatible up to WordPress 5.2.4
+= 3.7.3 =
+* New: Support for whatsapp web with social network add-on https://mashshare.net/downloads/mashshare-social-networks-addon/
+* New: Support up to WordPress 5.4
 
 

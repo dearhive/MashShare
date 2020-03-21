@@ -1,8 +1,3 @@
-/* local path 
-cd "m:/github/Mashshare/mashshare-github-master/"
-cd "/srv/www/wordpress-develop/src/wp-content/plugins/mashsharer"
- * 
- */
 module.exports = function(grunt) {
 
     // Project configuration.
@@ -11,12 +6,12 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON( 'package.json' ),
         paths : {
             // Base destination dir
-            base: '../../../plugin/svn/tags/<%= pkg.version %>',
-            basetrunk: '../../../plugin/svn/trunk/',
-            basetags: '../../../plugin/svn/tags/',
-            basezip: '../../../plugin/svn/',
-            baseassets: '../../../plugin/svn/assets',
-            tmp: '../../../plugin/svn/tmp'
+            base: '../../releases/mashshare/tags/<%= pkg.version %>',
+            basetrunk: '../../releases/mashshare/trunk/',
+            basetags: '../../releases/mashshare/tags/',
+            basezip: '../../releases/mashshare/',
+            baseassets: '../../releases/mashshare/assets',
+            tmp: '../../releases/mashshare/tmp'
         },
 
         // Tasks here
@@ -48,10 +43,32 @@ module.exports = function(grunt) {
         copy: {
             build: {             
                 files: [
-                    {expand: true, src: ['**', '!node_modules/**', '!Gruntfile.js', '!package.json', '!nbproject/**', '!grunt/**','!tests/**', '!bin/**', '!.travis.yml', '!phpunit.xml.dist', '!composer.json'],                
+                    {expand: true, src: ['**',
+                            '!node_modules/**',
+                            '!Gruntfile.js',
+                            '!package.json',
+                            '!nbproject/**',
+                            '!grunt/**',
+                            '!tests/**',
+                            '!bin/**',
+                            '!.travis.yml',
+                            '!phpunit.xml.dist',
+                            '!package-lock.json',
+                            '!composer.json'],
                      dest: '<%= paths.base %>'},
                  
-                    {expand: true, src: ['**', '!node_modules/**', '!Gruntfile.js', '!package.json', '!nbproject/**', '!grunt/**','!tests/**', '!bin/**', '!.travis.yml', '!phpunit.xml.dist', '!composer.json'],
+                    {expand: true, src: ['**',
+                            '!node_modules/**',
+                            '!Gruntfile.js',
+                            '!package.json',
+                            '!nbproject/**',
+                            '!grunt/**',
+                            '!tests/**',
+                            '!bin/**',
+                            '!.travis.yml',
+                            '!phpunit.xml.dist',
+                            '!package-lock.json',
+                            '!composer.json'],
                     dest: '<%= paths.basetrunk %>'}
                 ]                
             }
