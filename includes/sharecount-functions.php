@@ -129,10 +129,14 @@ function mashsb_rate_limit_exceeded(){
 
 
     /**
-     * Make sure that requests do not exceed 1req / 300sec(5min)
+     * Make sure that requests do not exceed 1req / 60sec(5min)
      * @return boolean
      */
     function mashsb_is_req_limited() {
+        // Disable this function!
+        return false;
+
+
         global $mashsb_debug;
 
         $data_timeout = get_transient('mashsb_limit_req');

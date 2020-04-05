@@ -250,9 +250,12 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
+= 3.7.4 =
+* New: Supports up to WordPress 5.4
+* Fix: Share count not collected for all pages on large sites with huge traffic if caching plugins are used
+
 = 3.7.3 =
 * New: Support for whatsapp web.  Social network add-on needed https://mashshare.net/downloads/mashshare-social-networks-addon/
-* New: Supports up to WordPress 5.4
 * Fix: Show correct results if debug mode is active and sharedcount.com integration works.
 
 = 3.7.2 =
@@ -286,27 +289,14 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 * Fix: Do not call the facebook api directly any longer
 * Fix: Undefined variable notice after uninstallation and deleting all MashShare settings an installation again
 
-= 3.6.3 =
-* Fix: Option Cumulate Http(s) Shares not working for sharedcount.com API endpoint
-* Fix: Tweets can be requested via opensharecount.com
-* Fix: Async cache refresh not fired
-* New: Performance Improvements in collecting sharecount
-* New: Switch default share method to refresh while loading
-* New: If yoast twitter title and description is populated the mashshare generated twitter card will use this settings but still allows to define a custom tweet text.
-
-= 3.6.2 =
-* New: Necessary change because of new facebook API
-* New: Remove mashengine
-* New: Remove GDPR option. Not needed any longer as all shares are collected via sharedcount.com
-* New: Add admin notice notifying user of new facebook API.
 
 See release notes and complete changelog at:
 https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 3.7.3 =
-* New: Support for whatsapp web with social network add-on https://mashshare.net/downloads/mashshare-social-networks-addon/
-* New: Support up to WordPress 5.4
+= 3.7.4 =
+* New: Supports up to WordPress 5.4
+* Fix: Share count not collected for all pages on large sites with huge traffic if caching plugins are used
 
 
