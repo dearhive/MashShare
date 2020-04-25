@@ -250,6 +250,9 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
+= 3.7.5 =
+* Fix: Validate Open Graph Data button is broken
+
 = 3.7.4 =
 * New: Supports up to WordPress 5.4
 * Fix: Share count not collected for all pages on large sites with huge traffic if caching plugins are used
@@ -295,8 +298,7 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 3.7.4 =
-* New: Supports up to WordPress 5.4
-* Fix: Share count not collected for all pages on large sites with huge traffic if caching plugins are used
+= 3.7.5 =
+* Fix: Validate Open Graph Data button is broken
 
 
