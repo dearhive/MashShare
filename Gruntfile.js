@@ -112,7 +112,8 @@ module.exports = function(grunt) {
             build: { 
                 files:[
                     {'<%= paths.base %>/assets/css/mashsb-admin.min.css' : 'assets/css/mashsb-admin.css'},
-                    {'<%= paths.base %>/assets/css/mashsb.min.css' : 'assets/css/mashsb.min.css'}
+                    {'<%= paths.base %>/assets/css/mashsb.min.css' : 'assets/css/mashsb.min.css'},
+                    {'<%= paths.base %>/assets/css/mashsb-amp.min.css' : 'assets/css/mashsb-amp.min.css'}
                 ]
             }
         },

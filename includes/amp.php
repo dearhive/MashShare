@@ -53,7 +53,7 @@ function mashsb_amp_load_css() {
 }";
     
     // Get default css file
-    $css .= file_get_contents( MASHSB_PLUGIN_DIR . '/assets/css/mashsb-amp.css' );
+    $css .= file_get_contents( MASHSB_PLUGIN_DIR . '/assets/css/mashsb-amp.min.css' );
     
 
     // add custom css

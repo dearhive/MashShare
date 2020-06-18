@@ -250,6 +250,9 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
+= 3.7.6 =
+* Fix: Minify mashsb-amp.css
+
 = 3.7.5 =
 * Fix: Validate Open Graph Data button is broken
 
@@ -298,7 +301,7 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 3.7.5 =
-* Fix: Validate Open Graph Data button is broken
+= 3.7.6 =
+* Fix: Minify mashsb-amp.css
 
 
