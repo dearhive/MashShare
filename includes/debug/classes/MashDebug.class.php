@@ -207,7 +207,7 @@ class MashDebug implements iMashDebug {
 	 */
 	private function _get_interfaces() {
 		// This will come from the admin config
-		$selected_interfaces = array( 'FirePHP', 'ChromePHP' );
+		$selected_interfaces = array( 'ChromePHP' );
 
 		$selected_interfaces = apply_filters( 'wplinb-selected-interfaces', $selected_interfaces );
 
@@ -222,16 +222,11 @@ class MashDebug implements iMashDebug {
 	/**
 	 * @param $interface_name
 	 *
-	 * @return mixed|null|WPChromePHP|WPFirePHP
+	 * @return mixed|null|WPChromePHP
 	 */
 	private function _get_interface( $interface_name ) {
 
 		switch ( $interface_name ) {
-
-			case 'FirePHP':
-				include $this->path . 'browsers/WPFirePHP.class.php';
-				$interface = new WPFirePHP();
-				break;
 
 			case 'ChromePHP':
 				include $this->path . 'browsers/WPChromePHP.class.php';

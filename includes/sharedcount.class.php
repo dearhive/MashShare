@@ -103,7 +103,7 @@ class mashsbSharedcount {
                 break;
             case $fb_mode === 'total':
                 $counts['shares']['fb']       = $sharecounts['Facebook']['total_count'];
-                $counts['shares']['fb_https'] = $sharecounts['https']['Facebook']['total_count'];
+                $counts['shares']['fb_https'] = isset($sharecounts['https']['Facebook']['total_count']) ? $sharecounts['https']['Facebook']['total_count'] : 0;
                 break;
             default:
                 $counts['shares']['fb']       = $sharecounts['Facebook']['share_count'];
@@ -129,27 +129,9 @@ class mashsbSharedcount {
     }
 
     /**
-     * 
-     * @global array $mashsb_options
-     * @param type $domain
-     * @return int
+     * @param $url
+     * @return mixed
      */
-//    function update_sharedcount_domain( $domain = false ) {
-//        global $mashsb_options;
-//        if( !$domain ) {
-//            try {
-//                $domain_obj = $this->_curl( 'http://' . $mashsb_options["mashsharer_sharecount_domain"] . "/account?apikey=" . $this->apikey );
-//                $domain     = $domain_obj["domain"];
-//            } catch ( Exception $e ) {
-//                mashdebug()->error( "error: " . $domain_obj );
-//                return 0;
-//            }
-//        }
-//        $mashsb_options["mashsharer_sharecount_domain"] = $domain;
-//        update_option( 'mashsb_settings', $mashsb_options );
-//        return 1;
-//    }
-
     private function _curl( $url ) {
         $curl         = curl_init();
         curl_setopt( $curl, CURLOPT_URL, $url );
