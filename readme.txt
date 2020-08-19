@@ -8,7 +8,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, Traffic posts, pages, widget, social share buttons, analytics, email, dsgvo
 Requires at least: 3.6+
-Tested up to: 5.4
+Tested up to: 5.5
 Stable tag: {{ version }} 
 Requires PHP: 5.2
 
@@ -250,6 +250,10 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
+= 3.7.7 =
+* Fix: Undefined var
+* New: PHP 7.4 compatibility
+
 = 3.7.6 =
 * Fix: Minify mashsb-amp.css
 
@@ -301,7 +305,8 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 3.7.6 =
-* Fix: Minify mashsb-amp.css
+= 3.7.7 =
+* Fix: Undefined var
+* New: PHP 7.4 compatibility
 
 
