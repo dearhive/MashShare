@@ -251,7 +251,8 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 == Changelog ==
 
 = 3.7.7 =
-* Fix: Undefined var
+* Fix: Network drag and drop does not work in WordPress 5.5
+* Fix: Undefined var warning
 * New: PHP 7.4 compatibility
 
 = 3.7.6 =
