@@ -6,7 +6,7 @@
  * Description: Mashshare is a Share functionality inspired by the the great website Mashable for Facebook and Twitter. More networks available.
  * Author: René Hermenau
  * Author URI: https://www.mashshare.net
- * Version: 3.8.0
+ * Version: {{ version }}
  * Text Domain: mashsb
  * Domain Path: /languages
 
@@ -35,7 +35,7 @@ if( !defined( 'ABSPATH' ) )
 
 // Plugin version
 if( !defined( 'MASHSB_VERSION' ) ) {
-    define( 'MASHSB_VERSION', '3.8.0' );
+    define( 'MASHSB_VERSION', '{{ version }}' );
 }
 
 // Debug mode

@@ -8,9 +8,9 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, social share buttons
 Requires at least: 3.6+
-Tested up to: 5.8
-Stable tag: 3.8.0 
-Requires PHP: 5.2
+Tested up to: 5.9
+Stable tag: {{ version }}
+Requires PHP: 5.6
 
 Social Media Share Buttons for Twitter, Facebook, and other social networks. Highly customizable Social Media ecosystem
 
@@ -248,6 +248,9 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 
 == Changelog ==
+
+= {{ version }} =
+* New: Compatible up to WordPress 5.9
 
 = 3.8.0 =
 * New: Compatible up to WordPress 5.8

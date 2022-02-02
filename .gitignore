@@ -3,3 +3,4 @@
 /nbproject/
 /.git/
 .travis.yml
+/dist/

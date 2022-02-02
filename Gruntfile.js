@@ -6,12 +6,12 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON( 'package.json' ),
         paths : {
             // Base destination dir
-            base: '../../releases/mashshare/tags/<%= pkg.version %>',
-            basetrunk: '../../releases/mashshare/trunk/',
-            basetags: '../../releases/mashshare/tags/',
-            basezip: '../../releases/mashshare/',
-            baseassets: '../../releases/mashshare/assets',
-            tmp: '../../releases/mashshare/tmp'
+            base: './dist/releases/mashshare/tags/<%= pkg.version %>',
+            basetrunk: './dist/releases/mashshare/trunk/',
+            basetags: './dist/releases/mashshare/tags/',
+            basezip: './dist/releases/mashshare/',
+            baseassets: './dist/releases/mashshare/assets',
+            tmp: './dist/releases/mashshare/tmp'
         },
 
         // Tasks here
