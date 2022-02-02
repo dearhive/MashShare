@@ -54,6 +54,8 @@ module.exports = function(grunt) {
                             '!.travis.yml',
                             '!phpunit.xml.dist',
                             '!package-lock.json',
+                            '!dist/**',
+                            '!mashsharer.zip',
                             '!composer.json'],
                      dest: '<%= paths.base %>'},
                  
@@ -68,6 +70,8 @@ module.exports = function(grunt) {
                             '!.travis.yml',
                             '!phpunit.xml.dist',
                             '!package-lock.json',
+                            '!dist/**',
+                            '!mashsharer.zip',
                             '!composer.json'],
                     dest: '<%= paths.basetrunk %>'}
                 ]                
