@@ -131,8 +131,8 @@ class MASHSB_Welcome {
             $this->tabs();
             ?>
             <?php if (isset($_GET['redirect'])) {?>
-            <p class="about-description mashsb-notice" style="background-color:#00abed;color:white;padding:20px;margin-top:20px;border:3px solid white;"><?php _e( '<strong>Facebook</strong> and <strong>Twitter Share Buttons</strong> have been enabled on all your posts! <br>Use the instructions below to customize MashShare.<br><br>:</strong>MashShare uses new sharedcount.com integration to be GDPR compliant. 
-Register for sharedcount.com at <a href="'.admin_url().'admin.php?page=mashsb-settings" style="color:white;">MashShare > Settings > Sharecount</a>', 'mashsb' ); ?></p>
+            <p class="about-description mashsb-notice" style="background-color:#00abed;color:white;padding:20px;margin-top:20px;border:3px solid white;"><?php _e( '<strong>Facebook</strong> and <strong>Twitter Share Buttons</strong> have been enabled on all your posts! <br>Use the instructions below to customize MashShare.<br><br>- </strong>MashShare uses sharedcount.com integration to be GDPR compliant. 
+Register for sharedcount.com on <a href="'.admin_url().'admin.php?page=mashsb-settings" style="color:white;">MashShare > Settings > Sharecount</a>', 'mashsb' ); ?></p>
             <?php } ?>
             <div class="changelog clear">
                 <h1><?php _e( 'Create Your First Social Sharing Button', 'mashsb' ); ?></h1>

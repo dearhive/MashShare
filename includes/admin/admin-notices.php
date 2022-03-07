@@ -49,20 +49,7 @@ function mashsb_admin_messages() {
     
     mashsb_show_update_notice_gdpr();
     
-    mashsb_show_new_fb_api();
-    
-    // Rate Limit warning
-//    if( mashsb_is_admin_page() && mashsb_rate_limit_exceeded() ) {
-//        echo '<div class="error">';
-//        echo '<p>' . sprintf(__('Your website exceeded the Facebook rate limit. Share count requests to Facebook and other networks will be delayed for 60min and the Share Count will not grow during this time. If you get this notice often consider to change <strong>MashShare Caching Method</strong> to <a href="%s">Refresh while Loading</a> and use a higher cache expiration. MashShare tries again to get shares in ' . mashsbGetRemainingRateLimitTime() , 'mashsb'), admin_url() . 'admin.php?page=mashsb-settings#mashsb_settingsgeneral_header', admin_url() . 'admin.php?page=mashsb-settings#mashsb_settingsservices_header') . '</p>';
-//        echo '</div>';
-//    }
-    // Access Token expired
-//    if( mashsb_is_invalid_fb_api_key() ) {
-//        echo '<div class="error">';
-//        echo '<p>' . sprintf(__('<strong>Error: </strong>'.mashsb_is_invalid_fb_api_key().' <br> Your <strong>Facebook Access Token</strong> has been expired or is invalid. Remove the invalid access token from <a href="%s">MashShare->Settings->Networks</a> or generate a new one. Your MashShare Facebook Shares will not be refreshed any longer. <a href="%s" target="_blank">Read here</a> how to renew the Facebook access token. Fix it and press the button: | <a href="%s" class="button">CHECK AGAIN</a>', 'mashsb'), admin_url() . 'admin.php?page=mashsb-settings#mashsb_settingsservices_header', 'http://docs.mashshare.net/article/132-how-to-create-a-facebook-access-token', admin_url() . 'admin.php?mashsb_action=check_access_token&page=mashsb-settings') . '</p>';
-//        echo '</div>';
-//    }
+    //mashsb_show_new_fb_api();
     
     // Cache warning
     if( mashsb_is_deactivated_cache() ) {
@@ -130,7 +117,7 @@ function mashsb_admin_messages() {
     // Share count is deactivated when permalinks are not used
     if( mashsb_is_admin_page() && !mashsb_is_enabled_permalinks() ) {
         echo '<div class="error">';
-        echo '<p>' . sprintf( __( '<strong>No Share Count aggregation possible!</strong> <a href="%s">Permalinks</a> must be enabled to count shares. Share count is deactivated until you have fixed this.', 'mashsb' ), admin_url( 'options-permalink.php' ) ) . '</p>';
+        echo '<p>' . sprintf( __( '<strong>No Share Count aggregation possible!</strong> <a href="%s">Permalinks</a> must be enabled to count shares. Share count is deactivated until you have changed this.', 'mashsb' ), admin_url( 'options-permalink.php' ) ) . '</p>';
         echo '</div>';
     }
     
@@ -444,9 +431,8 @@ function mashsb_is_invalid_fb_api_key(){
  */
 function mashsb_show_update_notice_gdpr() {
     
-    
     $message = sprintf(__( '<h2 style="color:white;">MashShare GDPR Compliance</h2>'
-            . 'MashShare uses new sharedcount.com integration to be GDPR compliant. <br>Activate sharedcount.com at <a href="'.admin_url().'admin.php?page=mashsb-settings#mashsb_settingsgeneral_header" style="color:white;">MashShare > Settings > General > Share Count</a><br><br>For collecting Twitter shares get the <a href="https://mashshare.net/downloads/mashshare-social-networks-addon/?utm_source=wp-admin&utm_medium=gdpr-notice&utm_campaign=gdpr-notice" target="_blank">Social Network Add-On</a>'
+            . 'MashShare uses sharedcount.com integration to be GDPR compliant. <br>Activate sharedcount.com at <a href="'.admin_url().'admin.php?page=mashsb-settings#mashsb_settingsgeneral_header" style="color:white;">MashShare > Settings > General > Share Count</a><br><br>For collecting Twitter shares get the <a href="https://mashshare.net/downloads/mashshare-social-networks-addon/?utm_source=wp-admin&utm_medium=gdpr-notice&utm_campaign=gdpr-notice" target="_blank" style="color:white;text-decoration:underline;">Social Network Add-On</a>'
             , 'mashsb' ), 
             admin_url() . 'admin.php?page=mashsb-settings'
             );
@@ -457,7 +443,7 @@ function mashsb_show_update_notice_gdpr() {
   
         // admin notice after updating Mashshare
         echo '<div class="mashsb-notice-gdpr mashsb_update_notice_gdpr update-nag" style="background-color: #00abed;color: white;padding: 20px;margin-top: 20px;border: 3px solid white;">' . $message . 
-        '<p><a href="'.admin_url().'admin.php?page=mashsb-settings&mashsb-action=hide_gdpr_notice" class="mashsb_hide_gdpr" title="I got it" style="text-decoration:none;color:white;">- I Understand! Do Not Show This Message Again -</a></a>'.
+        '<p><a href="'.admin_url().'admin.php?page=mashsb-settings&mashsb-action=hide_gdpr_notice" class="mashsb_hide_gdpr" title="I got it" style="text-decoration:none;color:white;text-decoration:underline;">- I Understand! Do Not Show This Message Again -</a></a>'.
             '</div>';
        
     
@@ -469,38 +455,10 @@ function mashsb_show_update_notice_gdpr() {
  * @global array $mashsb_options
  */
 function mashsb_hide_gdpr_notice(){
-        global $mashsb_options;
-        // Get all settings
         update_option( 'mashsb_show_update_notice_gdpr1', 'no' );
 }
 add_action ('mashsb_hide_gdpr_notice', 'mashsb_hide_gdpr_notice');
 
-
-
-/**
- * Show notice for new FB API
- * @since 3.5.3.0
- */
-function mashsb_show_new_fb_api() {
-    
-    
-    $message = sprintf(__( '<h2 style="color:white;">MashShare: Facebook API Changes</h2>'
-            . 'Facebook shut down its old API endpoint so you need to switch over to sharedcount.com integration to get the latest Facebook share count. <br>Add sharedcount.com API key at <a href="'.admin_url().'admin.php?page=mashsb-settings#mashsb_settingsgeneral_header" style="color:white;">MashShare > Settings > General > Share Count</a><br>'
-            , 'mashsb' ), 
-            admin_url() . 'admin.php?page=mashsb-settings'
-            );
-      
-        if( get_option( 'mashsb_show_new_fb_api' ) === 'no' ) {
-           return false;
-        }
-  
-        // admin notice after updating Mashshare
-        echo '<div class="mashsb-notice-gdpr mashsb_update_notice_gdpr update-nag" style="background-color: red;color: white;padding: 20px;margin-top: 20px;border: 3px solid white;">' . $message . 
-        '<p><a href="'.admin_url().'admin.php?page=mashsb-settings&mashsb-action=hide_fb_api_notice" class="mashsb_hide_fb_api" title="I got it" style="text-decoration:none;color:white;">- I Understand! Do Not Show This Message Again -</a></a>'.
-            '</div>';
-       
-    
-}
 
 /**
  * Hide FB API notice
@@ -508,8 +466,6 @@ function mashsb_show_new_fb_api() {
  * @global array $mashsb_options
  */
 function mashsb_hide_fb_api_notice(){
-        global $mashsb_options;
-        // Get all settings
         update_option( 'mashsb_show_new_fb_api', 'no' );
 }
 add_action ('mashsb_hide_fb_api_notice', 'mashsb_hide_fb_api_notice');
