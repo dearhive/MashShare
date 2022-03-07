@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="ccde069b-ef5e-448c-8088-02c07a537940" name="local" url="http://localhost">
+        <fileTransfer mountedRoot="$PROJECT_DIR$/../wp-staging-pro/var/www/single/wp-content/plugins/mashsharer" accessType="MOUNT" port="0" />
+      </webServer>
+    </option>
+  </component>
+</project>
