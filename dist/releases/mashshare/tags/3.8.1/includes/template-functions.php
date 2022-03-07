@@ -1277,7 +1277,7 @@ function mashsb_is_excluded()
 function mashsb_get_title()
 {
     global $post, $mashsb_meta_tags;
-    if (is_singular() && method_exists($mashsb_meta_tags, 'get_og_title')) {
+    if (is_singular() && !empty($mashsb_meta_tags) && method_exists($mashsb_meta_tags, 'get_og_title')) {
         $title = $mashsb_meta_tags->get_og_title();
         $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
         $title = urlencode($title);
@@ -1305,7 +1305,7 @@ function mashsb_get_twitter_title()
 {
     global $mashsb_meta_tags;
     // $mashsb_meta_tags is only available on singular pages
-    if (is_singular() && method_exists($mashsb_meta_tags, 'get_twitter_title')) {
+    if (is_singular() && !empty($mashsb_meta_tags) && method_exists($mashsb_meta_tags, 'get_twitter_title')) {
         $title = $mashsb_meta_tags->get_twitter_title();
         $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
         $title = urlencode($title);

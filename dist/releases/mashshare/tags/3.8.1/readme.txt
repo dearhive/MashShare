@@ -250,8 +250,9 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 == Changelog ==
 
 = 3.8.1 =
-* Fix: Don't request share count for preview pages. This fixes an artificially high share count on initial post creation
 * New: Compatible up to WordPress 5.9
+* Fix: Make MashShare compatible with PHP 8.x
+* Fix: Don't request share count for preview pages. This fixes an artificially high share count on initial post creation
 
 = 3.8.0 =
 * New: Compatible up to WordPress 5.8
