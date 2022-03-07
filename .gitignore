@@ -4,3 +4,7 @@
 /.git/
 .travis.yml
 /dist/
+.idea/
+node_modules
+.vscode
+vendor

@@ -1,0 +1,7 @@
+.mashsb-rwmb-color-wrapper .wp-picker-container {
+	position: relative;
+}
+.mashsb-rwmb-color-wrapper .wp-picker-holder {
+	position: absolute;
+	z-index: 9;
+}

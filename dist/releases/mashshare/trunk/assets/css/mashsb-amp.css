@@ -1,0 +1,420 @@
+
+/* START Delete text for buttons behind Plus sign */
+ .mashsb-buttons .secondary-shares a .text{
+        text-indent: -9999px;
+        line-height: 0px;
+        display: block;
+        } 
+ .mashsb-buttons .secondary-shares a .text:after {
+        content: " ";
+        text-indent: 0;
+        font-size:13px;
+        display: block;
+    }
+ .mashsb-buttons .secondary-shares a {
+        min-width:0;
+        font-size: 0px;
+    }
+  .mashsb-buttons .secondary-shares a .icon:before {
+        margin-right:0px;
+    }
+/* END */
+
+/* hide class */
+.mashsb-buttons .mashsb-hide {
+    display:none;
+}
+
+/* Adjustable specifications */
+
+/* Hover effect */
+[class^="mashicon-"]:hover, [class*=" mashicon-"]:hover {
+opacity: 0.8;
+}
+/* Icon Color */
+[class^="mashicon-"] .icon, [class*=" mashicon-"] {
+color:#ffffff;
+}
+/* Font color */
+[class^="mashicon-"] .text, [class*=" mashicon-"] .text {
+    color:#ffffff;
+}
+/* General visual settings,like border, shadow, shine etc. */
+ [class^="mashicon-"], [class*=" mashicon-"] .onoffswitch-label{
+        font-size:15px;
+        border-radius: 0px;
+        cursor: pointer;
+ }
+ /* Icon visual appearance */
+ [class^="mashicon-"] .icon:before, [class*=" mashicon-"] .icon:before, .mashicon-share:before {
+  font-family: "mashsb-font";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  font-size:16px;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: 0.7em;
+  text-align: center;
+  /* opacity: .8; */
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none; 
+  /* fix buttons height, for twitter bootstrap */
+  /*line-height: 1em;*/
+ 
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  /*margin-left: 0.7em;*/
+ 
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+ 
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+  
+  /* Reset margin-top for twitter bootstrap */
+  margin-top:0px;
+  /* For IE 8 Important */
+  float:left;
+}
+/* Icon definitions */
+.mashicon-facebook .icon:before { content: '\e800'; } /* '' */
+.mashicon-google .icon:before { content: '\e801'; } /* '' */
+.mashicon-pinterest .icon:before { content: '\e802'; } /* '' */
+.mashicon-linkedin .icon:before { content: '\e803'; } /* '' */
+.mashicon-digg .icon:before { content: '\e804'; } /* '' */
+.mashicon-reddit .icon:before { content: '\e805'; } /* '' */
+.mashicon-stumbleupon .icon:before { content: '\e806'; } /* '' */
+.mashicon-twitter .icon:before { content: '\e807'; } /* '' */
+.mashicon-mail .icon:before { content: '\e808'; } /* '' */
+.mashicon-vk .icon:before { content: '\e809'; } /* '' */
+.mashicon-print .icon:before { content: '\e80a'; } /* '' */
+.mashicon-delicious .icon:before { content: '\e80b'; } /* '' */
+.mashicon-buffer .icon:before { content: '\e80c'; } /* '' */
+.mashicon-heart .icon:before { content: '\e80d'; } /* '' */
+.mashicon-weibo .icon:before { content: '\e80e'; } /* '' */
+.mashicon-pocket .icon:before { content: '\e80f'; } /* '' */
+.mashicon-xing .icon:before { content: '\e810'; } /* '' */
+.mashicon-flattr .icon:before { content: '\e811'; } /* '' */
+.mashicon-odnoklassniki .icon:before { content: '\e812'; } /* '' */
+.mashicon-tumblr .icon:before { content: '\e813'; } /* '' */
+.mashicon-subscribe .icon:before { content: '\e808'; } /* '' */
+.mashicon-whatsapp .icon:before { content: '\e814'; }
+.mashicon-meneame .icon:before { content: '\e815'; } /* '' */
+.mashicon-managewp .icon:before { content: '\e816'; } /* '' */
+.mashicon-mailru .icon:before { content: '\E819'; } /* '' */
+.mashicon-line .icon:before { content: '\E81A'; } /* '' */
+.mashicon-yummly .icon:before { content: '\E81B'; } /* '' */
+.mashicon-frype .icon:before { content: '\e81c'; } /* '' */
+.mashicon-skype .icon:before { content: '\e81d'; } /* '' */
+.mashicon-telegram .icon:before { content: '\e81f'; } /* '' */
+.mashicon-hackernews .icon:before { content: '\e820'; } /* '' */
+.mashicon-flipboard .icon:before { content: '\e821'; } /* '' */
+
+.mashicon-share:before { content: '\e81E'; } /* '' */
+
+/* Upper and lower distance share button to next elements  */
+.mashsb-container{
+    padding-top: 10px;
+    padding-bottom:10px;
+} 
+/* 
+ *  General size of all buttons 
+ *  low cardinality so we can override this with custom css easily 
+ */
+.mashsb-buttons a{
+    min-width: 177px;
+}
+
+/* General design of all buttons */
+.mashsb-box .mashsb-buttons a{
+    padding:13px;
+    margin-right: 3px;
+    margin-bottom:3px;
+    float:left;
+    text-decoration: none;
+    border:0px;
+    box-shadow: none;
+}
+
+/* Click on plus sign adds this class to switch the float */
+.mashsb-buttons .float-right {
+    float:right;
+}
+.mashsb-buttons .float-left {
+    float:left;
+}
+
+/* Social networks main background color*/
+.mashicon-facebook{
+background: #2d5f9a;
+}
+.mashicon-twitter{
+background: #00c3f3;
+}
+.mashicon-google{
+background: #d73d32;
+}
+.mashicon-subscribe{
+background: #fff120;
+}
+.mashicon-pinterest{
+background: #cd252b;
+}
+.mashicon-linkedin{
+background: #2ba3e1;
+}
+.mashicon-digg{
+background: #1b5791;
+}
+.mashicon-stumbleupon{
+background: #eb4723;
+}
+.mashicon-vk{
+background: #5d83aa;
+}
+.mashicon-mail{
+background: #888888;
+}
+.mashicon-print{
+background: #666666;
+}
+.mashicon-reddit{
+background: #333333;
+}
+.mashicon-delicious{
+background: #3399ff;
+}
+.mashicon-weibo{
+background: #ed1c24;
+}
+.mashicon-pocket{
+background: #ee4055;
+}
+.mashicon-xing{
+background: #135a5b;
+}
+.mashicon-flattr{
+background: #8cb55b;
+}
+.mashicon-odnoklassniki{
+background: #f4731c;
+}
+.mashicon-managewp{
+background: #056cad;
+}
+.mashicon-tumblr{
+background: #2c4762;
+}
+.mashicon-meneame{
+background: #ff7d12;
+}
+.mashicon-whatsapp{
+background: #1d9e11;
+}
+.mashicon-buffer{
+background: #000000;
+}
+
+.mashicon-mailru{
+background: #044b89;
+}
+.mashicon-line{
+background: #1dcd00;
+}
+
+.mashicon-yummly{
+background: #e16120;
+}
+.mashicon-frype{
+background: #ff6600;
+}
+
+.mashicon-skype{
+background: #00afef;
+}
+
+.mashicon-telegram{
+background: #1d94d3;
+}
+
+.mashicon-hackernews{
+background: #ff6600;
+}
+.mashicon-flipboard{
+background: #b31f17;
+}
+
+.mashicon-buffer .text, mashicon-buffer .icon{
+color: #ffffff;
+}
+/* Overwrite text color for subscribe button */
+.mashicon-subscribe .text, 
+.mashicon-subscribe .icon {
+color: #000000;
+}
+/* Define Share count number */
+.mashsb-count {
+display: block;
+padding-bottom: 0px;
+font-size: 43px;
+font-weight: bold;
+font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+color: #7FC04C;
+border: #FFF solid 0px;
+text-align: center;
+margin-right: 10px;
+margin-top: 10px;
+float: left;
+line-height: 13px;
+}
+/* Define Share text below share count number */
+.mashsb-sharetext {
+font-size:11px;
+font-family:Arial,sans-serif;
+color:#8A8C8E;
+}
+/* Define Subscribe toggle container */
+.mashsb-toggle-container {
+    display:none;
+    padding: 11px 2% 8px;
+    border: 10px solid #FFF120;
+    position: relative;
+    margin-bottom:10px;
+    margin-top:0px;
+}
+
+
+/* IMPORTANT: DO NOT EDIT BELOW THIS LINE */
+
+/* Position */
+ [class^="mashicon-"], [class*=" mashicon-"]{
+        position: relative;
+        display: inline-block;
+ }
+ 
+[class^="mashicon-"] .text, [class*=" mashicon-"] .text {
+    padding:0px;
+    margin:0px;
+}
+
+ [class^="mashicon-"] .text:after, [class*=" mashicon-"] .text:after{
+        line-height: 10px;
+ }
+ 
+/* IMPORTANT: DO NOT EDIT BELOW THIS LINE */
+
+/* Important to reset global body line-height */
+.mashsb-box {
+    /*height:49px;*/
+    line-height: 1;
+}
+.mashsb-count > counts {
+    clear:both;
+}
+
+.onoffswitch {
+    position: relative; 
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+    display: inline-block;
+    float: left;
+    margin-right: 3px;
+    margin-bottom:3px;
+    margin-left: 0px;
+    cursor: pointer;
+    background-color: #C5C5C5; color: #FFFFFF;
+    width: 42px;
+    height: 42px; 
+    line-height: 42px;
+    text-align: center;
+}
+
+.onoffswitch:before {
+    content: "+";
+    /*padding-left: 12px;
+    padding-top: 1px;*/
+    display: inline-block;
+    font-weight: bold;
+    font-size: 30px;
+    font-family: arial;
+    vertical-align: middle;
+}
+
+.onoffswitch2 {
+    position: relative; 
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+    display: inline-block;
+    float: left;
+    margin-right: 3px;
+    margin-bottom:3px;
+    margin-left: 0px;
+    cursor: pointer;
+    background-color: #C5C5C5; color: #FFFFFF;
+    width: 42px;
+    height: 42px;
+    line-height: 42px;
+    text-align: center;
+}
+
+.onoffswitch2:before {
+    content: "-";
+    /*padding-left: 15px;
+    padding-top: 5px;*/
+    display: inline-block;
+    font-weight: bold;
+    font-size: 30px;
+    font-family: arial;
+    vertical-align: super;
+}
+
+.widget_mashsb_mostshared_posts_widget li{
+    padding: 0.4688em 0;
+    list-style: none;
+}
+
+.widget_mashsb_mostshared_posts_widget li:first-child {
+    border-top: 0;
+    padding-top: 0;
+}
+
+
+/* Smartphones (portrait) (iPhone 4 / 5) No text buttons  ----------- */
+@media only screen and (max-width: 568px) {
+    [class^="mashicon-"] .text, [class*=" mashicon-"] .text{
+        text-indent: -9999px;
+        line-height: 0px;
+        display: block;
+        } 
+    [class^="mashicon-"] .text:after, [class*=" mashicon-"] .text:after {
+        content: "";
+        text-indent: 0;
+        font-size:13px;
+        display: block;
+    }
+    [class^="mashicon-"], [class*=" mashicon-"] {
+        text-align: center;
+    }
+    [class^="mashicon-"] .icon:before, [class*=" mashicon-"] .icon:before{
+        float:none;
+        margin-right: 0;
+    }
+    .mashsb-buttons a{
+       margin-right: 3px;
+       margin-bottom:3px;
+       min-width: 0;
+       width: 41px;
+    }
+
+    .onoffswitch, 
+    .onoffswitch-inner:before, 
+    .onoffswitch-inner:after 
+    .onoffswitch2,
+    .onoffswitch2-inner:before, 
+    .onoffswitch2-inner:after  {
+        margin-right: 0px;
+        width: 41px;
+    }
+    
+}

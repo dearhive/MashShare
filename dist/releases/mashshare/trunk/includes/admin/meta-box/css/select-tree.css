@@ -1,0 +1,7 @@
+.mashsb-rwmb-select-tree {
+	display: inline-block;
+}
+
+.mashsb-rwmb-select-tree.hidden {
+	display: none;
+}
