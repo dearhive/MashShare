@@ -1,0 +1,81 @@
+.mashsb-rwmb-media-list {
+	margin: 0 0 5px;
+	overflow: hidden;
+}
+.mashsb-rwmb-media-item {
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+.mashsb-rwmb-media-preview {
+	width: 60px;
+	float: left;
+	position: relative;
+}
+.mashsb-rwmb-media-preview:before {
+	content: '';
+	display: block;
+	padding-top: 100%;
+}
+.mashsb-rwmb-media-content {
+	position: absolute;
+	overflow: hidden;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+.mashsb-rwmb-media-content .centered {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	-webkit-transform: translate(50%, 50%);
+	-ms-transform: translate(50%, 50%);
+	transform: translate(50%, 50%);
+}
+.mashsb-rwmb-media-content img {
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	max-height: 100%;
+	max-width: 100%;
+	border-radius: 3px;
+}
+.mashsb-rwmb-media-info {
+	margin-left: 65px;
+}
+.mashsb-rwmb-media-info a {
+	text-decoration: none;
+}
+.mashsb-rwmb-media-info p,
+.mashsb-rwmb-media-info h4 {
+	margin: 0 0 2px;
+}
+.mashsb-rwmb-edit-media,
+.mashsb-rwmb-remove-media {
+	font-size: 11px;
+	color: inherit;
+}
+.mashsb-rwmb-edit-media .dashicons,
+.mashsb-rwmb-remove-media .dashicons {
+	font-size: 12px;
+	width: 12px;
+	height: 12px;
+	vertical-align: middle;
+}
+
+/* Add more button */
+.mashsb-rwmb-media-view .mashsb-rwmb-add-media {
+	padding-left: 5px;
+	margin-right: 5px;
+}
+
+/* Status */
+.mashsb-rwmb-media-status {
+	display: inline-block;
+	text-decoration: none;
+	font-size: 13px;
+	line-height: 26px;
+	height: 28px;
+}
