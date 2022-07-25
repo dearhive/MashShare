@@ -251,7 +251,10 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 = 3.8.2 =
 * New: Compatible up to WordPress 6.0.1
+* Fix: Do sanitization on input values. Fix a low severity Authenticated Stored Cross-Site Scripting (XSS) vulnerability
 * Tweak: Move jQuery nearest library on top of MashShare JS
+* Tweak: Implement PHP 8.1 compatibility support
+* Tweak: Clean up code and
 
 = 3.8.1 =
 * New: Compatible up to WordPress 5.9
