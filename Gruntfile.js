@@ -141,7 +141,7 @@ module.exports = function(grunt) {
                     svn_user: 'renehermi',  
                     build_dir: '<%= paths.basezip %>', //relative path to your build directory
                     //assets_dir: '<%= paths.basezip %>', //relative path to your assets directory (optional).
-                    tmp_dir: '<%= paths.tmp %>', //relative path tmp assets directory (optional).
+                    tmp_dir: '<%= paths.tmp %>', //Location where your SVN repository is checked out to.
                     version: '<%= pkg.version %>'
                 }
             }

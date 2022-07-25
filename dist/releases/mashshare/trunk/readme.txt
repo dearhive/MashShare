@@ -8,8 +8,8 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, social share buttons
 Requires at least: 3.6+
-Tested up to: 5.9
-Stable tag: 3.8.1
+Tested up to: 6.0
+Stable tag: 3.8.2
 Requires PHP: 5.6
 
 Social Media Share Buttons for Twitter, Facebook, and other social networks. Highly customizable Social Media ecosystem
@@ -249,6 +249,10 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
+= 3.8.2 =
+* New: Compatible up to WordPress 6.0.1
+* Tweak: Move jQuery nearest library on top of MashShare JS
+
 = 3.8.1 =
 * New: Compatible up to WordPress 5.9
 * Fix: Make MashShare compatible with PHP 8.x
@@ -313,11 +317,11 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 * Fix: Do not call the Facebook API directly any longer
 * Fix: Undefined variable notice after uninstallation and deleting all MashShare settings an installation again
 
-
 See release notes and complete changelog at:
 https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 3.8.0 =
-* New: Compatible up to WordPress 5.8
+= 3.8.2 =
+* New: Compatible up to WordPress 6.0.1
+* Tweak: Move jQuery nearest library on top of MashShare JS
