@@ -19,10 +19,10 @@ if( !defined( 'ABSPATH' ) ) {
  */
 function mashsb_set_fb_sharecount() {
 
-   $postId = isset( $_POST['postid'] ) ? $_POST['postid'] : false;
+   $postId = isset( $_POST['postid'] ) ? intval($_POST['postid']) : false;
    
    // Ajax result
-   $result = isset( $_POST['shares'] ) ? $_POST['shares'] : false;
+   $result = isset( $_POST['shares'] ) ? intval($_POST['shares']) : false;
    $comment_count = isset( $result['comment_count'] ) ? (int)$result['comment_count'] : 0;
    $share_count = isset( $result['share_count'] ) ? (int)$result['share_count'] : 0;
    
@@ -132,10 +132,9 @@ function mashsb_rate_limit_exceeded(){
      * Make sure that requests do not exceed 1req / 60sec(5min)
      * @return boolean
      */
-    function mashsb_is_req_limited() {
+/*    function mashsb_is_req_limited() {
         // Disable this function!
         return false;
-
 
         global $mashsb_debug;
 
@@ -149,7 +148,7 @@ function mashsb_rate_limit_exceeded(){
             $mashsb_debug[] = 'Temp Rate Limit Exceeded';
         return true;
 
-    }
+    }*/
 
 /**
  * Check if cache time is expired and post must be refreshed

@@ -17,8 +17,7 @@ class mashengine {
       $this->https_scheme_url = rawurlencode( 'https://' . $url_host_path );
 
       $this->timeout = $timeout;
-      $this->url = rawurlencode( $url ); // Original URL
-      //$this->url ='https://google.com';
+      $this->url = rawurlencode( $url );
    }
 
    /* Collect share count from all available networks */
@@ -28,8 +27,7 @@ class mashengine {
       $this->data->total = 0;
       $this->data->error = '';
 
-      $data = $this->getSharesALL();
-      return $data;
+      return $this->getSharesALL();
    }
 
    /* Collect share count from facebook and twitter */
@@ -43,8 +41,9 @@ class mashengine {
       return $data;
    }
 
-   /* Build the multi_curl() crawler for facebook and twitter
-    * 
+   /*
+    * Build the multi_curl() crawler for facebook and twitter
+    *
     * @returns
     */
 
@@ -63,7 +62,6 @@ class mashengine {
 
       switch ( $fb_mode ) {
          case $fb_mode === 'likes':
-            //if( empty( $mashsb_options['fb_access_token_new'] ) ) {
             if( isset( $mashsb_options['cumulate_http_https'] ) ) {
                $RollingCurlX->addRequest( "http://graph.facebook.com/?fields=og_object{likes.summary(true).limit(0)},share&id=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('facebook_likes'), $headers );
                $RollingCurlX->addRequest( "http://graph.facebook.com/?fields=og_object{likes.summary(true).limit(0)},share&id=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('facebook_likes'), $headers );
@@ -273,7 +271,6 @@ class mashengine {
 
          add_action( 'wp_footer', array($this, 'outputDebug'), 1000 );
       }
-      return;
    }
 
    public function outputDebug() {
