@@ -45,6 +45,7 @@ module.exports = function(grunt) {
                 files: [
                     {expand: true, src: ['**',
                             '!node_modules/**',
+                            '!docs/**',
                             '!Gruntfile.js',
                             '!package.json',
                             '!nbproject/**',
@@ -61,6 +62,7 @@ module.exports = function(grunt) {
                  
                     {expand: true, src: ['**',
                             '!node_modules/**',
+                            '!docs/**',
                             '!Gruntfile.js',
                             '!package.json',
                             '!nbproject/**',
