@@ -5,6 +5,7 @@
 .travis.yml
 /dist/
 .idea/
+.idea
 node_modules
 .vscode
 vendor

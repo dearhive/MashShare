@@ -8,7 +8,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, social share buttons
 Requires at least: 3.6+
-Tested up to: 5.9
+Tested up to: 6.0
 Stable tag: {{ version }}
 Requires PHP: 5.6
 
@@ -249,7 +249,14 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
-= {{ version }} =
+= 3.8.2 =
+* New: Compatible up to WordPress 6.0.1
+* Fix: Do sanitization on input values. Fix a low severity Authenticated Stored Cross-Site Scripting (XSS) vulnerability
+* Tweak: Move jQuery nearest library on top of MashShare JS
+* Tweak: Implement PHP 8.1 compatibility support
+* Tweak: Clean up code and
+
+= 3.8.1 =
 * New: Compatible up to WordPress 5.9
 * Fix: Make MashShare compatible with PHP 8.x
 * Fix: Don't request share count for preview pages. This fixes an artificially high share count on initial post creation
@@ -313,11 +320,14 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 * Fix: Do not call the Facebook API directly any longer
 * Fix: Undefined variable notice after uninstallation and deleting all MashShare settings an installation again
 
-
 See release notes and complete changelog at:
 https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 3.8.0 =
-* New: Compatible up to WordPress 5.8
+= 3.8.2 =
+* New: Compatible up to WordPress 6.0.1
+* Fix: Do sanitization on input values. Fix a low severity Authenticated Stored Cross-Site Scripting (XSS) vulnerability
+* Tweak: Move jQuery nearest library on top of MashShare JS
+* Tweak: Implement PHP 8.1 compatibility support
+* Tweak: Clean up code and

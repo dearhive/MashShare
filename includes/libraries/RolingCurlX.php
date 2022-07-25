@@ -53,9 +53,7 @@ Class RollingCurlX {
     public function addRequest(
                         $url,
                         array $post_data = NULL,
-                        //callable $callback = NULL, //individual callback rhe
-                        //$callback = NULL, //individual callback
-			array $callback = NULL,
+						array $callback = NULL,
                         $user_data = NULL,
                         array $options = NULL, //individual cURL options
                         array $headers = NULL //individual cURL request headers
@@ -96,7 +94,12 @@ Class RollingCurlX {
 
 
             //add curl handle of a request to the request map
-            $key = (string) $ch;
+	        // PHP 8: 	On success, this function returns a CurlMultiHandle instance now; previously on PHP 7.X and lower, a resource was returned.
+	        if(is_resource($ch)) {
+		        $key = (string) $ch;
+	        } else {
+		        $key = spl_object_hash($ch);
+	        }
             $requests_map[$key] = $i;
         }
         do{

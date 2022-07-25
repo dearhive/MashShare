@@ -130,9 +130,9 @@ function mashsbGetNonPostShares($url)
     if (mashsb_force_cache_refresh()) {
 
         // Its request limited
-        if (mashsb_is_req_limited()) {
+/*        if (mashsb_is_req_limited()) {
             mashsbGetShareCountFromTransient($url_clean);
-        }
+        }*/
 
         // Regenerate the data and save the transient
         // Get the share Object
@@ -151,7 +151,7 @@ function mashsbGetNonPostShares($url)
 
 /**
  * get share count from transient
- * @param type string
+ * @param string
  * @return int
  */
 function mashsbGetShareCountFromTransient($url)
@@ -163,7 +163,6 @@ function mashsbGetShareCountFromTransient($url)
     } else {
         return 0 + getFakecount(); // we need a result
     }
-    xdebug_break();
 }
 
 /**
@@ -255,10 +254,10 @@ function getSharedcount($url)
         $mashsb_debug[] = 'Force Cache Refresh for page type singular()';
 
         // Its request limited
-        if (mashsb_is_req_limited()) {
+/*        if (mashsb_is_req_limited()) {
             $mashsb_debug[] = 'Rate limit reached: Return Share from custom meta field.';
             return (int)get_post_meta($post->ID, 'mashsb_shares', true) + getFakecount();
-        }
+        }*/
 
         // free some memory
         unset ($mashsb_sharecount[$url]);

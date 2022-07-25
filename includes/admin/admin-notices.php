@@ -432,7 +432,7 @@ function mashsb_is_invalid_fb_api_key(){
 function mashsb_show_update_notice_gdpr() {
     
     $message = sprintf(__( '<h2 style="color:white;">MashShare GDPR Compliance</h2>'
-            . 'MashShare uses sharedcount.com integration to be GDPR compliant. <br>Activate sharedcount.com at <a href="'.admin_url().'admin.php?page=mashsb-settings#mashsb_settingsgeneral_header" style="color:white;">MashShare > Settings > General > Share Count</a><br><br>For collecting Twitter shares get the <a href="https://mashshare.net/downloads/mashshare-social-networks-addon/?utm_source=wp-admin&utm_medium=gdpr-notice&utm_campaign=gdpr-notice" target="_blank" style="color:white;text-decoration:underline;">Social Network Add-On</a>'
+            . 'MashShare uses sharedcount.com to collect shares and to be GDPR compliant. <br>Activate sharedcount.com here: <a href="'.admin_url().'admin.php?page=mashsb-settings#mashsb_settingsgeneral_header" style="color:white;">MashShare > Settings > General > Share Count</a><br><br>For collecting Twitter shares get the <a href="https://mashshare.net/downloads/mashshare-social-networks-addon/?utm_source=wp-admin&utm_medium=gdpr-notice&utm_campaign=gdpr-notice" target="_blank" style="color:white;text-decoration:underline;">Social Network Add-On</a>'
             , 'mashsb' ), 
             admin_url() . 'admin.php?page=mashsb-settings'
             );
@@ -442,8 +442,8 @@ function mashsb_show_update_notice_gdpr() {
         }
   
         // admin notice after updating Mashshare
-        echo '<div class="mashsb-notice-gdpr mashsb_update_notice_gdpr update-nag" style="background-color: #00abed;color: white;padding: 20px;margin-top: 20px;border: 3px solid white;">' . $message . 
-        '<p><a href="'.admin_url().'admin.php?page=mashsb-settings&mashsb-action=hide_gdpr_notice" class="mashsb_hide_gdpr" title="I got it" style="text-decoration:none;color:white;text-decoration:underline;">- I Understand! Do Not Show This Message Again -</a></a>'.
+        echo '<div class="mashsb-notice-gdpr mashsb_update_notice_gdpr update-nag" style="background-color: #00abed;color: white;padding: 20px;margin-top: 20px;border: 3px solid white;width:80%;">' . $message .
+        '<p><a href="'.admin_url().'admin.php?page=mashsb-settings&mashsb-action=hide_gdpr_notice" class="mashsb_hide_gdpr" title="I got it" style="text-decoration:none;color:white;text-decoration:none;">I understand! Close this message</a></a>'.
             '</div>';
        
     

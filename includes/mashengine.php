@@ -17,8 +17,7 @@ class mashengine {
       $this->https_scheme_url = rawurlencode( 'https://' . $url_host_path );
 
       $this->timeout = $timeout;
-      $this->url = rawurlencode( $url ); // Original URL
-      //$this->url ='https://google.com';
+      $this->url = rawurlencode( $url );
    }
 
    /* Collect share count from all available networks */
@@ -28,8 +27,7 @@ class mashengine {
       $this->data->total = 0;
       $this->data->error = '';
 
-      $data = $this->getSharesALL();
-      return $data;
+      return $this->getSharesALL();
    }
 
    /* Collect share count from facebook and twitter */
@@ -43,8 +41,9 @@ class mashengine {
       return $data;
    }
 
-   /* Build the multi_curl() crawler for facebook and twitter
-    * 
+   /*
+    * Build the multi_curl() crawler for facebook and twitter
+    *
     * @returns
     */
 
@@ -55,11 +54,6 @@ class mashengine {
 
       $post_data = null;
       $headers = null;
-
-//      $options = array(
-//          CURLOPT_SSL_VERIFYPEER => FALSE,
-//          CURLOPT_SSL_VERIFYHOST => FALSE
-//      );
       
       $options = array();
 
@@ -68,39 +62,20 @@ class mashengine {
 
       switch ( $fb_mode ) {
          case $fb_mode === 'likes':
-            //if( empty( $mashsb_options['fb_access_token_new'] ) ) {
             if( isset( $mashsb_options['cumulate_http_https'] ) ) {
                $RollingCurlX->addRequest( "http://graph.facebook.com/?fields=og_object{likes.summary(true).limit(0)},share&id=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('facebook_likes'), $headers );
                $RollingCurlX->addRequest( "http://graph.facebook.com/?fields=og_object{likes.summary(true).limit(0)},share&id=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('facebook_likes'), $headers );
             } else {
                $RollingCurlX->addRequest( "http://graph.facebook.com/?fields=og_object{likes.summary(true).limit(0)},share&id=" . $this->url, $post_data, array($this, 'getCount'), array('facebook_likes'), $headers );
             }
-            //} 
-//                else {
-//                    if( isset( $mashsb_options['cumulate_http_https'] ) ) {
-//                        $RollingCurlX->addRequest( "https://graph.facebook.com/v2.7/?id=" . $this->http_scheme_url . '&access_token=' . sanitize_text_field( $mashsb_options['fb_access_token_new'] ), $post_data, array($this, 'getCount'), array('facebook_likes'), $headers );
-//                        $RollingCurlX->addRequest( "https://graph.facebook.com/v2.7/?id=" . $this->https_scheme_url . '&access_token=' . sanitize_text_field( $mashsb_options['fb_access_token_new'] ), $post_data, array($this, 'getCount'), array('facebook_likes'), $headers );
-//                    } else {
-//                        $RollingCurlX->addRequest( "https://graph.facebook.com/v2.7/?id=" . $this->url . '&access_token=' . sanitize_text_field( $mashsb_options['fb_access_token_new'] ), $post_data, array($this, 'getCount'), array('facebook_likes'), $headers );
-//                    }
-//                }
             break;
          case $fb_mode === 'total':
-            //if( empty( $mashsb_options['fb_access_token_new'] ) ) {
             if( isset( $mashsb_options['cumulate_http_https'] ) ) {
                $RollingCurlX->addRequest( "http://graph.facebook.com/?fields=og_object{likes.summary(true).limit(0)},share&id=" . $this->http_scheme_url, $post_data, array($this, 'getCount'), array('facebook_total'), $headers );
                $RollingCurlX->addRequest( "http://graph.facebook.com/?fields=og_object{likes.summary(true).limit(0)},share&id=" . $this->https_scheme_url, $post_data, array($this, 'getCount'), array('facebook_total'), $headers );
             } else {
                $RollingCurlX->addRequest( "http://graph.facebook.com/?fields=og_object{likes.summary(true).limit(0)},share&id=" . $this->url, $post_data, array($this, 'getCount'), array('facebook_total'), $headers );
             }
-//                } else {
-//                    if( isset( $mashsb_options['cumulate_http_https'] ) ) {
-//                        $RollingCurlX->addRequest( "https://graph.facebook.com/v2.7/?id=" . $this->http_scheme_url . '&access_token=' . sanitize_text_field( $mashsb_options['fb_access_token_new'] ), $post_data, array($this, 'getCount'), array('facebook_total'), $headers );
-//                        $RollingCurlX->addRequest( "https://graph.facebook.com/v2.7/?id=" . $this->https_scheme_url . '&access_token=' . sanitize_text_field( $mashsb_options['fb_access_token_new'] ), $post_data, array($this, 'getCount'), array('facebook_total'), $headers );
-//                    } else {
-//                        $RollingCurlX->addRequest( "https://graph.facebook.com/v2.7/?id=" . $this->url . '&access_token=' . sanitize_text_field( $mashsb_options['fb_access_token_new'] ), $post_data, array($this, 'getCount'), array('facebook_total'), $headers );
-//                    }
-//                }
             break;
          default:
             //if( empty( $mashsb_options['fb_access_token_new'] ) ) {
@@ -110,14 +85,6 @@ class mashengine {
             } else {
                $RollingCurlX->addRequest( "http://graph.facebook.com/?fields=og_object{likes.summary(true).limit(0)},share&id=" . $this->url, $post_data, array($this, 'getCount'), array('facebook_shares'), $headers );
             }
-//                } else {
-//                    if( isset( $mashsb_options['cumulate_http_https'] ) ) {
-//                        $RollingCurlX->addRequest( "https://graph.facebook.com/v2.7/?id=" . $this->http_scheme_url . '&access_token=' . sanitize_text_field( $mashsb_options['fb_access_token_new'] ), $post_data, array($this, 'getCount'), array('facebook_shares'), $headers );
-//                        $RollingCurlX->addRequest( "https://graph.facebook.com/v2.7/?id=" . $this->https_scheme_url . '&access_token=' . sanitize_text_field( $mashsb_options['fb_access_token_new'] ), $post_data, array($this, 'getCount'), array('facebook_shares'), $headers );
-//                    } else {
-//                        $RollingCurlX->addRequest( "https://graph.facebook.com/v2.7/?id=" . $this->url . '&access_token=' . sanitize_text_field( $mashsb_options['fb_access_token_new'] ), $post_data, array($this, 'getCount'), array('facebook_shares'), $headers );
-//                    }
-//                }
       }
       if( isset( $mashsb_options['cumulate_http_https'] ) ) {
          if( class_exists( 'mashnetTwitter' ) ) {
@@ -149,11 +116,6 @@ class mashengine {
       $fb_mode = isset( $mashsb_options['facebook_count_mode'] ) ? $mashsb_options['facebook_count_mode'] : 'total';
       $post_data = null;
       $headers = null;
-
-//      $options = array(
-//          CURLOPT_SSL_VERIFYPEER => FALSE,
-//          CURLOPT_SSL_VERIFYHOST => FALSE
-//      );
       
       $options = array();
 
@@ -168,14 +130,6 @@ class mashengine {
             } else {
                $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->url, $post_data, array($this, 'getCount'), array('facebook_likes'), $headers );
             }
-//                } else {
-//                    if( isset( $mashsb_options['cumulate_http_https'] ) ) {
-//                        $RollingCurlX->addRequest( "https://graph.facebook.com/v2.7/?id=" . $this->http_scheme_url . '&access_token=' . sanitize_text_field( $mashsb_options['fb_access_token_new'] ), $post_data, array($this, 'getCount'), array('facebook_likes'), $headers );
-//                        $RollingCurlX->addRequest( "https://graph.facebook.com/v2.7/?id=" . $this->https_scheme_url . '&access_token=' . sanitize_text_field( $mashsb_options['fb_access_token_new'] ), $post_data, array($this, 'getCount'), array('facebook_likes'), $headers );
-//                    } else {
-//                        $RollingCurlX->addRequest( "https://graph.facebook.com/v2.7/?id=" . $this->url . '&access_token=' . sanitize_text_field( $mashsb_options['fb_access_token_new'] ), $post_data, array($this, 'getCount'), array('facebook_likes'), $headers );
-//                    }
-//                }
             break;
          case $fb_mode === 'total':
             //if( empty( $mashsb_options['fb_access_token_new'] ) ) {
@@ -185,14 +139,6 @@ class mashengine {
             } else {
                $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->url, $post_data, array($this, 'getCount'), array('facebook_total'), $headers );
             }
-//                } else {
-//                    if( isset( $mashsb_options['cumulate_http_https'] ) ) {
-//                        $RollingCurlX->addRequest( "https://graph.facebook.com/v2.7/?id=" . $this->http_scheme_url . '&access_token=' . sanitize_text_field( $mashsb_options['fb_access_token_new'] ), $post_data, array($this, 'getCount'), array('facebook_total'), $headers );
-//                        $RollingCurlX->addRequest( "https://graph.facebook.com/v2.7/?id=" . $this->https_scheme_url . '&access_token=' . sanitize_text_field( $mashsb_options['fb_access_token_new'] ), $post_data, array($this, 'getCount'), array('facebook_total'), $headers );
-//                    } else {
-//                        $RollingCurlX->addRequest( "https://graph.facebook.com/v2.7/?id=" . $this->url . '&access_token=' . sanitize_text_field( $mashsb_options['fb_access_token_new'] ), $post_data, array($this, 'getCount'), array('facebook_total'), $headers );
-//                    }
-//                }
             break;
          default:
             //if( empty( $mashsb_options['fb_access_token_new'] ) ) {
@@ -202,14 +148,6 @@ class mashengine {
             } else {
                $RollingCurlX->addRequest( "http://graph.facebook.com/?id=" . $this->url, $post_data, array($this, 'getCount'), array('facebook_shares'), $headers );
             }
-//                } else {
-//                    if( isset( $mashsb_options['cumulate_http_https'] ) ) {
-//                        $RollingCurlX->addRequest( "https://graph.facebook.com/v2.7/?id=" . $this->http_scheme_url . '&access_token=' . sanitize_text_field( $mashsb_options['fb_access_token_new'] ), $post_data, array($this, 'getCount'), array('facebook_shares'), $headers );
-//                        $RollingCurlX->addRequest( "https://graph.facebook.com/v2.7/?id=" . $this->https_scheme_url . '&access_token=' . sanitize_text_field( $mashsb_options['fb_access_token_new'] ), $post_data, array($this, 'getCount'), array('facebook_shares'), $headers );
-//                    } else {
-//                        $RollingCurlX->addRequest( "https://graph.facebook.com/v2.7/?id=" . $this->url . '&access_token=' . sanitize_text_field( $mashsb_options['fb_access_token_new'] ), $post_data, array($this, 'getCount'), array('facebook_shares'), $headers );
-//                    }
-//                }
       }
       if( isset( $mashsb_options['cumulate_http_https'] ) ) {
          if( class_exists( 'mashnetTwitter' ) ) {
@@ -333,7 +271,6 @@ class mashengine {
 
          add_action( 'wp_footer', array($this, 'outputDebug'), 1000 );
       }
-      return;
    }
 
    public function outputDebug() {
