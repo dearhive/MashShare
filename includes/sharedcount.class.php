@@ -102,7 +102,7 @@ class mashsbSharedcount {
                 $counts['shares']['fb_https'] = $sharecounts['https']['Facebook']['like_count'];
                 break;
             case $fb_mode === 'total':
-                $counts['shares']['fb']       = $sharecounts['Facebook']['total_count'];
+                $counts['shares']['fb']       = isset($sharecounts['Facebook']['total_count']) ? $sharecounts['Facebook']['total_count'] : 0;
                 $counts['shares']['fb_https'] = isset($sharecounts['https']['Facebook']['total_count']) ? $sharecounts['https']['Facebook']['total_count'] : 0;
                 break;
             default:
