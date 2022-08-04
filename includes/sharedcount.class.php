@@ -37,7 +37,7 @@ class mashsbSharedcount {
     /**
      * Collect shares for facebook and twitter (Twitter not supported any longer)
      * @global array $mashsb_options
-     * @return type
+     * @return array
      */
     public function getFBTWCounts() {
         global $mashsb_options;
@@ -54,19 +54,19 @@ class mashsbSharedcount {
         $counts = array('shares' => array(), 'total' => 0);
         switch ( $fb_mode ) {
             case $fb_mode === 'likes':
-                $counts['shares']['fb']       = $sharecounts['Facebook']['like_count'];
-                $counts['shares']['fb_https'] = $sharecounts['https']['Facebook']['like_count'];
+                $counts['shares']['fb']       = isset($sharecounts['Facebook']['like_count']) ? $sharecounts['Facebook']['like_count'] : 0;
+                $counts['shares']['fb_https'] = isset($sharecounts['https']['Facebook']['like_count']) ? $sharecounts['https']['Facebook']['like_count'] : 0;
 
                 break;
             case $fb_mode === 'total':
-                $counts['shares']['fb']       = $sharecounts['Facebook']['total_count'];
-                $counts['shares']['fb_https'] = $sharecounts['https']['Facebook']['total_count'];
+                $counts['shares']['fb']       = isset($sharecounts['Facebook']['total_count']) ? $sharecounts['Facebook']['total_count'] : 0;
+                $counts['shares']['fb_https'] = isset($sharecounts['https']['Facebook']['total_count']) ? $sharecounts['https']['Facebook']['total_count'] : 0;
                 break;
             default:
-                $counts['shares']['fb']       = $sharecounts['Facebook']['share_count'];
-                $counts['shares']['fb_https'] = $sharecounts['https']['Facebook']['share_count'];
+                $counts['shares']['fb']       = isset($sharecounts['Facebook']['share_count']) ? $sharecounts['Facebook']['share_count'] : 0;
+                $counts['shares']['fb_https'] = isset($sharecounts['https']['Facebook']['share_count']) ? $sharecounts['https']['Facebook']['share_count'] : 0;
         }
-        $counts['shares']['tw'] = $sharecounts['Twitter'];
+        $counts['shares']['tw'] = isset($sharecounts['Twitter']) ? $sharecounts['Twitter'] : 0;
 
 
 
@@ -98,15 +98,15 @@ class mashsbSharedcount {
         $counts = array('shares' => array(), 'total' => 0);
         switch ( $fb_mode ) {
             case $fb_mode === 'likes':
-                $counts['shares']['fb']       = $sharecounts['Facebook']['like_count'];
-                $counts['shares']['fb_https'] = $sharecounts['https']['Facebook']['like_count'];
+                $counts['shares']['fb']       = isset($sharecounts['Facebook']['like_count']) ? $sharecounts['Facebook']['like_count'] : 0;
+                $counts['shares']['fb_https'] = isset($sharecounts['https']['Facebook']['like_count']) ? $sharecounts['https']['Facebook']['like_count'] : 0;
                 break;
             case $fb_mode === 'total':
                 $counts['shares']['fb']       = isset($sharecounts['Facebook']['total_count']) ? $sharecounts['Facebook']['total_count'] : 0;
                 $counts['shares']['fb_https'] = isset($sharecounts['https']['Facebook']['total_count']) ? $sharecounts['https']['Facebook']['total_count'] : 0;
                 break;
             default:
-                $counts['shares']['fb']       = $sharecounts['Facebook']['share_count'];
+                $counts['shares']['fb']       = isset($sharecounts['Facebook']['share_count']) ?  $sharecounts['Facebook']['share_count'] : 0;
                 $counts['shares']['fb_https'] = isset($sharecounts['https']['Facebook']['share_count']) ? $sharecounts['https']['Facebook']['share_count'] : '';
         }
         isset( $sharecounts['Twitter'] ) ? $counts['shares']['tw']        = $sharecounts['Twitter'] : $counts['shares']['tw']        = 0;
@@ -115,8 +115,6 @@ class mashsbSharedcount {
         isset( $sharecounts['StumbleUpon'] ) ? $counts['shares']['st']        = $sharecounts['StumbleUpon'] : $counts['shares']['st']        = 0;
         isset( $sharecounts['Pinterest'] ) ? $counts['shares']['pin']       = $sharecounts['Pinterest'] : $counts['shares']['pin']       = 0;
         isset( $sharecounts['https']['Pinterest'] ) ? $counts['shares']['pin_https'] = $sharecounts['https']['Pinterest'] : $counts['shares']['pin_https'] = 0;
-
-
 
         $total = 0;
         foreach ( $counts['shares'] as $totalcount ) {
