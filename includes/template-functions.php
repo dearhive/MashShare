@@ -129,11 +129,6 @@ function mashsbGetNonPostShares($url)
     // Get any existing copy of our transient data and fill the cache
     if (mashsb_force_cache_refresh()) {
 
-        // Its request limited
-/*        if (mashsb_is_req_limited()) {
-            mashsbGetShareCountFromTransient($url_clean);
-        }*/
-
         // Regenerate the data and save the transient
         // Get the share Object
         $mashsbSharesObj = mashsbGetShareObj($url_clean);
@@ -194,8 +189,6 @@ function mashsbIsPostTypeAllowed()
  * @param string url of the page the share count is collected for
  * @returns int
  */
-
-
 function getSharedcount($url)
 {
     global $mashsb_options, $post, $mashsb_sharecount, $mashsb_debug; // todo test a global share count var if it reduces the amount of requests
@@ -211,7 +204,6 @@ function getSharedcount($url)
      * - rate limit exceeded
      * - deprecated: admin pages (we need to remove this for themes which are using a bad infinite scroll implementation where is_admin() is always true)
      */
-
 
     if (is_preview()) {
         return 0;
@@ -230,17 +222,13 @@ function getSharedcount($url)
         return $mashsb_sharecount[$url] + getFakecount();
     }
 
-
     // Remove mashsb-refresh query parameter
     $url = mashsb_sanitize_url($url);
-
 
     /* 
      * Return share count on non singular pages when url is defined
        Possible: Category, blog list pages, non singular() pages. This store the shares in transients with mashsbGetNonPostShares();
      */
-
-
     if (!empty($url) && is_null($post)) {
         $mashsb_debug[] = '$url or $post is empty. Return share count with mashsbGetNonPostShares';
         return apply_filters('filter_get_sharedcount', mashsbGetNonPostShares($url));
@@ -252,12 +240,6 @@ function getSharedcount($url)
     if (mashsb_force_cache_refresh() && is_singular()) {
 
         $mashsb_debug[] = 'Force Cache Refresh for page type singular()';
-
-        // Its request limited
-/*        if (mashsb_is_req_limited()) {
-            $mashsb_debug[] = 'Rate limit reached: Return Share from custom meta field.';
-            return (int)get_post_meta($post->ID, 'mashsb_shares', true) + getFakecount();
-        }*/
 
         // free some memory
         unset ($mashsb_sharecount[$url]);
@@ -344,7 +326,7 @@ function mashsb_cleanShortcode($code, $content)
     global $shortcode_tags;
     $stack = $shortcode_tags;
     $shortcode_tags = array($code => 1);
-    $content = strip_shortcodes($content);
+    $content = strip_shortcodes(wp_kses_post($content));
     $shortcode_tags = $stack;
 
     return do_shortcode($content);
@@ -359,6 +341,10 @@ function mashsb_cleanShortcode($code, $content)
 
 function roundshares($totalshares)
 {
+	if (!is_numeric($totalshares)){
+		return '0';
+	}
+
     if ($totalshares > 1000000) {
         $totalshares = round($totalshares / 1000000, 1) . 'M';
     } elseif ($totalshares > 1000) {
@@ -402,7 +388,7 @@ function onOffSwitch2($size = false)
     global $mashsb_options;
 
     // Get class names for buttons size
-    $class_size = isset($mashsb_options['buttons_size']) ? ' ' . $mashsb_options['buttons_size'] : '';
+    $class_size = isset($mashsb_options['buttons_size']) ? ' ' . esc_attr($mashsb_options['buttons_size']) : '';
 
     // Override size with shortcode argument
     $class_size = $size ? ' mash-' . $size : $class_size;
@@ -494,10 +480,7 @@ function mashsb_getNetworks($is_shortcode = false, $services = 0)
     }
 
     // Get class names for buttons size
-    $class_size = isset($mashsb_options['buttons_size']) ? ' ' . $mashsb_options['buttons_size'] : '';
-
-    // Override size with shortcode argument
-    //$class_size = $size ? ' mash-'.$size : $class_size;
+    $class_size = isset($mashsb_options['buttons_size']) ? ' ' . esc_attr($mashsb_options['buttons_size']) : '';
 
     // Get class names for buttons margin
     $class_margin = isset($mashsb_options['button_margin']) ? '' : ' mash-nomargin';
@@ -546,11 +529,6 @@ function mashsb_getNetworks($is_shortcode = false, $services = 0)
     }
 
 
-    // Use custom networks if available and override default networks
-    //$enablednetworks = $networks ? $networks : $enablednetworks;
-
-    //var_dump($enablednetworks);
-
     // Start Primary Buttons
 
     if (!empty($enablednetworks)) {
@@ -559,12 +537,10 @@ function mashsb_getNetworks($is_shortcode = false, $services = 0)
             if ($maxcounter !== 'all' && $maxcounter < count($enablednetworks)) { // $maxcounter + 1 for correct comparision with count()
                 if ($startcounter == $maxcounter) {
                     $onoffswitch = onOffSwitch(); // Start More Button
-                    //$startsecondaryshares = '</div>'; // End Primary Buttons
                     $visibility = mashsb_is_amp_page() ? '' : 'display:none;';
                     $startsecondaryshares .= '<div class="secondary-shares" style="' . $visibility . '">'; // Start secondary-shares
                 } else {
                     $onoffswitch = '';
-                    $onoffswitch2 = '';
                     $startsecondaryshares = '';
                 }
                 if ($startcounter === (count($enablednetworks))) {
@@ -614,7 +590,6 @@ function mashsb_getNetworks($is_shortcode = false, $services = 0)
 
 function mashsb_getNetworksShortcode($is_shortcode = false, $services = 0, $networks = false, $size = false, $icons = false)
 {
-    //global $mashsb_options, $mashsb_custom_url, $enablednetworks, $mashsb_twitter_url;
     global $mashsb_options, $mashsb_custom_url, $mashsb_twitter_url;
 
 
@@ -627,7 +602,7 @@ function mashsb_getNetworksShortcode($is_shortcode = false, $services = 0, $netw
     }
 
     // Get class names for buttons size
-    $class_size = isset($mashsb_options['buttons_size']) ? ' ' . $mashsb_options['buttons_size'] : '';
+    $class_size = isset($mashsb_options['buttons_size']) ? ' ' . esc_attr($mashsb_options['buttons_size']) : '';
 
     // Override size with shortcode argument
     $class_size = $size ? ' mash-' . $size : $class_size;
@@ -642,8 +617,6 @@ function mashsb_getNetworksShortcode($is_shortcode = false, $services = 0, $netw
     $class_style = isset($mashsb_options['mash_style']) && $mashsb_options['mash_style'] === 'shadow' ? ' mashsb-shadow' : ' mashsb-noshadow';
 
     $class_icons = $icons ? ' mashsb-pure-icons' : '';
-
-    //$style = $fullwidth ? '' : 'style="min-width:0;flex:none;-webkit-flex:none;"';
 
     $output = '';
     $startsecondaryshares = '';
@@ -696,11 +669,9 @@ function mashsb_getNetworksShortcode($is_shortcode = false, $services = 0, $netw
             if ($maxcounter !== 'all' && $maxcounter < count($enablednetworks)) { // $maxcounter + 1 for correct comparision with count()
                 if ($startcounter == $maxcounter) {
                     $onoffswitch = onOffSwitch($size); // Start More Button
-                    //$startsecondaryshares = '</div>'; // End Primary Buttons
                     $startsecondaryshares .= '<div class="secondary-shares" style="display:none;">'; // Start secondary-shares
                 } else {
                     $onoffswitch = '';
-                    $onoffswitch2 = '';
                     $startsecondaryshares = '';
                 }
                 if ($startcounter === (count($enablednetworks))) {
@@ -716,8 +687,6 @@ function mashsb_getNetworksShortcode($is_shortcode = false, $services = 0, $netw
             } else {
                 $name = !$icons ? ucfirst($enablednetworks[$key]['id']) : ''; // Use the id as share label. Capitalize it!
             }
-
-            //$enablednetworks[$key]['id'] == 'whatsapp' ? $display = 'style="display:none;"' : $display = ''; // Whatsapp button is made visible via js when opened on mobile devices
 
             // Lets use the data attribute to prevent that pininit.js is overwriting our pinterest button - PR: https://secure.helpscout.net/conversation/257066283/954/?folderId=924740
             if ('pinterest' === $enablednetworks[$key]['id'] && !mashsb_is_amp_page()) {
@@ -789,7 +758,7 @@ function mashsb_render_sharecounts($customurl = '', $align = 'left', $size = fal
     }
 
     $url = empty($customurl) ? mashsb_get_url() : $customurl;
-    $sharetitle = isset($mashsb_options['sharecount_title']) ? $mashsb_options['sharecount_title'] : __('SHARES', 'mashsb');
+    $sharetitle = isset($mashsb_options['sharecount_title']) ? wp_kses_post($mashsb_options['sharecount_title']) : __('SHARES', 'mashsb');
 
     $shares = getSharedcount($url);
     $sharecount = isset($mashsb_options['mashsharer_round']) ? roundshares($shares) : $shares;
@@ -800,10 +769,10 @@ function mashsb_render_sharecounts($customurl = '', $align = 'left', $size = fal
     }
 
     // Get class names for buttons size
-    $class_size = isset($mashsb_options['buttons_size']) ? ' ' . $mashsb_options['buttons_size'] : '';
+    $class_size = isset($mashsb_options['buttons_size']) ? ' ' . esc_attr($mashsb_options['buttons_size']) : '';
 
     // Override size with shortcode argument
-    $class_size = $size ? ' mash-' . $size : $class_size;
+    $class_size = $size ? ' mash-' . esc_attr($size) : $class_size;
 
     // No inline style if it's amp
     $style = !mashsb_is_amp_page() ? 'style="float:' . $align . ';"' : '';
@@ -859,10 +828,6 @@ function mashshareShortcodeShow($args)
         $networks = $new;
     }
 
-    //var_dump( $new );
-
-    // Define custom url var to share
-    //$mashsb_custom_url = empty( $url ) ? mashsb_get_url() : $url;
     // The global available custom url to share
     $mashsb_custom_url = !empty($url) ? $url : '';
     // local url
@@ -1061,7 +1026,6 @@ function mashshare_filter_content($content)
 
 function mashshare()
 {
-    //global $atts;
     echo mashshareShow();
 }
 
@@ -1072,7 +1036,6 @@ function mashshare()
 
 function mashsharer()
 {
-    //global $atts;
     echo mashshareShow();
 }
 
@@ -1153,7 +1116,6 @@ add_action('mashsb_get_excerpt_by_id', 'mashsb_get_excerpt_by_id');
 function mashsb_get_fake_factor()
 {
     // str_word_count is not working for hebraic and arabic languages
-    //$wordcount = str_word_count(the_title_attribute('echo=0')); //Gets title to be used as a basis for the count
     $wordcount = count(explode(' ', the_title_attribute('echo=0')));
     $factor = $wordcount / 10;
     return apply_filters('mashsb_fake_factor', $factor);
