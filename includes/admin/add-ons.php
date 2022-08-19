@@ -48,7 +48,7 @@ function mashsb_add_ons_get_feed() {
 		if ( ! is_wp_error( $feed ) ) {
 			if ( isset( $feed['body'] ) && strlen( $feed['body'] ) > 0 ) {
 				$cache = wp_remote_retrieve_body( $feed );
-				set_transient( 'mashshare_add_ons_feed', $cache, 3600 );
+				set_transient( 'mashshare_add_ons_feed', $cache, 86400 );
 			}
 		} else {
 			$cache = '<div class="error"><p>' . __( 'There was an error retrieving the Mashshare addon list from the server. Please try again later.', 'mashsb' ) . '

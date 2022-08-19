@@ -249,8 +249,11 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
+= 3.8.4 =
+* Fix: Improve sanitization on input values and escape output values. Fixes a low severity Authenticated Stored Cross-Site Scripting (XSS) vulnerability
+
 = 3.8.3 =
-* Fix: Undefined warning on php 8.1
+* Fix: Do sanitization on input values. Fix a low severity Authenticated Stored Cross-Site Scripting (XSS) vulnerability
 
 = 3.8.2 =
 * New: Compatible up to WordPress 6.0.1
@@ -327,6 +330,9 @@ See release notes and complete changelog at:
 https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
+
+= 3.8.4 =
+* Fix: Do better sanitization on input and output values. Fix a low severity Authenticated Stored Cross-Site Scripting (XSS) vulnerability that can only be exploited by authenticated damin users
 
 = 3.8.3 =
 * Fix: Undefined warning on php 8.1
