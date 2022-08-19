@@ -777,7 +777,7 @@ function mashsb_render_sharecounts($customurl = '', $align = 'left', $size = fal
     // No inline style if it's amp
     $style = !mashsb_is_amp_page() ? 'style="float:' . $align . ';"' : '';
 
-    $html = '<div class="mashsb-count' . $class_size . '" ' . $style . '><div class="counts mashsbcount">' . $sharecount . '</div><span class="mashsb-sharetext">' . $sharetitle . '</span></div>';
+    $html = '<div class="mashsb-count' . $class_size . '" ' . esc_attr($style) . '><div class="counts mashsbcount">' . esc_html($sharecount) . '</div><span class="mashsb-sharetext">' . esc_html($sharetitle) . '</span></div>';
     return apply_filters('mashsb_share_count', $html);
 }
 
