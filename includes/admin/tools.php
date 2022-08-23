@@ -64,8 +64,8 @@ function mashsb_tools_page() {
 function mashsb_get_tools_tabs() {
 
 	$tabs                  = array();
-	$tabs['import_export'] = __( 'Import/Export', 'mashsb' );
-        $tabs['system_info'] = __( 'System Info', 'mashsb' );
+	$tabs['import_export'] = esc_html_e( 'Import/Export', 'mashsb' );
+        $tabs['system_info'] = esc_html_e( 'System Info', 'mashsb' );
 
 	return apply_filters( 'mashsb_tools_tabs', $tabs );
 }
@@ -87,32 +87,32 @@ function mashsb_tools_import_export_display() {
 	do_action( 'mashsb_tools_import_export_before' );
 ?>
 	<div class="postbox">
-		<h3><span><?php _e( 'Export Settings', 'mashsb' ); ?></span></h3>
+		<h3><span><?php esc_html_e( 'Export Settings', 'mashsb' ); ?></span></h3>
 		<div class="inside">
-			<p><?php _e( 'Export the Mashshare settings for this site as a .json file. This allows you to easily import the configuration into another site.', 'mashsb' ); ?></p>
+			<p><?php esc_html_e( 'Export the Mashshare settings for this site as a .json file. This allows you to easily import the configuration into another site.', 'mashsb' ); ?></p>
 			
-			<form method="post" action="<?php echo admin_url( 'admin.php?page=mashsb-tools&tab=import_export' ); ?>">
+			<form method="post" action="<?php echo esc_url(admin_url( 'admin.php?page=mashsb-tools&tab=import_export' )); ?>">
 				<p><input type="hidden" name="mashsb-action" value="export_settings" /></p>
 				<p>
 					<?php wp_nonce_field( 'mashsb_export_nonce', 'mashsb_export_nonce' ); ?>
-					<?php submit_button( __( 'Export', 'mashsb' ), 'primary', 'submit', false ); ?>
+					<?php submit_button( esc_html_e( 'Export', 'mashsb' ), 'primary', 'submit', false ); ?>
 				</p>
 			</form>
 		</div><!-- .inside -->
 	</div><!-- .postbox -->
 
 	<div class="postbox">
-		<h3><span><?php _e( 'Import Settings', 'mashsb' ); ?></span></h3>
+		<h3><span><?php esc_html_e( 'Import Settings', 'mashsb' ); ?></span></h3>
 		<div class="inside">
-			<p><?php _e( 'Import the Mashshare settings from a .json file. This file can be obtained by exporting the settings on another site using the form above.', 'mashsb' ); ?></p>
-			<form method="post" enctype="multipart/form-data" action="<?php echo admin_url( 'admin.php?page=mashsb-tools&tab=import_export' ); ?>">
+			<p><?php esc_html_e( 'Import the MashShare settings from a .json file. This file can be obtained by exporting the settings on another site using the form above.', 'mashsb' ); ?></p>
+			<form method="post" enctype="multipart/form-data" action="<?php echo esc_url(admin_url( 'admin.php?page=mashsb-tools&tab=import_export' )); ?>">
 				<p>
 					<input type="file" name="import_file"/>
 				</p>
 				<p>
 					<input type="hidden" name="mashsb-action" value="import_settings" />
 					<?php wp_nonce_field( 'mashsb_import_nonce', 'mashsb_import_nonce' ); ?>
-					<?php submit_button( __( 'Import', 'mashsb' ), 'secondary', 'submit', false ); ?>
+					<?php submit_button( esc_html_e( 'Import', 'mashsb' ), 'secondary', 'submit', false ); ?>
 				</p>
 			</form>
 		</div><!-- .inside -->
@@ -213,13 +213,13 @@ function mashsb_tools_import_export_process_import() {
 		return;
 
     if( mashsb_get_file_extension( $_FILES['import_file']['name'] ) != 'json' ) {
-        wp_die( __( 'Please upload a valid .json file', 'mashsb' ) );
+        wp_die( esc_html_e( 'Please upload a valid .json file', 'mashsb' ) );
     }
 
 	$import_file = $_FILES['import_file']['tmp_name'];
 
 	if( empty( $import_file ) ) {
-		wp_die( __( 'Please upload a file to import', 'mashsb' ) );
+		wp_die( esc_html_e( 'Please upload a file to import', 'mashsb' ) );
 	}
 
 	// Retrieve the settings from the file and convert the json object to an array

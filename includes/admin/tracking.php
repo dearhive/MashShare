@@ -286,11 +286,10 @@ class MASHSB_Tracking {
 			);
 
 			echo wp_kses(sprintf( __( 'Allow Mashshare to track plugin usage? Opt-in to tracking and our newsletter and immediately be emailed a <strong>20%% discount to the Mashshare shop</strong>, valid towards the <a href="%s" target="_blank">purchase of Add-Ons</a>. No sensitive data is tracked.', 'mashsb' ), $extensions_url ), $allowedHtml);
-			echo '&nbsp;<a href="' . esc_url( $optin_url ) . '" class="button-secondary">' . __( 'Allow', 'mashsb' ) . '</a>';
-			echo '&nbsp;<a href="' . esc_url( $optout_url ) . '" class="button-secondary">' . __( 'Do not allow', 'mashsb' ) . '</a>';
+			echo '&nbsp;<a href="' . esc_url( $optin_url ) . '" class="button-secondary">' . esc_html_e( 'Allow', 'mashsb' ) . '</a>';
+			echo '&nbsp;<a href="' . esc_url( $optout_url ) . '" class="button-secondary">' . esc_html_e( 'Do not allow', 'mashsb' ) . '</a>';
 			echo '</p></div>';
 		}
 	}
 
 }
-//$mashsb_tracking = new MASHSB_Tracking;

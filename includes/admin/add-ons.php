@@ -44,7 +44,7 @@ function mashsb_add_ons_page() {
  */
 function mashsb_add_ons_get_feed() {
 	if ( false === ( $cache = get_transient( 'mashshare_add_ons_feed' ) ) ) {
-		$feed = wp_remote_get( 'https://www.mashshare.net/?feed=addons', array( 'sslverify' => false ) );
+		$feed = wp_remote_get( 'https://www.mashshare.net/?feed=addons', array( 'sslverify' => true ) );
 		if ( ! is_wp_error( $feed ) ) {
 			if ( isset( $feed['body'] ) && strlen( $feed['body'] ) > 0 ) {
 				$cache = wp_remote_retrieve_body( $feed );

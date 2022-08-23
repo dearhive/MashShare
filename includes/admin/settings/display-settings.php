@@ -21,7 +21,6 @@ if( !defined( 'ABSPATH' ) )
  */
 
 function getTabHeader( $page, $section ) {
-    global $mashsb_options;
     global $wp_settings_fields;
 
     if( !isset( $wp_settings_fields[$page][$section] ) )
@@ -32,7 +31,7 @@ function getTabHeader( $page, $section ) {
         $sanitizedID = str_replace( '[', '', $field['id'] );
         $sanitizedID = str_replace( ']', '', $sanitizedID );
         if( strpos( $field['callback'], 'header' ) !== false ) {
-            echo '<li class="mashsb-tabs" id="' . esc_attr($sanitizedID) . '-nav"><a href="#' . esc_attr($sanitizedID) . '">' . esc_html($field['title']) . '</a></li>';
+            echo '<li class="mashsb-tabs" id="' . esc_attr($sanitizedID) . '-nav"><a href="#' . esc_attr($sanitizedID) . '">' . wp_kses_post($field['title']) . '</a></li>';
         }
     }
     echo '</ul>';
@@ -176,7 +175,6 @@ function mashsb_options_page() {
                     settings_fields( 'mashsb_settings' );
                     mashsb_do_settings_fields( 'mashsb_settings_' . esc_attr($active_tab), 'mashsb_settings_' . esc_attr($active_tab) );
                     ?>
-                    <!--</table>-->
 
                     <?php
                     // do not show save button on add-on page
