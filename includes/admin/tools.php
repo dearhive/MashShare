@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * @return      void
  */
 function mashsb_tools_page() {
-	$active_tab = isset( $_GET['tab'] ) ? $_GET['tab'] : 'import_export';
+	$active_tab = isset( $_GET['tab'] ) ? wp_unslash($_GET['tab']) : 'import_export';
 ?>
 	<div class="wrap">
 		<h2 class="nav-tab-wrapper">
@@ -40,14 +40,14 @@ function mashsb_tools_page() {
 				), $tab_url );
 
 				$active = $active_tab == $tab_id ? ' nav-tab-active' : '';
-				echo '<a href="' . esc_url( $tab_url ) . '" title="' . esc_attr( $tab_name ) . '" class="nav-tab' . $active . '">' . esc_html( $tab_name ) . '</a>';
+				echo '<a href="' . esc_url( $tab_url ) . '" title="' . esc_attr( $tab_name ) . '" class="nav-tab' . esc_attr($active) . '">' . esc_html( $tab_name ) . '</a>';
 
 			}
 			?>
 		</h2>
 		<div class="metabox-holder">
 			<?php
-			do_action( 'mashsb_tools_tab_' . $active_tab );
+			do_action( 'mashsb_tools_tab_' . esc_attr($active_tab) );
 			?>
 		</div><!-- .metabox-holder -->
 	</div><!-- .wrap -->
@@ -148,12 +148,10 @@ function mashsb_tools_import_export_process_export() {
 	if( ! current_user_can( 'manage_options' ) )
 		return;
 
-	$settings = array();
-	$settings = get_option( 'mashsb_settings' );
+	$settings = get_option( 'mashsb_settings', array() );
 
 	ignore_user_abort( true );
 
-	//if ( ! mashsb_is_func_disabled( 'set_time_limit' ) && ! ini_get( 'safe_mode' ) )
 	if ( ! mashsb_is_func_disabled( 'set_time_limit' ) )
 		set_time_limit( 0 );
 
@@ -271,7 +269,7 @@ add_action( 'mashsb_tools_tab_system_info', 'mashsb_tools_sysinfo_display' );
  * @return      string $return A string containing the info to output
  */
 function mashsb_tools_sysinfo_get() {
-	global $wpdb, $mashsb_options;
+	global $wpdb;
 
 	if( !class_exists( 'Browser' ) )
 		require_once MASHSB_PLUGIN_DIR . 'includes/libraries/browser.php';
@@ -407,7 +405,7 @@ function mashsb_tools_sysinfo_get() {
 	$return .= "\n" . '-- Webserver Configuration' . "\n\n";
 	$return .= 'PHP Version:              ' . PHP_VERSION . "\n";
 	$return .= 'MySQL Version:            ' . $wpdb->db_version() . "\n";
-	$return .= 'Webserver Info:           ' . $_SERVER['SERVER_SOFTWARE'] . "\n";
+	$return .= 'Webserver Info:           ' . esc_html($_SERVER['SERVER_SOFTWARE']) . "\n";
 
 	$return  = apply_filters( 'mashsb_sysinfo_after_webserver_config', $return );
 
@@ -446,9 +444,10 @@ function mashsb_tools_sysinfo_get() {
  */
 function mashsb_tools_sysinfo_download() {
     
-        if( ! current_user_can( 'update_plugins' ) )
-		return;
-    
+    if( ! current_user_can( 'update_plugins' ) ){
+        return ;
+    }
+
 	nocache_headers();
 
 	header( 'Content-Type: text/plain' );

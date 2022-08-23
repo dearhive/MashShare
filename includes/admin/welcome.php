@@ -122,7 +122,6 @@ class MASHSB_Welcome {
      * @return void
      */
     public function getting_started_screen() {
-        global $mashsb_redirect;
         ?>
         <div class="wrap mashsb-about-wrap">
             <?php
@@ -138,7 +137,7 @@ class MASHSB_Welcome {
                 <h1><?php _e( 'Create Your First Social Sharing Button', 'mashsb' ); ?></h1>
                 <div class="mash-feature-section">
                     <div class="mash-feature-section-media">
-                        <img style="display:none;" src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/social-networks-settings.png'; ?>" class="mashsb-welcome-screenshots"/>
+                        <img style="display:none;" src="<?php echo esc_url(MASHSB_PLUGIN_URL) . 'assets/images/screenshots/social-networks-settings.png'; ?>" class="mashsb-welcome-screenshots"/>
                     </div>
                     <div class="mash-feature-section-content">
                         <h4>Step 1: Go to <a href="<?php echo admin_url( 'admin.php?page=mashsb-settings#mashsb_settingsservices_header' ) ?>" target="blank"><?php _e( 'Settings &rarr; Networks', 'mashsb' ); ?></a></h4>
@@ -159,7 +158,7 @@ class MASHSB_Welcome {
                         <h4>Go to <a href="<?php echo admin_url( 'widgets.php' ) ?>" target="blank"><?php _e( 'Appearance &rarr; Widgets', 'mashsb' ); ?></a></h4>
 
                         <p><?php _e( 'Drag and drop the widget labeled "<i>MashShare - Most Shared Posts</i>" into the desired widget location and save it.', 'mashsb' ); ?></p>
-                        <img style="display:none;" src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/most-shared-posts.png'; ?>"/>
+                        <img style="display:none;" src="<?php echo esc_url(MASHSB_PLUGIN_URL) . 'assets/images/screenshots/most-shared-posts.png'; ?>"/>
 
                     </div>
                 </div>
@@ -169,7 +168,7 @@ class MASHSB_Welcome {
                 <h1><?php _e( 'Content Shortcodes', 'mashsb' ); ?></h1>
                 <div class="mash-feature-section">
                     <div class="mash-feature-section-media">
-                        <img style="display:none;" src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/shortcodes.png'; ?>"/>
+                        <img style="display:none;" src="<?php echo esc_url(MASHSB_PLUGIN_URL) . 'assets/images/screenshots/shortcodes.png'; ?>"/>
                     </div>
                     <div class="mash-feature-section-content">
                         <p>
@@ -177,7 +176,17 @@ class MASHSB_Welcome {
                         </p>
                         <?php _e( 'Paste the shortcode in content of your posts or pages with the post editor at the place you want the share buttons appear', 'mashsb' ); ?>
                         <p>
-                            <?php echo sprintf(__( 'There are several parameters you can use for the shortcode. Get a  <a href="%s" target="blank">list of all available shortcode parameters</a>', 'mashsb'), 'http://docs.mashshare.net/article/67-shortcodes'); ?><br>
+                            <?php
+                            $allowedHtml = array(
+	                            'a' => array(
+		                            'class' => array(),
+		                            'href'  => array(),
+		                            'rel'   => array(),
+		                            'title' => array(),
+		                            'target' => array(),
+	                            )
+                            );
+                            echo wp_kses(sprintf(__( 'There are several parameters you can use for the shortcode. Get a  <a href="%s" target="blank">list of all available shortcode parameters</a>', 'mashsb'), 'http://docs.mashshare.net/article/67-shortcodes'), $allowedHtml); ?><br>
                         </p>
                     </div>
                 </div>
@@ -200,7 +209,7 @@ class MASHSB_Welcome {
                 <div class="mash-feature-section two-col">
                     <div>
                         <h4><?php _e( 'Great Support', 'mashsb' ); ?></h4>
-                        <p><?php _e( 'We do our best to provide the best support we can. If you encounter a problem or have a question, simply <a href="https://www.mashshare.net/contact-developer/" target="blank">open a ticket</a>.', 'mashsb' ); ?></p>
+                        <p><?php _e( 'If you encounter a problem or have any question, please <a href="https://www.mashshare.net/contact-developer/" target="blank">open a ticket</a>.', 'mashsb' ); ?></p>
                         <ul id="mash-social-admin-head">
                             <?php echo mashsb_share_buttons(); ?>
                         </ul>
@@ -223,10 +232,9 @@ class MASHSB_Welcome {
         list( $display_version ) = explode( '-', MASHSB_VERSION );
         ?>
         <div id="mashsb-header">
-            <!--<img class="mashsb-badge" src="<?php //echo  . 'assets/images/mashsb-logo.svg';  ?>" alt="<?php //_e( 'MashShare', 'mashsb' );  ?>" / >//-->
-            <h1><?php printf( __( 'Welcome to MashShare %s', 'mashsb' ), $display_version ); ?></h1>
+            <h1><?php echo esc_html(sprintf( __( 'Welcome to MashShare %s', 'mashsb' ), $display_version )); ?></h1>
             <h1 class="about-text">
-                <?php _e( 'Congrats for Choosing MashShare<br>MashShare has been Activated And is Ready to Increase Your Social Media Traffic!', 'mashsb' ); ?>
+                <?php _e( 'Congrats for Choosing MashShare<br>MashShare is Active and Ready to Boost Your Social Media Traffic!', 'mashsb' ); ?>
             </h1>
         </div>
         <?php
@@ -250,29 +258,24 @@ class MASHSB_Welcome {
             <div class="changelog">
                 <div class="mash-feature-section">
                     <div class="mash-feature-section-content">
-                        <!--
-                        <h1><?php //_e( 'Use Facebook Connect to Skyrocket Share Count', 'mashsb' ); ?></h1>
-                        <p><?php //_e( 'MashShare is the first Social Media plugin that uses the brandnew Facebook Connect Integration to bypass the regular facebook API limit which has been introduced recently. <p>It allows you up to 200 API calls per hour to the facebook server. This is more than enough for even huge traffic sites as MashShare is caching all share counts internally. <p>We are convinced that other social media plugins are going to copy our solution soon... and we will be proud of it;) <p> Your site becomes immediately better than the rest because you are the one whose website is running with full social sharing power. Other sites share count still stucks and are delayed and they do not know it;)', 'mashsb' ); ?></p>
-                        <img src="<?php //echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/oauth.png'; ?>"/>
-                        //-->
                         <p></p>
                         <h1><?php _e( 'A New Beautiful Sharing Widget', 'mashsb' ); ?></h1>
                         <p><?php _e( 'We have heard your wishes so the new widget contains the long requested post thumbnail and a beautiful css which gives your side bar sharing super power.', 'mashsb' ); ?></p>
-                        <img src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/widget.png'; ?>"/>
+                        <img src="<?php echo esc_url(MASHSB_PLUGIN_URL) . 'assets/images/screenshots/widget.png'; ?>"/>
                         <p></p>
                         <h1><?php _e( 'Better Customization Options', 'mashsb' ); ?></h1>
                         <p><?php _e( 'Select from 3 ready to use sizes to make sure that MashShare is looking great on your site. No matter if you prefer small, medium or large buttons.', 'mashsb' ); ?></p>
-                        <img src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/different_sizes.gif'; ?>"/>
+                        <img src="<?php echo esc_url(MASHSB_PLUGIN_URL) . 'assets/images/screenshots/different_sizes.gif'; ?>"/>
                         <p></p>
                         <h1><?php _e( 'Asyncronous Share Count Aggregation', 'mashsb' ); ?></h1>
                         <p><?php _e( 'With MashShare you get our biggest performance update. Use the new <i>Async Cache Refresh</i> method and your share counts will be aggregated only after page loading and never while page loads. This is a huge performance update.', 'mashsb' ); ?></p>
-                        <img src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/async_cache_refresh.png'; ?>"/>
+                        <img src="<?php echo esc_url(MASHSB_PLUGIN_URL) . 'assets/images/screenshots/async_cache_refresh.png'; ?>"/>
                         <p></p>
                         <h1><?php _e( 'Open Graph and Twitter Card Integration', 'mashsb' ); ?></h1>
                         <p><?php _e( 'Use open graph and twitter card to specify the content you like to share. If you are using Yoast, MashShare will use the Yoast open graph data instead and extend it with custom data to get the maximum out of your valuable content.', 'mashsb' ); ?></p>
                         <p></p>
                         
-                        <img src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/social_sharing_settings.png'; ?>"/>
+                        <img src="<?php echo esc_url(MASHSB_PLUGIN_URL) . 'assets/images/screenshots/social_sharing_settings.png'; ?>"/>
                         <p></p>
                         <h1><?php _e( 'Great Responsive Buttons', 'mashsb' ); ?></h1>
                         <p><?php _e( 'MashShare arrives you with excellent responsive support. So the buttons look great on mobile and desktop devices. If you want more customization options for mobile devices you can purchase the responsive Add-On', 'mashsb' ); ?></p>
@@ -280,7 +283,7 @@ class MASHSB_Welcome {
                         <h1><?php _e( 'Share Count Dashboard', 'mashsb' ); ?></h1>
                         <p><?php _e( 'See the shares of your posts at a glance on the admin posts listing:', 'mashsb' ); ?></p>
                         <p></p>
-                        <img alt="Share count dashboard" title="Share count dashboard" src="<?php echo MASHSB_PLUGIN_URL . 'assets/images/screenshots/dashboard.png'; ?>"/>
+                        <img alt="Share count dashboard" title="Share count dashboard" src="<?php echo esc_url(MASHSB_PLUGIN_URL) . 'assets/images/screenshots/dashboard.png'; ?>"/>
                         <p></p>
                         <h1><?php _e( 'A much cleaner user interface', 'mashsb' ); ?></h1>
                         <p><?php _e( 'We spent a lot of time to make useful first time settings and improved the user interface for an easier experience.', 'mashsb' ); ?></p>
@@ -288,14 +291,24 @@ class MASHSB_Welcome {
                     </div>
                 </div>
             </div>
-
-
             <div class="changelog">
                 <h1><?php _e( 'Additional Updates', 'mashsb' ); ?></h1>
                 <div class="mash-feature-section three-col">
                     <div class="col">
                         <h4><?php _e( 'Developer Friendly', 'mashsb' ); ?></h4>
-                        <p><?php echo sprintf(__( 'Are you a theme developer and want to use MashShare as your build in share count aggregator? Read the <a href="%s" target="blank">developer instructions.</a>', 'mashsb' ), 'https://docs.mashshare.net/category/38-sample-functions'); ?></p>
+                        <p><?php
+
+	                        $allowedHtml = array(
+		                        'a' => array(
+			                        'class' => array(),
+			                        'href'  => array(),
+			                        'rel'   => array(),
+			                        'title' => array(),
+			                        'target' => array(),
+		                        )
+	                        );
+
+                            echo wp_kses(sprintf(__( 'Are you a theme developer and want to use MashShare as your build in share count aggregator? Read the <a href="%s" target="blank">developer instructions.</a>', 'mashsb' ), 'https://docs.mashshare.net/category/38-sample-functions'), $allowedHtml); ?></p>
                     </div>
                     <div class="col">
                         <h4><?php _e( 'Check Open Graph Settings', 'mashsb' ); ?></h4>
@@ -360,7 +373,7 @@ class MASHSB_Welcome {
             $this->welcome_message();
             $this->tabs();
             ?>
-            <h1 class="about-description"><?php _e( 'Mashshare is created by developers all over the world who aim to provide the #1 ecosystem for growing social media traffic through WordPress.', 'mashsb' ); ?></h1>
+            <h1 class="about-description"><?php _e( 'MashShare is created by developers all over the world who aim to provide the #1 ecosystem for growing social media traffic through WordPress.', 'mashsb' ); ?></h1>
 
             <?php echo $this->contributors(); ?>
             <p class="small"><?php echo sprintf(__(' If you want to be credited here participate on the development and  make your pull request on <a href="%s" target="_blank">github</a>',' mashsb'), 'https://github.com/mashshare/Mashshare')?></p>
@@ -386,13 +399,26 @@ class MASHSB_Welcome {
 
         $contributor_list = '<ul class="wp-people-group">';
 
+	    $allowedHtml = array(
+		    'a' => array(
+			    'class' => array(),
+			    'href'  => array(),
+			    'rel'   => array(),
+			    'title' => array(),
+			    'target' => array(),
+			    'style' => array(),
+			    'width' => array(),
+			    'height' => array(),
+			    'alt' => array(),
+		    )
+	    );
+
         foreach ( $contributors as $contributor ) {
             $contributor_list .= '<li class="wp-person">';
-            $contributor_list .= sprintf( '<a href="%s" style="margin-right:8px;" title="%s">', esc_url( 'https://github.com/' . $contributor->login ), esc_html( sprintf( __( 'View %s', 'mashsb' ), $contributor->login ) )
-            );
-            $contributor_list .= sprintf( '<img src="%s" width="64" height="64" class="gravatar" alt="%s" />', esc_url( $contributor->avatar_url ), esc_html( $contributor->login ) );
+            $contributor_list .= wp_kses(sprintf( '<a href="%s" style="margin-right:8px;" title="%s">', esc_url( 'https://github.com/' . $contributor->login ), esc_html( sprintf( __( 'View %s', 'mashsb' ), $contributor->login ) ) ), $allowedHtml);
+            $contributor_list .= wp_kses(sprintf( '<img src="%s" width="64" height="64" class="gravatar" alt="%s" />', esc_url( $contributor->avatar_url ), esc_html( $contributor->login ) ), $allowedHtml );
             $contributor_list .= '</a>';
-            $contributor_list .= sprintf( '<a class="web" href="%s">%s</a>', esc_url( 'https://github.com/' . $contributor->login ), esc_html( $contributor->login ) );
+            $contributor_list .= wp_kses(sprintf( '<a class="web" href="%s">%s</a>', esc_url( 'https://github.com/' . $contributor->login ), esc_html( $contributor->login ) ), $allowedHtml);
             $contributor_list .= '</a>';
             $contributor_list .= '</li>';
         }

@@ -32,7 +32,7 @@ function getTabHeader( $page, $section ) {
         $sanitizedID = str_replace( '[', '', $field['id'] );
         $sanitizedID = str_replace( ']', '', $sanitizedID );
         if( strpos( $field['callback'], 'header' ) !== false ) {
-            echo '<li class="mashsb-tabs" id="' . $sanitizedID . '-nav"><a href="#' . $sanitizedID . '">' . $field['title'] . '</a></li>';
+            echo '<li class="mashsb-tabs" id="' . esc_attr($sanitizedID) . '-nav"><a href="#' . esc_attr($sanitizedID) . '">' . esc_html($field['title']) . '</a></li>';
         }
     }
     echo '</ul>';
@@ -83,22 +83,21 @@ function mashsb_do_settings_fields( $page, $section ) {
 
         // Check if header has been created previously
         if( strpos( $field['callback'], 'header' ) !== false && $firstHeader === false ) {
-            echo '<div id="' . $sanitizedID . '">';
+            echo '<div id="' . esc_attr($sanitizedID) . '">';
             echo '<table class="form-table"><tbody>';
             $firstHeader = true;
         } elseif( strpos( $field['callback'], 'header' ) !== false && $firstHeader === true ) {
             // Header has been created previously so we have to close the first opened div
-            echo '</table></div><div id="' . $sanitizedID . '">';
+            echo '</table></div><div id="' . esc_attr($sanitizedID) . '">';
             echo '<table class="form-table"><tbody>';
         }
-        //if( (!empty( $field['args']['label_for'] ) || empty( $field['args']['desc'] )) )  {
         if( strpos( $field['callback'], 'header' ) !== false ){
             // Do not return header_callback Its only needed for creating the navigation entries
         }
         // The headline
         else if( strpos( $field['callback'], 'headline' ) !== false )  {
             echo '<tr class="row"><th class="row th">';
-            echo '<div class="col-title"><h2>' . $field['title'] . '</h2></div>';
+            echo '<div class="col-title"><h2>' . esc_html($field['title']) . '</h2></div>';
             echo '</th>';
             echo '<td>';
             call_user_func( $field['callback'], $field['args'] );
@@ -107,11 +106,11 @@ function mashsb_do_settings_fields( $page, $section ) {
         // The Settings
         } else {
             echo '<tr class="row"><th class="row th">';
-            echo '<div class="col-title">' . $field['title'];
+            echo '<div class="col-title">' . esc_html($field['title']);
             // Do not show the helper text when its empty
             if (!empty($field['args']['desc']) ){
                 echo '<a class="mashsb-helper" href="#"></a>';
-                echo '<div class="mashsb-message">' . $field['args']['desc'] . '</div>';
+                echo '<div class="mashsb-message">' . esc_html($field['args']['desc']) . '</div>';
             }
             echo '</div>';
             echo '</th>';
@@ -144,7 +143,7 @@ function mashsb_options_page() {
     ob_start();
     ?>
     <div class="mashsb_admin">
-        <span class="mashsharelogo"> <?php echo __( 'MashShare ', 'mashsb' ); ?></span><span class="mashsb-version"><?php echo MASHSB_VERSION; ?></span>
+        <span class="mashsharelogo"> <?php echo esc_html(__( 'MashShare ', 'mashsb' )); ?></span><span class="mashsb-version"><?php echo esc_html(MASHSB_VERSION); ?></span>
         <div class="about-text" style="clear:both;">
             <ul id="mash-social-admin-head">
                 <?php echo mashsb_share_buttons(); ?>
@@ -163,19 +162,19 @@ function mashsb_options_page() {
 
                 $active = $active_tab == $tab_id ? ' nav-tab-active' : '';
 
-                echo '<a href="' . esc_url( $tab_url ) . '" title="' . esc_attr( $tab_name ) . '" class="nav-tab' . $active . '">';
+                echo '<a href="' . esc_url( $tab_url ) . '" title="' . esc_attr( $tab_name ) . '" class="nav-tab' . esc_attr($active) . '">';
                 echo esc_html( $tab_name );
                 echo '</a>';
             }
             ?>
         </h2>
         <div id="mashsb_container" class="mashsb_container">
-                    <?php getTabHeader( 'mashsb_settings_' . $active_tab, 'mashsb_settings_' . $active_tab ); ?>   
+                    <?php getTabHeader( 'mashsb_settings_' . esc_attr($active_tab), 'mashsb_settings_' . esc_attr($active_tab) ); ?>
             <div class="mashsb-panel-container"> <!-- new //-->
                 <form method="post" action="options.php">
                     <?php
                     settings_fields( 'mashsb_settings' );
-                    mashsb_do_settings_fields( 'mashsb_settings_' . $active_tab, 'mashsb_settings_' . $active_tab );
+                    mashsb_do_settings_fields( 'mashsb_settings_' . esc_attr($active_tab), 'mashsb_settings_' . esc_attr($active_tab) );
                     ?>
                     <!--</table>-->
 
@@ -195,8 +194,7 @@ function mashsb_options_page() {
                 }
             ?>
         </div> <!-- #sidebar-->
-                        <?php echo mashsb_get_debug_settings(); ?>
-
+        <?php echo mashsb_get_debug_settings(); ?>
     </div><!-- .mashsb_admin -->
     <?php
     echo ob_get_clean();
