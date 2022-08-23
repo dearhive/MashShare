@@ -1,4 +1,4 @@
-#Contribute To Mashshare
+#Contribute To MashShare
 
 Community made patches, localisations, bug reports and contributions are always welcome.
 
@@ -24,11 +24,11 @@ __Please Note:__ GitHub is for bug reports and contributions only - if you have 
 
 ## Code Documentation
 
-* We ensure that every Mashshare function is documented well and follows the standards set by phpDoc
+* We ensure that every MashShare function is documented well and follows the standards set by phpDoc
 * An example function can be found [here](https://gist.github.com/rene-hermenau/8d3d7ee0633ee2f64b4b)
 * Please make sure that every function is documented so that when we update our API Documentation it will complete
 * If you're adding/editing a function in a class, make sure to add `@access {private|public|protected}`
-* Finally, please use tabs and not spaces. The tab indent size should be 4 for all Mashshare code.
+* Finally, please use tabs and not spaces. The tab indent size should be 4 for all MashShare code.
 
 At this point you're waiting on us to merge your pull request. We'll review all pull requests, and make suggestions and changes if necessary.
 

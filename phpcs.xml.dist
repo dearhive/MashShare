@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<ruleset name="MashShare Coding Standards">
+
+<config name="installed_paths" value="vendor/phpcompatibility/php-compatibility" />
+
+    <exclude-pattern>/vendor/*</exclude-pattern>
+
+    <arg name="extensions" value="php"/>
+
+    <arg name="basepath" value="/"/>
+    <arg name="colors"/>
+    <arg name="parallel" value="8"/>
+    <arg value="sp"/>
+
+    <rule ref="Generic.ControlStructures.DisallowYodaConditions.Found">
+        <severity>3</severity>
+        <type>warning</type>
+    </rule>
+
+    <config name="testVersion" value="5.6-"/>
+    <rule ref="PHPCompatibility">
+        <include-pattern>*\.php$</include-pattern>
+    </rule>
+
+    <rule ref="./vendor/wp-coding-standards/wpcs/WordPress/Sniffs/Security/EscapeOutputSniff.php">
+        <include-pattern>*\.php$</include-pattern>
+    </rule>
+
+    <rule ref="./vendor/wp-coding-standards/wpcs/WordPress/Sniffs/Security/ValidatedSanitizedInputSniff.php">
+        <include-pattern>*\.php$</include-pattern>
+    </rule>
+
+    <rule ref="./vendor/wp-coding-standards/wpcs/WordPress/Sniffs/Security/NonceVerificationSniff.php">
+        <include-pattern>*\.php$</include-pattern>
+    </rule>
+
+    <rule ref="./vendor/wp-coding-standards/wpcs/WordPress/Sniffs/Security/SafeRedirectSniff.php">
+        <include-pattern>*\.php$</include-pattern>
+    </rule>
+
+</ruleset>
