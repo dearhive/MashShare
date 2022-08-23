@@ -249,6 +249,9 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
+= 3.8.5 =
+* Fix: Improve sanitization on input values and escape output values.
+
 = 3.8.4 =
 * Fix: Improve sanitization on input values and escape output values. Fixes a low severity Authenticated Stored Cross-Site Scripting (XSS) vulnerability
 
