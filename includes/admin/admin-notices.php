@@ -48,76 +48,67 @@ function mashsb_admin_messages() {
     }
     
     mashsb_show_update_notice_gdpr();
-    
-    //mashsb_show_new_fb_api();
-    
+
     // Cache warning
     if( mashsb_is_deactivated_cache() ) {
         echo '<div class="error">';
-        echo '<p>' . sprintf(__('Attention: The Mashshare Cache is deactivated. <a href="%s">Activate it</a> or share count requests to social networks will be rate limited.', 'mashsb'), admin_url() . 'admin.php?page=mashsb-settings#mashsb_settingsdebug_header') . '</p>';
+        echo '<p>' . wp_kses_post(sprintf(__('Attention: The Mashshare Cache is deactivated. <a href="%s">Activate it</a> or share count requests to social networks will be rate limited.', 'mashsb'), admin_url() . 'admin.php?page=mashsb-settings#mashsb_settingsdebug_header') ). '</p>';
         echo '</div>';
     }
     // Cache warning
     if( mashsb_is_deleted_cache() ) {
         echo '<div class="error">';
-        echo '<p>' . sprintf(__('Attention: The Mashshare Cache is permanetely purged. <a href="%s">Fix this</a> or share count requests to social networks will be rate limited.', 'mashsb'), admin_url() . 'admin.php?page=mashsb-settings#mashsb_settingsdebug_header') . '</p>';
+        echo '<p>' . wp_kses_post(sprintf(__('Attention: The Mashshare Cache is permanetely purged. <a href="%s">Fix this</a> or share count requests to social networks will be rate limited.', 'mashsb'), admin_url() . 'admin.php?page=mashsb-settings#mashsb_settingsdebug_header')) . '</p>';
         echo '</div>';
     }
-    
-    //mashsb_update_notice_101();
-    
+
     if( mashsb_is_admin_page() && !mashsb_curl_installed() ) {
         echo '<div class="error">';
-        echo '<p>' . sprintf(__('MashShare needs the PHP extension cURL and curl_multi_init() which is not installed on your server. Please <a href="%s" target="_blank" rel="noopener">install and activate</a> it to be able to collect share count of your posts.', 'mashsb'), 'https://www.google.com/search?btnG=1&pws=0&q=enable+curl+on+php') . '</p>';
+        echo '<p>' . wp_kses_post(sprintf(__('MashShare needs the PHP extension cURL and curl_multi_init() which is not installed on your server. Please <a href="%s" target="_blank" rel="noopener">install and activate</a> it to be able to collect share count of your posts.', 'mashsb'), 'https://www.google.com/search?btnG=1&pws=0&q=enable+curl+on+php')) . '</p>';
         echo '</div>';
     }
 
     // notice no Networks enabled    
     if( mashsb_is_admin_page() && !mashsb_check_active_networks() ) {
         echo '<div class="error">';
-        echo '<p>' . sprintf( __( 'No Social Networks enabled. Go to <a href="%s"> Mashshare->Settings->Social Networks</a> and enable at least one Social Network.', 'mashsb' ), admin_url( 'admin.php?page=mashsb-settings&tab=networks#mashsb_settingsservices_header' ) ) . '</p>';
+        echo '<p>' . wp_kses_post(sprintf( __( 'No Social Networks enabled. Go to <a href="%s"> Mashshare->Settings->Social Networks</a> and enable at least one Social Network.', 'mashsb' ), admin_url( 'admin.php?page=mashsb-settings&tab=networks#mashsb_settingsservices_header' ) )) . '</p>';
         echo '</div>';
     }
     // Share bar add-on notice    
     if( mashsb_is_admin_page() && mashsb_incorrect_sharebar_version() ) { 
         echo '<div class="error">';
-        echo '<p>' . sprintf( __( 'Your Sharebar Add-On version is not using new short url mechanism of MashShare 3.X. Please <a href="%s" target="blank"> update the Sharebar Add-On</a> to at least version 1.2.5. if you want to make sure that twitter short urls will not stop working in one of the next updates. This requires a valid license of the Sharebar Add-On', 'mashsb' ), 'https://www.mashshare.net/downloads/sticky-sharebar/?utm_source=insideplugin&utm_medium=userwebsite&utm_content=update_sharebar&utm_campaign=freeplugin' ) . '</p>';
+        echo '<p>' . wp_kses_post(sprintf( __( 'Your Sharebar Add-On version is not using new short url mechanism of MashShare 3.X. Please <a href="%s" target="blank"> update the Sharebar Add-On</a> to at least version 1.2.5. if you want to make sure that twitter short urls will not stop working in one of the next updates. This requires a valid license of the Sharebar Add-On', 'mashsb' ), 'https://www.mashshare.net/downloads/sticky-sharebar/?utm_source=insideplugin&utm_medium=userwebsite&utm_content=update_sharebar&utm_campaign=freeplugin' )) . '</p>';
         echo '</div>';
     }
     // Floating Sidebar add-on notice    
     if( mashsb_is_admin_page() && mashsb_incorrect_sidebar_version() ) {
         echo '<div class="error">';
-        echo '<p>' . sprintf( __( 'Your Floating Sidebar Add-On version is not using new short url mechanism of MashShare 3.X. Please <a href="%s" target="blank"> update the Floating Sidebar Add-On</a> to at least version 1.2.6. if you want to make sure that twitter short urls will not stop working in one of the next updates. This requires a valid license of the Floating Sidebar Add-On', 'mashsb' ), 'https://www.mashshare.net/downloads/floating-sidebar/?utm_source=insideplugin&utm_medium=userwebsite&utm_content=update_sharebar&utm_campaign=freeplugin' ) . '</p>';
+        echo '<p>' . wp_kses_post(sprintf( __( 'Your Floating Sidebar Add-On version is not using new short url mechanism of MashShare 3.X. Please <a href="%s" target="blank"> update the Floating Sidebar Add-On</a> to at least version 1.2.6. if you want to make sure that twitter short urls will not stop working in one of the next updates. This requires a valid license of the Floating Sidebar Add-On', 'mashsb' ), 'https://www.mashshare.net/downloads/floating-sidebar/?utm_source=insideplugin&utm_medium=userwebsite&utm_content=update_sharebar&utm_campaign=freeplugin' ) ). '</p>';
         echo '</div>';
     }
-    // Check google API key  
-//    if( mashsb_is_admin_page() && ( mashsb_check_google_apikey() && isset( $mashsb_options['mashsu_methods'] ) && $mashsb_options['mashsu_methods'] === 'google' ) ) {
-//        echo '<div class="error">';
-//        echo '<p>' . sprintf( __( 'Google API key is invalid. Go to <a href="%s"><i>Mashshare->Settings->Short URL Integration</i></a> and check the Google API key.', 'mashsb' ), admin_url( 'admin.php?page=mashsb-settings#mashsb_settingsshorturl_header' ) ) . '</p>';
-//        echo '</div>';
-//    }
+
     // Check Bitly API key  
     if( mashsb_is_admin_page() && (false === mashsb_check_bitly_apikey() && isset( $mashsb_options['mashsu_methods'] ) && $mashsb_options['mashsu_methods'] === 'bitly' ) ) {
         echo '<div class="error">';
-        echo '<p>' . sprintf( __( 'Bitly Access Token is invalid or bitly.com endpoint can not be reached. Go to <a href="%s"><i>Mashshare->Settings->Short URL Integration</i></a> and check the Bitly API key.', 'mashsb' ), admin_url( 'admin.php?page=mashsb-settings#mashsb_settingsshorturl_header' ) ) . '</p>';
+        echo '<p>' . wp_kses_post(sprintf( __( 'Bitly Access Token is invalid or bitly.com endpoint can not be reached. Go to <a href="%s"><i>Mashshare->Settings->Short URL Integration</i></a> and check the Bitly API key.', 'mashsb' ), admin_url( 'admin.php?page=mashsb-settings#mashsb_settingsshorturl_header' ) )) . '</p>';
         echo '</div>';
     }
     // Notice MashShare Open Graph Add-On installed and activated
     if( class_exists( 'MashshareOpenGraph' ) ) {
         echo '<div class="error">';
-        echo '<p>' . sprintf( __( '<strong>Important:</strong> Deactivate the MashShare Open Graph Add-On. It is not longer needed and having it activated leads to duplicate open graph tags on your site. Go to <a href="%s"> Plugin Settings</a> ', 'mashsb' ), admin_url( 'plugins.php' ) ) . '</p>';
+        echo '<p>' . wp_kses_post(sprintf( __( '<strong>Important:</strong> Deactivate the MashShare Open Graph Add-On. It is not longer needed and having it activated leads to duplicate open graph tags on your site. Go to <a href="%s"> Plugin Settings</a> ', 'mashsb' ), admin_url( 'plugins.php' ) )) . '</p>';
         echo '</div>';
     }
     // Notice MashShare ShortURL Add-On installed and activated
     if( class_exists( 'MashshareShorturls' ) ) {
         echo '<div class="error">';
-        echo '<p>' . sprintf( __( '<strong>Important:</strong> Deactivate the MashShare Shorturls Add-On. It is not longer needed and already built in MashShare. Deactivate it from <a href="%s"> Plugin Settings</a> ', 'mashsb' ), admin_url( 'plugins.php' ) ) . '</p>';
+        echo '<p>' . wp_kses_post(sprintf( __( '<strong>Important:</strong> Deactivate the MashShare Shorturls Add-On. It is not longer needed and already built in MashShare. Deactivate it from <a href="%s"> Plugin Settings</a> ', 'mashsb' ), admin_url( 'plugins.php' ) )) . '</p>';
         echo '</div>';
     }
     // Share count is deactivated when permalinks are not used
     if( mashsb_is_admin_page() && !mashsb_is_enabled_permalinks() ) {
         echo '<div class="error">';
-        echo '<p>' . sprintf( __( '<strong>No Share Count aggregation possible!</strong> <a href="%s">Permalinks</a> must be enabled to count shares. Share count is deactivated until you have changed this.', 'mashsb' ), admin_url( 'options-permalink.php' ) ) . '</p>';
+        echo '<p>' . wp_kses_post(sprintf( __( '<strong>No Share Count aggregation possible!</strong> <a href="%s">Permalinks</a> must be enabled to count shares. Share count is deactivated until you have changed this.', 'mashsb' ), admin_url( 'options-permalink.php' ) )) . '</p>';
         echo '</div>';
     }
     
@@ -126,7 +117,7 @@ function mashsb_admin_messages() {
         switch ( $_GET['mashsb-message'] ) {
             case 'settings-imported' :
                 echo '<div class="updated">';
-                echo '<p>' . __( 'The settings have been imported', 'mashsb' ) . '</p>';
+                echo '<p>' . esc_html(__( 'The settings have been imported', 'mashsb' )) . '</p>';
                 echo '</div>';
                 break;
         }
@@ -175,8 +166,6 @@ function mashsb_admin_messages() {
     </script>
     ';
     }
-    // Disabled since 2.4.7
-    //mashsb_update_notices();
 }
 add_action( 'admin_notices', 'mashsb_admin_messages' );
 
@@ -217,76 +206,20 @@ function mashsb_incorrect_sidebar_version() {
  */
 
 function mashsb_hide_update_notice() {
-    if( !empty( $_POST['action'] ) && $_POST['action'] === 'mashsb_hide_notice' && !empty( $_POST['id'] ) ) {
-        //echo $_POST['action'] . '_' . $_POST['id'];
+
+	$postId = intval($_POST['id'] );
+
+	if (!$postId || empty($_POST['action'])) {
+		return;
+	}
+
+    if( $_POST['action'] === 'mashsb_hide_notice' ) {
         update_option( 'mashsb_update_notice_' . $_POST['id'], 'no' );
-        $result = array('success');
-        echo json_encode( $result );
+        echo json_encode( array('success') );
         exit;
     }
 }
-
 add_action( 'wp_ajax_mashsb_hide_notice', 'mashsb_hide_update_notice' );
-
-/**
- * Return update notice 101
- * @since 3.2.0
- */
-function mashsb_update_notice_101() {
-    
-        if( !mashsb_is_admin_page() ) {
-            return false;
-        }
-    
-    $notice_id = '101'; //unique id of our notice
-    $message = sprintf(__( 'Admin notices are pain but read this one or you will miss how to fix your facebook share counts in MashShare: <p><strong style="font-weight:bold;">Go to <a href="%1s">Settings->Networks</a> and request your access token via facebook login - That\'s all. '
-            . '<a href="#" id="mashsb_notice_101_resp"> Whats also new? </a> </strong>'
-                . '<div style="display:none;" id="mashsb_notice_101_more">'
-                . '<ul style="font-weight:600;">'
-                . '<li>- Full Width Responsive Buttons (Enable them from <a href="%2s">Visual Setting</a>)<li>'
-                . '<li>- Most Shared Posts Widget incl. Thumbnails</li>'
-                . '<li>- Cumulate Http(s) Shares - Move your site to ssl without loosing shares</li>'
-                . '</div>'
-            , 'mashsb' ), 
-            admin_url() . 'admin.php?page=mashsb-settings#mashsb_settingsservices_header',
-            admin_url() . 'admin.php?page=mashsb-settings#mashsb_settingsstyle_header'
-            );
-      
-        if( get_option( 'mashsb_update_notice_' . $notice_id ) === 'yes' ) {
-  
-        // admin notice after updating Mashshare
-        echo '<div class="mashsb_update_notice_'. $notice_id .' update-nag">' . $message . 
-        '<p><a href="javascript:void(0);" class="mashsb_hide_'. $notice_id .'" title="I got it" style="text-decoration:none;">- Ok, Do Not Show Again</a></a>'
-        . '</div>'
-        . '<script>
-    jQuery( document ).ready(function( $ ) {
-        jQuery(\'.mashsb_hide_'. $notice_id .'\').click(function(){
-            var data={
-            \'action\':\'mashsb_hide_notice\',
-            \'id\':\'101\',
-            }
-            jQuery.ajax({
-                url: "' . admin_url( 'admin-ajax.php' ) . '",
-                type: "post",
-                data: data,
-                dataType: "json",
-                async: !0,
-                success: function(e) {
-                    if (e=="success") {
-                       jQuery(\'.mashsb_update_notice_'. $notice_id .'\').hide();	   
-                    }
-                }
-            });
-        })
-        jQuery(\'#mashsb_notice_101_resp\').click(function(e){
-        e.preventDefault();
-            jQuery(\'#mashsb_notice_101_more\').show()
-        });
-        
-});
-    </script>';
-    }
-}
 
 /* Hide the rating div
  * 
@@ -304,7 +237,6 @@ function mashsb_HideRatingDiv() {
     echo json_encode( array("success") );
     exit;
 }
-
 add_action( 'wp_ajax_hideRating', 'mashsb_HideRatingDiv' );
 
 /**
@@ -326,13 +258,13 @@ function mashsb_admin_addons_notices() {
  */
 function mashsb_dismiss_notices() {
 
-    $notice = isset( $_GET['mashsb_notice'] ) ? $_GET['mashsb_notice'] : false;
+    $notice = isset( $_GET['mashsb_notice'] ) ? esc_attr($_GET['mashsb_notice']) : false;
     if( !$notice )
-        return; // No notice, so get out of here
+        return;
 
     update_user_meta( get_current_user_id(), '_mashsb_' . $notice . '_dismissed', 1 );
 
-    wp_redirect( esc_url( remove_query_arg( array('mashsb_action', 'mashsb_notice') ) ) );
+    wp_save_redirect( esc_url( remove_query_arg( array('mashsb_action', 'mashsb_notice') ) ) );
     exit;
 }
 
@@ -442,11 +374,11 @@ function mashsb_show_update_notice_gdpr() {
         }
   
         // admin notice after updating Mashshare
-        echo '<div class="mashsb-notice-gdpr mashsb_update_notice_gdpr update-nag" style="background-color: #00abed;color: white;padding: 20px;margin-top: 20px;border: 3px solid white;width:80%;">' . $message .
+        $html = '<div class="mashsb-notice-gdpr mashsb_update_notice_gdpr update-nag" style="background-color: #00abed;color: white;padding: 20px;margin-top: 20px;border: 3px solid white;width:80%;">' . $message .
         '<p><a href="'.admin_url().'admin.php?page=mashsb-settings&mashsb-action=hide_gdpr_notice" class="mashsb_hide_gdpr" title="I got it" style="text-decoration:none;color:white;text-decoration:none;">I understand! Close this message</a></a>'.
             '</div>';
-       
-    
+
+		echo wp_kses_post($html);
 }
 
 /**
