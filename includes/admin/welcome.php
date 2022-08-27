@@ -127,11 +127,11 @@ class MASHSB_Welcome {
                         <img style="display:none;" src="<?php echo esc_url(MASHSB_PLUGIN_URL) . 'assets/images/screenshots/social-networks-settings.png'; ?>" class="mashsb-welcome-screenshots"/>
                     </div>
                     <div class="mash-feature-section-content">
-                        <h4>Step 1: Go to <a href="<?php echo esc_url(admin_url( 'admin.php?page=mashsb-settings#mashsb_settingsservices_header' )); ?>" target="blank"><?php esc_html_e( 'Settings &rarr; Networks', 'mashsb' ); ?></a></h4>
+                        <h3>Step 1: Go to <a href="<?php echo esc_url(admin_url( 'admin.php?page=mashsb-settings#mashsb_settingsservices_header' )); ?>" target="blank"><?php esc_html_e( 'Settings &rarr; Networks', 'mashsb' ); ?></a></h3>
                         <p><?php esc_html_e( 'The Social Network menu is your general access point for activating the desired share buttons and for customizing the share button label', 'mashsb' ); ?></p>
-                        <h4>Step 2: Go to <a href="<?php echo esc_url(admin_url( 'admin.php?page=mashsb-settings#mashsb_settingslocation_header' )); ?>" target="blank"><?php esc_html_e( 'Settings &rarr; Position', 'mashsb' ); ?></a></h4>
+                        <h3>Step 2: Go to <a href="<?php echo esc_url(admin_url( 'admin.php?page=mashsb-settings#mashsb_settingslocation_header' )); ?>" target="blank"><?php esc_html_e( 'Settings &rarr; Position', 'mashsb' ); ?></a></h3>
                         <p><?php esc_html_e( 'Select the location and exact position of the share buttons within your content', 'mashsb' ); ?></p>
-                        <h4><?php esc_html_e('You are done! Easy, isn\'t it?', 'mashsb'); ?></h4>
+                        <p><?php esc_html_e('You are done! Easy, isn\'t it?', 'mashsb'); ?></p>
                         <p></p>
                             
                     </div>
@@ -142,7 +142,7 @@ class MASHSB_Welcome {
                 <h1><?php esc_html_e( 'Create Most Shared Posts Widget', 'mashsb' ); ?></h1>
                 <div class="mash-feature-section">
                     <div class="mash-feature-section-content">
-                        <h4>Go to <a href="<?php echo esc_url(admin_url( 'widgets.php' )); ?>" target="blank"><?php esc_html_e( 'Appearance &rarr; Widgets', 'mashsb' ); ?></a></h4>
+                        <h3>Go to <a href="<?php echo esc_url(admin_url( 'widgets.php' )); ?>" target="blank"><?php esc_html_e( 'Appearance &rarr; Widgets', 'mashsb' ); ?></a></h3>
                         <p><?php echo wp_kses_post(__( 'Drag and drop the widget labeled "<i>MashShare - Most Shared Posts</i>" into the desired widget location and save it.', 'mashsb' )); ?></p>
                         <img style="display:none;" src="<?php echo esc_url(MASHSB_PLUGIN_URL) . 'assets/images/screenshots/most-shared-posts.png'; ?>"/>
                     </div>
@@ -157,7 +157,7 @@ class MASHSB_Welcome {
                     </div>
                     <div class="mash-feature-section-content">
                         <p>
-                            <?php esc_html_e( 'Add Share buttons manually with using shortcode <i style="font-weight:bold;">[mashshare]</i>.', 'mashsb' ); ?>
+                            <?php echo wp_kses_post(__( 'Add Share buttons manually with using shortcode <i style="font-weight:bold;">[mashshare]</i>.', 'mashsb' )); ?>
                         </p>
                         <?php esc_html_e( 'Paste the shortcode in content of your posts or pages with the post editor at the place you want the share buttons appear', 'mashsb' ); ?>
                         <p>
@@ -183,7 +183,7 @@ class MASHSB_Welcome {
                     </div>
                     <div class="mash-feature-section-content">
                         <p>
-                            <?php esc_html_e( 'Add MashShare directly into your theme template files with using the PHP code<br> <pre><i style="font-weight:bold;">&lt;?php do_shortcode(\'[mashshare]\'); ?&gt;</i></pre>', 'mashsb' ); ?>
+                            <?php echo wp_kses_post(__( 'Add MashShare directly into your theme template files with using the PHP code<br> <pre><i style="font-weight:bold;">&lt;?php do_shortcode(\'[mashshare]\'); ?&gt;</i></pre>', 'mashsb' )); ?>
                         </p>
                     </div>
                 </div>
@@ -193,8 +193,8 @@ class MASHSB_Welcome {
                 <h1><?php esc_html_e( 'Need Help?', 'mashsb' ); ?></h1>
                 <div class="mash-feature-section two-col">
                     <div>
-                        <h4><?php esc_html_e( 'Great Support', 'mashsb' ); ?></h4>
-                        <p><?php esc_html_e( 'If you encounter a problem or have any question, please <a href="https://www.mashshare.net/contact-developer/" target="blank">open a ticket</a>.', 'mashsb' ); ?></p>
+                        <h3><?php esc_html_e( 'Great Support', 'mashsb' ); ?></h3>
+                        <p><?php echo wp_kses_post(__( 'If you encounter a problem or have any question, please <a href="https://www.mashshare.net/contact-developer/" target="blank">open a ticket</a>.', 'mashsb' )); ?></p>
                         <ul id="mash-social-admin-head">
                             <?php echo mashsb_share_buttons(); ?>
                         </ul>
@@ -219,7 +219,7 @@ class MASHSB_Welcome {
         <div id="mashsb-header">
             <h1><?php echo esc_html(sprintf( __( 'Welcome to MashShare %s', 'mashsb' ), $display_version )); ?></h1>
             <h1 class="about-text">
-                <?php esc_html_e( 'Congrats for Choosing MashShare<br>MashShare is Active and Ready to Boost Your Social Media Traffic!', 'mashsb' ); ?>
+                <?php echo wp_kses_post(__( 'Congrats for Choosing MashShare<br>MashShare is Active and Ready to Boost Your Social Media Traffic!', 'mashsb' )); ?>
             </h1>
         </div>
         <?php
@@ -280,7 +280,7 @@ class MASHSB_Welcome {
                 <h1><?php esc_html_e( 'Additional Updates', 'mashsb' ); ?></h1>
                 <div class="mash-feature-section three-col">
                     <div class="col">
-                        <h4><?php esc_html_e( 'Developer Friendly', 'mashsb' ); ?></h4>
+                        <h3><?php esc_html_e( 'Developer Friendly', 'mashsb' ); ?></h3>
                         <p><?php
 
 	                        $allowedHtml = array(
@@ -296,11 +296,11 @@ class MASHSB_Welcome {
                             echo wp_kses(sprintf(__( 'Are you a theme developer and want to use MashShare as your build in share count aggregator? Read the <a href="%s" target="blank">developer instructions.</a>', 'mashsb' ), 'https://docs.mashshare.net/category/38-sample-functions'), $allowedHtml); ?></p>
                     </div>
                     <div class="col">
-                        <h4><?php esc_html_e( 'Check Open Graph Settings', 'mashsb' ); ?></h4>
+                        <h3><?php esc_html_e( 'Check Open Graph Settings', 'mashsb' ); ?></h3>
                         <p><?php echo wp_kses_post(__( 'Use the <i>Validate Open Graph Data</i> button and check if the open graph data on your site is working as expected or conflicts with other open graph data.', 'mashsb' )); ?></p>
                     </div>
                     <div class="col">
-                        <h4><?php esc_html_e( 'Use Yoast SEO Title', 'mashsb' ); ?></h4>
+                        <h3><?php esc_html_e( 'Use Yoast SEO Title', 'mashsb' ); ?></h3>
                         <p><?php esc_html_e( 'MashShare will use the YOAST SEO title if it is defined.', 'mashsb' ); ?></p>
                     </div>
                 </div>
