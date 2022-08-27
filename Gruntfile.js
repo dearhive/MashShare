@@ -57,6 +57,10 @@ module.exports = function(grunt) {
                             '!package-lock.json',
                             '!dist/**',
                             '!mashsharer.zip',
+                            '!vendor/**',
+                            '!wpcs/**',
+                            '!dev/**',
+                            '!composer.lock',
                             '!composer.json'],
                      dest: '<%= paths.base %>'},
                  
@@ -74,6 +78,10 @@ module.exports = function(grunt) {
                             '!package-lock.json',
                             '!dist/**',
                             '!mashsharer.zip',
+                            '!vendor/**',
+                            '!wpcs/**',
+                            '!dev/**',
+                            '!composer.lock',
                             '!composer.json'],
                     dest: '<%= paths.basetrunk %>'}
                 ]                
@@ -142,7 +150,6 @@ module.exports = function(grunt) {
                     plugin_slug: 'mashsharer',
                     svn_user: 'renehermi',  
                     build_dir: '<%= paths.basetrunk %>', //relative path to your build directory
-                    //assets_dir: '<%= paths.basezip %>', //relative path to your assets directory (optional).
                     tmp_dir: '<%= paths.tmp %>', //Location where your SVN repository is checked out to.
                     version: '<%= pkg.version %>'
                 }
