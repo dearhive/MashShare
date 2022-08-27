@@ -193,10 +193,10 @@ class MASHSB_License {
 			return;
 		}
 
-		echo '<p>' . sprintf(
+		echo '<p>' . esc_html(sprintf(
 			__( 'Enter your extension license keys here to receive updates for purchased extensions. If your license key has expired, please <a href="%s" target="_blank" title="License renewal FAQ">renew your license</a>.', 'mashsb' ),
 			'https://www.mashshare.net/documentation/license-renewal/#How_do_I_renew_my_license'
-		) . '</p>';
+		)) . '</p>';
 
 		$has_ran = true;
 
@@ -299,7 +299,7 @@ class MASHSB_License {
 
 		if( ! wp_verify_nonce( $_REQUEST[ $this->item_shortname . '_license_key-nonce'], $this->item_shortname . '_license_key-nonce' ) ) {
 		
-			wp_die( __( 'Nonce verification failed', 'mashsb' ), __( 'Error', 'mashsb' ), array( 'response' => 403 ) );
+			wp_die( esc_html__( 'Nonce verification failed', 'mashsb' ), esc_html__( 'Error', 'mashsb' ), array( 'response' => 403 ) );
                 
 		}
                 
@@ -342,7 +342,7 @@ class MASHSB_License {
 	}
         
         
-        /**
+	/**
 	 * Check if license key is valid once per week
 	 *
 	 * @access  public
@@ -415,10 +415,10 @@ class MASHSB_License {
 
 			if( empty( $_GET['tab'] ) || 'licenses' !== $_GET['tab'] ) {
 
-				$messages[] = sprintf(
+				$messages[] = wp_kses_post(sprintf(
 					__( 'You have invalid or expired license keys for MashShare. Please go to the <a href="%s" title="Go to Licenses page">Licenses page</a> to correct this issue.', 'mashsb' ),
 					admin_url( 'admin.php?page=mashsb-settings&tab=licenses' )
-				);
+				));
 
 				$showed_invalid_message = true;
 
@@ -455,7 +455,7 @@ class MASHSB_License {
 
 		if( ( ! is_object( $license ) || 'valid' !== $license->license ) && empty( $showed_imissing_key_message[ $this->item_shortname ] ) ) {
 
-			echo '&nbsp;<strong><a href="' . esc_url( admin_url( 'admin.php?page=mashsb-settings&tab=licenses' ) ) . '">' . __( 'Enter valid license key for automatic updates.', 'mashsb' ) . '</a></strong>';
+			echo '&nbsp;<strong><a href="' . esc_url( admin_url( 'admin.php?page=mashsb-settings&tab=licenses' ) ) . '">' . esc_html__( 'Enter valid license key for automatic updates.', 'mashsb' ) . '</a></strong>';
 			$showed_imissing_key_message[ $this->item_shortname ] = true;
 		}
 

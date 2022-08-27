@@ -14,42 +14,42 @@ $user = wp_get_current_user();
 
 <div id="mashsb-sidebar">
 
-	<a class="mashsb-banner" target="_blank" rel="noopener" href="https://www.mashshare.net/pricing/?utm_source=insideplugin&utm_medium=userwebsite&utm_content=sidebar&utm_campaign=freeplugin"><img src="<?php echo esc_url(MASHSB_PLUGIN_URL) . 'assets/images/upgrade_to_pro.png'; ?>" width="300" height="250" alt="<?php _e( 'Increase your Shares and Social Traffic', 'mashsb' ); ?>" /></a>
+	<a class="mashsb-banner" target="_blank" rel="noopener" href="https://www.mashshare.net/pricing/?utm_source=insideplugin&utm_medium=userwebsite&utm_content=sidebar&utm_campaign=freeplugin"><img src="<?php echo esc_url(MASHSB_PLUGIN_URL) . 'assets/images/upgrade_to_pro.png'; ?>" width="300" height="250" alt="<?php esc_html_e( 'Increase your Shares and Social Traffic', 'mashsb' ); ?>" /></a>
 
-	<form method="post" action="<?php echo $post; ?>" target="_blank" rel="noopener" class="subscribe block" style="display:none;">
-		<h2><?php _e( 'Get More Traffic', 'mashsb' ); ?></h2>
+	<form method="post" action="<?php echo esc_url($post); ?>" target="_blank" rel="noopener" class="subscribe block" style="display:none;">
+		<h2><?php esc_html_e( 'Get More Traffic', 'mashsb' ); ?></h2>
 
 		<?php $user = wp_get_current_user(); ?>
 
 		<p class="interesting">
-			<?php echo wptexturize( __( "Submit your name and email and we'll send you tips and tricks how to get more traffic by using MashShare", 'mashsb' ) ); ?>
+			<?php esc_html_e( __( "Submit your name and email and we'll send you tips and tricks how to get more traffic by using MashShare", 'mashsb' ) ); ?>
 		</p>
 
 		<div class="field">
-			<input type="email" name="email" value="<?php echo esc_attr( $user->user_email ); ?>" placeholder="<?php _e( 'Your Email', 'mashsb' ); ?>"/>
+			<input type="email" name="email" value="<?php echo esc_attr( $user->user_email ); ?>" placeholder="<?php esc_html_e( 'Your Email', 'mashsb' ); ?>"/>
 		</div>
 
 		<div class="field">
-			<input type="text" name="firstname" value="<?php echo esc_attr( trim( $user->user_firstname ) ); ?>" placeholder="<?php _e( 'First Name', 'mashsb' ); ?>"/>
+			<input type="text" name="firstname" value="<?php echo esc_attr( trim( $user->user_firstname ) ); ?>" placeholder="<?php esc_html_e( 'First Name', 'mashsb' ); ?>"/>
 		</div>
 
 		<div class="field">
-			<input type="text" name="lastname" value="<?php echo esc_attr( trim( $user->user_lastname ) ); ?>" placeholder="<?php _e( 'Last Name', 'mashsb' ); ?>"/>
+			<input type="text" name="lastname" value="<?php echo esc_attr( trim( $user->user_lastname ) ); ?>" placeholder="<?php esc_html_e( 'Last Name', 'mashsb' ); ?>"/>
 		</div>
 
 		<input type="hidden" name="campaigns[]" value="4" />
 		<input type="hidden" name="source" value="8" />
 
 		<div class="field submit-button">
-			<input type="submit" class="button" value="<?php _e( 'Send me the free stuff', 'mashsb' ); ?>"/>
+			<input type="submit" class="button" value="<?php esc_html_e( 'Send me the free stuff', 'mashsb' ); ?>"/>
 		</div>
 
 		<p class="promise">
-			<?php _e( 'Your email will not be used for anything else and you can unsubscribe with 1-click anytime.', 'mashsb' ); ?>
+			<?php esc_html_e( 'Your email will not be used for anything else and you can unsubscribe with 1-click anytime.', 'mashsb' ); ?>
 		</p>
-                <p style="text-align: center;margin-top:25px;"><?php echo sprintf(__( '<a href="%s" target="_new" style="font-weight:bold;color:#00adff;border: 1px solid #00adff;padding:6px;">Visit Our Affiliate Program', 'mashsb'), 'https://www.mashshare.net/become-partner/?utm_source=mashsbadmin&utm_medium=website&utm_campaign=see_our_affiliate_program' ); ?></a></p>
+                <p style="text-align: center;margin-top:25px;"><?php echo wp_kses_post(sprintf(__( '<a href="%s" target="_new" style="font-weight:bold;color:#00adff;border: 1px solid #00adff;padding:6px;">Visit Our Affiliate Program', 'mashsb'), 'https://www.mashshare.net/become-partner/?utm_source=mashsbadmin&utm_medium=website&utm_campaign=see_our_affiliate_program' )); ?></a></p>
                 
-                
+
 	</form>
 
 	<div class="block testimonial">

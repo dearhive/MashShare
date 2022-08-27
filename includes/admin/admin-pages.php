@@ -51,8 +51,6 @@ function mashsb_is_admin_page() {
         return false;
     }
 
-    global $mashsb_parent_page, $pagenow, $typenow, $mashsb_settings_page, $mashsb_add_ons_page, $mashsb_tools_page, $mashsb_quickstart;
-
     if( 'mashsb-settings' == $currentpage || 'mashsb-addons' == $currentpage || 'mashsb-tools' == $currentpage || 'mashsb-getting-started' == $currentpage || 'mashsb-credits' == $currentpage || 'mashsb-about' == $currentpage  ) {
         return true;
     }
