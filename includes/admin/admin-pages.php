@@ -51,7 +51,7 @@ function mashsb_is_admin_page() {
         return false;
     }
 
-    if( 'mashsb-settings' == $currentpage || 'mashsb-addons' == $currentpage || 'mashsb-tools' == $currentpage || 'mashsb-getting-started' == $currentpage || 'mashsb-credits' == $currentpage || 'mashsb-about' == $currentpage  ) {
+    if( 'mashsb-settings' == $currentpage || 'mashsb-addons' == $currentpage || 'mashsb-tools' == $currentpage || 'mashsb-getting-started' == $currentpage || 'mashsb-about' == $currentpage  ) {
         return true;
     }
 }

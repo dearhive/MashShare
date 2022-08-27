@@ -336,9 +336,6 @@ class MASHSB_Welcome {
             <a class="nav-tab <?php echo $selected == 'mashsb-getting-started' ? 'nav-tab-active' : ''; ?>" href="<?php echo esc_url( admin_url( add_query_arg( array('page' => 'mashsb-getting-started'), 'admin.php' ) ) ); ?>">
                 <?php esc_html_e( 'Getting Started', 'mashsb' ); ?>
             </a>
-            <a class="nav-tab <?php echo $selected == 'mashsb-credits' ? 'nav-tab-active' : ''; ?>" href="<?php echo esc_url( admin_url( add_query_arg( array('page' => 'mashsb-credits'), 'admin.php' ) ) ); ?>">
-                <?php esc_html_e( 'Credits', 'mashsb' ); ?>
-            </a>
         </h1>
         <?php
     }
