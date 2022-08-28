@@ -109,7 +109,7 @@ function mashsb_do_settings_fields( $page, $section ) {
             // Do not show the helper text when its empty
             if (!empty($field['args']['desc']) ){
                 echo '<a class="mashsb-helper" href="#"></a>';
-                echo '<div class="mashsb-message">' . esc_html($field['args']['desc']) . '</div>';
+                echo '<div class="mashsb-message">' . wp_kses_post($field['args']['desc']) . '</div>';
             }
             echo '</div>';
             echo '</th>';
