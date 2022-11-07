@@ -5,21 +5,19 @@
 ![Total Downloads](https://img.shields.io/wordpress/plugin/dt/mashsharer.svg?maxAge=2592000) 
 ![Plugin Rating](https://img.shields.io/wordpress/plugin/r/mashsharer.svg?maxAge=2592000) 
 ![WordPress Compatibility](https://img.shields.io/wordpress/v/mashsharer.svg?maxAge=2592000) 
-[![Build Status](https://img.shields.io/travis/mashshare/MashShare/master.svg?maxAge=3600)](https://travis-ci.org/mashshare/MashShare.svg?branch=master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mashshare/MashShare/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/mashshare/MashShare/?branch=master)
 [![License](https://img.shields.io/badge/license-GPL--2.0%2B-red.svg)](https://github.com/mashshare/MashShare/blob/master/license.txt)
 
-### Welcome to the Mashshare GitHub Repository
+### Welcome to the MashShare GitHub Repository
 
 Social sharing optimization is essential for every website that aims to be succesfull regarding traffic and social interaction.
 Mashshare aspires to give you all the necessary tools for best possible sharing interaction out of your content from one source. It´s not only a set of big prominent fast loading share buttons, it optimizes your content in the background with open graph tags and optimizes all your contest in the best way to get the maximum amount of shares.
 
-More information can be found at [mashshare.net](https://www.mashshare.net/).
+More information can be found on [mashshare.net](https://www.mashshare.net/).
 
 ## Note ##
 
 This is the latest developer version of MashShare. 
-if you just want to use MashShare install the productive version which you get at [wordpress.org](http://wordpress.org/plugins/mashsharer/)
+if you just want to use MashShare install the productive version which you get on [wordpress.org](http://wordpress.org/plugins/mashsharer/)
 
 ## Installation ##
 

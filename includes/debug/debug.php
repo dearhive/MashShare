@@ -1,7 +1,7 @@
 <?php
     /**
      * Output debug notices in footer
-     * @global type $mashsb_options
+     * @global array $mashsb_options
      */
     function mashsbOutputDebug() {
         global $mashsb_options, $mashsb_debug;
@@ -14,8 +14,7 @@
             echo '<div class="mash-debug" style="display:block;z-index:250000;font-size:12px;text-align:center;">';
             echo  'MashShare Debug Mode.<br><br>';
             foreach ($mashsb_debug as $key => $value){
-                //echo $key . ' ' . date( 'H:m:s.u', time()). ' ' . $value . '<br />';
-                echo $value . '<br />';
+                echo wp_kses_post($value) . '<br />';
             }
             echo '</div>';
         }

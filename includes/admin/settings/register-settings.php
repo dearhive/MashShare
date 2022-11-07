@@ -832,7 +832,7 @@ function mashsb_header_callback( $args ) {
 function mashsb_checkbox_callback( $args ) {
     global $mashsb_options;
 
-    $checked = isset( $mashsb_options[$args['id']] ) ? checked( 1, $mashsb_options[$args['id']], false ) : '';
+    $checked = isset( $mashsb_options[$args['id']] ) ? checked( 1, esc_attr($mashsb_options[$args['id']]), false ) : '';
     $html = '<div class="mashsb-admin-onoffswitch">';
     $html .= '<input type="checkbox" class="mashsb-admin-onoffswitch-checkbox" id="mashsb_settings[' . esc_attr($args['id']) . ']" name="mashsb_settings[' . esc_attr($args['id']) . ']" value="1" ' . esc_attr($checked) . '/>';
     $html .= '<label class="mashsb-admin-onoffswitch-label" for="mashsb_settings[' . esc_attr($args['id']) . ']">'
@@ -864,7 +864,7 @@ function mashsb_multicheck_callback( $args ) {
             } else {
                 $enabled = NULL;
             }
-            echo '<input name="mashsb_settings[' . esc_attr($args['id']) . '][' . esc_attr($key) . ']" id="mashsb_settings[' . esc_attr($args['id']) . '][' . esc_attr($key) . ']" type="checkbox" value="' . esc_html($option) . '" ' . checked( $option, $enabled, false ) . '/>&nbsp;';
+            echo '<input name="mashsb_settings[' . esc_attr($args['id']) . '][' . esc_attr($key) . ']" id="mashsb_settings[' . esc_attr($args['id']) . '][' . esc_attr($key) . ']" type="checkbox" value="' . esc_html($option) . '" ' . esc_attr(checked( $option, $enabled, false )) . '/>&nbsp;';
             echo '<label for="mashsb_settings[' . esc_attr($args['id']) . '][' . esc_attr($key) . ']">' . esc_html($option) . '</label><br/>';
         endforeach;
         echo '<p class="description mashsb_hidden">' . esc_html($args['desc']) . '</p>';
@@ -892,8 +892,8 @@ function mashsb_radio_callback( $args ) {
         elseif( isset( $args['std'] ) && $args['std'] == $key && !isset( $mashsb_options[$args['id']] ) )
             $checked = true;
 
-        echo '<input name="mashsb_settings[' . esc_attr($args['id']) . ']"" id="mashsb_settings[' . esc_attr($args['id']) . '][' . esc_attr($key) . ']" type="radio" value="' . esc_attr($key) . '" ' . checked( true, $checked, false ) . '/>&nbsp;';
-        echo '<label for="mashsb_settings[' . esc_attr($args['id']) . '][' . esc_attr($key) . ']">' . $option . '</label><br/>';
+        echo '<input name="mashsb_settings[' . esc_attr($args['id']) . ']"" id="mashsb_settings[' . esc_attr($args['id']) . '][' . esc_attr($key) . ']" type="radio" value="' . esc_attr($key) . '" ' . esc_attr(checked( true, $checked, false )) . '/>&nbsp;';
+        echo '<label for="mashsb_settings[' . esc_attr($args['id']) . '][' . esc_attr($key) . ']">' . esc_attr($option) . '</label><br/>';
     endforeach;
 
     echo '<p class="description mashsb_hidden">' . esc_html($args['desc']) . '</p>';
@@ -947,8 +947,8 @@ function mashsb_number_callback( $args ) {
     $step = isset( $args['step'] ) ? $args['step'] : 1;
 
     $size = ( isset( $args['size'] ) && !is_null( $args['size'] ) ) ? esc_attr($args['size']) : 'regular';
-    $html = '<input type="number" step="' . esc_attr( $step ) . '" max="' . esc_attr( $max ) . '" min="' . esc_attr( $min ) . '" class="' . $size . '-text" id="mashsb_settings[' . esc_attr($args['id']) . ']" name="mashsb_settings[' . esc_attr($args['id']) . ']" value="' . esc_attr( stripslashes( $value ) ) . '"/>';
-    $html .= '<label class="mashsb_hidden" for="mashsb_settings[' . $args['id'] . ']"> ' . $args['desc'] . '</label>';
+    $html = '<input type="number" step="' . esc_attr( $step ) . '" max="' . esc_attr( $max ) . '" min="' . esc_attr( $min ) . '" class="' . esc_attr($size) . '-text" id="mashsb_settings[' . esc_attr($args['id']) . ']" name="mashsb_settings[' . esc_attr($args['id']) . ']" value="' . esc_attr( stripslashes( $value ) ) . '"/>';
+    $html .= '<label class="mashsb_hidden" for="mashsb_settings[' . esc_attr($args['id']) . ']"> ' . esc_html($args['desc']) . '</label>';
 
     echo $html;
 }
@@ -1013,7 +1013,7 @@ function mashsb_password_callback( $args ) {
  * @return void
  */
 function mashsb_missing_callback( $args ) {
-    printf( __( 'The callback function used for the <strong>%s</strong> setting is missing.', 'mashsb' ), $args['id'] );
+    echo wp_kses_post(sprintf( __( 'The callback function used for the <strong>%s</strong> setting is missing.', 'mashsb' ), esc_attr($args['id'] )));
 }
 
 /**
@@ -1152,8 +1152,8 @@ function mashsb_upload_callback( $args ) {
         $value = isset( $args['std'] ) ? $args['std'] : '';
 
     $size = ( isset( $args['size'] ) && !is_null( $args['size'] ) ) ? esc_attr($args['size']) : 'regular';
-    $html = '<input type="text" class="' . $size . '-text mashsb_upload_field" id="mashsb_settings[' . esc_attr($args['id']) . ']" name="mashsb_settings[' . esc_attr($args['id']) . ']" value="' . esc_attr( stripslashes( $value ) ) . '"/>';
-    $html .= '<span>&nbsp;<input type="button" class="mashsb_settings_upload_button button-secondary" value="' . __( 'Upload File', 'mashsb' ) . '"/></span>';
+    $html = '<input type="text" class="' . esc_attr($size) . '-text mashsb_upload_field" id="mashsb_settings[' . esc_attr($args['id']) . ']" name="mashsb_settings[' . esc_attr($args['id']) . ']" value="' . esc_attr( stripslashes( $value ) ) . '"/>';
+    $html .= '<span>&nbsp;<input type="button" class="mashsb_settings_upload_button button-secondary" value="' . esc_html(__( 'Upload File', 'mashsb' )) . '"/></span>';
     $html .= '<label class="mashsb_hidden" for="mashsb_settings[' . esc_attr($args['id']) . ']"> ' . esc_attr($args['desc']) . '</label>';
 
     echo $html;
@@ -1222,7 +1222,7 @@ if ( ! function_exists( 'mashsb_license_key_callback' ) ) {
                         $messages[] = sprintf(
                             __( 'Your license key expired on %s. Please <a href="%s" target="_blank" title="Renew your license key">renew your license key</a>.', 'mashsb' ),
                             date_i18n( get_option( 'date_format' ), strtotime( $license->expires, current_time( 'timestamp' ) ) ),
-                            'https://www.mashshare.net/checkout/?edd_license_key=' . $value . '&utm_campaign=notice&utm_source=license_tab&utm_medium=admin&utm_content=license-expired'
+                            'https://www.mashshare.net/checkout/?edd_license_key=' . esc_attr($value) . '&utm_campaign=notice&utm_source=license_tab&utm_medium=admin&utm_content=license-expired'
                         );
 
                         $license_status = 'mashsb-license-' . $class . '-notice';
@@ -1337,7 +1337,7 @@ if ( ! function_exists( 'mashsb_license_key_callback' ) ) {
             foreach( $messages as $message ) {
 
                 $html .= '<div class="mashsb-license-data mashsb-license-' . esc_attr($class) . '">';
-                $html .= '<p>' . $message . '</p>';
+                $html .= '<p>' . wp_kses_post($message) . '</p>';
                 $html .= '</div>';
 
             }
@@ -1394,22 +1394,22 @@ function mashsb_networks_callback( $args ) {
     <table id="mashsb_network_list" class="wp-list-table fixed posts">
     <thead>
     <tr>
-        <th scope="col" class='mashsb-network-col' style="padding: 2px 0px 10px 0px"><?php _e( 'Social Network', 'mashsb' ); ?></th>
-        <th scope="col" class='mashsb-status-col' style="padding: 2px 0px 10px 10px"><?php _e( 'Status', 'mashsb' ); ?></th>
-        <th scope="col" class='mashsb-label-col' style="padding: 2px 0px 10px 10px"><?php _e( 'Custom Label', 'mashsb' ); ?></th>
+        <th scope="col" class='mashsb-network-col' style="padding: 2px 0px 10px 0px"><?php esc_html_e( 'Social Network', 'mashsb' ); ?></th>
+        <th scope="col" class='mashsb-status-col' style="padding: 2px 0px 10px 10px"><?php esc_html_e( 'Status', 'mashsb' ); ?></th>
+        <th scope="col" class='mashsb-label-col' style="padding: 2px 0px 10px 10px"><?php esc_html_e( 'Custom Label', 'mashsb' ); ?></th>
     </tr>
     </thead>
     <?php
     if( !empty( $args['options'] ) ) {
         foreach ( $args['options'] as $key => $option ):
-            echo '<tr id="mashsb_list_' . $key . '" class="mashsb_list_item">';
+            echo '<tr id="mashsb_list_' . esc_attr($key) . '" class="mashsb_list_item">';
             if( isset( $mashsb_options[$args['id']][$key]['status'] ) ) {
                 $enabled = 1;
             } else {
                 $enabled = NULL;
             }
             if( isset( $mashsb_options[$args['id']][$key]['name'] ) ) {
-                $name = esc_attr($mashsb_options[$args['id']][$key]['name']);
+                $name = $mashsb_options[$args['id']][$key]['name'];
             } else {
                 $name = NULL;
             }
@@ -1421,7 +1421,7 @@ function mashsb_networks_callback( $args ) {
             }
             echo '<td><input type="hidden" name="mashsb_settings[' . esc_attr($args['id']) . '][' . esc_attr($key) . '][id]" id="mashsb_settings[' . esc_attr($args['id']) . '][' . esc_attr($key) . '][id]" value="' . strtolower( esc_attr($option) ) . '">';
             echo '<div class="mashsb-admin-onoffswitch">';
-            echo '<input name="mashsb_settings[' . esc_attr($args['id']) . '][' . esc_attr($key) . '][status]" class="mashsb-admin-onoffswitch-checkbox" id="mashsb_settings[' . esc_attr($args['id']) . '][' . esc_attr($key) . '][status]" type="checkbox" value="1" ' . checked( 1, $enabled, false ) . '/>';
+            echo '<input name="mashsb_settings[' . esc_attr($args['id']) . '][' . esc_attr($key) . '][status]" class="mashsb-admin-onoffswitch-checkbox" id="mashsb_settings[' . esc_attr($args['id']) . '][' . esc_attr($key) . '][status]" type="checkbox" value="1" ' . esc_attr(checked( 1, $enabled, false )) . '/>';
             echo '<label class="mashsb-admin-onoffswitch-label" for="mashsb_settings[' . esc_attr($args['id']) . '][' . esc_attr($key) . '][status]">'
                 . '<span class="mashsb-admin-onoffswitch-inner"></span>'
                 . '<span class="mashsb-admin-onoffswitch-switch"></span>'
@@ -1461,7 +1461,7 @@ function mashsb_upload_image_callback( $args ) {
     global $mashsb_options;
 
     if( isset( $mashsb_options[$args['id']] ) )
-        $value = esc_attr($mashsb_options[$args['id']]);
+        $value = $mashsb_options[$args['id']];
     else
         $value = isset( $args['std'] ) ? esc_attr($args['std']) : '';
 
@@ -1494,14 +1494,12 @@ function mashsb_posttypes_callback( $args ) {
     if( !empty( $posttypes ) ) {
         foreach ( $posttypes as $key => $option ):
             if( isset( $mashsb_options[$args['id']][$key] ) ) {
-                $enabled = esc_attr($option);
+                $enabled = $option;
             } else {
                 $enabled = NULL;
             }
-            $key = esc_attr($key);
-            $option = esc_attr($option);
-            echo '<input name="mashsb_settings[' . esc_attr($args['id']) . '][' . $key . ']" id="mashsb_settings[' . $args['id'] . '][' . $key . ']" type="checkbox" value="' . $option . '" ' . checked( $option, $enabled, false ) . '/>&nbsp;';
-            echo '<label for="mashsb_settings[' . $args['id'] . '][' . $key . ']">' . $option . '</label><br/>';
+            echo '<input name="mashsb_settings[' . esc_attr($args['id']) . '][' . esc_attr($key) . ']" id="mashsb_settings[' . esc_attr($args['id']) . '][' . esc_attr($key) . ']" type="checkbox" value="' . esc_attr($option) . '" ' . esc_attr(checked( $option, $enabled, false )) . '/>&nbsp;';
+            echo '<label for="mashsb_settings[' . esc_attr($args['id']) . '][' . esc_attr($key) . ']">' . esc_attr($option) . '</label><br/>';
         endforeach;
         echo '<p class="description mashsb_hidden">' . esc_attr($args['desc']) . '</p>';
     }
@@ -1636,7 +1634,7 @@ function mashsb_delete_cache_objects() {
 function mashsb_cache_status() {
     global $mashsb_options;
     if( isset( $mashsb_options['disable_cache'] ) ) {
-        return ' <strong style="color:red;">' . __( 'Transient Cache disabled! Enable it for performance increase.', 'mashsb' ) . '</strong> ';
+        return ' <strong style="color:red;">' . esc_html(__( 'Transient Cache disabled! Enable it for performance increase.', 'mashsb' )) . '</strong> ';
     }
 }
 
@@ -1675,9 +1673,8 @@ function mashsb_is_deleted_cache() {
  */
 
 function mashsb_log_permissions() {
-    global $mashsb_options;
     if( !MASHSB()->logger->checkDir() ) {
-        return '<br><strong style="color:red;">' . __( 'Log file directory not writable! Set FTP permission to 755 or 777 for /wp-content/plugins/mashsharer/logs/', 'mashsb' ) . '</strong> <br> Read here more about <a href="http://codex.wordpress.org/Changing_File_Permissions" target="_blank">file permissions</a> ';
+        return '<br><strong style="color:red;">' . esc_html(__( 'Log file directory not writable! Set FTP permission to 755 or 777 for /wp-content/plugins/mashsharer/logs/', 'mashsb' )) . '</strong> <br> Read here more about <a href="http://codex.wordpress.org/Changing_File_Permissions" target="_blank">file permissions</a> ';
     }
 }
 

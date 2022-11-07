@@ -40,14 +40,14 @@ function mashsb_tools_page() {
 				), $tab_url );
 
 				$active = $active_tab == $tab_id ? ' nav-tab-active' : '';
-				echo '<a href="' . esc_url( $tab_url ) . '" title="' . esc_attr( $tab_name ) . '" class="nav-tab' . $active . '">' . esc_html( $tab_name ) . '</a>';
+				echo '<a href="' . esc_url( $tab_url ) . '" title="' . esc_attr( $tab_name ) . '" class="nav-tab' . esc_attr($active) . '">' . wp_kses_post( $tab_name ) . '</a>';
 
 			}
 			?>
 		</h2>
 		<div class="metabox-holder">
 			<?php
-			do_action( 'mashsb_tools_tab_' . $active_tab );
+			do_action( 'mashsb_tools_tab_' . esc_attr($active_tab) );
 			?>
 		</div><!-- .metabox-holder -->
 	</div><!-- .wrap -->
@@ -64,8 +64,8 @@ function mashsb_tools_page() {
 function mashsb_get_tools_tabs() {
 
 	$tabs                  = array();
-	$tabs['import_export'] = __( 'Import/Export', 'mashsb' );
-        $tabs['system_info'] = __( 'System Info', 'mashsb' );
+	$tabs['import_export'] = esc_html__( 'Import/Export', 'mashsb' );
+    $tabs['system_info'] = esc_html__( 'System Info', 'mashsb' );
 
 	return apply_filters( 'mashsb_tools_tabs', $tabs );
 }
@@ -87,32 +87,32 @@ function mashsb_tools_import_export_display() {
 	do_action( 'mashsb_tools_import_export_before' );
 ?>
 	<div class="postbox">
-		<h3><span><?php _e( 'Export Settings', 'mashsb' ); ?></span></h3>
+		<h3><span><?php esc_html_e( 'Export Settings', 'mashsb' ); ?></span></h3>
 		<div class="inside">
-			<p><?php _e( 'Export the Mashshare settings for this site as a .json file. This allows you to easily import the configuration into another site.', 'mashsb' ); ?></p>
+			<p><?php esc_html_e( 'Export the MashShare settings for this site as a .json file. This allows you to easily import the configuration into another site.', 'mashsb' ); ?></p>
 			
-			<form method="post" action="<?php echo admin_url( 'admin.php?page=mashsb-tools&tab=import_export' ); ?>">
+			<form method="post" action="<?php echo esc_url(admin_url( 'admin.php?page=mashsb-tools&tab=import_export' )); ?>">
 				<p><input type="hidden" name="mashsb-action" value="export_settings" /></p>
 				<p>
 					<?php wp_nonce_field( 'mashsb_export_nonce', 'mashsb_export_nonce' ); ?>
-					<?php submit_button( __( 'Export', 'mashsb' ), 'primary', 'submit', false ); ?>
+					<?php echo submit_button( esc_html__( 'Export', 'mashsb' ), 'primary', 'submit', false ); ?>
 				</p>
 			</form>
 		</div><!-- .inside -->
 	</div><!-- .postbox -->
 
 	<div class="postbox">
-		<h3><span><?php _e( 'Import Settings', 'mashsb' ); ?></span></h3>
+		<h3><span><?php esc_html_e( 'Import Settings', 'mashsb' ); ?></span></h3>
 		<div class="inside">
-			<p><?php _e( 'Import the Mashshare settings from a .json file. This file can be obtained by exporting the settings on another site using the form above.', 'mashsb' ); ?></p>
-			<form method="post" enctype="multipart/form-data" action="<?php echo admin_url( 'admin.php?page=mashsb-tools&tab=import_export' ); ?>">
+			<p><?php esc_html_e( 'Import the MashShare settings from a .json file. This file can be obtained by exporting the settings on another site using the form above.', 'mashsb' ); ?></p>
+			<form method="post" enctype="multipart/form-data" action="<?php echo esc_url(admin_url( 'admin.php?page=mashsb-tools&tab=import_export' )); ?>">
 				<p>
 					<input type="file" name="import_file"/>
 				</p>
 				<p>
 					<input type="hidden" name="mashsb-action" value="import_settings" />
 					<?php wp_nonce_field( 'mashsb_import_nonce', 'mashsb_import_nonce' ); ?>
-					<?php submit_button( __( 'Import', 'mashsb' ), 'secondary', 'submit', false ); ?>
+					<?php echo submit_button( esc_html__( 'Import', 'mashsb' ), 'secondary', 'submit', false ); ?>
 				</p>
 			</form>
 		</div><!-- .inside -->
@@ -148,12 +148,10 @@ function mashsb_tools_import_export_process_export() {
 	if( ! current_user_can( 'manage_options' ) )
 		return;
 
-	$settings = array();
-	$settings = get_option( 'mashsb_settings' );
+	$settings = get_option( 'mashsb_settings', array() );
 
 	ignore_user_abort( true );
 
-	//if ( ! mashsb_is_func_disabled( 'set_time_limit' ) && ! ini_get( 'safe_mode' ) )
 	if ( ! mashsb_is_func_disabled( 'set_time_limit' ) )
 		set_time_limit( 0 );
 
@@ -215,13 +213,13 @@ function mashsb_tools_import_export_process_import() {
 		return;
 
     if( mashsb_get_file_extension( $_FILES['import_file']['name'] ) != 'json' ) {
-        wp_die( __( 'Please upload a valid .json file', 'mashsb' ) );
+        wp_die( esc_html__( 'Please upload a valid .json file', 'mashsb' ) );
     }
 
 	$import_file = $_FILES['import_file']['tmp_name'];
 
 	if( empty( $import_file ) ) {
-		wp_die( __( 'Please upload a file to import', 'mashsb' ) );
+		wp_die( esc_html__( 'Please upload a file to import', 'mashsb' ) );
 	}
 
 	// Retrieve the settings from the file and convert the json object to an array
@@ -251,10 +249,6 @@ function mashsb_tools_sysinfo_display() {
 ?>
 	<form action="<?php echo esc_url( admin_url( 'admin.php?page=mashsb-tools&tab=system_info' ) ); ?>" method="post" dir="ltr">
 		<textarea readonly="readonly" onclick="this.focus(); this.select()" id="system-info-textarea" name="mashsb-sysinfo" title="To copy the system info, click below then press Ctrl + C (PC) or Cmd + C (Mac)."><?php echo mashsb_tools_sysinfo_get(); ?></textarea>
-		<p class="submit">
-			<input type="hidden" name="mashsb-action" value="download_sysinfo" />
-			<?php submit_button( 'Download System Info File', 'primary', 'mashsb-download-sysinfo', false ); ?>
-		</p>
 	</form>
 <?php
 }
@@ -271,7 +265,7 @@ add_action( 'mashsb_tools_tab_system_info', 'mashsb_tools_sysinfo_display' );
  * @return      string $return A string containing the info to output
  */
 function mashsb_tools_sysinfo_get() {
-	global $wpdb, $mashsb_options;
+	global $wpdb;
 
 	if( !class_exists( 'Browser' ) )
 		require_once MASHSB_PLUGIN_DIR . 'includes/libraries/browser.php';
@@ -407,7 +401,7 @@ function mashsb_tools_sysinfo_get() {
 	$return .= "\n" . '-- Webserver Configuration' . "\n\n";
 	$return .= 'PHP Version:              ' . PHP_VERSION . "\n";
 	$return .= 'MySQL Version:            ' . $wpdb->db_version() . "\n";
-	$return .= 'Webserver Info:           ' . $_SERVER['SERVER_SOFTWARE'] . "\n";
+	$return .= 'Webserver Info:           ' . esc_html($_SERVER['SERVER_SOFTWARE']) . "\n";
 
 	$return  = apply_filters( 'mashsb_sysinfo_after_webserver_config', $return );
 
@@ -436,25 +430,3 @@ function mashsb_tools_sysinfo_get() {
 
 	return $return;
 }
-
-
-/**
- * Generates a System Info download file
- *
- * @since       2.0
- * @return      void
- */
-function mashsb_tools_sysinfo_download() {
-    
-        if( ! current_user_can( 'update_plugins' ) )
-		return;
-    
-	nocache_headers();
-
-	header( 'Content-Type: text/plain' );
-	header( 'Content-Disposition: attachment; filename="mashsb-system-info.txt"' );
-
-	echo wp_strip_all_tags( $_POST['mashsb-sysinfo'] );
-	wp_die();
-}
-add_action( 'mashsb_download_sysinfo', 'mashsb_tools_sysinfo_download' );

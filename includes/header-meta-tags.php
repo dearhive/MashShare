@@ -643,7 +643,6 @@ class MASHSB_HEADER_META_TAGS {
      * @return string HTML
      */
     public function render_header_meta() {
-        //echo apply_filters( 'mashsb_meta_tags', $html );
         echo apply_filters( 'mashsb_opengraph_meta', $this->render_open_graph_meta() );
         echo apply_filters( 'mashsb_twittercard_meta', $this->render_twitter_card_meta() );
     }

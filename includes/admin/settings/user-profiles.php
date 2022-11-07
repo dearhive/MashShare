@@ -38,14 +38,30 @@ function mashsb_render_user_profiles( $user ) {
 /**
  * Save user profile
  * 
- * @param type $user_id
+ * @param int $user_id
  * @return boolean
  */
 function mashsb_save_user_profiles( $user_id ) {
 
-    if( !current_user_can( 'edit_user', $user_id ) )
-        return false;
+	$userId = intval($user_id);
 
-    update_user_meta( $user_id, 'mashsb_twitter_handle', $_POST['mashsb_twitter_handle'] );
-    update_user_meta( $user_id, 'mashsb_fb_author_url', $_POST['mashsb_fb_author_url'] );
+	if (!$userId){
+		return false;
+	}
+
+    if( !current_user_can( 'edit_user', $user_id ) ){
+	    return false;
+    }
+
+	if (empty($_POST['mashsb_twitter_handle'])) {
+		return false;
+	}
+
+    update_user_meta( $user_id, 'mashsb_twitter_handle', sanitize_text_field(wp_unslash($_POST['mashsb_twitter_handle'])) );
+
+	if (empty($_POST['mashsb_fb_author_url'])) {
+		return false;
+	}
+
+    update_user_meta( $user_id, 'mashsb_fb_author_url', sanitize_text_field(wp_unslash($_POST['mashsb_fb_author_url'])) );
 }

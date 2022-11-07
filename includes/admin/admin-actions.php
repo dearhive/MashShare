@@ -20,11 +20,11 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * @return void
  */
 function mashsb_process_actions() {
-	if ( isset( $_POST['mashsb-action'] ) ) {
+	if ( !empty( $_POST['mashsb-action'] ) ) {
 		do_action( 'mashsb_' . $_POST['mashsb-action'], $_POST );
 	}
 
-	if ( isset( $_GET['mashsb-action'] ) ) {
+	if ( !empty( $_GET['mashsb-action'] ) ) {
 		do_action( 'mashsb_' . $_GET['mashsb-action'], $_GET );
 	}
 }
@@ -36,11 +36,9 @@ add_action( 'admin_init', 'mashsb_process_actions' );
  * @global array $mashsb_options
  */
 function mashsb_save_order(){
-        global $mashsb_options;
-        // Get all settings
-        
+
         $current_list = get_option('mashsb_networks');
-        $new_order = $_POST['mashsb_list'];
+        $new_order = (array)$_POST['mashsb_list'];
         $new_list = array();
         
         /* First write the sort order */

@@ -7,18 +7,20 @@
  * @copyright   Copyright (c) 2015, Rene Hermenau
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       2.5.1
-*/
+ */
 
 // Exit if accessed directly
-if ( !defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 
 /**
  * Usage tracking
  *
  * @access public
- * @since  2.5.1
  * @return void
+ * @since  2.5.1
  */
 class MASHSB_Tracking {
 
@@ -37,7 +39,7 @@ class MASHSB_Tracking {
 	public function __construct() {
 
 		//$this->schedule_send();
-                add_action( 'init', array( $this, 'schedule_send' ) );
+		add_action( 'init', array( $this, 'schedule_send' ) );
 
 		add_action( 'mashsb_settings_general_sanitize', array( $this, 'check_for_settings_optin' ) );
 		add_action( 'mashsb_opt_into_tracking', array( $this, 'check_for_optin' ) );
@@ -54,6 +56,7 @@ class MASHSB_Tracking {
 	 */
 	private function tracking_allowed() {
 		$allow_tracking = mashsb_get_option( 'allow_tracking', false );
+
 		return $allow_tracking;
 	}
 
@@ -70,13 +73,13 @@ class MASHSB_Tracking {
 		// Retrieve current theme info
 		$theme_data = wp_get_theme();
 		$theme      = $theme_data->Name . ' ' . $theme_data->Version;
-		
-		$data['url']    = home_url();
-		$data['theme']  = $theme;
-		$data['email']  = get_bloginfo( 'admin_email' );
+
+		$data['url']   = home_url();
+		$data['theme'] = $theme;
+		$data['email'] = get_bloginfo( 'admin_email' );
 
 		// Retrieve current plugin information
-		if( ! function_exists( 'get_plugins' ) ) {
+		if ( ! function_exists( 'get_plugins' ) ) {
 			include ABSPATH . '/wp-admin/includes/plugin.php';
 		}
 
@@ -92,7 +95,7 @@ class MASHSB_Tracking {
 
 		$data['active_plugins']   = $active_plugins;
 		$data['inactive_plugins'] = $plugins;
-                $data['post_count'] = wp_count_posts( 'post' )->publish;
+		$data['post_count']       = wp_count_posts( 'post' )->publish;
 
 		$this->data = $data;
 	}
@@ -105,23 +108,25 @@ class MASHSB_Tracking {
 	 */
 	public function send_checkin( $override = false ) {
 
-		if( ! $this->tracking_allowed() && ! $override )
+		if ( ! $this->tracking_allowed() && ! $override ) {
 			return;
+		}
 
 		// Send a maximum of once per week
 		$last_send = $this->get_last_send();
-		if( $last_send && $last_send > strtotime( '-1 week' ) )
+		if ( $last_send && $last_send > strtotime( '-1 week' ) ) {
 			return;
+		}
 
 		$this->setup_data();
-                
-                
-                $url = 'https://www.mashshare.net/?mashsb_action=checkin';
-                if (MASHSB_DEBUG){
-                    $url = 'http://src.wordpress-develop.dev/?mashsb_action=checkin'; // only for debugging
-                }
-                
-                $request = wp_remote_post( $url, array(
+
+
+		$url = 'https://www.mashshare.net/?mashsb_action=checkin';
+		if ( MASHSB_DEBUG ) {
+			$url = 'http://src.wordpress-develop.dev/?mashsb_action=checkin'; // only for debugging
+		}
+
+		$request = wp_remote_post( $url, array(
 			'method'      => 'POST',
 			'timeout'     => 20,
 			'redirection' => 5,
@@ -132,12 +137,11 @@ class MASHSB_Tracking {
 		) );
 
 
-                
-                if (!MASHSB_DEBUG){
-		update_option( 'mashsb_tracking_last_send', time() );
-                }
-                
-                $data = $this->data;
+		if ( ! MASHSB_DEBUG ) {
+			update_option( 'mashsb_tracking_last_send', time() );
+		}
+
+		$data = $this->data;
 	}
 
 	/**
@@ -151,7 +155,7 @@ class MASHSB_Tracking {
 	public function check_for_settings_optin( $input ) {
 		// Send an intial check in on settings save
 
-		if( isset( $input['allow_tracking'] ) ) {
+		if ( isset( $input['allow_tracking'] ) ) {
 			$this->send_checkin( true );
 		}
 
@@ -171,13 +175,15 @@ class MASHSB_Tracking {
 
 		$mashsb_options['allow_tracking'] = '1';
 
-                if (!MASHSB_DEBUG)
-		update_option( 'mashsb_settings', $mashsb_options );
+		if ( ! MASHSB_DEBUG ) {
+			update_option( 'mashsb_settings', $mashsb_options );
+		}
 
 		$this->send_checkin( true );
-                
-                if (!MASHSB_DEBUG)
-		update_option( 'mashsb_tracking_notice', '1' );
+
+		if ( ! MASHSB_DEBUG ) {
+			update_option( 'mashsb_tracking_notice', '1' );
+		}
 
 	}
 
@@ -190,15 +196,18 @@ class MASHSB_Tracking {
 	public function check_for_optout( $data ) {
 
 		global $mashsb_options;
-		if( isset( $mashsb_options['allow_tracking'] ) ) {
+		if ( isset( $mashsb_options['allow_tracking'] ) ) {
 			unset( $mashsb_options['allow_tracking'] );
-                         if (!MASHSB_DEBUG)
-			update_option( 'mashsb_settings', $mashsb_options );
+			if ( ! MASHSB_DEBUG ) {
+				update_option( 'mashsb_settings', $mashsb_options );
+			}
 		}
-                 if (!MASHSB_DEBUG)
-		update_option( 'mashsb_tracking_notice', '1' );
+		if ( ! MASHSB_DEBUG ) {
+			update_option( 'mashsb_tracking_notice', '1' );
+		}
 
-		wp_redirect( remove_query_arg( 'mashsb_action' ) ); exit;
+		wp_safe_redirect( remove_query_arg( 'mashsb_action' ) );
+		exit;
 
 	}
 
@@ -230,45 +239,57 @@ class MASHSB_Tracking {
 	 * @return void
 	 */
 	public function admin_notice() {
-            
-                if (!current_user_can('update_plugins'))
-                    return;
+
+		if ( ! current_user_can( 'update_plugins' ) ) {
+			return;
+		}
 
 		$hide_notice = get_option( 'mashsb_tracking_notice' );
 
-		if( $hide_notice ) {
+		if ( $hide_notice ) {
 			return;
 		}
 
-		if( mashsb_get_option( 'allow_tracking', false ) ) {
+		if ( mashsb_get_option( 'allow_tracking', false ) ) {
 			return;
 		}
 
-		if( ! current_user_can( 'manage_options' ) ) {
+		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
 
-		if(
-			stristr( network_site_url( '/' ), '_dev'       ) !== false ||
+		if (
+			stristr( network_site_url( '/' ), '_dev' ) !== false ||
 			stristr( network_site_url( '/' ), 'localhost' ) !== false ||
-			stristr( network_site_url( '/' ), ':8888'     ) !== false // This is common with MAMP on OS X
+			stristr( network_site_url( '/' ), ':8888' ) !== false // This is common with MAMP on OS X
 		) {
-                         if (!MASHSB_DEBUG)
-                            update_option( 'mashsb_tracking_notice', '1' );
+			if ( ! MASHSB_DEBUG ) {
+				update_option( 'mashsb_tracking_notice', '1' );
+			}
 		} else {
 			$optin_url  = add_query_arg( 'mashsb_action', 'opt_into_tracking' );
 			$optout_url = add_query_arg( 'mashsb_action', 'opt_out_of_tracking' );
 
 			//$source         = substr( md5( get_bloginfo( 'name' ) ), 0, 10 );
-                        $source         = substr( md5( get_bloginfo( 'admin_email' ) ), 0, 10 );
+			$source         = substr( md5( get_bloginfo( 'admin_email' ) ), 0, 10 );
 			$extensions_url = 'https://www.mashshare.net/add-ons/?utm_source=' . $source . '&utm_medium=admin&utm_term=notice&utm_campaign=MASHSBUsageTracking';
 			echo '<div class="updated"><p>';
-				echo sprintf( __( 'Allow Mashshare to track plugin usage? Opt-in to tracking and our newsletter and immediately be emailed a <strong>20%% discount to the Mashshare shop</strong>, valid towards the <a href="%s" target="_blank">purchase of Add-Ons</a>. No sensitive data is tracked.', 'mashsb' ), $extensions_url );
-				echo '&nbsp;<a href="' . esc_url( $optin_url ) . '" class="button-secondary">' . __( 'Allow', 'mashsb' ) . '</a>';
-				echo '&nbsp;<a href="' . esc_url( $optout_url ) . '" class="button-secondary">' . __( 'Do not allow', 'mashsb' ) . '</a>';
+
+			$allowedHtml = array(
+				'a' => array(
+					'class' => array(),
+					'href'  => array(),
+					'rel'   => array(),
+					'title' => array(),
+					'target' => array(),
+				)
+			);
+
+			echo wp_kses(sprintf( __( 'Allow Mashshare to track plugin usage? Opt-in to tracking and our newsletter and immediately be emailed a <strong>20%% discount to the Mashshare shop</strong>, valid towards the <a href="%s" target="_blank">purchase of Add-Ons</a>. No sensitive data is tracked.', 'mashsb' ), $extensions_url ), $allowedHtml);
+			echo '&nbsp;<a href="' . esc_url( $optin_url ) . '" class="button-secondary">' . esc_html_e( 'Allow', 'mashsb' ) . '</a>';
+			echo '&nbsp;<a href="' . esc_url( $optout_url ) . '" class="button-secondary">' . esc_html_e( 'Do not allow', 'mashsb' ) . '</a>';
 			echo '</p></div>';
 		}
 	}
 
 }
-//$mashsb_tracking = new MASHSB_Tracking;
