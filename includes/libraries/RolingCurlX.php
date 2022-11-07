@@ -119,7 +119,11 @@ Class RollingCurlX {
                 }
 
                 //get request info
-                $key = (string) $ch;
+	            if(is_resource($ch)) {
+		            $key = (string) $ch;
+	            } else {
+		            $key = spl_object_hash($ch);
+	            }
                 $request =& $this->requests[$requests_map[$key]]; //map handler to request index to get request info
                 $url = $request['url'];
                 $callback = $request['callback'];
@@ -155,7 +159,11 @@ Class RollingCurlX {
                     curl_multi_add_handle($multi_handle, $ch);
 
                     //add curl handle of a new request to the request map
-                    $key = (string) $ch;
+	                if(is_resource($ch)) {
+		                $key = (string) $ch;
+	                } else {
+		                $key = spl_object_hash($ch);
+	                }
                     $requests_map[$key] = $i;
                     $i++;
                 }

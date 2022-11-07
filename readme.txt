@@ -8,7 +8,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, social share buttons
 Requires at least: 3.6+
-Tested up to: 6.0
+Tested up to: 6.1
 Stable tag: {{ version }}
 Requires PHP: 5.6
 
@@ -249,6 +249,10 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
+= 3.8.6 =
+* New: Compatible up to WordPress 6.1
+* Fix: Fatal error in RolingCurlX library on PHP 8
+
 = 3.8.5 =
 * Fix: Add missing sanitization and escaping of input and output values to prevent possible XSS attempts.
 
@@ -334,15 +338,4 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-= 3.8.4 =
-* Fix: Do better sanitization on input and output values. Fix a low severity Authenticated Stored Cross-Site Scripting (XSS) vulnerability that can only be exploited by authenticated damin users
-
-= 3.8.3 =
-* Fix: Undefined warning on php 8.1
-
-= 3.8.2 =
-* New: Compatible up to WordPress 6.0.1
-* Fix: Do sanitization on input values. Fix a low severity Authenticated Stored Cross-Site Scripting (XSS) vulnerability
-* Tweak: Move jQuery nearest library on top of MashShare JS
-* Tweak: Implement PHP 8.1 compatibility support
-* Tweak: Clean up code and
+Recommended update for all php 8.x users
