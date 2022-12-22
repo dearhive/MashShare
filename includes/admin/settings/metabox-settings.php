@@ -14,10 +14,10 @@
  * Show meta box when a specific user role is not specified
  * 
  * @global array $mashsb_options
- * @return bool true when meta boxes should should be visible for a specific user role
+ * @return bool true when meta boxes should be visible for a specific user role
  */
 function mashsb_show_meta_box(){
-    global $mashsb_options, $wp_roles;
+    global $mashsb_options;
     
     $visibility = !empty( $mashsb_options['user_roles_for_sharing_options']) ? $mashsb_options['user_roles_for_sharing_options'] : false;
         if($visibility && in_array('disable', $visibility)){
@@ -56,13 +56,9 @@ function mashsb_meta_boxes( $meta_boxes ) {
     endforeach;
     $post_type[] = 'post';
     $post_type[] = 'page';
-    //echo "<pre>";
-//    echo(var_dump($post_type));
-//        echo "</pre>";
 
     $twitter_handle = isset( $mashsb_options['mashsharer_hashtag'] ) ? $mashsb_options['mashsharer_hashtag'] : '';
-    
-    
+
     // Do not show meta boxes
     if( !mashsb_show_meta_box() ) {
         return apply_filters( 'mashsb_meta_box_settings', $meta_boxes, 10, 0 );
