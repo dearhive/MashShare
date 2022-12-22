@@ -249,6 +249,9 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
+= 3.8.7 =
+* Fix: Security issue due to lack of escaping on output
+
 = 3.8.6 =
 * New: Compatible up to WordPress 6.1
 * Fix: Fatal error in RolingCurlX library on PHP 8

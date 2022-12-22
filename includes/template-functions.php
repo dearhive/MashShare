@@ -732,7 +732,36 @@ function mashshareShow()
         '</aside>
             <!-- Share buttons by mashshare.net - Version: ' . MASHSB_VERSION . '-->';
 
-    return apply_filters('mashsb_output_buttons', wp_kses_post($return));
+    $allowedElements = [
+        'aside' => [
+            'class' => [],
+            'style' => [],
+        ],
+        'a' => [
+            'class' => [],
+            'href' => [],
+            'title' => [],
+            'rel' => [],
+            'target' => [],
+            'style' => [],
+        ],
+        'div' => [
+            'class' => [],
+            'style' => [],
+        ],
+        'span' => [
+            'class' => [],
+            'style' => [],
+        ],
+    ];
+
+    // Allow the style property `display in html output.
+    add_filter( 'safe_style_css', function( $styles ) {
+        $styles[] = 'display';
+        return $styles;
+    } );
+
+    return apply_filters('mashsb_output_buttons', wp_kses($return, $allowedElements));
 }
 
 /**
@@ -857,7 +886,36 @@ function mashshareShortcodeShow($args)
         '</aside>
             <!-- Share buttons made by mashshare.net - Version: ' . MASHSB_VERSION . '-->';
 
-    return apply_filters('mashsb_output_buttons', wp_kses_post($return));
+    $allowedElements = [
+        'aside' => [
+            'class' => [],
+            'style' => [],
+        ],
+        'a' => [
+            'class' => [],
+            'href' => [],
+            'title' => [],
+            'rel' => [],
+            'target' => [],
+            'style' => [],
+        ],
+        'div' => [
+            'class' => [],
+            'style' => [],
+        ],
+        'span' => [
+            'class' => [],
+            'style' => [],
+        ],
+    ];
+
+    // Allow the style property `display in html output.
+    add_filter( 'safe_style_css', function( $styles ) {
+        $styles[] = 'display';
+        return $styles;
+    } );
+
+    return apply_filters('mashsb_output_buttons', wp_kses($return, $allowedElements));
 }
 
 
