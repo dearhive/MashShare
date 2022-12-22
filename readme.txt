@@ -8,7 +8,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, social share buttons
 Requires at least: 3.6+
-Tested up to: 6.1
+Tested up to: 6.2
 Stable tag: {{ version }}
 Requires PHP: 5.6
 
@@ -250,6 +250,7 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 == Changelog ==
 
 = 3.8.7 =
+* New: Compatible up to WP 6.2
 * Fix: Security issue due to lack of escaping on output
 
 = 3.8.6 =
@@ -341,4 +342,4 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-Recommended update for all php 8.x users
+Highly recommended security update
