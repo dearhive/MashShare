@@ -86,12 +86,10 @@ color:#ffffff;
 .mashicon-linkedin .icon:before { content: '\e803'; } /* '' */
 .mashicon-digg .icon:before { content: '\e804'; } /* '' */
 .mashicon-reddit .icon:before { content: '\e805'; } /* '' */
-.mashicon-stumbleupon .icon:before { content: '\e806'; } /* '' */
 .mashicon-twitter .icon:before { content: '\e807'; } /* '' */
 .mashicon-mail .icon:before { content: '\e808'; } /* '' */
 .mashicon-vk .icon:before { content: '\e809'; } /* '' */
 .mashicon-print .icon:before { content: '\e80a'; } /* '' */
-.mashicon-delicious .icon:before { content: '\e80b'; } /* '' */
 .mashicon-buffer .icon:before { content: '\e80c'; } /* '' */
 .mashicon-heart .icon:before { content: '\e80d'; } /* '' */
 .mashicon-weibo .icon:before { content: '\e80e'; } /* '' */
@@ -169,9 +167,6 @@ background: #2ba3e1;
 .mashicon-digg{
 background: #1b5791;
 }
-.mashicon-stumbleupon{
-background: #eb4723;
-}
 .mashicon-vk{
 background: #5d83aa;
 }
@@ -183,9 +178,6 @@ background: #666666;
 }
 .mashicon-reddit{
 background: #333333;
-}
-.mashicon-delicious{
-background: #3399ff;
 }
 .mashicon-weibo{
 background: #ed1c24;

@@ -105,16 +105,13 @@ This Social Media share buttons plugin in active development and will be updated
 
 <strong> Social Media Add-Ons available for </strong>
 
-* Google / G+
 * Whatsapp (Whatsapp button is shown only on mobile devices)
 * Pinterest
 * Digg
 * Linkedin
 * Reddit
-* Stumbleupon
 * Vk / VKontakte
 * Print
-* Delicious
 * Buffer
 * Weibo
 * Pocket
@@ -248,6 +245,10 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 
 == Changelog ==
+
+
+= 3.8.7 =
+* Tweak: Removed social networks that don't exist anymore ( Google+, StumbleUpon, Delicious )
 
 = 3.8.6 =
 * New: Compatible up to WordPress 6.1

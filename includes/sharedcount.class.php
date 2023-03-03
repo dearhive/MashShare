@@ -112,7 +112,6 @@ class mashsbSharedcount {
         isset( $sharecounts['Twitter'] ) ? $counts['shares']['tw']        = $sharecounts['Twitter'] : $counts['shares']['tw']        = 0;
         isset( $sharecounts['GooglePlusOne'] ) ? $counts['shares']['gp']        = $sharecounts['GooglePlusOne'] : $counts['shares']['gp']        = 0;
         isset( $sharecounts['LinkedIn'] ) ? $counts['shares']['li']        = $sharecounts['LinkedIn'] : $counts['shares']['li']        = 0;
-        isset( $sharecounts['StumbleUpon'] ) ? $counts['shares']['st']        = $sharecounts['StumbleUpon'] : $counts['shares']['st']        = 0;
         isset( $sharecounts['Pinterest'] ) ? $counts['shares']['pin']       = $sharecounts['Pinterest'] : $counts['shares']['pin']       = 0;
         isset( $sharecounts['https']['Pinterest'] ) ? $counts['shares']['pin_https'] = $sharecounts['https']['Pinterest'] : $counts['shares']['pin_https'] = 0;
 

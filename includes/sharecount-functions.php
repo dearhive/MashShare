@@ -87,14 +87,13 @@ function mashsb_get_total_shares($postId){
       $google = isset($result['google']) ? $result['google'] : 0;
       $pinterest = isset($result['pinterest']) ? $result['pinterest'] : 0;
       $linkedin = isset($result['linkedin']) ? $result['linkedin'] : 0;
-      $stumbleupon = isset($result['stumbleupon']) ? $result['stumbleupon'] : 0;
       
       
    if( $mode === 'total' ) {
-      $shares = $fbtotal + $twitter + $google + $pinterest + $linkedin + $stumbleupon;
+      $shares = $fbtotal + $twitter + $google + $pinterest + $linkedin;
    }
    if( $mode === 'shares' ) {
-      $shares = $fbshares + $twitter + $google + $pinterest + $linkedin + $stumbleupon;
+      $shares = $fbshares + $twitter + $google + $pinterest + $linkedin;
    }
    
    return (int)$shares;
