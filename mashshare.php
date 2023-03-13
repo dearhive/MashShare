@@ -4,12 +4,18 @@
  * Plugin Name: Mashshare Share Buttons
  * Plugin URI: https://www.mashshare.net
  * Description: Mashshare is a Share functionality inspired by the the great website Mashable for Facebook and Twitter. More networks available.
- * Author: René Hermenau
- * Author URI: https://www.mashshare.net
- * Version: {{ version }}
+ * Author: WPChill
+ * Author URI: https://wpchill.com/
+ * Version: 3.8.7
  * Text Domain: mashsb
  * Domain Path: /languages
-
+ *
+ * Copyright 2016-2022      René Hermenau   rene@wp-staging.com
+ * Copyright 2023           WPChill         heyyy@wpchill.com
+ *
+ * Original Plugin URI:      https://www.mashshare.net
+ * Original Author URI:      https://www.mashshare.net
+ * Original Author:          https://profiles.wordpress.org/renehermi/
  *
  * Mashshare Share Buttons is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
