@@ -6,7 +6,7 @@
  * Description: Mashshare is a Share functionality inspired by the the great website Mashable for Facebook and Twitter. More networks available.
  * Author: WPChill
  * Author URI: https://wpchill.com/
- * Version: 3.8.7
+ * Version: {{ version }}
  * Text Domain: mashsb
  * Domain Path: /languages
  *
