@@ -163,7 +163,6 @@ class mashengine {
          $RollingCurlX->addRequest( "https://api.pinterest.com/v1/urls/count.json?url=" . $this->url, $post_data, array($this, 'getCount'), array('pinterest'), $headers );
       }
 
-      $RollingCurlX->addRequest( "http://www.stumbleupon.com/services/1.01/badge.getinfo?url=" . $this->url, $post_data, array($this, 'getCount'), array('stumbleupon'), $headers );
       $RollingCurlX->addRequest( "https://api.bufferapp.com/1/links/shares.json?url=" . $this->url, $post_data, array($this, 'getCount'), array('buffer'), $headers );
       $RollingCurlX->addRequest( "https://vk.com/share.php?act=count&index=1&url=" . $this->url, $post_data, array($this, 'getCount'), array('vk'), $headers );
 
@@ -213,26 +212,12 @@ class mashengine {
                   $this->setRateLimitTransient();
                }
                break;
-            case "google":
-               preg_match( "#window\.__SSR = {c: ([\d]+)#", $data, $matches );
-               if( isset( $matches[0] ) )
-                  $count = str_replace( 'window.__SSR = {c: ', '', $matches[0] );
-               break;
             case "pinterest":
                $data = substr( $data, 13, -1 );
             case "linkedin":
             case "twitter":
                $data = json_decode( $data );
                $count = isset( $data->count ) ? $data->count : 0;
-               break;
-            case "stumbleupon":
-               $data = json_decode( $data );
-               isset( $data->result->views ) ? $count = $data->result->views : $count = 0;
-
-               break;
-            case "delicious":
-               $data = json_decode( $data );
-               $count = !empty( $data ) ? $data[0]->total_posts : 0;
                break;
             case "reddit":
                $data = json_decode( $data );

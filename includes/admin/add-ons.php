@@ -41,7 +41,7 @@ function mashsbGetAddOns(){
 	return <<< EOT
 <div class="mashshare-addons">
 <h3 class="mashshare-addons-title">Add more social networks</h3>
-<a title="MashShare Networks Add-On" href="https://www.mashshare.net/downloads/mashshare-social-networks-addon/?ref=1" target="_blank"><img class="alignnone wp-image-107 size-full" src="https://www.mashshare.net/wp-content/uploads/2014/03/mash-networks-e1404756641988.png" alt="MashShare More Networks" width="300" height="200" /></a>Extend MashShare: Whatsapp, Pinterest, Digg, Linkedin, Reddit, Stumbleupon, Vk,Print, Delicious, Buffer, Weibo, Pocket, Xing, Tumblr …<a class="button-secondary" title="MashShare Networks Add-On" href="https://www.mashshare.net/downloads/mashshare-social-networks-addon/?ref=1" target="_blank">Get this Add On</a>
+<a title="MashShare Networks Add-On" href="https://www.mashshare.net/downloads/mashshare-social-networks-addon/?ref=1" target="_blank"><img class="alignnone wp-image-107 size-full" src="https://www.mashshare.net/wp-content/uploads/2014/03/mash-networks-e1404756641988.png" alt="MashShare More Networks" width="300" height="200" /></a>Extend MashShare: Whatsapp, Pinterest, Digg, Linkedin, Reddit, Vk,Print, Buffer, Weibo, Pocket, Xing, Tumblr …<a class="button-secondary" title="MashShare Networks Add-On" href="https://www.mashshare.net/downloads/mashshare-social-networks-addon/?ref=1" target="_blank">Get this Add On</a>
 </div>
 
 <div class="mashshare-addons">

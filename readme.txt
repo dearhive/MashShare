@@ -2,30 +2,30 @@
 
 Author URL: https://www.mashshare.net
 Plugin URL: https://www.mashshare.net
-Contributors: ReneHermi, WP-Staging
+Contributors: wpchill, silkalns, giucu91
 Donate link: https://www.mashshare.net
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: Share buttons, Social Sharing, social media, Facebook, Twitter, Subscribe, social share buttons
 Requires at least: 3.6+
-Tested up to: 6.1
+Tested up to: 6.2
 Stable tag: {{ version }}
 Requires PHP: 5.6
 
 Social Media Share Buttons for Twitter, Facebook, and other social networks. Highly customizable Social Media ecosystem
 
-== Description == 
+== Description ==
 
 #### MashShare - The Social Media Share Buttons Ecosystem (Twitter count supported with [Social Network Add-On](https://mashshare.net/downloads/mashshare-social-networks-addon/))
 A free Social Media Share Buttons Plugin, professional and highly customizable<br />
-ecosystem for social media sharing and optimizing your valuable content.<br /> 
+ecosystem for social media sharing and optimizing your valuable content.<br />
 
 <strong>Important for EU users: MashShare is DSGVO compliant!<br />
 No IP data or any other personal data is sent to third parties or collected at all.</strong><br>
- 
+
 <strong>Stop slowing down your website and prevent ranking loss.</strong>
 Other social share buttons are often using external scripts which are increasing loading times.
-MashShare is using NO external script dependencies. All code is loaded directly from your website and <strong>MashShare ensures your and your visitor's privacy!</strong>  <br /> 
+MashShare is using NO external script dependencies. All code is loaded directly from your website and <strong>MashShare ensures your and your visitor's privacy!</strong>  <br />
 
 * <strong>New: </strong> Most Shared Posts Widget
 * <strong>New: </strong> Async share count aggregation for Share Buttons share count
@@ -36,32 +36,30 @@ MashShare is using NO external script dependencies. All code is loaded directly 
 <strong>Installation</strong>
 [youtube https://www.youtube.com/watch?v=vRSE-pQJTBQ]
 
-It gives you per default a large total share button counter beside three large 
-prominent Share Buttons for your Twitter tweets, Facebook share, and the option<br /> 
-to place a prominent subscribe button for your news feed and mailing list. 
-These services are free per default including great support. 
-There is no need to create an account! <br /> 
+It gives you per default a large total share button counter beside three large  prominent Share Buttons for your Twitter tweets, Facebook share, and the option to place a prominent subscribe button for your news feed and mailing list.
+These services are free per default including great support.
+There is no need to create an account! <br />
 
-We also offer free Add-Ons for specifying social sharing image, title, description, and Twitter hashtags and think this is satisfying for most website owners who need a free and effective working social sharing solution.<br /> 
+We also offer free Add-Ons for specifying social sharing image, title, description, and Twitter hashtags and think this is satisfying for most website owners who need a free and effective working social sharing solution.<br />
 
 If you need share buttons fore Whatsapp, Pinterest, Mail,<br />
 Print, Linkedin, Odnoklassniki, etc., you get them on the Add-On Marketplace.<br />
- 
+
 MashShare can also be used in conjunction with other third-party share buttons vendors!
 
 Free and paid Add-Ons available for:
- 
-- More Social Share Buttons<br /> 
+
+- More Social Share Buttons<br />
 - YouTube Video Share Popup<br />
-- Share Button Responsive<br /> 
-- Sticky Share bar<br /> 
-- Social Sharing Optimization<br /> 
-- Google Analytics<br /> 
-- and more...<br /> 
+- Share Button Responsive<br />
+- Sticky Share bar<br />
+- Social Sharing Optimization<br />
+- Google Analytics<br />
+- and more...<br />
 
 [Demo](https://www.mashshare.net?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-info-link) | [More Add-Ons >>](https://www.mashshare.net/downloads?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=get-addons)
 
- 
+
 <h4> Social Media Share Buttons</h4>
 
 This Social Media share buttons plugin in active development and will be updated regularly - Please do not rate negative before we tried to solve your issue.
@@ -76,7 +74,7 @@ This Social Media share buttons plugin in active development and will be updated
 * Extensible with many [Add-Ons](https://www.mashshare.net/downloads) (Google Analytics, More Social Networks, Responsive, YouTube Video Share and more...)
 * Developer friendly with several filters and actions.
 * Highly customizable
-* Smart (virtual) share button count function. Add virtual shares to new articles. Use psychological aspects to increase real shares. 
+* Smart (virtual) share button count function. Add virtual shares to new articles. Use psychological aspects to increase real shares.
 
 = Recent Changes and New Features: =
 
@@ -105,16 +103,13 @@ This Social Media share buttons plugin in active development and will be updated
 
 <strong> Social Media Add-Ons available for </strong>
 
-* Google / G+
 * Whatsapp (Whatsapp button is shown only on mobile devices)
 * Pinterest
 * Digg
 * Linkedin
 * Reddit
-* Stumbleupon
 * Vk / VKontakte
 * Print
-* Delicious
 * Buffer
 * Weibo
 * Pocket
@@ -164,7 +159,7 @@ Any description and title which is defined in Yoast open graph settings will be 
 
 ** GitHub **
 Follow the development and improve MashShare.
-You find us on GitHub at https://github.com/mashshare/MashShare 
+You find us on GitHub at https://github.com/mashshare/MashShare
 
 ** Languages **
 
@@ -177,15 +172,15 @@ MashShare has been translated into many languages:
 5. Italy
 6. Portuguese (Brazil)
 
-Please help to translate the share button plugin into more languages: 
+Please help to translate the share button plugin into more languages:
 https://translate.wordpress.org/projects/wp-plugins/mashsharer
 
 = How does it work? =
 
-MashShare makes use of public available API endpoints that are delivered by social networks. It periodically checks for the total count of all your Facebook and Twitter shares and cumulates them. It then shows the total number beside the Share and Social Media Icons. 
-No need to embed dozens of external slow loading scripts into your website. 
+MashShare makes use of public available API endpoints that are delivered by social networks. It periodically checks for the total count of all your Facebook and Twitter shares and cumulates them. It then shows the total number beside the Share and Social Media Icons.
+No need to embed dozens of external slow loading scripts into your website.
 
- 
+
 = How to install and setup? =
 Install it via the admin dashboard and to 'Plugins', click 'Add New' and search the plugins for 'MashShare'. Install the plugin with 'Install Now'.
 After installation go to the settings page Settings->MashShare and make your changes there.
@@ -210,8 +205,8 @@ There is no account needed. All code resides on your website and there is no acc
 <h4>Does this plugin sends any personal user data to you or Facebook, Twitter, etc.?</h4>
 
 No, there is no personal data send to Facebook, Twitter, Google, and other services. No data goes to MashShare that includes any IP or other data without your explicit grant.
-The big advantage of using Mashable Share buttons is the independence in comparison to other plugins which creates steady connections to Facebook and Co. 
-So there is no IP based data send to the social networks or shared count. 
+The big advantage of using Mashable Share buttons is the independence in comparison to other plugins which creates steady connections to Facebook and Co.
+So there is no IP based data send to the social networks or shared count.
 
 <h4>Do I have to do manual changes in Javascript or HTML Code?</h4>
 There is no need for you to make any manual changes. The plugin does everything for you. But if you are an experienced web-developer you are free to use the PHP function mashsharer(); in your templates.
@@ -248,6 +243,13 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 
 == Changelog ==
+
+= 3.8.8 - 13.03.2023 =
+Changed: Removed support for social networks that don't exist anymore ( [#148](https://github.com/WPChill/MashShare/issues/148) )
+
+= 3.8.7 =
+* New: Compatible up to WP 6.2
+* Fix: Security issue due to lack of escaping on output
 
 = 3.8.6 =
 * New: Compatible up to WordPress 6.1
@@ -315,7 +317,7 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 = 3.6.8 =
 * New: Add new filter mashsb_allowed_post_types for allowing or disabling share counts on particular posts types to lower the API requests to sharedcount.com
-* Tweak: sharedcount.com lowered their free API limit to 500 daily requests. Change description in MashShare! 
+* Tweak: sharedcount.com lowered their free API limit to 500 daily requests. Change description in MashShare!
 * Fix: Changed register link for sharedcount.com
 * Fix: PHP Warning: Invalid argument supplied for foreach() in meta-box.php
 
@@ -338,4 +340,4 @@ https://www.mashshare.net/changelog/
 
 == Upgrade Notice ==
 
-Recommended update for all php 8.x users
+Highly recommended security update
