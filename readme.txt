@@ -244,6 +244,9 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
+= 3.8.9 - TBD =
+Fixed: Escaping bug show Pinterest blank page ( [#153](https://github.com/WPChill/MashShare/issues/153) )
+
 = 3.8.8 - 13.03.2023 =
 Changed: Removed support for social networks that don't exist anymore ( [#148](https://github.com/WPChill/MashShare/issues/148) )
 

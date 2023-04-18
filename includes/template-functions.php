@@ -744,6 +744,7 @@ function mashshareShow()
             'rel' => [],
             'target' => [],
             'style' => [],
+            'data-mashsb-url' => [],
         ],
         'div' => [
             'class' => [],
@@ -898,6 +899,7 @@ function mashshareShortcodeShow($args)
             'rel' => [],
             'target' => [],
             'style' => [],
+            'data-mashsb-url' => [],
         ],
         'div' => [
             'class' => [],
