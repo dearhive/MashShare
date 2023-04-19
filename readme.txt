@@ -244,7 +244,7 @@ Read here more about this: http://docs.mashshare.net/article/10-facebook-is-show
 
 == Changelog ==
 
-= 3.8.9 - TBD =
+= 3.8.9 - 19.04.2023 =
 Fixed: Escaping bug show Pinterest blank page ( [#153](https://github.com/WPChill/MashShare/issues/153) )
 Fixed: PHP fatal error when no netowrks are saved ( [#152](https://github.com/WPChill/MashShare/issues/152) )
 
