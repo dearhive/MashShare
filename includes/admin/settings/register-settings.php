@@ -788,8 +788,17 @@ function mashsb_get_expiretimes() {
  *
  * @return array Defined social networks
  */
-function mashsb_get_networks_list() {
+function mashsb_get_networks_list() { 
     $networks = get_option( 'mashsb_networks' );
+
+    if( ! is_array( $networks ) || ! $networks ){
+        $networks = array(
+            'Facebook',
+            'Twitter',
+            'Subscribe'
+        );
+        update_option( 'mashsb_networks', $networks );
+    }
     return apply_filters( 'mashsb_get_networks_list', $networks );
 }
 
