@@ -126,11 +126,7 @@ function mashsb_install() {
     
     $networks = get_option('mashsb_networks');
     if( is_plugin_inactive( 'mashshare-networks/mashshare-networks.php' ) || false === $networks || empty($networks) ) {
-        $networks = array(
-            'Facebook',
-            'Twitter',
-            'Subscribe'
-        );
+        $networks = mashsb_get_base_networks();
         update_option( 'mashsb_networks', $networks );
     }
 

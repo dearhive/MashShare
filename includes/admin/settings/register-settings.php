@@ -27,6 +27,16 @@ function mashsb_get_option( $key = '', $default = false ) {
     return apply_filters( 'mashsb_get_option_' . $key, $value, $key, $default );
 }
 
+function mashsb_get_base_networks(){
+
+    return array(
+        'Facebook',
+        'Twitter',
+        'Subscribe'
+        );
+
+}
+
 /**
  * Get Settings
  *
@@ -792,11 +802,7 @@ function mashsb_get_networks_list() {
     $networks = get_option( 'mashsb_networks' );
 
     if( ! is_array( $networks ) || ! $networks ){
-        $networks = array(
-            'Facebook',
-            'Twitter',
-            'Subscribe'
-        );
+        $networks = mashsb_get_base_networks();
         update_option( 'mashsb_networks', $networks );
     }
     return apply_filters( 'mashsb_get_networks_list', $networks );
